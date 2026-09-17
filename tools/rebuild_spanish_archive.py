@@ -89,8 +89,9 @@ def parse_tail(m: bytes):
             tokens.append((False, b, m[idx:idx+1]))
             idx += 1
     tail = []
+    TAIL_CODES = {0x02, 0x05, 0x07, 0x09, 0x0A, 0x0B, 0x0D, 0x0E, 0x10, 0x11, 0x1B, 0x1C}
     for is_ctrl, code, raw in reversed(tokens):
-        if is_ctrl and code != 0x01: # control token, not newline
+        if is_ctrl and code in TAIL_CODES:
             tail.append(raw)
         else:
             break

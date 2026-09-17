@@ -1,0 +1,78 @@
+{
+  "project": "Ocarina of Time PC - Couch Edition",
+  "release_candidate": "OCARINA_COUCH_EDITION_RC1",
+  "source_base": {
+    "repository": "Shipwright 9.1.1 (Branch: couch-edition | Commit: 4aaad85)",
+    "libultraship": "Reconciled Fast3D Safe Lookups + V02 Visual Foundation + G_SETTIMG hardening"
+  },
+  "build": {
+    "timestamp": "2026-09-16T23:20:43-06:00",
+    "compiler": "MSVC v143 (Visual Studio 2022 17.14)",
+    "architecture": "x64",
+    "configuration": "Release",
+    "exit_code": 0
+  },
+  "artifacts": {
+    "soh.exe": {
+      "path": "C:\\Users\\danie\\Desktop\\Ocarina_CouchEdition_DEV\\runtime\\build-test\\soh.exe",
+      "size_bytes": 33020416,
+      "sha256": "5ee136fb0ee048b85d129658f703a1edfcb9a4f956c7c1644e785d6e0a02765c"
+    },
+    "soh.o2r": {
+      "path": "C:\\Users\\danie\\Desktop\\Ocarina_CouchEdition_DEV\\runtime\\build-test\\soh.o2r",
+      "size_bytes": 1167200,
+      "sha256": "518977d24f25f5ccd28907a1651ec820bd6564c7c367c91f1cfa61dbab0611eb"
+    },
+    "es.o2r": {
+      "path": "C:\\Users\\danie\\Desktop\\Ocarina_CouchEdition_DEV\\runtime\\build-test\\es.o2r",
+      "size_bytes": 99610,
+      "sha256": "d9037a8a4086d0073f90cc297fcbfe558a78ac3758f27b11a250537883fd990d"
+    },
+    "oot.o2r": {
+      "path": "C:\\Users\\danie\\Desktop\\Ocarina_CouchEdition_DEV\\runtime\\build-test\\oot.o2r",
+      "size_bytes": 33482668,
+      "sha256": "6fc0211fd1ea450fc41aa0991c0abfd73ff61b81db39039033edfdb2653d9e4b"
+    }
+  },
+  "features": {
+    "visual_profiles": {
+      "classic": "PASS (Bit-exact legacy presentation, profile 0)",
+      "enhanced": "PASS (ACES filmic tonemapping, MaterialRegistry foundation, atmospheric fog depth curve, profile 1)"
+    },
+    "localization": {
+      "language_code": "ES-419 (Español Latinoamericano)",
+      "language_id": 4,
+      "static_messages_parsed": 2116,
+      "logical_main_game_target": 2233,
+      "font_glyphs": "11/11 authentic 16x16 I4 OTEX textures",
+      "unsafe_language_array_indices": 0,
+      "control_mismatches": 0,
+      "literal_choice_tokens": 0,
+      "fallback_to_english": "PASS"
+    },
+    "controller": {
+      "profile": "Xbox Series X / One Controller",
+      "lt_to_z": "PASS (LT physical trigger mapped to N64 Z target)",
+      "left_stick": "PASS (Movement)",
+      "right_stick": "PASS (C-button directions)",
+      "dialog_glyphs": "Classic N64 authentic glyphs (Dynamic glyph crash bypass active for stability)"
+    },
+    "display": {
+      "ultrawide_resolution": "3440x1440",
+      "aspect_ratio": "21:9",
+      "match_refresh_rate": "PASS (Target 85 Hz intact)"
+    },
+    "save_integrity": {
+      "file1.sav": "NOT_PRESENT",
+      "file2.sav": "UNCHANGED",
+      "file3.sav": "UNCHANGED",
+      "global.sav": "UNCHANGED"
+    }
+  },
+  "known_nonblocking_issues": [
+    "Classic N64 button glyphs in dialogue (dynamic Xbox glyphs bypassed for crash safety)",
+    "Ship of Harkinian ImGui developer menus remain in English",
+    "Randomizer text remains untranslated",
+    "Visual Enhanced profile is V02 foundation only (no bloom, no SSAO, no PBR shader expansion, no RTX/DLSS)"
+  ]
+}
