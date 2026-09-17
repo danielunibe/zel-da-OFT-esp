@@ -1,0 +1,5 @@
+asset_id,source_or_context,category,confidence,material_candidate,risk,notes
+UNKNOWN,soh/src/overlays/actors and scene display lists,magic/energy,UNKNOWN,EMISSIVE_CANDIDATE,MEDIUM,Specific texture and draw context must be captured before approval; bright color alone is not evidence.
+UNKNOWN,soh/src/code and actor display lists,fire/lava,UNKNOWN,EMISSIVE_CANDIDATE,MEDIUM,Classify per draw call and preserve original alpha/fog/combiners.
+UNKNOWN,scene/actor resources,portal/Triforce,UNKNOWN,EMISSIVE_CANDIDATE,HIGH,Potential gameplay-critical visibility and special-combiner interaction; no automatic assignment.
+UNKNOWN,soh/src/overlays/actors,faerie/light effects,UNKNOWN,EMISSIVE_CANDIDATE,HIGH,May be billboard/particle; remains classic until 2D/3D classification is proven.

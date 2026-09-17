@@ -1,0 +1,699 @@
+diff --git a/include/fast/backends/gfx_direct3d_common.h b/include/fast/backends/gfx_direct3d_common.h
+index bfe5f960..407e5f66 100644
+--- a/include/fast/backends/gfx_direct3d_common.h
++++ b/include/fast/backends/gfx_direct3d_common.h
+@@ -111,6 +111,7 @@ class GfxRenderingAPIDX11 final : public GfxRenderingAPI {
+     FilteringMode GetTextureFilter() override;
+     void SetSrgbMode() override;
+     ImTextureID GetTextureById(int id) override;
++    void RunTonemappingPass();
+ 
+     PFN_D3D11_CREATE_DEVICE mDX11CreateDevice;
+     Microsoft::WRL::ComPtr<ID3D11DeviceContext> mContext;
+@@ -177,6 +178,29 @@ class GfxRenderingAPIDX11 final : public GfxRenderingAPI {
+     Microsoft::WRL::ComPtr<ID3D11SamplerState> mLastSamplerStates[SHADER_MAX_TEXTURES] = { nullptr, nullptr };
+ 
+     D3D_PRIMITIVE_TOPOLOGY mLastPrimitaveTopology = D3D_PRIMITIVE_TOPOLOGY_UNDEFINED;
++
++    // Tonemapping post-process
++    Microsoft::WRL::ComPtr<ID3D11VertexShader> mTonemapVS;
++    Microsoft::WRL::ComPtr<ID3D11PixelShader> mTonemapPS;
++    Microsoft::WRL::ComPtr<ID3D11InputLayout> mTonemapIL;
++    Microsoft::WRL::ComPtr<ID3D11Texture2D> mTonemapCopyTex;
++    Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> mTonemapCopySRV;
++    Microsoft::WRL::ComPtr<ID3D11SamplerState> mTonemapSampler;
++    bool mTonemapInitialized = false;
++    uint32_t mTonemapCopyTexW = 0;
++    uint32_t mTonemapCopyTexH = 0;
++
++    // Atmospheric fog constant buffer
++    struct FogConstants {
++        float fogStart;
++        float fogRange;
++        float padding[2];
++        float fogColorR;
++        float fogColorG;
++        float fogColorB;
++        float fogStrength;
++    };
++    Microsoft::WRL::ComPtr<ID3D11Buffer> mFogCB;
+ };
+ 
+ std::string gfx_direct3d_common_build_shader(size_t& numFloats, const CCFeatures& cc_features,
+diff --git a/include/fast/backends/gfx_rendering_api.h b/include/fast/backends/gfx_rendering_api.h
+index d95bcc0d..e14e28d1 100644
+--- a/include/fast/backends/gfx_rendering_api.h
++++ b/include/fast/backends/gfx_rendering_api.h
+@@ -72,6 +72,7 @@ class GfxRenderingAPI {
+     virtual FilteringMode GetTextureFilter() = 0;
+     virtual void SetSrgbMode() = 0;
+     virtual ImTextureID GetTextureById(int id) = 0;
++    virtual void RunTonemappingPass() {}
+ 
+   protected:
+     int8_t mCurrentDepthTest = 0;
+diff --git a/src/fast/backends/gfx_direct3d11.cpp b/src/fast/backends/gfx_direct3d11.cpp
+index 1077d2a4..9e27003a 100644
+--- a/src/fast/backends/gfx_direct3d11.cpp
++++ b/src/fast/backends/gfx_direct3d11.cpp
+@@ -276,6 +276,112 @@ void CSMain(uint3 DTid : SV_DispatchThreadID) {
+         throw hr;
+     }
+ 
++    // Create tonemapping post-process shaders (ACES filmic)
++
++    const char* tonemap_vs_source = R"(
++        void VSMain(out float4 pos : SV_Position, out float2 uv : TEXCOORD0, uint vid : SV_VertexID) {
++            uv = float2((vid << 1) & 2, vid & 2);
++            pos = float4(uv * float2(2, -2) + float2(-1, 1), 0, 1);
++        }
++    )";
++
++    const char* tonemap_ps_source = R"(
++        Texture2D sceneTex : register(t0);
++        SamplerState sceneSampler : register(s0);
++        Texture2D depthTex : register(t1);
++        SamplerState depthSampler : register(s1);
++
++        cbuffer FogCB : register(b2) {
++            float4 fogParams; // x=fogStart, y=fogRange, z=unused, w=unused
++            float4 fogColor;  // rgb=fogColor, a=unused
++        };
++
++        float3 ACESFilm(float3 x) {
++            float a = 2.51;
++            float b = 0.03;
++            float c = 2.43;
++            float d = 0.59;
++            float e = 0.14;
++            return saturate((x * (a * x + b)) / (x * (c * x + d) + e));
++        }
++
++        float3 LinearToSRGB(float3 c) {
++            return pow(max(c, 0.0), 1.0 / 2.2);
++        }
++
++        float3 SRGBToLinear(float3 c) {
++            return pow(max(c, 0.0), 2.2);
++        }
++
++        float4 PSMain(float4 pos : SV_Position, float2 uv : TEXCOORD0) : SV_Target {
++            float3 color = sceneTex.Sample(sceneSampler, uv).rgb;
++            float depth = depthTex.Sample(depthSampler, uv).r;
++
++            float linearDepth = fogParams.x + depth * fogParams.y;
++            float fogFactor = saturate(1.0 - exp(-linearDepth * linearDepth));
++            fogFactor = fogFactor * fogFactor;
++
++            color = SRGBToLinear(color);
++            color = ACESFilm(color);
++            color = lerp(color, fogColor.rgb, fogFactor * fogColor.a);
++            color = LinearToSRGB(color);
++            return float4(color, 1.0);
++        }
++    )";
++
++    {
++        ComPtr<ID3DBlob> vs_blob, error_blob;
++
++        hr = mD3dCompile(tonemap_vs_source, strlen(tonemap_vs_source), nullptr, nullptr, nullptr,
++                         "VSMain", "vs_4_0", compile_flags, 0, vs_blob.GetAddressOf(),
++                         error_blob.GetAddressOf());
++        if (FAILED(hr)) {
++            char* err = (char*)error_blob->GetBufferPointer();
++            MessageBoxA(mWindowBackend->GetWindowHandle(), err, "Tonemap VS Error", MB_OK | MB_ICONERROR);
++            throw hr;
++        }
++
++        ThrowIfFailed(mDevice->CreateVertexShader(vs_blob->GetBufferPointer(), vs_blob->GetBufferSize(),
++                                                   nullptr, mTonemapVS.GetAddressOf()));
++
++        ComPtr<ID3DBlob> ps_blob;
++        hr = mD3dCompile(tonemap_ps_source, strlen(tonemap_ps_source), nullptr, nullptr, nullptr,
++                         "PSMain", "ps_4_0", compile_flags, 0, ps_blob.GetAddressOf(),
++                         error_blob.ReleaseAndGetAddressOf());
++        if (FAILED(hr)) {
++            char* err = (char*)error_blob->GetBufferPointer();
++            MessageBoxA(mWindowBackend->GetWindowHandle(), err, "Tonemap PS Error", MB_OK | MB_ICONERROR);
++            throw hr;
++        }
++
++        ThrowIfFailed(mDevice->CreatePixelShader(ps_blob->GetBufferPointer(), ps_blob->GetBufferSize(),
++                                                  nullptr, mTonemapPS.GetAddressOf()));
++
++        D3D11_INPUT_ELEMENT_DESC layout[] = {
++            { "POSITION", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
++        };
++        ThrowIfFailed(mDevice->CreateInputLayout(layout, 1, vs_blob->GetBufferPointer(),
++                                                 vs_blob->GetBufferSize(), mTonemapIL.GetAddressOf()));
++
++        D3D11_SAMPLER_DESC sampler_desc = {};
++        sampler_desc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
++        sampler_desc.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
++        sampler_desc.AddressV = D3D11_TEXTURE_ADDRESS_CLAMP;
++        sampler_desc.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;
++        sampler_desc.MaxLOD = D3D11_FLOAT32_MAX;
++        ThrowIfFailed(mDevice->CreateSamplerState(&sampler_desc, mTonemapSampler.GetAddressOf()));
++    }
++
++    // Create fog constant buffer
++    {
++        D3D11_BUFFER_DESC cb_desc = {};
++        cb_desc.ByteWidth = sizeof(FogConstants);
++        cb_desc.Usage = D3D11_USAGE_DYNAMIC;
++        cb_desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
++        cb_desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
++        ThrowIfFailed(mDevice->CreateBuffer(&cb_desc, nullptr, mFogCB.GetAddressOf()));
++    }
++
+     // Create ImGui
+ 
+     Ship::GuiWindowInitData window_impl;
+@@ -726,6 +832,161 @@ void GfxRenderingAPIDX11::EndFrame() {
+ void GfxRenderingAPIDX11::FinishRender() {
+ }
+ 
++void GfxRenderingAPIDX11::RunTonemappingPass() {
++    if (!mTonemapInitialized) {
++        mTonemapInitialized = true;
++    }
++
++    // Get current backbuffer
++    ComPtr<ID3D11Texture2D> backbuffer_tex;
++    HRESULT hr = mWindowBackend->GetSwapChain()->GetBuffer(0, IID_PPV_ARGS(backbuffer_tex.GetAddressOf()));
++    if (FAILED(hr) || !backbuffer_tex) return;
++
++    D3D11_TEXTURE2D_DESC bb_desc;
++    backbuffer_tex->GetDesc(&bb_desc);
++
++    // Resize copy texture if needed
++    if (!mTonemapCopyTex || bb_desc.Width != mTonemapCopyTexW || bb_desc.Height != mTonemapCopyTexH) {
++        mTonemapCopyTex.Reset();
++        mTonemapCopySRV.Reset();
++
++        D3D11_TEXTURE2D_DESC tex_desc = {};
++        tex_desc.Width = bb_desc.Width;
++        tex_desc.Height = bb_desc.Height;
++        tex_desc.MipLevels = 1;
++        tex_desc.ArraySize = 1;
++        tex_desc.Format = bb_desc.Format;
++        tex_desc.SampleDesc.Count = 1;
++        tex_desc.Usage = D3D11_USAGE_DEFAULT;
++        tex_desc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
++
++        hr = mDevice->CreateTexture2D(&tex_desc, nullptr, mTonemapCopyTex.GetAddressOf());
++        if (FAILED(hr)) return;
++
++        D3D11_SHADER_RESOURCE_VIEW_DESC srv_desc = {};
++        srv_desc.Format = tex_desc.Format;
++        srv_desc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
++        srv_desc.Texture2D.MipLevels = 1;
++
++        hr = mDevice->CreateShaderResourceView(mTonemapCopyTex.Get(), &srv_desc, mTonemapCopySRV.GetAddressOf());
++        if (FAILED(hr)) return;
++
++        mTonemapCopyTexW = bb_desc.Width;
++        mTonemapCopyTexH = bb_desc.Height;
++    }
++
++    // Copy backbuffer to our SRV texture
++    mContext->CopyResource(mTonemapCopyTex.Get(), backbuffer_tex.Get());
++
++    // Save previous state
++    ComPtr<ID3D11RenderTargetView> prev_rtvs[D3D11_SIMULTANEOUS_RENDER_TARGET_COUNT];
++    mContext->OMGetRenderTargets(D3D11_SIMULTANEOUS_RENDER_TARGET_COUNT, prev_rtvs[0].GetAddressOf(), nullptr);
++    ComPtr<ID3D11VertexShader> prev_vs;
++    ComPtr<ID3D11PixelShader> prev_ps;
++    ComPtr<ID3D11InputLayout> prev_il;
++    mContext->VSGetShader(prev_vs.GetAddressOf(), nullptr, nullptr);
++    mContext->PSGetShader(prev_ps.GetAddressOf(), nullptr, nullptr);
++    mContext->IAGetInputLayout(prev_il.GetAddressOf());
++    D3D11_PRIMITIVE_TOPOLOGY prev_topo;
++    mContext->IAGetPrimitiveTopology(&prev_topo);
++    ComPtr<ID3D11ShaderResourceView> prev_srvs[D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT];
++    mContext->PSGetShaderResources(0, D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT, prev_srvs[0].GetAddressOf());
++    ComPtr<ID3D11SamplerState> prev_samplers[D3D11_COMMONSHADER_SAMPLER_SLOT_COUNT];
++    mContext->PSGetSamplers(0, D3D11_COMMONSHADER_SAMPLER_SLOT_COUNT, prev_samplers[0].GetAddressOf());
++    ComPtr<ID3D11RasterizerState> prev_rs;
++    mContext->RSGetState(prev_rs.GetAddressOf());
++    ComPtr<ID3D11BlendState> prev_bs;
++    FLOAT prev_blend_factor[4];
++    UINT prev_sample_mask;
++    mContext->OMGetBlendState(prev_bs.GetAddressOf(), prev_blend_factor, &prev_sample_mask);
++    ComPtr<ID3D11DepthStencilState> prev_dss;
++    UINT prev_stencil_ref;
++    mContext->OMGetDepthStencilState(prev_dss.GetAddressOf(), &prev_stencil_ref);
++    ID3D11Buffer* prev_cb[D3D11_COMMONSHADER_CONSTANT_BUFFER_API_SLOT_COUNT];
++    mContext->PSGetConstantBuffers(0, D3D11_COMMONSHADER_CONSTANT_BUFFER_API_SLOT_COUNT, prev_cb);
++
++    // Create backbuffer RTV
++    ComPtr<ID3D11RenderTargetView> bb_rtv;
++    hr = mDevice->CreateRenderTargetView(backbuffer_tex.Get(), nullptr, bb_rtv.GetAddressOf());
++    if (FAILED(hr)) return;
++
++    // Set tonemapping state
++    D3D11_VIEWPORT vp = {};
++    vp.Width = (float)bb_desc.Width;
++    vp.Height = (float)bb_desc.Height;
++    vp.MaxDepth = 1.0f;
++    mContext->RSSetViewports(1, &vp);
++
++    D3D11_RECT scissor = { 0, 0, (LONG)bb_desc.Width, (LONG)bb_desc.Height };
++    mContext->RSSetScissorRects(1, &scissor);
++
++    FLOAT black[] = { 0, 0, 0, 0 };
++    mContext->OMSetRenderTargets(1, bb_rtv.GetAddressOf(), nullptr);
++    mContext->OMSetBlendState(nullptr, black, 0xFFFFFFFF);
++    mContext->OMSetDepthStencilState(nullptr, 0);
++
++    D3D11_RASTERIZER_DESC rs_desc = {};
++    rs_desc.FillMode = D3D11_FILL_SOLID;
++    rs_desc.CullMode = D3D11_CULL_NONE;
++    rs_desc.ScissorEnable = true;
++    ComPtr<ID3D11RasterizerState> tonemap_rs;
++    mDevice->CreateRasterizerState(&rs_desc, tonemap_rs.GetAddressOf());
++    mContext->RSSetState(tonemap_rs.Get());
++
++    // Update fog constant buffer
++    FogConstants fogData = {};
++    fogData.fogStart = 0.3f;
++    fogData.fogRange = 0.7f;
++    fogData.fogColorR = 0.45f;
++    fogData.fogColorG = 0.55f;
++    fogData.fogColorB = 0.70f;
++    fogData.fogStrength = 0.15f;
++    D3D11_MAPPED_SUBRESOURCE fogMap;
++    if (SUCCEEDED(mContext->Map(mFogCB.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &fogMap))) {
++        memcpy(fogMap.pData, &fogData, sizeof(FogConstants));
++        mContext->Unmap(mFogCB.Get(), 0);
++    }
++
++    // Get depth buffer SRV for atmospheric fog
++    ID3D11ShaderResourceView* depthSRV = nullptr;
++    if (mCurrentFramebuffer >= 0 && mCurrentFramebuffer < (int)mFrameBuffers.size()) {
++        FramebufferDX11& fb = mFrameBuffers[mCurrentFramebuffer];
++        if (fb.depth_stencil_srv.Get() != nullptr) {
++            depthSRV = fb.depth_stencil_srv.Get();
++        }
++    }
++
++    mContext->IASetInputLayout(mTonemapIL.Get());
++    mContext->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
++    mContext->VSSetShader(mTonemapVS.Get(), 0, 0);
++    mContext->PSSetShader(mTonemapPS.Get(), 0, 0);
++    mContext->PSSetShaderResources(0, 1, mTonemapCopySRV.GetAddressOf());
++    if (depthSRV) {
++        mContext->PSSetShaderResources(1, 1, &depthSRV);
++    }
++    mContext->PSSetSamplers(0, 1, mTonemapSampler.GetAddressOf());
++    if (depthSRV) {
++        mContext->PSSetSamplers(1, 1, mTonemapSampler.GetAddressOf());
++    }
++    mContext->PSSetConstantBuffers(2, 1, mFogCB.GetAddressOf());
++
++    // Draw fullscreen triangle (SV_VertexID generates vertices)
++    mContext->Draw(3, 0);
++
++    // Restore previous state
++    mContext->OMSetRenderTargets(D3D11_SIMULTANEOUS_RENDER_TARGET_COUNT, prev_rtvs[0].GetAddressOf(), nullptr);
++    mContext->VSSetShader(prev_vs.Get(), 0, 0);
++    mContext->PSSetShader(prev_ps.Get(), 0, 0);
++    mContext->IASetInputLayout(prev_il.Get());
++    mContext->IASetPrimitiveTopology(prev_topo);
++    mContext->PSSetShaderResources(0, D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT, prev_srvs[0].GetAddressOf());
++    mContext->PSSetSamplers(0, D3D11_COMMONSHADER_SAMPLER_SLOT_COUNT, prev_samplers[0].GetAddressOf());
++    mContext->RSSetState(prev_rs.Get());
++    mContext->OMSetBlendState(prev_bs.Get(), prev_blend_factor, prev_sample_mask);
++    mContext->OMSetDepthStencilState(prev_dss.Get(), prev_stencil_ref);
++    mContext->PSSetConstantBuffers(0, D3D11_COMMONSHADER_CONSTANT_BUFFER_API_SLOT_COUNT, prev_cb);
++}
++
+ int GfxRenderingAPIDX11::CreateFramebuffer() {
+     uint32_t texture_id = NewTexture();
+     TextureData& t = mTextures[texture_id];
+diff --git a/src/fast/interpreter.cpp b/src/fast/interpreter.cpp
+index 98d92f5e..7b546be5 100644
+--- a/src/fast/interpreter.cpp
++++ b/src/fast/interpreter.cpp
+@@ -35,6 +35,8 @@
+ #include "ship/Context.h"
+ #include "ship/config/ConsoleVariable.h"
+ 
++#include "fast/MaterialRegistry.h"
++
+ #include "libultraship/libultra/os.h"
+ 
+ #include <spdlog/fmt/fmt.h>
+@@ -126,6 +128,26 @@ void GfxSetInstance(std::shared_ptr<Interpreter> gfx) {
+ 
+ void Interpreter::Flush() {
+     if (mBufVboLen > 0) {
++        if (MaterialRegistry::IsEnhancedVisualProfile()) {
++            DrawCallInfo dcInfo = {};
++            dcInfo.combineMode = mRdp->combine_mode;
++            dcInfo.geometryMode = mRsp->geometry_mode;
++            dcInfo.otherModeL = mRdp->other_mode_l;
++            dcInfo.otherModeH = mRdp->other_mode_h;
++            dcInfo.primR = mRdp->prim_color.r;
++            dcInfo.primG = mRdp->prim_color.g;
++            dcInfo.primB = mRdp->prim_color.b;
++            dcInfo.primA = mRdp->prim_color.a;
++            dcInfo.envR = mRdp->env_color.r;
++            dcInfo.envG = mRdp->env_color.g;
++            dcInfo.envB = mRdp->env_color.b;
++            dcInfo.envA = mRdp->env_color.a;
++            dcInfo.fogMul = mRdp->fog_color.r;
++            dcInfo.fogOffset = mRdp->fog_color.g;
++            dcInfo.isRect = false;
++            dcInfo.is2D = (mRsp->geometry_mode & G_ZBUFFER) == 0;
++            MaterialRegistry::Instance().RecordDrawCall(dcInfo);
++        }
+         mRapi->DrawTriangles(mBufVbo, mBufVboLen, mBufVboNumTris);
+         mBufVboLen = 0;
+         mBufVboNumTris = 0;
+@@ -482,10 +504,13 @@ void Interpreter::TextureCacheDelete(const uint8_t* origAddr) {
+ 
+ void Interpreter::ImportTextureRgba16(int tile, bool importReplacement) {
+     const RawTexMetadata* metadata = &mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].raw_tex_metadata;
+-    const uint8_t* addr =
+-        importReplacement && (metadata->resource != nullptr)
+-            ? mMaskedTextures.find(GetBaseTexturePath(metadata->resource->GetInitData()->Path))->second.replacementData
+-            : mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].addr;
++    const uint8_t* addr = mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].addr;
++    if (importReplacement && (metadata->resource != nullptr)) {
++        auto it = mMaskedTextures.find(GetBaseTexturePath(metadata->resource->GetInitData()->Path));
++        if (it != mMaskedTextures.end()) {
++            addr = it->second.replacementData;
++        }
++    }
+     uint32_t sizeBytes = mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].size_bytes;
+     uint32_t fullImageLineSizeBytes =
+         mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].full_image_line_size_bytes;
+@@ -524,10 +549,13 @@ void Interpreter::ImportTextureRgba16(int tile, bool importReplacement) {
+ 
+ void Interpreter::ImportTextureRgba32(int tile, bool importReplacement) {
+     const RawTexMetadata* metadata = &mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].raw_tex_metadata;
+-    const uint8_t* addr =
+-        importReplacement && (metadata->resource != nullptr)
+-            ? mMaskedTextures.find(GetBaseTexturePath(metadata->resource->GetInitData()->Path))->second.replacementData
+-            : mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].addr;
++    const uint8_t* addr = mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].addr;
++    if (importReplacement && (metadata->resource != nullptr)) {
++        auto it = mMaskedTextures.find(GetBaseTexturePath(metadata->resource->GetInitData()->Path));
++        if (it != mMaskedTextures.end()) {
++            addr = it->second.replacementData;
++        }
++    }
+     uint32_t size_bytes = mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].size_bytes;
+     uint32_t full_image_line_size_bytes =
+         mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].full_image_line_size_bytes;
+@@ -541,10 +569,13 @@ void Interpreter::ImportTextureRgba32(int tile, bool importReplacement) {
+ 
+ void Interpreter::ImportTextureIA4(int tile, bool importReplacement) {
+     const RawTexMetadata* metadata = &mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].raw_tex_metadata;
+-    const uint8_t* addr =
+-        importReplacement && (metadata->resource != nullptr)
+-            ? mMaskedTextures.find(GetBaseTexturePath(metadata->resource->GetInitData()->Path))->second.replacementData
+-            : mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].addr;
++    const uint8_t* addr = mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].addr;
++    if (importReplacement && (metadata->resource != nullptr)) {
++        auto it = mMaskedTextures.find(GetBaseTexturePath(metadata->resource->GetInitData()->Path));
++        if (it != mMaskedTextures.end()) {
++            addr = it->second.replacementData;
++        }
++    }
+     uint32_t sizeBytes = mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].size_bytes;
+     uint32_t fullImageLineSizeBytes =
+         mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].full_image_line_size_bytes;
+@@ -573,10 +604,13 @@ void Interpreter::ImportTextureIA4(int tile, bool importReplacement) {
+ 
+ void Interpreter::ImportTextureIA8(int tile, bool importReplacement) {
+     const RawTexMetadata* metadata = &mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].raw_tex_metadata;
+-    const uint8_t* addr =
+-        importReplacement && (metadata->resource != nullptr)
+-            ? mMaskedTextures.find(GetBaseTexturePath(metadata->resource->GetInitData()->Path))->second.replacementData
+-            : mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].addr;
++    const uint8_t* addr = mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].addr;
++    if (importReplacement && (metadata->resource != nullptr)) {
++        auto it = mMaskedTextures.find(GetBaseTexturePath(metadata->resource->GetInitData()->Path));
++        if (it != mMaskedTextures.end()) {
++            addr = it->second.replacementData;
++        }
++    }
+     uint32_t sizeBytes = mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].size_bytes;
+     uint32_t fullImageLineSizeBytes =
+         mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].full_image_line_size_bytes;
+@@ -603,10 +637,13 @@ void Interpreter::ImportTextureIA8(int tile, bool importReplacement) {
+ 
+ void Interpreter::ImportTextureIA16(int tile, bool importReplacement) {
+     const RawTexMetadata* metadata = &mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].raw_tex_metadata;
+-    const uint8_t* addr =
+-        importReplacement && (metadata->resource != nullptr)
+-            ? mMaskedTextures.find(GetBaseTexturePath(metadata->resource->GetInitData()->Path))->second.replacementData
+-            : mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].addr;
++    const uint8_t* addr = mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].addr;
++    if (importReplacement && (metadata->resource != nullptr)) {
++        auto it = mMaskedTextures.find(GetBaseTexturePath(metadata->resource->GetInitData()->Path));
++        if (it != mMaskedTextures.end()) {
++            addr = it->second.replacementData;
++        }
++    }
+     uint32_t size_bytes = mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].size_bytes;
+     uint32_t full_image_line_size_bytes =
+         mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].full_image_line_size_bytes;
+@@ -645,10 +682,13 @@ void Interpreter::ImportTextureIA16(int tile, bool importReplacement) {
+ 
+ void Interpreter::ImportTextureI4(int tile, bool importReplacement) {
+     const RawTexMetadata* metadata = &mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].raw_tex_metadata;
+-    const uint8_t* addr =
+-        importReplacement && (metadata->resource != nullptr)
+-            ? mMaskedTextures.find(GetBaseTexturePath(metadata->resource->GetInitData()->Path))->second.replacementData
+-            : mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].addr;
++    const uint8_t* addr = mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].addr;
++    if (importReplacement && (metadata->resource != nullptr)) {
++        auto it = mMaskedTextures.find(GetBaseTexturePath(metadata->resource->GetInitData()->Path));
++        if (it != mMaskedTextures.end()) {
++            addr = it->second.replacementData;
++        }
++    }
+     uint32_t sizeBytes = mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].size_bytes;
+     uint32_t fullImageLineSizeBytes =
+         mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].full_image_line_size_bytes;
+@@ -689,10 +729,13 @@ void Interpreter::ImportTextureI4(int tile, bool importReplacement) {
+ 
+ void Interpreter::ImportTextureI8(int tile, bool importReplacement) {
+     const RawTexMetadata* metadata = &mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].raw_tex_metadata;
+-    const uint8_t* addr =
+-        importReplacement && (metadata->resource != nullptr)
+-            ? mMaskedTextures.find(GetBaseTexturePath(metadata->resource->GetInitData()->Path))->second.replacementData
+-            : mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].addr;
++    const uint8_t* addr = mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].addr;
++    if (importReplacement && (metadata->resource != nullptr)) {
++        auto it = mMaskedTextures.find(GetBaseTexturePath(metadata->resource->GetInitData()->Path));
++        if (it != mMaskedTextures.end()) {
++            addr = it->second.replacementData;
++        }
++    }
+     uint32_t sizeBytes = mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].size_bytes;
+     uint32_t full_image_line_size_bytes =
+         mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].full_image_line_size_bytes;
+@@ -716,10 +759,13 @@ void Interpreter::ImportTextureCi4(int tile, bool importReplacement) {
+     uint32_t fullImageLineSizeBytes =
+         mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].full_image_line_size_bytes;
+     const RawTexMetadata* metadata = &mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].raw_tex_metadata;
+-    const uint8_t* addr =
+-        importReplacement && (metadata->resource != nullptr)
+-            ? mMaskedTextures.find(GetBaseTexturePath(metadata->resource->GetInitData()->Path))->second.replacementData
+-            : mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].addr;
++    const uint8_t* addr = mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].addr;
++    if (importReplacement && (metadata->resource != nullptr)) {
++        auto it = mMaskedTextures.find(GetBaseTexturePath(metadata->resource->GetInitData()->Path));
++        if (it != mMaskedTextures.end()) {
++            addr = it->second.replacementData;
++        }
++    }
+     uint32_t sizeBytes = mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].size_bytes;
+     uint32_t lineSizeBytes = mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].line_size_bytes;
+     uint32_t palIdx = mRdp->texture_tile[tile].palette; // 0-15
+@@ -760,10 +806,13 @@ void Interpreter::ImportTextureCi4(int tile, bool importReplacement) {
+ 
+ void Interpreter::ImportTextureCi8(int tile, bool importReplacement) {
+     const RawTexMetadata* metadata = &mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].raw_tex_metadata;
+-    const uint8_t* addr =
+-        importReplacement && (metadata->resource != nullptr)
+-            ? mMaskedTextures.find(GetBaseTexturePath(metadata->resource->GetInitData()->Path))->second.replacementData
+-            : mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].addr;
++    const uint8_t* addr = mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].addr;
++    if (importReplacement && (metadata->resource != nullptr)) {
++        auto it = mMaskedTextures.find(GetBaseTexturePath(metadata->resource->GetInitData()->Path));
++        if (it != mMaskedTextures.end()) {
++            addr = it->second.replacementData;
++        }
++    }
+     uint32_t sizeBytes = mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].size_bytes;
+     uint32_t fullImageLineSizeBytes =
+         mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].full_image_line_size_bytes;
+@@ -798,10 +847,13 @@ void Interpreter::ImportTextureCi8(int tile, bool importReplacement) {
+ 
+ void Interpreter::ImportTextureImg(int tile, bool importReplacement) {
+     const RawTexMetadata* metadata = &mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].raw_tex_metadata;
+-    const uint8_t* addr =
+-        importReplacement && (metadata->resource != nullptr)
+-            ? mMaskedTextures.find(GetBaseTexturePath(metadata->resource->GetInitData()->Path))->second.replacementData
+-            : mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].addr;
++    const uint8_t* addr = mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].addr;
++    if (importReplacement && (metadata->resource != nullptr)) {
++        auto it = mMaskedTextures.find(GetBaseTexturePath(metadata->resource->GetInitData()->Path));
++        if (it != mMaskedTextures.end()) {
++            addr = it->second.replacementData;
++        }
++    }
+ 
+     uint16_t width = metadata->width;
+     uint16_t height = metadata->height;
+@@ -810,10 +862,13 @@ void Interpreter::ImportTextureImg(int tile, bool importReplacement) {
+ 
+ void Interpreter::ImportTextureRaw(int tile, bool importReplacement) {
+     const RawTexMetadata* metadata = &mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].raw_tex_metadata;
+-    const uint8_t* addr =
+-        importReplacement && (metadata->resource != nullptr)
+-            ? mMaskedTextures.find(GetBaseTexturePath(metadata->resource->GetInitData()->Path))->second.replacementData
+-            : mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].addr;
++    const uint8_t* addr = mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].addr;
++    if (importReplacement && (metadata->resource != nullptr)) {
++        auto it = mMaskedTextures.find(GetBaseTexturePath(metadata->resource->GetInitData()->Path));
++        if (it != mMaskedTextures.end()) {
++            addr = it->second.replacementData;
++        }
++    }
+ 
+     uint16_t width = metadata->width;
+     uint16_t height = metadata->height;
+@@ -892,10 +947,13 @@ void Interpreter::ImportTexture(int i, int tile, bool importReplacement) {
+     uint32_t origSizeBytes = mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].orig_size_bytes;
+ 
+     const RawTexMetadata* metadata = &mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].raw_tex_metadata;
+-    const uint8_t* origAddr =
+-        importReplacement && (metadata->resource != nullptr)
+-            ? mMaskedTextures.find(GetBaseTexturePath(metadata->resource->GetInitData()->Path))->second.replacementData
+-            : mRdp->loaded_texture[tmemIdex].addr;
++    const uint8_t* origAddr = mRdp->loaded_texture[tmemIdex].addr;
++    if (importReplacement && (metadata->resource != nullptr)) {
++        auto it = mMaskedTextures.find(GetBaseTexturePath(metadata->resource->GetInitData()->Path));
++        if (it != mMaskedTextures.end()) {
++            origAddr = it->second.replacementData;
++        }
++    }
+ 
+     TextureCacheKey key;
+     if (fmt == G_IM_FMT_CI) {
+@@ -3467,8 +3525,9 @@ bool gfx_set_fb_handler_custom(F3DGfx** cmd0) {
+ 
+     if (cmd->words.w1) {
+         gfx->SetFrameBuffer((int32_t)cmd->words.w1, 1.0f);
+-        gfx->mActiveFrameBuffer = gfx->mFrameBuffers.find((int32_t)cmd->words.w1);
+-        gfx->mFbActive = true;
++        auto fbIt = gfx->mFrameBuffers.find((int32_t)cmd->words.w1);
++        gfx->mActiveFrameBuffer = (fbIt != gfx->mFrameBuffers.end()) ? fbIt : gfx->mFrameBuffers.end();
++        gfx->mFbActive = (fbIt != gfx->mFrameBuffers.end());
+     } else {
+         gfx->ResetFrameBuffer();
+         gfx->mFbActive = false;
+@@ -4249,6 +4308,9 @@ bool Interpreter::ViewportMatchesRendererResolution() {
+ }
+ 
+ void Interpreter::StartFrame() {
++    MaterialRegistry::Instance().SetProfile(
++        Ship::Context::GetInstance()->GetConsoleVariables()->GetInteger("gEnhancements.Graphics.VisualProfile", 0));
++
+     mWapi->GetDimensions(&mGfxCurrentWindowDimensions.width, &mGfxCurrentWindowDimensions.height, &mCurWindowPosX,
+                          &mCurWindowPosY);
+     if (mCurDimensions.height == 0) {
+@@ -4368,6 +4430,10 @@ void Interpreter::Run(Gfx* commands, const std::unordered_map<Mtx*, MtxF>& mtx_r
+ 
+ void Interpreter::EndFrame() {
+     mRapi->EndFrame();
++    if (MaterialRegistry::IsEnhancedVisualProfile()) {
++        mRapi->RunTonemappingPass();
++        MaterialRegistry::Instance().FlushFrame();
++    }
+     mWapi->SwapBuffersBegin();
+     mRapi->FinishRender();
+     mWapi->SwapBuffersEnd();
+@@ -4486,7 +4552,8 @@ uint16_t Interpreter::GetPixelDepth(float x, float y) {
+     mGetPixelDepthCached.merge(res);
+     mGetPixelDepthPending.clear();
+ 
+-    return mGetPixelDepthCached.find(std::make_pair(x, y))->second;
++    auto resultIt = mGetPixelDepthCached.find(std::make_pair(x, y));
++    return (resultIt != mGetPixelDepthCached.end()) ? resultIt->second : 0;
+ }
+ 
+ void gfx_push_current_dir(char* path) {
+diff --git a/src/ship/Context.cpp b/src/ship/Context.cpp
+index f3db0445..042f09df 100644
+--- a/src/ship/Context.cpp
++++ b/src/ship/Context.cpp
+@@ -151,6 +151,7 @@ bool Context::InitLogging() {
+ #else
+         mLogger = std::make_shared<spdlog::async_logger>(GetName(), sinks.begin(), sinks.end(), spdlog::thread_pool(),
+                                                          spdlog::async_overflow_policy::block);
++        GetLogger()->flush_on(spdlog::level::info);
+ #endif
+ 
+         GetLogger()->set_pattern("[%Y-%m-%d %H:%M:%S.%e] [%@] [%l] %v");
+diff --git a/src/ship/resource/ResourceManager.cpp b/src/ship/resource/ResourceManager.cpp
+index 5c76ac33..ff7ad275 100644
+--- a/src/ship/resource/ResourceManager.cpp
++++ b/src/ship/resource/ResourceManager.cpp
+@@ -8,6 +8,12 @@
+ #include "ship/utils/Utils.h"
+ #include "ship/config/ConsoleVariable.h"
+ #include "ship/Context.h"
++#ifdef _WIN32
++#include <windows.h>
++#else
++#include <unistd.h>
++#include <fcntl.h>
++#endif
+ 
+ namespace Ship {
+ 
+@@ -409,8 +415,36 @@ size_t ResourceManager::UnloadResource(const std::string& filePath) {
+ }
+ 
+ bool ResourceManager::OtrSignatureCheck(const char* fileName) {
++    if (fileName == nullptr || (uintptr_t)fileName < 0x10000) {
++        return false;
++    }
++#ifdef _WIN32
++    MEMORY_BASIC_INFORMATION mbi;
++    if (VirtualQuery(fileName, &mbi, sizeof(mbi)) == 0 ||
++        mbi.State != MEM_COMMIT ||
++        (mbi.Protect & (PAGE_READONLY | PAGE_READWRITE | PAGE_EXECUTE_READ | PAGE_EXECUTE_READWRITE)) == 0) {
++        return false;
++    }
++    __try {
++        static const char* sOtrSignature = "__OTR__";
++        return strncmp(fileName, sOtrSignature, 7) == 0;
++    } __except (EXCEPTION_EXECUTE_HANDLER) {
++        return false;
++    }
++#else
++#if defined(__unix__) || defined(__APPLE__) || defined(__linux__)
++    int nullFd = open("/dev/null", O_WRONLY);
++    if (nullFd >= 0) {
++        ssize_t written = write(nullFd, fileName, 7);
++        close(nullFd);
++        if (written != 7) {
++            return false;
++        }
++    }
++#endif
+     static const char* sOtrSignature = "__OTR__";
+-    return strncmp(fileName, sOtrSignature, strlen(sOtrSignature)) == 0;
++    return strncmp(fileName, sOtrSignature, 7) == 0;
++#endif
+ }
+ 
+ bool ResourceManager::IsAltAssetsEnabled() {

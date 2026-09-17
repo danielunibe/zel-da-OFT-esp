@@ -1,0 +1,23 @@
+ .gitignore                                         |  14 ++
+ CMakeLists.txt                                     |   4 +
+ libultraship                                       |   0
+ soh/include/z64.h                                  |  11 ++
+ soh/soh/Enhancements/FileSelectEnhancements.cpp    |   6 +-
+ soh/soh/Enhancements/boss-rush/BossRush.cpp        |  18 ++-
+ .../custom-message/CustomMessageManager.cpp        | 112 +++++++++++-----
+ .../custom-message/CustomMessageManager.h          |   3 +-
+ soh/soh/OTRGlobals.cpp                             |   6 +
+ soh/soh/ResourceManagerHelpers.cpp                 |   5 +
+ soh/soh/ShipUtils.cpp                              |  25 ++++
+ soh/soh/SohGui/SohMenu.h                           |   1 +
+ soh/soh/SohGui/SohMenuSettings.cpp                 |  18 ++-
+ soh/soh/z_message_OTR.cpp                          |  14 ++
+ soh/src/code/z_kanfont.c                           |  34 ++++-
+ soh/src/code/z_message_PAL.c                       |   3 +-
+ soh/src/code/z_parameter.c                         |  10 +-
+ soh/src/overlays/actors/ovl_En_Mag/z_en_mag.c      |   4 +-
+ .../gamestates/ovl_file_choose/z_file_choose.c     |  41 +++---
+ .../ovl_file_choose/z_file_nameset_PAL.c           |  35 +++--
+ .../misc/ovl_kaleido_scope/z_kaleido_map_PAL.c     |   9 +-
+ .../misc/ovl_kaleido_scope/z_kaleido_scope_PAL.c   | 142 +++++++++++----------
+ 22 files changed, 375 insertions(+), 140 deletions(-)

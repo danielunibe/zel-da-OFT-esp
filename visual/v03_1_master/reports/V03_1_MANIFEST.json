@@ -1,0 +1,52 @@
+{
+  "release_candidate": "OCARINA_COUCH_EDITION_V03.1",
+  "integration_owner": "Gemini 3.8 High / High Flash",
+  "date": "2026-09-17",
+  "status": "HUMAN_VISUAL_VALIDATION_REQUIRED",
+  "github_pushed": false,
+  "pinned_foundation": {
+    "shipwright_commit": "4aaad850bd5540cd77c2d83f3ad348d3b38605b2",
+    "libultraship_commit": "17a0b7939bd05f5e617cef89457ca43774fc9a9f",
+    "upstream_migrations": "NONE (STRICTLY PINNED)"
+  },
+  "runtime_candidate_hashes": {
+    "soh.exe": "A287BBB1663179D0B118E362DAB0BD8E59121E2C4E84656F9844DB4ABB32EB7C",
+    "soh.o2r": "E92DD764D25DFD5E52E5411C83ED61CD5599EFEB1A6A25A6EED2118228104F1C",
+    "es.o2r": "D9037A8A4086D0073F90CC297FCBFE558A78AC3758F27B11A250537883FD990D",
+    "shipofharkinian.json": "0ADFEC294CBD53EDAF4F2134FABFC07AE11E4C9B7B6091B67A98AE1BCA781167",
+    "gamecontrollerdb.txt": "8055F1EA5F2EB367476A57FD153429D1EC3C0AA2E6C93E88A5EA85C922245F2D",
+    "OcarinaLauncher.ps1": "DE4A9B505EBAB61626D062576C5718B84B192FD4DF6DA8464CAC4188CD3C2A81",
+    "CONTROLES_TECLADO.txt": "2E46FEE7FD6B54E80D923CE3F5382F822AF2DB46ACF5DA21C20CE7A69FFCECDE"
+  },
+  "generated_artifacts": {
+    "MaterialRulesPilot.h": "D7E4C035134CB465864D6A7CA3195D3082D73815AB09CB83C1E8758C14E21734"
+  },
+  "material_intelligence_metrics": {
+    "total_discovered_visual_resources": 24372,
+    "compiled_pilot_rules": 1407,
+    "ui_protected_textures": 6102,
+    "emissive_candidates": 358,
+    "water_surfaces": 237,
+    "metal_candidates": 163,
+    "pbr_lite_capability": "METADATA_ONLY",
+    "cook_torrance_brdf": "NOT_IMPLEMENTED",
+    "raytracing_dxr": "NOT_IMPLEMENTED"
+  },
+  "validation_gates": {
+    "classic_mode_parity": "PASS (Bit-exact upstream N64 output)",
+    "enhanced_mode_aces": "PASS (Stephen Hill ACES Fitted Curve in Linear Space)",
+    "ui_postprocess_isolation": "PASS (ACES_UI_CONTAMINATION = 0, Delta E = 0.00)",
+    "atmospheric_fog_pipeline": "PASS (F3DEX2 dynamic scene fog linearized and blended)",
+    "depth_pipeline_safety": "PASS (DSV unbind prevents OM read/write hazard)",
+    "d3d11_com_churn": "PASS (0 allocations / frame)",
+    "visual_qa_test_suite": "PASS (40 / 40 passed in 0.636s)",
+    "automated_runtime_suite": "PASS (5 / 5 passed)",
+    "save_game_compatibility": "PASS (file2.sav, file3.sav, global.sav preserved)",
+    "spanish_language_pack": "PASS (es.o2r active and verified)"
+  },
+  "operational_contract": {
+    "live_root_status": "STRICTLY READ-ONLY",
+    "prestate_backup_location": "visual_workspace/v03_1_master/runtime_backup/pre_master_v03",
+    "rollback_guarantee": "IMMEDIATE (RC1.1 binaries preserved)"
+  }
+}

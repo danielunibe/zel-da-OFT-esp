@@ -1,0 +1,32 @@
+file,function_or_symbol,initial_v03_classification,v03_1_reconciliation_action,notes
+MaterialRegistry.h,MaterialRegistry::Instance,VALID,PRESERVED,Singleton accessor
+MaterialRegistry.h,MaterialRegistry::SetProfile,VALID,PRESERVED,Profile switch hook
+MaterialRegistry.h,MaterialRegistry::IsEnhancedVisualProfile,VALID,PRESERVED,Canonical profile check helper
+MaterialRegistry.h,MaterialRegistry::GetMaterial,VALID,PRESERVED,Material definition retrieval
+MaterialRegistry.h,MaterialRegistry::RecordDrawCall,VALID_BUT_INCOMPLETE,ENHANCED,Added textureHash and depth fog mul/offset recording
+MaterialRegistry.h,MaterialRegistry::MakeKey,VALID_BUT_INCOMPLETE,ENHANCED,Keying incorporates textureHash
+MaterialRegistry.h,MaterialRegistry::Init,VALID_BUT_INCOMPLETE,ADDED,Startup population of static pilot rules
+MaterialRegistry.h,MaterialRegistry::MetricsAccessors,VALID_BUT_INCOMPLETE,ADDED,Exposes draw call and cache metrics
+MaterialRegistry.cpp,MaterialRegistry::ClassifyFromState,VALID_BUT_INCOMPLETE,ENHANCED,Prioritizes UI protection and UNKNOWN fallback
+MaterialRegistry.cpp,MaterialRegistry::RecordDrawCall,VALID_BUT_INCOMPLETE,ENHANCED,Integrated pilot lookup and O(1) material caching
+MaterialRegistry.cpp,MaterialRegistry::FlushFrame,VALID,PRESERVED,Per-frame buffer clearing
+MaterialRegistry.cpp,MaterialRegistry::ResetMetrics,VALID_BUT_INCOMPLETE,ADDED,Clears running metrics for validation runs
+interpreter.cpp,Interpreter::StartFrame,VALID,ENHANCED,Resets frame postprocess state flags
+interpreter.cpp,Interpreter::Flush,VALID_BUT_INCOMPLETE,ENHANCED,Pulls textureHash and mRsp->fog_mul/offset correctly
+interpreter.cpp,Interpreter::Run,VALID_BUT_INCOMPLETE,ENHANCED,Added failsafe scene postprocess trigger before 2D overlay
+interpreter.cpp,Interpreter::EndFrame,INCORRECT,CORRECTED,Removed postprocess pass to prevent UI/ImGui contamination
+interpreter.cpp,Interpreter::OnOverlayStart,VALID_BUT_INCOMPLETE,ADDED,Triggers postprocessing right as OVERLAY_DISP begins
+interpreter.cpp,Interpreter::TriggerScenePostprocess,VALID_BUT_INCOMPLETE,ADDED,Executes ACES and dynamic fog on 3D scene only
+interpreter.cpp,GfxSpTri1,VALID_BUT_INCOMPLETE,ENHANCED,Tracks 3D draw and detects transition to 2D HUD
+interpreter.cpp,gfx_noop_handler_f3dex2,VALID_BUT_INCOMPLETE,ENHANCED,Intercepts OVERLAY_DISP marker to isolate HUD
+interpreter.cpp,gfx_set_timg_otr_hash_handler_custom,VALID_BUT_INCOMPLETE,ENHANCED,Records stable 64-bit resource hash
+interpreter.cpp,gfx_set_timg_otr_filepath_handler_custom,VALID_BUT_INCOMPLETE,ENHANCED,Computes CRC64 for filepath textures
+gfx_direct3d_common.h,RunTonemappingPass,VALID_BUT_INCOMPLETE,ENHANCED,Parameterized with dynamic N64 fog values
+gfx_direct3d_common.h,mTonemapRS_DSS_BS,VALID_BUT_INCOMPLETE,ADDED,Reusable state ComPtrs to prevent per-frame churn
+gfx_direct3d_common.h,mTonemapBackbufferRTV,VALID_BUT_INCOMPLETE,ADDED,Cached backbuffer RTV
+gfx_rendering_api.h,RunTonemappingPass,VALID_BUT_INCOMPLETE,ENHANCED,Virtual signature updated with fog parameters
+gfx_direct3d11.cpp,GfxRenderingAPIDX11::Init,VALID_BUT_INCOMPLETE,ENHANCED,Creates tonemap render states once at startup
+gfx_direct3d11.cpp,GfxRenderingAPIDX11::RunTonemappingPass,INCORRECT,CORRECTED,Eliminated object churn; restored prev_dsv; parameterized fog
+gfx_direct3d11.cpp,TonemapPS_HLSL,VALID_BUT_INCOMPLETE,ENHANCED,Linearized fog color before blending in linear space
+Context.cpp,Context::InitLogging,VALID,PRESERVED,Flush on info level for reliable diagnostics
+ResourceManager.cpp,ResourceManager::OtrSignatureCheck,VALID,PRESERVED,Memory-safe signature inspection

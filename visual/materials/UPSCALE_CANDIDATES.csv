@@ -1,0 +1,8 @@
+asset_id,scene_or_object,current_resolution,screen_coverage,visual_importance,upscale_benefit,risk,notes
+UNKNOWN,close-up opaque environment texture,UNKNOWN,UNKNOWN,UNKNOWN,UNKNOWN,MEDIUM,Select only after XML/resource identity, actual dimensions and capture-based coverage are recorded.
+UNKNOWN,large opaque stone surface in pilot area,UNKNOWN,HIGH,HIGH,UNKNOWN,MEDIUM,Do not upscale until normal/roughness need is separated from a style change.
+UNKNOWN,large opaque wood surface,UNKNOWN,MEDIUM,MEDIUM,UNKNOWN,MEDIUM,Preserve original albedo as source and keep generated output additive.
+UNKNOWN,large opaque metal object,UNKNOWN,MEDIUM,HIGH,UNKNOWN,HIGH,Validate silhouette, alpha and combiner before any upscale.
+UNKNOWN,water texture,UNKNOWN,UNKNOWN,UNKNOWN,UNKNOWN,HIGH,Exclude from generic upscale until water scrolling, alpha and ordering are captured.
+UNKNOWN,skybox texture,UNKNOWN,HIGH,MEDIUM,UNKNOWN,HIGH,Requires separate skybox review; avoid seams or baked-lighting artifacts.
+UNKNOWN,character surface texture,UNKNOWN,UNKNOWN,HIGH,UNKNOWN,HIGH,Only consider if it is not a billboard, UI asset or alpha-tested special effect.

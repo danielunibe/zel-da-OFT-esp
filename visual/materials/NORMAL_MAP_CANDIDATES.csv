@@ -1,0 +1,9 @@
+asset_id,scene_or_object,surface_type,priority,normal_map_feasibility,notes
+UNKNOWN,Temple of Time main hall capture,stone,HIGH,UNKNOWN,Promising pilot class; exact texture path, dimensions and draw context must be captured before approval.
+UNKNOWN,Temple of Time pillars capture,stone,HIGH,UNKNOWN,Close opaque surfaces are candidates; preserve original UV and albedo.
+UNKNOWN,Hyrule Castle wall capture,stone,MEDIUM,UNKNOWN,Use only after source-backed resource identity and screen coverage are measured.
+UNKNOWN,Kakariko wall capture,stone,MEDIUM,UNKNOWN,Potential repeated opaque surface; no asset identity asserted by this audit.
+UNKNOWN,Death Mountain rock capture,rock,MEDIUM,UNKNOWN,Potential close surface; avoid applying to lava, particles or billboards.
+UNKNOWN,large wood surface capture,wood,MEDIUM,UNKNOWN,Candidate only when original draw is opaque and geometry context is stable.
+UNKNOWN,large metal object capture,metal,MEDIUM,UNKNOWN,Candidate only after metallic material identity is independently verified.
+UNKNOWN,large cloth surface capture,cloth,LOW,UNKNOWN,Do not add high-frequency detail that changes the original silhouette or art language.

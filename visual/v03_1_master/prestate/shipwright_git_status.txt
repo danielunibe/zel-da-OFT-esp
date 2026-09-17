@@ -1,0 +1,25 @@
+ M .gitignore
+ M CMakeLists.txt
+ m libultraship
+ M soh/include/z64.h
+ M soh/soh/Enhancements/FileSelectEnhancements.cpp
+ M soh/soh/Enhancements/boss-rush/BossRush.cpp
+ M soh/soh/Enhancements/custom-message/CustomMessageManager.cpp
+ M soh/soh/Enhancements/custom-message/CustomMessageManager.h
+ M soh/soh/OTRGlobals.cpp
+ M soh/soh/ResourceManagerHelpers.cpp
+ M soh/soh/ShipUtils.cpp
+ M soh/soh/SohGui/SohMenu.h
+ M soh/soh/SohGui/SohMenuSettings.cpp
+ M soh/soh/z_message_OTR.cpp
+ M soh/src/code/z_kanfont.c
+ M soh/src/code/z_message_PAL.c
+ M soh/src/code/z_parameter.c
+ M soh/src/overlays/actors/ovl_En_Mag/z_en_mag.c
+ M soh/src/overlays/gamestates/ovl_file_choose/z_file_choose.c
+ M soh/src/overlays/gamestates/ovl_file_choose/z_file_nameset_PAL.c
+ M soh/src/overlays/misc/ovl_kaleido_scope/z_kaleido_map_PAL.c
+ M soh/src/overlays/misc/ovl_kaleido_scope/z_kaleido_scope_PAL.c
+?? soh/assets/custom/textures/buttons/LTBtn.i4.png
+?? soh/include/glyph_resolver.h
+?? soh/soh/Enhancements/glyphs/

@@ -1,0 +1,9 @@
+Benchmark Scenario,Target FPS,Classic Mode FPS,Enhanced Mode FPS,Postprocess GPU Time (ms),State Allocation Churn,Status
+Title Screen / Intro,60.0,60.0,60.0,0.065,0,PASS
+Temple of Time (Interior),60.0,60.0,60.0,0.078,0,PASS
+Kokiri Forest (Canopy & Particles),60.0,60.0,60.0,0.088,0,PASS
+Hyrule Field (Midday Sun),60.0,60.0,60.0,0.082,0,PASS
+Hyrule Field (Night Fog),60.0,60.0,60.0,0.085,0,PASS
+Pause Subscreen (2D UI Overlay),60.0,60.0,60.0,0.070,0,PASS
+ImGui Couch Settings Overlay,60.0,60.0,60.0,0.072,0,PASS
+Toggle Stress (10x Cycles),60.0,60.0,60.0,0.080,0,PASS

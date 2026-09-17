@@ -1,0 +1,31 @@
+asset_id,category,path,protection_reason,risk_if_modified
+icon_item_static/ITEM_KOKIRI_EMERALD,HUD icons,soh/assets/textures/icon_item_static/icon_item_static.h,Original sprite must not receive PBR treatment,Item icon would render incorrectly with normal/roughness maps
+icon_item_static/ITEM_GORON_RUBY,HUD icons,soh/assets/textures/icon_item_static/icon_item_static.h,Original sprite must not receive PBR treatment,Item icon would render incorrectly
+icon_item_static/ITEM_ZORA_SAPPHIRE,HUD icons,soh/assets/textures/icon_item_static/icon_item_static.h,Original sprite must not receive PBR treatment,Item icon would render incorrectly
+icon_item_24_static/QUEST_MEDALLION_FOREST,HUD icons,soh/assets/textures/icon_item_24_static/icon_item_24_static.h,Quest icon must stay 2D,Medallion icon would break
+icon_item_24_static/QUEST_MEDALLION_FIRE,HUD icons,soh/assets/textures/icon_item_24_static/icon_item_24_static.h,Quest icon must stay 2D,Medallion icon would break
+icon_item_24_static/QUEST_MEDALLION_WATER,HUD icons,soh/assets/textures/icon_item_24_static/icon_item_24_static.h,Quest icon must stay 2D,Medallion icon would break
+nes_font_static/FONT_A,Fonts,soh/assets/textures/nes_font_static/nes_font_static.h,Font glyph must stay pixel-perfect,Text would become unreadable
+nes_font_static/FONT_B,Fonts,soh/assets/textures/nes_font_static/nes_font_static.h,Font glyph must stay pixel-perfect,Text would become unreadable
+kanji/KANJI_001,Fonts,soh/assets/textures/kanji/kanji.h,Japanese glyph must stay pixel-perfect,Text would become unreadable
+item_name_static/ITEM_NAME_SWORD,Fonts,soh/assets/textures/item_name_static/item_name_static.h,Item name text must stay pixel-perfect,Text would become unreadable
+do_action_static/BTN_ATTACK,Button glyphs,soh/assets/textures/do_action_static/do_action_static.h,Action button must stay 2D,Button would render incorrectly
+do_action_static/BTN_CHECK,Button glyphs,soh/assets/textures/do_action_static/do_action_static.h,Action button must stay 2D,Button would render incorrectly
+message_static/MSG_BOX_BACKGROUND,Menu assets,soh/assets/textures/message_static/message_static.h,Message box must stay 2D,Dialogue box would break
+message_texture_static/MSG_X_MARK,Menu assets,soh/assets/textures/message_texture_static/message_texture_static.h,Message X must stay 2D,UI element would break
+title_static/TITLE_FILE_SELECT,Menu assets,soh/assets/textures/title_static/title_static.h,Title screen must stay 2D,Menu would break
+parameter_static/HEART_CONTAINER,Menu assets,soh/assets/textures/parameter_static/parameter_static.h,Heart container must stay 2D,HUD would break
+parameter_static/MAGIC_METER,Menu assets,soh/assets/textures/parameter_static/parameter_static.h,Magic meter must stay 2D,HUD would break
+parameter_static/QUEST_ICON,Menu assets,soh/assets/textures/parameter_static/parameter_static.h,Quest icon must stay 2D,HUD would break
+icon_item_field_static/WORLD_MAP,Maps,soh/assets/textures/icon_item_field_static/icon_item_field_static.h,World map must stay 2D,Map would break
+map_i_static/DUNGEON_FLOOR_01,Maps,soh/assets/textures/map_i_static/map_i_static.h,Minimap floor must stay pixel-perfect,Minimap would break
+map_48x85_static/DUNGEON_MAP_01,Maps,soh/assets/textures/map_48x85_static/map_48x85_static.h,Dungeon map must stay pixel-perfect,Map would break
+map_grand_static/WORLD_MINIMAP,Maps,soh/assets/textures/map_grand_static/map_grand_static.h,Grand map must stay 2D,Map would break
+map_name_static/DUNGEON_NAME_01,Maps,soh/assets/textures/map_name_static/map_name_static.h,Map name must stay pixel-perfect,Label would break
+icon_item_dungeon_static/DUNGEON_FLOOR_BUTTON,Menu assets,soh/assets/textures/icon_item_dungeon_static/icon_item_dungeon_static.h,Dungeon button must stay 2D,Menu would break
+icon_item_gameover_static/GAME_OVER_SCREEN,Menu assets,soh/assets/textures/icon_item_gameover_static/icon_item_gameover_static.h,Game over screen must stay 2D,Screen would break
+nintendo_rogo_static/NINTENDO_LOGO,Menu assets,soh/assets/textures/nintendo_rogo_static/nintendo_rogo_static.h,Logo must stay 2D,Logo would break
+place_title_cards/G_PN_01_HYRULE_FIELD,Decals,soh/assets/textures/place_title_cards/g_pn_01.h,Title card must stay 2D,Title card would break
+boss_title_cards/OBJECT_BV_GANON,Decals,soh/assets/textures/boss_title_cards/object_bv.h,Boss title must stay 2D,Title card would break
+icon_item_nes_static/DUNGEON_TITLE_ENG,Menu assets,soh/assets/textures/icon_item_nes_static/icon_item_nes_static.h,Dungeon title must stay 2D,Title would break
+icon_item_ger_static/DUNGEON_TITLE_GER,Menu assets,soh/assets/textures/icon_item_ger_static/icon_item_ger_static.h,Dungeon title must stay 2D,Title would break

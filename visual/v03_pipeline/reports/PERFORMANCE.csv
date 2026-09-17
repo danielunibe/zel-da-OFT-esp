@@ -1,0 +1,9 @@
+metric,classic_value,enhanced_value,unit,notes
+gpu_frame_time_ms,UNKNOWN,UNKNOWN,ms,requires runtime measurement
+cpu_frame_time_ms,UNKNOWN,UNKNOWN,ms,requires runtime measurement
+postprocess_gpu_ms,0,UNKNOWN,ms,Classic has no post-process
+draw_call_count,UNKNOWN,UNKNOWN,count,depends on scene
+material_lookup_overhead_ms,0,UNKNOWN,ms,only when ENHANCED
+state_save_restore_cost,0,LOW,ms,per-frame in tonemap pass
+fog_cb_update,0,LOW,ms,Map/Unmap 32 bytes per frame
+depth_srv_binding,0,LOW,ms,one additional SRV bind

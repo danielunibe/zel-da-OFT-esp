@@ -1,0 +1,8 @@
+ M include/fast/backends/gfx_direct3d_common.h
+ M include/fast/backends/gfx_rendering_api.h
+ M src/fast/backends/gfx_direct3d11.cpp
+ M src/fast/interpreter.cpp
+ M src/ship/Context.cpp
+ M src/ship/resource/ResourceManager.cpp
+?? include/fast/MaterialRegistry.h
+?? src/fast/MaterialRegistry.cpp

@@ -1,0 +1,36 @@
+{
+  "_meta": {
+    "task": "MASTER_VISUAL_CONSOLIDATION_V03_1",
+    "phase": "MATERIAL_DATASET_SNAPSHOT",
+    "generator": "tools/generate_material_pilot.py"
+  },
+  "input_datasets": {
+    "17_MATERIAL_RULES_CANDIDATE.json": "1967527b4fa6872266739a0606cfa1b9f1c225d80072a820c313ab39d754356b",
+    "07_UI_PROTECTION_LIST.csv": "f9fc2e855b28dd6481011d4c87eaa1ec502f46d3e0089fc1c73672f24323ec91",
+    "08_EMISSIVE_CANDIDATES.csv": "6e8e5c62224704cd6745cea2b55f07855b553aa30ee848efe6b78dc5a12628ce",
+    "09_WATER_SURFACES.csv": "5d336e3e3f8505c0ff5e9a05252daeb70909303baeb3446cc0d427f48803f7e2",
+    "10_METAL_CANDIDATES.csv": "611e3041bda7bbd0d637cfa5ca0748d787caba675f6ed9f24435da915868425b",
+    "05_PBR_DEFAULTS.json": "80ba581a66aab19b92831c3cbc5871ed3ba4d04f1c000af6e97494527d8d068e"
+  },
+  "rules_summary": {
+    "total_rules_in_candidate_json": 1633,
+    "accepted_rules_count": 1407,
+    "rejected_low_confidence_count": 0,
+    "ui_protected_prioritized": true,
+    "pilot_scenes_covered": [
+      "Temple of Time (tokinoma)",
+      "Kokiri Forest (spot04)",
+      "Hyrule Field (spot00)"
+    ],
+    "special_materials_included": [
+      "METAL",
+      "WATER",
+      "EMISSIVE",
+      "UI_2D"
+    ]
+  },
+  "generated_header": {
+    "file": "MaterialRulesPilot.h",
+    "sha256": "d7e4c035134cb465864d6a7ca3195d3082d73815ab09cb83c1e8758c14e21734"
+  }
+}

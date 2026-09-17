@@ -1,0 +1,31 @@
+# Controles de Teclado - Ocarina of Time PC
+
+Tu juego está configurado para jugarse con Teclado o Control de Xbox. Ambos funcionan simultáneamente.
+
+## Movimiento (Link)
+- **Arriba**: W
+- **Abajo**: S
+- **Izquierda**: A
+- **Derecha**: D
+
+## Acciones Principales
+- **Botón A** (Interactuar/Rodar): X
+- **Botón B** (Atacar): C
+- **Z-Target** (Fijar mira): Z
+- **Start** (Menú): Espacio
+
+## Botones C (Items/Ocarina)
+Despues de instalar el mod de Iconos Xbox, estos corresponderán a la palanca derecha o botones asignados.
+Por defecto en teclado suelen ser:
+- **C-Arriba**: Flecha Arriba
+- **C-Abajo**: Flecha Abajo
+- **C-Izquierda**: Flecha Izquierda
+- **C-Derecha**: Flecha Derecha
+
+## Otros
+- **Escudo (R)**: R
+- **L-Target**: E
+- **Pantalla Completa**: F11
+- **Menú de Mejoras**: F1
+
+*Nota: Puedes cambiar cualquiera de estos controles presionando F1 en el juego y yendo a Settings > Controller.*

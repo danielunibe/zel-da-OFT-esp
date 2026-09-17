@@ -1,0 +1,7 @@
+ include/fast/backends/gfx_direct3d_common.h |  24 +++
+ include/fast/backends/gfx_rendering_api.h   |   1 +
+ src/fast/backends/gfx_direct3d11.cpp        | 261 ++++++++++++++++++++++++++++
+ src/fast/interpreter.cpp                    | 169 ++++++++++++------
+ src/ship/Context.cpp                        |   1 +
+ src/ship/resource/ResourceManager.cpp       |  36 +++-
+ 6 files changed, 440 insertions(+), 52 deletions(-)
