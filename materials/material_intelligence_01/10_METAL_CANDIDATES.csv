@@ -1,0 +1,164 @@
+resource,object_or_scene,confidence,reason,partial_metal_risk
+gChristmasGreenTreasureChestFrontTex.rgb5a1.png,group:objects,MEDIUM,"metal keyword; wood keyword; multiple categories plausible: METAL, WOOD",yes
+gChristmasGreenTreasureChestSideAndTopTex.rgb5a1.png,group:objects,MEDIUM,"metal keyword; wood keyword; multiple categories plausible: METAL, WOOD",yes
+gChristmasRedTreasureChestFrontTex.rgb5a1.png,group:objects,MEDIUM,"metal keyword; wood keyword; multiple categories plausible: METAL, WOOD",yes
+gChristmasRedTreasureChestSideAndTopTex.rgb5a1.png,group:objects,MEDIUM,"metal keyword; wood keyword; multiple categories plausible: METAL, WOOD",yes
+gGoldTreasureChestFrontTex.rgb5a1.png,group:objects,MEDIUM,"metal keyword; wood keyword; multiple categories plausible: METAL, WOOD",yes
+gGoldTreasureChestSideAndTopTex.rgb5a1.png,group:objects,MEDIUM,"metal keyword; wood keyword; multiple categories plausible: METAL, WOOD",yes
+gKeyTreasureChestFrontTex.rgb5a1.png,group:objects,MEDIUM,"metal keyword; wood keyword; multiple categories plausible: METAL, WOOD",yes
+gKeyTreasureChestSideAndTopTex.rgb5a1.png,group:objects,MEDIUM,"metal keyword; wood keyword; multiple categories plausible: METAL, WOOD",yes
+gArrowDown.ia16.png,group:textures,HIGH,metal keyword; IA format (ia16) carries alpha -> transparency/alpha-test likely,check
+gArrowUp.ia16.png,group:textures,HIGH,metal keyword; IA format (ia16) carries alpha -> transparency/alpha-test likely,check
+gDoorChainTex,object:gameplay_dangeon_keep,MEDIUM,"metal keyword; wood keyword; multiple categories plausible: METAL, WOOD",yes
+gPushBlockBaseTex,object:gameplay_dangeon_keep,MEDIUM,"metal keyword; stone keyword; multiple categories plausible: METAL, STONE",check
+gPushBlockGrayTex,object:gameplay_dangeon_keep,MEDIUM,"metal keyword; stone keyword; multiple categories plausible: METAL, STONE",check
+gPushBlockSilverTex,object:gameplay_dangeon_keep,MEDIUM,"metal keyword; stone keyword; multiple categories plausible: METAL, STONE",check
+gUnusedGoldLockTex,object:gameplay_dangeon_keep,HIGH,metal keyword,check
+gBgBombWallBrokenTex,object:gameplay_field_keep,MEDIUM,"metal keyword; stone keyword; multiple categories plausible: METAL, STONE",check
+gBgBombwallNormalTex,object:gameplay_field_keep,MEDIUM,"metal keyword; stone keyword; multiple categories plausible: METAL, STONE",check
+gArrowCursorTex,object:gameplay_keep,HIGH,metal keyword; IA format (ia8) carries alpha -> transparency/alpha-test likely; UI-style keyword present but resource is world-grouped: manual check,check
+gArrowFletchingTex,object:gameplay_keep,HIGH,metal keyword,check
+gArrowShaftTex,object:gameplay_keep,MEDIUM,"metal keyword; wood keyword; multiple categories plausible: METAL, WOOD",check
+gBombCapTex,object:gameplay_keep,HIGH,metal keyword,check
+gDoorMetalBarsTex,object:gameplay_keep,MEDIUM,"metal keyword; wood keyword; multiple categories plausible: METAL, WOOD; IA format (ia8) carries alpha -> transparency/alpha-test likely",yes
+gDropArrows1Tex,object:gameplay_keep,HIGH,metal keyword,check
+gDropArrows2Tex,object:gameplay_keep,HIGH,metal keyword,check
+gDropArrows3Tex,object:gameplay_keep,HIGH,metal keyword,check
+gDropBombTex,object:gameplay_keep,HIGH,metal keyword,check
+gDropKeySmallTex,object:gameplay_keep,HIGH,metal keyword,check
+gEffBombExplosion1Tex,object:gameplay_keep,HIGH,metal keyword; IA format (ia16) carries alpha -> transparency/alpha-test likely,check
+gEffBombExplosion2Tex,object:gameplay_keep,HIGH,metal keyword; IA format (ia16) carries alpha -> transparency/alpha-test likely,check
+gEffBombExplosion3Tex,object:gameplay_keep,HIGH,metal keyword; IA format (ia16) carries alpha -> transparency/alpha-test likely,check
+gEffBombExplosion4Tex,object:gameplay_keep,HIGH,metal keyword; IA format (ia16) carries alpha -> transparency/alpha-test likely,check
+gEffBombExplosion5Tex,object:gameplay_keep,HIGH,metal keyword; IA format (ia16) carries alpha -> transparency/alpha-test likely,check
+gEffBombExplosion6Tex,object:gameplay_keep,HIGH,metal keyword; IA format (ia16) carries alpha -> transparency/alpha-test likely,check
+gEffBombExplosion7Tex,object:gameplay_keep,HIGH,metal keyword; IA format (ia16) carries alpha -> transparency/alpha-test likely,check
+gEffBombExplosion8Tex,object:gameplay_keep,HIGH,metal keyword; IA format (ia16) carries alpha -> transparency/alpha-test likely,check
+gHylianShieldDesignTex,object:gameplay_keep,MEDIUM,"metal keyword; wood keyword; multiple categories plausible: METAL, WOOD",yes
+gRupeeBlueTex,object:gameplay_keep,HIGH,metal keyword,check
+gRupeeGreenTex,object:gameplay_keep,HIGH,metal keyword,check
+gRupeeLightRedTex,object:gameplay_keep,HIGH,metal keyword,check
+gRupeeOrangeTex,object:gameplay_keep,HIGH,metal keyword,check
+gRupeePinkTex,object:gameplay_keep,HIGH,metal keyword,check
+gRupeeRedTex,object:gameplay_keep,HIGH,metal keyword,check
+gRupeeSilverTex,object:gameplay_keep,HIGH,metal keyword,check
+gUnusedDropArrows1Tex,object:gameplay_keep,HIGH,metal keyword,check
+gUnusedDropBombTex,object:gameplay_keep,HIGH,metal keyword,check
+gUnusedDropBombchuTex,object:gameplay_keep,HIGH,metal keyword,check
+gUnusedRupeeLightBlueTex,object:gameplay_keep,HIGH,metal keyword,check
+gUnusedStoneHookshotTargetTex,object:gameplay_keep,MEDIUM,"metal keyword; stone keyword; multiple categories plausible: METAL, STONE",check
+gUnusedTreeBarkTex,object:gameplay_keep,MEDIUM,"metal keyword; wood keyword; multiple categories plausible: METAL, WOOD",check
+gUnusedTreeStumpBarkTex,object:gameplay_keep,MEDIUM,"metal keyword; wood keyword; multiple categories plausible: METAL, WOOD",check
+object_bombiwa_Tex_000020,object:object_bombiwa,HIGH,metal keyword,check
+gTreasureChestBossKeyFrontTex,object:object_box,MEDIUM,"metal keyword; wood keyword; multiple categories plausible: METAL, WOOD",yes
+gTreasureChestBossKeySideAndTopTex,object:object_box,MEDIUM,"metal keyword; wood keyword; multiple categories plausible: METAL, WOOD",yes
+gTreasureChestFrontTex,object:object_box,MEDIUM,"metal keyword; wood keyword; multiple categories plausible: METAL, WOOD",yes
+gTreasureChestSideAndTopTex,object:object_box,MEDIUM,"metal keyword; wood keyword; multiple categories plausible: METAL, WOOD",yes
+gBarinadeSparkBall1Tex,object:object_bv,HIGH,metal keyword,check
+gBarinadeSparkBall2Tex,object:object_bv,HIGH,metal keyword,check
+gBarinadeSparkBall3Tex,object:object_bv,HIGH,metal keyword,check
+gBarinadeSparkBall4Tex,object:object_bv,HIGH,metal keyword,check
+gBarinadeSparkBall5Tex,object:object_bv,HIGH,metal keyword,check
+gBarinadeSparkBall6Tex,object:object_bv,HIGH,metal keyword,check
+gBarinadeSparkBall7Tex,object:object_bv,HIGH,metal keyword,check
+gBarinadeSparkBall8Tex,object:object_bv,HIGH,metal keyword,check
+gBarinadeTitleCardTex,object:object_bv,HIGH,metal keyword; UI-style keyword present but resource is world-grouped: manual check,check
+gHookshotPostTex,object:object_d_hsblock,HIGH,metal keyword,check
+gHookshotTargetTex,object:object_d_hsblock,HIGH,metal keyword,check
+gDodongoBarsBottomTex,object:object_ddan_objects,HIGH,metal keyword,check
+gDodongoBarsTex,object:object_ddan_objects,HIGH,metal keyword,check
+gFishingLureHookTex,object:object_fish,HIGH,metal keyword,check
+gFishingOldLureFloatTex,object:object_fish,HIGH,metal keyword,check
+gFishingOldLureHookTex,object:object_fish,HIGH,metal keyword,check
+gFlareDancerSwordHiltTex,object:object_fw,HIGH,metal keyword,yes
+gGanondorfGauntletAndPauldronTex,object:object_ganon,HIGH,metal keyword,check
+gGanonSwordBladeTex,object:object_ganon2,HIGH,metal keyword,yes
+gGanonSwordGripTex,object:object_ganon2,HIGH,metal keyword,yes
+gGanonSwordGuardTex,object:object_ganon2,HIGH,metal keyword,yes
+object_gi_shield_1Tex_000000,object:object_gi_shield_1,HIGH,metal keyword,yes
+object_gi_shield_3Tex_000000,object:object_gi_shield_3,HIGH,metal keyword,yes
+object_gi_shield_3Tex_000400,object:object_gi_shield_3,HIGH,metal keyword,yes
+gGerudoPurpleMetalTex,object:object_gla,HIGH,metal keyword,check
+gGoldenGoddessAuraHTailTex,object:object_god_lgt,HIGH,metal keyword,check
+gGoldenGoddessAuraMaskTex,object:object_god_lgt,HIGH,metal keyword,check
+gTowerCollapseCsBoltedSidesTex,object:object_gt,HIGH,metal keyword,check
+gHeavyBlockTex,object:object_heavy_object,MEDIUM,"metal keyword; stone keyword; multiple categories plausible: METAL, STONE",check
+gIronKnuckleBigRivetTex,object:object_ik,HIGH,metal keyword; IA format (ia8) carries alpha -> transparency/alpha-test likely,check
+gIronKnuckleBlockPatternTex,object:object_ik,MEDIUM,"metal keyword; stone keyword; multiple categories plausible: METAL, STONE",check
+gIronKnuckleChainMailTex,object:object_ik,HIGH,metal keyword,check
+gIronKnuckleJewelTex,object:object_ik,HIGH,metal keyword,check
+gIronKnuckleMetalOverflowTex,object:object_ik,HIGH,metal keyword,check
+gIronKnuckleMetalTex,object:object_ik,HIGH,metal keyword,check
+gIronKnuckleNabooruChestJewelTex,object:object_ik,MEDIUM,"metal keyword; wood keyword; multiple categories plausible: METAL, WOOD",yes
+gSpiritDoorMetalBarsTex,object:object_jya_door,MEDIUM,"metal keyword; wood keyword; multiple categories plausible: METAL, WOOD",yes
+gBombiwaLight1Tex,object:object_jya_obj,HIGH,metal keyword; IA format (ia16) carries alpha -> transparency/alpha-test likely,check
+gBombiwaRockTex,object:object_jya_obj,MEDIUM,"metal keyword; stone keyword; multiple categories plausible: METAL, STONE",check
+gLiftChainTex,object:object_jya_obj,HIGH,metal keyword,check
+gLiftUpperChainTex,object:object_jya_obj,HIGH,metal keyword,check
+gGoldenGoddessLightRingTex,object:object_light_ring,HIGH,metal keyword,check
+gLinkAdultDefaultGauntlet1Tex,object:object_link_boy,HIGH,metal keyword,check
+gLinkAdultDefaultGauntlet2Tex,object:object_link_boy,HIGH,metal keyword,check
+gLinkAdultHookshotChainTex,object:object_link_boy,HIGH,metal keyword,check
+gLinkAdultHookshotDesignTex,object:object_link_boy,MEDIUM,"metal keyword; wood keyword; multiple categories plausible: METAL, WOOD",check
+gLinkAdultHookshotMetalTex,object:object_link_boy,HIGH,metal keyword,check
+gLinkAdultHookshotReticleTex,object:object_link_boy,HIGH,metal keyword,check
+gLinkAdultHylianShieldBackTex,object:object_link_boy,HIGH,metal keyword,yes
+gLinkAdultSwordEmblemTex,object:object_link_boy,HIGH,metal keyword,yes
+gLinkAdultSwordGuardTex,object:object_link_boy,HIGH,metal keyword,yes
+gLinkAdultSwordPommelTex,object:object_link_boy,HIGH,metal keyword,yes
+gLinkAdultUnusedGauntlet1Tex,object:object_link_boy,HIGH,metal keyword,check
+gLinkAdultUnusedGauntlet2Tex,object:object_link_boy,HIGH,metal keyword,check
+gLinkAdultUnusedSwordEmblemTex,object:object_link_boy,HIGH,metal keyword,yes
+gLinkAdultUnusedSwordGuardTex,object:object_link_boy,HIGH,metal keyword,yes
+gLinkAdultUnusedSwordPommelTex,object:object_link_boy,HIGH,metal keyword,yes
+gLinkChildDekuShieldBackTex,object:object_link_child,MEDIUM,"metal keyword; wood keyword; multiple categories plausible: METAL, WOOD",yes
+gLinkChildDekuShieldFrontTex,object:object_link_child,MEDIUM,"metal keyword; wood keyword; multiple categories plausible: METAL, WOOD",yes
+gLinkChildGoronSymbolTex,object:object_link_child,HIGH,metal keyword; IA format (ia16) carries alpha -> transparency/alpha-test likely,check
+gLinkChildHylianShieldBackTex,object:object_link_child,HIGH,metal keyword,yes
+gLinkChildMasterSwordEmblemTex,object:object_link_child,HIGH,metal keyword; Temple of Time key-object keyword,yes
+gLinkChildMasterSwordGuardTex,object:object_link_child,HIGH,metal keyword; Temple of Time key-object keyword,yes
+gLinkChildMasterSwordPommelTex,object:object_link_child,HIGH,metal keyword; Temple of Time key-object keyword,yes
+gLinkChildSwordJewelTex,object:object_link_child,HIGH,metal keyword,yes
+object_medal_Tex_002140,object:object_medal,HIGH,metal keyword,check
+object_medal_Tex_002940,object:object_medal,HIGH,metal keyword,check
+object_medal_Tex_003140,object:object_medal,HIGH,metal keyword,check
+object_medal_Tex_003940,object:object_medal,HIGH,metal keyword,check
+object_medal_Tex_004140,object:object_medal,HIGH,metal keyword,check
+object_medal_Tex_004940,object:object_medal,HIGH,metal keyword,check
+gShieldBeamGlowRayTex,object:object_mir_ray,MEDIUM,"metal keyword; wood keyword; multiple categories plausible: METAL, WOOD; IA format (ia16) carries alpha -> transparency/alpha-test likely",yes
+gShieldBeamImageCircleTex,object:object_mir_ray,MEDIUM,"metal keyword; wood keyword; multiple categories plausible: METAL, WOOD; IA format (ia16) carries alpha -> transparency/alpha-test likely",yes
+gShieldBeamImageGerudoSymbolNewTex,object:object_mir_ray,MEDIUM,"metal keyword; wood keyword; multiple categories plausible: METAL, WOOD; IA format (ia16) carries alpha -> transparency/alpha-test likely",yes
+gShadowMedallionPlatformTex,object:object_mjin_dark,HIGH,metal keyword,check
+gLightMedallionPlatformTex,object:object_mjin_flash,HIGH,metal keyword,check
+gSpiritMedallionPlatformTex,object:object_mjin_soul,HIGH,metal keyword,check
+gForestMedallionPlatformTex,object:object_mjin_wind,HIGH,metal keyword,check
+gMoriElevatorBarTex,object:object_mori_tex,HIGH,metal keyword,check
+gMoriKaitenkabeMetalWallTex,object:object_mori_tex,MEDIUM,"metal keyword; stone keyword; multiple categories plausible: METAL, STONE",check
+gPoeSellerMetalFrameTex,object:object_ps,HIGH,metal keyword,check
+gBlockTex,object:object_pu_box,MEDIUM,"metal keyword; stone keyword; multiple categories plausible: METAL, STONE",check
+gBombchuShopkeeperTattooTex,object:object_rs,MEDIUM,"metal keyword; wood keyword; multiple categories plausible: METAL, WOOD",check
+gBombchuShopkeeperVestTex,object:object_rs,MEDIUM,"metal keyword; wood keyword; multiple categories plausible: METAL, WOOD",check
+gEnHeishiArmorTex,object:object_sd,HIGH,metal keyword,yes
+gEnHeishiKingGuardArmorTex,object:object_sd,HIGH,metal keyword,yes
+gEnHeishiKingGuardChestArmorTex,object:object_sd,MEDIUM,"metal keyword; wood keyword; multiple categories plausible: METAL, WOOD",yes
+gEnHeishiUniformGoldTriforceTex,object:object_sd,HIGH,metal keyword; Temple of Time key-object keyword,check
+gBarbedWireFenceTex,object:object_spot00_break,MEDIUM,"metal keyword; wood keyword; multiple categories plausible: METAL, WOOD",check
+gBrokenDrawbridgeBoltTex,object:object_spot00_break,MEDIUM,"metal keyword; wood keyword; multiple categories plausible: METAL, WOOD",check
+gBrokenDrawbridgeChainTex,object:object_spot00_break,MEDIUM,"metal keyword; wood keyword; multiple categories plausible: METAL, WOOD",check
+gGoldenTorch1Tex,object:object_syokudai,HIGH,metal keyword,check
+gGoldenTorch2Tex,object:object_syokudai,HIGH,metal keyword,check
+gSongOfTimeBlockTex,object:object_timeblock,MEDIUM,"metal keyword; stone keyword; multiple categories plausible: METAL, STONE",check
+gSlidingBladeTrapBoltsTex,object:object_trap,HIGH,metal keyword,check
+gSlidingBladeTrapGradientTex,object:object_trap,HIGH,metal keyword,check
+gSlidingBladeTrapTex_0000,object:object_trap,HIGH,metal keyword,check
+gJumpableHorseFenceMetalBarTex,object:object_umajump,MEDIUM,"metal keyword; wood keyword; multiple categories plausible: METAL, WOOD",check
+gBariInnerHoodTex,object:object_vali,HIGH,metal keyword; IA format (ia16) carries alpha -> transparency/alpha-test likely,check
+gBariMandibleClawTex,object:object_vali,HIGH,metal keyword; IA format (ia16) carries alpha -> transparency/alpha-test likely,check
+gBariNucleusTex,object:object_vali,HIGH,metal keyword; IA format (ia16) carries alpha -> transparency/alpha-test likely,check
+gBariOuterHoodBottomTex,object:object_vali,HIGH,metal keyword; IA format (ia16) carries alpha -> transparency/alpha-test likely,check
+gBeamosBoltAndMetalTex,object:object_vm,MEDIUM,"metal keyword; wood keyword; multiple categories plausible: METAL, WOOD",check
+gBeamosGrayMetalTex,object:object_vm,MEDIUM,"metal keyword; wood keyword; multiple categories plausible: METAL, WOOD",check
+gYdanHasi3BlocksSideTex,object:object_ydan_objects,MEDIUM,"metal keyword; stone keyword; multiple categories plausible: METAL, STONE",check
+gYdanHasi3BlocksTopTex,object:object_ydan_objects,MEDIUM,"metal keyword; stone keyword; multiple categories plausible: METAL, STONE",check
+gYdanHasiFloatingBlockBottomTex,object:object_ydan_objects,MEDIUM,"metal keyword; stone keyword; multiple categories plausible: METAL, STONE",check
+gYdanHasiFloatingBlockSideTex,object:object_ydan_objects,MEDIUM,"metal keyword; stone keyword; multiple categories plausible: METAL, STONE",check

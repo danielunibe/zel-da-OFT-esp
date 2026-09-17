@@ -1,0 +1,359 @@
+resource,object_or_scene,confidence,reason,suggested_emissive_strength_class
+gMoon.rgba32.png,group:textures,LOW,no keyword evidence,MEDIUM
+gNavi.rgba32.png,group:textures,MEDIUM,fairy/Navi effect keyword,STRONG
+gSun.rgba32.png,group:textures,LOW,no keyword evidence,MEDIUM
+gPushBlockGrayTex,object:gameplay_dangeon_keep,MEDIUM,"metal keyword; stone keyword; multiple categories plausible: METAL, STONE",MEDIUM
+gCircleGlowLTex,object:gameplay_keep,HIGH,skin/body-part keyword,MEDIUM
+gCircleGlowRTex,object:gameplay_keep,HIGH,skin/body-part keyword,MEDIUM
+gCircleGlowSLTex,object:gameplay_keep,HIGH,skin/body-part keyword,MEDIUM
+gCircleGlowSRTex,object:gameplay_keep,HIGH,skin/body-part keyword,MEDIUM
+gDecorativeFlameMaskTex,object:gameplay_keep,HIGH,lava/fire keyword,STRONG
+gDecorativeFlameTex,object:gameplay_keep,HIGH,lava/fire keyword,STRONG
+gEffEnemyDeathFlame10Tex,object:gameplay_keep,HIGH,lava/fire keyword,STRONG
+gEffEnemyDeathFlame1Tex,object:gameplay_keep,HIGH,lava/fire keyword,STRONG
+gEffEnemyDeathFlame2Tex,object:gameplay_keep,HIGH,lava/fire keyword,STRONG
+gEffEnemyDeathFlame3Tex,object:gameplay_keep,HIGH,lava/fire keyword,STRONG
+gEffEnemyDeathFlame4Tex,object:gameplay_keep,HIGH,lava/fire keyword,STRONG
+gEffEnemyDeathFlame5Tex,object:gameplay_keep,HIGH,lava/fire keyword,STRONG
+gEffEnemyDeathFlame6Tex,object:gameplay_keep,HIGH,lava/fire keyword,STRONG
+gEffEnemyDeathFlame7Tex,object:gameplay_keep,HIGH,lava/fire keyword,STRONG
+gEffEnemyDeathFlame8Tex,object:gameplay_keep,HIGH,lava/fire keyword,STRONG
+gEffEnemyDeathFlame9Tex,object:gameplay_keep,HIGH,lava/fire keyword,STRONG
+gEffFireFootprint1Tex,object:gameplay_keep,MEDIUM,"lava/fire keyword; skin/body-part keyword; multiple categories plausible: LAVA, SKIN; IA format (ia8) carries alpha -> transparency/alpha-test likely",STRONG
+gEffFireFootprint2Tex,object:gameplay_keep,MEDIUM,"lava/fire keyword; skin/body-part keyword; multiple categories plausible: LAVA, SKIN; IA format (ia8) carries alpha -> transparency/alpha-test likely",STRONG
+gEffFireFootprint3Tex,object:gameplay_keep,MEDIUM,"lava/fire keyword; skin/body-part keyword; multiple categories plausible: LAVA, SKIN; IA format (ia8) carries alpha -> transparency/alpha-test likely",STRONG
+gEffFireFootprint4Tex,object:gameplay_keep,MEDIUM,"lava/fire keyword; skin/body-part keyword; multiple categories plausible: LAVA, SKIN; IA format (ia8) carries alpha -> transparency/alpha-test likely",STRONG
+gEffFireFootprint5Tex,object:gameplay_keep,MEDIUM,"lava/fire keyword; skin/body-part keyword; multiple categories plausible: LAVA, SKIN; IA format (ia8) carries alpha -> transparency/alpha-test likely",STRONG
+gEffFireFootprint6Tex,object:gameplay_keep,MEDIUM,"lava/fire keyword; skin/body-part keyword; multiple categories plausible: LAVA, SKIN; IA format (ia8) carries alpha -> transparency/alpha-test likely",STRONG
+gEffFireFootprint7Tex,object:gameplay_keep,MEDIUM,"lava/fire keyword; skin/body-part keyword; multiple categories plausible: LAVA, SKIN; IA format (ia8) carries alpha -> transparency/alpha-test likely",STRONG
+gEffFireFootprint8Tex,object:gameplay_keep,MEDIUM,"lava/fire keyword; skin/body-part keyword; multiple categories plausible: LAVA, SKIN; IA format (ia8) carries alpha -> transparency/alpha-test likely",STRONG
+gEffLightning1Tex,object:gameplay_keep,LOW,no keyword evidence,MEDIUM
+gEffLightning2Tex,object:gameplay_keep,LOW,no keyword evidence,MEDIUM
+gEffLightning3Tex,object:gameplay_keep,LOW,no keyword evidence,MEDIUM
+gEffLightning4Tex,object:gameplay_keep,LOW,no keyword evidence,MEDIUM
+gEffLightning5Tex,object:gameplay_keep,LOW,no keyword evidence,MEDIUM
+gEffLightning6Tex,object:gameplay_keep,LOW,no keyword evidence,MEDIUM
+gEffLightning7Tex,object:gameplay_keep,LOW,no keyword evidence,MEDIUM
+gEffLightning8Tex,object:gameplay_keep,LOW,no keyword evidence,MEDIUM
+gEffMagmaBubble1Tex,object:gameplay_keep,HIGH,lava/fire keyword; IA format (ia8) carries alpha -> transparency/alpha-test likely,STRONG
+gEffMagmaBubble2Tex,object:gameplay_keep,HIGH,lava/fire keyword; IA format (ia8) carries alpha -> transparency/alpha-test likely,STRONG
+gEffMagmaBubble3Tex,object:gameplay_keep,HIGH,lava/fire keyword; IA format (ia8) carries alpha -> transparency/alpha-test likely,STRONG
+gEffMagmaBubble4Tex,object:gameplay_keep,HIGH,lava/fire keyword; IA format (ia8) carries alpha -> transparency/alpha-test likely,STRONG
+gEffMagmaBubble5Tex,object:gameplay_keep,HIGH,lava/fire keyword; IA format (ia8) carries alpha -> transparency/alpha-test likely,STRONG
+gEffMagmaBubble6Tex,object:gameplay_keep,HIGH,lava/fire keyword; IA format (ia8) carries alpha -> transparency/alpha-test likely,STRONG
+gEffMagmaBubble7Tex,object:gameplay_keep,HIGH,lava/fire keyword; IA format (ia8) carries alpha -> transparency/alpha-test likely,STRONG
+gEffMagmaBubble8Tex,object:gameplay_keep,HIGH,lava/fire keyword; IA format (ia8) carries alpha -> transparency/alpha-test likely,STRONG
+gEffSpark1Tex,object:gameplay_keep,LOW,no keyword evidence,MEDIUM
+gEffSpark2Tex,object:gameplay_keep,LOW,no keyword evidence,MEDIUM
+gEffSpark3Tex,object:gameplay_keep,LOW,no keyword evidence,MEDIUM
+gEffSpark4Tex,object:gameplay_keep,LOW,no keyword evidence,MEDIUM
+gEffSparklesTex,object:gameplay_keep,LOW,no keyword evidence,MEDIUM
+gFairyWingTex,object:gameplay_keep,MEDIUM,fairy/Navi effect keyword,STRONG
+gFlameWall1Tex,object:gameplay_keep,MEDIUM,"lava/fire keyword; stone keyword; multiple categories plausible: LAVA, STONE",STRONG
+gFlameWall2Tex,object:gameplay_keep,MEDIUM,"lava/fire keyword; stone keyword; multiple categories plausible: LAVA, STONE",STRONG
+gLensFlareCircleTex,object:gameplay_keep,HIGH,glass keyword,MEDIUM
+gLensFlareRingTex,object:gameplay_keep,HIGH,glass keyword,MEDIUM
+gMoonTex,object:gameplay_keep,LOW,IA format (ia8) carries alpha -> transparency/alpha-test likely,MEDIUM
+gRupeeLightRedTex,object:gameplay_keep,HIGH,metal keyword,MEDIUM
+gSun1Tex,object:gameplay_keep,LOW,no keyword evidence,MEDIUM
+gSunEvening1Tex,object:gameplay_keep,LOW,no keyword evidence,MEDIUM
+gTorchFlameTex,object:gameplay_keep,HIGH,lava/fire keyword,STRONG
+gUnusedFairyWingTex,object:gameplay_keep,MEDIUM,fairy/Navi effect keyword,STRONG
+gUnusedRupeeLightBlueTex,object:gameplay_keep,HIGH,metal keyword,MEDIUM
+gBossDoorFireTex,object:object_bdoor,MEDIUM,"lava/fire keyword; wood keyword; multiple categories plausible: LAVA, WOOD",STRONG
+gChuGirlUmbEarLicusTex,object:object_bg,HIGH,skin/body-part keyword,MEDIUM
+gBarinadeSparkBall1Tex,object:object_bv,HIGH,metal keyword,MEDIUM
+gBarinadeSparkBall2Tex,object:object_bv,HIGH,metal keyword,MEDIUM
+gBarinadeSparkBall3Tex,object:object_bv,HIGH,metal keyword,MEDIUM
+gBarinadeSparkBall4Tex,object:object_bv,HIGH,metal keyword,MEDIUM
+gBarinadeSparkBall5Tex,object:object_bv,HIGH,metal keyword,MEDIUM
+gBarinadeSparkBall6Tex,object:object_bv,HIGH,metal keyword,MEDIUM
+gBarinadeSparkBall7Tex,object:object_bv,HIGH,metal keyword,MEDIUM
+gBarinadeSparkBall8Tex,object:object_bv,HIGH,metal keyword,MEDIUM
+gTorchSlugBody1Tex,object:object_bw,HIGH,skin/body-part keyword,STRONG
+gTorchSlugBody2Tex,object:object_bw,HIGH,skin/body-part keyword,STRONG
+gTorchSlugEyeTex,object:object_bw,HIGH,skin/body-part keyword,STRONG
+gTorchSlugEyestalkTex,object:object_bw,MEDIUM,"bone keyword; skin/body-part keyword; multiple categories plausible: BONE, SKIN",STRONG
+gDodongoFire0Tex,object:object_dodongo,HIGH,lava/fire keyword,STRONG
+gDodongoFire1Tex,object:object_dodongo,HIGH,lava/fire keyword,STRONG
+gDodongoFire2Tex,object:object_dodongo,HIGH,lava/fire keyword,STRONG
+gDodongoFire3Tex,object:object_dodongo,HIGH,lava/fire keyword,STRONG
+gGreatFairyBackOfHandTex,object:object_dy_obj,HIGH,skin/body-part keyword; fairy/Navi effect keyword,STRONG
+gGreatFairyBetaClothesTex,object:object_dy_obj,HIGH,cloth keyword; fairy/Navi effect keyword,STRONG
+gGreatFairyBetaGradient1Tex,object:object_dy_obj,MEDIUM,fairy/Navi effect keyword,STRONG
+gGreatFairyBetaGradient2Tex,object:object_dy_obj,MEDIUM,fairy/Navi effect keyword,STRONG
+gGreatFairyBootPatternTex,object:object_dy_obj,HIGH,leather keyword; fairy/Navi effect keyword,STRONG
+gGreatFairyEar1Tex,object:object_dy_obj,HIGH,skin/body-part keyword; fairy/Navi effect keyword,STRONG
+gGreatFairyEar2Tex,object:object_dy_obj,HIGH,skin/body-part keyword; fairy/Navi effect keyword,STRONG
+gGreatFairyEyeClosedTex,object:object_dy_obj,HIGH,skin/body-part keyword; fairy/Navi effect keyword,STRONG
+gGreatFairyEyeHalfTex,object:object_dy_obj,HIGH,skin/body-part keyword; fairy/Navi effect keyword,STRONG
+gGreatFairyEyeOpenTex,object:object_dy_obj,HIGH,skin/body-part keyword; fairy/Navi effect keyword,STRONG
+gGreatFairyFlowerTex,object:object_dy_obj,HIGH,foliage keyword; IA format (ia16) carries alpha -> transparency/alpha-test likely; fairy/Navi effect keyword,STRONG
+gGreatFairyHairTex,object:object_dy_obj,HIGH,skin/body-part keyword; fairy/Navi effect keyword,STRONG
+gGreatFairyLeavesPattern1Tex,object:object_dy_obj,HIGH,foliage keyword; fairy/Navi effect keyword,STRONG
+gGreatFairyLeavesPattern2Tex,object:object_dy_obj,HIGH,foliage keyword; fairy/Navi effect keyword,STRONG
+gGreatFairyLeavesPattern3Tex,object:object_dy_obj,HIGH,foliage keyword; fairy/Navi effect keyword,STRONG
+gGreatFairyMouthClosedTex,object:object_dy_obj,HIGH,skin/body-part keyword; fairy/Navi effect keyword,STRONG
+gGreatFairyMouthOpenTex,object:object_dy_obj,HIGH,skin/body-part keyword; fairy/Navi effect keyword,STRONG
+gGreatFairyParticleTex,object:object_dy_obj,MEDIUM,fairy/Navi effect keyword,STRONG
+gGreatFairySpiralBeamGradientTex,object:object_dy_obj,HIGH,wood keyword; fairy/Navi effect keyword,STRONG
+gGreatFairySpiralBeamPatternTex,object:object_dy_obj,HIGH,wood keyword; fairy/Navi effect keyword,STRONG
+gCrystalLightTex,object:object_efc_crystal_light,MEDIUM,"glass keyword; bone keyword; wood keyword; multiple categories plausible: BONE, GLASS, WOOD",MEDIUM
+gDeathMountainCloudFireTex,object:object_efc_doughnut,MEDIUM,"lava/fire keyword; earth keyword; multiple categories plausible: EARTH, LAVA; IA format (ia8) carries alpha -> transparency/alpha-test likely",STRONG
+gCreationFireBallFlameEffectTex,object:object_efc_fire_ball,HIGH,lava/fire keyword,STRONG
+gCreationFireBallMaskTex,object:object_efc_fire_ball,HIGH,lava/fire keyword,STRONG
+gEnliveningLightTex,object:object_efc_lgt_shower,LOW,no keyword evidence,MEDIUM
+object_efc_star_field_Tex_000108,object:object_efc_star_field,HIGH,grass keyword,MEDIUM
+object_efc_star_field_Tex_000FD0,object:object_efc_star_field,HIGH,grass keyword,MEDIUM
+gTimeWarpTex,object:object_efc_tw,LOW,no keyword evidence,MEDIUM
+gFire0Tex,object:object_fire,HIGH,lava/fire keyword; IA format (ia8) carries alpha -> transparency/alpha-test likely,STRONG
+gFire1Tex,object:object_fire,HIGH,lava/fire keyword; IA format (ia8) carries alpha -> transparency/alpha-test likely,STRONG
+gFire2Tex,object:object_fire,HIGH,lava/fire keyword; IA format (ia8) carries alpha -> transparency/alpha-test likely,STRONG
+gFire3Tex,object:object_fire,HIGH,lava/fire keyword; IA format (ia8) carries alpha -> transparency/alpha-test likely,STRONG
+gFire4Tex,object:object_fire,HIGH,lava/fire keyword; IA format (ia8) carries alpha -> transparency/alpha-test likely,STRONG
+gFire5Tex,object:object_fire,HIGH,lava/fire keyword; IA format (ia8) carries alpha -> transparency/alpha-test likely,STRONG
+gFire6Tex,object:object_fire,HIGH,lava/fire keyword; IA format (ia8) carries alpha -> transparency/alpha-test likely,STRONG
+gFire7Tex,object:object_fire,HIGH,lava/fire keyword; IA format (ia8) carries alpha -> transparency/alpha-test likely,STRONG
+gFireKeeseBodyTex,object:object_firefly,MEDIUM,"lava/fire keyword; skin/body-part keyword; multiple categories plausible: LAVA, SKIN",STRONG
+gFireKeeseEarTex,object:object_firefly,MEDIUM,"lava/fire keyword; skin/body-part keyword; multiple categories plausible: LAVA, SKIN",STRONG
+gFireKeeseEyeTex,object:object_firefly,MEDIUM,"lava/fire keyword; skin/body-part keyword; multiple categories plausible: LAVA, SKIN",STRONG
+gFireKeeseTalonTex,object:object_firefly,HIGH,lava/fire keyword,STRONG
+gFireKeeseWingTex,object:object_firefly,HIGH,lava/fire keyword,STRONG
+gFlareDancerBlueFlameTex,object:object_fw,HIGH,lava/fire keyword,STRONG
+gFlareDancerFirePatternTex,object:object_fw,HIGH,lava/fire keyword,STRONG
+gFlareDancerFireTex,object:object_fw,HIGH,lava/fire keyword,STRONG
+gGanondorfGerudoFabricWithSunTex,object:object_ganon,HIGH,cloth keyword,MEDIUM
+object_gi_fireTex_000000,object:object_gi_fire,HIGH,lava/fire keyword,STRONG
+object_gi_fireTex_000200,object:object_gi_fire,HIGH,lava/fire keyword,STRONG
+gGiGoronRubyScintillationTex,object:object_gi_jewel,MEDIUM,spiritual stone keyword (glowing iconography),MEDIUM
+gGiKokiriEmeraldScintillationTex,object:object_gi_jewel,HIGH,foliage keyword; spiritual stone keyword (glowing iconography),MEDIUM
+gGiZoraSapphireScintillationTex,object:object_gi_jewel,MEDIUM,spiritual stone keyword (glowing iconography),MEDIUM
+gYoungGanondorfGerudoFabricWithSunTex,object:object_gndd,HIGH,cloth keyword,MEDIUM
+gTowerCollapseCsFlameSmokeTex,object:object_gt,MEDIUM,"lava/fire keyword; smoke keyword; multiple categories plausible: LAVA, SMOKE",STRONG
+gTowerCollapseCsGrayFloorTex,object:object_gt,HIGH,stone keyword,MEDIUM
+gTowerCollapseCsGrayStoneTex,object:object_gt,HIGH,stone keyword,MEDIUM
+gFireTempleBigVerticalFlame0Tex,object:object_hidan_objects,MEDIUM,"lava/fire keyword; stone keyword; multiple categories plausible: LAVA, STONE; IA format (ia8) carries alpha -> transparency/alpha-test likely",STRONG
+gFireTempleBigVerticalFlame1Tex,object:object_hidan_objects,MEDIUM,"lava/fire keyword; stone keyword; multiple categories plausible: LAVA, STONE; IA format (ia8) carries alpha -> transparency/alpha-test likely",STRONG
+gFireTempleBigVerticalFlame2Tex,object:object_hidan_objects,MEDIUM,"lava/fire keyword; stone keyword; multiple categories plausible: LAVA, STONE; IA format (ia8) carries alpha -> transparency/alpha-test likely",STRONG
+gFireTempleBigVerticalFlame3Tex,object:object_hidan_objects,MEDIUM,"lava/fire keyword; stone keyword; multiple categories plausible: LAVA, STONE; IA format (ia8) carries alpha -> transparency/alpha-test likely",STRONG
+gFireTempleBigVerticalFlame4Tex,object:object_hidan_objects,MEDIUM,"lava/fire keyword; stone keyword; multiple categories plausible: LAVA, STONE; IA format (ia8) carries alpha -> transparency/alpha-test likely",STRONG
+gFireTempleBigVerticalFlame5Tex,object:object_hidan_objects,MEDIUM,"lava/fire keyword; stone keyword; multiple categories plausible: LAVA, STONE; IA format (ia8) carries alpha -> transparency/alpha-test likely",STRONG
+gFireTempleBigVerticalFlame6Tex,object:object_hidan_objects,MEDIUM,"lava/fire keyword; stone keyword; multiple categories plausible: LAVA, STONE; IA format (ia8) carries alpha -> transparency/alpha-test likely",STRONG
+gFireTempleBigVerticalFlame7Tex,object:object_hidan_objects,MEDIUM,"lava/fire keyword; stone keyword; multiple categories plausible: LAVA, STONE; IA format (ia8) carries alpha -> transparency/alpha-test likely",STRONG
+gFireTempleDoorKillerTex,object:object_hidan_objects,MEDIUM,"lava/fire keyword; wood keyword; stone keyword; multiple categories plausible: LAVA, STONE, WOOD",STRONG
+gFireTempleFireball0Tex,object:object_hidan_objects,MEDIUM,"lava/fire keyword; stone keyword; multiple categories plausible: LAVA, STONE; IA format (ia8) carries alpha -> transparency/alpha-test likely",STRONG
+gFireTempleFireball1Tex,object:object_hidan_objects,MEDIUM,"lava/fire keyword; stone keyword; multiple categories plausible: LAVA, STONE; IA format (ia8) carries alpha -> transparency/alpha-test likely",STRONG
+gFireTempleFireball2Tex,object:object_hidan_objects,MEDIUM,"lava/fire keyword; stone keyword; multiple categories plausible: LAVA, STONE; IA format (ia8) carries alpha -> transparency/alpha-test likely",STRONG
+gFireTempleFireball3Tex,object:object_hidan_objects,MEDIUM,"lava/fire keyword; stone keyword; multiple categories plausible: LAVA, STONE; IA format (ia8) carries alpha -> transparency/alpha-test likely",STRONG
+gFireTempleFireball4Tex,object:object_hidan_objects,MEDIUM,"lava/fire keyword; stone keyword; multiple categories plausible: LAVA, STONE; IA format (ia8) carries alpha -> transparency/alpha-test likely",STRONG
+gFireTempleFireball5Tex,object:object_hidan_objects,MEDIUM,"lava/fire keyword; stone keyword; multiple categories plausible: LAVA, STONE; IA format (ia8) carries alpha -> transparency/alpha-test likely",STRONG
+gFireTempleFireball6Tex,object:object_hidan_objects,MEDIUM,"lava/fire keyword; stone keyword; multiple categories plausible: LAVA, STONE; IA format (ia8) carries alpha -> transparency/alpha-test likely",STRONG
+gFireTempleFireball7Tex,object:object_hidan_objects,MEDIUM,"lava/fire keyword; stone keyword; multiple categories plausible: LAVA, STONE; IA format (ia8) carries alpha -> transparency/alpha-test likely",STRONG
+gBombiwaLight1Tex,object:object_jya_obj,HIGH,metal keyword; IA format (ia16) carries alpha -> transparency/alpha-test likely,MEDIUM
+gGoldenGoddessLightRingTex,object:object_light_ring,HIGH,metal keyword,MEDIUM
+object_lightbox_Tex_000E10,object:object_lightbox,HIGH,wood keyword,MEDIUM
+object_lightbox_Tex_001610,object:object_lightbox,HIGH,wood keyword,MEDIUM
+object_lightswitch_Tex_000420,object:object_lightswitch,LOW,no keyword evidence,MEDIUM
+object_lightswitch_Tex_000C20,object:object_lightswitch,LOW,no keyword evidence,MEDIUM
+object_lightswitch_Tex_001420,object:object_lightswitch,LOW,no keyword evidence,MEDIUM
+object_lightswitch_Tex_001C20,object:object_lightswitch,LOW,no keyword evidence,MEDIUM
+gLinkAdultEyesUnk1Tex,object:object_link_boy,HIGH,skin/body-part keyword,MEDIUM
+gLinkAdultEyesUnk2Tex,object:object_link_boy,HIGH,skin/body-part keyword,MEDIUM
+gLinkChildEyesUnk1Tex,object:object_link_child,HIGH,skin/body-part keyword,MEDIUM
+gLinkChildEyesUnk2Tex,object:object_link_child,HIGH,skin/body-part keyword,MEDIUM
+gLinkChildFairyOcarinaTex,object:object_link_child,MEDIUM,fairy/Navi effect keyword,STRONG
+gTitleFlameEffectTex,object:object_mag,HIGH,lava/fire keyword; UI-style keyword present but resource is world-grouped: manual check,STRONG
+gShieldBeamGlowRayTex,object:object_mir_ray,MEDIUM,"metal keyword; wood keyword; multiple categories plausible: METAL, WOOD; IA format (ia16) carries alpha -> transparency/alpha-test likely",MEDIUM
+gShieldBeamImageCircleTex,object:object_mir_ray,MEDIUM,"metal keyword; wood keyword; multiple categories plausible: METAL, WOOD; IA format (ia16) carries alpha -> transparency/alpha-test likely",MEDIUM
+gShieldBeamImageGerudoSymbolNewTex,object:object_mir_ray,MEDIUM,"metal keyword; wood keyword; multiple categories plausible: METAL, WOOD; IA format (ia16) carries alpha -> transparency/alpha-test likely",MEDIUM
+gWarpPadSideTex,object:object_mjin,HIGH,water keyword,MEDIUM
+gWarpPadTopTex,object:object_mjin,HIGH,water keyword,MEDIUM
+gShadowMedallionPlatformTex,object:object_mjin_dark,HIGH,metal keyword,MEDIUM
+gFireMedallionPlatformTex,object:object_mjin_flame,MEDIUM,"lava/fire keyword; metal keyword; multiple categories plausible: LAVA, METAL",STRONG
+gLightMedallionPlatformTex,object:object_mjin_flash,HIGH,metal keyword,MEDIUM
+gWaterMedallionPlatformTex,object:object_mjin_ice,MEDIUM,"water keyword; metal keyword; multiple categories plausible: METAL, WATER",MEDIUM
+gOcarinaWarpPadOcarinaTex,object:object_mjin_oka,HIGH,water keyword,MEDIUM
+gOcarinaWarpPadSideTex,object:object_mjin_oka,HIGH,water keyword,MEDIUM
+gSpiritMedallionPlatformTex,object:object_mjin_soul,HIGH,metal keyword,MEDIUM
+gForestMedallionPlatformTex,object:object_mjin_wind,HIGH,metal keyword,MEDIUM
+gPoeSellerLanternTex,object:object_ps,LOW,no keyword evidence,STRONG
+gSariaFairyOcarinaTex,object:object_sa,MEDIUM,fairy/Navi effect keyword,STRONG
+gEnHeishiKingGuardChestArmorTex,object:object_sd,MEDIUM,"metal keyword; wood keyword; multiple categories plausible: METAL, WOOD",MEDIUM
+gEffSunGraveSpark1Tex,object:object_spot02_objects,HIGH,stone keyword,MEDIUM
+gEffSunGraveSpark2Tex,object:object_spot02_objects,HIGH,stone keyword,MEDIUM
+gEffSunGraveSpark3Tex,object:object_spot02_objects,HIGH,stone keyword,MEDIUM
+gEffSunGraveSpark4Tex,object:object_spot02_objects,HIGH,stone keyword,MEDIUM
+gEffSunGraveSpark5Tex,object:object_spot02_objects,HIGH,stone keyword,MEDIUM
+gEffSunGraveSpark6Tex,object:object_spot02_objects,HIGH,stone keyword,MEDIUM
+gEffSunGraveSpark7Tex,object:object_spot02_objects,HIGH,stone keyword,MEDIUM
+gEffSunGraveSpark8Tex,object:object_spot02_objects,HIGH,stone keyword,MEDIUM
+gGoldenTorch1Tex,object:object_syokudai,HIGH,metal keyword,STRONG
+gGoldenTorch2Tex,object:object_syokudai,HIGH,metal keyword,STRONG
+gTimedTorchTex,object:object_syokudai,LOW,no keyword evidence,STRONG
+gTorchFlameGuardTex,object:object_syokudai,HIGH,lava/fire keyword,STRONG
+gWoodenTorchTex,object:object_syokudai,HIGH,wood keyword,STRONG
+object_torch2Tex_0041C0,object:object_torch2,LOW,no keyword evidence,STRONG
+object_torch2Tex_0043C0,object:object_torch2,LOW,IA format (ia16) carries alpha -> transparency/alpha-test likely,STRONG
+gTriforceColumnSide1Tex,object:object_triforce_spot,HIGH,stone keyword; Temple of Time key-object keyword,MEDIUM
+gTriforceColumnSide2Tex,object:object_triforce_spot,HIGH,stone keyword; Temple of Time key-object keyword,MEDIUM
+gTwinrovaBigFlameMaskTex,object:object_tw,HIGH,lava/fire keyword,STRONG
+gTwinrovaBigFlameTex,object:object_tw,HIGH,lava/fire keyword,STRONG
+gTwinrovaFireMaskTex,object:object_tw,HIGH,lava/fire keyword,STRONG
+gTwinrovaFirePoolAndShieldChargeCenterTex,object:object_tw,MEDIUM,"water keyword; lava/fire keyword; metal keyword; multiple categories plausible: LAVA, METAL, WATER",STRONG
+gTwinrovaFireSmokeTex,object:object_tw,MEDIUM,"lava/fire keyword; smoke keyword; multiple categories plausible: LAVA, SMOKE",STRONG
+gTwinrovaFireTex,object:object_tw,HIGH,lava/fire keyword,STRONG
+gTwinrovaLightPillarAndHaloTex,object:object_tw,HIGH,stone keyword,MEDIUM
+gBeamosBodyGradientTex,object:object_vm,MEDIUM,"skin/body-part keyword; wood keyword; multiple categories plausible: SKIN, WOOD",MEDIUM
+gBeamosBodyTex,object:object_vm,MEDIUM,"skin/body-part keyword; wood keyword; multiple categories plausible: SKIN, WOOD",MEDIUM
+gBeamosBoltAndMetalTex,object:object_vm,MEDIUM,"metal keyword; wood keyword; multiple categories plausible: METAL, WOOD",MEDIUM
+gBeamosEyeOutlineTex,object:object_vm,MEDIUM,"skin/body-part keyword; wood keyword; multiple categories plausible: SKIN, WOOD",MEDIUM
+gBeamosEyeTex,object:object_vm,MEDIUM,"skin/body-part keyword; wood keyword; multiple categories plausible: SKIN, WOOD",MEDIUM
+gBeamosGrayMetalTex,object:object_vm,MEDIUM,"metal keyword; wood keyword; multiple categories plausible: METAL, WOOD",MEDIUM
+gBeamosLaserTex,object:object_vm,HIGH,wood keyword,MEDIUM
+gBeamosTeethTex,object:object_vm,MEDIUM,"bone keyword; wood keyword; multiple categories plausible: BONE, WOOD",MEDIUM
+gBeamosTex_2D40,object:object_vm,HIGH,wood keyword,MEDIUM
+gWarpCrystalTex,object:object_warp1,MEDIUM,"glass keyword; bone keyword; multiple categories plausible: BONE, GLASS",MEDIUM
+gWarpPortalTex,object:object_warp1,LOW,no keyword evidence,MEDIUM
+gTowerCollapseBarFlameTex,object:object_zg,MEDIUM,"lava/fire keyword; metal keyword; multiple categories plausible: LAVA, METAL",STRONG
+sLavaFloorLavaTex,group:ovl_Boss_Dodongo,MEDIUM,effect overlay glow name,STRONG
+sLavaFloorRockTex,group:ovl_Boss_Dodongo,MEDIUM,effect overlay glow name,STRONG
+gGanondorfLightning10Tex,group:ovl_Boss_Ganon,MEDIUM,effect overlay glow name,MEDIUM
+gGanondorfLightning11Tex,group:ovl_Boss_Ganon,MEDIUM,effect overlay glow name,MEDIUM
+gGanondorfLightning12Tex,group:ovl_Boss_Ganon,MEDIUM,effect overlay glow name,MEDIUM
+gGanondorfLightning1Tex,group:ovl_Boss_Ganon,MEDIUM,effect overlay glow name,MEDIUM
+gGanondorfLightning2Tex,group:ovl_Boss_Ganon,MEDIUM,effect overlay glow name,MEDIUM
+gGanondorfLightning3Tex,group:ovl_Boss_Ganon,MEDIUM,effect overlay glow name,MEDIUM
+gGanondorfLightning4Tex,group:ovl_Boss_Ganon,MEDIUM,effect overlay glow name,MEDIUM
+gGanondorfLightning5Tex,group:ovl_Boss_Ganon,MEDIUM,effect overlay glow name,MEDIUM
+gGanondorfLightning6Tex,group:ovl_Boss_Ganon,MEDIUM,effect overlay glow name,MEDIUM
+gGanondorfLightning7Tex,group:ovl_Boss_Ganon,MEDIUM,effect overlay glow name,MEDIUM
+gGanondorfLightning8Tex,group:ovl_Boss_Ganon,MEDIUM,effect overlay glow name,MEDIUM
+gGanondorfLightning9Tex,group:ovl_Boss_Ganon,MEDIUM,effect overlay glow name,MEDIUM
+gGanonFireRingTex,group:ovl_Boss_Ganon2,MEDIUM,effect overlay glow name,STRONG
+gGanonLightOrbTex,group:ovl_Boss_Ganon2,MEDIUM,effect overlay glow name,MEDIUM
+gGanonLightningTex,group:ovl_Boss_Ganon2,MEDIUM,effect overlay glow name,MEDIUM
+sRoomColumnFriezeAndCanopyTex,group:ovl_En_Ganon_Organ,MEDIUM,effect overlay glow name,MEDIUM
+sRoomColumnMetalEdgingTex,group:ovl_En_Ganon_Organ,MEDIUM,effect overlay glow name,MEDIUM
+gDCLavaFloor1Tex,scene:ddan,LOW,scene texture (offset-named) in ddan; cavern/dungeon scene-level prior,STRONG
+gDCLavaFloor2Tex,scene:ddan,LOW,scene texture (offset-named) in ddan; cavern/dungeon scene-level prior,STRONG
+gDCLavaFloor3Tex,scene:ddan,LOW,scene texture (offset-named) in ddan; cavern/dungeon scene-level prior,STRONG
+gDCLavaFloor4Tex,scene:ddan,LOW,scene texture (offset-named) in ddan; cavern/dungeon scene-level prior,STRONG
+gDCLavaFloor5Tex,scene:ddan,LOW,scene texture (offset-named) in ddan; cavern/dungeon scene-level prior,STRONG
+gDCLavaFloor6Tex,scene:ddan,LOW,scene texture (offset-named) in ddan; cavern/dungeon scene-level prior,STRONG
+gDCLavaFloor7Tex,scene:ddan,LOW,scene texture (offset-named) in ddan; cavern/dungeon scene-level prior,STRONG
+gDCLavaFloor8Tex,scene:ddan,LOW,scene texture (offset-named) in ddan; cavern/dungeon scene-level prior,STRONG
+FIRE_bs_room_0Tex_002E68,scene:FIRE_bs/room0,LOW,scene texture (offset-named) in FIRE_bs,STRONG
+FIRE_bs_room_0Tex_003068,scene:FIRE_bs/room0,LOW,scene texture (offset-named) in FIRE_bs,STRONG
+FIRE_bs_room_0Tex_003468,scene:FIRE_bs/room0,LOW,scene texture (offset-named) in FIRE_bs,STRONG
+FIRE_bs_room_0Tex_003868,scene:FIRE_bs/room0,LOW,scene texture (offset-named) in FIRE_bs,STRONG
+FIRE_bs_room_0Tex_003A68,scene:FIRE_bs/room0,LOW,scene texture (offset-named) in FIRE_bs,STRONG
+FIRE_bs_room_0Tex_003C68,scene:FIRE_bs/room0,LOW,scene texture (offset-named) in FIRE_bs,STRONG
+FIRE_bs_room_0Tex_004068,scene:FIRE_bs/room0,LOW,scene texture (offset-named) in FIRE_bs,STRONG
+FIRE_bs_room_1Tex_0049D8,scene:FIRE_bs/room1,LOW,scene texture (offset-named) in FIRE_bs,STRONG
+FIRE_bs_room_1Tex_004BD8,scene:FIRE_bs/room1,LOW,scene texture (offset-named) in FIRE_bs,STRONG
+FIRE_bs_room_1Tex_0053D8,scene:FIRE_bs/room1,LOW,scene texture (offset-named) in FIRE_bs,STRONG
+FIRE_bs_room_1Tex_005BD8,scene:FIRE_bs/room1,LOW,scene texture (offset-named) in FIRE_bs,STRONG
+FIRE_bs_room_1Tex_005FD8,scene:FIRE_bs/room1,LOW,scene texture (offset-named) in FIRE_bs,STRONG
+FIRE_bs_room_1Tex_0061D8,scene:FIRE_bs/room1,LOW,scene texture (offset-named) in FIRE_bs,STRONG
+FIRE_bs_room_1Tex_0065D8,scene:FIRE_bs/room1,LOW,scene texture (offset-named) in FIRE_bs,STRONG
+FIRE_bs_room_1Tex_006DD8,scene:FIRE_bs/room1,LOW,scene texture (offset-named) in FIRE_bs,STRONG
+FIRE_bs_sceneTex_002C00,scene:FIRE_bs,LOW,scene texture (offset-named) in FIRE_bs,STRONG
+FIRE_bs_sceneTex_003400,scene:FIRE_bs,LOW,scene texture (offset-named) in FIRE_bs,STRONG
+FIRE_bs_sceneTex_003C00,scene:FIRE_bs,LOW,scene texture (offset-named) in FIRE_bs,STRONG
+FIRE_bs_sceneTex_004400,scene:FIRE_bs,LOW,scene texture (offset-named) in FIRE_bs,STRONG
+gDodongosCavernBossLavaFloorTex,scene:ddan_boss/room1,LOW,scene texture (offset-named) in ddan_boss; cavern/dungeon scene-level prior,STRONG
+takaraya_room_0Tex_003BE0,scene:takaraya/room0,LOW,scene texture (offset-named) in takaraya,MEDIUM
+takaraya_room_0Tex_0043E0,scene:takaraya/room0,LOW,scene texture (offset-named) in takaraya,MEDIUM
+takaraya_room_0Tex_004BE0,scene:takaraya/room0,LOW,scene texture (offset-named) in takaraya,MEDIUM
+takaraya_room_0Tex_005BE0,scene:takaraya/room0,LOW,scene texture (offset-named) in takaraya,MEDIUM
+takaraya_room_0Tex_0063E0,scene:takaraya/room0,LOW,scene texture (offset-named) in takaraya,MEDIUM
+takaraya_room_0Tex_006BE0,scene:takaraya/room0,LOW,scene texture (offset-named) in takaraya,MEDIUM
+takaraya_room_0Tex_0073E0,scene:takaraya/room0,LOW,scene texture (offset-named) in takaraya,MEDIUM
+takaraya_room_0Tex_007BE0,scene:takaraya/room0,LOW,scene texture (offset-named) in takaraya,MEDIUM
+takaraya_room_0Tex_0083E0,scene:takaraya/room0,LOW,scene texture (offset-named) in takaraya,MEDIUM
+takaraya_room_0Tex_0095C0,scene:takaraya/room0,LOW,scene texture (offset-named) in takaraya; IA format (ia4) carries alpha -> transparency/alpha-test likely,MEDIUM
+takaraya_room_1Tex_0017F8,scene:takaraya/room1,LOW,scene texture (offset-named) in takaraya,MEDIUM
+takaraya_room_2Tex_001828,scene:takaraya/room2,LOW,scene texture (offset-named) in takaraya,MEDIUM
+takaraya_room_3Tex_001818,scene:takaraya/room3,LOW,scene texture (offset-named) in takaraya,MEDIUM
+takaraya_room_3Tex_002018,scene:takaraya/room3,LOW,scene texture (offset-named) in takaraya,MEDIUM
+takaraya_room_4Tex_001820,scene:takaraya/room4,LOW,scene texture (offset-named) in takaraya,MEDIUM
+takaraya_room_4Tex_002020,scene:takaraya/room4,LOW,scene texture (offset-named) in takaraya,MEDIUM
+takaraya_room_4Tex_002820,scene:takaraya/room4,LOW,scene texture (offset-named) in takaraya,MEDIUM
+takaraya_room_5Tex_0017F8,scene:takaraya/room5,LOW,scene texture (offset-named) in takaraya,MEDIUM
+takaraya_room_5Tex_001FF8,scene:takaraya/room5,LOW,scene texture (offset-named) in takaraya,MEDIUM
+takaraya_room_5Tex_0027F8,scene:takaraya/room5,LOW,scene texture (offset-named) in takaraya,MEDIUM
+takaraya_room_6Tex_0012F8,scene:takaraya/room6,LOW,scene texture (offset-named) in takaraya,MEDIUM
+takaraya_room_6Tex_001AF8,scene:takaraya/room6,LOW,scene texture (offset-named) in takaraya,MEDIUM
+takaraya_room_6Tex_0022F8,scene:takaraya/room6,LOW,scene texture (offset-named) in takaraya,MEDIUM
+takaraya_sceneTex_0051B0,scene:takaraya,LOW,scene texture (offset-named) in takaraya,MEDIUM
+takaraya_sceneTex_0059B0,scene:takaraya,LOW,scene texture (offset-named) in takaraya,MEDIUM
+takaraya_sceneTex_0061B0,scene:takaraya,LOW,scene texture (offset-named) in takaraya,MEDIUM
+takaraya_sceneTex_0069B0,scene:takaraya,LOW,scene texture (offset-named) in takaraya,MEDIUM
+gUnusedNaviDoActionENGTex,group:do_action_static,HIGH,dedicated UI texture group 'do_action_static'; IA format (ia4) carries alpha -> transparency/alpha-test likely; fairy/Navi effect keyword,STRONG
+gUnusedNaviDoActionFRATex,group:do_action_static,HIGH,dedicated UI texture group 'do_action_static'; fairy/Navi effect keyword,STRONG
+gUnusedNaviDoActionGERTex,group:do_action_static,HIGH,dedicated UI texture group 'do_action_static'; fairy/Navi effect keyword,STRONG
+gUnusedNaviDoActionJPNTex,group:do_action_static,HIGH,dedicated UI texture group 'do_action_static'; IA format (ia4) carries alpha -> transparency/alpha-test likely; fairy/Navi effect keyword,STRONG
+gGreatFairysFountainTitleCardENGTex,group:place_title_cards,HIGH,dedicated UI texture group 'place_title_cards'; IA format (ia8) carries alpha -> transparency/alpha-test likely; fairy/Navi effect keyword,STRONG
+gGreatFairysFountainTitleCardFRATex,group:place_title_cards,HIGH,dedicated UI texture group 'place_title_cards'; fairy/Navi effect keyword,STRONG
+gGreatFairysFountainTitleCardGERTex,group:place_title_cards,HIGH,dedicated UI texture group 'place_title_cards'; fairy/Navi effect keyword,STRONG
+gFairysFountainTitleCardENGTex,group:place_title_cards,HIGH,dedicated UI texture group 'place_title_cards'; IA format (ia8) carries alpha -> transparency/alpha-test likely; fairy/Navi effect keyword,STRONG
+gFairysFountainTitleCardFRATex,group:place_title_cards,HIGH,dedicated UI texture group 'place_title_cards'; fairy/Navi effect keyword,STRONG
+gFairysFountainTitleCardGERTex,group:place_title_cards,HIGH,dedicated UI texture group 'place_title_cards'; fairy/Navi effect keyword,STRONG
+gQuestIconGoronRubyTex,group:icon_item_24_static,HIGH,dedicated UI texture group 'icon_item_24_static'; spiritual stone keyword (glowing iconography),MEDIUM
+gQuestIconKokiriEmeraldTex,group:icon_item_24_static,HIGH,dedicated UI texture group 'icon_item_24_static'; spiritual stone keyword (glowing iconography),MEDIUM
+gQuestIconZoraSapphireTex,group:icon_item_24_static,HIGH,dedicated UI texture group 'icon_item_24_static'; spiritual stone keyword (glowing iconography),MEDIUM
+gItemIconBottleFairyTex,group:icon_item_static,HIGH,dedicated UI texture group 'icon_item_static'; fairy/Navi effect keyword,STRONG
+gItemIconOcarinaFairyTex,group:icon_item_static,HIGH,dedicated UI texture group 'icon_item_static'; fairy/Navi effect keyword,STRONG
+gBottledFairyItemNameENGTex,group:item_name_static,HIGH,dedicated UI texture group 'item_name_static'; IA format (ia4) carries alpha -> transparency/alpha-test likely; fairy/Navi effect keyword,STRONG
+gBottledFairyItemNameFRATex,group:item_name_static,HIGH,dedicated UI texture group 'item_name_static'; fairy/Navi effect keyword,STRONG
+gBottledFairyItemNameGERTex,group:item_name_static,HIGH,dedicated UI texture group 'item_name_static'; fairy/Navi effect keyword,STRONG
+gBottledFairyItemNameJPNTex,group:item_name_static,HIGH,dedicated UI texture group 'item_name_static'; IA format (ia4) carries alpha -> transparency/alpha-test likely; fairy/Navi effect keyword,STRONG
+gFairyBowItemNameENGTex,group:item_name_static,HIGH,dedicated UI texture group 'item_name_static'; IA format (ia4) carries alpha -> transparency/alpha-test likely; fairy/Navi effect keyword,STRONG
+gFairyBowItemNameFRATex,group:item_name_static,HIGH,dedicated UI texture group 'item_name_static'; fairy/Navi effect keyword,STRONG
+gFairyBowItemNameGERTex,group:item_name_static,HIGH,dedicated UI texture group 'item_name_static'; fairy/Navi effect keyword,STRONG
+gFairyBowItemNameJPNTex,group:item_name_static,HIGH,dedicated UI texture group 'item_name_static'; IA format (ia4) carries alpha -> transparency/alpha-test likely; fairy/Navi effect keyword,STRONG
+gFairyOcarinaItemNameENGTex,group:item_name_static,HIGH,dedicated UI texture group 'item_name_static'; IA format (ia4) carries alpha -> transparency/alpha-test likely; fairy/Navi effect keyword,STRONG
+gFairyOcarinaItemNameFRATex,group:item_name_static,HIGH,dedicated UI texture group 'item_name_static'; fairy/Navi effect keyword,STRONG
+gFairyOcarinaItemNameGERTex,group:item_name_static,HIGH,dedicated UI texture group 'item_name_static'; fairy/Navi effect keyword,STRONG
+gFairyOcarinaItemNameJPNTex,group:item_name_static,HIGH,dedicated UI texture group 'item_name_static'; IA format (ia4) carries alpha -> transparency/alpha-test likely; fairy/Navi effect keyword,STRONG
+gFairySlingshotItemNameENGTex,group:item_name_static,HIGH,dedicated UI texture group 'item_name_static'; IA format (ia4) carries alpha -> transparency/alpha-test likely; fairy/Navi effect keyword,STRONG
+gFairySlingshotItemNameFRATex,group:item_name_static,HIGH,dedicated UI texture group 'item_name_static'; fairy/Navi effect keyword,STRONG
+gFairySlingshotItemNameGERTex,group:item_name_static,HIGH,dedicated UI texture group 'item_name_static'; fairy/Navi effect keyword,STRONG
+gFairySlingshotItemNameJPNTex,group:item_name_static,HIGH,dedicated UI texture group 'item_name_static'; IA format (ia4) carries alpha -> transparency/alpha-test likely; fairy/Navi effect keyword,STRONG
+gGoronsRubyItemNameENGTex,group:item_name_static,HIGH,dedicated UI texture group 'item_name_static'; IA format (ia4) carries alpha -> transparency/alpha-test likely; spiritual stone keyword (glowing iconography),MEDIUM
+gGoronsRubyItemNameFRATex,group:item_name_static,HIGH,dedicated UI texture group 'item_name_static'; spiritual stone keyword (glowing iconography),MEDIUM
+gGoronsRubyItemNameGERTex,group:item_name_static,HIGH,dedicated UI texture group 'item_name_static'; spiritual stone keyword (glowing iconography),MEDIUM
+gGoronsRubyItemNameJPNTex,group:item_name_static,HIGH,dedicated UI texture group 'item_name_static'; IA format (ia4) carries alpha -> transparency/alpha-test likely; spiritual stone keyword (glowing iconography),MEDIUM
+gKokiriEmeraldItemNameENGTex,group:item_name_static,HIGH,dedicated UI texture group 'item_name_static'; IA format (ia4) carries alpha -> transparency/alpha-test likely; spiritual stone keyword (glowing iconography),MEDIUM
+gKokiriEmeraldItemNameFRATex,group:item_name_static,HIGH,dedicated UI texture group 'item_name_static'; spiritual stone keyword (glowing iconography),MEDIUM
+gKokiriEmeraldItemNameGERTex,group:item_name_static,HIGH,dedicated UI texture group 'item_name_static'; spiritual stone keyword (glowing iconography),MEDIUM
+gKokiriEmeraldItemNameJPNTex,group:item_name_static,HIGH,dedicated UI texture group 'item_name_static'; IA format (ia4) carries alpha -> transparency/alpha-test likely; spiritual stone keyword (glowing iconography),MEDIUM
+gZorasSapphireItemNameENGTex,group:item_name_static,HIGH,dedicated UI texture group 'item_name_static'; IA format (ia4) carries alpha -> transparency/alpha-test likely; spiritual stone keyword (glowing iconography),MEDIUM
+gZorasSapphireItemNameFRATex,group:item_name_static,HIGH,dedicated UI texture group 'item_name_static'; spiritual stone keyword (glowing iconography),MEDIUM
+gZorasSapphireItemNameGERTex,group:item_name_static,HIGH,dedicated UI texture group 'item_name_static'; spiritual stone keyword (glowing iconography),MEDIUM
+gZorasSapphireItemNameJPNTex,group:item_name_static,HIGH,dedicated UI texture group 'item_name_static'; IA format (ia4) carries alpha -> transparency/alpha-test likely; spiritual stone keyword (glowing iconography),MEDIUM
+gNaviCUpENGTex,group:parameter_static,HIGH,dedicated UI texture group 'parameter_static'; IA format (ia4) carries alpha -> transparency/alpha-test likely; fairy/Navi effect keyword,STRONG
+gNaviCUpJPTex,group:parameter_static,HIGH,dedicated UI texture group 'parameter_static'; IA format (ia4) carries alpha -> transparency/alpha-test likely; fairy/Navi effect keyword,STRONG
+gFileSelGoronRubyTex,group:title_static,HIGH,dedicated UI texture group 'title_static'; spiritual stone keyword (glowing iconography),MEDIUM
+gFileSelKokiriEmeraldTex,group:title_static,HIGH,dedicated UI texture group 'title_static'; spiritual stone keyword (glowing iconography),MEDIUM
+gFileSelZoraSapphireTex,group:title_static,HIGH,dedicated UI texture group 'title_static'; spiritual stone keyword (glowing iconography),MEDIUM
+gSunriseOvercastSkybox1Tex,group:skyboxes,HIGH,skybox/background group 'skyboxes',MEDIUM
+gSunriseOvercastSkybox2Tex,group:skyboxes,HIGH,skybox/background group 'skyboxes',MEDIUM
+gSunriseOvercastSkybox3Tex,group:skyboxes,HIGH,skybox/background group 'skyboxes',MEDIUM
+gSunriseOvercastSkybox4Tex,group:skyboxes,HIGH,skybox/background group 'skyboxes',MEDIUM
+gSunriseOvercastSkybox5Tex,group:skyboxes,HIGH,skybox/background group 'skyboxes',MEDIUM
+gSunsetOvercastSkybox1Tex,group:skyboxes,HIGH,skybox/background group 'skyboxes',MEDIUM
+gSunsetOvercastSkybox2Tex,group:skyboxes,HIGH,skybox/background group 'skyboxes',MEDIUM
+gSunsetOvercastSkybox3Tex,group:skyboxes,HIGH,skybox/background group 'skyboxes',MEDIUM
+gSunsetOvercastSkybox4Tex,group:skyboxes,HIGH,skybox/background group 'skyboxes',MEDIUM
+gSunsetOvercastSkybox5Tex,group:skyboxes,HIGH,skybox/background group 'skyboxes',MEDIUM
+gSunriseSkybox1Tex,group:skyboxes,HIGH,skybox/background group 'skyboxes',MEDIUM
+gSunriseSkybox2Tex,group:skyboxes,HIGH,skybox/background group 'skyboxes',MEDIUM
+gSunriseSkybox3Tex,group:skyboxes,HIGH,skybox/background group 'skyboxes',MEDIUM
+gSunriseSkybox4Tex,group:skyboxes,HIGH,skybox/background group 'skyboxes',MEDIUM
+gSunriseSkybox5Tex,group:skyboxes,HIGH,skybox/background group 'skyboxes',MEDIUM
+gSunsetSkybox1Tex,group:skyboxes,HIGH,skybox/background group 'skyboxes',MEDIUM
+gSunsetSkybox2Tex,group:skyboxes,HIGH,skybox/background group 'skyboxes',MEDIUM
+gSunsetSkybox3Tex,group:skyboxes,HIGH,skybox/background group 'skyboxes',MEDIUM
+gSunsetSkybox4Tex,group:skyboxes,HIGH,skybox/background group 'skyboxes',MEDIUM
+gSunsetSkybox5Tex,group:skyboxes,HIGH,skybox/background group 'skyboxes',MEDIUM

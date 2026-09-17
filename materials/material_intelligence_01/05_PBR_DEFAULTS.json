@@ -1,0 +1,203 @@
+{
+  "_meta": {
+    "purpose": "DESIGN DEFAULT PROPOSALS ONLY. Not physically calibrated. Not implemented in runtime.",
+    "version": "material_intelligence_01",
+    "normalization": "0..1 normalized where practical; WATER/LAVA/MAGIC are special material paths.",
+    "warning": "Every value here must be validated per-resource before any runtime use. UNKNOWN categories must never receive these defaults (see MATERIAL_CLASSIFICATION_SPEC.md rule 3)."
+  },
+  "categories": {
+    "STONE": {
+      "roughness": 0.85,
+      "metallic": 0.0,
+      "emissive_strength": 0.0,
+      "specular_strength": 0.25,
+      "normal_strength": 0.8,
+      "notes": "High roughness; subtle specular. Temple/dungeon architecture."
+    },
+    "WOOD": {
+      "roughness": 0.75,
+      "metallic": 0.0,
+      "emissive_strength": 0.0,
+      "specular_strength": 0.15,
+      "normal_strength": 0.6,
+      "notes": "Medium-high roughness; grain normals modest."
+    },
+    "METAL": {
+      "roughness": 0.35,
+      "metallic": 0.9,
+      "emissive_strength": 0.0,
+      "specular_strength": 0.8,
+      "normal_strength": 0.5,
+      "notes": "Variable roughness; 0.35 default suits weathered N64-era metals."
+    },
+    "EARTH": {
+      "roughness": 0.95,
+      "metallic": 0.0,
+      "emissive_strength": 0.0,
+      "specular_strength": 0.05,
+      "normal_strength": 0.7
+    },
+    "SAND": {
+      "roughness": 0.95,
+      "metallic": 0.0,
+      "emissive_strength": 0.0,
+      "specular_strength": 0.05,
+      "normal_strength": 0.4,
+      "notes": "Fine-grain; low normal strength to avoid tiling artifacts."
+    },
+    "GRASS": {
+      "roughness": 0.9,
+      "metallic": 0.0,
+      "emissive_strength": 0.0,
+      "specular_strength": 0.08,
+      "normal_strength": 0.5
+    },
+    "FOLIAGE": {
+      "roughness": 0.8,
+      "metallic": 0.0,
+      "emissive_strength": 0.0,
+      "specular_strength": 0.1,
+      "normal_strength": 0.5,
+      "notes": "Candidate for subsurface/translucency later; do NOT enable in V03."
+    },
+    "CLOTH": {
+      "roughness": 0.9,
+      "metallic": 0.0,
+      "emissive_strength": 0.0,
+      "specular_strength": 0.08,
+      "normal_strength": 0.4
+    },
+    "SKIN": {
+      "roughness": 0.65,
+      "metallic": 0.0,
+      "emissive_strength": 0.0,
+      "specular_strength": 0.3,
+      "normal_strength": 0.3,
+      "notes": "Character skin; strongest candidate for 'do not touch' until lighting validated."
+    },
+    "LEATHER": {
+      "roughness": 0.75,
+      "metallic": 0.0,
+      "emissive_strength": 0.0,
+      "specular_strength": 0.15,
+      "normal_strength": 0.4
+    },
+    "BONE": {
+      "roughness": 0.7,
+      "metallic": 0.0,
+      "emissive_strength": 0.0,
+      "specular_strength": 0.25,
+      "normal_strength": 0.5
+    },
+    "CERAMIC": {
+      "roughness": 0.4,
+      "metallic": 0.0,
+      "emissive_strength": 0.0,
+      "specular_strength": 0.45,
+      "normal_strength": 0.3
+    },
+    "GLASS": {
+      "roughness": 0.1,
+      "metallic": 0.0,
+      "emissive_strength": 0.0,
+      "specular_strength": 0.9,
+      "normal_strength": 0.2,
+      "notes": "Special material path (transmission/blend), not simple PBR-Lite."
+    },
+    "ICE": {
+      "roughness": 0.2,
+      "metallic": 0.0,
+      "emissive_strength": 0.0,
+      "specular_strength": 0.8,
+      "normal_strength": 0.3,
+      "notes": "Special material path candidate (shiny + semi-transparent)."
+    },
+    "WATER": {
+      "roughness": 0.05,
+      "metallic": 0.0,
+      "emissive_strength": 0.0,
+      "specular_strength": 1.0,
+      "normal_strength": 0.6,
+      "notes": "SPECIAL MATERIAL PATH. Reflection/RTX candidate; never standard albedo PBR."
+    },
+    "LAVA": {
+      "roughness": 0.8,
+      "metallic": 0.0,
+      "emissive_strength": 1.0,
+      "specular_strength": 0.2,
+      "normal_strength": 0.7,
+      "notes": "SPECIAL MATERIAL PATH. Animated UV scroll + emissive."
+    },
+    "MAGIC": {
+      "roughness": 0.5,
+      "metallic": 0.0,
+      "emissive_strength": 0.9,
+      "specular_strength": 0.3,
+      "normal_strength": 0.0,
+      "notes": "SPECIAL MATERIAL PATH. Emissive-primary; often alpha-blended billboards."
+    },
+    "EMISSIVE": {
+      "roughness": 0.6,
+      "metallic": 0.0,
+      "emissive_strength": 0.8,
+      "specular_strength": 0.1,
+      "normal_strength": 0.0
+    },
+    "SMOKE": {
+      "roughness": 1.0,
+      "metallic": 0.0,
+      "emissive_strength": 0.1,
+      "specular_strength": 0.0,
+      "normal_strength": 0.0,
+      "notes": "Billboard/alpha-blend path; PBR constants mostly irrelevant."
+    },
+    "PARTICLE": {
+      "roughness": 1.0,
+      "metallic": 0.0,
+      "emissive_strength": 0.3,
+      "specular_strength": 0.0,
+      "normal_strength": 0.0,
+      "notes": "Effect path; leave out of MaterialRegistry scope."
+    },
+    "SKY": {
+      "roughness": 1.0,
+      "metallic": 0.0,
+      "emissive_strength": 0.15,
+      "specular_strength": 0.0,
+      "normal_strength": 0.0,
+      "notes": "Skyboxes: unlit/atmosphere; exclude from world lighting; usable as IBL source later."
+    },
+    "UI_2D": {
+      "roughness": 0.0,
+      "metallic": 0.0,
+      "emissive_strength": 0.0,
+      "specular_strength": 0.0,
+      "normal_strength": 0.0,
+      "notes": "PROTECTED. No PBR, no fog, no world lighting, no RTX. Values listed only to make exclusion explicit."
+    },
+    "SPRITE": {
+      "roughness": 0.0,
+      "metallic": 0.0,
+      "emissive_strength": 0.0,
+      "specular_strength": 0.0,
+      "normal_strength": 0.0,
+      "notes": "PROTECTED like UI; world-anchored billboards may keep fog, per-case."
+    },
+    "TEXT": {
+      "roughness": 0.0,
+      "metallic": 0.0,
+      "emissive_strength": 0.0,
+      "specular_strength": 0.0,
+      "normal_strength": 0.0,
+      "notes": "PROTECTED. Font rendering must never receive world-space effects."
+    },
+    "UNKNOWN": {
+      "roughness": null,
+      "metallic": null,
+      "emissive_strength": null,
+      "specular_strength": null,
+      "normal_strength": null,
+      "notes": "NO DEFAULTS BY RULE. UNKNOWN = classic pipeline fallback (MATERIAL_CLASSIFICATION_SPEC.md rule 3)."
+    }
+  }
+}

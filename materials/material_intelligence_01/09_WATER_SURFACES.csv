@@ -1,0 +1,238 @@
+resource,water_type,object_or_scene,confidence,reason
+gFileSelPleaseChooseAQuestENGTex.ia8.png,unknown,group:textures,HIGH,water keyword; IA format (ia8) carries alpha -> transparency/alpha-test likely
+gFileSelPleaseChooseAQuestFRATex.ia8.png,unknown,group:textures,HIGH,water keyword; IA format (ia8) carries alpha -> transparency/alpha-test likely
+gFileSelPleaseChooseAQuestGERTex.ia8.png,unknown,group:textures,HIGH,water keyword; IA format (ia8) carries alpha -> transparency/alpha-test likely
+gFileSelPleaseChooseAQuestJPNTex.ia8.png,unknown,group:textures,HIGH,water keyword; IA format (ia8) carries alpha -> transparency/alpha-test likely
+gEffShockwaveTex,unknown,object:gameplay_keep,HIGH,water keyword
+gEffWaterRippleTex,unknown,object:gameplay_keep,HIGH,water keyword
+gEffWaterSplash1Tex,unknown,object:gameplay_keep,MEDIUM,"water keyword; smoke keyword; multiple categories plausible: SMOKE, WATER"
+gEffWaterSplash2Tex,unknown,object:gameplay_keep,MEDIUM,"water keyword; smoke keyword; multiple categories plausible: SMOKE, WATER"
+gEffWaterSplash3Tex,unknown,object:gameplay_keep,MEDIUM,"water keyword; smoke keyword; multiple categories plausible: SMOKE, WATER"
+gEffWaterSplash4Tex,unknown,object:gameplay_keep,MEDIUM,"water keyword; smoke keyword; multiple categories plausible: SMOKE, WATER"
+gEffWaterSplash5Tex,unknown,object:gameplay_keep,MEDIUM,"water keyword; smoke keyword; multiple categories plausible: SMOKE, WATER"
+gEffWaterSplash6Tex,unknown,object:gameplay_keep,MEDIUM,"water keyword; smoke keyword; multiple categories plausible: SMOKE, WATER"
+gEffWaterSplash7Tex,unknown,object:gameplay_keep,MEDIUM,"water keyword; smoke keyword; multiple categories plausible: SMOKE, WATER"
+gEffWaterSplash8Tex,unknown,object:gameplay_keep,MEDIUM,"water keyword; smoke keyword; multiple categories plausible: SMOKE, WATER"
+gBossDoorWaterTex,unknown,object:object_bdoor,MEDIUM,"water keyword; wood keyword; multiple categories plausible: WATER, WOOD"
+gFishingAquariumBottomTex,unknown,object:object_fish,HIGH,water keyword
+gFishingAquariumGlassTex,unknown,object:object_fish,MEDIUM,"water keyword; glass keyword; multiple categories plausible: GLASS, WATER"
+gFishingAquariumWaterTex,unknown,object:object_fish,HIGH,water keyword
+gFishingStreamSplashTile1Tex,river,object:object_fish,MEDIUM,"water keyword; smoke keyword; stone keyword; multiple categories plausible: SMOKE, STONE, WATER"
+gFishingStreamSplashTile2Tex,river,object:object_fish,MEDIUM,"water keyword; smoke keyword; stone keyword; multiple categories plausible: SMOKE, STONE, WATER"
+gFishingWaterDustTex,unknown,object:object_fish,MEDIUM,"water keyword; smoke keyword; multiple categories plausible: SMOKE, WATER"
+gBotwWater1Tex,unknown,object:object_hakach_objects,HIGH,water keyword; IA format (ia16) carries alpha -> transparency/alpha-test likely
+gBotwWater2Tex,unknown,object:object_hakach_objects,HIGH,water keyword
+gWarpPadSideTex,pool,object:object_mjin,HIGH,water keyword
+gWarpPadTopTex,pool,object:object_mjin,HIGH,water keyword
+gWaterMedallionPlatformTex,unknown,object:object_mjin_ice,MEDIUM,"water keyword; metal keyword; multiple categories plausible: METAL, WATER"
+gOcarinaWarpPadOcarinaTex,pool,object:object_mjin_oka,HIGH,water keyword
+gOcarinaWarpPadSideTex,pool,object:object_mjin_oka,HIGH,water keyword
+gMorphaWaterTex,unknown,object:object_mo,HIGH,water keyword
+gMoriWaterTex,unknown,object:object_mori_tex,HIGH,water keyword
+gKakarikoWellWaterTex,unknown,object:object_spot01_objects,MEDIUM,"water keyword; stone keyword; multiple categories plausible: STONE, WATER"
+gLakeHyliaWaterTempleGateTex,lake,object:object_spot06_objects,MEDIUM,"water keyword; skin/body-part keyword; wood keyword; stone keyword; multiple categories plausible: SKIN, STONE, WATER, WOOD"
+gLakeHyliaWaterTempleKeyTex,lake,object:object_spot06_objects,MEDIUM,"water keyword; metal keyword; stone keyword; multiple categories plausible: METAL, STONE, WATER"
+gLakeHyliaWaterTex,lake,object:object_spot06_objects,HIGH,water keyword
+gLakeHyliaZoraShortcutIceblockTex,lake,object:object_spot06_objects,MEDIUM,"water keyword; ice keyword; smoke keyword; metal keyword; stone keyword; multiple categories plausible: ICE, METAL, SMOKE, STONE, WATER"
+gZorasFountainBombableWallTex,fountain,object:object_spot08_obj,MEDIUM,"water keyword; metal keyword; stone keyword; multiple categories plausible: METAL, STONE, WATER"
+gZorasFountainIceRampLowerSideTex,fountain,object:object_spot08_obj,MEDIUM,"water keyword; ice keyword; multiple categories plausible: ICE, WATER"
+gZorasFountainIceRampMiddleSlopeTex,fountain,object:object_spot08_obj,MEDIUM,"water keyword; ice keyword; multiple categories plausible: ICE, WATER"
+gZorasFountainIceRampSurfaceTex,fountain,object:object_spot08_obj,MEDIUM,"water keyword; ice keyword; skin/body-part keyword; multiple categories plausible: ICE, SKIN, WATER"
+gZorasFountainIceRampUpperSideTex,fountain,object:object_spot08_obj,MEDIUM,"water keyword; ice keyword; multiple categories plausible: ICE, WATER"
+gZorasFountainIcebergSideTex,fountain,object:object_spot08_obj,MEDIUM,"water keyword; ice keyword; multiple categories plausible: ICE, WATER"
+gZorasFountainIcebergTopTex,fountain,object:object_spot08_obj,MEDIUM,"water keyword; ice keyword; multiple categories plausible: ICE, WATER"
+gZorasFountainIcebergUndersideTex,fountain,object:object_spot08_obj,MEDIUM,"water keyword; ice keyword; multiple categories plausible: ICE, WATER"
+gDesertColossusOasisWaterTex,unknown,object:object_spot11_obj,MEDIUM,"water keyword; sand keyword; multiple categories plausible: SAND, WATER"
+object_stream_Tex_000000,river,object:object_stream,HIGH,water keyword
+gTwinrovaFirePoolAndShieldChargeCenterTex,pool,object:object_tw,MEDIUM,"water keyword; lava/fire keyword; metal keyword; multiple categories plausible: LAVA, METAL, WATER"
+gTwinrovaIcePoolShineMaskTex,pool,object:object_tw,MEDIUM,"water keyword; ice keyword; multiple categories plausible: ICE, WATER"
+gTwinrovaIcePoolShineTex,pool,object:object_tw,MEDIUM,"water keyword; ice keyword; multiple categories plausible: ICE, WATER"
+gTwinrovaIcePoolTex,pool,object:object_tw,MEDIUM,"water keyword; ice keyword; multiple categories plausible: ICE, WATER"
+gYdanHasiWaterTex,unknown,object:object_ydan_objects,HIGH,water keyword
+MIZUsin_room_0Tex_00CDF8,unknown,scene:MIZUsin/room0,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_0Tex_00D5F8,unknown,scene:MIZUsin/room0,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_0Tex_00DDF8,unknown,scene:MIZUsin/room0,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_0Tex_00E5F8,unknown,scene:MIZUsin/room0,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_0Tex_00EDF8,unknown,scene:MIZUsin/room0,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_0Tex_00F5F8,unknown,scene:MIZUsin/room0,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_0Tex_00FDF8,unknown,scene:MIZUsin/room0,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_0Tex_0105F8,unknown,scene:MIZUsin/room0,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_0Tex_010DF8,unknown,scene:MIZUsin/room0,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_0Tex_0115F8,unknown,scene:MIZUsin/room0,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_0Tex_011DF8,unknown,scene:MIZUsin/room0,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_0Tex_0125F8,unknown,scene:MIZUsin/room0,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_0Tex_012DF8,unknown,scene:MIZUsin/room0,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_0Tex_0135F8,unknown,scene:MIZUsin/room0,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_0Tex_013DF8,unknown,scene:MIZUsin/room0,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_0Tex_0145F8,unknown,scene:MIZUsin/room0,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_0Tex_015428,unknown,scene:MIZUsin/room0,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior); IA format (ia16) carries alpha -> transparency/alpha-test likely
+MIZUsin_room_10Tex_003870,unknown,scene:MIZUsin/room10,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_10Tex_004070,unknown,scene:MIZUsin/room10,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_10Tex_004870,unknown,scene:MIZUsin/room10,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_10Tex_005070,unknown,scene:MIZUsin/room10,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_10Tex_005870,unknown,scene:MIZUsin/room10,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_11Tex_002220,unknown,scene:MIZUsin/room11,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_11Tex_002A20,unknown,scene:MIZUsin/room11,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_11Tex_003220,unknown,scene:MIZUsin/room11,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_11Tex_003A20,unknown,scene:MIZUsin/room11,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_11Tex_004220,unknown,scene:MIZUsin/room11,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_12Tex_0039C8,unknown,scene:MIZUsin/room12,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_12Tex_0041C8,unknown,scene:MIZUsin/room12,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_12Tex_0049C8,unknown,scene:MIZUsin/room12,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_12Tex_0051C8,unknown,scene:MIZUsin/room12,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_12Tex_006628,unknown,scene:MIZUsin/room12,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior); IA format (ia16) carries alpha -> transparency/alpha-test likely
+MIZUsin_room_13Tex_0001F8,unknown,scene:MIZUsin/room13,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_14Tex_003680,unknown,scene:MIZUsin/room14,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_14Tex_003E80,unknown,scene:MIZUsin/room14,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_14Tex_004680,unknown,scene:MIZUsin/room14,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_14Tex_004E80,unknown,scene:MIZUsin/room14,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_14Tex_005680,unknown,scene:MIZUsin/room14,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_14Tex_005E80,unknown,scene:MIZUsin/room14,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_14Tex_006680,unknown,scene:MIZUsin/room14,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_15Tex_002C68,unknown,scene:MIZUsin/room15,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_15Tex_003468,unknown,scene:MIZUsin/room15,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_15Tex_003C68,unknown,scene:MIZUsin/room15,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_15Tex_004468,unknown,scene:MIZUsin/room15,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_15Tex_004C68,unknown,scene:MIZUsin/room15,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_15Tex_005468,unknown,scene:MIZUsin/room15,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_15Tex_005C68,unknown,scene:MIZUsin/room15,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_15Tex_006468,unknown,scene:MIZUsin/room15,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_15Tex_006C68,unknown,scene:MIZUsin/room15,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_16Tex_001330,unknown,scene:MIZUsin/room16,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_16Tex_001B30,unknown,scene:MIZUsin/room16,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_16Tex_002330,unknown,scene:MIZUsin/room16,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_16Tex_002B30,unknown,scene:MIZUsin/room16,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_16Tex_003330,unknown,scene:MIZUsin/room16,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_17Tex_005AA8,unknown,scene:MIZUsin/room17,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_17Tex_0062A8,unknown,scene:MIZUsin/room17,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_17Tex_006AA8,unknown,scene:MIZUsin/room17,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_17Tex_0072A8,unknown,scene:MIZUsin/room17,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_17Tex_007AA8,unknown,scene:MIZUsin/room17,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_17Tex_0082A8,unknown,scene:MIZUsin/room17,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_18Tex_0018F8,unknown,scene:MIZUsin/room18,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_18Tex_0020F8,unknown,scene:MIZUsin/room18,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_18Tex_0028F8,unknown,scene:MIZUsin/room18,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_18Tex_0030F8,unknown,scene:MIZUsin/room18,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_18Tex_0038F8,unknown,scene:MIZUsin/room18,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_19Tex_001130,unknown,scene:MIZUsin/room19,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_19Tex_001930,unknown,scene:MIZUsin/room19,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_19Tex_002130,unknown,scene:MIZUsin/room19,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_19Tex_002930,unknown,scene:MIZUsin/room19,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_19Tex_003130,unknown,scene:MIZUsin/room19,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_1Tex_0059D0,unknown,scene:MIZUsin/room1,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_1Tex_0061D0,unknown,scene:MIZUsin/room1,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_1Tex_0069D0,unknown,scene:MIZUsin/room1,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_1Tex_0071D0,unknown,scene:MIZUsin/room1,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_1Tex_0079D0,unknown,scene:MIZUsin/room1,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_1Tex_0081D0,unknown,scene:MIZUsin/room1,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_1Tex_0089D0,unknown,scene:MIZUsin/room1,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_1Tex_0091D0,unknown,scene:MIZUsin/room1,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_1Tex_0099D0,unknown,scene:MIZUsin/room1,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_20Tex_003040,unknown,scene:MIZUsin/room20,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_20Tex_003840,unknown,scene:MIZUsin/room20,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_20Tex_004040,unknown,scene:MIZUsin/room20,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_20Tex_004840,unknown,scene:MIZUsin/room20,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_20Tex_005040,unknown,scene:MIZUsin/room20,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_20Tex_005840,unknown,scene:MIZUsin/room20,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_20Tex_006040,unknown,scene:MIZUsin/room20,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_21Tex_004360,unknown,scene:MIZUsin/room21,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_21Tex_004B60,unknown,scene:MIZUsin/room21,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_21Tex_005360,unknown,scene:MIZUsin/room21,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_21Tex_005B60,unknown,scene:MIZUsin/room21,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_21Tex_006CA0,unknown,scene:MIZUsin/room21,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior); IA format (ia16) carries alpha -> transparency/alpha-test likely
+MIZUsin_room_22Tex_0044E8,unknown,scene:MIZUsin/room22,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_22Tex_0048E8,unknown,scene:MIZUsin/room22,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_22Tex_0050E8,unknown,scene:MIZUsin/room22,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_22Tex_0058E8,unknown,scene:MIZUsin/room22,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_22Tex_0060E8,unknown,scene:MIZUsin/room22,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_22Tex_0068E8,unknown,scene:MIZUsin/room22,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_22Tex_0070E8,unknown,scene:MIZUsin/room22,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_22Tex_0078E8,unknown,scene:MIZUsin/room22,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_22Tex_0080E8,unknown,scene:MIZUsin/room22,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_22Tex_0088E8,unknown,scene:MIZUsin/room22,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_2Tex_002AB8,unknown,scene:MIZUsin/room2,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_2Tex_0032B8,unknown,scene:MIZUsin/room2,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_2Tex_003AB8,unknown,scene:MIZUsin/room2,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_2Tex_0042B8,unknown,scene:MIZUsin/room2,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_2Tex_004AB8,unknown,scene:MIZUsin/room2,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_2Tex_005488,unknown,scene:MIZUsin/room2,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior); IA format (ia16) carries alpha -> transparency/alpha-test likely
+MIZUsin_room_3Tex_0037B8,unknown,scene:MIZUsin/room3,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_3Tex_003FB8,unknown,scene:MIZUsin/room3,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_3Tex_0047B8,unknown,scene:MIZUsin/room3,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_3Tex_004FB8,unknown,scene:MIZUsin/room3,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_3Tex_0057B8,unknown,scene:MIZUsin/room3,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_3Tex_005FB8,unknown,scene:MIZUsin/room3,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_4Tex_002820,unknown,scene:MIZUsin/room4,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_4Tex_003020,unknown,scene:MIZUsin/room4,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_4Tex_003820,unknown,scene:MIZUsin/room4,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_4Tex_004020,unknown,scene:MIZUsin/room4,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_4Tex_004820,unknown,scene:MIZUsin/room4,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_4Tex_005020,unknown,scene:MIZUsin/room4,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_4Tex_005820,unknown,scene:MIZUsin/room4,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_5Tex_003A48,unknown,scene:MIZUsin/room5,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_5Tex_004248,unknown,scene:MIZUsin/room5,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_5Tex_004A48,unknown,scene:MIZUsin/room5,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_5Tex_005248,unknown,scene:MIZUsin/room5,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_5Tex_005A48,unknown,scene:MIZUsin/room5,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_5Tex_006248,unknown,scene:MIZUsin/room5,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_5Tex_006A48,unknown,scene:MIZUsin/room5,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_5Tex_007248,unknown,scene:MIZUsin/room5,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_5Tex_007A48,unknown,scene:MIZUsin/room5,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_5Tex_008248,unknown,scene:MIZUsin/room5,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_5Tex_008A48,unknown,scene:MIZUsin/room5,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_5Tex_009248,unknown,scene:MIZUsin/room5,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_5Tex_009E38,unknown,scene:MIZUsin/room5,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior); IA format (ia16) carries alpha -> transparency/alpha-test likely
+MIZUsin_room_6Tex_005100,unknown,scene:MIZUsin/room6,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_6Tex_005300,unknown,scene:MIZUsin/room6,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_6Tex_005B00,unknown,scene:MIZUsin/room6,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_6Tex_006300,unknown,scene:MIZUsin/room6,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_6Tex_006500,unknown,scene:MIZUsin/room6,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_6Tex_006700,unknown,scene:MIZUsin/room6,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_6Tex_006900,unknown,scene:MIZUsin/room6,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_6Tex_006B00,unknown,scene:MIZUsin/room6,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_6Tex_007300,unknown,scene:MIZUsin/room6,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_6Tex_007B00,unknown,scene:MIZUsin/room6,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_6Tex_008300,unknown,scene:MIZUsin/room6,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_6Tex_008B00,unknown,scene:MIZUsin/room6,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_6Tex_009300,unknown,scene:MIZUsin/room6,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_6Tex_009B00,unknown,scene:MIZUsin/room6,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_6Tex_00A300,unknown,scene:MIZUsin/room6,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_6Tex_00AB00,unknown,scene:MIZUsin/room6,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_7Tex_002560,unknown,scene:MIZUsin/room7,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_7Tex_002D60,unknown,scene:MIZUsin/room7,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_7Tex_003560,unknown,scene:MIZUsin/room7,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_7Tex_003D60,unknown,scene:MIZUsin/room7,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_7Tex_004560,unknown,scene:MIZUsin/room7,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_7Tex_004D60,unknown,scene:MIZUsin/room7,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_8Tex_005D98,unknown,scene:MIZUsin/room8,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_8Tex_005F98,unknown,scene:MIZUsin/room8,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_8Tex_006198,unknown,scene:MIZUsin/room8,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_8Tex_006998,unknown,scene:MIZUsin/room8,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_8Tex_007198,unknown,scene:MIZUsin/room8,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_8Tex_007398,unknown,scene:MIZUsin/room8,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_8Tex_007598,unknown,scene:MIZUsin/room8,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_8Tex_007D98,unknown,scene:MIZUsin/room8,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_8Tex_008598,unknown,scene:MIZUsin/room8,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_8Tex_008D98,unknown,scene:MIZUsin/room8,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_8Tex_009598,unknown,scene:MIZUsin/room8,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_8Tex_009D98,unknown,scene:MIZUsin/room8,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_8Tex_00A598,unknown,scene:MIZUsin/room8,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_8Tex_00AD98,unknown,scene:MIZUsin/room8,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_8Tex_00B598,unknown,scene:MIZUsin/room8,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_8Tex_00BD98,unknown,scene:MIZUsin/room8,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_8Tex_00C598,unknown,scene:MIZUsin/room8,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_8Tex_00D578,unknown,scene:MIZUsin/room8,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior); IA format (ia16) carries alpha -> transparency/alpha-test likely
+MIZUsin_room_9Tex_0036D8,unknown,scene:MIZUsin/room9,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_9Tex_003ED8,unknown,scene:MIZUsin/room9,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_9Tex_0046D8,unknown,scene:MIZUsin/room9,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_9Tex_004ED8,unknown,scene:MIZUsin/room9,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_9Tex_0056D8,unknown,scene:MIZUsin/room9,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_9Tex_005ED8,unknown,scene:MIZUsin/room9,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_9Tex_0066D8,unknown,scene:MIZUsin/room9,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_9Tex_006ED8,unknown,scene:MIZUsin/room9,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_room_9Tex_0078A8,unknown,scene:MIZUsin/room9,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior); IA format (ia16) carries alpha -> transparency/alpha-test likely
+MIZUsin_sceneTex_013C30,unknown,scene:MIZUsin,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_sceneTex_014430,unknown,scene:MIZUsin,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+MIZUsin_sceneTex_015030,unknown,scene:MIZUsin,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior)
+gWaterTempleDayEntranceTex,unknown,scene:MIZUsin,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior); IA format (ia16) carries alpha -> transparency/alpha-test likely
+gWaterTempleNightEntranceTex,unknown,scene:MIZUsin,LOW,scene texture (offset-named) in MIZUsin; Water Temple predominantly water (scene-level prior); IA format (ia16) carries alpha -> transparency/alpha-test likely

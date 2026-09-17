@@ -1,0 +1,150 @@
+{
+  "_meta": {
+    "task": "MATERIAL_INTELLIGENCE_DATASET_01",
+    "date": "2026-09-17",
+    "read_only": true,
+    "source_root": "source/shipwright/soh/assets",
+    "config": "xml/GC_NMQ_NTSC_U (+headers shared across configs)"
+  },
+  "total_discovered_visual_resources": 24372,
+  "by_resource_type": {
+    "TEXTURE": 12872,
+    "DISPLAY_LIST": 8304,
+    "PALETTE": 421,
+    "GEOMETRY": 74,
+    "ASSET_REF": 2629,
+    "PNG_FILE": 72
+  },
+  "classified_HIGH": 7541,
+  "classified_MEDIUM": 719,
+  "classified_LOW": 16112,
+  "UNKNOWN_category": 15536,
+  "ui_protected": 6102,
+  "emissive_candidates": 358,
+  "water_candidates": 237,
+  "metal_candidates": 163,
+  "category_histogram": {
+    "BONE": 55,
+    "CERAMIC": 87,
+    "CLOTH": 72,
+    "EARTH": 5,
+    "EMISSIVE": 19,
+    "FOLIAGE": 91,
+    "GLASS": 21,
+    "GRASS": 81,
+    "ICE": 80,
+    "LAVA": 87,
+    "LEATHER": 77,
+    "MAGIC": 13,
+    "METAL": 163,
+    "PARTICLE": 82,
+    "SAND": 8,
+    "SKIN": 717,
+    "SKY": 196,
+    "SMOKE": 26,
+    "STONE": 553,
+    "UI_2D": 6068,
+    "UNKNOWN": 15536,
+    "WATER": 237,
+    "WOOD": 98
+  },
+  "category_confidence_matrix": {
+    "BONE": {
+      "MEDIUM": 23,
+      "HIGH": 32
+    },
+    "CERAMIC": {
+      "MEDIUM": 23,
+      "HIGH": 64
+    },
+    "CLOTH": {
+      "HIGH": 60,
+      "MEDIUM": 12
+    },
+    "EARTH": {
+      "HIGH": 3,
+      "MEDIUM": 2
+    },
+    "EMISSIVE": {
+      "MEDIUM": 19
+    },
+    "FOLIAGE": {
+      "MEDIUM": 18,
+      "HIGH": 14,
+      "LOW": 59
+    },
+    "GLASS": {
+      "MEDIUM": 15,
+      "HIGH": 6
+    },
+    "GRASS": {
+      "HIGH": 21,
+      "MEDIUM": 9,
+      "LOW": 51
+    },
+    "ICE": {
+      "HIGH": 16,
+      "MEDIUM": 2,
+      "LOW": 62
+    },
+    "LAVA": {
+      "HIGH": 48,
+      "MEDIUM": 39
+    },
+    "LEATHER": {
+      "MEDIUM": 22,
+      "HIGH": 55
+    },
+    "MAGIC": {
+      "MEDIUM": 13
+    },
+    "METAL": {
+      "MEDIUM": 51,
+      "HIGH": 112
+    },
+    "PARTICLE": {
+      "LOW": 82
+    },
+    "SAND": {
+      "MEDIUM": 7,
+      "HIGH": 1
+    },
+    "SKIN": {
+      "MEDIUM": 74,
+      "HIGH": 643
+    },
+    "SKY": {
+      "HIGH": 196
+    },
+    "SMOKE": {
+      "HIGH": 21,
+      "MEDIUM": 5
+    },
+    "STONE": {
+      "MEDIUM": 5,
+      "HIGH": 70,
+      "LOW": 478
+    },
+    "UI_2D": {
+      "HIGH": 6068
+    },
+    "UNKNOWN": {
+      "LOW": 15193,
+      "MEDIUM": 343
+    },
+    "WATER": {
+      "HIGH": 19,
+      "MEDIUM": 31,
+      "LOW": 187
+    },
+    "WOOD": {
+      "HIGH": 92,
+      "MEDIUM": 6
+    }
+  },
+  "textures_only_counts": {
+    "total": 12944,
+    "low_confidence": 5117,
+    "manual_review_flagged": 4537
+  }
+}
