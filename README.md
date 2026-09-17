@@ -1,42 +1,68 @@
-# Zelda: Ocarina of Time (PC - Ship of Harkinian) — Couch Edition V03.1
+# Zelda: Ocarina of Time (PC - Ship of Harkinian) — Couch Edition V03.1.1
 
-**Ocarina Couch Edition V03.1** es la versión consolidada y definitiva de *Ship of Harkinian* (Ocarina of Time PC) para juego en sala / sofá ("Couch Edition"), integrando **localización completa en Español Latino (ES-419)**, **ciencia de color filmica ACES**, **niebla atmosférica dinámica F3DEX2**, **inteligencia de materiales (1.407 reglas piloto)**, **aislamiento total de la interfaz (100% UI Purity)** y **estabilidad de memoria certificada**.
+**Ocarina Couch Edition V03.1.1** es la versión consolidada y probada en tiempo de ejecución de *Ship of Harkinian* (Ocarina of Time PC) para juego en sala / sofá ("Couch Edition"), integrando **localización completa en Español Latino (ES-419)**, **pipeline de color fílmico ACES en Direct3D 11**, **niebla atmosférica dinámica F3DEX2**, **inteligencia de materiales (1.407 reglas compiladas)**, **aislamiento total de la interfaz** y **estabilidad certificada**.
 
 ---
 
-## 🌟 Novedades de la Versión V03.1 (Master Visual Consolidation)
+## 🌟 Arquitectura Visual y Perfiles en Tiempo de Ejecución
 
-### 🎨 1. Pipeline de Color Fílmico ACES en Espacio Lineal
-- **Tonemapping ACES Fitted (Stephen Hill):** Curva de compresión tonal cinematográfica ejecutada en Direct3D 11 (`TonemapPS.hlsl`).
-- **Rango Dinámico y Contraste:** Preserva detalles en altas luces (sol del mediodía en Hyrule Field, lava del Volcán de la Muerte, haces de luz en el Templo del Tiempo) sin saturación ni "quemado" de canales, manteniendo negros ricos y contraste orgánico.
+### 🎨 Perfil Visual Canónico (`gEnhancements.Graphics.VisualProfile`)
+El motor cuenta con un interruptor canónico y unificado para el perfil visual:
+- **Classic (0):** Renderizado bit-a-bit idéntico a Nintendo 64 / upstream Shipwright 9.1.1 puro (`tonemapPassCount = 0`).
+- **Enhanced (1):** Renderizado con post-procesado fílmico ACES Fitted, niebla atmosférica linealizada y clasificación de materiales activa (`tonemapPassCount > 0`, `atmosphericPassCount > 0`, `materialDrawCallCount > 0`).
 
-### 🌫️ 2. Niebla Atmosférica Dinámica F3DEX2
-- **Extracción Directa de Registros:** Lectura por cuadro de `mRdp->fog_color` y parámetros de profundidad RSP (`fog_mul`, `fog_offset`).
-- **Mezcla en Espacio Lineal:** La niebla nativa del N64 se linealiza ($c^{2.2}$) y se mezcla en el flujo HDR antes del tonemapper ACES, eliminando el "banding" y logrando una atmósfera suave y natural.
+> **Nota de compatibilidad:** El motor incluye una migración automática desde la clave legada `gVisualEnhancements.MasterTonemapping` hacia la canónica `gEnhancements.Graphics.VisualProfile`.
 
-### 🛡️ 3. Aislamiento Total de Interfaz y Texto (`ACES_UI_CONTAMINATION = 0`)
-- **Puntuación $\Delta E_{00} = 0.00$:** Todos los elementos 2D del HUD (Corazones, Barra de Magia, Contador de Rupias, Botones A/B/C/D-Pad), cajas de diálogo y el menú ImGui se renderizan **después** del pase de tonemapping.
-- Cero pérdida de contraste, opacidad o alteración cromática en la interfaz de usuario.
+### 🌫️ Niebla Atmosférica Dinámica F3DEX2
+- Extracción directa en cada cuadro de los registros de niebla del RDP (`mRdp->fog_color`) y parámetros de profundidad RSP (`fog_mul`, `fog_offset`).
+- Mezcla linealizada en espacio HDR antes del tonemapping ACES para evitar artefactos de banding.
 
-### 🧱 4. Motor de Inteligencia de Materiales (Piloto de 1.407 Reglas)
-- **Inventario Exhaustivo de 24.372 Recursos:** 100% de los recursos visuales analizados y clasificados.
-- **6.102 Texturas con Protección UI:** Enrutadas de forma estricta como `PROTECTED_2D`.
-- **1.407 Reglas Piloto Compiladas:** Tabla estática hash CRC64 (`MaterialRulesPilot.h`) con búsqueda $O(1)$ en caché y $O(\log N)$ binaria fallback (tiempo de consulta $< 0.02\,\mu\text{s}$).
-- **Clasificación PBR-Lite:** Auditoría honesta certificada como `METADATA_ONLY` (propiedades de rugosidad, metalicidad y emisividad disponibles en memoria para pases futuros).
+### 🛡️ Aislamiento de Interfaz de Usuario
+- Todos los elementos 2D (HUD, corazones, magia, rupias, botones y diálogos) se dibujan después del pase de postprocesado para garantizar máxima legibilidad y cero contaminación cromática.
 
-### ⚡ 5. Blindaje de Direct3D 11 & Rendimiento
-- **Eliminación de Conflictos OM:** Desvinculación explícita del Depth-Stencil View (DSV) durante el pase de postprocesado para erradicar avisos de peligro en el driver.
-- **Zero Allocations per Frame:** Estados de renderizado (`RasterizerState`, `DepthStencilState`, `BlendState`) preasignados en `Init()`.
-- **60.0 FPS Sólidos:** Costo de GPU del pase de tonemapping $< 0.082\,\text{ms}$.
+### 🧱 Clasificación de Materiales e Inteligencia de Superficies
+- **1.407 Reglas Piloto Compiladas (`MaterialRulesPilot.h`):** Búsqueda binaria indexada por hash de estado de tubería.
+- **PBR-Lite:** Estado actual auditado: **`METADATA_ONLY`**. Las propiedades de rugosidad, metalicidad y emisividad están clasificadas en memoria en el `MaterialRegistry` para consumo futuro; no se declara sombreado PBR activo en pantalla en esta versión.
 
 ---
 
 ## 🌎 Localización Español Latino (ES-419)
 
-- **2.116 Mensajes Traducidos & Verificados:** Diálogos del juego base, misiones secundarias, pistas y descripciones de objetos con correspondencia 100% fiel a los eventos y estructuras de control NTSC.
-- **Tokens de Elección Nativos:** Implementación de opcodes binarios nativos de OoT (`0x1B` TWO_CHOICE y `0x1C` THREE_CHOICE).
-- **Tipografía Auténtica de Nintendo (11 Glifos I4):** Letras con tildes (`á, é, í, ó, ú, Á, Í, Ó, Ú`), `ñ`, `Ñ` y signos de apertura (`¡`, `¿`) extraídos y adaptados directamente desde la fuente original N64, con paleta de antialiasing nativa y dimensiones 16x16 I4 (128 bytes).
-- **Kerning Proporcional:** Tabla `sCharWidths` ajustada para eliminar espacios indeseados.
+- **2.116 Mensajes Traducidos & Verificados:** Diálogos, descripciones, objetos y cinemáticas en español latino.
+- **Opcodes de Decisión Nativos:** Soporte para selección binaria nativa (`0x1B` TWO_CHOICE y `0x1C` THREE_CHOICE).
+- **Tipografía Auténtica de Nintendo (11 Glifos I4):** Tildes, eñes y signos de interrogación/exclamación integrados con antialiasing nativo.
+- **Alcance de la Traducción:**
+  - Los textos y diálogos de la historia y del mundo dentro del juego están 100% en español latino.
+  - La barra de menús de configuración de Ship of Harkinian (tecla F1 / ImGui) permanece en inglés por diseño upstream.
+  - El mod `es.o2r` es retrocompatible con compilaciones estándar de Ship of Harkinian (proporcionando traducción de diálogos) y se integra nativamente en el runtime completo de Couch Edition V03.1.1.
+
+---
+
+## 🚀 Opciones de Uso e Instalación
+
+### Opción A: Paquete Precompilado (`V03_1_1_RUNTIME`)
+Si dispones del paquete precompilado de Couch Edition:
+1. Copia tu archivo **`oot.o2r`** (generado con tu ROM legítima de N64) dentro de la carpeta del juego junto a `soh.exe`, `soh.o2r`, `es.o2r`, `shipofharkinian.json` y `gamecontrollerdb.txt`.
+2. Ejecuta **`soh.exe`**.
+3. Para alternar el perfil visual:
+   - Presiona **F1** para abrir la barra de menús.
+   - Dirígete a:
+     ```
+     Settings -> Graphics -> Visual Profile
+     ```
+   - Selecciona **Classic** o **Enhanced**.
+
+### Opción B: Compilación desde Código Fuente Mediante Parches
+Aplica los dos parches canónicos sobre los commits fijados:
+1. **Shipwright** (`commit 4aaad850bd5540cd77c2d83f3ad348d3b38605b2`):
+   ```bash
+   git apply patches/shipwright_couch_edition_v03_1_1.patch
+   ```
+2. **libultraship** (`commit 17a0b7939bd05f5e617cef89457ca43774fc9a9f`):
+   ```bash
+   git apply patches/libultraship_couch_edition_v03_1_1.patch
+   ```
+3. Compilar usando Visual Studio 2022 con el entorno vcpkg fijado.
 
 ---
 
@@ -44,50 +70,45 @@
 
 ```
 zel-da-OFT-esp/
-├── es.o2r                                  # Archivo de mod listo para jugar (Couch Edition V03.1 / RC1.1)
+├── es.o2r                                        # Archivo O2R de textos y glifos en español latino
 ├── data/
-│   ├── spa_message_data_static             # Tabla binaria canónica de mensajes (243.018 bytes)
-│   └── glyphs/                             # Texturas binarias I4 16x16 de los 11 glifos auténticos
+│   ├── spa_message_data_static                   # Tabla binaria canónica de mensajes
+│   └── glyphs/                                   # Texturas binarias I4 de glifos
 ├── docs/
-│   ├── RELEASE_NOTES_V03_1.md              # Notas completas de la versión V03.1 Master
-│   ├── V03_1_MANIFEST.json                 # Manifiesto técnico con hashes SHA-256 e invariantes
-│   └── v03_1/                              # 25 Reportes de consolidación, paridad y pipelines
+│   ├── RELEASE_NOTES_V03_1.md                    # Notas de lanzamiento
+│   └── v03_1/                                    # Documentación técnica y auditorías
 ├── patches/
-│   ├── shipwright_couch_edition_v03_1.patch   # Parche V03.1 para Shipwright
-│   ├── libultraship_couch_edition_v03_1.patch # Parche V03.1 para LibUltraShip (ACES + Materiales)
-│   ├── shipwright_es419.patch                 # Parche base ES-419
-│   └── libultraship_couch_edition_rc1_1.patch # Parche RC1.1
+│   ├── shipwright_couch_edition_v03_1_1.patch    # Parche canónico V03.1.1 para Shipwright
+│   ├── libultraship_couch_edition_v03_1_1.patch  # Parche canónico V03.1.1 para libultraship
+│   └── legacy/                                   # Parches históricos de versiones previas
 ├── tools/
-│   ├── generate_material_pilot.py          # Generador de MaterialRulesPilot.h desde datasets
-│   ├── test_v03_1_runtime.py               # Suite automatizada de pruebas de arranque y regresión
-│   ├── generate_authentic_spanish_glyphs.py# Extractor de glifos desde la ROM original
-│   └── rebuild_spanish_archive.py          # Empaquetador reproducible de es.o2r
+│   ├── test_v03_1_1_runtime.py                   # Suite de verificación runtime con diagnósticos
+│   ├── export_v03_1_1_patches.py                 # Generador canónico de parches UTF-8 LF
+│   └── package_v03_1_1.py                        # Empaquetador local del runtime
 └── README.md
 ```
 
 ---
 
-## 🚀 Instalación Rápida
+## 🧪 Validación en Tiempo de Ejecución (Evidencia Real)
 
-1. Descarga el archivo **`es.o2r`** (SHA256: `D9037A8A4086D0073F90CC297FCBFE558A78AC3758F27B11A250537883FD990D`).
-2. Cópialo en la carpeta raíz de tu instalación de **Ship of Harkinian** (junto a `oot.o2r` y `soh.exe`) o dentro de la subcarpeta `mods/`.
-3. Inicia el juego con mando (perfil Couch preconfigurado con asignaciones ergonómicas).
-4. En el menú de configuración de Ship of Harkinian (**F1** o menú Couch):
-   - **Idioma:** Selecciona **Español** en `Settings -> Audio / General`.
-   - **Mejoras Visuales:** Activa **Master Tonemapping** en `Settings -> Enhancements -> Visuals` para disfrutar del color ACES y niebla dinámica.
-5. ¡Disfruta de la mejor experiencia de Ocarina of Time en PC!
+Resultados certificados en ejecución real mediante `tools/test_v03_1_1_runtime.py`:
 
----
-
-## 🧪 Pruebas y Validación Automatizada
-
-La versión V03.1 cuenta con certificación 100% automatizada:
-- **Visual QA Suite:** 40/40 pruebas superadas (`tools/visual_qa/tests/test_visual_qa.py`).
-- **Runtime Validation Suite:** 5/5 pruebas superadas (Arranque Clásico, Arranque Mejorado, Estrés de alternancia, Fallback en caliente ante ausencia de archivos, Integridad de archivos de guardado `.sav`).
+| Parámetro / Métrica | Modo Classic | Modo Enhanced | Estado |
+|---|---|---|---|
+| Perfil Visual Real | `0` | `1` | PASS |
+| Tonemap Passes | `0` | `> 0` (301 medidos) | PASS |
+| Atmospheric Passes | `0` | `> 0` (301 medidos) | PASS |
+| Material Draw Calls | N/A | `> 0` (6.536 medidos) | PASS |
+| Reglas de Materiales | 1.407 cargadas | 1.407 cargadas | PASS |
+| Montaje de `es.o2r` | YES | YES | PASS |
+| Carga de Tabla Español | YES | YES | PASS |
+| Rendimiento Medido | NOT_MEASURED (en este entorno) | NOT_MEASURED (en este entorno) | INFORMATIVO |
+| PBR-Lite | METADATA_ONLY | METADATA_ONLY | CERTIFICADO |
 
 ---
 
 ## 👤 Créditos
 
 - **Proyecto Base:** [Ship of Harkinian / HarbourMasters](https://github.com/HarbourMasters/Shipwright)
-- **Localización ES-419, Arquitectura de Estabilidad & Visual Consolidation:** Daniel Aguilar & Equipo Couch Edition
+- **Localización ES-419, Arquitectura Visual & Couch Edition:** Daniel Aguilar & Colaboradores

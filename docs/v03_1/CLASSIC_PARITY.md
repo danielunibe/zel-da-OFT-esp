@@ -17,8 +17,8 @@ A fundamental requirement of Ocarina Couch Edition V03.1 is that **Classic Mode*
 
 ### 2.1 Complete Bypass Mechanism
 In `interpreter.cpp` and `gfx_direct3d11.cpp`:
-- `CVarGetInteger("gVisualEnhancements.MasterTonemapping", 0)` controls post-process activation.
-- In **Classic Mode** (`MasterTonemapping == 0`):
+- `CVarGetInteger("gEnhancements.Graphics.VisualProfile", 0)` controls post-process activation (with backward compatibility migration for legacy `gVisualEnhancements.MasterTonemapping`).
+- In **Classic Mode** (`VisualProfile == 0`):
   1. `RunTonemappingPass` returns immediately at line 1 (`if (!CVarGetInteger(...)) return;`).
   2. The D3D11 backbuffer receives directly rasterized polygons from the F3DEX2 Color Combiner.
   3. No intermediate fullscreen quad is rendered.

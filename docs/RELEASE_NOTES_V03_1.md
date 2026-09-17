@@ -41,7 +41,7 @@ Ocarina Couch Edition V03.1 represents the unified master release consolidating 
 
 ## 3. Preservation & Compatibility
 
-- **Classic Mode Parity:** When disabled (`gVisualEnhancements.MasterTonemapping = 0`), the engine operates bit-for-bit identical to upstream Shipwright 9.1.1.
+- **Classic Mode Parity:** When disabled (`gEnhancements.Graphics.VisualProfile = 0`), the engine operates bit-for-bit identical to upstream Shipwright 9.1.1 (legacy key `gVisualEnhancements.MasterTonemapping` is migrated automatically).
 - **Save Integrity:** Save files (`file2.sav`, `file3.sav`, `global.sav`) load seamlessly without modification.
 - **Spanish Localization:** Full support for `es.o2r` language pack with perfect font clarity.
 - **Couch Comfort:** Gamepad navigation, rumble feedback, and couch overlays fully preserved.

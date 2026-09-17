@@ -28,20 +28,24 @@ def run_test():
 
     results = {}
 
-    def set_master_tonemapping(val):
+    def set_visual_profile(val):
         with open(json_path, "r", encoding="utf-8") as f:
             data = json.load(f)
         if "CVars" not in data:
             data["CVars"] = {}
-        if not isinstance(data["CVars"].get("gVisualEnhancements"), dict):
-            data["CVars"]["gVisualEnhancements"] = {}
-        data["CVars"]["gVisualEnhancements"]["MasterTonemapping"] = val
+        if not isinstance(data["CVars"].get("gEnhancements"), dict):
+            data["CVars"]["gEnhancements"] = {}
+        if not isinstance(data["CVars"]["gEnhancements"].get("Graphics"), dict):
+            data["CVars"]["gEnhancements"]["Graphics"] = {}
+        data["CVars"]["gEnhancements"]["Graphics"]["VisualProfile"] = val
+        if "gVisualEnhancements" in data["CVars"]:
+            del data["CVars"]["gVisualEnhancements"]
         with open(json_path, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=4)
 
     # 1. CLASSIC MODE BOOT TEST
-    print("\n[TEST 1] Testing Classic Mode Boot (MasterTonemapping = 0)...")
-    set_master_tonemapping(0)
+    print("\n[TEST 1] Testing Classic Mode Boot (VisualProfile = 0)...")
+    set_visual_profile(0)
     proc = subprocess.Popen([exe_path], cwd=runtime_dir)
     time.sleep(5)
     poll_res = proc.poll()
@@ -58,8 +62,8 @@ def run_test():
         results["ClassicBoot"] = "FAIL"
 
     # 2. ENHANCED MODE BOOT TEST
-    print("\n[TEST 2] Testing Enhanced Mode Boot (MasterTonemapping = 1)...")
-    set_master_tonemapping(1)
+    print("\n[TEST 2] Testing Enhanced Mode Boot (VisualProfile = 1)...")
+    set_visual_profile(1)
     proc = subprocess.Popen([exe_path], cwd=runtime_dir)
     time.sleep(5)
     poll_res = proc.poll()
@@ -80,7 +84,7 @@ def run_test():
     toggle_pass = True
     for i in range(1, 4):
         mode = i % 2
-        set_master_tonemapping(mode)
+        set_visual_profile(mode)
         p = subprocess.Popen([exe_path], cwd=runtime_dir)
         time.sleep(3)
         if p.poll() is not None:
@@ -135,7 +139,7 @@ def run_test():
     results["SaveIntegrity"] = "PASS" if save_match else "FAIL"
 
     # Reset default to Enhanced Mode = 1
-    set_master_tonemapping(1)
+    set_visual_profile(1)
 
     print("\n=== SUMMARY RESULTS ===")
     for k, v in results.items():

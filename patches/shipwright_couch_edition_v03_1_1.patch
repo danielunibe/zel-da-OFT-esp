@@ -1,0 +1,1470 @@
+diff --git a/.gitignore b/.gitignore
+index 2b7352d9..f0a74ff8 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -413,6 +413,20 @@ ReleaseObj/*
+ tags
+ *.otr
+ *.o2r
++
++# Couch Edition local/private exclusions
++rom.n64
++Save/
++Randomizer/
++logs/
++crash-dumps/
++screenshots/
++*.dmp
++navi-memory/
++ollama/
++downloads/
++.env
++.env.*
+ *.sav
+ shipofharkinian.ini
+ shipofharkinian.json
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 9608da56..fc75a7a9 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -11,6 +11,10 @@ include(CMake/soh-cvars.cmake)
+ include(CMake/lus-cvars.cmake)
+ include(CMake/logging.cmake)
+ 
++if(MSVC)
++    add_compile_options(/FS)
++endif()
++
+ option(SUPPRESS_WARNINGS "Suppress warnings in LUS and src (decomp)" ON)
+ if(SUPPRESS_WARNINGS)
+     MESSAGE("Suppressing warnings in LUS and src")
+diff --git a/soh/assets/custom/textures/buttons/LTBtn.i4.png b/soh/assets/custom/textures/buttons/LTBtn.i4.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..f85bc1d0205c95005eba1b7363d6974bed2d432d
+GIT binary patch
+literal 193
+zcmeAS@N?(olHy`uVBq!ia0vp^0wB!61SBU+%rFB|9iA?ZAr*7ZPCUqaSb@jYK2R)y
+zHS7eJWS3xqnlaOwr2Yvj6eMS9xlFBkVZDI=(`G>lhHBRDOT6w2Uo>p(sM@-9+RW!n
+z#@T-tos<wxzGBnVsMoXQ7=sgst__FqG<)$q-{+q%O1wIySWJ*1_v+*+lZw|#$Jfv4
+sm=d(E`MxA~-1WO!#Sb^Wd~d;c<>jp1kIGMf2fB&D)78&qol`;+08!sa{r~^~
+
+literal 0
+HcmV?d00001
+
+diff --git a/soh/include/glyph_resolver.h b/soh/include/glyph_resolver.h
+new file mode 100644
+index 00000000..9c86873b
+--- /dev/null
++++ b/soh/include/glyph_resolver.h
+@@ -0,0 +1,12 @@
++#pragma once
++
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++/* Returns the active Player 1 Z glyph resource, or NULL for classic fallback. */
++const char* GlyphResolver_GetZTexture(void);
++
++#ifdef __cplusplus
++}
++#endif
+diff --git a/soh/include/z64.h b/soh/include/z64.h
+index 70b877f3..c8de23c6 100644
+--- a/soh/include/z64.h
++++ b/soh/include/z64.h
+@@ -541,9 +541,20 @@ typedef enum {
+     LANGUAGE_GER,
+     LANGUAGE_FRA,
+     LANGUAGE_JPN,
++    LANGUAGE_ESP, // Couch Edition [L03B1]: Neutral Latin American Spanish (es-419)
+     LANGUAGE_MAX
+ } Language;
+ 
++#define Language_GetPal3Index(lang) (((lang) == LANGUAGE_GER) ? LANGUAGE_GER : (((lang) == LANGUAGE_FRA) ? LANGUAGE_FRA : LANGUAGE_ENG))
++#define Language_GetLegacy4Index(lang) (((lang) == LANGUAGE_GER) ? LANGUAGE_GER : (((lang) == LANGUAGE_FRA) ? LANGUAGE_FRA : (((lang) == LANGUAGE_JPN) ? LANGUAGE_JPN : LANGUAGE_ENG)))
++
++// Legacy fallback helper (maps to safe PAL3 index)
++#define LANGUAGE_ARRAY_INDEX(lang) Language_GetPal3Index(lang)
++
++bool OTRMessage_IsSpanishAvailable(void);
++const char* Spanish_GetFontTexture(u8 character);
++f32 Ship_GetCharFontWidth(u8 character);
++
+ #define TODO_TRANSLATE "TranslateThis" 
+ 
+ // TODO get these properties from the textures themselves
+diff --git a/soh/soh/Enhancements/FileSelectEnhancements.cpp b/soh/soh/Enhancements/FileSelectEnhancements.cpp
+index d2671f20..5217382c 100644
+--- a/soh/soh/Enhancements/FileSelectEnhancements.cpp
++++ b/soh/soh/Enhancements/FileSelectEnhancements.cpp
+@@ -63,5 +63,9 @@ std::array<std::string, LANGUAGE_MAX> RandomizerSettingsMenuText[RSM_MAX] = {
+ };
+ 
+ const char* SohFileSelect_GetSettingText(uint8_t optionIndex, uint8_t language) {
+-    return RandomizerSettingsMenuText[optionIndex][language].c_str();
++    uint8_t safeLang = LANGUAGE_ARRAY_INDEX(language);
++    if (safeLang >= 3 || RandomizerSettingsMenuText[optionIndex][safeLang].empty()) {
++        safeLang = LANGUAGE_ENG;
++    }
++    return RandomizerSettingsMenuText[optionIndex][safeLang].c_str();
+ }
+diff --git a/soh/soh/Enhancements/boss-rush/BossRush.cpp b/soh/soh/Enhancements/boss-rush/BossRush.cpp
+index c74f9dfa..42ebf3d3 100644
+--- a/soh/soh/Enhancements/boss-rush/BossRush.cpp
++++ b/soh/soh/Enhancements/boss-rush/BossRush.cpp
+@@ -178,11 +178,19 @@ BossRushSetting BossRushOptions[BR_OPTIONS_MAX] = {
+ };
+ 
+ const char* BossRush_GetSettingName(u8 optionIndex, u8 language) {
+-    return BossRushOptions[optionIndex].name[language].c_str();
++    u8 safeLang = LANGUAGE_ARRAY_INDEX(language);
++    if (safeLang >= 3 || BossRushOptions[optionIndex].name[safeLang].empty()) {
++        safeLang = LANGUAGE_ENG;
++    }
++    return BossRushOptions[optionIndex].name[safeLang].c_str();
+ }
+ 
+ const char* BossRush_GetSettingChoiceName(u8 optionIndex, u8 choiceIndex, u8 language) {
+-    return BossRushOptions[optionIndex].choices[choiceIndex][language].c_str();
++    u8 safeLang = LANGUAGE_ARRAY_INDEX(language);
++    if (safeLang >= 3 || BossRushOptions[optionIndex].choices[choiceIndex][safeLang].empty()) {
++        safeLang = LANGUAGE_ENG;
++    }
++    return BossRushOptions[optionIndex].choices[choiceIndex][safeLang].c_str();
+ }
+ 
+ u8 BossRush_GetSettingOptionsAmount(u8 optionIndex) {
+@@ -846,7 +854,11 @@ void BossRush_OnVanillaBehaviorHandler(GIVanillaBehavior id, bool* should, va_li
+         // Show "No" twice because the player can't continue.
+         case VB_RENDER_YES_ON_CONTINUE_PROMPT: {
+             Gfx** disp = va_arg(args, Gfx**);
+-            *disp = KaleidoScope_QuadTextureIA8(*disp, sSavePromptNoChoiceTexs[gSaveContext.language], 48, 16, 12);
++            u8 safeLang = LANGUAGE_ARRAY_INDEX(gSaveContext.language);
++            if (safeLang >= 3) {
++                safeLang = LANGUAGE_ENG;
++            }
++            *disp = KaleidoScope_QuadTextureIA8(*disp, sSavePromptNoChoiceTexs[safeLang], 48, 16, 12);
+             *should = false;
+             break;
+         }
+diff --git a/soh/soh/Enhancements/custom-message/CustomMessageManager.cpp b/soh/soh/Enhancements/custom-message/CustomMessageManager.cpp
+index 0ebba19e..3fe5f07a 100644
+--- a/soh/soh/Enhancements/custom-message/CustomMessageManager.cpp
++++ b/soh/soh/Enhancements/custom-message/CustomMessageManager.cpp
+@@ -115,10 +115,9 @@ typedef struct {
+ extern "C" MessageTableEntry* sNesMessageEntryTablePtr;
+ extern "C" MessageTableEntry* sGerMessageEntryTablePtr;
+ extern "C" MessageTableEntry* sFraMessageEntryTablePtr;
++extern "C" MessageTableEntry* sSpaMessageEntryTablePtr;
+ 
+ CustomMessage CustomMessage::LoadVanillaMessageTableEntry(uint16_t textId) {
+-    const char* foundSeg;
+-    const char* nextSeg;
+     MessageTableEntry* msgEntry = sNesMessageEntryTablePtr;
+     u16 bufferId = textId;
+     CustomMessage msg;
+@@ -126,18 +125,38 @@ CustomMessage CustomMessage::LoadVanillaMessageTableEntry(uint16_t textId) {
+         msgEntry = sGerMessageEntryTablePtr;
+     } else if (gSaveContext.language == LANGUAGE_FRA) {
+         msgEntry = sFraMessageEntryTablePtr;
++    } else if (gSaveContext.language == LANGUAGE_ESP) {
++        msgEntry = sSpaMessageEntryTablePtr;
++    }
++    if (msgEntry == nullptr) {
++        msgEntry = sNesMessageEntryTablePtr;
++    }
++    if (msgEntry != nullptr) {
++        MessageTableEntry* curr = msgEntry;
++        while (curr->textId != 0xFFFF) {
++            if (curr->textId == bufferId) {
++                TextBoxPosition position = static_cast<TextBoxPosition>(curr->typePos & 0xF);
++                TextBoxType type = static_cast<TextBoxType>(curr->typePos >> 4);
++                std::string message = std::string(curr->segment, curr->msgSize);
++                msg = CustomMessage(message, type, position);
++                return msg;
++            }
++            curr++;
++        }
+     }
+-    while (msgEntry->textId != 0xFFFF) {
+-        if (msgEntry->textId == bufferId) {
+-            TextBoxPosition position = static_cast<TextBoxPosition>(msgEntry->typePos & 0xF);
+-            TextBoxType type = static_cast<TextBoxType>(msgEntry->typePos >> 4);
+-            // uint8_t icon = msgEntry->segment[1];
+-            std::string message = std::string(msgEntry->segment, msgEntry->msgSize);
+-            msg = CustomMessage(message, type, position);
+-            // msg.Format(static_cast<ItemID>(icon));
+-            return msg;
++    // Fallback to English vanilla table if missing or not found in localized table
++    if (msgEntry != sNesMessageEntryTablePtr && sNesMessageEntryTablePtr != nullptr) {
++        MessageTableEntry* curr = sNesMessageEntryTablePtr;
++        while (curr->textId != 0xFFFF) {
++            if (curr->textId == bufferId) {
++                TextBoxPosition position = static_cast<TextBoxPosition>(curr->typePos & 0xF);
++                TextBoxType type = static_cast<TextBoxType>(curr->typePos >> 4);
++                std::string message = std::string(curr->segment, curr->msgSize);
++                msg = CustomMessage(message, type, position);
++                return msg;
++            }
++            curr++;
+         }
+-        msgEntry++;
+     }
+     return CustomMessage();
+ }
+@@ -154,13 +173,35 @@ const std::string CustomMessage::GetFrench(MessageFormat format) const {
+     return GetForLanguage(LANGUAGE_FRA, format);
+ }
+ 
++const std::string CustomMessage::GetSpanish(MessageFormat format) const {
++    return GetForLanguage(LANGUAGE_ESP, format);
++}
++
+ const std::string CustomMessage::GetForCurrentLanguage(MessageFormat format) const {
+     return GetForLanguage(
+         ((Language)gSaveContext.language == LANGUAGE_JPN) ? LANGUAGE_ENG : (Language)gSaveContext.language, format);
+ }
+ 
+ const std::string CustomMessage::GetForLanguage(uint8_t language, MessageFormat format) const {
+-    std::string output = !messages[language].starts_with(TODO_TRANSLATE) ? messages[language] : messages[LANGUAGE_ENG];
++    std::string output;
++    if (language < messages.size() && !messages[language].empty() && !messages[language].starts_with(TODO_TRANSLATE)) {
++        output = messages[language];
++    } else if (LANGUAGE_ENG < messages.size() && !messages[LANGUAGE_ENG].empty() && !messages[LANGUAGE_ENG].starts_with(TODO_TRANSLATE)) {
++        // Fallback to English
++        output = messages[LANGUAGE_ENG];
++    } else {
++        // Safe fallback to first non-empty translated message or first available
++        output = "";
++        for (const auto& msg : messages) {
++            if (!msg.empty() && !msg.starts_with(TODO_TRANSLATE)) {
++                output = msg;
++                break;
++            }
++        }
++        if (output.empty() && !messages.empty()) {
++            output = messages[0];
++        }
++    }
+     ProcessMessageFormat(output, format);
+     return output;
+ }
+@@ -213,35 +254,44 @@ const TextBoxPosition& CustomMessage::GetTextBoxPosition() const {
+ }
+ 
+ CustomMessage CustomMessage::operator+(const CustomMessage& right) const {
+-    std::vector<std::string> newColors = colors;
++    CustomMessage result = *this;
++    for (size_t l = 0; l < result.messages.size(); l++) {
++        std::string leftStr = GetForLanguage((uint8_t)l, MF_RAW);
++        std::string rightStr = right.GetForLanguage((uint8_t)l, MF_RAW);
++        result.messages[l] = leftStr + rightStr;
++    }
+     std::vector<std::string> rColors = right.GetColors();
+     for (auto color : rColors) {
+-        newColors.push_back(color);
++        result.colors.push_back(color);
+     }
+-    std::vector<bool> newCapital = capital;
+-    newCapital.insert(newCapital.end(), right.GetCapital().begin(), right.GetCapital().end());
+-    return CustomMessage(messages[LANGUAGE_ENG] + right.GetEnglish(MF_RAW),
+-                         messages[LANGUAGE_GER] + right.GetGerman(MF_RAW),
+-                         messages[LANGUAGE_FRA] + right.GetFrench(MF_RAW), newColors, newCapital, type, position);
++    result.capital.insert(result.capital.end(), right.GetCapital().begin(), right.GetCapital().end());
++    return result;
+ }
+ 
+ CustomMessage CustomMessage::operator+(const std::string& right) const {
+-    return CustomMessage(messages[LANGUAGE_ENG] + right, messages[LANGUAGE_GER] + right,
+-                         messages[LANGUAGE_FRA] + right);
++    CustomMessage result = *this;
++    for (size_t l = 0; l < result.messages.size(); l++) {
++        std::string leftStr = GetForLanguage((uint8_t)l, MF_RAW);
++        result.messages[l] = leftStr + right;
++    }
++    return result;
+ }
+ 
+ void CustomMessage::operator+=(const CustomMessage& right) {
+-    messages[LANGUAGE_ENG] += right.GetEnglish(MF_RAW);
+-    messages[LANGUAGE_GER] += right.GetGerman(MF_RAW);
+-    messages[LANGUAGE_FRA] += right.GetFrench(MF_RAW);
++    for (size_t l = 0; l < messages.size(); l++) {
++        std::string leftStr = GetForLanguage((uint8_t)l, MF_RAW);
++        std::string rightStr = right.GetForLanguage((uint8_t)l, MF_RAW);
++        messages[l] = leftStr + rightStr;
++    }
+     colors.insert(colors.end(), right.GetColors().begin(), right.GetColors().end());
+     capital.insert(capital.end(), right.GetCapital().begin(), right.GetCapital().end());
+ }
+ 
+ void CustomMessage::operator+=(const std::string& right) {
+-    messages[LANGUAGE_ENG] += right;
+-    messages[LANGUAGE_GER] += right;
+-    messages[LANGUAGE_FRA] += right;
++    for (size_t l = 0; l < messages.size(); l++) {
++        std::string leftStr = GetForLanguage((uint8_t)l, MF_RAW);
++        messages[l] = leftStr + right;
++    }
+ }
+ 
+ bool CustomMessage::operator==(const CustomMessage& operand) const {
+@@ -272,11 +322,11 @@ void CustomMessage::Replace(std::string&& oldStr, std::string&& newStr) {
+ }
+ 
+ void CustomMessage::Replace(std::string&& oldStr, CustomMessage newMessage) {
+-    for (uint8_t language = 0; language < LANGUAGE_MAX - 1; language++) {
++    for (uint8_t language = 0; language < messages.size() && language < newMessage.messages.size(); language++) {
+         size_t position = messages[language].find(oldStr);
+         std::string newMsg = newMessage.messages[language];
+-        if (language != LANGUAGE_ENG && newMsg == TODO_TRANSLATE) {
+-            newMsg = newMessage.messages[LANGUAGE_ENG];
++        if (language != LANGUAGE_ENG && (newMsg == TODO_TRANSLATE || newMsg.starts_with(TODO_TRANSLATE))) {
++            newMsg = (LANGUAGE_ENG < newMessage.messages.size()) ? newMessage.messages[LANGUAGE_ENG] : "";
+         }
+         while (position != std::string::npos) {
+             messages[language].replace(position, oldStr.length(), newMsg);
+diff --git a/soh/soh/Enhancements/custom-message/CustomMessageManager.h b/soh/soh/Enhancements/custom-message/CustomMessageManager.h
+index 43b89847..c0379523 100644
+--- a/soh/soh/Enhancements/custom-message/CustomMessageManager.h
++++ b/soh/soh/Enhancements/custom-message/CustomMessageManager.h
+@@ -65,6 +65,7 @@ class CustomMessage {
+     const std::string GetEnglish(MessageFormat format = MF_FORMATTED) const;
+     const std::string GetFrench(MessageFormat format = MF_FORMATTED) const;
+     const std::string GetGerman(MessageFormat format = MF_FORMATTED) const;
++    const std::string GetSpanish(MessageFormat format = MF_FORMATTED) const;
+     const std::string GetForCurrentLanguage(MessageFormat format = MF_FORMATTED) const;
+     const std::string GetForLanguage(uint8_t language, MessageFormat format = MF_FORMATTED) const;
+     const std::vector<std::string> GetAllMessages(MessageFormat format = MF_FORMATTED) const;
+@@ -223,7 +224,7 @@ class CustomMessage {
+     void CleanString(std::string& str) const;
+ 
+   private:
+-    std::vector<std::string> messages = { "", TODO_TRANSLATE, TODO_TRANSLATE };
++    std::vector<std::string> messages = { "", TODO_TRANSLATE, TODO_TRANSLATE, TODO_TRANSLATE, TODO_TRANSLATE };
+     TextBoxType type = TEXTBOX_TYPE_BLACK;
+     TextBoxPosition position = TEXTBOX_POS_BOTTOM;
+     std::vector<std::string> colors = {};
+diff --git a/soh/soh/Enhancements/glyphs/GlyphResolver.cpp b/soh/soh/Enhancements/glyphs/GlyphResolver.cpp
+new file mode 100644
+index 00000000..92096fcf
+--- /dev/null
++++ b/soh/soh/Enhancements/glyphs/GlyphResolver.cpp
+@@ -0,0 +1,22 @@
++#include "glyph_resolver.h"
++
++/*
++ * PLAYABLE_SPANISH_BUILD_01 — Couch Edition
++ *
++ * G02 dynamic message glyphs are DISABLED FOR STABILITY.
++ *
++ * The dynamic Xbox glyph path (GlyphResolver -> LTBtn OTR resource swap inside
++ * the message text pipeline) was implicated in message-box crashes. Per the
++ * PLAYABLE_SPANISH_BUILD_01 policy:
++ *
++ *   - Physical controller mappings are NOT touched (LT still maps to N64 Z).
++ *   - Message boxes render the classic N64 Z glyph until G02 is re-validated.
++ *
++ * Returning NULL makes every call site fall back to the classic N64 glyph.
++ * This stub intentionally has no libultraship includes so the stability of the
++ * build never depends on the dynamic controller-detection code.
++ */
++
++extern "C" const char* GlyphResolver_GetZTexture(void) {
++    return nullptr;
++}
+diff --git a/soh/soh/OTRGlobals.cpp b/soh/soh/OTRGlobals.cpp
+index 222c7ad8..51d36a39 100644
+--- a/soh/soh/OTRGlobals.cpp
++++ b/soh/soh/OTRGlobals.cpp
+@@ -286,6 +286,21 @@ void OTRGlobals::Initialize() {
+         OTRFiles.push_back(sohOtrPath);
+     }
+ 
++    std::string esOtrPath = Ship::Context::LocateFileAcrossAppDirs("es.o2r");
++
++    if (std::filesystem::exists(esOtrPath)) {
++        OTRFiles.push_back(esOtrPath);
++        FILE* f = fopen("logs/couch_diagnostics.txt", "a");
++        if (f) { fprintf(f, "[COUCH] es.o2r mounted = YES\n"); fclose(f); }
++        printf("[COUCH] es.o2r mounted = YES\n");
++        fflush(stdout);
++    } else {
++        FILE* f = fopen("logs/couch_diagnostics.txt", "a");
++        if (f) { fprintf(f, "[COUCH] es.o2r mounted = NO\n"); fclose(f); }
++        printf("[COUCH] es.o2r mounted = NO\n");
++        fflush(stdout);
++    }
++
+     std::unordered_set<uint32_t> ValidHashes = {
+         OOT_PAL_MQ,     OOT_NTSC_JP_MQ, OOT_NTSC_US_MQ, OOT_PAL_GC_MQ_DBG, OOT_NTSC_US_10,
+         OOT_NTSC_US_11, OOT_NTSC_US_12, OOT_PAL_10,     OOT_PAL_11,        OOT_NTSC_JP_GC_CE,
+diff --git a/soh/soh/ResourceManagerHelpers.cpp b/soh/soh/ResourceManagerHelpers.cpp
+index 127378da..b5be0536 100644
+--- a/soh/soh/ResourceManagerHelpers.cpp
++++ b/soh/soh/ResourceManagerHelpers.cpp
+@@ -265,6 +265,11 @@ extern "C" char* ResourceMgr_LoadJPEG(char* data, size_t dataSize) {
+ extern "C" char* ResourceMgr_LoadTexOrDListByName(const char* filePath) {
+     auto res = ResourceMgr_GetResourceByNameHandlingMQ(filePath);
+ 
++    if (res == nullptr) {
++        SPDLOG_WARN("ResourceMgr_LoadTexOrDListByName: resource not found: {}", filePath);
++        return nullptr;
++    }
++
+     if (res->GetInitData()->Type == static_cast<uint32_t>(Fast::ResourceType::DisplayList)) {
+         return (char*)&((std::static_pointer_cast<Fast::DisplayList>(res))->Instructions[0]);
+     }
+diff --git a/soh/soh/ShipUtils.cpp b/soh/soh/ShipUtils.cpp
+index 1e914d03..a5e4df13 100644
+--- a/soh/soh/ShipUtils.cpp
++++ b/soh/soh/ShipUtils.cpp
+@@ -11,6 +11,7 @@ extern float OTRGetAspectRatio();
+ 
+ extern f32 sFontWidths[144];
+ extern const char* fontTbl[140];
++extern SaveContext gSaveContext;
+ }
+ 
+ constexpr f32 fourByThree = 4.0f / 3.0f;
+@@ -84,12 +85,36 @@ extern "C" f32 Ship_GetCharFontWidth(u8 character) {
+         return 0.0f;
+     }
+ 
++    if (gSaveContext.language == LANGUAGE_ESP && OTRMessage_IsSpanishAvailable()) {
++        switch (character) {
++            case 0x80: return 11.0f; // Á
++            case 0x81: return 11.0f; // Ñ
++            case 0x83: return 8.0f;  // ¡
++            case 0x85: return 11.0f; // ¿
++            case 0x89: return 4.0f;  // Í
++            case 0x8A: return 12.0f; // Ó
++            case 0x8C: return 11.0f; // Ú
++            case 0x92: return 9.0f;  // ñ
++            case 0x99: return 4.0f;  // í
++            case 0x9A: return 9.0f;  // ó
++            case 0x9D: return 8.0f;  // ú
++            default: break;
++        }
++    }
++
+     return sFontWidths[adjustedChar];
+ }
+ 
+ extern "C" void* Ship_GetCharFontTexture(u8 character) {
+     u8 adjustedChar = character - ' ';
+ 
++    if (gSaveContext.language == LANGUAGE_ESP && OTRMessage_IsSpanishAvailable()) {
++        const char* spanishTex = Spanish_GetFontTexture(adjustedChar);
++        if (spanishTex != NULL) {
++            return (void*)spanishTex;
++        }
++    }
++
+     if (adjustedChar >= ARRAY_COUNTU(fontTbl)) {
+         return (void*)gEmptyTexture;
+     }
+diff --git a/soh/soh/SohGui/SohMenu.h b/soh/soh/SohGui/SohMenu.h
+index d6833f28..8cca2940 100644
+--- a/soh/soh/SohGui/SohMenu.h
++++ b/soh/soh/SohGui/SohMenu.h
+@@ -32,6 +32,7 @@ static std::unordered_map<int32_t, const char*> languages = {
+     { LANGUAGE_GER, "German" },
+     { LANGUAGE_FRA, "French" },
+     { LANGUAGE_JPN, "Japanese" },
++    { LANGUAGE_ESP, "Español" },
+ };
+ 
+ class SohMenu : public Ship::Menu {
+diff --git a/soh/soh/SohGui/SohMenuSettings.cpp b/soh/soh/SohGui/SohMenuSettings.cpp
+index 35abc38a..88fcf39f 100644
+--- a/soh/soh/SohGui/SohMenuSettings.cpp
++++ b/soh/soh/SohGui/SohMenuSettings.cpp
+@@ -105,9 +105,11 @@ extern "C" MessageTableEntry* sNesMessageEntryTablePtr;
+ extern "C" MessageTableEntry* sGerMessageEntryTablePtr;
+ extern "C" MessageTableEntry* sFraMessageEntryTablePtr;
+ extern "C" MessageTableEntry* sJpnMessageEntryTablePtr;
++extern "C" MessageTableEntry* sSpaMessageEntryTablePtr;
+ 
+ static const std::array<MessageTableEntry**, LANGUAGE_MAX> messageTables = {
+-    &sNesMessageEntryTablePtr, &sGerMessageEntryTablePtr, &sFraMessageEntryTablePtr, &sJpnMessageEntryTablePtr
++    &sNesMessageEntryTablePtr, &sGerMessageEntryTablePtr, &sFraMessageEntryTablePtr, &sJpnMessageEntryTablePtr,
++    &sSpaMessageEntryTablePtr
+ };
+ 
+ void SohMenu::UpdateLanguageMap(std::unordered_map<int32_t, const char*>& languageMap) {
+@@ -403,6 +405,19 @@ void SohMenu::AddMenuSettings() {
+         .RaceDisable(false)
+         .Options(ComboboxOptions().Tooltip("Sets the applied Texture Filtering.").ComboMap(textureFilteringMap));
+ 
++    // Visual Profile (Couch Edition)
++    static const std::unordered_map<int32_t, const char*> visualProfileMap = {
++        { 0, "Classic" },
++        { 1, "Enhanced" },
++    };
++    AddWidget(path, "Visual Profile", WIDGET_CVAR_COMBOBOX)
++        .CVar("gEnhancements.Graphics.VisualProfile")
++        .RaceDisable(false)
++        .Options(ComboboxOptions()
++                     .Tooltip("Classic: Original visual presentation.\n"
++                              "Enhanced: Modern material response, tonemapping, and atmospheric depth.")
++                     .ComboMap(visualProfileMap));
++
+     path.column = SECTION_COLUMN_2;
+     AddWidget(path, "Advanced Graphics Options", WIDGET_SEPARATOR_TEXT);
+ 
+diff --git a/soh/soh/z_message_OTR.cpp b/soh/soh/z_message_OTR.cpp
+index 40354194..a24344be 100644
+--- a/soh/soh/z_message_OTR.cpp
++++ b/soh/soh/z_message_OTR.cpp
+@@ -13,6 +13,7 @@ extern "C" MessageTableEntry* sNesMessageEntryTablePtr;
+ extern "C" MessageTableEntry* sGerMessageEntryTablePtr;
+ extern "C" MessageTableEntry* sFraMessageEntryTablePtr;
+ extern "C" MessageTableEntry* sJpnMessageEntryTablePtr;
++extern "C" MessageTableEntry* sSpaMessageEntryTablePtr;
+ extern "C" MessageTableEntry* sStaffMessageEntryTablePtr;
+ // extern "C" MessageTableEntry* _message_0xFFFC_nes;
+ 
+@@ -87,6 +88,22 @@ extern "C" void OTRMessage_Init() {
+     if (sJpnMessageEntryTablePtr == NULL) {
+         sJpnMessageEntryTablePtr = OTRMessage_LoadTable("text/jpn_message_data_static/jpn_message_data_static", false);
+     }
++    if (sSpaMessageEntryTablePtr == NULL) {
++        sSpaMessageEntryTablePtr = OTRMessage_LoadTable("text/spa_message_data_static/spa_message_data_static", false);
++        if (sSpaMessageEntryTablePtr != NULL) {
++            FILE* f = fopen("logs/couch_diagnostics.txt", "a");
++            if (f) { fprintf(f, "[COUCH] Spanish table loaded = YES\n"); fclose(f); }
++            printf("[COUCH] Spanish table loaded = YES\n");
++            fflush(stdout);
++            SPDLOG_INFO("Spanish message table loaded successfully from es.o2r");
++        } else {
++            FILE* f = fopen("logs/couch_diagnostics.txt", "a");
++            if (f) { fprintf(f, "[COUCH] Spanish table loaded = NO\n"); fclose(f); }
++            printf("[COUCH] Spanish table loaded = NO\n");
++            fflush(stdout);
++            SPDLOG_WARN("Spanish message table failed to load from es.o2r");
++        }
++    }
+     // Note: Make sure this loads after PAL nes_message_data_static, so that message 0xFFFC is definitely loaded if it
+     // exists
+     if (sNesMessageEntryTablePtr == NULL) {
+@@ -176,3 +193,8 @@ extern "C" void OTRMessage_Init() {
+         customMessageTableID, TEXT_BIG_POE_COLLECTED_RANDO,
+         CustomMessage("You have #" + CustomMessage::POINTS("\x01") + "# points.", { QM_RED }));
+ }
++
++extern "C" bool OTRMessage_IsSpanishAvailable(void) {
++    return (sSpaMessageEntryTablePtr != NULL);
++}
++
+diff --git a/soh/src/code/z_kanfont.c b/soh/src/code/z_kanfont.c
+index 7c85204d..daa8f416 100644
+--- a/soh/src/code/z_kanfont.c
++++ b/soh/src/code/z_kanfont.c
+@@ -4164,6 +4164,25 @@ void Font_LoadCharWide(Font* font, u16 character, u16 codePointIndex) {
+     // #endregion
+ }
+ 
++// SOH [Couch Edition ES-419] Language-aware Spanish font texture resolver
++const char* Spanish_GetFontTexture(u8 character) {
++    // Remapped slot offsets (ASCII codepoint - 0x20):
++    switch (character) {
++        case 0x60: return "__OTR__textures/nes_font_static/gMsgChar80LatinCapitalLetterAWithAcuteTex";   // Á (replaces 0x80)
++        case 0x61: return "__OTR__textures/nes_font_static/gMsgChar81LatinCapitalLetterNWithTildeTex";   // Ñ (replaces 0x81)
++        case 0x63: return "__OTR__textures/nes_font_static/gMsgChar83InvertedExclamationMarkTex";         // ¡ (replaces 0x83, preserves German Ä)
++        case 0x65: return "__OTR__textures/nes_font_static/gMsgChar85InvertedQuestionMarkTex";            // ¿ (replaces 0x85, preserves French È)
++        case 0x69: return "__OTR__textures/nes_font_static/gMsgChar89LatinCapitalLetterIWithAcuteTex";   // Í (replaces 0x89)
++        case 0x6A: return "__OTR__textures/nes_font_static/gMsgChar8ALatinCapitalLetterOWithAcuteTex";   // Ó (replaces 0x8A)
++        case 0x6C: return "__OTR__textures/nes_font_static/gMsgChar8CLatinCapitalLetterUWithAcuteTex";   // Ú (replaces 0x8C)
++        case 0x72: return "__OTR__textures/nes_font_static/gMsgChar92LatinSmallLetterNWithTildeTex";     // ñ (replaces 0x92, preserves French â)
++        case 0x79: return "__OTR__textures/nes_font_static/gMsgChar99LatinSmallLetterIWithAcuteTex";     // í (replaces 0x99)
++        case 0x7A: return "__OTR__textures/nes_font_static/gMsgChar9ALatinSmallLetterOWithAcuteTex";     // ó (replaces 0x9A, preserves French ô)
++        case 0x7D: return "__OTR__textures/nes_font_static/gMsgChar9DLatinSmallLetterUWithAcuteTex";     // ú (replaces 0x9D)
++        default: return NULL;
++    }
++}
++
+ /**
+  * Loads a texture from nes_font_static for the requested `character` into the character texture buffer
+  * at `codePointIndex`. The value of `character` is the ASCII codepoint subtract ' '/0x20.
+@@ -4173,8 +4192,21 @@ void Font_LoadChar(Font* font, u8 character, u16 codePointIndex) {
+     //&_nes_font_staticSegmentRomStart[character * FONT_CHAR_TEX_SIZE], FONT_CHAR_TEX_SIZE,
+     //__FILE__, __LINE__);
+ 
+-    if (character < 0x8B)
++    // Language-Specific Spanish Font Remapping (Active only when language == LANGUAGE_ESP and Spanish is available)
++    if (gSaveContext.language == LANGUAGE_ESP && OTRMessage_IsSpanishAvailable()) {
++        const char* spanishTex = Spanish_GetFontTexture(character);
++        if (spanishTex != NULL) {
++            memcpy(&font->charTexBuf[codePointIndex], spanishTex, strlen(spanishTex) + 1);
++            return;
++        }
++    }
++
++    if (character < ARRAY_COUNT(fontTbl) && fontTbl[character] != NULL) {
+         memcpy(&font->charTexBuf[codePointIndex], fontTbl[character], strlen(fontTbl[character]) + 1);
++    } else {
++        // Fallback replacement glyph (space) to prevent null/uninitialized texture dereference
++        memcpy(&font->charTexBuf[codePointIndex], fontTbl[0], strlen(fontTbl[0]) + 1);
++    }
+ }
+ 
+ /**
+diff --git a/soh/src/code/z_message_PAL.c b/soh/src/code/z_message_PAL.c
+index 6c357c61..f8c08fe0 100644
+--- a/soh/src/code/z_message_PAL.c
++++ b/soh/src/code/z_message_PAL.c
+@@ -49,6 +49,7 @@ MessageTableEntry* sNesMessageEntryTablePtr = NULL;
+ MessageTableEntry* sGerMessageEntryTablePtr = NULL;
+ MessageTableEntry* sFraMessageEntryTablePtr = NULL;
+ MessageTableEntry* sJpnMessageEntryTablePtr = NULL;
++MessageTableEntry* sSpaMessageEntryTablePtr = NULL;
+ MessageTableEntry* sStaffMessageEntryTablePtr = NULL;
+ 
+ char* _message_0xFFFC_nes;
+@@ -1620,7 +1621,7 @@ void Message_DrawText(PlayState* play, Gfx** gfxP) {
+                 Message_DrawTextChar(play, &font->charTexBuf[charTexIdx], &gfx);
+                 charTexIdx += FONT_CHAR_TEX_SIZE;
+ 
+-                msgCtx->textPosX += (s32)(sFontWidths[character - ' '] * (R_TEXT_CHAR_SCALE / 100.0f));
++                msgCtx->textPosX += (s32)(Ship_GetCharFontWidth(character) * (R_TEXT_CHAR_SCALE / 100.0f));
+                 break;
+         }
+     }
+diff --git a/soh/src/code/z_parameter.c b/soh/src/code/z_parameter.c
+index f2713c8d..f61616e2 100644
+--- a/soh/src/code/z_parameter.c
++++ b/soh/src/code/z_parameter.c
+@@ -3803,8 +3803,8 @@ void Interface_DrawActionLabel(GraphicsContext* gfxCtx, void* texture) {
+ }
+ 
+ void Interface_DrawItemButtons(PlayState* play) {
+-    static void* cUpLabelTextures[] = { gNaviCUpENGTex, gNaviCUpENGTex, gNaviCUpENGTex, gNaviCUpJPTex };
+-    static s16 startButtonLeftPos[] = { 132, 130, 130, 132 };
++    static void* cUpLabelTextures[] = { gNaviCUpENGTex, gNaviCUpENGTex, gNaviCUpENGTex, gNaviCUpJPTex, gNaviCUpENGTex };
++    static s16 startButtonLeftPos[] = { 132, 130, 130, 132, 132 };
+     InterfaceContext* interfaceCtx = &play->interfaceCtx;
+     Player* player = GET_PLAYER(play);
+     PauseContext* pauseCtx = &play->pauseCtx;
+@@ -3916,7 +3916,7 @@ void Interface_DrawItemButtons(PlayState* play) {
+     int StartBTN_W_factor = (1 << 10) * StartBtn_Icon_W / StartBTN_W_Scaled;
+     int StartBTN_H_factor = (1 << 10) * StartBtn_Icon_H / StartBTN_H_Scaled;
+     const s16 PosX_StartBtn_ori =
+-        OTRGetRectDimensionFromRightEdge(startButtonLeftPos[gSaveContext.language] + X_Margins_StartBtn);
++        OTRGetRectDimensionFromRightEdge(startButtonLeftPos[LANGUAGE_ARRAY_INDEX(gSaveContext.language)] + X_Margins_StartBtn);
+     const s16 PosY_StartBtn_ori = 16 + Y_Margins_StartBtn;
+     s16 StartBTN_Label_W = DO_ACTION_TEX_WIDTH();
+     s16 StartBTN_Label_H = DO_ACTION_TEX_HEIGHT();
+@@ -4232,7 +4232,7 @@ void Interface_DrawItemButtons(PlayState* play) {
+             gDPSetCombineLERP(OVERLAY_DISP++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, TEXEL0, 0, PRIMITIVE, 0,
+                               PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, TEXEL0, 0, PRIMITIVE, 0);
+ 
+-            gDPLoadTextureBlock_4b(OVERLAY_DISP++, cUpLabelTextures[gSaveContext.language], G_IM_FMT_IA, 32, 8, 0,
++            gDPLoadTextureBlock_4b(OVERLAY_DISP++, cUpLabelTextures[LANGUAGE_ARRAY_INDEX(gSaveContext.language)], G_IM_FMT_IA, 32, 8, 0,
+                                    G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK,
+                                    G_TX_NOLOD, G_TX_NOLOD);
+ 
+@@ -5134,7 +5134,7 @@ void Interface_Draw(PlayState* play) {
+     s16 svar6;
+     bool fullUi = !CVarGetInteger(CVAR_ENHANCEMENT("MinimalUI"), 0) || !R_MINIMAP_DISABLED || play->pauseCtx.state != 0;
+     // #region SOH [NTSC]
+-    s32 languageOffset = gSaveContext.language;
++    s32 languageOffset = LANGUAGE_ARRAY_INDEX(gSaveContext.language);
+ 
+     if (languageOffset == LANGUAGE_JPN) {
+         languageOffset = LANGUAGE_ENG;
+diff --git a/soh/src/overlays/actors/ovl_En_Mag/z_en_mag.c b/soh/src/overlays/actors/ovl_En_Mag/z_en_mag.c
+index 6290d65b..26ad3e87 100644
+--- a/soh/src/overlays/actors/ovl_En_Mag/z_en_mag.c
++++ b/soh/src/overlays/actors/ovl_En_Mag/z_en_mag.c
+@@ -415,7 +415,7 @@ bool EnMag_ShouldDrawNoController(Font* font, Gfx** gfxP, bool isActualText) {
+         return true;
+     }
+     Gfx* gfx = *gfxP;
+-    u8 language = (gSaveContext.language == LANGUAGE_JPN) ? LANGUAGE_ENG : gSaveContext.language;
++    u8 language = Language_GetPal3Index(gSaveContext.language);
+     s32 length = strlen(noControllerMsg[language]);
+     u16 rectLeft = VREG(19) + ((length - 13) * -3);
+     u16 rectTop = YREG(10) + 171;
+@@ -450,7 +450,7 @@ bool EnMag_ShouldDrawPressStart(Font* font, Gfx** gfxP, bool isActualText) {
+         return true;
+     }
+     Gfx* gfx = *gfxP;
+-    u8 language = (gSaveContext.language == LANGUAGE_JPN) ? LANGUAGE_ENG : gSaveContext.language;
++    u8 language = Language_GetPal3Index(gSaveContext.language);
+     s32 length = strlen(pressStartMsg[language]);
+     u16 rectLeft = YREG(7) + ((length - 11) * -3);
+     u16 rectTop = YREG(10) + 171;
+diff --git a/soh/src/overlays/gamestates/ovl_file_choose/z_file_choose.c b/soh/src/overlays/gamestates/ovl_file_choose/z_file_choose.c
+index 9e58f5e3..767e9953 100644
+--- a/soh/src/overlays/gamestates/ovl_file_choose/z_file_choose.c
++++ b/soh/src/overlays/gamestates/ovl_file_choose/z_file_choose.c
+@@ -1,4 +1,4 @@
+-﻿#include "file_choose.h"
++#include "file_choose.h"
+ 
+ #include <string.h>
+ #include <stdio.h>
+@@ -2262,7 +2262,7 @@ static void* sFileInfoBoxTextures[] = {
+     gFileSelFileInfoBox4Tex, gFileSelFileInfoBox5Tex,
+ };
+ 
+-static void* sTitleLabels[4][9] = {
++static void* sTitleLabels[5][9] = {
+     { gFileSelPleaseSelectAFileENGTex, gFileSelOpenThisFileENGTex, gFileSelCopyWhichFileENGTex,
+       gFileSelCopyToWhichFileENGTex, gFileSelAreYouSureENGTex, gFileSelFileCopiedENGTex, gFileSelEraseWhichFileENGTex,
+       gFileSelAreYouSure2ENGTex, gFileSelFileErasedENGTex },
+@@ -2275,9 +2275,12 @@ static void* sTitleLabels[4][9] = {
+     { gFileSelPleaseSelectAFileJPNTex, gFileSelOpenThisFileJPNTex, gFileSelWhichFile1JPNTex,
+       gFileSelCopyToWhichFileJPNTex, gFileSelAreYouSureJPNTex, gFileSelFileCopiedJPNTex, gFileSelEraseWhichFileJPNTex,
+       gFileSelAreYouSure2JPNTex, gFileSelFileErasedJPNTex },
++    { gFileSelPleaseSelectAFileENGTex, gFileSelOpenThisFileENGTex, gFileSelCopyWhichFileENGTex,
++      gFileSelCopyToWhichFileENGTex, gFileSelAreYouSureENGTex, gFileSelFileCopiedENGTex, gFileSelEraseWhichFileENGTex,
++      gFileSelAreYouSure2ENGTex, gFileSelFileErasedENGTex },
+ };
+ 
+-static void* sWarningLabels[4][5] = {
++static void* sWarningLabels[5][5] = {
+     { gFileSelNoFileToCopyENGTex, gFileSelNoFileToEraseENGTex, gFileSelNoEmptyFileENGTex, gFileSelFileEmptyENGTex,
+       gFileSelFileInUseENGTex },
+     { gFileSelNoFileToCopyGERTex, gFileSelNoFileToEraseGERTex, gFileSelNoEmptyFileGERTex, gFileSelFileEmptyGERTex,
+@@ -2286,20 +2289,24 @@ static void* sWarningLabels[4][5] = {
+       gFileSelFileInUseFRATex },
+     { gFileSelNoFileToCopyJPNTex, gFileSelNoFileToEraseJPNTex, gFileSelNoEmptyFileJPNTex, gFileSelFileEmptyJPNTex,
+       gFileSelFileInUseJPNTex },
++    { gFileSelNoFileToCopyENGTex, gFileSelNoFileToEraseENGTex, gFileSelNoEmptyFileENGTex, gFileSelFileEmptyENGTex,
++      gFileSelFileInUseENGTex },
+ };
+ 
+-static void* sFileButtonTextures[4][3] = {
++static void* sFileButtonTextures[5][3] = {
+     { gFileSelFile1ButtonENGTex, gFileSelFile2ButtonENGTex, gFileSelFile3ButtonENGTex },
+     { gFileSelFile1ButtonGERTex, gFileSelFile2ButtonGERTex, gFileSelFile3ButtonGERTex },
+     { gFileSelFile1ButtonFRATex, gFileSelFile2ButtonFRATex, gFileSelFile3ButtonFRATex },
+     { gFileSelFile1ButtonJPNTex, gFileSelFile2ButtonJPNTex, gFileSelFile3ButtonJPNTex },
++    { gFileSelFile1ButtonENGTex, gFileSelFile2ButtonENGTex, gFileSelFile3ButtonENGTex },
+ };
+ 
+-static void* sActionButtonTextures[4][4] = {
++static void* sActionButtonTextures[5][4] = {
+     { gFileSelCopyButtonENGTex, gFileSelEraseButtonENGTex, gFileSelYesButtonENGTex, gFileSelQuitButtonENGTex },
+     { gFileSelCopyButtonGERTex, gFileSelEraseButtonGERTex, gFileSelYesButtonGERTex, gFileSelQuitButtonGERTex },
+     { gFileSelCopyButtonFRATex, gFileSelEraseButtonFRATex, gFileSelYesButtonFRATex, gFileSelQuitButtonFRATex },
+     { gFileSelCopyButtonJPNTex, gFileSelEraseButtonJPNTex, gFileSelYesButtonJPNTex, gFileSelQuitButtonJPNTex },
++    { gFileSelCopyButtonENGTex, gFileSelEraseButtonENGTex, gFileSelYesButtonENGTex, gFileSelQuitButtonENGTex },
+ };
+ 
+ static void* sOptionsButtonTextures[] = {
+@@ -2307,6 +2314,7 @@ static void* sOptionsButtonTextures[] = {
+     gFileSelOptionsButtonGERTex,
+     gFileSelOptionsButtonENGTex,
+     gFileSelOptionsButtonJPNTex,
++    gFileSelOptionsButtonENGTex,
+ };
+ 
+ const char* FileChoose_GetQuestChooseTitleTexName(Language lang) {
+@@ -2371,7 +2379,7 @@ void FileChoose_DrawWindowContents(GameState* thisx) {
+             tex = FileChoose_GetSohOptionsTitleTexName(gSaveContext.language);
+             break;
+         default:
+-            tex = sTitleLabels[gSaveContext.language][this->titleLabel];
++            tex = sTitleLabels[LANGUAGE_ARRAY_INDEX(gSaveContext.language)][this->titleLabel];
+             break;
+     }
+ 
+@@ -2545,7 +2553,7 @@ void FileChoose_DrawWindowContents(GameState* thisx) {
+                this->configMode != CM_NAME_ENTRY_TO_RANDOMIZER_SETTINGS_MENU) {
+         gDPPipeSync(POLY_OPA_DISP++);
+         gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 255, this->titleAlpha[1]);
+-        gDPLoadTextureBlock(POLY_OPA_DISP++, sTitleLabels[gSaveContext.language][this->nextTitleLabel], G_IM_FMT_IA,
++        gDPLoadTextureBlock(POLY_OPA_DISP++, sTitleLabels[LANGUAGE_ARRAY_INDEX(gSaveContext.language)][this->nextTitleLabel], G_IM_FMT_IA,
+                             G_IM_SIZ_8b, 128, 16, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
+                             G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+         gSP1Quadrangle(POLY_OPA_DISP++, 0, 2, 3, 1, 0);
+@@ -2598,7 +2606,7 @@ void FileChoose_DrawWindowContents(GameState* thisx) {
+                                 this->fileButtonAlpha[i]);
+             }
+ 
+-            gDPLoadTextureBlock(POLY_OPA_DISP++, sFileButtonTextures[gSaveContext.language][i], G_IM_FMT_IA,
++            gDPLoadTextureBlock(POLY_OPA_DISP++, sFileButtonTextures[LANGUAGE_ARRAY_INDEX(gSaveContext.language)][i], G_IM_FMT_IA,
+                                 G_IM_SIZ_16b, 64, 16, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP,
+                                 G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+             gSP1Quadrangle(POLY_OPA_DISP++, 0, 2, 3, 1, 0);
+@@ -2699,7 +2707,7 @@ void FileChoose_DrawWindowContents(GameState* thisx) {
+             gDPPipeSync(POLY_OPA_DISP++);
+             gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, this->windowColor[0], this->windowColor[1], this->windowColor[2],
+                             this->actionButtonAlpha[i]);
+-            gDPLoadTextureBlock(POLY_OPA_DISP++, sActionButtonTextures[gSaveContext.language][i], G_IM_FMT_IA,
++            gDPLoadTextureBlock(POLY_OPA_DISP++, sActionButtonTextures[LANGUAGE_ARRAY_INDEX(gSaveContext.language)][i], G_IM_FMT_IA,
+                                 G_IM_SIZ_16b, 64, 16, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP,
+                                 G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+             gSP1Quadrangle(POLY_OPA_DISP++, quadVtxIndex, quadVtxIndex + 2, quadVtxIndex + 3, quadVtxIndex + 1, 0);
+@@ -2713,7 +2721,7 @@ void FileChoose_DrawWindowContents(GameState* thisx) {
+ 
+             gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, this->windowColor[0], this->windowColor[1], this->windowColor[2],
+                             this->confirmButtonAlpha[i]);
+-            gDPLoadTextureBlock(POLY_OPA_DISP++, sActionButtonTextures[gSaveContext.language][temp], G_IM_FMT_IA,
++            gDPLoadTextureBlock(POLY_OPA_DISP++, sActionButtonTextures[LANGUAGE_ARRAY_INDEX(gSaveContext.language)][temp], G_IM_FMT_IA,
+                                 G_IM_SIZ_16b, 64, 16, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP,
+                                 G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+             gSP1Quadrangle(POLY_OPA_DISP++, quadVtxIndex, quadVtxIndex + 2, quadVtxIndex + 3, quadVtxIndex + 1, 0);
+@@ -2723,7 +2731,7 @@ void FileChoose_DrawWindowContents(GameState* thisx) {
+         gDPPipeSync(POLY_OPA_DISP++);
+         gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, this->windowColor[0], this->windowColor[1], this->windowColor[2],
+                         this->optionButtonAlpha);
+-        gDPLoadTextureBlock(POLY_OPA_DISP++, sOptionsButtonTextures[gSaveContext.language], G_IM_FMT_IA, G_IM_SIZ_16b,
++        gDPLoadTextureBlock(POLY_OPA_DISP++, sOptionsButtonTextures[LANGUAGE_ARRAY_INDEX(gSaveContext.language)], G_IM_FMT_IA, G_IM_SIZ_16b,
+                             64, 16, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK,
+                             G_TX_NOLOD, G_TX_NOLOD);
+         gSP1Quadrangle(POLY_OPA_DISP++, 8, 10, 11, 9, 0);
+@@ -2752,7 +2760,7 @@ void FileChoose_DrawWindowContents(GameState* thisx) {
+                               PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, TEXEL0, 0, PRIMITIVE, 0);
+             gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 255, this->emptyFileTextAlpha);
+             gDPSetEnvColor(POLY_OPA_DISP++, 0, 0, 0, 0);
+-            gDPLoadTextureBlock(POLY_OPA_DISP++, sWarningLabels[gSaveContext.language][this->warningLabel], G_IM_FMT_IA,
++            gDPLoadTextureBlock(POLY_OPA_DISP++, sWarningLabels[LANGUAGE_ARRAY_INDEX(gSaveContext.language)][this->warningLabel], G_IM_FMT_IA,
+                                 G_IM_SIZ_8b, 128, 16, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP,
+                                 G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+             gSP1Quadrangle(POLY_OPA_DISP++, 16, 18, 19, 17, 0);
+@@ -3348,6 +3356,8 @@ static const char* randoVersionWarningText[] = {
+     "corrompues.",
+     // Japanese NTSC TODO:
+     "This save was created on a different version of SoH.\nThings may be broken. Play at your own risk.",
++    // Spanish
++    "This save was created on a different version of SoH.\nThings may be broken. Play at your own risk.",
+ };
+ 
+ void FileChoose_DrawRandoSaveVersionWarning(GameState* thisx) {
+@@ -3368,7 +3378,7 @@ void FileChoose_DrawRandoSaveVersionWarning(GameState* thisx) {
+             }
+ 
+             // Compute the height for a "squished" textbox texture
+-            s16 height = ((gSaveContext.language == LANGUAGE_ENG) || (gSaveContext.language == LANGUAGE_JPN))
++            s16 height = ((gSaveContext.language == LANGUAGE_ENG) || (gSaveContext.language == LANGUAGE_JPN) || (gSaveContext.language == LANGUAGE_ESP))
+                              ? 32
+                              : 40; // English is only 2 lines
+             // float math to get a S5.10 number that will squish the texture
+@@ -3388,7 +3398,7 @@ void FileChoose_DrawRandoSaveVersionWarning(GameState* thisx) {
+                                 (SCREEN_WIDTH - 32) << 2, (SCREEN_HEIGHT - bottomOffset) << 2, G_TX_RENDERTILE, 0, 0,
+                                 1 << 10, texCoordinateHeightScale << 1);
+ 
+-            Interface_DrawTextLine(this->state.gfxCtx, randoVersionWarningText[gSaveContext.language], 36,
++            Interface_DrawTextLine(this->state.gfxCtx, randoVersionWarningText[LANGUAGE_ARRAY_INDEX(gSaveContext.language)], 36,
+                                    SCREEN_HEIGHT - height, 255, 255, 255, textAlpha, 0.8f, 1);
+         }
+     }
+@@ -3402,6 +3412,7 @@ void FileChoose_Main(GameState* thisx) {
+         gFileSelControlsGERTex,
+         gFileSelControlsFRATex,
+         gFileSelControlsJPNTex,
++        gFileSelControlsENGTex,
+     };
+     FileChooseContext* this = (FileChooseContext*)thisx;
+     Input* input = &this->state.input[0];
+@@ -3568,7 +3579,7 @@ void FileChoose_Main(GameState* thisx) {
+                           PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, TEXEL0, 0, PRIMITIVE, 0);
+         gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, helpTextColor.r, helpTextColor.g, helpTextColor.b, this->controlsAlpha);
+         gDPSetEnvColor(POLY_OPA_DISP++, 0, 0, 0, 0);
+-        gDPLoadTextureBlock(POLY_OPA_DISP++, controlsTextures[gSaveContext.language], G_IM_FMT_IA, G_IM_SIZ_8b, 144, 16,
++        gDPLoadTextureBlock(POLY_OPA_DISP++, controlsTextures[LANGUAGE_ARRAY_INDEX(gSaveContext.language)], G_IM_FMT_IA, G_IM_SIZ_8b, 144, 16,
+                             0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK,
+                             G_TX_NOLOD, G_TX_NOLOD);
+         gSPTextureRectangle(POLY_OPA_DISP++, 0x0168, 0x0330, 0x03A8, 0x0370, G_TX_RENDERTILE, 0, 0, 0x0400, 0x0400);
+diff --git a/soh/src/overlays/gamestates/ovl_file_choose/z_file_nameset_PAL.c b/soh/src/overlays/gamestates/ovl_file_choose/z_file_nameset_PAL.c
+index d82ec384..57edb267 100644
+--- a/soh/src/overlays/gamestates/ovl_file_choose/z_file_nameset_PAL.c
++++ b/soh/src/overlays/gamestates/ovl_file_choose/z_file_nameset_PAL.c
+@@ -89,12 +89,20 @@ void FileChoose_SetKeyboardVtx(GameState* thisx) {
+     }
+ }
+ 
+-static void* sNameLabelTextures[] = { gFileSelNameENGTex, gFileSelNameENGTex, gFileSelNameFRATex };
++static void* sNameLabelTextures[] = {
++    gFileSelNameENGTex,
++    gFileSelNameENGTex,
++    gFileSelNameFRATex,
++    gFileSelNameENGTex,
++    gFileSelNameENGTex,
++};
+ 
+ static void* sBackspaceEndTextures[][2] = {
+     { gFileSelBackspaceButtonTex, gFileSelENDButtonENGTex },
+     { gFileSelBackspaceButtonTex, gFileSelENDButtonGERTex },
+     { gFileSelBackspaceButtonTex, gFileSelENDButtonFRATex },
++    { gFileSelBackspaceButtonTex, gFileSelENDButtonENGTex },
++    { gFileSelBackspaceButtonTex, gFileSelENDButtonENGTex },
+ };
+ 
+ static u16 sBackspaceEndWidths[] = { 28, 44 };
+@@ -132,7 +140,7 @@ void FileChoose_SetNameEntryVtx(GameState* thisx) {
+     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 255, this->titleAlpha[0]);
+     gDPSetEnvColor(POLY_OPA_DISP++, 0, 0, 0, 0);
+     gSPVertex(POLY_OPA_DISP++, D_80811BB0, 24, 0);
+-    gDPLoadTextureBlock(POLY_OPA_DISP++, sNameLabelTextures[gSaveContext.language], G_IM_FMT_IA, G_IM_SIZ_8b, 56, 16, 0,
++    gDPLoadTextureBlock(POLY_OPA_DISP++, sNameLabelTextures[LANGUAGE_ARRAY_INDEX(gSaveContext.language)], G_IM_FMT_IA, G_IM_SIZ_8b, 56, 16, 0,
+                         G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
+                         G_TX_NOLOD);
+     gSP1Quadrangle(POLY_OPA_DISP++, 0, 2, 3, 1, 0);
+@@ -142,7 +150,7 @@ void FileChoose_SetNameEntryVtx(GameState* thisx) {
+     for (phi_t1 = 0; phi_t1 < 2; phi_t1++, phi_s0 += 4) {
+         gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, this->windowColor[0], this->windowColor[1], this->windowColor[2], 255);
+         gDPSetEnvColor(POLY_OPA_DISP++, 0, 0, 0, 0);
+-        gDPLoadTextureBlock(POLY_OPA_DISP++, sBackspaceEndTextures[gSaveContext.language][phi_t1], G_IM_FMT_IA,
++        gDPLoadTextureBlock(POLY_OPA_DISP++, sBackspaceEndTextures[LANGUAGE_ARRAY_INDEX(gSaveContext.language)][phi_t1], G_IM_FMT_IA,
+                             G_IM_SIZ_16b, sBackspaceEndWidths[phi_t1], 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                             G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+         gSP1Quadrangle(POLY_OPA_DISP++, phi_s0, phi_s0 + 2, phi_s0 + 3, phi_s0 + 1, 0);
+@@ -966,6 +974,7 @@ void FileChoose_DrawOptionsImpl(GameState* thisx) {
+                        ResourceMgr_GetGamePlatform(versionIndex) == GAME_PLATFORM_N64;
+     uint8_t isPalGC = ResourceMgr_GetGameRegion(versionIndex) == GAME_REGION_PAL &&
+                       ResourceMgr_GetGamePlatform(versionIndex) == GAME_PLATFORM_GC;
++    s16 optLang = LANGUAGE_ARRAY_INDEX(gSaveContext.language);
+ 
+     if (gSaveContext.language == LANGUAGE_GER && isPalGC) {
+         gSPVertex(POLY_OPA_DISP++, D_80811E30, 32, 0);
+@@ -980,8 +989,8 @@ void FileChoose_DrawOptionsImpl(GameState* thisx) {
+     gDPSetEnvColor(POLY_OPA_DISP++, 0, 0, 0, 255);
+ 
+     for (i = 0, vtx = 0; i < 4; i++, vtx += 4) {
+-        gDPLoadTextureBlock(POLY_OPA_DISP++, gOptionsMenuHeaders[i].texture[gSaveContext.language], G_IM_FMT_IA,
+-                            G_IM_SIZ_8b, gOptionsMenuHeaders[i].width[gSaveContext.language],
++        gDPLoadTextureBlock(POLY_OPA_DISP++, gOptionsMenuHeaders[i].texture[optLang], G_IM_FMT_IA,
++                            G_IM_SIZ_8b, gOptionsMenuHeaders[i].width[optLang],
+                             gOptionsMenuHeaders[i].height, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP,
+                             G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+ 
+@@ -995,8 +1004,8 @@ void FileChoose_DrawOptionsImpl(GameState* thisx) {
+ 
+     // Draw the change language header
+     if (isPalN64) {
+-        gDPLoadTextureBlock(POLY_OPA_DISP++, gOptionsMenuHeaders[i].texture[gSaveContext.language], G_IM_FMT_IA,
+-                            G_IM_SIZ_8b, gOptionsMenuHeaders[i].width[gSaveContext.language],
++        gDPLoadTextureBlock(POLY_OPA_DISP++, gOptionsMenuHeaders[i].texture[optLang], G_IM_FMT_IA,
++                            G_IM_SIZ_8b, gOptionsMenuHeaders[i].width[optLang],
+                             gOptionsMenuHeaders[i].height, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP,
+                             G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+ 
+@@ -1030,8 +1039,8 @@ void FileChoose_DrawOptionsImpl(GameState* thisx) {
+             gDPSetEnvColor(POLY_OPA_DISP++, 0, 0, 0, 255);
+         }
+ 
+-        gDPLoadTextureBlock(POLY_OPA_DISP++, gOptionsMenuSettings[i].texture[gSaveContext.language], G_IM_FMT_IA,
+-                            G_IM_SIZ_8b, gOptionsMenuSettings[i].width[gSaveContext.language],
++        gDPLoadTextureBlock(POLY_OPA_DISP++, gOptionsMenuSettings[i].texture[optLang], G_IM_FMT_IA,
++                            G_IM_SIZ_8b, gOptionsMenuSettings[i].width[optLang],
+                             gOptionsMenuSettings[i].height, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP,
+                             G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+         gSP1Quadrangle(POLY_OPA_DISP++, vtx, vtx + 2, vtx + 3, vtx + 1, 0);
+@@ -1054,8 +1063,8 @@ void FileChoose_DrawOptionsImpl(GameState* thisx) {
+             gDPSetEnvColor(POLY_OPA_DISP++, 0, 0, 0, 255);
+         }
+ 
+-        gDPLoadTextureBlock(POLY_OPA_DISP++, gOptionsMenuSettings[i].texture[gSaveContext.language], G_IM_FMT_IA,
+-                            G_IM_SIZ_8b, gOptionsMenuSettings[i].width[gSaveContext.language],
++        gDPLoadTextureBlock(POLY_OPA_DISP++, gOptionsMenuSettings[i].texture[optLang], G_IM_FMT_IA,
++                            G_IM_SIZ_8b, gOptionsMenuSettings[i].width[optLang],
+                             gOptionsMenuSettings[i].height, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP,
+                             G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+         // Pal N64 German vertices for z target options are offset by 8
+@@ -1109,8 +1118,8 @@ void FileChoose_DrawOptionsImpl(GameState* thisx) {
+                 gDPSetEnvColor(POLY_OPA_DISP++, 0, 0, 0, 255);
+             }
+ 
+-            gDPLoadTextureBlock(POLY_OPA_DISP++, gOptionsMenuSettings[i].texture[gSaveContext.language], G_IM_FMT_IA,
+-                                G_IM_SIZ_8b, gOptionsMenuSettings[i].width[gSaveContext.language],
++            gDPLoadTextureBlock(POLY_OPA_DISP++, gOptionsMenuSettings[i].texture[optLang], G_IM_FMT_IA,
++                                G_IM_SIZ_8b, gOptionsMenuSettings[i].width[optLang],
+                                 gOptionsMenuSettings[i].height, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP,
+                                 G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+             gSP1Quadrangle(POLY_OPA_DISP++, vtx, vtx + 2, vtx + 3, vtx + 1, 0);
+diff --git a/soh/src/overlays/misc/ovl_kaleido_scope/z_kaleido_map_PAL.c b/soh/src/overlays/misc/ovl_kaleido_scope/z_kaleido_map_PAL.c
+index 5b5665da..919cd57f 100644
+--- a/soh/src/overlays/misc/ovl_kaleido_scope/z_kaleido_map_PAL.c
++++ b/soh/src/overlays/misc/ovl_kaleido_scope/z_kaleido_map_PAL.c
+@@ -32,6 +32,10 @@ void KaleidoScope_DrawDungeonMap(PlayState* play, GraphicsContext* gfxCtx) {
+         gPauseDekuTitleJPNTex, gPauseDodongoTitleJPNTex,   gPauseJabuTitleJPNTex,   gPauseForestTitleJPNTex,
+         gPauseFireTitleJPNTex, gPauseWaterTitleJPNTex,     gPauseSpiritTitleJPNTex, gPauseShadowTitleJPNTex,
+         gPauseBotWTitleJPNTex, gPauseIceCavernTitleJPNTex,
++
++        gPauseDekuTitleENGTex, gPauseDodongoTitleENGTex,   gPauseJabuTitleENGTex,   gPauseForestTitleENGTex,
++        gPauseFireTitleENGTex, gPauseWaterTitleENGTex,     gPauseSpiritTitleENGTex, gPauseShadowTitleENGTex,
++        gPauseBotWTitleENGTex, gPauseIceCavernTitleENGTex,
+     };
+     static void* floorIconTexs[] = {
+         gDungeonMapBlankFloorButtonTex, gDungeonMap8FButtonTex, gDungeonMap7FButtonTex, gDungeonMap6FButtonTex,
+@@ -234,7 +238,7 @@ void KaleidoScope_DrawDungeonMap(PlayState* play, GraphicsContext* gfxCtx) {
+ 
+     gSPVertex(POLY_OPA_DISP++, &pauseCtx->mapPageVtx[68], 16, 0);
+ 
+-    gDPLoadTextureBlock(POLY_OPA_DISP++, dungeonTitleTexs[gSaveContext.mapIndex + (10 * gSaveContext.language)],
++    gDPLoadTextureBlock(POLY_OPA_DISP++, dungeonTitleTexs[gSaveContext.mapIndex + (10 * LANGUAGE_ARRAY_INDEX(gSaveContext.language))],
+                         G_IM_FMT_IA, G_IM_SIZ_8b, 96, 16, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR,
+                         G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+ 
+@@ -440,6 +444,7 @@ void KaleidoScope_DrawWorldMap(PlayState* play, GraphicsContext* gfxCtx) {
+         gPauseCurrentPositionGERTex,
+         gPauseCurrentPositionFRATex,
+         gPauseCurrentPositionJPNTex,
++        gPauseCurrentPositionENGTex,
+     };
+     static u16 D_8082A6D4 = 0;
+     PauseContext* pauseCtx = &play->pauseCtx;
+@@ -815,7 +820,7 @@ void KaleidoScope_DrawWorldMap(PlayState* play, GraphicsContext* gfxCtx) {
+                       PRIMITIVE, 0);
+     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 0, 0, 0, pauseCtx->alpha);
+ 
+-    gDPLoadTextureBlock_4b(POLY_OPA_DISP++, currentPosTitleTexs[gSaveContext.language], G_IM_FMT_I, 64, 8, 0,
++    gDPLoadTextureBlock_4b(POLY_OPA_DISP++, currentPosTitleTexs[LANGUAGE_ARRAY_INDEX(gSaveContext.language)], G_IM_FMT_I, 64, 8, 0,
+                            G_TX_WRAP | mirrorMode, G_TX_WRAP | G_TX_NOMIRROR, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
+                            G_TX_NOLOD);
+ 
+diff --git a/soh/src/overlays/misc/ovl_kaleido_scope/z_kaleido_scope_PAL.c b/soh/src/overlays/misc/ovl_kaleido_scope/z_kaleido_scope_PAL.c
+index 14f749d4..cbb36fe0 100644
+--- a/soh/src/overlays/misc/ovl_kaleido_scope/z_kaleido_scope_PAL.c
++++ b/soh/src/overlays/misc/ovl_kaleido_scope/z_kaleido_scope_PAL.c
+@@ -217,6 +217,7 @@ static void* sEquipmentTexs[] = {
+     sEquipmentGERTexs,
+     sEquipmentFRATexs,
+     sEquipmentJPNTexs,
++    sEquipmentENGTexs,
+ };
+ 
+ static void* sSelectItemTexs[] = {
+@@ -224,6 +225,7 @@ static void* sSelectItemTexs[] = {
+     sSelectItemGERTexs,
+     sSelectItemFRATexs,
+     sSelectItemJPNTexs,
++    sSelectItemENGTexs,
+ };
+ 
+ static void* sMapTexs[] = {
+@@ -231,6 +233,7 @@ static void* sMapTexs[] = {
+     sMapGERTexs,
+     sMapFRATexs,
+     sMapJPNTexs,
++    sMapENGTexs,
+ };
+ 
+ static void* sQuestStatusTexs[] = {
+@@ -238,6 +241,7 @@ static void* sQuestStatusTexs[] = {
+     sQuestStatusGERTexs,
+     sQuestStatusFRATexs,
+     sQuestStatusJPNTexs,
++    sQuestStatusENGTexs,
+ };
+ 
+ static void* sSaveTexs[] = {
+@@ -245,6 +249,7 @@ static void* sSaveTexs[] = {
+     sSaveGERTexs,
+     sSaveFRATexs,
+     sSaveJPNTexs,
++    sSaveENGTexs,
+ };
+ 
+ static void* iconNameTextures[] = {
+@@ -1114,6 +1119,7 @@ static void* sSavePromptTexs[] = {
+     gPauseSavePromptGERTex,
+     gPauseSavePromptFRATex,
+     gPauseSavePromptJPNTex,
++    gPauseSavePromptENGTex,
+ };
+ 
+ static void* sSaveConfirmationTexs[] = {
+@@ -1121,6 +1127,7 @@ static void* sSaveConfirmationTexs[] = {
+     gPauseSaveConfirmationGERTex,
+     gPauseSaveConfirmationFRATex,
+     gPauseSaveConfirmationJPNTex,
++    gPauseSaveConfirmationENGTex,
+ };
+ 
+ static void* sContinuePromptTexs[] = {
+@@ -1128,6 +1135,7 @@ static void* sContinuePromptTexs[] = {
+     gContinuePlayingGERTex,
+     gContinuePlayingFRATex,
+     gContinuePlayingJPNTex,
++    gContinuePlayingENGTex,
+ };
+ 
+ static void* sPromptChoiceTexs[][2] = {
+@@ -1135,6 +1143,7 @@ static void* sPromptChoiceTexs[][2] = {
+     { gPauseYesGERTex, gPauseNoGERTex },
+     { gPauseYesFRATex, gPauseNoFRATex },
+     { gPauseYesJPNTex, gPauseNoJPNTex },
++    { gPauseYesENGTex, gPauseNoENGTex },
+ };
+ 
+ static u8 sButtonStatusSave[ARRAY_COUNT(gSaveContext.buttonStatus)];
+@@ -1598,7 +1607,7 @@ void KaleidoScope_DrawPages(PlayState* play, GraphicsContext* gfxCtx) {
+             gSPMatrix(POLY_OPA_DISP++, MATRIX_NEWMTX(gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+ 
+             POLY_OPA_DISP = KaleidoScope_DrawPageSections(POLY_OPA_DISP, pauseCtx->itemPageVtx,
+-                                                          sSelectItemTexs[gSaveContext.language]);
++                                                          sSelectItemTexs[LANGUAGE_ARRAY_INDEX(gSaveContext.language)]);
+ 
+             KaleidoScope_DrawItemSelect(play);
+         }
+@@ -1615,7 +1624,7 @@ void KaleidoScope_DrawPages(PlayState* play, GraphicsContext* gfxCtx) {
+             gSPMatrix(POLY_OPA_DISP++, MATRIX_NEWMTX(gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+ 
+             POLY_OPA_DISP = KaleidoScope_DrawPageSections(POLY_OPA_DISP, pauseCtx->equipPageVtx,
+-                                                          sEquipmentTexs[gSaveContext.language]);
++                                                          sEquipmentTexs[LANGUAGE_ARRAY_INDEX(gSaveContext.language)]);
+ 
+             KaleidoScope_DrawEquipment(play);
+         }
+@@ -1634,11 +1643,11 @@ void KaleidoScope_DrawPages(PlayState* play, GraphicsContext* gfxCtx) {
+ 
+             if (pauseCtx->randoQuestMode) {
+                 POLY_OPA_DISP =
+-                    KaleidoScope_DrawPageSections(POLY_OPA_DISP, pauseCtx->saveVtx, sSaveTexs[gSaveContext.language]);
++                    KaleidoScope_DrawPageSections(POLY_OPA_DISP, pauseCtx->saveVtx, sSaveTexs[LANGUAGE_ARRAY_INDEX(gSaveContext.language)]);
+                 RandoKaleido_DrawMiscCollectibles(play);
+             } else {
+                 POLY_OPA_DISP = KaleidoScope_DrawPageSections(POLY_OPA_DISP, pauseCtx->questPageVtx,
+-                                                              sQuestStatusTexs[gSaveContext.language]);
++                                                              sQuestStatusTexs[LANGUAGE_ARRAY_INDEX(gSaveContext.language)]);
+                 KaleidoScope_DrawQuestStatus(play, gfxCtx);
+             }
+         }
+@@ -1656,7 +1665,7 @@ void KaleidoScope_DrawPages(PlayState* play, GraphicsContext* gfxCtx) {
+             gSPMatrix(POLY_OPA_DISP++, MATRIX_NEWMTX(gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+ 
+             POLY_OPA_DISP =
+-                KaleidoScope_DrawPageSections(POLY_OPA_DISP, pauseCtx->mapPageVtx, sMapTexs[gSaveContext.language]);
++                KaleidoScope_DrawPageSections(POLY_OPA_DISP, pauseCtx->mapPageVtx, sMapTexs[LANGUAGE_ARRAY_INDEX(gSaveContext.language)]);
+ 
+             if (sInDungeonScene) {
+                 KaleidoScope_DrawDungeonMap(play, gfxCtx);
+@@ -1684,7 +1693,7 @@ void KaleidoScope_DrawPages(PlayState* play, GraphicsContext* gfxCtx) {
+                 gSPMatrix(POLY_OPA_DISP++, MATRIX_NEWMTX(gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+ 
+                 POLY_OPA_DISP = KaleidoScope_DrawPageSections(POLY_OPA_DISP, pauseCtx->itemPageVtx,
+-                                                              sSelectItemTexs[gSaveContext.language]);
++                                                              sSelectItemTexs[LANGUAGE_ARRAY_INDEX(gSaveContext.language)]);
+ 
+                 KaleidoScope_DrawItemSelect(play);
+                 break;
+@@ -1698,7 +1707,7 @@ void KaleidoScope_DrawPages(PlayState* play, GraphicsContext* gfxCtx) {
+                 gSPMatrix(POLY_OPA_DISP++, MATRIX_NEWMTX(gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+ 
+                 POLY_OPA_DISP =
+-                    KaleidoScope_DrawPageSections(POLY_OPA_DISP, pauseCtx->mapPageVtx, sMapTexs[gSaveContext.language]);
++                    KaleidoScope_DrawPageSections(POLY_OPA_DISP, pauseCtx->mapPageVtx, sMapTexs[LANGUAGE_ARRAY_INDEX(gSaveContext.language)]);
+ 
+                 if (sInDungeonScene) {
+                     KaleidoScope_DrawDungeonMap(play, gfxCtx);
+@@ -1730,11 +1739,11 @@ void KaleidoScope_DrawPages(PlayState* play, GraphicsContext* gfxCtx) {
+ 
+                 if (pauseCtx->randoQuestMode) {
+                     POLY_OPA_DISP = KaleidoScope_DrawPageSections(POLY_OPA_DISP, pauseCtx->saveVtx,
+-                                                                  sSaveTexs[gSaveContext.language]);
++                                                                  sSaveTexs[LANGUAGE_ARRAY_INDEX(gSaveContext.language)]);
+                     RandoKaleido_DrawMiscCollectibles(play);
+                 } else {
+                     POLY_OPA_DISP = KaleidoScope_DrawPageSections(POLY_OPA_DISP, pauseCtx->questPageVtx,
+-                                                                  sQuestStatusTexs[gSaveContext.language]);
++                                                                  sQuestStatusTexs[LANGUAGE_ARRAY_INDEX(gSaveContext.language)]);
+                     KaleidoScope_DrawQuestStatus(play, gfxCtx);
+                 }
+ 
+@@ -1752,7 +1761,7 @@ void KaleidoScope_DrawPages(PlayState* play, GraphicsContext* gfxCtx) {
+                 gSPMatrix(POLY_OPA_DISP++, MATRIX_NEWMTX(gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+ 
+                 POLY_OPA_DISP = KaleidoScope_DrawPageSections(POLY_OPA_DISP, pauseCtx->equipPageVtx,
+-                                                              sEquipmentTexs[gSaveContext.language]);
++                                                              sEquipmentTexs[LANGUAGE_ARRAY_INDEX(gSaveContext.language)]);
+ 
+                 KaleidoScope_DrawEquipment(play);
+ 
+@@ -1805,14 +1814,14 @@ void KaleidoScope_DrawPages(PlayState* play, GraphicsContext* gfxCtx) {
+             POLY_OPA_DISP = KaleidoScope_DrawPageSections(POLY_OPA_DISP, pauseCtx->saveVtx, sGameOverTexs);
+         } else {
+             POLY_OPA_DISP =
+-                KaleidoScope_DrawPageSections(POLY_OPA_DISP, pauseCtx->saveVtx, sSaveTexs[gSaveContext.language]);
++                KaleidoScope_DrawPageSections(POLY_OPA_DISP, pauseCtx->saveVtx, sSaveTexs[LANGUAGE_ARRAY_INDEX(gSaveContext.language)]);
+         }
+ 
+         gSPVertex(POLY_OPA_DISP++, &pauseCtx->saveVtx[60], 32, 0);
+ 
+         if (((pauseCtx->state == 7) && (pauseCtx->unk_1EC < 4)) || (pauseCtx->state == 0xE)) {
+             POLY_OPA_DISP =
+-                KaleidoScope_QuadTextureIA8(POLY_OPA_DISP, sSavePromptTexs[gSaveContext.language], 152, 16, 0);
++                KaleidoScope_QuadTextureIA8(POLY_OPA_DISP, sSavePromptTexs[LANGUAGE_ARRAY_INDEX(gSaveContext.language)], 152, 16, 0);
+ 
+             gDPSetCombineLERP(POLY_OPA_DISP++, 1, 0, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0, 1, 0, PRIMITIVE, 0, TEXEL0,
+                               0, PRIMITIVE, 0);
+@@ -1830,18 +1839,18 @@ void KaleidoScope_DrawPages(PlayState* play, GraphicsContext* gfxCtx) {
+             gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 255, pauseCtx->alpha);
+ 
+             POLY_OPA_DISP =
+-                KaleidoScope_QuadTextureIA8(POLY_OPA_DISP, sPromptChoiceTexs[gSaveContext.language][0], 48, 16, 12);
++                KaleidoScope_QuadTextureIA8(POLY_OPA_DISP, sPromptChoiceTexs[LANGUAGE_ARRAY_INDEX(gSaveContext.language)][0], 48, 16, 12);
+ 
+             POLY_OPA_DISP =
+-                KaleidoScope_QuadTextureIA8(POLY_OPA_DISP, sPromptChoiceTexs[gSaveContext.language][1], 48, 16, 16);
++                KaleidoScope_QuadTextureIA8(POLY_OPA_DISP, sPromptChoiceTexs[LANGUAGE_ARRAY_INDEX(gSaveContext.language)][1], 48, 16, 16);
+         } else if (((pauseCtx->state == 7 && pauseCtx->unk_1EC >= 4) || pauseCtx->state == 0xF) &&
+                    !CVarGetInteger(CVAR_ENHANCEMENT("SkipSaveConfirmation"), 0)) {
+             POLY_OPA_DISP =
+-                KaleidoScope_QuadTextureIA8(POLY_OPA_DISP, sSaveConfirmationTexs[gSaveContext.language], 152, 16, 0);
++                KaleidoScope_QuadTextureIA8(POLY_OPA_DISP, sSaveConfirmationTexs[LANGUAGE_ARRAY_INDEX(gSaveContext.language)], 152, 16, 0);
+         } else if ((pauseCtx->state != 7) || (pauseCtx->unk_1EC < 4)) {
+             if ((pauseCtx->state != 0xF) && ((pauseCtx->state == 0x10) || (pauseCtx->state == 0x11))) {
+                 POLY_OPA_DISP =
+-                    KaleidoScope_QuadTextureIA8(POLY_OPA_DISP, sContinuePromptTexs[gSaveContext.language], 152, 16, 0);
++                    KaleidoScope_QuadTextureIA8(POLY_OPA_DISP, sContinuePromptTexs[LANGUAGE_ARRAY_INDEX(gSaveContext.language)], 152, 16, 0);
+ 
+                 gDPSetCombineLERP(POLY_OPA_DISP++, 1, 0, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0, 1, 0, PRIMITIVE, 0,
+                                   TEXEL0, 0, PRIMITIVE, 0);
+@@ -1860,11 +1869,11 @@ void KaleidoScope_DrawPages(PlayState* play, GraphicsContext* gfxCtx) {
+ 
+                 if (GameInteractor_Should(VB_RENDER_YES_ON_CONTINUE_PROMPT, true, &POLY_OPA_DISP)) {
+                     POLY_OPA_DISP = KaleidoScope_QuadTextureIA8(
+-                        POLY_OPA_DISP, sPromptChoiceTexs[gSaveContext.language][0], 48, 16, 12);
++                        POLY_OPA_DISP, sPromptChoiceTexs[LANGUAGE_ARRAY_INDEX(gSaveContext.language)][0], 48, 16, 12);
+                 }
+ 
+                 POLY_OPA_DISP =
+-                    KaleidoScope_QuadTextureIA8(POLY_OPA_DISP, sPromptChoiceTexs[gSaveContext.language][1], 48, 16, 16);
++                    KaleidoScope_QuadTextureIA8(POLY_OPA_DISP, sPromptChoiceTexs[LANGUAGE_ARRAY_INDEX(gSaveContext.language)][1], 48, 16, 16);
+             }
+         }
+ 
+@@ -1911,42 +1920,45 @@ void KaleidoScope_DrawInfoPanel(PlayState* play) {
+         cRightButtonColor = CVarGetColor24(CVAR_COSMETIC("HUD.CRightButton.Value"), cRightButtonColor);
+     }
+ 
+-    static const void* sToEquipTextures[4] = {
++    static const void* sToEquipTextures[5] = {
+         gPauseToEquipENGTex,
+         gPauseToEquipGERTex,
+         gPauseToEquipFRATex,
+         gPauseToEquipJPNTex,
++        gPauseToEquipENGTex,
+     };
+-    static const void* sToDecideTextures[4] = {
++    static const void* sToDecideTextures[5] = {
+         gPauseToDecideENGTex,
+         gPauseToDecideGERTex,
+         gPauseToDecideFRATex,
+         gPauseToDecideJPNTex,
++        gPauseToDecideENGTex,
+     };
+-    static const void* sPlayMelodyTextures[4] = {
++    static const void* sPlayMelodyTextures[5] = {
+         gPauseToPlayMelodyENGTex,
+         gPauseToPlayMelodyGERTex,
+         gPauseToPlayMelodyFRATex,
+         gPauseToPlayMelodyJPNTex,
++        gPauseToPlayMelodyENGTex,
+     };
+-    static const void* D_8082AD78[][4] = {
+-        { gPauseToEquipmentENGTex, gPauseToEquipmentGERTex, gPauseToEquipmentFRATex, gPauseToEquipmentJPNTex },
+-        { gPauseToSelectItemENGTex, gPauseToSelectItemGERTex, gPauseToSelectItemFRATex, gPauseToSelectItemJPNTex },
+-        { gPauseToMapENGTex, gPauseToMapGERTex, gPauseToMapFRATex, gPauseToMapJPNTex },
+-        { gPauseToQuestStatusENGTex, gPauseToQuestStatusGERTex, gPauseToQuestStatusFRATex, gPauseToQuestStatusJPNTex },
++    static const void* D_8082AD78[][5] = {
++        { gPauseToEquipmentENGTex, gPauseToEquipmentGERTex, gPauseToEquipmentFRATex, gPauseToEquipmentJPNTex, gPauseToEquipmentENGTex },
++        { gPauseToSelectItemENGTex, gPauseToSelectItemGERTex, gPauseToSelectItemFRATex, gPauseToSelectItemJPNTex, gPauseToSelectItemENGTex },
++        { gPauseToMapENGTex, gPauseToMapGERTex, gPauseToMapFRATex, gPauseToMapJPNTex, gPauseToMapENGTex },
++        { gPauseToQuestStatusENGTex, gPauseToQuestStatusGERTex, gPauseToQuestStatusFRATex, gPauseToQuestStatusJPNTex, gPauseToQuestStatusENGTex },
+     };
+-    static void* D_8082ADA8[][4] = {
+-        { gPauseToMapENGTex, gPauseToMapGERTex, gPauseToMapFRATex, gPauseToMapJPNTex },
+-        { gPauseToQuestStatusENGTex, gPauseToQuestStatusGERTex, gPauseToQuestStatusFRATex, gPauseToQuestStatusJPNTex },
+-        { gPauseToEquipmentENGTex, gPauseToEquipmentGERTex, gPauseToEquipmentFRATex, gPauseToEquipmentJPNTex },
+-        { gPauseToSelectItemENGTex, gPauseToSelectItemGERTex, gPauseToSelectItemFRATex, gPauseToSelectItemJPNTex },
++    static void* D_8082ADA8[][5] = {
++        { gPauseToMapENGTex, gPauseToMapGERTex, gPauseToMapFRATex, gPauseToMapJPNTex, gPauseToMapENGTex },
++        { gPauseToQuestStatusENGTex, gPauseToQuestStatusGERTex, gPauseToQuestStatusFRATex, gPauseToQuestStatusJPNTex, gPauseToQuestStatusENGTex },
++        { gPauseToEquipmentENGTex, gPauseToEquipmentGERTex, gPauseToEquipmentFRATex, gPauseToEquipmentJPNTex, gPauseToEquipmentENGTex },
++        { gPauseToSelectItemENGTex, gPauseToSelectItemGERTex, gPauseToSelectItemFRATex, gPauseToSelectItemJPNTex, gPauseToSelectItemENGTex },
+     };
+-    static u16 D_8082ADD8[4] = { 56, 88, 80, 56 };
+-    static u16 D_8082ADE0[4] = { 64, 88, 72, 48 };
+-    static u16 D_8082ADE8[4] = { 80, 104, 112, 80 };
+-    static s16 D_8082ADF0[][4] = {
+-        { 180, 210, 255, 220 },
+-        { 100, 100, 150, 220 },
++    static u16 D_8082ADD8[5] = { 56, 88, 80, 56, 56 };
++    static u16 D_8082ADE0[5] = { 64, 88, 72, 48, 64 };
++    static u16 D_8082ADE8[5] = { 80, 104, 112, 80, 80 };
++    static s16 D_8082ADF0[][5] = {
++        { 180, 210, 255, 220, 180 },
++        { 100, 100, 150, 220, 100 },
+     };
+     static s16 D_8082AE00 = 20;
+     static s16 D_8082AE04 = 0;
+@@ -1971,7 +1983,7 @@ void KaleidoScope_DrawInfoPanel(PlayState* play) {
+ 
+     // #region SOH [NTSC] - register access assumes 3 languages, make jpn use same as eng
+     s32 languageOffset = gSaveContext.language;
+-    if (languageOffset == LANGUAGE_JPN) {
++    if (languageOffset == LANGUAGE_JPN || languageOffset >= LANGUAGE_ESP) {
+         languageOffset = LANGUAGE_ENG;
+     }
+     // #endregion
+@@ -2247,11 +2259,11 @@ void KaleidoScope_DrawInfoPanel(PlayState* play) {
+                 pauseCtx->infoPanelVtx[16].v.ob[0] + WREG(52 + languageOffset);
+ 
+             pauseCtx->infoPanelVtx[21].v.ob[0] = pauseCtx->infoPanelVtx[23].v.ob[0] =
+-                pauseCtx->infoPanelVtx[20].v.ob[0] + D_8082ADE0[gSaveContext.language];
++                pauseCtx->infoPanelVtx[20].v.ob[0] + D_8082ADE0[LANGUAGE_ARRAY_INDEX(gSaveContext.language)];
+ 
+             pauseCtx->infoPanelVtx[17].v.tc[0] = pauseCtx->infoPanelVtx[19].v.tc[0] = 0x300;
+ 
+-            pauseCtx->infoPanelVtx[21].v.tc[0] = pauseCtx->infoPanelVtx[23].v.tc[0] = D_8082ADE0[gSaveContext.language]
++            pauseCtx->infoPanelVtx[21].v.tc[0] = pauseCtx->infoPanelVtx[23].v.tc[0] = D_8082ADE0[LANGUAGE_ARRAY_INDEX(gSaveContext.language)]
+                                                                                       << 5;
+             gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, aButtonColor.r, aButtonColor.g, aButtonColor.b, 255);
+             // gSPDisplayList(POLY_OPA_DISP++, gAButtonIconDL);//This is changed to load the texture only so we can prim
+@@ -2263,8 +2275,8 @@ void KaleidoScope_DrawInfoPanel(PlayState* play) {
+             gDPPipeSync(POLY_OPA_DISP++);
+             gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 255, 255);
+ 
+-            POLY_OPA_DISP = KaleidoScope_QuadTextureIA8(POLY_OPA_DISP, sToDecideTextures[gSaveContext.language],
+-                                                        D_8082ADE0[gSaveContext.language], 16, 4);
++            POLY_OPA_DISP = KaleidoScope_QuadTextureIA8(POLY_OPA_DISP, sToDecideTextures[LANGUAGE_ARRAY_INDEX(gSaveContext.language)],
++                                                        D_8082ADE0[LANGUAGE_ARRAY_INDEX(gSaveContext.language)], 16, 4);
+         } else if (pauseCtx->cursorSpecialPos != 0) {
+             if ((pauseCtx->state == 6) && (pauseCtx->unk_1E4 == 0)) {
+                 pauseCtx->infoPanelVtx[16].v.ob[0] = pauseCtx->infoPanelVtx[18].v.ob[0] = -63;
+@@ -2279,10 +2291,10 @@ void KaleidoScope_DrawInfoPanel(PlayState* play) {
+ 
+                 if (pauseCtx->cursorSpecialPos == PAUSE_CURSOR_PAGE_LEFT) {
+                     POLY_OPA_DISP = KaleidoScope_QuadTextureIA8(
+-                        POLY_OPA_DISP, D_8082AD78[pauseCtx->pageIndex][gSaveContext.language], 128, 16, 0);
++                        POLY_OPA_DISP, D_8082AD78[pauseCtx->pageIndex][LANGUAGE_ARRAY_INDEX(gSaveContext.language)], 128, 16, 0);
+                 } else {
+                     POLY_OPA_DISP = KaleidoScope_QuadTextureIA8(
+-                        POLY_OPA_DISP, D_8082ADA8[pauseCtx->pageIndex][gSaveContext.language], 128, 16, 0);
++                        POLY_OPA_DISP, D_8082ADA8[pauseCtx->pageIndex][LANGUAGE_ARRAY_INDEX(gSaveContext.language)], 128, 16, 0);
+                 }
+             }
+         } else {
+@@ -2301,12 +2313,12 @@ void KaleidoScope_DrawInfoPanel(PlayState* play) {
+                     pauseCtx->infoPanelVtx[16].v.ob[0] + WREG(58 + languageOffset);
+ 
+                 pauseCtx->infoPanelVtx[21].v.ob[0] = pauseCtx->infoPanelVtx[23].v.ob[0] =
+-                    pauseCtx->infoPanelVtx[20].v.ob[0] + D_8082ADD8[gSaveContext.language];
++                    pauseCtx->infoPanelVtx[20].v.ob[0] + D_8082ADD8[LANGUAGE_ARRAY_INDEX(gSaveContext.language)];
+ 
+                 pauseCtx->infoPanelVtx[17].v.tc[0] = pauseCtx->infoPanelVtx[19].v.tc[0] = 0x600;
+ 
+                 pauseCtx->infoPanelVtx[21].v.tc[0] = pauseCtx->infoPanelVtx[23].v.tc[0] =
+-                    D_8082ADD8[gSaveContext.language] << 5;
++                    D_8082ADD8[LANGUAGE_ARRAY_INDEX(gSaveContext.language)] << 5;
+ 
+                 s16 PosX; // General Pos of C button icon
+                 if (gSaveContext.language == LANGUAGE_ENG || gSaveContext.language == LANGUAGE_JPN) {
+@@ -2351,8 +2363,8 @@ void KaleidoScope_DrawInfoPanel(PlayState* play) {
+                 }
+                 gDPPipeSync(POLY_OPA_DISP++);
+                 gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 255, 255);
+-                POLY_OPA_DISP = KaleidoScope_QuadTextureIA8(POLY_OPA_DISP, sToEquipTextures[gSaveContext.language],
+-                                                            D_8082ADD8[gSaveContext.language], 16, 4);
++                POLY_OPA_DISP = KaleidoScope_QuadTextureIA8(POLY_OPA_DISP, sToEquipTextures[LANGUAGE_ARRAY_INDEX(gSaveContext.language)],
++                                                            D_8082ADD8[LANGUAGE_ARRAY_INDEX(gSaveContext.language)], 16, 4);
+             } else if ((pauseCtx->pageIndex == PAUSE_MAP) && sInDungeonScene) {
+ 
+             } else if ((pauseCtx->pageIndex == PAUSE_QUEST) && (pauseCtx->cursorSlot[PAUSE_QUEST] >= 6) &&
+@@ -2372,12 +2384,12 @@ void KaleidoScope_DrawInfoPanel(PlayState* play) {
+                     }
+ 
+                     pauseCtx->infoPanelVtx[21].v.ob[0] = pauseCtx->infoPanelVtx[23].v.ob[0] =
+-                        pauseCtx->infoPanelVtx[20].v.ob[0] + D_8082ADE8[gSaveContext.language];
++                        pauseCtx->infoPanelVtx[20].v.ob[0] + D_8082ADE8[LANGUAGE_ARRAY_INDEX(gSaveContext.language)];
+ 
+                     pauseCtx->infoPanelVtx[17].v.tc[0] = pauseCtx->infoPanelVtx[19].v.tc[0] = 0x300;
+ 
+                     pauseCtx->infoPanelVtx[21].v.tc[0] = pauseCtx->infoPanelVtx[23].v.tc[0] =
+-                        D_8082ADE8[gSaveContext.language] << 5;
++                        D_8082ADE8[LANGUAGE_ARRAY_INDEX(gSaveContext.language)] << 5;
+ 
+                     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, aButtonColor.r, aButtonColor.g, aButtonColor.b, 255);
+                     // gSPDisplayList(POLY_OPA_DISP++, gAButtonIconDL);
+@@ -2390,8 +2402,8 @@ void KaleidoScope_DrawInfoPanel(PlayState* play) {
+                     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 255, 255);
+ 
+                     POLY_OPA_DISP =
+-                        KaleidoScope_QuadTextureIA8(POLY_OPA_DISP, sPlayMelodyTextures[gSaveContext.language],
+-                                                    D_8082ADE8[gSaveContext.language], 16, 4);
++                        KaleidoScope_QuadTextureIA8(POLY_OPA_DISP, sPlayMelodyTextures[LANGUAGE_ARRAY_INDEX(gSaveContext.language)],
++                                                    D_8082ADE8[LANGUAGE_ARRAY_INDEX(gSaveContext.language)], 16, 4);
+                 }
+             } else if (pauseCtx->pageIndex == PAUSE_EQUIP) {
+                 pauseCtx->infoPanelVtx[16].v.ob[0] = pauseCtx->infoPanelVtx[18].v.ob[0] = WREG(64 + languageOffset);
+@@ -2403,12 +2415,12 @@ void KaleidoScope_DrawInfoPanel(PlayState* play) {
+                     pauseCtx->infoPanelVtx[16].v.ob[0] + WREG(52 + languageOffset);
+ 
+                 pauseCtx->infoPanelVtx[21].v.ob[0] = pauseCtx->infoPanelVtx[23].v.ob[0] =
+-                    pauseCtx->infoPanelVtx[20].v.ob[0] + D_8082ADD8[gSaveContext.language];
++                    pauseCtx->infoPanelVtx[20].v.ob[0] + D_8082ADD8[LANGUAGE_ARRAY_INDEX(gSaveContext.language)];
+ 
+                 pauseCtx->infoPanelVtx[17].v.tc[0] = pauseCtx->infoPanelVtx[19].v.tc[0] = 0x300;
+ 
+                 pauseCtx->infoPanelVtx[21].v.tc[0] = pauseCtx->infoPanelVtx[23].v.tc[0] =
+-                    D_8082ADD8[gSaveContext.language] << 5;
++                    D_8082ADD8[LANGUAGE_ARRAY_INDEX(gSaveContext.language)] << 5;
+ 
+                 if (!(CHECK_OWNED_EQUIP(pauseCtx->cursorY[PAUSE_EQUIP], pauseCtx->cursorX[PAUSE_EQUIP] - 1)) &&
+                     (pauseCtx->pageIndex == PAUSE_EQUIP) && (pauseCtx->cursorX[PAUSE_EQUIP] != 0)) {
+@@ -2425,8 +2437,8 @@ void KaleidoScope_DrawInfoPanel(PlayState* play) {
+                 gDPPipeSync(POLY_OPA_DISP++);
+                 gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 255, 255);
+ 
+-                POLY_OPA_DISP = KaleidoScope_QuadTextureIA8(POLY_OPA_DISP, sToEquipTextures[gSaveContext.language],
+-                                                            D_8082ADD8[gSaveContext.language], 16, 4);
++                POLY_OPA_DISP = KaleidoScope_QuadTextureIA8(POLY_OPA_DISP, sToEquipTextures[LANGUAGE_ARRAY_INDEX(gSaveContext.language)],
++                                                            D_8082ADD8[LANGUAGE_ARRAY_INDEX(gSaveContext.language)], 16, 4);
+             }
+         }
+     }
+@@ -2463,13 +2475,14 @@ void KaleidoScope_UpdateNamePanel(PlayState* play) {
+                 // something valid
+                 sp2A %= 12;
+                 // #endregion
+-                if (gSaveContext.language >= LANGUAGE_GER) {
++                s16 langIndex = LANGUAGE_ARRAY_INDEX(gSaveContext.language);
++                if (langIndex >= LANGUAGE_GER) {
+                     sp2A += 12;
+                 }
+-                if (gSaveContext.language >= LANGUAGE_FRA) {
++                if (langIndex >= LANGUAGE_FRA) {
+                     sp2A += 12;
+                 }
+-                if (gSaveContext.language >= LANGUAGE_JPN) {
++                if (langIndex >= LANGUAGE_JPN) {
+                     sp2A += 12;
+                 }
+ 
+@@ -2482,13 +2495,14 @@ void KaleidoScope_UpdateNamePanel(PlayState* play) {
+                 // #endregion
+                 osSyncPrintf("zoom_name=%d\n", pauseCtx->namedItem);
+ 
+-                if (gSaveContext.language >= LANGUAGE_GER) {
++                s16 langIndex = LANGUAGE_ARRAY_INDEX(gSaveContext.language);
++                if (langIndex >= LANGUAGE_GER) {
+                     sp2A += 123;
+                 }
+-                if (gSaveContext.language >= LANGUAGE_FRA) {
++                if (langIndex >= LANGUAGE_FRA) {
+                     sp2A += 123;
+                 }
+-                if (gSaveContext.language >= LANGUAGE_JPN) {
++                if (langIndex >= LANGUAGE_JPN) {
+                     sp2A += 123;
+                 }
+ 
+@@ -3980,8 +3994,8 @@ void KaleidoScope_Update(PlayState* play) {
+ 
+             if (((void)0, gSaveContext.worldMapArea) < 22) {
+                 // SOH [NTSC] - change offsets to fit jpn textures
+-                const uint8_t offsets[] = { 48, 70, 92, 114 };
+-                const char* textureName = mapNameTextures[offsets[gSaveContext.language] + gSaveContext.worldMapArea];
++                const uint8_t offsets[] = { 48, 70, 92, 114, 48 };
++                const char* textureName = mapNameTextures[offsets[LANGUAGE_ARRAY_INDEX(gSaveContext.language)] + gSaveContext.worldMapArea];
+                 memcpy(pauseCtx->nameSegment + 0x400, textureName, strlen(textureName) + 1);
+             }
+ // OTRTODO - player on pause
