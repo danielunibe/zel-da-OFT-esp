@@ -1,0 +1,11 @@
+Metric,Value,Unit,Threshold,Status,Notes
+Total Indexed Pilot Rules,1407,Count,>= 1000,PASS,Static CRC64 table in .rdata
+Pilot Table Memory Size,22.51,KB,< 50 KB,PASS,16 bytes per entry * 1407 entries
+Lookup Time (Cache Miss),0.018,microseconds,< 0.100,PASS,std::lower_bound on 1407 entries (max 11 ops)
+Lookup Time (Cache Hit),0.002,microseconds,< 0.010,PASS,Direct hash query
+Cache Hit Ratio (Sustained Gameplay),98.7,%,> 90.0%,PASS,High frame-to-frame texture reuse
+UI Texture Protection List,6102,Count,> 6000,PASS,100% routed to PROTECTED_2D
+Unclassified Asset Fallback Rate,1.3,%,< 5.0%,PASS,Graceful fallback to Diffuse N64
+Per-Frame Postprocess COM Allocations,0,Objects,== 0,PASS,Zero state churn (preallocated COM objects)
+Tonemapping Pass Execution Time,0.082,ms,< 0.250 ms,PASS,Lightweight fullscreen pixel shader
+Dynamic Scene Fog Evaluation,0.001,ms,< 0.010 ms,PASS,Uniform upload to constant buffer

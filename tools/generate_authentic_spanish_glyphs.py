@@ -9,9 +9,8 @@ import os
 import struct
 import zipfile
 
-DEV_ROOT = r"C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV"
-OOT_O2R = os.path.join(DEV_ROOT, "runtime", "build-test", "oot.o2r")
-GLYPHS_DIR = os.path.join(DEV_ROOT, "runtime", "build-test", "_spanish_work", "glyphs")
+import argparse
+from pathlib import Path
 
 def decode_i4(data):
     grid = [[0]*16 for _ in range(16)]
@@ -32,10 +31,22 @@ def encode_i4(grid):
     return bytes(out)
 
 def main():
-    os.makedirs(GLYPHS_DIR, exist_ok=True)
-    print(f"Reading stock font textures from {OOT_O2R}...")
+    repo_root = Path(__file__).resolve().parent.parent
+    default_oot = repo_root / "oot.o2r"
+    default_glyphs = repo_root / "data" / "glyphs"
 
-    with zipfile.ZipFile(OOT_O2R, "r") as zf:
+    parser = argparse.ArgumentParser(description="Generate 11 authentic Spanish glyphs from stock OoT font textures")
+    parser.add_argument("--oot", type=Path, default=default_oot, help="Path to user-owned oot.o2r archive")
+    parser.add_argument("--glyphs-dir", type=Path, default=default_glyphs, help="Output directory for glyph .bin files")
+    args = parser.parse_args()
+
+    args.glyphs_dir.mkdir(parents=True, exist_ok=True)
+    if not args.oot.exists():
+        print(f"Error: Base ROM archive not found at {args.oot}. Specify with --oot <path>.", file=sys.stderr)
+        sys.exit(1)
+
+    print(f"Reading stock font textures from {args.oot}...")
+    with zipfile.ZipFile(args.oot, "r") as zf:
         acute_lower = decode_i4(zf.read("textures/nes_font_static/gMsgChar96LatinSmallLetterEWithAcuteTex")[80:])
         acute_upper = decode_i4(zf.read("textures/nes_font_static/gMsgChar86LatinCapitalLetterEWithAcuteTex")[80:])
         excl = decode_i4(zf.read("textures/nes_font_static/gMsgChar21ExclamationMarkTex")[80:])

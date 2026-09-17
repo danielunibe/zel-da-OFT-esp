@@ -78,4 +78,4 @@ All pre-existing user save files remain 100% untouched and identical:
 ---
 
 ### 5. Live Project Isolation
-`LIVE_ROOT` (`C:\Users\danie\Desktop\Ocarina of Time PC`) was strictly treated as read-only. Zero files were modified, overwritten, or removed.
+The live production project directory was strictly treated as read-only. Zero files were modified, overwritten, or removed.
