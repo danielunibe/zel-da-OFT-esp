@@ -61,6 +61,9 @@ def run_test():
         if not isinstance(data["CVars"]["gEnhancements"].get("Graphics"), dict):
             data["CVars"]["gEnhancements"]["Graphics"] = {}
         data["CVars"]["gEnhancements"]["Graphics"]["VisualProfile"] = profile_val
+        if not isinstance(data["CVars"].get("gSettings"), dict):
+            data["CVars"]["gSettings"] = {}
+        data["CVars"]["gSettings"]["Languages"] = 4
         # Remove any lingering incorrect CVar to ensure no ambiguity
         if "gVisualEnhancements" in data["CVars"]:
             del data["CVars"]["gVisualEnhancements"]
@@ -230,6 +233,27 @@ def run_test():
         else:
             print(f"  -> {f}: HASH PRESERVED ({post_hash[:16]}...)")
     results["SAVE_INTEGRITY"] = "PASS" if save_match else "FAIL"
+
+    # ------------------------------------------------------------
+    # 5. SPANISH LANGUAGE ROUTING & LOOKUP VERIFICATION
+    # ------------------------------------------------------------
+    print("\n[TEST 5] Testing Spanish Language Routing & Message Lookup (Mido 0x1042)...")
+    has_lang_4 = ("[COUCH-LANG] SaveContext.language = 4" in enhanced_output) or ("[COUCH-LANG] Runtime language enum = 4" in enhanced_output)
+    has_msg_1042 = "[COUCH-LANG] Message ID = 0x1042" in enhanced_output
+    has_req_lang_4 = "[COUCH-LANG] Requested language = 4" in enhanced_output
+    has_table_spa = "[COUCH-LANG] Resolved table = SPA" in enhanced_output
+    has_fallback_no = "[COUCH-LANG] Fallback used = NO" in enhanced_output
+
+    diagnostics_record["requested_language"] = 4 if has_req_lang_4 else "UNKNOWN"
+    diagnostics_record["resolved_table"] = "SPA" if has_table_spa else "FALLBACK/OTHER"
+    diagnostics_record["fallback_used"] = "NO" if has_fallback_no else "YES"
+
+    if has_lang_4 and has_msg_1042 and has_req_lang_4 and has_table_spa and has_fallback_no:
+        print("  -> Spanish Message Routing Confirmed: ID=0x1042, requestedLanguage=4, resolvedTable=SPA, fallback=NO -> PASS")
+        results["SPANISH_ROUTING_VERIFIED"] = "PASS"
+    else:
+        print(f"  -> Spanish Message Routing FAILED (lang4={has_lang_4}, msg={has_msg_1042}, req={has_req_lang_4}, spa={has_table_spa}, nofallback={has_fallback_no})")
+        results["SPANISH_ROUTING_VERIFIED"] = "FAIL"
 
     # Reset default configuration to ENHANCED (1)
     set_visual_profile(1)

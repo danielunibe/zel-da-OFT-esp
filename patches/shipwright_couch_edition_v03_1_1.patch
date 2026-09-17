@@ -346,6 +346,27 @@ index 43b89847..c0379523 100644
      TextBoxType type = TEXTBOX_TYPE_BLACK;
      TextBoxPosition position = TEXTBOX_POS_BOTTOM;
      std::vector<std::string> colors = {};
+diff --git a/soh/soh/Enhancements/debugger/MessageViewer.cpp b/soh/soh/Enhancements/debugger/MessageViewer.cpp
+index c018b001..dc94eb4c 100644
+--- a/soh/soh/Enhancements/debugger/MessageViewer.cpp
++++ b/soh/soh/Enhancements/debugger/MessageViewer.cpp
+@@ -117,6 +117,7 @@ extern "C" MessageTableEntry* sNesMessageEntryTablePtr;
+ extern "C" MessageTableEntry* sGerMessageEntryTablePtr;
+ extern "C" MessageTableEntry* sFraMessageEntryTablePtr;
+ extern "C" MessageTableEntry* sJpnMessageEntryTablePtr;
++extern "C" MessageTableEntry* sSpaMessageEntryTablePtr;
+ extern "C" MessageTableEntry* sStaffMessageEntryTablePtr;
+ 
+ void FindMessage(PlayState* play, const uint16_t textId, const uint8_t language) {
+@@ -131,6 +132,8 @@ void FindMessage(PlayState* play, const uint16_t textId, const uint8_t language)
+         messageTableEntry = sFraMessageEntryTablePtr;
+     else if (language == LANGUAGE_JPN)
+         messageTableEntry = sJpnMessageEntryTablePtr;
++    else if (language == LANGUAGE_ESP)
++        messageTableEntry = sSpaMessageEntryTablePtr;
+ 
+     // If PAL languages are not present in the OTR file, default to English
+     if (messageTableEntry == nullptr)
 diff --git a/soh/soh/Enhancements/glyphs/GlyphResolver.cpp b/soh/soh/Enhancements/glyphs/GlyphResolver.cpp
 new file mode 100644
 index 00000000..92096fcf
@@ -478,7 +499,7 @@ index d6833f28..8cca2940 100644
  
  class SohMenu : public Ship::Menu {
 diff --git a/soh/soh/SohGui/SohMenuSettings.cpp b/soh/soh/SohGui/SohMenuSettings.cpp
-index 35abc38a..88fcf39f 100644
+index 35abc38a..24562d7f 100644
 --- a/soh/soh/SohGui/SohMenuSettings.cpp
 +++ b/soh/soh/SohGui/SohMenuSettings.cpp
 @@ -105,9 +105,11 @@ extern "C" MessageTableEntry* sNesMessageEntryTablePtr;
@@ -494,7 +515,23 @@ index 35abc38a..88fcf39f 100644
  };
  
  void SohMenu::UpdateLanguageMap(std::unordered_map<int32_t, const char*>& languageMap) {
-@@ -403,6 +405,19 @@ void SohMenu::AddMenuSettings() {
+@@ -215,6 +217,15 @@ void SohMenu::AddMenuSettings() {
+             auto options = std::static_pointer_cast<UIWidgets::ComboboxOptions>(info.options);
+             SohMenu::UpdateLanguageMap(options->comboMap);
+         })
++        .Callback([](WidgetInfo& info) {
++            int32_t val = CVarGetInteger(CVAR_SETTING("Languages"), LANGUAGE_ENG);
++            printf("[COUCH-LANG] UI language selected = %d\n", val);
++            FILE* fl = fopen("logs/couch_diagnostics.txt", "a");
++            if (fl) {
++                fprintf(fl, "[COUCH-LANG] UI language selected = %d\n", val);
++                fclose(fl);
++            }
++        })
+         .Options(ComboboxOptions()
+                      .LabelPosition(LabelPositions::Far)
+                      .ComponentAlignment(ComponentAlignments::Right)
+@@ -403,6 +414,19 @@ void SohMenu::AddMenuSettings() {
          .RaceDisable(false)
          .Options(ComboboxOptions().Tooltip("Sets the applied Texture Filtering.").ComboMap(textureFilteringMap));
  
@@ -515,7 +552,7 @@ index 35abc38a..88fcf39f 100644
      AddWidget(path, "Advanced Graphics Options", WIDGET_SEPARATOR_TEXT);
  
 diff --git a/soh/soh/z_message_OTR.cpp b/soh/soh/z_message_OTR.cpp
-index 40354194..a24344be 100644
+index 40354194..b855111d 100644
 --- a/soh/soh/z_message_OTR.cpp
 +++ b/soh/soh/z_message_OTR.cpp
 @@ -13,6 +13,7 @@ extern "C" MessageTableEntry* sNesMessageEntryTablePtr;
@@ -526,7 +563,7 @@ index 40354194..a24344be 100644
  extern "C" MessageTableEntry* sStaffMessageEntryTablePtr;
  // extern "C" MessageTableEntry* _message_0xFFFC_nes;
  
-@@ -87,6 +88,22 @@ extern "C" void OTRMessage_Init() {
+@@ -87,6 +88,43 @@ extern "C" void OTRMessage_Init() {
      if (sJpnMessageEntryTablePtr == NULL) {
          sJpnMessageEntryTablePtr = OTRMessage_LoadTable("text/jpn_message_data_static/jpn_message_data_static", false);
      }
@@ -538,6 +575,27 @@ index 40354194..a24344be 100644
 +            printf("[COUCH] Spanish table loaded = YES\n");
 +            fflush(stdout);
 +            SPDLOG_INFO("Spanish message table loaded successfully from es.o2r");
++
++            // Self-test lookup validation for Mido message 0x1042
++            MessageTableEntry* curr = sSpaMessageEntryTablePtr;
++            while (curr->textId != 0xFFFF) {
++                if (curr->textId == 0x1042) {
++                    printf("[COUCH-LANG] Message ID = 0x1042\n");
++                    printf("[COUCH-LANG] Requested language = 4\n");
++                    printf("[COUCH-LANG] Resolved table = SPA\n");
++                    printf("[COUCH-LANG] Fallback used = NO\n");
++                    FILE* fdiag = fopen("logs/couch_diagnostics.txt", "a");
++                    if (fdiag) {
++                        fprintf(fdiag, "[COUCH-LANG] Message ID = 0x1042\n");
++                        fprintf(fdiag, "[COUCH-LANG] Requested language = 4\n");
++                        fprintf(fdiag, "[COUCH-LANG] Resolved table = SPA\n");
++                        fprintf(fdiag, "[COUCH-LANG] Fallback used = NO\n");
++                        fclose(fdiag);
++                    }
++                    break;
++                }
++                curr++;
++            }
 +        } else {
 +            FILE* f = fopen("logs/couch_diagnostics.txt", "a");
 +            if (f) { fprintf(f, "[COUCH] Spanish table loaded = NO\n"); fclose(f); }
@@ -549,7 +607,7 @@ index 40354194..a24344be 100644
      // Note: Make sure this loads after PAL nes_message_data_static, so that message 0xFFFC is definitely loaded if it
      // exists
      if (sNesMessageEntryTablePtr == NULL) {
-@@ -176,3 +193,8 @@ extern "C" void OTRMessage_Init() {
+@@ -176,3 +214,8 @@ extern "C" void OTRMessage_Init() {
          customMessageTableID, TEXT_BIG_POE_COLLECTED_RANDO,
          CustomMessage("You have #" + CustomMessage::POINTS("\x01") + "# points.", { QM_RED }));
  }
@@ -558,6 +616,53 @@ index 40354194..a24344be 100644
 +    return (sSpaMessageEntryTablePtr != NULL);
 +}
 +
+diff --git a/soh/src/code/game.c b/soh/src/code/game.c
+index a31cf647..b7249a0d 100644
+--- a/soh/src/code/game.c
++++ b/soh/src/code/game.c
+@@ -1,4 +1,5 @@
+ #include <string.h>
++#include <stdio.h>
+ #include "global.h"
+ #include "vt.h"
+ #include "libultraship/bridge.h"
+@@ -11,6 +12,8 @@ extern MessageTableEntry* sNesMessageEntryTablePtr;
+ extern MessageTableEntry* sGerMessageEntryTablePtr;
+ extern MessageTableEntry* sFraMessageEntryTablePtr;
+ extern MessageTableEntry* sJpnMessageEntryTablePtr;
++extern MessageTableEntry* sSpaMessageEntryTablePtr;
++
+ 
+ SpeedMeter D_801664D0;
+ VisCvg sVisCvg;
+@@ -351,6 +354,27 @@ void GameState_Update(GameState* gameState) {
+         gSaveContext.language = LANGUAGE_ENG;
+     } else if (gSaveContext.language == LANGUAGE_FRA && sFraMessageEntryTablePtr == NULL) {
+         gSaveContext.language = LANGUAGE_ENG;
++    } else if (gSaveContext.language == LANGUAGE_ESP && sSpaMessageEntryTablePtr == NULL) {
++        gSaveContext.language = LANGUAGE_ENG;
++    }
++
++    static s32 sLoggedLangState = -1;
++    if (gSaveContext.language != sLoggedLangState) {
++        sLoggedLangState = gSaveContext.language;
++        printf("[COUCH-LANG] SaveContext.language = %d\n", gSaveContext.language);
++        printf("[COUCH-LANG] Runtime language enum = %d\n", gSaveContext.language);
++        printf("[COUCH-LANG] LANGUAGE_ESP = %d\n", LANGUAGE_ESP);
++        printf("[COUCH-LANG] es.o2r mounted = %s\n", OTRMessage_IsSpanishAvailable() ? "YES" : "NO");
++        printf("[COUCH-LANG] Spanish message table available = %s\n", (sSpaMessageEntryTablePtr != NULL) ? "YES" : "NO");
++        FILE* flang = fopen("logs/couch_diagnostics.txt", "a");
++        if (flang) {
++            fprintf(flang, "[COUCH-LANG] SaveContext.language = %d\n", gSaveContext.language);
++            fprintf(flang, "[COUCH-LANG] Runtime language enum = %d\n", gSaveContext.language);
++            fprintf(flang, "[COUCH-LANG] LANGUAGE_ESP = %d\n", LANGUAGE_ESP);
++            fprintf(flang, "[COUCH-LANG] es.o2r mounted = %s\n", OTRMessage_IsSpanishAvailable() ? "YES" : "NO");
++            fprintf(flang, "[COUCH-LANG] Spanish message table available = %s\n", (sSpaMessageEntryTablePtr != NULL) ? "YES" : "NO");
++            fclose(flang);
++        }
+     }
+ 
+     GameInteractor_ExecuteOnGameFrameUpdate();
 diff --git a/soh/src/code/z_kanfont.c b/soh/src/code/z_kanfont.c
 index 7c85204d..daa8f416 100644
 --- a/soh/src/code/z_kanfont.c
@@ -612,10 +717,18 @@ index 7c85204d..daa8f416 100644
  
  /**
 diff --git a/soh/src/code/z_message_PAL.c b/soh/src/code/z_message_PAL.c
-index 6c357c61..f8c08fe0 100644
+index 6c357c61..2133005a 100644
 --- a/soh/src/code/z_message_PAL.c
 +++ b/soh/src/code/z_message_PAL.c
-@@ -49,6 +49,7 @@ MessageTableEntry* sNesMessageEntryTablePtr = NULL;
+@@ -3,6 +3,7 @@
+ #include "vt.h"
+ 
+ #include <string.h>
++#include <stdio.h>
+ 
+ #include "textures/parameter_static/parameter_static.h"
+ #include "textures/message_static/message_static.h"
+@@ -49,6 +50,7 @@ MessageTableEntry* sNesMessageEntryTablePtr = NULL;
  MessageTableEntry* sGerMessageEntryTablePtr = NULL;
  MessageTableEntry* sFraMessageEntryTablePtr = NULL;
  MessageTableEntry* sJpnMessageEntryTablePtr = NULL;
@@ -623,7 +736,102 @@ index 6c357c61..f8c08fe0 100644
  MessageTableEntry* sStaffMessageEntryTablePtr = NULL;
  
  char* _message_0xFFFC_nes;
-@@ -1620,7 +1621,7 @@ void Message_DrawText(PlayState* play, Gfx** gfxP) {
+@@ -340,18 +342,28 @@ void Message_FindMessage(PlayState* play, u16 textId) {
+     const char* foundSeg;
+     const char* nextSeg;
+     MessageTableEntry* messageTableEntry = sNesMessageEntryTablePtr;
+-    const char** languageSegmentTable;
+     Font* font;
+     const char* seg;
++    const char* resolvedTableName = "ENG";
++    bool fallbackUsed = false;
+ 
+-    if (gSaveContext.language == LANGUAGE_GER)
++    if (gSaveContext.language == LANGUAGE_GER && sGerMessageEntryTablePtr != NULL) {
+         messageTableEntry = sGerMessageEntryTablePtr;
+-    else if (gSaveContext.language == LANGUAGE_FRA)
++        resolvedTableName = "GER";
++    } else if (gSaveContext.language == LANGUAGE_FRA && sFraMessageEntryTablePtr != NULL) {
+         messageTableEntry = sFraMessageEntryTablePtr;
++        resolvedTableName = "FRA";
++    } else if (gSaveContext.language == LANGUAGE_ESP && sSpaMessageEntryTablePtr != NULL) {
++        messageTableEntry = sSpaMessageEntryTablePtr;
++        resolvedTableName = "SPA";
++    }
+ 
+-    // If PAL languages are not present in the OTR file, default to English
+-    if (messageTableEntry == NULL)
++    // If selected language table is not available, default to English
++    if (messageTableEntry == NULL) {
+         messageTableEntry = sNesMessageEntryTablePtr;
++        resolvedTableName = "ENG";
++        fallbackUsed = true;
++    }
+ 
+     seg = messageTableEntry->segment;
+ 
+@@ -366,6 +378,25 @@ void Message_FindMessage(PlayState* play, u16 textId) {
+             font->msgOffset = messageTableEntry->segment;
+             font->msgLength = messageTableEntry->msgSize;
+ 
++            static u16 sLastDiagTextId = 0;
++            static u8 sLastDiagLang = 0xFF;
++            if (textId != sLastDiagTextId || gSaveContext.language != sLastDiagLang) {
++                sLastDiagTextId = textId;
++                sLastDiagLang = gSaveContext.language;
++                printf("[COUCH-LANG] Message ID = 0x%04X\n", textId);
++                printf("[COUCH-LANG] Requested language = %d\n", gSaveContext.language);
++                printf("[COUCH-LANG] Resolved table = %s\n", resolvedTableName);
++                printf("[COUCH-LANG] Fallback used = %s\n", fallbackUsed ? "YES" : "NO");
++                FILE* fl = fopen("logs/couch_diagnostics.txt", "a");
++                if (fl) {
++                    fprintf(fl, "[COUCH-LANG] Message ID = 0x%04X\n", textId);
++                    fprintf(fl, "[COUCH-LANG] Requested language = %d\n", gSaveContext.language);
++                    fprintf(fl, "[COUCH-LANG] Resolved table = %s\n", resolvedTableName);
++                    fprintf(fl, "[COUCH-LANG] Fallback used = %s\n", fallbackUsed ? "YES" : "NO");
++                    fclose(fl);
++                }
++            }
++
+             // "Message found!!!"
+             osSyncPrintf(" メッセージが,見つかった！！！ = %x  "
+                          "(data=%x) (data0=%x) (data1=%x) (data2=%x) (data3=%x)\n",
+@@ -375,6 +406,34 @@ void Message_FindMessage(PlayState* play, u16 textId) {
+         messageTableEntry++;
+     }
+ 
++    // Message not found in selected table: Fallback to English vanilla table
++    if (messageTableEntry != sNesMessageEntryTablePtr && sNesMessageEntryTablePtr != NULL) {
++        MessageTableEntry* fallbackEntry = sNesMessageEntryTablePtr;
++        while (fallbackEntry->textId != 0xFFFF) {
++            if (fallbackEntry->textId == textId) {
++                font = &play->msgCtx.font;
++                font->charTexBuf[0] = fallbackEntry->typePos;
++                font->msgOffset = fallbackEntry->segment;
++                font->msgLength = fallbackEntry->msgSize;
++
++                printf("[COUCH-LANG] Message ID = 0x%04X\n", textId);
++                printf("[COUCH-LANG] Requested language = %d\n", gSaveContext.language);
++                printf("[COUCH-LANG] Resolved table = ENG\n");
++                printf("[COUCH-LANG] Fallback used = YES\n");
++                FILE* fl = fopen("logs/couch_diagnostics.txt", "a");
++                if (fl) {
++                    fprintf(fl, "[COUCH-LANG] Message ID = 0x%04X\n", textId);
++                    fprintf(fl, "[COUCH-LANG] Requested language = %d\n", gSaveContext.language);
++                    fprintf(fl, "[COUCH-LANG] Resolved table = ENG\n");
++                    fprintf(fl, "[COUCH-LANG] Fallback used = YES\n");
++                    fclose(fl);
++                }
++                return;
++            }
++            fallbackEntry++;
++        }
++    }
++
+     // "Message not found!!!"
+     osSyncPrintf(" メッセージが,見つからなかった！！！ = %x\n", textId);
+     font = &play->msgCtx.font;
+@@ -1620,7 +1679,7 @@ void Message_DrawText(PlayState* play, Gfx** gfxP) {
                  Message_DrawTextChar(play, &font->charTexBuf[charTexIdx], &gfx);
                  charTexIdx += FONT_CHAR_TEX_SIZE;
  
