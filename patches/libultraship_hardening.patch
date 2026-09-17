@@ -1,0 +1,101 @@
+diff --git a/src/fast/interpreter.cpp b/src/fast/interpreter.cpp
+index 98d92f5e..91df8e64 100644
+--- a/src/fast/interpreter.cpp
++++ b/src/fast/interpreter.cpp
+@@ -919,6 +919,15 @@ void Interpreter::ImportTexture(int i, int tile, bool importReplacement) {
+         return;
+     }
+ 
++    const RawTexMetadata* checkMeta = &mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].raw_tex_metadata;
++    const uint8_t* checkAddr =
++        importReplacement && (checkMeta->resource != nullptr)
++            ? mMaskedTextures.find(GetBaseTexturePath(checkMeta->resource->GetInitData()->Path))->second.replacementData
++            : mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].addr;
++    if (checkAddr == nullptr) {
++        return;
++    }
++
+     switch (fmt) {
+         case G_IM_FMT_RGBA:
+             if (siz == G_IM_SIZ_16b) {
+@@ -3340,7 +3349,7 @@ bool gfx_set_timg_handler_rdp(F3DGfx** cmd0) {
+     uint32_t texFlags = 0;
+     RawTexMetadata rawTexMetdata = {};
+ 
+-    if ((i & 1) != 1) {
++    if ((i & 1) != 1 && i >= 0x10000) {
+         if (gfx_check_image_signature(imgData) == 1) {
+             std::shared_ptr<Fast::Texture> tex = std::static_pointer_cast<Fast::Texture>(
+                 Ship::Context::GetInstance()->GetResourceManager()->LoadResourceProcess(imgData));
+@@ -4499,15 +4508,11 @@ void gfx_push_current_dir(char* path) {
+ int32_t gfx_check_image_signature(const char* imgData) {
+     uintptr_t i = (uintptr_t)(imgData);
+ 
+-    if ((i & 1) == 1) {
++    if ((i & 1) == 1 || i < 0x10000) {
+         return 0;
+     }
+ 
+-    if (i != 0) {
+-        return Ship::Context::GetInstance()->GetResourceManager()->OtrSignatureCheck(imgData);
+-    }
+-
+-    return 0;
++    return Ship::Context::GetInstance()->GetResourceManager()->OtrSignatureCheck(imgData);
+ }
+ 
+ void Interpreter::RegisterBlendedTexture(const char* name, uint8_t* mask, uint8_t* replacement) {
+diff --git a/src/ship/Context.cpp b/src/ship/Context.cpp
+index f3db0445..042f09df 100644
+--- a/src/ship/Context.cpp
++++ b/src/ship/Context.cpp
+@@ -151,6 +151,7 @@ bool Context::InitLogging() {
+ #else
+         mLogger = std::make_shared<spdlog::async_logger>(GetName(), sinks.begin(), sinks.end(), spdlog::thread_pool(),
+                                                          spdlog::async_overflow_policy::block);
++        GetLogger()->flush_on(spdlog::level::info);
+ #endif
+ 
+         GetLogger()->set_pattern("[%Y-%m-%d %H:%M:%S.%e] [%@] [%l] %v");
+diff --git a/src/ship/resource/ResourceManager.cpp b/src/ship/resource/ResourceManager.cpp
+index 5c76ac33..6aac01ea 100644
+--- a/src/ship/resource/ResourceManager.cpp
++++ b/src/ship/resource/ResourceManager.cpp
+@@ -8,6 +8,9 @@
+ #include "ship/utils/Utils.h"
+ #include "ship/config/ConsoleVariable.h"
+ #include "ship/Context.h"
++#ifdef _WIN32
++#include <windows.h>
++#endif
+ 
+ namespace Ship {
+ 
+@@ -409,8 +412,26 @@ size_t ResourceManager::UnloadResource(const std::string& filePath) {
+ }
+ 
+ bool ResourceManager::OtrSignatureCheck(const char* fileName) {
++    if (fileName == nullptr || (uintptr_t)fileName < 0x10000) {
++        return false;
++    }
++#ifdef _WIN32
++    MEMORY_BASIC_INFORMATION mbi;
++    if (VirtualQuery(fileName, &mbi, sizeof(mbi)) == 0 ||
++        mbi.State != MEM_COMMIT ||
++        (mbi.Protect & (PAGE_READONLY | PAGE_READWRITE | PAGE_EXECUTE_READ | PAGE_EXECUTE_READWRITE)) == 0) {
++        return false;
++    }
++    __try {
++        static const char* sOtrSignature = "__OTR__";
++        return strncmp(fileName, sOtrSignature, 7) == 0;
++    } __except (EXCEPTION_EXECUTE_HANDLER) {
++        return false;
++    }
++#else
+     static const char* sOtrSignature = "__OTR__";
+-    return strncmp(fileName, sOtrSignature, strlen(sOtrSignature)) == 0;
++    return strncmp(fileName, sOtrSignature, 7) == 0;
++#endif
+ }
+ 
+ bool ResourceManager::IsAltAssetsEnabled() {
