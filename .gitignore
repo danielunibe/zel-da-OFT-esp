@@ -1,10 +1,102 @@
-# Byte-compiled / optimized / DLL files
+# ============================================================
+# OCARINA OF TIME PC - COUCH EDITION (.gitignore)
+# ============================================================
+
+# --- 1. PROHIBICION ESTRICTA DE COPYRIGHT Y ASSETS DE NINTENDO ---
+oot.o2r
+*.z64
+*.n64
+*.v64
+baserom*
+*baserom*
+rom/
+ROM/
+dumps/
+*.rom
+
+# --- 2. ARCHIVOS DE GUARDADO PERSONAL Y DATOS DE USUARIO ---
+*.sav
+file1.sav
+file2.sav
+file3.sav
+global.sav
+oot_save.sav
+saves/
+save/
+
+# --- 3. BINARIOS Y ARTEFACTOS GENERADOS DE COMPILACION ---
+build/
+Build/
+bin/
+obj/
+out/
+x64/
+x86/
+*.exe
+*.dll
+*.so
+*.dylib
+soh.exe
+soh.o2r
+# es.o2r es recurso propio traducido; se versiona explicitamente si esta autorizado
+# pero se previene acumulacion de compilaciones temporales
+*.pdb
+*.obj
+*.o
+*.a
+*.lib
+*.idb
+*.ilk
+*.exp
+*.tlog
+*.lastbuildstate
+*.unsuccessfulbuild
+
+# --- 4. ARCHIVOS TEMPORALES Y CACHES DE IDE / SISTEMA ---
+.vs/
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
 __pycache__/
 *.py[cod]
 *$py.class
-
-# Caches and logs
 *.log
-.DS_Store
+.freebuff/
+crash_dumps/
+*.dmp
 Thumbs.db
+.DS_Store
 *.bak
+*.swp
+*.tmp
+*.temp
+
+# --- 5. CANDADOS Y CONTROL DE PROCESOS AGÉNTICOS ---
+.agent_build.lock
+.build_lock*
+
+# --- 6. SEGURIDAD Y SECRETOS ---
+.env
+.env.*
+*.key
+*.pem
+*.pfx
+*.p12
+id_rsa*
+id_ed25519*
+*credentials*.json
+*secret*
+!docs/*secret*
+!*material_rules*
+!*Secret*
+
+# --- 7. EXCEPCIONES Y ARCHIVOS REQUERIDOS ---
+!.gitignore
+!.gitattributes
+!README.md
+!NOTICE.md
+!LICENSE
+!THIRD_PARTY_LICENSES.md

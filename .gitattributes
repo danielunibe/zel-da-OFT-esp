@@ -1,0 +1,38 @@
+# ============================================================
+# OCARINA OF TIME PC - COUCH EDITION (.gitattributes)
+# ============================================================
+
+# Manejo general de texto
+* text=auto
+
+# Normalización estricta de parches (siempre LF sin BOM)
+*.patch text eol=lf
+*.diff text eol=lf
+
+# Scripts y código fuente
+*.py text eol=lf
+*.sh text eol=lf
+*.ps1 text eol=crlf
+*.c text eol=lf
+*.cpp text eol=lf
+*.h text eol=lf
+*.hpp text eol=lf
+
+# Datos y documentación
+*.md text eol=lf
+*.json text eol=lf
+*.csv text eol=lf
+*.xml text eol=lf
+*.txt text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+
+# Binarios gráficos y recursos propios
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ico binary
+*.bmp binary
+*.o2r binary
+*.zip binary
+*.tar.gz binary
