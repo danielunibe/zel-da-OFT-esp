@@ -1,0 +1,26 @@
+============================================================
+OCARINA OF TIME PC - COUCH EDITION
+INSTRUCCION OBLIGATORIA SOBRE 'oot.o2r'
+============================================================
+
+POR RAZONES ESTRICTAS DE PROPIEDAD INTELECTUAL Y COPYRIGHT DE
+NINTENDO CO., LTD., ESTE REPOSITORIO NO CONTIENE NI DISTRIBUYE
+EL ARCHIVO 'oot.o2r' NI NINGUNA ROM DEL JUEGO.
+
+COMO USUARIO FINAL DEBE:
+1. Poseer una copia legal de The Legend of Zelda: Ocarina of Time (N64).
+2. Extraer los assets utilizando la herramienta oficial de Shipwright
+   (o iniciar soh.exe con la ROM en la misma carpeta para generarlo).
+3. Colocar el archivo generado con el nombre exacto:
+   oot.o2r
+   en este mismo directorio (la raiz donde reside soh.exe).
+
+ESTRUCTURA FINAL ESPERADA:
+./
+├── soh.exe                   (Compilado o descargado de Release autorizada)
+├── soh.o2r                   (Recurso de interfaz de Shipwright)
+├── oot.o2r                   <--- COLOQUE SU ARCHIVO AQUI
+├── gamecontrollerdb.txt      (Mapeo de mandos)
+├── shipofharkinian.json      (Configuracion de Couch Edition)
+└── mods/
+    └── es.o2r                (Recurso de localizacion al espanol)
