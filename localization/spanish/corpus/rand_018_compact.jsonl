@@ -1,0 +1,200 @@
+{"id": "LOCATION::RC_GANONS_CASTLE_MQ_SHADOW_TRIAL_BOMB_FLOWER_CHEST", "plain_text": "Ganons Castle Mq Shadow Trial Bomb Flower Chest", "category": "LOCATION_NAME", "subcategory": "RC_GANONS_CASTLE_MQ_SHADOW_TRIAL_BOMB_FLOWER_CHEST", "variables": []}
+{"id": "LOCATION::RC_GANONS_CASTLE_MQ_SHADOW_TRIAL_EYE_SWITCH_CHEST", "plain_text": "Ganons Castle Mq Shadow Trial Eye Switch Chest", "category": "LOCATION_NAME", "subcategory": "RC_GANONS_CASTLE_MQ_SHADOW_TRIAL_EYE_SWITCH_CHEST", "variables": []}
+{"id": "LOCATION::RC_GANONS_CASTLE_MQ_SPIRIT_TRIAL_GOLDEN_GAUNTLETS_CHEST", "plain_text": "Ganons Castle Mq Spirit Trial Golden Gauntlets Chest", "category": "LOCATION_NAME", "subcategory": "RC_GANONS_CASTLE_MQ_SPIRIT_TRIAL_GOLDEN_GAUNTLETS_CHEST", "variables": []}
+{"id": "LOCATION::RC_GANONS_CASTLE_MQ_SPIRIT_TRIAL_SUN_BACK_RIGHT_CHEST", "plain_text": "Ganons Castle Mq Spirit Trial Sun Back Right Chest", "category": "LOCATION_NAME", "subcategory": "RC_GANONS_CASTLE_MQ_SPIRIT_TRIAL_SUN_BACK_RIGHT_CHEST", "variables": []}
+{"id": "LOCATION::RC_GANONS_CASTLE_MQ_SPIRIT_TRIAL_SUN_BACK_LEFT_CHEST", "plain_text": "Ganons Castle Mq Spirit Trial Sun Back Left Chest", "category": "LOCATION_NAME", "subcategory": "RC_GANONS_CASTLE_MQ_SPIRIT_TRIAL_SUN_BACK_LEFT_CHEST", "variables": []}
+{"id": "LOCATION::RC_GANONS_CASTLE_MQ_SPIRIT_TRIAL_SUN_FRONT_LEFT_CHEST", "plain_text": "Ganons Castle Mq Spirit Trial Sun Front Left Chest", "category": "LOCATION_NAME", "subcategory": "RC_GANONS_CASTLE_MQ_SPIRIT_TRIAL_SUN_FRONT_LEFT_CHEST", "variables": []}
+{"id": "LOCATION::RC_GANONS_CASTLE_MQ_SPIRIT_TRIAL_FIRST_CHEST", "plain_text": "Ganons Castle Mq Spirit Trial First Chest", "category": "LOCATION_NAME", "subcategory": "RC_GANONS_CASTLE_MQ_SPIRIT_TRIAL_FIRST_CHEST", "variables": []}
+{"id": "LOCATION::RC_GANONS_CASTLE_MQ_SPIRIT_TRIAL_INVISIBLE_CHEST", "plain_text": "Ganons Castle Mq Spirit Trial Invisible Chest", "category": "LOCATION_NAME", "subcategory": "RC_GANONS_CASTLE_MQ_SPIRIT_TRIAL_INVISIBLE_CHEST", "variables": []}
+{"id": "LOCATION::RC_GANONS_CASTLE_MQ_FOREST_TRIAL_FREESTANDING_KEY", "plain_text": "Ganons Castle Mq Forest Trial Freestanding Key", "category": "LOCATION_NAME", "subcategory": "RC_GANONS_CASTLE_MQ_FOREST_TRIAL_FREESTANDING_KEY", "variables": []}
+{"id": "LOCATION::RC_GANONS_CASTLE_MQ_DEKU_SCRUB_RIGHT", "plain_text": "Ganons Castle Mq Deku Scrub Right", "category": "LOCATION_NAME", "subcategory": "RC_GANONS_CASTLE_MQ_DEKU_SCRUB_RIGHT", "variables": []}
+{"id": "LOCATION::RC_GANONS_CASTLE_MQ_DEKU_SCRUB_CENTER_LEFT", "plain_text": "Ganons Castle Mq Deku Scrub Center Left", "category": "LOCATION_NAME", "subcategory": "RC_GANONS_CASTLE_MQ_DEKU_SCRUB_CENTER_LEFT", "variables": []}
+{"id": "LOCATION::RC_GANONS_CASTLE_MQ_DEKU_SCRUB_CENTER", "plain_text": "Ganons Castle Mq Deku Scrub Center", "category": "LOCATION_NAME", "subcategory": "RC_GANONS_CASTLE_MQ_DEKU_SCRUB_CENTER", "variables": []}
+{"id": "LOCATION::RC_GANONS_CASTLE_MQ_DEKU_SCRUB_CENTER_RIGHT", "plain_text": "Ganons Castle Mq Deku Scrub Center Right", "category": "LOCATION_NAME", "subcategory": "RC_GANONS_CASTLE_MQ_DEKU_SCRUB_CENTER_RIGHT", "variables": []}
+{"id": "LOCATION::RC_GANONS_CASTLE_MQ_DEKU_SCRUB_LEFT", "plain_text": "Ganons Castle Mq Deku Scrub Left", "category": "LOCATION_NAME", "subcategory": "RC_GANONS_CASTLE_MQ_DEKU_SCRUB_LEFT", "variables": []}
+{"id": "LOCATION::RC_DEKU_TREE_GS_BASEMENT_BACK_ROOM", "plain_text": "Deku Tree Gs Basement Back Room", "category": "LOCATION_NAME", "subcategory": "RC_DEKU_TREE_GS_BASEMENT_BACK_ROOM", "variables": []}
+{"id": "LOCATION::RC_DEKU_TREE_GS_BASEMENT_GATE", "plain_text": "Deku Tree Gs Basement Gate", "category": "LOCATION_NAME", "subcategory": "RC_DEKU_TREE_GS_BASEMENT_GATE", "variables": []}
+{"id": "LOCATION::RC_DEKU_TREE_GS_BASEMENT_VINES", "plain_text": "Deku Tree Gs Basement Vines", "category": "LOCATION_NAME", "subcategory": "RC_DEKU_TREE_GS_BASEMENT_VINES", "variables": []}
+{"id": "LOCATION::RC_DEKU_TREE_GS_COMPASS_ROOM", "plain_text": "Deku Tree Gs Compass Room", "category": "LOCATION_NAME", "subcategory": "RC_DEKU_TREE_GS_COMPASS_ROOM", "variables": []}
+{"id": "LOCATION::RC_DEKU_TREE_MQ_GS_LOBBY", "plain_text": "Deku Tree Mq Gs Lobby", "category": "LOCATION_NAME", "subcategory": "RC_DEKU_TREE_MQ_GS_LOBBY", "variables": []}
+{"id": "LOCATION::RC_DEKU_TREE_MQ_GS_PAST_BOULDER_VINES", "plain_text": "Deku Tree Mq Gs Past Boulder Vines", "category": "LOCATION_NAME", "subcategory": "RC_DEKU_TREE_MQ_GS_PAST_BOULDER_VINES", "variables": []}
+{"id": "LOCATION::RC_DEKU_TREE_MQ_GS_BASEMENT_GRAVES_ROOM", "plain_text": "Deku Tree Mq Gs Basement Graves Room", "category": "LOCATION_NAME", "subcategory": "RC_DEKU_TREE_MQ_GS_BASEMENT_GRAVES_ROOM", "variables": []}
+{"id": "LOCATION::RC_DEKU_TREE_MQ_GS_BASEMENT_BACK_ROOM", "plain_text": "Deku Tree Mq Gs Basement Back Room", "category": "LOCATION_NAME", "subcategory": "RC_DEKU_TREE_MQ_GS_BASEMENT_BACK_ROOM", "variables": []}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_GS_VINES_ABOVE_STAIRS", "plain_text": "Dodongos Cavern Gs Vines Above Stairs", "category": "LOCATION_NAME", "subcategory": "RC_DODONGOS_CAVERN_GS_VINES_ABOVE_STAIRS", "variables": []}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_GS_SCARECROW", "plain_text": "Dodongos Cavern Gs Scarecrow", "category": "LOCATION_NAME", "subcategory": "RC_DODONGOS_CAVERN_GS_SCARECROW", "variables": []}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_GS_ALCOVE_ABOVE_STAIRS", "plain_text": "Dodongos Cavern Gs Alcove Above Stairs", "category": "LOCATION_NAME", "subcategory": "RC_DODONGOS_CAVERN_GS_ALCOVE_ABOVE_STAIRS", "variables": []}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_GS_BACK_ROOM", "plain_text": "Dodongos Cavern Gs Back Room", "category": "LOCATION_NAME", "subcategory": "RC_DODONGOS_CAVERN_GS_BACK_ROOM", "variables": []}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_GS_SIDE_ROOM_NEAR_LOWER_LIZALFOS", "plain_text": "Dodongos Cavern Gs Side Room Near Lower Lizalfos", "category": "LOCATION_NAME", "subcategory": "RC_DODONGOS_CAVERN_GS_SIDE_ROOM_NEAR_LOWER_LIZALFOS", "variables": []}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_MQ_GS_SCRUB_ROOM", "plain_text": "Dodongos Cavern Mq Gs Scrub Room", "category": "LOCATION_NAME", "subcategory": "RC_DODONGOS_CAVERN_MQ_GS_SCRUB_ROOM", "variables": []}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_MQ_GS_SONG_OF_TIME_BLOCK_ROOM", "plain_text": "Dodongos Cavern Mq Gs Song Of Time Block Room", "category": "LOCATION_NAME", "subcategory": "RC_DODONGOS_CAVERN_MQ_GS_SONG_OF_TIME_BLOCK_ROOM", "variables": []}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_MQ_GS_LIZALFOS_ROOM", "plain_text": "Dodongos Cavern Mq Gs Lizalfos Room", "category": "LOCATION_NAME", "subcategory": "RC_DODONGOS_CAVERN_MQ_GS_LIZALFOS_ROOM", "variables": []}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_MQ_GS_LARVAE_ROOM", "plain_text": "Dodongos Cavern Mq Gs Larvae Room", "category": "LOCATION_NAME", "subcategory": "RC_DODONGOS_CAVERN_MQ_GS_LARVAE_ROOM", "variables": []}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_MQ_GS_BACK_AREA", "plain_text": "Dodongos Cavern Mq Gs Back Area", "category": "LOCATION_NAME", "subcategory": "RC_DODONGOS_CAVERN_MQ_GS_BACK_AREA", "variables": []}
+{"id": "LOCATION::RC_JABU_JABUS_BELLY_GS_LOBBY_BASEMENT_LOWER", "plain_text": "Jabu Jabus Belly Gs Lobby Basement Lower", "category": "LOCATION_NAME", "subcategory": "RC_JABU_JABUS_BELLY_GS_LOBBY_BASEMENT_LOWER", "variables": []}
+{"id": "LOCATION::RC_JABU_JABUS_BELLY_GS_LOBBY_BASEMENT_UPPER", "plain_text": "Jabu Jabus Belly Gs Lobby Basement Upper", "category": "LOCATION_NAME", "subcategory": "RC_JABU_JABUS_BELLY_GS_LOBBY_BASEMENT_UPPER", "variables": []}
+{"id": "LOCATION::RC_JABU_JABUS_BELLY_GS_NEAR_BOSS", "plain_text": "Jabu Jabus Belly Gs Near Boss", "category": "LOCATION_NAME", "subcategory": "RC_JABU_JABUS_BELLY_GS_NEAR_BOSS", "variables": []}
+{"id": "LOCATION::RC_JABU_JABUS_BELLY_GS_WATER_SWITCH_ROOM", "plain_text": "Jabu Jabus Belly Gs Water Switch Room", "category": "LOCATION_NAME", "subcategory": "RC_JABU_JABUS_BELLY_GS_WATER_SWITCH_ROOM", "variables": []}
+{"id": "LOCATION::RC_JABU_JABUS_BELLY_MQ_GS_TAILPASARAN_ROOM", "plain_text": "Jabu Jabus Belly Mq Gs Tailpasaran Room", "category": "LOCATION_NAME", "subcategory": "RC_JABU_JABUS_BELLY_MQ_GS_TAILPASARAN_ROOM", "variables": []}
+{"id": "LOCATION::RC_JABU_JABUS_BELLY_MQ_GS_INVISIBLE_ENEMIES_ROOM", "plain_text": "Jabu Jabus Belly Mq Gs Invisible Enemies Room", "category": "LOCATION_NAME", "subcategory": "RC_JABU_JABUS_BELLY_MQ_GS_INVISIBLE_ENEMIES_ROOM", "variables": []}
+{"id": "LOCATION::RC_JABU_JABUS_BELLY_MQ_GS_BOOMERANG_CHEST_ROOM", "plain_text": "Jabu Jabus Belly Mq Gs Boomerang Chest Room", "category": "LOCATION_NAME", "subcategory": "RC_JABU_JABUS_BELLY_MQ_GS_BOOMERANG_CHEST_ROOM", "variables": []}
+{"id": "LOCATION::RC_JABU_JABUS_BELLY_MQ_GS_NEAR_BOSS", "plain_text": "Jabu Jabus Belly Mq Gs Near Boss", "category": "LOCATION_NAME", "subcategory": "RC_JABU_JABUS_BELLY_MQ_GS_NEAR_BOSS", "variables": []}
+{"id": "LOCATION::RC_FOREST_TEMPLE_GS_RAISED_ISLAND_COURTYARD", "plain_text": "Forest Temple Gs Raised Island Courtyard", "category": "LOCATION_NAME", "subcategory": "RC_FOREST_TEMPLE_GS_RAISED_ISLAND_COURTYARD", "variables": []}
+{"id": "LOCATION::RC_FOREST_TEMPLE_GS_FIRST_ROOM", "plain_text": "Forest Temple Gs First Room", "category": "LOCATION_NAME", "subcategory": "RC_FOREST_TEMPLE_GS_FIRST_ROOM", "variables": []}
+{"id": "LOCATION::RC_FOREST_TEMPLE_GS_LEVEL_ISLAND_COURTYARD", "plain_text": "Forest Temple Gs Level Island Courtyard", "category": "LOCATION_NAME", "subcategory": "RC_FOREST_TEMPLE_GS_LEVEL_ISLAND_COURTYARD", "variables": []}
+{"id": "LOCATION::RC_FOREST_TEMPLE_GS_LOBBY", "plain_text": "Forest Temple Gs Lobby", "category": "LOCATION_NAME", "subcategory": "RC_FOREST_TEMPLE_GS_LOBBY", "variables": []}
+{"id": "LOCATION::RC_FOREST_TEMPLE_GS_BASEMENT", "plain_text": "Forest Temple Gs Basement", "category": "LOCATION_NAME", "subcategory": "RC_FOREST_TEMPLE_GS_BASEMENT", "variables": []}
+{"id": "LOCATION::RC_FOREST_TEMPLE_MQ_GS_FIRST_HALLWAY", "plain_text": "Forest Temple Mq Gs First Hallway", "category": "LOCATION_NAME", "subcategory": "RC_FOREST_TEMPLE_MQ_GS_FIRST_HALLWAY", "variables": []}
+{"id": "LOCATION::RC_FOREST_TEMPLE_MQ_GS_BLOCK_PUSH_ROOM", "plain_text": "Forest Temple Mq Gs Block Push Room", "category": "LOCATION_NAME", "subcategory": "RC_FOREST_TEMPLE_MQ_GS_BLOCK_PUSH_ROOM", "variables": []}
+{"id": "LOCATION::RC_FOREST_TEMPLE_MQ_GS_RAISED_ISLAND_COURTYARD", "plain_text": "Forest Temple Mq Gs Raised Island Courtyard", "category": "LOCATION_NAME", "subcategory": "RC_FOREST_TEMPLE_MQ_GS_RAISED_ISLAND_COURTYARD", "variables": []}
+{"id": "LOCATION::RC_FOREST_TEMPLE_MQ_GS_LEVEL_ISLAND_COURTYARD", "plain_text": "Forest Temple Mq Gs Level Island Courtyard", "category": "LOCATION_NAME", "subcategory": "RC_FOREST_TEMPLE_MQ_GS_LEVEL_ISLAND_COURTYARD", "variables": []}
+{"id": "LOCATION::RC_FOREST_TEMPLE_MQ_GS_WELL", "plain_text": "Forest Temple Mq Gs Well", "category": "LOCATION_NAME", "subcategory": "RC_FOREST_TEMPLE_MQ_GS_WELL", "variables": []}
+{"id": "LOCATION::RC_FIRE_TEMPLE_GS_SONG_OF_TIME_ROOM", "plain_text": "Fire Temple Gs Song Of Time Room", "category": "LOCATION_NAME", "subcategory": "RC_FIRE_TEMPLE_GS_SONG_OF_TIME_ROOM", "variables": []}
+{"id": "LOCATION::RC_FIRE_TEMPLE_GS_BOSS_KEY_LOOP", "plain_text": "Fire Temple Gs Boss Key Loop", "category": "LOCATION_NAME", "subcategory": "RC_FIRE_TEMPLE_GS_BOSS_KEY_LOOP", "variables": []}
+{"id": "LOCATION::RC_FIRE_TEMPLE_GS_BOULDER_MAZE", "plain_text": "Fire Temple Gs Boulder Maze", "category": "LOCATION_NAME", "subcategory": "RC_FIRE_TEMPLE_GS_BOULDER_MAZE", "variables": []}
+{"id": "LOCATION::RC_FIRE_TEMPLE_GS_SCARECROW_TOP", "plain_text": "Fire Temple Gs Scarecrow Top", "category": "LOCATION_NAME", "subcategory": "RC_FIRE_TEMPLE_GS_SCARECROW_TOP", "variables": []}
+{"id": "LOCATION::RC_FIRE_TEMPLE_GS_SCARECROW_CLIMB", "plain_text": "Fire Temple Gs Scarecrow Climb", "category": "LOCATION_NAME", "subcategory": "RC_FIRE_TEMPLE_GS_SCARECROW_CLIMB", "variables": []}
+{"id": "LOCATION::RC_FIRE_TEMPLE_MQ_GS_ABOVE_FIRE_MAZE", "plain_text": "Fire Temple Mq Gs Above Fire Maze", "category": "LOCATION_NAME", "subcategory": "RC_FIRE_TEMPLE_MQ_GS_ABOVE_FIRE_MAZE", "variables": []}
+{"id": "LOCATION::RC_FIRE_TEMPLE_MQ_GS_FIRE_WALL_MAZE_CENTER", "plain_text": "Fire Temple Mq Gs Fire Wall Maze Center", "category": "LOCATION_NAME", "subcategory": "RC_FIRE_TEMPLE_MQ_GS_FIRE_WALL_MAZE_CENTER", "variables": []}
+{"id": "LOCATION::RC_FIRE_TEMPLE_MQ_GS_BIG_LAVA_ROOM_OPEN_DOOR", "plain_text": "Fire Temple Mq Gs Big Lava Room Open Door", "category": "LOCATION_NAME", "subcategory": "RC_FIRE_TEMPLE_MQ_GS_BIG_LAVA_ROOM_OPEN_DOOR", "variables": []}
+{"id": "LOCATION::RC_FIRE_TEMPLE_MQ_GS_FIRE_WALL_MAZE_SIDE_ROOM", "plain_text": "Fire Temple Mq Gs Fire Wall Maze Side Room", "category": "LOCATION_NAME", "subcategory": "RC_FIRE_TEMPLE_MQ_GS_FIRE_WALL_MAZE_SIDE_ROOM", "variables": []}
+{"id": "LOCATION::RC_FIRE_TEMPLE_MQ_GS_SKULL_ON_FIRE", "plain_text": "Fire Temple Mq Gs Skull On Fire", "category": "LOCATION_NAME", "subcategory": "RC_FIRE_TEMPLE_MQ_GS_SKULL_ON_FIRE", "variables": []}
+{"id": "LOCATION::RC_WATER_TEMPLE_GS_BEHIND_GATE", "plain_text": "Water Temple Gs Behind Gate", "category": "LOCATION_NAME", "subcategory": "RC_WATER_TEMPLE_GS_BEHIND_GATE", "variables": []}
+{"id": "LOCATION::RC_WATER_TEMPLE_GS_FALLING_PLATFORM_ROOM", "plain_text": "Water Temple Gs Falling Platform Room", "category": "LOCATION_NAME", "subcategory": "RC_WATER_TEMPLE_GS_FALLING_PLATFORM_ROOM", "variables": []}
+{"id": "LOCATION::RC_WATER_TEMPLE_GS_CENTRAL_PILLAR", "plain_text": "Water Temple Gs Central Pillar", "category": "LOCATION_NAME", "subcategory": "RC_WATER_TEMPLE_GS_CENTRAL_PILLAR", "variables": []}
+{"id": "LOCATION::RC_WATER_TEMPLE_GS_NEAR_BOSS_KEY_CHEST", "plain_text": "Water Temple Gs Near Boss Key Chest", "category": "LOCATION_NAME", "subcategory": "RC_WATER_TEMPLE_GS_NEAR_BOSS_KEY_CHEST", "variables": []}
+{"id": "LOCATION::RC_WATER_TEMPLE_GS_RIVER", "plain_text": "Water Temple Gs River", "category": "LOCATION_NAME", "subcategory": "RC_WATER_TEMPLE_GS_RIVER", "variables": []}
+{"id": "LOCATION::RC_WATER_TEMPLE_MQ_GS_BEFORE_UPPER_WATER_SWITCH", "plain_text": "Water Temple Mq Gs Before Upper Water Switch", "category": "LOCATION_NAME", "subcategory": "RC_WATER_TEMPLE_MQ_GS_BEFORE_UPPER_WATER_SWITCH", "variables": []}
+{"id": "LOCATION::RC_WATER_TEMPLE_MQ_GS_FREESTANDING_KEY_AREA", "plain_text": "Water Temple Mq Gs Freestanding Key Area", "category": "LOCATION_NAME", "subcategory": "RC_WATER_TEMPLE_MQ_GS_FREESTANDING_KEY_AREA", "variables": []}
+{"id": "LOCATION::RC_WATER_TEMPLE_MQ_GS_LIZALFOS_HALLWAY", "plain_text": "Water Temple Mq Gs Lizalfos Hallway", "category": "LOCATION_NAME", "subcategory": "RC_WATER_TEMPLE_MQ_GS_LIZALFOS_HALLWAY", "variables": []}
+{"id": "LOCATION::RC_WATER_TEMPLE_MQ_GS_RIVER", "plain_text": "Water Temple Mq Gs River", "category": "LOCATION_NAME", "subcategory": "RC_WATER_TEMPLE_MQ_GS_RIVER", "variables": []}
+{"id": "LOCATION::RC_WATER_TEMPLE_MQ_GS_TRIPLE_WALL_TORCH", "plain_text": "Water Temple Mq Gs Triple Wall Torch", "category": "LOCATION_NAME", "subcategory": "RC_WATER_TEMPLE_MQ_GS_TRIPLE_WALL_TORCH", "variables": []}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_GS_HALL_AFTER_SUN_BLOCK_ROOM", "plain_text": "Spirit Temple Gs Hall After Sun Block Room", "category": "LOCATION_NAME", "subcategory": "RC_SPIRIT_TEMPLE_GS_HALL_AFTER_SUN_BLOCK_ROOM", "variables": []}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_GS_BOULDER_ROOM", "plain_text": "Spirit Temple Gs Boulder Room", "category": "LOCATION_NAME", "subcategory": "RC_SPIRIT_TEMPLE_GS_BOULDER_ROOM", "variables": []}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_GS_LOBBY", "plain_text": "Spirit Temple Gs Lobby", "category": "LOCATION_NAME", "subcategory": "RC_SPIRIT_TEMPLE_GS_LOBBY", "variables": []}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_GS_SUN_ON_FLOOR_ROOM", "plain_text": "Spirit Temple Gs Sun On Floor Room", "category": "LOCATION_NAME", "subcategory": "RC_SPIRIT_TEMPLE_GS_SUN_ON_FLOOR_ROOM", "variables": []}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_GS_METAL_FENCE", "plain_text": "Spirit Temple Gs Metal Fence", "category": "LOCATION_NAME", "subcategory": "RC_SPIRIT_TEMPLE_GS_METAL_FENCE", "variables": []}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_MQ_GS_SYMPHONY_ROOM", "plain_text": "Spirit Temple Mq Gs Symphony Room", "category": "LOCATION_NAME", "subcategory": "RC_SPIRIT_TEMPLE_MQ_GS_SYMPHONY_ROOM", "variables": []}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_MQ_GS_LEEVER_ROOM", "plain_text": "Spirit Temple Mq Gs Leever Room", "category": "LOCATION_NAME", "subcategory": "RC_SPIRIT_TEMPLE_MQ_GS_LEEVER_ROOM", "variables": []}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_MQ_GS_NINE_THRONES_ROOM_WEST", "plain_text": "Spirit Temple Mq Gs Nine Thrones Room West", "category": "LOCATION_NAME", "subcategory": "RC_SPIRIT_TEMPLE_MQ_GS_NINE_THRONES_ROOM_WEST", "variables": []}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_MQ_GS_NINE_THRONES_ROOM_NORTH", "plain_text": "Spirit Temple Mq Gs Nine Thrones Room North", "category": "LOCATION_NAME", "subcategory": "RC_SPIRIT_TEMPLE_MQ_GS_NINE_THRONES_ROOM_NORTH", "variables": []}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_MQ_GS_SUN_BLOCK_ROOM", "plain_text": "Spirit Temple Mq Gs Sun Block Room", "category": "LOCATION_NAME", "subcategory": "RC_SPIRIT_TEMPLE_MQ_GS_SUN_BLOCK_ROOM", "variables": []}
+{"id": "LOCATION::RC_SHADOW_TEMPLE_GS_SINGLE_GIANT_POT", "plain_text": "Shadow Temple Gs Single Giant Pot", "category": "LOCATION_NAME", "subcategory": "RC_SHADOW_TEMPLE_GS_SINGLE_GIANT_POT", "variables": []}
+{"id": "LOCATION::RC_SHADOW_TEMPLE_GS_FALLING_SPIKES_ROOM", "plain_text": "Shadow Temple Gs Falling Spikes Room", "category": "LOCATION_NAME", "subcategory": "RC_SHADOW_TEMPLE_GS_FALLING_SPIKES_ROOM", "variables": []}
+{"id": "LOCATION::RC_SHADOW_TEMPLE_GS_TRIPLE_GIANT_POT", "plain_text": "Shadow Temple Gs Triple Giant Pot", "category": "LOCATION_NAME", "subcategory": "RC_SHADOW_TEMPLE_GS_TRIPLE_GIANT_POT", "variables": []}
+{"id": "LOCATION::RC_SHADOW_TEMPLE_GS_LIKE_LIKE_ROOM", "plain_text": "Shadow Temple Gs Like Like Room", "category": "LOCATION_NAME", "subcategory": "RC_SHADOW_TEMPLE_GS_LIKE_LIKE_ROOM", "variables": []}
+{"id": "LOCATION::RC_SHADOW_TEMPLE_GS_NEAR_SHIP", "plain_text": "Shadow Temple Gs Near Ship", "category": "LOCATION_NAME", "subcategory": "RC_SHADOW_TEMPLE_GS_NEAR_SHIP", "variables": []}
+{"id": "LOCATION::RC_SHADOW_TEMPLE_MQ_GS_FALLING_SPIKES_ROOM", "plain_text": "Shadow Temple Mq Gs Falling Spikes Room", "category": "LOCATION_NAME", "subcategory": "RC_SHADOW_TEMPLE_MQ_GS_FALLING_SPIKES_ROOM", "variables": []}
+{"id": "LOCATION::RC_SHADOW_TEMPLE_MQ_GS_WIND_HINT_ROOM", "plain_text": "Shadow Temple Mq Gs Wind Hint Room", "category": "LOCATION_NAME", "subcategory": "RC_SHADOW_TEMPLE_MQ_GS_WIND_HINT_ROOM", "variables": []}
+{"id": "LOCATION::RC_SHADOW_TEMPLE_MQ_GS_AFTER_WIND", "plain_text": "Shadow Temple Mq Gs After Wind", "category": "LOCATION_NAME", "subcategory": "RC_SHADOW_TEMPLE_MQ_GS_AFTER_WIND", "variables": []}
+{"id": "LOCATION::RC_SHADOW_TEMPLE_MQ_GS_AFTER_SHIP", "plain_text": "Shadow Temple Mq Gs After Ship", "category": "LOCATION_NAME", "subcategory": "RC_SHADOW_TEMPLE_MQ_GS_AFTER_SHIP", "variables": []}
+{"id": "LOCATION::RC_SHADOW_TEMPLE_MQ_GS_NEAR_BOSS", "plain_text": "Shadow Temple Mq Gs Near Boss", "category": "LOCATION_NAME", "subcategory": "RC_SHADOW_TEMPLE_MQ_GS_NEAR_BOSS", "variables": []}
+{"id": "LOCATION::RC_BOTTOM_OF_THE_WELL_GS_LIKE_LIKE_CAGE", "plain_text": "Bottom Of The Well Gs Like Like Cage", "category": "LOCATION_NAME", "subcategory": "RC_BOTTOM_OF_THE_WELL_GS_LIKE_LIKE_CAGE", "variables": []}
+{"id": "LOCATION::RC_BOTTOM_OF_THE_WELL_GS_EAST_INNER_ROOM", "plain_text": "Bottom Of The Well Gs East Inner Room", "category": "LOCATION_NAME", "subcategory": "RC_BOTTOM_OF_THE_WELL_GS_EAST_INNER_ROOM", "variables": []}
+{"id": "LOCATION::RC_BOTTOM_OF_THE_WELL_GS_WEST_INNER_ROOM", "plain_text": "Bottom Of The Well Gs West Inner Room", "category": "LOCATION_NAME", "subcategory": "RC_BOTTOM_OF_THE_WELL_GS_WEST_INNER_ROOM", "variables": []}
+{"id": "LOCATION::RC_BOTTOM_OF_THE_WELL_MQ_GS_BASEMENT", "plain_text": "Bottom Of The Well Mq Gs Basement", "category": "LOCATION_NAME", "subcategory": "RC_BOTTOM_OF_THE_WELL_MQ_GS_BASEMENT", "variables": []}
+{"id": "LOCATION::RC_BOTTOM_OF_THE_WELL_MQ_GS_COFFIN_ROOM", "plain_text": "Bottom Of The Well Mq Gs Coffin Room", "category": "LOCATION_NAME", "subcategory": "RC_BOTTOM_OF_THE_WELL_MQ_GS_COFFIN_ROOM", "variables": []}
+{"id": "LOCATION::RC_BOTTOM_OF_THE_WELL_MQ_GS_WEST_INNER_ROOM", "plain_text": "Bottom Of The Well Mq Gs West Inner Room", "category": "LOCATION_NAME", "subcategory": "RC_BOTTOM_OF_THE_WELL_MQ_GS_WEST_INNER_ROOM", "variables": []}
+{"id": "LOCATION::RC_ICE_CAVERN_GS_PUSH_BLOCK_ROOM", "plain_text": "Ice Cavern Gs Push Block Room", "category": "LOCATION_NAME", "subcategory": "RC_ICE_CAVERN_GS_PUSH_BLOCK_ROOM", "variables": []}
+{"id": "LOCATION::RC_ICE_CAVERN_GS_SPINNING_SCYTHE_ROOM", "plain_text": "Ice Cavern Gs Spinning Scythe Room", "category": "LOCATION_NAME", "subcategory": "RC_ICE_CAVERN_GS_SPINNING_SCYTHE_ROOM", "variables": []}
+{"id": "LOCATION::RC_ICE_CAVERN_GS_HEART_PIECE_ROOM", "plain_text": "Ice Cavern Gs Heart Piece Room", "category": "LOCATION_NAME", "subcategory": "RC_ICE_CAVERN_GS_HEART_PIECE_ROOM", "variables": []}
+{"id": "LOCATION::RC_ICE_CAVERN_MQ_GS_SCARECROW", "plain_text": "Ice Cavern Mq Gs Scarecrow", "category": "LOCATION_NAME", "subcategory": "RC_ICE_CAVERN_MQ_GS_SCARECROW", "variables": []}
+{"id": "LOCATION::RC_ICE_CAVERN_MQ_GS_ICE_BLOCK", "plain_text": "Ice Cavern Mq Gs Ice Block", "category": "LOCATION_NAME", "subcategory": "RC_ICE_CAVERN_MQ_GS_ICE_BLOCK", "variables": []}
+{"id": "LOCATION::RC_ICE_CAVERN_MQ_GS_RED_ICE", "plain_text": "Ice Cavern Mq Gs Red Ice", "category": "LOCATION_NAME", "subcategory": "RC_ICE_CAVERN_MQ_GS_RED_ICE", "variables": []}
+{"id": "LOCATION::RC_KF_GS_BEAN_PATCH", "plain_text": "Kf Gs Bean Patch", "category": "LOCATION_NAME", "subcategory": "RC_KF_GS_BEAN_PATCH", "variables": []}
+{"id": "LOCATION::RC_KF_GS_KNOW_IT_ALL_HOUSE", "plain_text": "Kf Gs Know It All House", "category": "LOCATION_NAME", "subcategory": "RC_KF_GS_KNOW_IT_ALL_HOUSE", "variables": []}
+{"id": "LOCATION::RC_KF_GS_HOUSE_OF_TWINS", "plain_text": "Kf Gs House Of Twins", "category": "LOCATION_NAME", "subcategory": "RC_KF_GS_HOUSE_OF_TWINS", "variables": []}
+{"id": "LOCATION::RC_LW_GS_BEAN_PATCH_NEAR_BRIDGE", "plain_text": "Lw Gs Bean Patch Near Bridge", "category": "LOCATION_NAME", "subcategory": "RC_LW_GS_BEAN_PATCH_NEAR_BRIDGE", "variables": []}
+{"id": "LOCATION::RC_LW_GS_BEAN_PATCH_NEAR_THEATER", "plain_text": "Lw Gs Bean Patch Near Theater", "category": "LOCATION_NAME", "subcategory": "RC_LW_GS_BEAN_PATCH_NEAR_THEATER", "variables": []}
+{"id": "LOCATION::RC_LW_GS_ABOVE_THEATER", "plain_text": "Lw Gs Above Theater", "category": "LOCATION_NAME", "subcategory": "RC_LW_GS_ABOVE_THEATER", "variables": []}
+{"id": "LOCATION::RC_SFM_GS", "plain_text": "Sfm Gs", "category": "LOCATION_NAME", "subcategory": "RC_SFM_GS", "variables": []}
+{"id": "LOCATION::RC_HF_GS_COW_GROTTO", "plain_text": "Hf Gs Cow Grotto", "category": "LOCATION_NAME", "subcategory": "RC_HF_GS_COW_GROTTO", "variables": []}
+{"id": "LOCATION::RC_HF_GS_NEAR_KAK_GROTTO", "plain_text": "Hf Gs Near Kak Grotto", "category": "LOCATION_NAME", "subcategory": "RC_HF_GS_NEAR_KAK_GROTTO", "variables": []}
+{"id": "LOCATION::RC_LH_GS_BEAN_PATCH", "plain_text": "Lh Gs Bean Patch", "category": "LOCATION_NAME", "subcategory": "RC_LH_GS_BEAN_PATCH", "variables": []}
+{"id": "LOCATION::RC_LH_GS_SMALL_ISLAND", "plain_text": "Lh Gs Small Island", "category": "LOCATION_NAME", "subcategory": "RC_LH_GS_SMALL_ISLAND", "variables": []}
+{"id": "LOCATION::RC_LH_GS_LAB_WALL", "plain_text": "Lh Gs Lab Wall", "category": "LOCATION_NAME", "subcategory": "RC_LH_GS_LAB_WALL", "variables": []}
+{"id": "LOCATION::RC_LH_GS_LAB_CRATE", "plain_text": "Lh Gs Lab Crate", "category": "LOCATION_NAME", "subcategory": "RC_LH_GS_LAB_CRATE", "variables": []}
+{"id": "LOCATION::RC_LH_GS_TREE", "plain_text": "Lh Gs Tree", "category": "LOCATION_NAME", "subcategory": "RC_LH_GS_TREE", "variables": []}
+{"id": "LOCATION::RC_GV_GS_BEAN_PATCH", "plain_text": "Gv Gs Bean Patch", "category": "LOCATION_NAME", "subcategory": "RC_GV_GS_BEAN_PATCH", "variables": []}
+{"id": "LOCATION::RC_GV_GS_SMALL_BRIDGE", "plain_text": "Gv Gs Small Bridge", "category": "LOCATION_NAME", "subcategory": "RC_GV_GS_SMALL_BRIDGE", "variables": []}
+{"id": "LOCATION::RC_GV_GS_PILLAR", "plain_text": "Gv Gs Pillar", "category": "LOCATION_NAME", "subcategory": "RC_GV_GS_PILLAR", "variables": []}
+{"id": "LOCATION::RC_GV_GS_BEHIND_TENT", "plain_text": "Gv Gs Behind Tent", "category": "LOCATION_NAME", "subcategory": "RC_GV_GS_BEHIND_TENT", "variables": []}
+{"id": "LOCATION::RC_GF_HBA_RANGE_GS", "plain_text": "Gf Hba Range Gs", "category": "LOCATION_NAME", "subcategory": "RC_GF_HBA_RANGE_GS", "variables": []}
+{"id": "LOCATION::RC_GF_GS_TOP_FLOOR", "plain_text": "Gf Gs Top Floor", "category": "LOCATION_NAME", "subcategory": "RC_GF_GS_TOP_FLOOR", "variables": []}
+{"id": "LOCATION::RC_WASTELAND_GS", "plain_text": "Wasteland Gs", "category": "LOCATION_NAME", "subcategory": "RC_WASTELAND_GS", "variables": []}
+{"id": "LOCATION::RC_COLOSSUS_GS_BEAN_PATCH", "plain_text": "Colossus Gs Bean Patch", "category": "LOCATION_NAME", "subcategory": "RC_COLOSSUS_GS_BEAN_PATCH", "variables": []}
+{"id": "LOCATION::RC_COLOSSUS_GS_HILL", "plain_text": "Colossus Gs Hill", "category": "LOCATION_NAME", "subcategory": "RC_COLOSSUS_GS_HILL", "variables": []}
+{"id": "LOCATION::RC_COLOSSUS_GS_TREE", "plain_text": "Colossus Gs Tree", "category": "LOCATION_NAME", "subcategory": "RC_COLOSSUS_GS_TREE", "variables": []}
+{"id": "LOCATION::RC_OGC_GS", "plain_text": "Ogc Gs", "category": "LOCATION_NAME", "subcategory": "RC_OGC_GS", "variables": []}
+{"id": "LOCATION::RC_HC_GS_STORMS_GROTTO", "plain_text": "Hc Gs Storms Grotto", "category": "LOCATION_NAME", "subcategory": "RC_HC_GS_STORMS_GROTTO", "variables": []}
+{"id": "LOCATION::RC_HC_GS_TREE", "plain_text": "Hc Gs Tree", "category": "LOCATION_NAME", "subcategory": "RC_HC_GS_TREE", "variables": []}
+{"id": "LOCATION::RC_MARKET_GS_GUARD_HOUSE", "plain_text": "Market Gs Guard House", "category": "LOCATION_NAME", "subcategory": "RC_MARKET_GS_GUARD_HOUSE", "variables": []}
+{"id": "LOCATION::RC_KAK_GS_HOUSE_UNDER_CONSTRUCTION", "plain_text": "Kak Gs House Under Construction", "category": "LOCATION_NAME", "subcategory": "RC_KAK_GS_HOUSE_UNDER_CONSTRUCTION", "variables": []}
+{"id": "LOCATION::RC_KAK_GS_SKULLTULA_HOUSE", "plain_text": "Kak Gs Skulltula House", "category": "LOCATION_NAME", "subcategory": "RC_KAK_GS_SKULLTULA_HOUSE", "variables": []}
+{"id": "LOCATION::RC_KAK_GS_GUARDS_HOUSE", "plain_text": "Kak Gs Guards House", "category": "LOCATION_NAME", "subcategory": "RC_KAK_GS_GUARDS_HOUSE", "variables": []}
+{"id": "LOCATION::RC_KAK_GS_TREE", "plain_text": "Kak Gs Tree", "category": "LOCATION_NAME", "subcategory": "RC_KAK_GS_TREE", "variables": []}
+{"id": "LOCATION::RC_KAK_GS_WATCHTOWER", "plain_text": "Kak Gs Watchtower", "category": "LOCATION_NAME", "subcategory": "RC_KAK_GS_WATCHTOWER", "variables": []}
+{"id": "LOCATION::RC_KAK_GS_ABOVE_IMPAS_HOUSE", "plain_text": "Kak Gs Above Impas House", "category": "LOCATION_NAME", "subcategory": "RC_KAK_GS_ABOVE_IMPAS_HOUSE", "variables": []}
+{"id": "LOCATION::RC_GRAVEYARD_GS_WALL", "plain_text": "Graveyard Gs Wall", "category": "LOCATION_NAME", "subcategory": "RC_GRAVEYARD_GS_WALL", "variables": []}
+{"id": "LOCATION::RC_GRAVEYARD_GS_BEAN_PATCH", "plain_text": "Graveyard Gs Bean Patch", "category": "LOCATION_NAME", "subcategory": "RC_GRAVEYARD_GS_BEAN_PATCH", "variables": []}
+{"id": "LOCATION::RC_DMC_GS_BEAN_PATCH", "plain_text": "Dmc Gs Bean Patch", "category": "LOCATION_NAME", "subcategory": "RC_DMC_GS_BEAN_PATCH", "variables": []}
+{"id": "LOCATION::RC_DMC_GS_CRATE", "plain_text": "Dmc Gs Crate", "category": "LOCATION_NAME", "subcategory": "RC_DMC_GS_CRATE", "variables": []}
+{"id": "LOCATION::RC_DMT_GS_BEAN_PATCH", "plain_text": "Dmt Gs Bean Patch", "category": "LOCATION_NAME", "subcategory": "RC_DMT_GS_BEAN_PATCH", "variables": []}
+{"id": "LOCATION::RC_DMT_GS_NEAR_KAK", "plain_text": "Dmt Gs Near Kak", "category": "LOCATION_NAME", "subcategory": "RC_DMT_GS_NEAR_KAK", "variables": []}
+{"id": "LOCATION::RC_DMT_GS_ABOVE_DODONGOS_CAVERN", "plain_text": "Dmt Gs Above Dodongos Cavern", "category": "LOCATION_NAME", "subcategory": "RC_DMT_GS_ABOVE_DODONGOS_CAVERN", "variables": []}
+{"id": "LOCATION::RC_DMT_GS_FALLING_ROCKS_PATH", "plain_text": "Dmt Gs Falling Rocks Path", "category": "LOCATION_NAME", "subcategory": "RC_DMT_GS_FALLING_ROCKS_PATH", "variables": []}
+{"id": "LOCATION::RC_GC_GS_CENTER_PLATFORM", "plain_text": "Gc Gs Center Platform", "category": "LOCATION_NAME", "subcategory": "RC_GC_GS_CENTER_PLATFORM", "variables": []}
+{"id": "LOCATION::RC_GC_GS_BOULDER_MAZE", "plain_text": "Gc Gs Boulder Maze", "category": "LOCATION_NAME", "subcategory": "RC_GC_GS_BOULDER_MAZE", "variables": []}
+{"id": "LOCATION::RC_ZR_GS_LADDER", "plain_text": "Zr Gs Ladder", "category": "LOCATION_NAME", "subcategory": "RC_ZR_GS_LADDER", "variables": []}
+{"id": "LOCATION::RC_ZR_GS_TREE", "plain_text": "Zr Gs Tree", "category": "LOCATION_NAME", "subcategory": "RC_ZR_GS_TREE", "variables": []}
+{"id": "LOCATION::RC_ZR_GS_ABOVE_BRIDGE", "plain_text": "Zr Gs Above Bridge", "category": "LOCATION_NAME", "subcategory": "RC_ZR_GS_ABOVE_BRIDGE", "variables": []}
+{"id": "LOCATION::RC_ZR_GS_NEAR_RAISED_GROTTOS", "plain_text": "Zr Gs Near Raised Grottos", "category": "LOCATION_NAME", "subcategory": "RC_ZR_GS_NEAR_RAISED_GROTTOS", "variables": []}
+{"id": "LOCATION::RC_ZD_GS_FROZEN_WATERFALL", "plain_text": "Zd Gs Frozen Waterfall", "category": "LOCATION_NAME", "subcategory": "RC_ZD_GS_FROZEN_WATERFALL", "variables": []}
+{"id": "LOCATION::RC_ZF_GS_ABOVE_THE_LOG", "plain_text": "Zf Gs Above The Log", "category": "LOCATION_NAME", "subcategory": "RC_ZF_GS_ABOVE_THE_LOG", "variables": []}
+{"id": "LOCATION::RC_ZF_GS_HIDDEN_CAVE", "plain_text": "Zf Gs Hidden Cave", "category": "LOCATION_NAME", "subcategory": "RC_ZF_GS_HIDDEN_CAVE", "variables": []}
+{"id": "LOCATION::RC_ZF_GS_TREE", "plain_text": "Zf Gs Tree", "category": "LOCATION_NAME", "subcategory": "RC_ZF_GS_TREE", "variables": []}
+{"id": "LOCATION::RC_LLR_GS_BACK_WALL", "plain_text": "Llr Gs Back Wall", "category": "LOCATION_NAME", "subcategory": "RC_LLR_GS_BACK_WALL", "variables": []}
+{"id": "LOCATION::RC_LLR_GS_RAIN_SHED", "plain_text": "Llr Gs Rain Shed", "category": "LOCATION_NAME", "subcategory": "RC_LLR_GS_RAIN_SHED", "variables": []}
+{"id": "LOCATION::RC_LLR_GS_HOUSE_WINDOW", "plain_text": "Llr Gs House Window", "category": "LOCATION_NAME", "subcategory": "RC_LLR_GS_HOUSE_WINDOW", "variables": []}
+{"id": "LOCATION::RC_LLR_GS_TREE", "plain_text": "Llr Gs Tree", "category": "LOCATION_NAME", "subcategory": "RC_LLR_GS_TREE", "variables": []}
+{"id": "LOCATION::RC_LINKS_POCKET", "plain_text": "Links Pocket", "category": "LOCATION_NAME", "subcategory": "RC_LINKS_POCKET", "variables": []}
+{"id": "LOCATION::RC_QUEEN_GOHMA", "plain_text": "Queen Gohma", "category": "LOCATION_NAME", "subcategory": "RC_QUEEN_GOHMA", "variables": []}
+{"id": "LOCATION::RC_KING_DODONGO", "plain_text": "King Dodongo", "category": "LOCATION_NAME", "subcategory": "RC_KING_DODONGO", "variables": []}
+{"id": "LOCATION::RC_BARINADE", "plain_text": "Barinade", "category": "LOCATION_NAME", "subcategory": "RC_BARINADE", "variables": []}
+{"id": "LOCATION::RC_PHANTOM_GANON", "plain_text": "Phantom Ganon", "category": "LOCATION_NAME", "subcategory": "RC_PHANTOM_GANON", "variables": []}
+{"id": "LOCATION::RC_VOLVAGIA", "plain_text": "Volvagia", "category": "LOCATION_NAME", "subcategory": "RC_VOLVAGIA", "variables": []}
+{"id": "LOCATION::RC_MORPHA", "plain_text": "Morpha", "category": "LOCATION_NAME", "subcategory": "RC_MORPHA", "variables": []}
+{"id": "LOCATION::RC_TWINROVA", "plain_text": "Twinrova", "category": "LOCATION_NAME", "subcategory": "RC_TWINROVA", "variables": []}
+{"id": "LOCATION::RC_BONGO_BONGO", "plain_text": "Bongo Bongo", "category": "LOCATION_NAME", "subcategory": "RC_BONGO_BONGO", "variables": []}
+{"id": "LOCATION::RC_GANON", "plain_text": "Ganon", "category": "LOCATION_NAME", "subcategory": "RC_GANON", "variables": []}
+{"id": "LOCATION::RC_GIFT_FROM_RAURU", "plain_text": "Gift From Rauru", "category": "LOCATION_NAME", "subcategory": "RC_GIFT_FROM_RAURU", "variables": []}
+{"id": "LOCATION::RC_DEKU_TREE_QUEEN_GOHMA_HEART", "plain_text": "Deku Tree Queen Gohma Heart", "category": "LOCATION_NAME", "subcategory": "RC_DEKU_TREE_QUEEN_GOHMA_HEART", "variables": []}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_KING_DODONGO_HEART", "plain_text": "Dodongos Cavern King Dodongo Heart", "category": "LOCATION_NAME", "subcategory": "RC_DODONGOS_CAVERN_KING_DODONGO_HEART", "variables": []}
+{"id": "LOCATION::RC_JABU_JABUS_BELLY_BARINADE_HEART", "plain_text": "Jabu Jabus Belly Barinade Heart", "category": "LOCATION_NAME", "subcategory": "RC_JABU_JABUS_BELLY_BARINADE_HEART", "variables": []}
+{"id": "LOCATION::RC_FOREST_TEMPLE_PHANTOM_GANON_HEART", "plain_text": "Forest Temple Phantom Ganon Heart", "category": "LOCATION_NAME", "subcategory": "RC_FOREST_TEMPLE_PHANTOM_GANON_HEART", "variables": []}
+{"id": "LOCATION::RC_FIRE_TEMPLE_VOLVAGIA_HEART", "plain_text": "Fire Temple Volvagia Heart", "category": "LOCATION_NAME", "subcategory": "RC_FIRE_TEMPLE_VOLVAGIA_HEART", "variables": []}
+{"id": "LOCATION::RC_WATER_TEMPLE_MORPHA_HEART", "plain_text": "Water Temple Morpha Heart", "category": "LOCATION_NAME", "subcategory": "RC_WATER_TEMPLE_MORPHA_HEART", "variables": []}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_TWINROVA_HEART", "plain_text": "Spirit Temple Twinrova Heart", "category": "LOCATION_NAME", "subcategory": "RC_SPIRIT_TEMPLE_TWINROVA_HEART", "variables": []}
+{"id": "LOCATION::RC_SHADOW_TEMPLE_BONGO_BONGO_HEART", "plain_text": "Shadow Temple Bongo Bongo Heart", "category": "LOCATION_NAME", "subcategory": "RC_SHADOW_TEMPLE_BONGO_BONGO_HEART", "variables": []}
+{"id": "LOCATION::RC_TOT_MASTER_SWORD", "plain_text": "Tot Master Sword", "category": "LOCATION_NAME", "subcategory": "RC_TOT_MASTER_SWORD", "variables": []}
+{"id": "LOCATION::RC_TOT_LIGHT_ARROWS_CUTSCENE", "plain_text": "Tot Light Arrows Cutscene", "category": "LOCATION_NAME", "subcategory": "RC_TOT_LIGHT_ARROWS_CUTSCENE", "variables": []}
+{"id": "LOCATION::RC_LW_GIFT_FROM_SARIA", "plain_text": "Lw Gift From Saria", "category": "LOCATION_NAME", "subcategory": "RC_LW_GIFT_FROM_SARIA", "variables": []}
+{"id": "LOCATION::RC_ZF_GREAT_FAIRY_REWARD", "plain_text": "Zf Great Fairy Reward", "category": "LOCATION_NAME", "subcategory": "RC_ZF_GREAT_FAIRY_REWARD", "variables": []}
+{"id": "LOCATION::RC_HC_GREAT_FAIRY_REWARD", "plain_text": "Hc Great Fairy Reward", "category": "LOCATION_NAME", "subcategory": "RC_HC_GREAT_FAIRY_REWARD", "variables": []}
+{"id": "LOCATION::RC_COLOSSUS_GREAT_FAIRY_REWARD", "plain_text": "Colossus Great Fairy Reward", "category": "LOCATION_NAME", "subcategory": "RC_COLOSSUS_GREAT_FAIRY_REWARD", "variables": []}
+{"id": "LOCATION::RC_DMT_GREAT_FAIRY_REWARD", "plain_text": "Dmt Great Fairy Reward", "category": "LOCATION_NAME", "subcategory": "RC_DMT_GREAT_FAIRY_REWARD", "variables": []}
+{"id": "LOCATION::RC_DMC_GREAT_FAIRY_REWARD", "plain_text": "Dmc Great Fairy Reward", "category": "LOCATION_NAME", "subcategory": "RC_DMC_GREAT_FAIRY_REWARD", "variables": []}
+{"id": "LOCATION::RC_OGC_GREAT_FAIRY_REWARD", "plain_text": "Ogc Great Fairy Reward", "category": "LOCATION_NAME", "subcategory": "RC_OGC_GREAT_FAIRY_REWARD", "variables": []}
+{"id": "LOCATION::RC_KF_SHOP_ITEM_1", "plain_text": "Kf Shop Item 1", "category": "LOCATION_NAME", "subcategory": "RC_KF_SHOP_ITEM_1", "variables": []}
+{"id": "LOCATION::RC_KF_SHOP_ITEM_2", "plain_text": "Kf Shop Item 2", "category": "LOCATION_NAME", "subcategory": "RC_KF_SHOP_ITEM_2", "variables": []}
+{"id": "LOCATION::RC_KF_SHOP_ITEM_3", "plain_text": "Kf Shop Item 3", "category": "LOCATION_NAME", "subcategory": "RC_KF_SHOP_ITEM_3", "variables": []}
+{"id": "LOCATION::RC_KF_SHOP_ITEM_4", "plain_text": "Kf Shop Item 4", "category": "LOCATION_NAME", "subcategory": "RC_KF_SHOP_ITEM_4", "variables": []}
+{"id": "LOCATION::RC_KF_SHOP_ITEM_5", "plain_text": "Kf Shop Item 5", "category": "LOCATION_NAME", "subcategory": "RC_KF_SHOP_ITEM_5", "variables": []}
+{"id": "LOCATION::RC_KF_SHOP_ITEM_6", "plain_text": "Kf Shop Item 6", "category": "LOCATION_NAME", "subcategory": "RC_KF_SHOP_ITEM_6", "variables": []}
+{"id": "LOCATION::RC_KF_SHOP_ITEM_7", "plain_text": "Kf Shop Item 7", "category": "LOCATION_NAME", "subcategory": "RC_KF_SHOP_ITEM_7", "variables": []}
+{"id": "LOCATION::RC_KF_SHOP_ITEM_8", "plain_text": "Kf Shop Item 8", "category": "LOCATION_NAME", "subcategory": "RC_KF_SHOP_ITEM_8", "variables": []}
+{"id": "LOCATION::RC_KAK_POTION_SHOP_ITEM_1", "plain_text": "Kak Potion Shop Item 1", "category": "LOCATION_NAME", "subcategory": "RC_KAK_POTION_SHOP_ITEM_1", "variables": []}
+{"id": "LOCATION::RC_KAK_POTION_SHOP_ITEM_2", "plain_text": "Kak Potion Shop Item 2", "category": "LOCATION_NAME", "subcategory": "RC_KAK_POTION_SHOP_ITEM_2", "variables": []}
+{"id": "LOCATION::RC_KAK_POTION_SHOP_ITEM_3", "plain_text": "Kak Potion Shop Item 3", "category": "LOCATION_NAME", "subcategory": "RC_KAK_POTION_SHOP_ITEM_3", "variables": []}
+{"id": "LOCATION::RC_KAK_POTION_SHOP_ITEM_4", "plain_text": "Kak Potion Shop Item 4", "category": "LOCATION_NAME", "subcategory": "RC_KAK_POTION_SHOP_ITEM_4", "variables": []}
+{"id": "LOCATION::RC_KAK_POTION_SHOP_ITEM_5", "plain_text": "Kak Potion Shop Item 5", "category": "LOCATION_NAME", "subcategory": "RC_KAK_POTION_SHOP_ITEM_5", "variables": []}
+{"id": "LOCATION::RC_KAK_POTION_SHOP_ITEM_6", "plain_text": "Kak Potion Shop Item 6", "category": "LOCATION_NAME", "subcategory": "RC_KAK_POTION_SHOP_ITEM_6", "variables": []}

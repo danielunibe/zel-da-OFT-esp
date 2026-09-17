@@ -1,0 +1,200 @@
+{"id": "Hint::RHT_WATER_TEMPLE_MORPHA_HEART::200", "plain_text_es_419": "Dicen que #Morpha# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_WATER_TEMPLE_MORPHA_HEART::201", "plain_text_es_419": "Dicen que la #Amiba Acuática Gigante# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_WATER_TEMPLE_GS_FALLING_PLATFORM_ROOM::202", "plain_text_es_419": "Dicen que una #araña sobre una cascada# en el Templo del Agua posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_WATER_TEMPLE_GS_CENTRAL_PILLAR::203", "plain_text_es_419": "Dicen que una #araña en el centro del Templo del Agua# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_WATER_TEMPLE_GS_NEAR_BOSS_KEY_CHEST::204", "plain_text_es_419": "Dicen que una araña protegida por #rocas rodantes en el Templo del Agua# esconde #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_WATER_TEMPLE_GS_NEAR_BOSS_KEY_CHEST::205", "plain_text_es_419": "Dicen que una araña protegida por #rocas rodantes bajo el lago# esconde #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_WATER_TEMPLE_GS_RIVER::206", "plain_text_es_419": "Dicen que una #araña sobre un río# en el Templo del Agua posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_WATER_TEMPLE_MQ_GS_BEFORE_UPPER_WATER_SWITCH::207", "plain_text_es_419": "Dicen que #más allá de un pozo de lagartos# hay una araña que posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_WATER_TEMPLE_MQ_GS_LIZALFOS_HALLWAY::208", "plain_text_es_419": "Dicen que los #lagartos custodian a una araña# en el Templo del Agua con #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_WATER_TEMPLE_MQ_GS_RIVER::209", "plain_text_es_419": "Dicen que una #araña sobre un río# en el Templo del Agua posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_POT_WATER_TEMPLE::210", "plain_text_es_419": "Dicen que una #olla en el Templo del Agua# contiene #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_WATER_TEMPLE_HEART::211", "plain_text_es_419": "Dicen que en un #río en el Templo del Agua# se encuentra #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_WATER_TEMPLE_MQ_DARK_LINK_PILAR_SUN_FAIRY::212", "plain_text_es_419": "Dicen que #invocar al sol encima de un pequeño pilar antes de un duelo con la propia sombra# revela #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_WATER_TEMPLE_MQ_DARK_LINK_LEFT_STORM_FAIRY::213", "plain_text_es_419": "Dicen que #invocar a la lluvia antes de un duelo con la propia sombra# revela #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_WATER_TEMPLE_MQ_DARK_LINK_RIGHT_SUN_FAIRY::214", "plain_text_es_419": "Dicen que #invocar al sol antes de un duelo con la propia sombra# revela #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_CRATE_WATER_TEMPLE::215", "plain_text_es_419": "Dicen que una #caja en el Templo del Agua# contiene #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SPIRIT_TEMPLE_CHILD_BRIDGE_CHEST::216", "plain_text_es_419": "Dicen que un niño conquista una #calavera en fuego verde# en el Templo del Espíritu para llegar a #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SPIRIT_TEMPLE_CHILD_EARLY_TORCHES_CHEST::217", "plain_text_es_419": "Dicen que un niño puede encontrar un #cofre enjaulado# en el Templo del Espíritu con #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SPIRIT_TEMPLE_COMPASS_CHEST::218", "plain_text_es_419": "Dicen que #al otro lado de un pozo de arena# en el Templo del Espíritu se encuentra #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SPIRIT_TEMPLE_EARLY_ADULT_RIGHT_CHEST::219", "plain_text_es_419": "Dicen que #esquivando rocas para recoger rupees de plata# en el Templo del Espíritu se obtiene #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SPIRIT_TEMPLE_FIRST_MIRROR_LEFT_CHEST::220", "plain_text_es_419": "Dicen que una #sombra girando alrededor de luz reflejada# en el Templo del Espíritu custodia #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SPIRIT_TEMPLE_FIRST_MIRROR_RIGHT_CHEST::221", "plain_text_es_419": "Dicen que una #sombra girando alrededor de luz reflejada# en el Templo del Espíritu custodia #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SPIRIT_TEMPLE_MAP_CHEST::222", "plain_text_es_419": "Dicen que #antes de una estatua gigante# en el Templo del Espíritu se encuentra #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SPIRIT_TEMPLE_CHILD_CLIMB_NORTH_CHEST::223", "plain_text_es_419": "Dicen que los #lagartos en el Templo del Espíritu# custodian #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SPIRIT_TEMPLE_CHILD_CLIMB_EAST_CHEST::224", "plain_text_es_419": "Dicen que los #lagartos en el Templo del Espíritu# custodian #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SPIRIT_TEMPLE_SUN_BLOCK_ROOM_CHEST::225", "plain_text_es_419": "Dicen que la #luz de antorcha entre Beamos# en el Templo del Espíritu revela #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SPIRIT_TEMPLE_STATUE_ROOM_HAND_CHEST::226", "plain_text_es_419": "Dicen que una #estatua en el Templo del Espíritu# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SPIRIT_TEMPLE_STATUE_ROOM_NORTHEAST_CHEST::227", "plain_text_es_419": "Dicen que en un #escalón junto a una estatua# en el Templo del Espíritu descansa #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SPIRIT_TEMPLE_NEAR_FOUR_ARMOS_CHEST::228", "plain_text_es_419": "Dicen que aquellos que #muestran la luz entre estatuas# en el Templo del Espíritu encuentran #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SPIRIT_TEMPLE_HALLWAY_RIGHT_INVISIBLE_CHEST::229", "plain_text_es_419": "Dicen que el #Ojo de la Verdad en el Templo del Espíritu# revela #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SPIRIT_TEMPLE_HALLWAY_LEFT_INVISIBLE_CHEST::230", "plain_text_es_419": "Dicen que el #Ojo de la Verdad en el Templo del Espíritu# revela #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SPIRIT_TEMPLE_BOSS_KEY_CHEST::231", "plain_text_es_419": "Dicen que un #cofre envuelto en llamas# en el Templo del Espíritu posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SPIRIT_TEMPLE_TOPMOST_CHEST::232", "plain_text_es_419": "Dicen que aquellos que #muestran la luz sobre el Coloso# encuentran #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SPIRIT_TEMPLE_MQ_ENTRANCE_FRONT_LEFT_CHEST::233", "plain_text_es_419": "Dicen que #yacente sin custodia# en el Templo del Espíritu está #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SPIRIT_TEMPLE_MQ_ENTRANCE_BACK_RIGHT_CHEST::234", "plain_text_es_419": "Dicen que un #interruptor en un pilar# dentro del Templo del Espíritu suelta #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SPIRIT_TEMPLE_MQ_ENTRANCE_FRONT_RIGHT_CHEST::235", "plain_text_es_419": "Dicen que #recolectar rupees a través de un chorro de agua# revela #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SPIRIT_TEMPLE_MQ_ENTRANCE_BACK_LEFT_CHEST::236", "plain_text_es_419": "Dicen que un #ojo cegado por piedra# dentro del Templo del Espíritu oculta #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SPIRIT_TEMPLE_MQ_MAP_CHEST::237", "plain_text_es_419": "Dicen que rodeado por #fuego y envolturas# se encuentra #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SPIRIT_TEMPLE_MQ_MAP_ROOM_ENEMY_CHEST::238", "plain_text_es_419": "Dicen que un niño derrota un #desafío de monstruos# dentro del Templo del Espíritu para encontrar #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SPIRIT_TEMPLE_MQ_CHILD_CLIMB_NORTH_CHEST::239", "plain_text_es_419": "Dicen que la #luz solar explosiva# dentro del Templo del Espíritu descubre #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SPIRIT_TEMPLE_MQ_CHILD_CLIMB_SOUTH_CHEST::240", "plain_text_es_419": "Dicen que #atrapado por enemigos que caen# dentro del Templo del Espíritu está #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SPIRIT_TEMPLE_MQ_COMPASS_CHEST::241", "plain_text_es_419": "Dicen que #cegar al coloso# revela #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SPIRIT_TEMPLE_MQ_STATUE_ROOM_LULLABY_CHEST::242", "plain_text_es_419": "Dicen que una #melodía real despierta al coloso# para revelar #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SPIRIT_TEMPLE_MQ_STATUE_ROOM_INVISIBLE_CHEST::243", "plain_text_es_419": "Dicen que el #Ojo de la Verdad# encuentra lo oculto del coloso, #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SPIRIT_TEMPLE_MQ_SILVER_BLOCK_HALLWAY_CHEST::244", "plain_text_es_419": "Dicen que #los viejos esconden lo que los jóvenes encuentran# para revelar #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SPIRIT_TEMPLE_MQ_SUN_BLOCK_ROOM_CHEST::245", "plain_text_es_419": "Dicen que la #luz solar en un laberinto de fuego# esconde #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SPIRIT_TEMPLE_MQ_LEEVER_ROOM_CHEST::246", "plain_text_es_419": "Dicen que #al otro lado de un pozo de arena# en el Templo del Espíritu se encuentra #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SPIRIT_TEMPLE_MQ_BEAMOS_ROOM_CHEST::247", "plain_text_es_419": "Dicen que donde una #piedra temporal bloquea el camino# dentro del Templo del Espíritu se encuentra #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SPIRIT_TEMPLE_MQ_CHEST_SWITCH_CHEST::248", "plain_text_es_419": "Dicen que un #cofre de doble propósito# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SPIRIT_TEMPLE_MQ_BOSS_KEY_CHEST::249", "plain_text_es_419": "Dicen que una #piedra temporal bloquea la luz# que conduce a #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SPIRIT_TEMPLE_MQ_MIRROR_PUZZLE_INVISIBLE_CHEST::250", "plain_text_es_419": "Dicen que aquellos que #muestran la luz sobre el Coloso# encuentran #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SPIRIT_TEMPLE_TWINROVA_HEART::251", "plain_text_es_419": "Dicen que #Twinrova# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SPIRIT_TEMPLE_TWINROVA_HEART::252", "plain_text_es_419": "Dicen que las #Hermanas Hechiceras# poseen #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SPIRIT_TEMPLE_GS_HALL_AFTER_SUN_BLOCK_ROOM::253", "plain_text_es_419": "Dicen que una araña en la #sala de un caballero# custodia #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SPIRIT_TEMPLE_GS_BOULDER_ROOM::254", "plain_text_es_419": "Dicen que una #araña detrás de una piedra temporal# en el Templo del Espíritu ofrece #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SPIRIT_TEMPLE_GS_LOBBY::255", "plain_text_es_419": "Dicen que una #araña junto a una estatua# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SPIRIT_TEMPLE_GS_SUN_ON_FLOOR_ROOM::256", "plain_text_es_419": "Dicen que una #araña en la cima de un pozo profundo# en el Templo del Espíritu posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SPIRIT_TEMPLE_GS_METAL_FENCE::257", "plain_text_es_419": "Dicen que un niño derrota una #araña entre murciélagos# en el Templo del Espíritu para obtener #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SPIRIT_TEMPLE_MQ_GS_LEEVER_ROOM::258", "plain_text_es_419": "Dicen que #encima de un pozo de arena# en el Templo del Espíritu esconde #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SPIRIT_TEMPLE_MQ_GS_NINE_THRONES_ROOM_WEST::259", "plain_text_es_419": "Dicen que una araña en la #sala de un caballero# custodia #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SPIRIT_TEMPLE_MQ_GS_NINE_THRONES_ROOM_NORTH::260", "plain_text_es_419": "Dicen que una araña en la #sala de un caballero# custodia #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SPIRIT_TEMPLE_MQ_GS_SUN_BLOCK_ROOM::261", "plain_text_es_419": "Dicen que #sobre una telaraña de vidrio# en el Templo del Espíritu hay una araña que posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_POT_SPIRIT_TEMPLE::262", "plain_text_es_419": "Dicen que una #olla en el Templo del Espíritu# contiene #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SPIRIT_TEMPLE_HEART::263", "plain_text_es_419": "Dicen que en una #pequeña plataforma# en el Templo del Espíritu se encuentra #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SPIRIT_TEMPLE_MQ_HEART::264", "plain_text_es_419": "Dicen que custodiado por un #anillo de fuego# en el Templo del Espíritu está #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_CRATE_SPIRIT_TEMPLE::265", "plain_text_es_419": "Dicen que una #caja en el Templo del Espíritu# contiene #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_MAP_CHEST::266", "plain_text_es_419": "Dicen que el #Ojo de la Verdad# perfora una sala de rostros para revelar #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_HOVER_BOOTS_CHEST::267", "plain_text_es_419": "Dicen que #Dead Hand en el Templo de la Sombra# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_HOVER_BOOTS_CHEST::268", "plain_text_es_419": "Dicen que un #habitante del inframundo en el Templo de la Sombra# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_COMPASS_CHEST::269", "plain_text_es_419": "Dicen que las #momias reveladas por el Ojo de la Verdad# custodian #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_EARLY_SILVER_RUPEE_CHEST::270", "plain_text_es_419": "Dicen que las #guadañas giratorias# protegen #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_INVISIBLE_BLADES_VISIBLE_CHEST::271", "plain_text_es_419": "Dicen que las #hojas invisibles# custodian #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_INVISIBLE_BLADES_INVISIBLE_CHEST::272", "plain_text_es_419": "Dicen que las #hojas invisibles# custodian #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_FALLING_SPIKES_LOWER_CHEST::273", "plain_text_es_419": "Dicen que los #pinchos que caen# bloquean el camino a #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_FALLING_SPIKES_UPPER_CHEST::274", "plain_text_es_419": "Dicen que los #pinchos que caen# bloquean el camino a #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_FALLING_SPIKES_SWITCH_CHEST::275", "plain_text_es_419": "Dicen que los #pinchos que caen# bloquean el camino a #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_INVISIBLE_SPIKES_CHEST::276", "plain_text_es_419": "Dicen que los #muertos deambulan entre pinchos invisibles# custodiando #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_WIND_HINT_CHEST::277", "plain_text_es_419": "Dicen que un #cofre invisible custodiado por los muertos# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_AFTER_WIND_ENEMY_CHEST::278", "plain_text_es_419": "Dicen que las #momias custodiando un barco# esconden #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_AFTER_WIND_HIDDEN_CHEST::279", "plain_text_es_419": "Dicen que las #momias custodiando un barco# esconden #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_SPIKE_WALLS_LEFT_CHEST::280", "plain_text_es_419": "Dicen que las #paredes consumidas por una bola de fuego# revelan #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_BOSS_KEY_CHEST::281", "plain_text_es_419": "Dicen que las #paredes consumidas por una bola de fuego# revelan #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_FREESTANDING_KEY::282", "plain_text_es_419": "Dicen que #dentro de una calavera ardiente# se encuentra #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_MQ_COMPASS_CHEST::283", "plain_text_es_419": "Dicen que el #Ojo de la Verdad# perfora una sala de rostros para revelar #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_MQ_HOVER_BOOTS_CHEST::284", "plain_text_es_419": "Dicen que #Dead Hand en el Templo de la Sombra# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_MQ_EARLY_GIBDOS_CHEST::285", "plain_text_es_419": "Dicen que las #momias reveladas por el Ojo de la Verdad# custodian #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_MQ_MAP_CHEST::286", "plain_text_es_419": "Dicen que las #guadañas giratorias# protegen #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_MQ_BEAMOS_SILVER_RUPEES_CHEST::287", "plain_text_es_419": "Dicen que #recolectar rupees en una vasta cueva# con el Templo de la Sombra revela #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_MQ_FALLING_SPIKES_SWITCH_CHEST::288", "plain_text_es_419": "Dicen que los #pinchos que caen# bloquean el camino a #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_MQ_FALLING_SPIKES_LOWER_CHEST::289", "plain_text_es_419": "Dicen que los #pinchos que caen# bloquean el camino a #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_MQ_FALLING_SPIKES_UPPER_CHEST::290", "plain_text_es_419": "Dicen que los #pinchos que caen# bloquean el camino a #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_MQ_INVISIBLE_SPIKES_CHEST::291", "plain_text_es_419": "Dicen que los #muertos deambulan entre pinchos invisibles# custodiando #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_MQ_BOSS_KEY_CHEST::292", "plain_text_es_419": "Dicen que las #paredes consumidas por una bola de fuego# revelan #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_MQ_SPIKE_WALLS_LEFT_CHEST::293", "plain_text_es_419": "Dicen que las #paredes consumidas por una bola de fuego# revelan #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_MQ_STALFOS_ROOM_CHEST::294", "plain_text_es_419": "Dicen que cerca de un #pedestal vacío# dentro del Templo de la Sombra se encuentra #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_MQ_INVISIBLE_BLADES_INVISIBLE_CHEST::295", "plain_text_es_419": "Dicen que las #hojas invisibles# custodian #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_MQ_INVISIBLE_BLADES_VISIBLE_CHEST::296", "plain_text_es_419": "Dicen que las #hojas invisibles# custodian #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_MQ_WIND_HINT_CHEST::297", "plain_text_es_419": "Dicen que un #cofre invisible custodiado por los muertos# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_MQ_AFTER_WIND_HIDDEN_CHEST::298", "plain_text_es_419": "Dicen que las #momias custodiando un barco# esconden #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_MQ_AFTER_WIND_ENEMY_CHEST::299", "plain_text_es_419": "Dicen que las #momias custodiando un barco# esconden #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_MQ_NEAR_SHIP_INVISIBLE_CHEST::300", "plain_text_es_419": "Dicen que #enjaulado cerca de un barco# se encuentra #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_MQ_FREESTANDING_KEY::301", "plain_text_es_419": "Dicen que #detrás de tres calaveras ardiendo# se encuentra #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_BONGO_BONGO_HEART::302", "plain_text_es_419": "Dicen que #Bongo Bongo# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_BONGO_BONGO_HEART::303", "plain_text_es_419": "Dicen que la #Bestia Sombra Fantasma# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_GS_SINGLE_GIANT_POT::304", "plain_text_es_419": "Dicen que #más allá de una calavera ardiente# hay una araña con #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_GS_FALLING_SPIKES_ROOM::305", "plain_text_es_419": "Dicen que una #araña más allá de pinchos que caen# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_GS_TRIPLE_GIANT_POT::306", "plain_text_es_419": "Dicen que #más allá de tres calaveras ardiendo# hay una araña con #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_GS_LIKE_LIKE_ROOM::307", "plain_text_es_419": "Dicen que una araña custodiada por #hojas invisibles# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_GS_NEAR_SHIP::308", "plain_text_es_419": "Dicen que una araña cerca de un #barco anclado# atesora #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_MQ_GS_FALLING_SPIKES_ROOM::309", "plain_text_es_419": "Dicen que una #araña más allá de pinchos que caen# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_MQ_GS_WIND_HINT_ROOM::310", "plain_text_es_419": "Dicen que una #araña entre vientos rugientes# en el Templo de la Sombra posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_MQ_GS_AFTER_WIND::311", "plain_text_es_419": "Dicen que una #araña bajo escombros grotescos# en el Templo de la Sombra esconde #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_MQ_GS_AFTER_SHIP::312", "plain_text_es_419": "Dicen que una #estatua caída# revela una araña con #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_MQ_GS_NEAR_BOSS::313", "plain_text_es_419": "Dicen que una #araña colgante# custodia #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_POT_SHADOW_TEMPLE::314", "plain_text_es_419": "Dicen que una #olla en el Templo de la Sombra# contiene #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_HEART::315", "plain_text_es_419": "Dicen que un #corazón en el Templo de la Sombra# esconde #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_BEAMOS_STORM_FAIRY::316", "plain_text_es_419": "Dicen que #invocar la lluvia para un centinela custodiando una casa de muertos# revela #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_PIT_STORM_FAIRY::317", "plain_text_es_419": "Dicen que #invocar la lluvia en una plataforma suspendida sobre un pozo sin fondo# revela #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SHADOW_TEMPLE_WIND_HINT_SUN_FAIRY::318", "plain_text_es_419": "Dicen que #invocar al sol cerca de un cofre invisible custodiado por los muertos# revela #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_CRATE_SHADOW_TEMPLE::319", "plain_text_es_419": "Dicen que una #caja en el Templo de la Sombra# contiene #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_BOTTOM_OF_THE_WELL_FRONT_LEFT_FAKE_WALL_CHEST::320", "plain_text_es_419": "Dicen que el #Ojo de la Verdad en el pozo# revela #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_BOTTOM_OF_THE_WELL_FRONT_CENTER_BOMBABLE_CHEST::321", "plain_text_es_419": "Dicen que los #escombros grotescos# en el pozo esconden #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_BOTTOM_OF_THE_WELL_RIGHT_BOTTOM_FAKE_WALL_CHEST::322", "plain_text_es_419": "Dicen que el #Ojo de la Verdad en el pozo# revela #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_BOTTOM_OF_THE_WELL_COMPASS_CHEST::323", "plain_text_es_419": "Dicen que una #entrada oculta a una jaula# en el pozo conduce a #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_BOTTOM_OF_THE_WELL_CENTER_SKULLTULA_CHEST::324", "plain_text_es_419": "Dicen que una #araña custodiando una jaula# en el pozo protege #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_BOTTOM_OF_THE_WELL_BACK_LEFT_BOMBABLE_CHEST::325", "plain_text_es_419": "Dicen que los #escombros grotescos# en el pozo esconden #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_BOTTOM_OF_THE_WELL_INVISIBLE_CHEST::326", "plain_text_es_419": "Dicen que el #secreto invisible de Dead Hand# es #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_BOTTOM_OF_THE_WELL_UNDERWATER_FRONT_CHEST::327", "plain_text_es_419": "Dicen que una #melodía real en el pozo# descubre #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_BOTTOM_OF_THE_WELL_UNDERWATER_LEFT_CHEST::328", "plain_text_es_419": "Dicen que una #melodía real en el pozo# descubre #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_BOTTOM_OF_THE_WELL_MAP_CHEST::329", "plain_text_es_419": "Dicen que en las #profundidades del pozo# se encuentra #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_BOTTOM_OF_THE_WELL_FIRE_KEESE_CHEST::330", "plain_text_es_419": "Dicen que los #pozos peligrosos# en el pozo custodian el camino a #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_BOTTOM_OF_THE_WELL_LIKE_LIKE_CHEST::331", "plain_text_es_419": "Dicen que #encerrado en una jaula# en el pozo se encuentra #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_BOTTOM_OF_THE_WELL_FREESTANDING_KEY::332", "plain_text_es_419": "Dicen que #dentro de un ataúd# se esconde #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_BOTTOM_OF_THE_WELL_MQ_MAP_CHEST::333", "plain_text_es_419": "Dicen que una #melodía real en el pozo# descubre #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_BOTTOM_OF_THE_WELL_MQ_LENS_OF_TRUTH_CHEST::334", "plain_text_es_419": "Dicen que un #ejército de muertos# en el pozo custodia #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_BOTTOM_OF_THE_WELL_MQ_DEAD_HAND_FREESTANDING_KEY::335", "plain_text_es_419": "Dicen que el #secreto explosivo de Dead Hand# es #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_BOTTOM_OF_THE_WELL_MQ_EAST_INNER_ROOM_FREESTANDING_KEY::336", "plain_text_es_419": "Dicen que un #camino invisible en el pozo# conduce a #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_BOTTOM_OF_THE_WELL_GS_LIKE_LIKE_CAGE::337", "plain_text_es_419": "Dicen que una #araña encerrada en una jaula# en el pozo posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_BOTTOM_OF_THE_WELL_GS_EAST_INNER_ROOM::338", "plain_text_es_419": "Dicen que un #camino invisible en el pozo# conduce a #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_BOTTOM_OF_THE_WELL_GS_WEST_INNER_ROOM::339", "plain_text_es_419": "Dicen que una #araña encerrada en una cripta# dentro del pozo custodia #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_BOTTOM_OF_THE_WELL_MQ_GS_BASEMENT::340", "plain_text_es_419": "Dicen que un #desafío de arañas invisibles# protege #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_BOTTOM_OF_THE_WELL_MQ_GS_COFFIN_ROOM::341", "plain_text_es_419": "Dicen que una #araña arrastrándose cerca de los muertos# en el pozo posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_BOTTOM_OF_THE_WELL_MQ_GS_WEST_INNER_ROOM::342", "plain_text_es_419": "Dicen que una #araña encerrada en una cripta# dentro del pozo custodia #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_POT_BOTTOM_OF_THE_WELL::343", "plain_text_es_419": "Dicen que una #olla en el Fondo del Pozo# contiene #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_BOTTOM_OF_THE_WELL_HEART::344", "plain_text_es_419": "Dicen que un #corazón dentro del pozo# esconde #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_BOTTOM_OF_THE_WELL_RUPEE::345", "plain_text_es_419": "Dicen que un #camino oculto a través del suelo# en el pozo conduce a #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_BOTTOM_OF_THE_WELL_BASEMENT_SUN_FAIRY::346", "plain_text_es_419": "Dicen que #invocar al sol en un callejón sin salida# dentro del pozo revela #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_BOTTOM_OF_THE_WELL_MQ_CELL_SUN_FAIRY::347", "plain_text_es_419": "Dicen que #invocar al sol en una celda vacía# dentro del pozo revela #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_BOTTOM_OF_THE_WELL_MQ_BASEMENT_SUN_FAIRY::348", "plain_text_es_419": "Dicen que #invocar al sol en un callejón sin salida# dentro del pozo revela #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_BOTTOM_OF_THE_WELL_GRASS::349", "plain_text_es_419": "Dicen que algo de #hierba en el Fondo del Pozo# esconde #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_ICE_CAVERN_MAP_CHEST::350", "plain_text_es_419": "Dicen que los #vientos de hielo# rodean #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_ICE_CAVERN_COMPASS_CHEST::351", "plain_text_es_419": "Dicen que una #pared de hielo# protege #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_ICE_CAVERN_IRON_BOOTS_CHEST::352", "plain_text_es_419": "Dicen que un #monstruo en una cueva helada# custodia #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_ICE_CAVERN_FREESTANDING_POH::353", "plain_text_es_419": "Dicen que una #pared de hielo# protege #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_ICE_CAVERN_MQ_IRON_BOOTS_CHEST::354", "plain_text_es_419": "Dicen que un #monstruo en una cueva helada# custodia #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_ICE_CAVERN_MQ_COMPASS_CHEST::355", "plain_text_es_419": "Dicen que los #vientos de hielo# rodean #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_ICE_CAVERN_MQ_MAP_CHEST::356", "plain_text_es_419": "Dicen que una #pared de hielo# protege #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_ICE_CAVERN_MQ_FREESTANDING_POH::357", "plain_text_es_419": "Dicen que los #vientos de hielo# rodean #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_ICE_CAVERN_GS_PUSH_BLOCK_ROOM::358", "plain_text_es_419": "Dicen que una #araña encima de pozos helados# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_ICE_CAVERN_GS_SPINNING_SCYTHE_ROOM::359", "plain_text_es_419": "Dicen que el #hielo giratorio# custodia una araña que posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_ICE_CAVERN_GS_HEART_PIECE_ROOM::360", "plain_text_es_419": "Dicen que una #araña detrás de una pared de hielo# esconde #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_ICE_CAVERN_MQ_GS_SCARECROW::361", "plain_text_es_419": "Dicen que una #araña encima de pozos helados# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_ICE_CAVERN_MQ_GS_ICE_BLOCK::362", "plain_text_es_419": "Dicen que una #telaraña de hielo# rodea una araña con #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_ICE_CAVERN_MQ_GS_RED_ICE::363", "plain_text_es_419": "Dicen que una #araña en hielo ardiente# atesora #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_POT_ICE_CAVERN::364", "plain_text_es_419": "Dicen que una #olla en la Cueva de Hielo# contiene #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_ICE_CAVERN_HEART::365", "plain_text_es_419": "Dicen que encima de un #pilar congelado# se encuentra #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_ICE_CAVERN_RUPEE::366", "plain_text_es_419": "Dicen que un #rupee en una cueva helada# esconde #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_ICE_CAVERN_ENTRANCE_STORMS_FAIRY::367", "plain_text_es_419": "Dicen que #invocar la lluvia cerca de la entrada de una cueva helada# revela #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GERUDO_TRAINING_GROUND_LOBBY_LEFT_CHEST::368", "plain_text_es_419": "Dicen que un #ojo cegado en el Campo de Entrenamiento Gerudo# suelta #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GERUDO_TRAINING_GROUND_LOBBY_RIGHT_CHEST::369", "plain_text_es_419": "Dicen que un #ojo cegado en el Campo de Entrenamiento Gerudo# suelta #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GERUDO_TRAINING_GROUND_STALFOS_CHEST::370", "plain_text_es_419": "Dicen que los #soldados caminando sobre arena movediza# en el Campo de Entrenamiento Gerudo custodian #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GERUDO_TRAINING_GROUND_BEAMOS_CHEST::371", "plain_text_es_419": "Dicen que los #guerreros reptilianos# en el Campo de Entrenamiento Gerudo protegen #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GERUDO_TRAINING_GROUND_HIDDEN_CEILING_CHEST::372", "plain_text_es_419": "Dicen que el #Ojo de la Verdad# en el Campo de Entrenamiento Gerudo revela #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GERUDO_TRAINING_GROUND_MAZE_PATH_FIRST_CHEST::373", "plain_text_es_419": "Dicen que el primer premio de #el entrenamiento de los ladrones# es #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GERUDO_TRAINING_GROUND_MAZE_PATH_SECOND_CHEST::374", "plain_text_es_419": "Dicen que el segundo premio de #el entrenamiento de los ladrones# es #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GERUDO_TRAINING_GROUND_MAZE_PATH_THIRD_CHEST::375", "plain_text_es_419": "Dicen que el tercer premio de #el entrenamiento de los ladrones# es #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GERUDO_TRAINING_GROUND_MAZE_RIGHT_CENTRAL_CHEST::376", "plain_text_es_419": "Dicen que la #Canción del Tiempo# en el Campo de Entrenamiento Gerudo conduce a #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GERUDO_TRAINING_GROUND_MAZE_RIGHT_SIDE_CHEST::377", "plain_text_es_419": "Dicen que la #Canción del Tiempo# en el Campo de Entrenamiento Gerudo conduce a #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GERUDO_TRAINING_GROUND_HAMMER_ROOM_CLEAR_CHEST::378", "plain_text_es_419": "Dicen que los #enemigos ardientes# en el Campo de Entrenamiento Gerudo custodian #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GERUDO_TRAINING_GROUND_HAMMER_ROOM_SWITCH_CHEST::379", "plain_text_es_419": "Dicen que #envuelto en llamas# donde los ladrones entrenan se encuentra #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GERUDO_TRAINING_GROUND_EYE_STATUE_CHEST::380", "plain_text_es_419": "Dicen que los ladrones #ciegan cuatro rostros# para encontrar #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GERUDO_TRAINING_GROUND_NEAR_SCARECROW_CHEST::381", "plain_text_es_419": "Dicen que los ladrones #ciegan cuatro rostros# para encontrar #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GERUDO_TRAINING_GROUND_BEFORE_HEAVY_BLOCK_CHEST::382", "plain_text_es_419": "Dicen que #antes de un bloque de plata# los ladrones pueden encontrar #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GERUDO_TRAINING_GROUND_HEAVY_BLOCK_FIRST_CHEST::383", "plain_text_es_419": "Dicen que una #hazaña de fuerza# recompensa a los ladrones con #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GERUDO_TRAINING_GROUND_HEAVY_BLOCK_SECOND_CHEST::384", "plain_text_es_419": "Dicen que una #hazaña de fuerza# recompensa a los ladrones con #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GERUDO_TRAINING_GROUND_HEAVY_BLOCK_THIRD_CHEST::385", "plain_text_es_419": "Dicen que una #hazaña de fuerza# recompensa a los ladrones con #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GERUDO_TRAINING_GROUND_HEAVY_BLOCK_FOURTH_CHEST::386", "plain_text_es_419": "Dicen que una #hazaña de fuerza# recompensa a los ladrones con #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GERUDO_TRAINING_GROUND_ENTRANCE_STORMS_FAIRY::387", "plain_text_es_419": "Dicen que #invocar la lluvia cerca de la entrada del Campo de Entrenamiento Gerudo# revela #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GERUDO_TRAINING_GROUND_FREESTANDING_KEY::388", "plain_text_es_419": "Dicen que la #Canción del Tiempo# en el Campo de Entrenamiento Gerudo conduce a #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GERUDO_TRAINING_GROUND_MQ_LOBBY_RIGHT_CHEST::389", "plain_text_es_419": "Dicen que los #ladrones se preparan para el entrenamiento# con #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GERUDO_TRAINING_GROUND_MQ_LOBBY_LEFT_CHEST::390", "plain_text_es_419": "Dicen que los #ladrones se preparan para el entrenamiento# con #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GERUDO_TRAINING_GROUND_MQ_FIRST_IRON_KNUCKLE_CHEST::391", "plain_text_es_419": "Dicen que los #soldados caminando sobre arena movediza# en el Campo de Entrenamiento Gerudo custodian #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GERUDO_TRAINING_GROUND_MQ_BEFORE_HEAVY_BLOCK_CHEST::392", "plain_text_es_419": "Dicen que #antes de un bloque de plata# los ladrones pueden encontrar #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GERUDO_TRAINING_GROUND_MQ_EYE_STATUE_CHEST::393", "plain_text_es_419": "Dicen que los ladrones #ciegan cuatro rostros# para encontrar #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GERUDO_TRAINING_GROUND_MQ_FLAME_CIRCLE_CHEST::394", "plain_text_es_419": "Dicen que #envuelto en llamas# donde los ladrones entrenan se encuentra #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GERUDO_TRAINING_GROUND_MQ_SECOND_IRON_KNUCKLE_CHEST::395", "plain_text_es_419": "Dicen que los #enemigos ardientes# en el Campo de Entrenamiento Gerudo custodian #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GERUDO_TRAINING_GROUND_MQ_DINOLFOS_CHEST::396", "plain_text_es_419": "Dicen que los #guerreros reptilianos# en el Campo de Entrenamiento Gerudo protegen #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GERUDO_TRAINING_GROUND_MQ_MAZE_RIGHT_CENTRAL_CHEST::397", "plain_text_es_419": "Dicen que un #camino de fuego# conduce a los ladrones a #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GERUDO_TRAINING_GROUND_MQ_MAZE_PATH_FIRST_CHEST::398", "plain_text_es_419": "Dicen que el primer premio de #el entrenamiento de los ladrones# es #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GERUDO_TRAINING_GROUND_MQ_MAZE_RIGHT_SIDE_CHEST::399", "plain_text_es_419": "Dicen que un #camino de fuego# conduce a los ladrones a #[1]#.", "translation_status": "TRANSLATED"}

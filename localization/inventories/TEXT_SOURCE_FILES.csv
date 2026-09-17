@@ -1,0 +1,39 @@
+path,system,language,entry_count,contains_message_ids,contains_control_codes,player_facing,notes
+oot.o2r::text/nes_message_data_static,VANILLA_MESSAGE,ENG,2116,Yes,Yes,Yes,Main NES English message table from NTSC ROM
+oot.o2r::text/jpn_message_data_static,VANILLA_MESSAGE,JPN,2086,Yes,Yes,Yes,Japanese message table from NTSC ROM
+oot.o2r::text/elf_message_ydan,VANILLA_MESSAGE,ENG,1,Yes,Yes,Yes,Dungeon Navi hint scripts
+oot.o2r::text/elf_message_field,VANILLA_MESSAGE,ENG,0,Yes,Yes,Yes,Overworld Navi hint scripts (binary only)
+oot.o2r::text/staff_message_data_static,VANILLA_MESSAGE,ENG,0,Yes,Yes,Yes,Staff credits (binary only - offset issue)
+soh.o2r::accessibility/texts/scenes_eng.json,ACCESSIBILITY,ENG,112,No,No,Yes,Scene name title cards
+soh.o2r::accessibility/texts/misc_eng.json,ACCESSIBILITY,ENG,23,No,No,Yes,Misc UI strings (buttons yes/no)
+soh.o2r::accessibility/texts/kaleidoscope_eng.json,ACCESSIBILITY,ENG,148,No,No,Yes,Pause menu item descriptions
+soh.o2r::accessibility/texts/filechoose_eng.json,ACCESSIBILITY,ENG,50,No,No,Yes,File select screen strings
+soh/soh/z_message_OTR.cpp,CUSTOM_MESSAGE,ENG+GER+FRA,17,Yes,Yes,Yes,Custom message overrides (Skulltula heart container etc)
+soh/soh/Enhancements/randomizer/randomizer.cpp,CUSTOM_MESSAGE,ENG+GER+FRA,117,Yes,Yes,Yes,Randomizer custom messages GIMESSAGE entries
+soh/soh/Enhancements/randomizer/3drando/hint_list/hint_list_item.cpp,RANDOMIZER_HINT,ENG+GER+FRA,~187,Yes,Yes,Yes,Item hint text (clear/obscure/joke names)
+soh/soh/Enhancements/randomizer/3drando/hint_list/hint_list_exclude_overworld.cpp,RANDOMIZER_HINT,ENG+GER+FRA,~421,Yes,Yes,Yes,Overworld location hints
+soh/soh/Enhancements/randomizer/3drando/hint_list/hint_list_exclude_dungeon.cpp,RANDOMIZER_HINT,ENG+GER+FRA,~420,Yes,Yes,Yes,Dungeon location hints
+soh/soh/Enhancements/randomizer/3drando/hint_list.cpp,RANDOMIZER_HINT,ENG+GER+FRA,~384,Yes,Yes,Yes,General/song/special hints
+soh/soh/Enhancements/randomizer/item_list.cpp,RANDOMIZER_ITEM,ENG+GER+FRA,~370,No,No,Yes,Randomizer item display names
+soh/soh/Enhancements/randomizer/location_list.cpp,RANDOMIZER_LOCATION,ENG,733,No,No,No,Location RC_ enum definitions (no display strings)
+soh/soh/Enhancements/randomizer/randomizer_check_objects.cpp,RANDOMIZER_LOCATION,ENG,33,No,No,Yes,Area names for check tracker
+soh/soh/Enhancements/randomizer/randomizer_entrance_tracker.cpp,RANDOMIZER_LOCATION,ENG,516,No,No,Yes,Entrance/area names for tracker
+soh/soh/Enhancements/randomizer/option_descriptions.cpp,SOH_ENHANCEMENT,ENG,~156,No,No,Yes,Randomizer setting descriptions
+soh/soh/SohGui/SohMenuSettings.cpp,SOH_MENU,ENG,~100,No,No,Yes,Settings menu labels
+soh/soh/SohGui/SohMenuEnhancements.cpp,SOH_ENHANCEMENT,ENG,~600,No,No,Yes,Enhancement names and tooltips
+soh/soh/SohGui/SohMenuRandomizer.cpp,SOH_ENHANCEMENT,ENG,~40,No,No,Yes,Randomizer enhancement labels
+soh/soh/SohGui/SohMenuDevTools.cpp,SOH_DEVTOOLS,ENG,~50,No,No,Yes,Developer tool labels
+soh/soh/SohGui/SohMenuNetwork.cpp,SOH_NETWORK,ENG,~30,No,No,Yes,Network feature labels
+soh/soh/SohGui/SohMenu.cpp,SOH_MENU,ENG,~20,No,No,Yes,Disabled state messages
+soh/soh/SohGui/SohMenuBar.cpp,SOH_MENU,ENG,~6,No,No,Yes,Backend renderer names
+soh/soh/SohGui/ResolutionEditor.cpp,SOH_MENU,ENG,~30,No,No,Yes,Resolution settings labels
+soh/soh/Enhancements/mod_menu.cpp,SOH_MOD_MENU,ENG,~20,No,No,Yes,Mod management labels
+soh/soh/Enhancements/cosmetics/CosmeticsEditor.cpp,SOH_COSMETICS,ENG,~500,No,No,Yes,Cosmetic color option labels
+soh/soh/Enhancements/audio/AudioEditor.cpp,SOH_AUDIO,ENG,~40,No,No,Yes,Audio editor labels
+soh/soh/Enhancements/controls/SohInputEditorWindow.cpp,SOH_MENU,ENG,~100,No,No,Yes,Controller configuration labels
+soh/soh/Enhancements/randomizer/randomizer_check_tracker.cpp,SOH_ENHANCEMENT,ENG,~70,No,No,Yes,Check tracker UI labels
+soh/soh/Enhancements/randomizer/randomizer_entrance_tracker.cpp,SOH_ENHANCEMENT,ENG,~50,No,No,Yes,Entrance tracker UI labels
+soh/soh/Enhancements/randomizer/randomizer_item_tracker.cpp,SOH_ENHANCEMENT,ENG,~40,No,No,Yes,Item tracker UI labels
+soh/include/message_data_fmt.h,SYSTEM,ENG,32,No,Yes,No,Control code constant definitions
+soh/soh/Enhancements/custom-message/CustomMessageManager.h,CUSTOM_MESSAGE,ENG,8,No,Yes,No,Quick-message color codes
+soh/soh/Enhancements/custom-message/CustomMessageTypes.h,CUSTOM_MESSAGE,ENG,~230,Yes,No,No,TextIDs enum with message ID constants

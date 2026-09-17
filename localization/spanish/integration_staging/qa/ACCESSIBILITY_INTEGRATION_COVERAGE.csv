@@ -1,0 +1,111 @@
+id,english,spanish,source_context,evidence,present_in_master,residual_english,status
+ACCESSIBILITY::filechoose_eng::target_switch,Targeting Mode - Switch,Modo de Fijar Blanco - Alternar,Accessibility label in accessibility/texts/filechoose_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::filechoose_eng::target_hold,Targeting Mode - Hold,Modo de Fijar Blanco - Mantener,Accessibility label in accessibility/texts/filechoose_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::filechoose_eng::language_english,Language - English,Idioma - Inglés,Accessibility label in accessibility/texts/filechoose_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::filechoose_eng::language_german,Language - German,Idioma - Alemán,Accessibility label in accessibility/texts/filechoose_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::filechoose_eng::language_french,Language - French,Idioma - Francés,Accessibility label in accessibility/texts/filechoose_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::filechoose_eng::quest_sel_vanilla,Quest - Original,Misión - Original,Accessibility label in accessibility/texts/filechoose_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::filechoose_eng::quest_sel_mq,Quest - Master Quest,Misión - Master Quest,Accessibility label in accessibility/texts/filechoose_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::filechoose_eng::quest_sel_randomizer,Quest - Randomizer,Misión - Randomizer,Accessibility label in accessibility/texts/filechoose_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::filechoose_eng::quest_sel_boss_rush,Quest - Boss Rush,Misión - Desafío de Jefes,Accessibility label in accessibility/texts/filechoose_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::kaleidoscope_eng::256,Haunted Wasteland,Desierto Encantado,Accessibility label in accessibility/texts/kaleidoscope_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::kaleidoscope_eng::258,Gerudo Valley,Valle Gerudo,Accessibility label in accessibility/texts/kaleidoscope_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::kaleidoscope_eng::260,Lon Lon Ranch,Rancho Lon Lon,Accessibility label in accessibility/texts/kaleidoscope_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::kaleidoscope_eng::261,Market,Mercado,Accessibility label in accessibility/texts/kaleidoscope_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::kaleidoscope_eng::262,Hyrule Field,Pradera de Hyrule,Accessibility label in accessibility/texts/kaleidoscope_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::kaleidoscope_eng::264,Kakariko Village,Aldea Kakariko,Accessibility label in accessibility/texts/kaleidoscope_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::kaleidoscope_eng::265,Lost Woods,Bosque Perdido,Accessibility label in accessibility/texts/kaleidoscope_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::kaleidoscope_eng::266,Kokiri Forest,Bosque Kokiri,Accessibility label in accessibility/texts/kaleidoscope_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::kaleidoscope_eng::267,Zoras Domain,Dominio Zora,Accessibility label in accessibility/texts/kaleidoscope_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::kaleidoscope_eng::292,Hyrule Field,Pradera de Hyrule,Accessibility label in accessibility/texts/kaleidoscope_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::kaleidoscope_eng::293,Kakariko Village,Aldea Kakariko,Accessibility label in accessibility/texts/kaleidoscope_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::kaleidoscope_eng::294,Graveyard,Cementerio,Accessibility label in accessibility/texts/kaleidoscope_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::kaleidoscope_eng::295,Zoras River,Río Zora,Accessibility label in accessibility/texts/kaleidoscope_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::kaleidoscope_eng::296,Kokiri Forest,Bosque Kokiri,Accessibility label in accessibility/texts/kaleidoscope_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::kaleidoscope_eng::297,Sacred Forest Meadow,Pradera Sagrada del Bosque,Accessibility label in accessibility/texts/kaleidoscope_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::kaleidoscope_eng::298,Lake Hylia,Lago Hylia,Accessibility label in accessibility/texts/kaleidoscope_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::kaleidoscope_eng::299,Zoras Domain,Dominio Zora,Accessibility label in accessibility/texts/kaleidoscope_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::kaleidoscope_eng::300,Zoras Fountain,Fuente Zora,Accessibility label in accessibility/texts/kaleidoscope_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::kaleidoscope_eng::301,Gerudo Valley,Valle Gerudo,Accessibility label in accessibility/texts/kaleidoscope_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::kaleidoscope_eng::302,Lost Woods,Bosque Perdido,Accessibility label in accessibility/texts/kaleidoscope_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::kaleidoscope_eng::303,Desert Colossus,Coloso del Desierto,Accessibility label in accessibility/texts/kaleidoscope_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::kaleidoscope_eng::304,Gerudo's Fortress,Fortaleza Gerudo,Accessibility label in accessibility/texts/kaleidoscope_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::kaleidoscope_eng::305,Haunted Wasteland,Desierto Encantado,Accessibility label in accessibility/texts/kaleidoscope_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::kaleidoscope_eng::306,Market,Mercado,Accessibility label in accessibility/texts/kaleidoscope_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::kaleidoscope_eng::307,Hyrule Castle,Castillo de Hyrule,Accessibility label in accessibility/texts/kaleidoscope_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::kaleidoscope_eng::308,Death Mountain Trail,Sendero del Monte Muerte,Accessibility label in accessibility/texts/kaleidoscope_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::kaleidoscope_eng::309,Death Mountain Crater,Cráter del Monte Muerte,Accessibility label in accessibility/texts/kaleidoscope_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::kaleidoscope_eng::310,Goron City,Ciudad Goron,Accessibility label in accessibility/texts/kaleidoscope_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::kaleidoscope_eng::311,Lon Lon Ranch,Rancho Lon Lon,Accessibility label in accessibility/texts/kaleidoscope_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::kaleidoscope_eng::312,Question Mark,Signo de Interrogación,Accessibility label in accessibility/texts/kaleidoscope_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::kaleidoscope_eng::313,Ganon's Castle,Castillo de Ganon,Accessibility label in accessibility/texts/kaleidoscope_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::0,Inside the Deku Tree,Interior del Gran Árbol Deku,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::1,Dodongo's Cavern,Cueva de los Dodongos,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::2,Inside Jabu-Jabu's Belly,Vientre de Jabu-Jabu,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::3,Forest Temple,Templo del Bosque,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::4,Fire Temple,Templo del Fuego,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::5,Water Temple,Templo del Agua,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::6,Spirit Temple,Templo del Espíritu,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::7,Shadow Temple,Templo de la Sombra,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::8,Bottom of The Well,Fondo del Pozo,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::9,Ice Cavern,Caverna de Hielo,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::11,Gerudo Training Ground,Campo de Entrenamiento Gerudo,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::12,Thieves' Hideout,Guarida de los Ladrones,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::13,Ganon's Castle,Castillo de Ganon,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::16,Treasure Box Shop,Tienda de Cofres del Tesoro,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::17,Parasitic Armored Arachnid - Gohma,Arácnido Acorazado Parásito - Gohma,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::18,Infernal Dinosaur - King Dodongo,Dinosaurio Infernal - Rey Dodongo,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::19,Bio-electric Anemone - Barinade,Anémona Bioeléctrica - Barinade,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::20,Evil Spirit from Beyond - Phantom Ganon,Espíritu Maligno del Más Allá - Phantom Ganon,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::21,Subterranean Lava Dragon - Volvagia,Dragón de Lava Subterráneo - Volvagia,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::22,Giant Aquatic Amoeba - Morpha,Ameba Acuática Gigante - Morpha,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::23,Sorceress Sisters - Twinrova,Hermanas Hechiceras - Twinrova,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::24,Phantom Shadow Beast - Bongo Bongo,Bestia Fantasmal de las Sombras - Bongo Bongo,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::25,Great King of Evil - Ganondorf,Gran Rey del Mal - Ganondorf,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::30,Back Alley,Callejón,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::31,Back Alley,Callejón,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::32,Market,Mercado,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::33,Market,Mercado,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::34,Market,Mercado,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::44,Bazaar,Bazar,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::45,Kokiri Shop,Tienda Kokiri,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::46,Goron Shop,Tienda Goron,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::47,Zora Shop,Tienda Zora,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::49,Potion Shop,Tienda de Pociones,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::51,Happy Mask Shop,Tienda de Máscaras Felices,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::54,Stable,Establo,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::56,Lakeside Laboratory,Laboratorio del Lago,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::58,Gravekeepers Hut,Cabaña del Enterrador,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::59,Great Fairy's Fountain,Fuente de la Gran Hada,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::60,Fairy's Fountain,Fuente de las Hadas,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::61,Great Fairy's Fountain,Fuente de la Gran Hada,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::65,Royal Family's Tomb,Cripta de la Familia Real,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::66,Shooting Gallery,Galería de Tiro,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::67,Temple of Time,Templo del Tiempo,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::68,Chamber of The Sages,Cámara de los Sabios,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::69,Castle Courtyard,Patio del Castillo,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::70,Castle Courtyard,Patio del Castillo,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::72,Unknown Place,Lugar Desconocido,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::73,Fishing Pond,Estanque de Pesca,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::74,Castle Courtyard,Patio del Castillo,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::75,Bombchu Bowling Alley,Bolera Bombchu,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::80,House of Skulltula,Casa de las Skulltulas,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::81,Hyrule Field,Pradera de Hyrule,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::82,Kakariko Village,Aldea Kakariko,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::83,Graveyard,Cementerio,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::84,Zora's River,Río Zora,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::85,Kokiri Forest,Bosque Kokiri,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::86,Sacred Forest Meadow,Pradera Sagrada del Bosque,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::87,Lake Hylia,Lago Hylia,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::88,Zoras Domain,Dominio Zora,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::89,Zoras Fountain,Fuente Zora,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::90,Gerudo Valley,Valle Gerudo,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::91,Lost Woods,Bosque Perdido,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::92,Desert Colossus,Coloso del Desierto,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::93,Gerudo's Fortress,Fortaleza Gerudo,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::94,Haunted Wasteland,Desierto Encantado,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::95,Hyrule Castle,Castillo de Hyrule,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::96,Death Mountain Trail,Sendero del Monte Muerte,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::97,Death Mountain Crater,Cráter del Monte Muerte,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::98,Goron City,Ciudad Goron,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT
+ACCESSIBILITY::scenes_eng::99,Lon Lon Ranch,Rancho Lon Lon,Accessibility label in accessibility/texts/scenes_eng.json,Canonical Zelda ES-419 terminology alignment,YES,NO,VERIFIED_PRESENT

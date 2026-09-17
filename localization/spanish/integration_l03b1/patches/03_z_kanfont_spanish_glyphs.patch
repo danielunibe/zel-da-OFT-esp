@@ -1,0 +1,42 @@
+--- a/soh/src/code/z_kanfont.c
++++ b/soh/src/code/z_kanfont.c
+@@ -10,6 +10,26 @@
+ #include "glyph_resolver.h"
+ 
+ // SOH [NTSC]
+ extern MessageTableEntry* sJpnMessageEntryTablePtr;
++
++// SOH [Couch Edition ES-419] Language-aware Spanish font texture resolver
++static const char* Spanish_GetFontTexture(u8 character) {
++    // Remapped slot offsets (ASCII codepoint - 0x20):
++    switch (character) {
++        case 0x60: return "textures/nes_font_static/gMsgChar80LatinCapitalLetterAWithAcuteTex";   // Á (replaces 0x80)
++        case 0x61: return "textures/nes_font_static/gMsgChar81LatinCapitalLetterNWithTildeTex";   // Ñ (replaces 0x81)
++        case 0x63: return "textures/nes_font_static/gMsgChar83InvertedExclamationMarkTex";         // ¡ (replaces 0x83, preserves German Ä)
++        case 0x65: return "textures/nes_font_static/gMsgChar85InvertedQuestionMarkTex";            // ¿ (replaces 0x85, preserves French È)
++        case 0x69: return "textures/nes_font_static/gMsgChar89LatinCapitalLetterIWithAcuteTex";   // Í (replaces 0x89)
++        case 0x6A: return "textures/nes_font_static/gMsgChar8ALatinCapitalLetterOWithAcuteTex";   // Ó (replaces 0x8A)
++        case 0x6C: return "textures/nes_font_static/gMsgChar8CLatinCapitalLetterUWithAcuteTex";   // Ú (replaces 0x8C)
++        case 0x72: return "textures/nes_font_static/gMsgChar92LatinSmallLetterNWithTildeTex";     // ñ (replaces 0x92, preserves French â)
++        case 0x79: return "textures/nes_font_static/gMsgChar99LatinSmallLetterIWithAcuteTex";     // í (replaces 0x99)
++        case 0x7A: return "textures/nes_font_static/gMsgChar9ALatinSmallLetterOWithAcuteTex";     // ó (replaces 0x9A, preserves French ô)
++        case 0x7D: return "textures/nes_font_static/gMsgChar9DLatinSmallLetterUWithAcuteTex";     // ú (replaces 0x9D)
++        default: return NULL;
++    }
++}
+ 
+@@ -4182,6 +4202,14 @@ void Font_LoadChar(Font* font, u8 character, u16 codePointIndex) {
+         }
+     }
+ 
++    if (gSaveContext.language == LANGUAGE_ESP) {
++        const char* spanishTex = Spanish_GetFontTexture(character);
++        if (spanishTex != NULL) {
++            memcpy(&font->charTexBuf[codePointIndex], spanishTex, strlen(spanishTex) + 1);
++            return;
++        }
++    }
++
+     if (character < 0x8B)
+         memcpy(&font->charTexBuf[codePointIndex], fontTbl[character], strlen(fontTbl[character]) + 1);
+ }

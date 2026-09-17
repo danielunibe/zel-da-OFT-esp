@@ -1,0 +1,200 @@
+{"id": "ENTRANCE::L336", "plain_text": "TH Steep Slope Cell", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L337", "plain_text": "GF Above GTG", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L337", "plain_text": "TH Double Cell", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L338", "plain_text": "GF Top of Lower Vines", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L338", "plain_text": "TH Double Cell", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L339", "plain_text": "GF Top of Lower Vines", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L339", "plain_text": "TH Kitchen By Corridor", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L340", "plain_text": "GF Near GS", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L340", "plain_text": "TH Kitchen Opposite Corridor", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L341", "plain_text": "GF Below Chest", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L341", "plain_text": "TH Break Room", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L342", "plain_text": "GF Above Jail", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L342", "plain_text": "TH Break Room Corridor", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L343", "plain_text": "GF Below GS", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L343", "plain_text": "TH Dead End Cell", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L344", "plain_text": "TH 1 Torch Cell", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L344", "plain_text": "GF Outskirts", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L345", "plain_text": "TH 1 Torch Cell", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L346", "plain_text": "TH Kitchen Corridor", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L347", "plain_text": "TH Kitchen Corridor", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L347", "plain_text": "GF Above GTG", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L348", "plain_text": "TH Steep Slope Cell", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L349", "plain_text": "TH Steep Slope Cell", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L349", "plain_text": "GF Bottom of Lower Vines", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L350", "plain_text": "TH Double Cell", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L350", "plain_text": "GF Above GTG", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L351", "plain_text": "TH Double Cell", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L351", "plain_text": "GF Top of Lower Vines", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L352", "plain_text": "TH Kitchen By Corridor", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L352", "plain_text": "GF Top of Lower Vines", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L353", "plain_text": "TH Kitchen Opposite Corridor", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L353", "plain_text": "GF Near GS", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L354", "plain_text": "TH Break Room", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L354", "plain_text": "GF Below Chest", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L355", "plain_text": "TH Break Room Corridor", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L355", "plain_text": "GF Above Jail", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L356", "plain_text": "TH Dead End Cell", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L356", "plain_text": "GF Below GS", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L359", "plain_text": "Haunted Wasteland East Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L359", "plain_text": "Gerudo Fortress Gate Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L360", "plain_text": "Haunted Wasteland West Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L360", "plain_text": "Desert Colossus East Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L361", "plain_text": "Desert Colossus East Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L361", "plain_text": "Haunted Wasteland West Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L362", "plain_text": "Colossus Great Fairy Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L362", "plain_text": "Colossus Great Fairy Fountain", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L364", "plain_text": "Colossus Outside Temple", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L364", "plain_text": "Spirit Temple Entrance", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L365", "plain_text": "Colossus Great Fairy Fountain", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L365", "plain_text": "Colossus Great Fairy Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L367", "plain_text": "Spirit Temple Entrance", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L367", "plain_text": "Colossus Outside Temple", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L368", "plain_text": "Spirit Temple Boss Door", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L368", "plain_text": "Twinrova", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L369", "plain_text": "Twinrova", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L369", "plain_text": "Spirit Temple Boss Door", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L370", "plain_text": "Twinrova Blue Warp", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L370", "plain_text": "Spirit Temple Blue Warp", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L373", "plain_text": "Market Entrance South Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L373", "plain_text": "Hyrule Field Drawbridge Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L374", "plain_text": "Market Entrance North Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L374", "plain_text": "Market South Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L375", "plain_text": "MK Entrance Guard House Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L375", "plain_text": "Guard House", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L376", "plain_text": "Market South Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L376", "plain_text": "Market Entrance North Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L377", "plain_text": "Market Castle Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L377", "plain_text": "Castle Grounds South Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L378", "plain_text": "Market Temple Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L378", "plain_text": "ToT Courtyard Gossip Stones Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L379", "plain_text": "MK Shooting Gallery Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L379", "plain_text": "MK Shooting Gallery", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L380", "plain_text": "MK Bombchu Bowling Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L380", "plain_text": "Bombchu Bowling", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L381", "plain_text": "MK Treasure Chest Game Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L381", "plain_text": "Treasure Chest Game", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L382", "plain_text": "MK Man-in-Green House Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L382", "plain_text": "Man-in-Green's House", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L383", "plain_text": "MK Mask Shop Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L383", "plain_text": "Mask Shop", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L384", "plain_text": "MK Bazaar Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L384", "plain_text": "MK Bazaar", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L385", "plain_text": "MK Potion Shop Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L385", "plain_text": "MK Potion Shop", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L386", "plain_text": "MK Bombchu Shop Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L386", "plain_text": "Bombchu Shop", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L387", "plain_text": "Guard House", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L387", "plain_text": "MK Entrance Guard House Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L388", "plain_text": "MK Shooting Gallery", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L388", "plain_text": "MK Shooting Gallery Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L389", "plain_text": "Bombchu Bowling", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L389", "plain_text": "MK Bombchu Bowling Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L390", "plain_text": "Treasure Chest Game", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L390", "plain_text": "MK Treasure Chest Game Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L391", "plain_text": "Man-in-Green's House", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L391", "plain_text": "MK Man-in-Green House Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L392", "plain_text": "Mask Shop", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L392", "plain_text": "MK Mask Shop Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L393", "plain_text": "MK Bazaar", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L393", "plain_text": "MK Bazaar Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L394", "plain_text": "MK Potion Shop", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L394", "plain_text": "MK Potion Shop Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L395", "plain_text": "Bombchu Shop", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L395", "plain_text": "MK Bombchu Shop Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L396", "plain_text": "ToT Courtyard Gossip Stones Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L396", "plain_text": "Market Temple Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L397", "plain_text": "ToT Courtyard Temple Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L397", "plain_text": "Temple of Time Entrance", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L398", "plain_text": "Temple of Time Entrance", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L398", "plain_text": "ToT Courtyard Temple Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L401", "plain_text": "Castle Grounds South Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L401", "plain_text": "Market Castle Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L402", "plain_text": "HC Boulder Crawlspace", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L402", "plain_text": "HC Great Fairy Fountain", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L404", "plain_text": "HC Great Fairy Fountain", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L404", "plain_text": "HC Boulder Crawlspace", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L406", "plain_text": "OGC Behind Pillar", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L406", "plain_text": "OGC Great Fairy Fountain", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L407", "plain_text": "OGC Rainbow Bridge Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L407", "plain_text": "Inside Ganon's Castle Entrance", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L408", "plain_text": "OGC Great Fairy Fountain", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L408", "plain_text": "OGC Behind Pillar", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L409", "plain_text": "Inside Ganon's Castle Entrance", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L409", "plain_text": "OGC Rainbow Bridge Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L488", "plain_text": "Checking entrance names:", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L586", "plain_text": "Remove", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L702", "plain_text": "The entrance tracker will only track shuffled entrances", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L715", "plain_text": "SortBy", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L718", "plain_text": "Sort entrances by the original source entrance", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L720", "plain_text": "From", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L720", "plain_text": "SortBy", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L721", "plain_text": "Sort entrances by the overrided destination", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L725", "plain_text": "Auto scroll", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L725", "plain_text": "AutoScroll", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L730", "plain_text": "Highlight previous", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L730", "plain_text": "HighlightPrevious", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L732", "plain_text": "Highlight the previous entrance that Link came from", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L734", "plain_text": "Highlight available", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L734", "plain_text": "HighlightAvailable", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L736", "plain_text": "Highlight available entrances in the current scene", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L739", "plain_text": "Hide undiscovered", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L739", "plain_text": "CollapseUndiscovered", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L747", "plain_text": "Hide reverse", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L747", "plain_text": "HideReverseEntrances", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L758", "plain_text": "Area", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L758", "plain_text": "GroupBy", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L759", "plain_text": "Group entrances by their area", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L761", "plain_text": "GroupBy", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L768", "plain_text": "Reveal the source for undiscovered entrances", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L771", "plain_text": "Reveal the destination for undiscovered entrances", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L778", "plain_text": "Legend", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L779", "plain_text": "Last Entrance", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L780", "plain_text": "Available Entrances", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L781", "plain_text": "Undiscovered Entrances", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L804", "plain_text": "Entrance Tracker", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L812", "plain_text": "Collapse All", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L812", "plain_text": "Collapse all entrance groups", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L818", "plain_text": "Expand All", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L818", "plain_text": "Expand all entrance groups", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L824", "plain_text": "Clear", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L824", "plain_text": "Clear the search field", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L836", "plain_text": "SortBy", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L837", "plain_text": "GroupBy", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L862", "plain_text": "ChildEntranceTrackerLocations", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L865", "plain_text": "CollapseUndiscovered", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L866", "plain_text": "HighlightPrevious", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L867", "plain_text": "HighlightAvailable", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L868", "plain_text": "HideReverseEntrances", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L869", "plain_text": "AutoScroll", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "LOCATION::RC_UNKNOWN_CHECK", "plain_text": "Unknown Check", "category": "LOCATION_NAME", "subcategory": "RC_UNKNOWN_CHECK", "variables": []}
+{"id": "LOCATION::RC_KF_KOKIRI_SWORD_CHEST", "plain_text": "Kf Kokiri Sword Chest", "category": "LOCATION_NAME", "subcategory": "RC_KF_KOKIRI_SWORD_CHEST", "variables": []}
+{"id": "LOCATION::RC_KF_MIDOS_TOP_LEFT_CHEST", "plain_text": "Kf Midos Top Left Chest", "category": "LOCATION_NAME", "subcategory": "RC_KF_MIDOS_TOP_LEFT_CHEST", "variables": []}
+{"id": "LOCATION::RC_KF_MIDOS_TOP_RIGHT_CHEST", "plain_text": "Kf Midos Top Right Chest", "category": "LOCATION_NAME", "subcategory": "RC_KF_MIDOS_TOP_RIGHT_CHEST", "variables": []}
+{"id": "LOCATION::RC_KF_MIDOS_BOTTOM_LEFT_CHEST", "plain_text": "Kf Midos Bottom Left Chest", "category": "LOCATION_NAME", "subcategory": "RC_KF_MIDOS_BOTTOM_LEFT_CHEST", "variables": []}
+{"id": "LOCATION::RC_KF_MIDOS_BOTTOM_RIGHT_CHEST", "plain_text": "Kf Midos Bottom Right Chest", "category": "LOCATION_NAME", "subcategory": "RC_KF_MIDOS_BOTTOM_RIGHT_CHEST", "variables": []}
+{"id": "LOCATION::RC_KF_STORMS_GROTTO_CHEST", "plain_text": "Kf Storms Grotto Chest", "category": "LOCATION_NAME", "subcategory": "RC_KF_STORMS_GROTTO_CHEST", "variables": []}
+{"id": "LOCATION::RC_LW_NEAR_SHORTCUTS_GROTTO_CHEST", "plain_text": "Lw Near Shortcuts Grotto Chest", "category": "LOCATION_NAME", "subcategory": "RC_LW_NEAR_SHORTCUTS_GROTTO_CHEST", "variables": []}
+{"id": "LOCATION::RC_LW_SKULL_KID", "plain_text": "Lw Skull Kid", "category": "LOCATION_NAME", "subcategory": "RC_LW_SKULL_KID", "variables": []}
+{"id": "LOCATION::RC_LW_TRADE_COJIRO", "plain_text": "Lw Trade Cojiro", "category": "LOCATION_NAME", "subcategory": "RC_LW_TRADE_COJIRO", "variables": []}
+{"id": "LOCATION::RC_LW_TRADE_ODD_POTION", "plain_text": "Lw Trade Odd Potion", "category": "LOCATION_NAME", "subcategory": "RC_LW_TRADE_ODD_POTION", "variables": []}
+{"id": "LOCATION::RC_LW_OCARINA_MEMORY_GAME", "plain_text": "Lw Ocarina Memory Game", "category": "LOCATION_NAME", "subcategory": "RC_LW_OCARINA_MEMORY_GAME", "variables": []}
+{"id": "LOCATION::RC_LW_TARGET_IN_WOODS", "plain_text": "Lw Target In Woods", "category": "LOCATION_NAME", "subcategory": "RC_LW_TARGET_IN_WOODS", "variables": []}
+{"id": "LOCATION::RC_LW_DEKU_SCRUB_NEAR_DEKU_THEATER_RIGHT", "plain_text": "Lw Deku Scrub Near Deku Theater Right", "category": "LOCATION_NAME", "subcategory": "RC_LW_DEKU_SCRUB_NEAR_DEKU_THEATER_RIGHT", "variables": []}
+{"id": "LOCATION::RC_LW_DEKU_SCRUB_NEAR_DEKU_THEATER_LEFT", "plain_text": "Lw Deku Scrub Near Deku Theater Left", "category": "LOCATION_NAME", "subcategory": "RC_LW_DEKU_SCRUB_NEAR_DEKU_THEATER_LEFT", "variables": []}
+{"id": "LOCATION::RC_LW_DEKU_SCRUB_NEAR_BRIDGE", "plain_text": "Lw Deku Scrub Near Bridge", "category": "LOCATION_NAME", "subcategory": "RC_LW_DEKU_SCRUB_NEAR_BRIDGE", "variables": []}
+{"id": "LOCATION::RC_LW_DEKU_SCRUB_GROTTO_REAR", "plain_text": "Lw Deku Scrub Grotto Rear", "category": "LOCATION_NAME", "subcategory": "RC_LW_DEKU_SCRUB_GROTTO_REAR", "variables": []}
+{"id": "LOCATION::RC_LW_DEKU_SCRUB_GROTTO_FRONT", "plain_text": "Lw Deku Scrub Grotto Front", "category": "LOCATION_NAME", "subcategory": "RC_LW_DEKU_SCRUB_GROTTO_FRONT", "variables": []}
+{"id": "LOCATION::RC_DEKU_THEATER_SKULL_MASK", "plain_text": "Deku Theater Skull Mask", "category": "LOCATION_NAME", "subcategory": "RC_DEKU_THEATER_SKULL_MASK", "variables": []}
+{"id": "LOCATION::RC_DEKU_THEATER_MASK_OF_TRUTH", "plain_text": "Deku Theater Mask Of Truth", "category": "LOCATION_NAME", "subcategory": "RC_DEKU_THEATER_MASK_OF_TRUTH", "variables": []}
+{"id": "LOCATION::RC_SFM_WOLFOS_GROTTO_CHEST", "plain_text": "Sfm Wolfos Grotto Chest", "category": "LOCATION_NAME", "subcategory": "RC_SFM_WOLFOS_GROTTO_CHEST", "variables": []}
+{"id": "LOCATION::RC_SFM_DEKU_SCRUB_GROTTO_REAR", "plain_text": "Sfm Deku Scrub Grotto Rear", "category": "LOCATION_NAME", "subcategory": "RC_SFM_DEKU_SCRUB_GROTTO_REAR", "variables": []}
+{"id": "LOCATION::RC_SFM_DEKU_SCRUB_GROTTO_FRONT", "plain_text": "Sfm Deku Scrub Grotto Front", "category": "LOCATION_NAME", "subcategory": "RC_SFM_DEKU_SCRUB_GROTTO_FRONT", "variables": []}
+{"id": "LOCATION::RC_HF_SOUTHEAST_GROTTO_CHEST", "plain_text": "Hf Southeast Grotto Chest", "category": "LOCATION_NAME", "subcategory": "RC_HF_SOUTHEAST_GROTTO_CHEST", "variables": []}
+{"id": "LOCATION::RC_HF_OPEN_GROTTO_CHEST", "plain_text": "Hf Open Grotto Chest", "category": "LOCATION_NAME", "subcategory": "RC_HF_OPEN_GROTTO_CHEST", "variables": []}
+{"id": "LOCATION::RC_HF_NEAR_MARKET_GROTTO_CHEST", "plain_text": "Hf Near Market Grotto Chest", "category": "LOCATION_NAME", "subcategory": "RC_HF_NEAR_MARKET_GROTTO_CHEST", "variables": []}
+{"id": "LOCATION::RC_HF_OCARINA_OF_TIME_ITEM", "plain_text": "Hf Ocarina Of Time Item", "category": "LOCATION_NAME", "subcategory": "RC_HF_OCARINA_OF_TIME_ITEM", "variables": []}
+{"id": "LOCATION::RC_HF_TEKTITE_GROTTO_FREESTANDING_POH", "plain_text": "Hf Tektite Grotto Freestanding Poh", "category": "LOCATION_NAME", "subcategory": "RC_HF_TEKTITE_GROTTO_FREESTANDING_POH", "variables": []}
+{"id": "LOCATION::RC_HF_DEKU_SCRUB_GROTTO", "plain_text": "Hf Deku Scrub Grotto", "category": "LOCATION_NAME", "subcategory": "RC_HF_DEKU_SCRUB_GROTTO", "variables": []}
+{"id": "LOCATION::RC_LH_CHILD_FISHING", "plain_text": "Lh Child Fishing", "category": "LOCATION_NAME", "subcategory": "RC_LH_CHILD_FISHING", "variables": []}
+{"id": "LOCATION::RC_LH_ADULT_FISHING", "plain_text": "Lh Adult Fishing", "category": "LOCATION_NAME", "subcategory": "RC_LH_ADULT_FISHING", "variables": []}

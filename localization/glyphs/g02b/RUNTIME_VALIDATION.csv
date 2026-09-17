@@ -1,0 +1,14 @@
+test,scope,expected,observed,result,evidence,notes
+PILOT_ID_RECONCILIATION,source/message data,0x1036 is a Z prompt,0x1036 is C-icons text; corrected pilot 0x100D,PASS,source actor paths plus text-ID cross-check,No localization changes
+BUILD_EXE,build,Release executable exists,33002496 bytes and SHA256 3282A70E68A53E8535ED7AB8C8E4ECCE56D5B2542A0A09FB9224747B02B6ADA4,PASS,source/shipwright/x64/Release/soh.exe,Build from G02; no G02B source rebuild
+RUNTIME_STAGING,build-test,source hash copied to build-test,staged hash equals source hash 3282A70E68A53E8535ED7AB8C8E4ECCE56D5B2542A0A09FB9224747B02B6ADA4,PASS,RUNTIME_STAGING.txt,Old runtime hash backed up
+RUNTIME_SMOKE,build-test,window opens and game loads,process responsive; log records version startup, save loads, and scene initialization,PASS_STATIC_RUNTIME,build-test/logs/Ship of Harkinian.log,Native visual capture unavailable
+RESOURCE_LOAD,build-test,LT asset loads without error,no missing LT/resource error in observed log,PARTIAL,build-test log tail,Actual LT texture display not visually verified
+CONTROLLER_RUNTIME,physical Xbox,actual name/type and mapping trace,not exposed by runtime connector in this session,NOT_TESTED,DEVICE_BINDING_RUNTIME_TRACE.csv,Do not infer from Task03 report
+CLASSIC_PROFILE,build-test,original N64 Z glyph visible,not captured,NOT_TESTED,screenshot not captured,Static fallback remains PASS from G02
+DYNAMIC_PROFILE,build-test with Xbox LT,LT glyph visible,not captured,NOT_TESTED,screenshot not captured,Static resolver/build remains PASS
+ULTRAWIDE,3440x1440,correct message/glyph layout,not captured,NOT_TESTED,no native screenshot evidence,No aesthetic tuning performed
+INPUT_REGRESSION,build-test,A/B/LT/sticks/Menu remain usable,not exercised through exposed UI connector,NOT_TESTED,no input trace,No controller backend changes
+MESSAGE_REGRESSION,build-test,text/pages/control codes intact,not exercised through exposed UI connector,NOT_TESTED,no message trace,No message source changes
+SAVE_PRESERVATION,build-test saves,hashes unchanged,all three pre/post SHA256 hashes match,PASS,SAVE_HASHES_PRE.csv and SAVE_HASHES_POST.csv,No manual save performed
+LIVE_SAFETY,live project and saves,no changes,not accessed for mutation,PASS,scope and git checks,Live root remained protected

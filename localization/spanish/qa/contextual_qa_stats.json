@@ -1,0 +1,21 @@
+{
+  "total": 2233,
+  "translated": 2170,
+  "skipped": 63,
+  "flagged": 186,
+  "accepted": 2162,
+  "needs_review": 0,
+  "risk_distribution": {
+    "LOW_RISK": 1984,
+    "MEDIUM_RISK": 178,
+    "HIGH_RISK": 8,
+    "SKIPPED_NO_TEXT": 63
+  },
+  "flag_types": {
+    "DOUBLE_SPACE": 79,
+    "COLOR_NOT_TRANSLATED": 106,
+    "CALQUE": 4,
+    "REAL_DIRECTION_LOSS_FALSE_POSITIVE": 8
+  },
+  "all_direction_flags_false_positives": true
+}

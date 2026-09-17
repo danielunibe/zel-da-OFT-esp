@@ -1,0 +1,8 @@
+file,classification,change,reason,status
+soh/src/code/z_kanfont.c,G02,Central semantic Z glyph substitution with classic fallback,Existing G02 implementation; not changed in G02B,UNCHANGED
+soh/include/glyph_resolver.h,G02,C ABI declaration for resolver,Existing G02 implementation; not changed in G02B,UNCHANGED
+soh/soh/Enhancements/glyphs/GlyphResolver.cpp,G02,Player 1 mapping/device-family resolver,Existing G02 implementation; not changed in G02B,UNCHANGED
+soh/assets/custom/textures/buttons/LTBtn.ppm,G02,16x16 LT pilot asset,Existing G02 implementation; not changed in G02B,UNCHANGED
+.gitignore,PREEXISTING,Dirty before G02 and preserved,Outside G02B ownership,PRESERVED
+localization_workspace/*,CONCURRENT,No changes,Protected concurrent work,PRESERVED
+haptics_workspace/*,CONCURRENT,No changes,Protected completed work,PRESERVED

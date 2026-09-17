@@ -1,0 +1,175 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Localization Entry",
+  "description": "Schema for a single localizable text entry in the OoT/SoH corpus",
+  "type": "object",
+  "required": ["id", "source_language", "source_file", "system", "category", "raw_text", "plain_text", "translation_status"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Stable identifier. For vanilla messages: hex ID like '0x2034'. For synthetic: SYSTEM::SOURCE_FILE::KEY"
+    },
+    "id_numeric": {
+      "type": ["integer", "null"],
+      "description": "Numeric message ID (e.g. 0x2034) if from vanilla/custom message system, null otherwise"
+    },
+    "source_language": {
+      "type": "string",
+      "enum": ["ENG", "GER", "FRA", "JPN"],
+      "description": "Canonical source language for this entry"
+    },
+    "source_file": {
+      "type": "string",
+      "description": "Relative path to the source file containing this text"
+    },
+    "source_line_start": {
+      "type": ["integer", "null"],
+      "description": "Starting line number in source file"
+    },
+    "source_line_end": {
+      "type": ["integer", "null"],
+      "description": "Ending line number in source file"
+    },
+    "system": {
+      "type": "string",
+      "enum": [
+        "VANILLA_MESSAGE",
+        "CUSTOM_MESSAGE",
+        "SOH_MENU",
+        "SOH_ENHANCEMENT",
+        "SOH_COSMETICS",
+        "SOH_AUDIO",
+        "SOH_DEVTOOLS",
+        "SOH_NETWORK",
+        "SOH_MOD_MENU",
+        "RANDOMIZER_HINT",
+        "RANDOMIZER_ITEM",
+        "RANDOMIZER_LOCATION",
+        "RANDOMIZER_SETTING",
+        "RANDOMIZER_NPC_DIALOG",
+        "ACCESSIBILITY",
+        "ELF_MESSAGE",
+        "OTHER"
+      ],
+      "description": "Which text system this entry belongs to"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "NPC_DIALOGUE",
+        "NAVI",
+        "TUTORIAL",
+        "ITEM_NAME",
+        "ITEM_DESCRIPTION",
+        "LOCATION_NAME",
+        "SIGN",
+        "SHOP",
+        "SYSTEM",
+        "MENU",
+        "HUD",
+        "PAUSE_MENU",
+        "CONFIGURATION",
+        "CONTROLLER",
+        "ENHANCEMENT_MENU",
+        "MOD_MENU",
+        "RANDOMIZER",
+        "MINIGAME",
+        "CUTSCENE",
+        "CHOICE",
+        "GAME_OVER",
+        "SAVE_LOAD",
+        "OTHER_PLAYER_VISIBLE"
+      ],
+      "description": "Content category"
+    },
+    "subcategory": {
+      "type": "string",
+      "description": "Finer categorization within the category"
+    },
+    "speaker_hint": {
+      "type": "string",
+      "description": "Inferred speaker if determinable, 'UNKNOWN' otherwise"
+    },
+    "context_hint": {
+      "type": "string",
+      "description": "Additional context about when/where this text appears"
+    },
+    "raw_text": {
+      "type": "string",
+      "description": "Text with all control codes preserved exactly as in source"
+    },
+    "plain_text": {
+      "type": "string",
+      "description": "Human-readable text with control codes replaced by friendly markers"
+    },
+    "control_codes": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "List of control code types found in this message"
+    },
+    "variables": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Dynamic variable references like [[gsCount]], [[heartPieceCount]], etc."
+    },
+    "button_glyphs": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Button references found (A, B, C-Up, L, R, Z, etc.)"
+    },
+    "choices": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Choice labels if this is a choice message"
+    },
+    "page_count": {
+      "type": "integer",
+      "description": "Number of text pages in this message"
+    },
+    "has_color_codes": {
+      "type": "boolean",
+      "description": "Whether message contains color control codes"
+    },
+    "has_sound_codes": {
+      "type": "boolean",
+      "description": "Whether message contains sound effect codes"
+    },
+    "has_dynamic_values": {
+      "type": "boolean",
+      "description": "Whether message contains template variables"
+    },
+    "has_player_name": {
+      "type": "boolean",
+      "description": "Whether message inserts player name"
+    },
+    "has_button_prompt": {
+      "type": "boolean",
+      "description": "Whether message contains controller button references"
+    },
+    "is_duplicate_text": {
+      "type": "boolean",
+      "description": "Whether plain_text matches another entry"
+    },
+    "duplicate_group": {
+      "type": ["string", "null"],
+      "description": "Group ID for duplicate entries"
+    },
+    "translation_status": {
+      "type": "string",
+      "enum": ["NOT_TRANSLATED", "IN_PROGRESS", "REVIEW", "TRANSLATED"],
+      "description": "Current translation status"
+    },
+    "german_text": {
+      "type": ["string", "null"],
+      "description": "German text if available from source, null otherwise"
+    },
+    "french_text": {
+      "type": ["string", "null"],
+      "description": "French text if available from source, null otherwise"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes"
+    }
+  }
+}

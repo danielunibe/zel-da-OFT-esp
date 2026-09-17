@@ -1,0 +1,11 @@
+file,symbol,change,reason,risk,G02_interaction
+soh/include/z64.h,Language,Add LANGUAGE_ESP=4 and update LANGUAGE_MAX=5,Define Spanish language enumeration in engine,Low,None (Disjoint from input/glyph systems)
+soh/soh/SohGui/SohMenu.h,languages,Add { LANGUAGE_ESP "Español" },Expose Spanish in ImGui Settings dropdown,Low,None (Menu definition disjoint from G02)
+soh/soh/SohGui/SohMenuSettings.cpp,messageTables,Add &sSpaMessageEntryTablePtr at index 4,Allow UI to check table presence before enabling Spanish,Low,None
+soh/src/code/z_message_PAL.c,Message_OpenText,Add else if (gSaveContext.language == LANGUAGE_ESP) routing to sSpaMessageEntryTablePtr,Route in-game text retrieval to Spanish table with English fallback,Low,None
+soh/soh/z_message_OTR.cpp,OTRMessage_Init,Add OTRMessage_LoadTable call for spa_message_data_static with info logging,Load Spanish message table from OTR archive,Low,None
+soh/src/code/z_kanfont.c,Font_LoadChar,Add Spanish_GetFontTexture check when language == LANGUAGE_ESP,Render 11 Spanish glyphs without overwriting European slots,Medium,CRITICAL_PRESERVATION (Preserves G02 character == 0x84 check exactly)
+soh/soh/Enhancements/custom-message/CustomMessageManager.cpp,LoadVanillaMessageTableEntry,Add else if (gSaveContext.language == LANGUAGE_ESP) branch and bounds guards,Support Spanish in custom message lookups and prevent vector out-of-bounds,Low,None
+soh/soh/OTRGlobals.cpp,OTRGlobals::Initialize,Add es.o2r to OTRFiles at initialization,Ensure LibUltraShip mounts es.o2r archive into virtual file system at boot,Low,None
+libultraship/src/ship/Context.cpp,Context::InitLogging,Add flush_on(spdlog::level::info),Ensure immediate on-disk log flushing for runtime verification,Low,None
+soh/soh/Enhancements/glyphs/GlyphResolver.cpp,GlyphResolver_GetZTexture,Return nullptr (DYNAMIC_DISABLED_FOR_STABILITY),Eliminate message crash on 0x100D by falling back to classic N64 Z glyph,Low,Direct fix for stability

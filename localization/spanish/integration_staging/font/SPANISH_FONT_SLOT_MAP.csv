@@ -1,0 +1,12 @@
+unicode,character,internal_slot,replaces,reason,used_frequency,collision_status,integration_status
+U+00F1,ñ,0x92,â (Latin Small Letter A With Circumflex),Most frequent missing Spanish consonant; replaces unused French circumflex,749,ZERO_COLLISION_SAFE,STAGED_READY
+U+00D1,Ñ,0x81,Î (Latin Capital Letter I With Circumflex),Capital N with tilde; replaces unused French capital circumflex,0,ZERO_COLLISION_SAFE,STAGED_READY
+U+00A1,¡,0x83,Ä (Latin Capital Letter A With Diaeresis),Inverted exclamation mark; replaces unused German diaeresis,2483,ZERO_COLLISION_SAFE,STAGED_READY
+U+00BF,¿,0x85,È (Latin Capital Letter E With Grave),Inverted question mark; replaces unused French grave accent,743,ZERO_COLLISION_SAFE,STAGED_READY
+U+00ED,í,0x99,ï (Latin Small Letter I With Diaeresis),Small i with acute; replaces unused French diaeresis,1441,ZERO_COLLISION_SAFE,STAGED_READY
+U+00F3,ó,0x9A,ô (Latin Small Letter O With Circumflex),Small o with acute; replaces unused French circumflex,947,ZERO_COLLISION_SAFE,STAGED_READY
+U+00FA,ú,0x9D,û (Latin Small Letter U With Circumflex),Small u with acute; replaces unused French circumflex,494,ZERO_COLLISION_SAFE,STAGED_READY
+U+00C1,Á,0x80,À (Latin Capital Letter A With Grave),Capital A with acute; replaces unused French grave accent,118,ZERO_COLLISION_SAFE,STAGED_READY
+U+00CD,Í,0x89,Ï (Latin Capital Letter I With Diaeresis),Capital I with acute; replaces unused French diaeresis,7,ZERO_COLLISION_SAFE,STAGED_READY
+U+00D3,Ó,0x8A,Ô (Latin Capital Letter O With Circumflex),Capital O with acute; replaces unused French circumflex,3,ZERO_COLLISION_SAFE,STAGED_READY
+U+00DA,Ú,0x8C,Ù (Latin Capital Letter U With Grave),Capital U with acute; replaces unused French grave accent,8,ZERO_COLLISION_SAFE,STAGED_READY

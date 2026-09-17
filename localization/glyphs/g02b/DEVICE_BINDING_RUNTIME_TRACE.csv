@@ -1,0 +1,2 @@
+timestamp,device_name,device_type,detected_family,semantic_action,player,physical_binding_type,active_binding,resolved_glyph,trace_status,notes
+2026-09-16T00:00:00-06:00,NOT_EXPOSED,NOT_EXPOSED,UNKNOWN,NOT_OBSERVED,1,NOT_OBSERVED,NOT_OBSERVED,NOT_OBSERVED,NOT_TESTED,No per-runtime trace was added because no native controller/UI observation path was available; no spam logging left in source

@@ -1,0 +1,943 @@
+id,source_file,plain_text,choice_count,category
+0x0006,oot.o2r::text/nes_message_data_static,"Bombs   20 Pieces   80 Rupees
+
+[CHOICE:2]Buy
+Don't buy",2,NPC_DIALOGUE
+0x0018,oot.o2r::text/nes_message_data_static,"Welcome to our cutting-edge 
+amusement center:
+--- PAGE ---
+The Bombchu Bowling Alley!
+--- PAGE ---
+Do you want to know what you 
+can win? Well, it's a secret.
+I can't tell you until you've
+paid to play.
+--- PAGE ---
+It's 30 Rupees per game.
+Do you want to play?
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x001A,oot.o2r::text/nes_message_data_static,"Do you want to play again?
+
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x001E,oot.o2r::text/nes_message_data_static,"Bombs   30 Pieces   120 Rupees
+
+[CHOICE:2]Buy
+Don't buy",2,NPC_DIALOGUE
+0x002A,oot.o2r::text/nes_message_data_static,"Bombchu   20 Pieces   180 Rupees
+
+[CHOICE:2]Buy
+Don't buy",2,NPC_DIALOGUE
+0x002B,oot.o2r::text/nes_message_data_static,"Do you want to play a game?
+It's 20 Rupees per play.
+[CHOICE:2]Yes
+Nope",2,NPC_DIALOGUE
+0x003B,oot.o2r::text/nes_message_data_static,"You cast Farore's Wind!
+[CHOICE:3]Return to the Warp Point
+Dispel the Warp Point
+Exit",3,NPC_DIALOGUE
+0x005D,oot.o2r::text/nes_message_data_static,"You put a Blue Fire
+into the bottle!
+This is a cool flame you can
+use with [R], [L] or [Z].",3,NPC_DIALOGUE
+0x0062,oot.o2r::text/nes_message_data_static,"Red Potion   40 Rupees
+
+[CHOICE:2]Buy
+Don't buy",2,NPC_DIALOGUE
+0x0063,oot.o2r::text/nes_message_data_static,"Red Potion   50 Rupees
+
+[CHOICE:2]Buy
+Don't buy",2,NPC_DIALOGUE
+0x006A,oot.o2r::text/nes_message_data_static,"Welcome! May I help you?
+
+[CHOICE:2]I want to shop
+Just looking",2,NPC_DIALOGUE
+0x006B,oot.o2r::text/nes_message_data_static,"Would you like to buy something
+else?
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x006D,oot.o2r::text/nes_message_data_static,"Open the chest and...Surprise!
+If you find a Key inside, you'll 
+be able to advance. Left or
+right--try your luck!
+--- PAGE ---
+10 Rupees to play. Do you want 
+to try it?
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x007C,oot.o2r::text/nes_message_data_static,"Bombs  10 pieces  50 Rupees
+
+[CHOICE:2]Buy
+Don't buy",2,NPC_DIALOGUE
+0x007D,oot.o2r::text/nes_message_data_static,"Arrows  50 pieces  90 Rupees
+
+[CHOICE:2]Buy
+Don't buy",2,NPC_DIALOGUE
+0x007E,oot.o2r::text/nes_message_data_static,"Fish   200 Rupees
+
+[CHOICE:2]Buy
+Don't buy",2,NPC_DIALOGUE
+0x007F,oot.o2r::text/nes_message_data_static,"Deku Nuts   5 Pieces   15 Rupees
+
+[CHOICE:2]Buy
+Don't buy",2,NPC_DIALOGUE
+0x0083,oot.o2r::text/nes_message_data_static,"Shop around by moving the 
+[D-Pad] left or right.
+[CHOICE:2]Talk to the owner
+Quit",2,NPC_DIALOGUE
+0x0087,oot.o2r::text/nes_message_data_static,"Deku Nuts   10 pieces  30 Rupees
+
+[CHOICE:2]Buy
+Don't buy",2,NPC_DIALOGUE
+0x0088,oot.o2r::text/nes_message_data_static,"Deku Stick  1 piece   10 Rupees
+
+[CHOICE:2]Buy
+Don't buy",2,NPC_DIALOGUE
+0x0089,oot.o2r::text/nes_message_data_static,"Deku Shield   40 Rupees
+
+[CHOICE:2]Buy
+Don't buy",2,NPC_DIALOGUE
+0x008A,oot.o2r::text/nes_message_data_static,"Arrow   10 pieces   20 Rupees
+
+[CHOICE:2]Buy
+Don't buy",2,NPC_DIALOGUE
+0x008B,oot.o2r::text/nes_message_data_static,"Bomb   5 pieces   25 Rupees
+
+[CHOICE:2]Buy
+Don't buy",2,NPC_DIALOGUE
+0x008C,oot.o2r::text/nes_message_data_static,"Bombchu  10 pieces   100 Rupees
+
+[CHOICE:2]Buy
+Don't buy",2,NPC_DIALOGUE
+0x008E,oot.o2r::text/nes_message_data_static,"Red Potion   30 Rupees
+
+[CHOICE:2]Buy
+Don't buy",2,NPC_DIALOGUE
+0x008F,oot.o2r::text/nes_message_data_static,"Green Potion   30 Rupees
+
+[CHOICE:2]Buy
+Don't buy",2,NPC_DIALOGUE
+0x0092,oot.o2r::text/nes_message_data_static,"Hylian Shield   80 Rupees
+
+[CHOICE:2]Buy
+Don't buy",2,NPC_DIALOGUE
+0x0093,oot.o2r::text/nes_message_data_static,"Goron Tunic   200 Rupees
+
+[CHOICE:2]Buy
+Don't buy",2,NPC_DIALOGUE
+0x0094,oot.o2r::text/nes_message_data_static,"Zora Tunic   300 Rupees
+
+[CHOICE:2]Buy
+Don't buy",2,NPC_DIALOGUE
+0x0095,oot.o2r::text/nes_message_data_static,"Recovery Heart   10 Rupees
+
+[CHOICE:2]Buy
+Don't buy",2,NPC_DIALOGUE
+0x0099,oot.o2r::text/nes_message_data_static,"You got an Empty Bottle!
+Put something inside and 
+press [C] to use it... What?
+Something's already inside!?",2,NPC_DIALOGUE
+0x009B,oot.o2r::text/nes_message_data_static,"Arrows   30 pieces   60 Rupees
+
+[CHOICE:2]Buy
+Don't buy",2,NPC_DIALOGUE
+0x00B6,oot.o2r::text/nes_message_data_static,"Fairy's Spirit    50 Rupees
+
+[CHOICE:2]Buy
+Don't buy",2,NPC_DIALOGUE
+0x00B8,oot.o2r::text/nes_message_data_static,"Blue Fire    300 Rupees
+
+[CHOICE:2]Buy
+Don't buy",2,NPC_DIALOGUE
+0x00BA,oot.o2r::text/nes_message_data_static,"Bottle Bug   50 Rupees
+
+[CHOICE:2]Buy
+Don't buy",2,NPC_DIALOGUE
+0x00CA,oot.o2r::text/nes_message_data_static,"Bombs   5 pieces   35 Rupees
+
+[CHOICE:2]Buy
+Don't buy",2,NPC_DIALOGUE
+0x00DE,oot.o2r::text/nes_message_data_static,"Deku Seeds 30 pieces 30 Rupees
+
+[CHOICE:2]Buy
+Don't buy",2,NPC_DIALOGUE
+0x00E0,oot.o2r::text/nes_message_data_static,"You want to talk to Saria, right?
+
+[CHOICE:2]Talk to Saria
+No",2,NPC_DIALOGUE
+0x00E1,oot.o2r::text/nes_message_data_static,"Really? Then do you want to talk 
+to me?
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x00E3,oot.o2r::text/nes_message_data_static,"Do you want to talk to Saria
+again?
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x088D,oot.o2r::text/nes_message_data_static,"Warp to the Lost Woods?
+
+[CHOICE:2]OK
+No",2,SYSTEM
+0x088E,oot.o2r::text/nes_message_data_static,"Warp to the Death Mountain 
+Crater?
+[CHOICE:2]OK
+No",2,SYSTEM
+0x088F,oot.o2r::text/nes_message_data_static,"Warp to Lake Hylia?
+
+[CHOICE:2]OK
+No",2,SYSTEM
+0x0890,oot.o2r::text/nes_message_data_static,"Warp to the Desert Colossus?
+
+[CHOICE:2]OK
+No",2,SYSTEM
+0x0891,oot.o2r::text/nes_message_data_static,"Warp to the graveyard?
+
+[CHOICE:2]OK
+No",2,SYSTEM
+0x0892,oot.o2r::text/nes_message_data_static,"Warp to the Temple of Time?
+
+[CHOICE:2]OK
+No",2,SYSTEM
+0x1016,oot.o2r::text/nes_message_data_static,"I have been cursed...
+I need you to break the curse
+with your wisdom and courage.
+--- PAGE ---
+Dost thou have courage enough
+to undertake this task?
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x101C,oot.o2r::text/nes_message_data_static,"Quite an unusual mask you have
+there. Hee hee! I like it! It may
+make me look a little bit tougher.
+--- PAGE ---
+Hey, why don't you give it to me?
+
+[CHOICE:2]OK
+No way",2,NPC_DIALOGUE
+0x102E,oot.o2r::text/nes_message_data_static,"Do you want to play some more?
+
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x1035,oot.o2r::text/nes_message_data_static,"I can teach you about the icons
+at the top of the screen.
+[CHOICE:2]About the yellow icons
+About the blue icon",2,NPC_DIALOGUE
+0x1038,oot.o2r::text/nes_message_data_static,"If you want to learn about the
+map and items, just ask me.
+But don't ask unless you want
+to hear a long explanation.
+--- PAGE ---
+What do you want to know about?
+[CHOICE:3]About the map 
+About items
+Don't ask",3,NPC_DIALOGUE
+0x103E,oot.o2r::text/nes_message_data_static,"Do you want to know how to use
+the [C-Right] Button?
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x1092,oot.o2r::text/nes_message_data_static,"Now, I have yet more to tell ye,
+wouldst thou listen...
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x10A3,oot.o2r::text/nes_message_data_static,"Let's make a deal!
+
+[CHOICE:2]OK
+No way",2,NPC_DIALOGUE
+0x10A9,oot.o2r::text/nes_message_data_static,"Would you like to play the 
+Ocarina with me?
+[CHOICE:2]Yes
+Don't do it",2,NPC_DIALOGUE
+0x10B3,oot.o2r::text/nes_message_data_static,"This will disappear if you take
+too long, so you gotta hurry!
+[CHOICE:2]OK
+I can't",2,NPC_DIALOGUE
+0x10B8,oot.o2r::text/nes_message_data_static,"That medicine is made of 
+forest mushrooms. Give it back!
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x10C2,oot.o2r::text/nes_message_data_static,"Do you want to hear what I said
+again?
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x10C6,oot.o2r::text/nes_message_data_static,"Do you want to hear what I
+said again?
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x2003,oot.o2r::text/nes_message_data_static,"How about trying your skill with
+Epona on an obstacle course?
+--- PAGE ---
+I'll time you for two laps.
+It's pretty challenging. If you
+miss jumping a fence in the 
+proper order, you'll fail.
+--- PAGE ---
+How about it?
+Do you want to try? 
+[CHOICE:2]Let's go
+Don't do it",2,NPC_DIALOGUE
+0x200B,oot.o2r::text/nes_message_data_static,"Will you sell it to me?
+
+[CHOICE:2]Yes
+No way",2,NPC_DIALOGUE
+0x2023,oot.o2r::text/nes_message_data_static,"Gyaah! It's Damp the 
+gravekeeper!
+--- PAGE ---
+???
+--- PAGE ---
+Oh, it's just a mask. I get a 
+different kind of fright from that
+mask than I get from Damp...
+--- PAGE ---
+Will you give that mask to me?
+
+[CHOICE:2]Yes
+No way",2,NPC_DIALOGUE
+0x202B,oot.o2r::text/nes_message_data_static,"I don't care how expensive it is!
+Please sell it to me!
+[CHOICE:2]Yes
+No way",2,NPC_DIALOGUE
+0x2031,oot.o2r::text/nes_message_data_static,"Pay me 10 Rupees and you can 
+ride.
+[CHOICE:2]Ride
+Don't ride",2,NPC_DIALOGUE
+0x2034,oot.o2r::text/nes_message_data_static,"Do you want to hear how to ride?
+
+[CHOICE:2]Listen
+Don't listen",2,NPC_DIALOGUE
+0x2036,oot.o2r::text/nes_message_data_static,"If you use [C-Left] Targeting, you can 
+talk to me from horseback.
+--- PAGE ---
+Are you ready to go home so 
+soon?
+[CHOICE:2]No, I want to ride.
+Yes, I'm done.",2,NPC_DIALOGUE
+0x2038,oot.o2r::text/nes_message_data_static,"You're getting better!
+How about a little race with me?
+One lap around the corral with
+that horse.
+--- PAGE ---
+Let's make a little wager, say
+50 Rupees?
+[CHOICE:2]Do it
+Don't do it",2,NPC_DIALOGUE
+0x2058,oot.o2r::text/nes_message_data_static,"It's been a while...
+Do you want to race?
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x205B,oot.o2r::text/nes_message_data_static,"Heh heh... Are you mad because 
+you lost? If you're that upset,
+how about another race?
+--- PAGE ---
+Bet 50 Rupees and race again?
+
+[CHOICE:2]Race
+Don't race",2,NPC_DIALOGUE
+0x205E,oot.o2r::text/nes_message_data_static,"Wanna buy milk for 30 Rupees?
+
+[CHOICE:2]Buy
+Don't buy",2,NPC_DIALOGUE
+0x2066,oot.o2r::text/nes_message_data_static,"Did you get all that?
+
+[CHOICE:2]No
+Yes",2,NPC_DIALOGUE
+0x206A,oot.o2r::text/nes_message_data_static,"Do you want to hear what I said 
+again?
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x2077,oot.o2r::text/nes_message_data_static,"Did you understand well the story
+I just told you?
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x2078,oot.o2r::text/nes_message_data_static,"I was spying through this window
+just now...
+--- PAGE ---
+The other element from my
+dream...the dark clouds...
+I believe they symbolize...
+that man in there!
+--- PAGE ---
+Will you look through the window
+at him?
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x207E,oot.o2r::text/nes_message_data_static,"Mumble...mumble...
+Huh? I'm awake already!
+--- PAGE ---
+What?
+--- PAGE ---
+Well I'll be! If it ain't the forest
+kid from the other day!
+By the way, thanks a lot for
+waking me up!
+--- PAGE ---
+It took some doing, but I finally 
+got Malon back in a good mood.
+--- PAGE ---
+So, what are you up to today?
+Got some free time on your hands
+you say?
+Well how about a little game?
+--- PAGE ---
+These three Cuccos I have here
+are special Super Cuccos!
+--- PAGE ---
+I'm going to throw these Cuccos
+into that there gaggle of normal
+Cuccos.
+--- PAGE ---
+If you can pick out these three 
+special birds from among the
+normal Cuccos within the time 
+limit, I'll give you something good.
+--- PAGE ---
+If you can't find them, I win.
+It'll be 10 Rupees... Want to play?
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x207F,oot.o2r::text/nes_message_data_static,"Mumble...mumble...
+I'm up! I'm up!
+--- PAGE ---
+What?
+--- PAGE ---
+Hey, forest kid!
+Got some free time?
+Then c'mon and play!
+--- PAGE ---
+I'm going to throw these three
+Super Cuccos into that gaggle of
+normal Cuccos.
+--- PAGE ---
+If you can pick out these three 
+special birds from among the
+normal Cuccos within the time 
+limit, I'll give you something good.
+--- PAGE ---
+If you can't find them, I win.
+It'll be 10 Rupees... Want to play?
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x2085,oot.o2r::text/nes_message_data_static,"Want to try again?
+--- PAGE ---
+A young man like you must have
+a real fire in your belly!
+Find three of them within
+30 seconds.
+--- PAGE ---
+Try again for 5 Rupees?
+
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x2086,oot.o2r::text/nes_message_data_static,"Hey, you!
+You've got the talent to be one of
+the world's best cowboys!
+--- PAGE ---
+How'd you like to marry Malon?
+Huh?
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x208B,oot.o2r::text/nes_message_data_static,"Mumble...mumble...
+I'm awake!
+--- PAGE ---
+What?
+--- PAGE ---
+Hey, [PLAYER]!
+If you're lookin' for Malon,
+she's right outside. Did you 
+come here to play?
+--- PAGE ---
+Well then, how about playing the
+Super Cucco-findin' game with me?
+Or, do you want to buy some
+Lon Lon Milk?
+--- PAGE ---
+What'll it be?
+[CHOICE:3]Lon Lon Milk - 30 Rupees
+Cucco-findin' game - 10 Rupees
+Quit",3,NPC_DIALOGUE
+0x300A,oot.o2r::text/nes_message_data_static,"I'm standing here to shade the
+Bomb Flowers from the sun.
+--- PAGE ---
+Do you have a question for me?
+
+[CHOICE:2]Ask about Bomb Flowers
+Ask about Dodongo's Cavern",2,NPC_DIALOGUE
+0x3034,oot.o2r::text/nes_message_data_static,"You'd better try to calm him down
+if you can...
+Maybe he will calm down if you 
+talk to him?
+--- PAGE ---
+What do you want to ask him?
+
+[CHOICE:2]About the dragon
+About the Gorons",2,NPC_DIALOGUE
+0x304F,oot.o2r::text/nes_message_data_static,"How about buying this knife for 
+200 Rupees?
+[CHOICE:2]Buy
+Don't buy",2,NPC_DIALOGUE
+0x3055,oot.o2r::text/nes_message_data_static,"Please go get the eyedrrrrrrops...
+
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x400C,oot.o2r::text/nes_message_data_static,"Have you seen Lord Jabu-Jabu?
+
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x4015,oot.o2r::text/nes_message_data_static,"Can you make it before they
+spoil?
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x4025,oot.o2r::text/nes_message_data_static,"You!
+You looked cool...cooler than I 
+thought you would, anyway... 
+Just a little!
+--- PAGE ---
+Well, anyway, you saved me, so I 
+guess I'll reward you.
+--- PAGE ---
+What do you wish? Just tell me...
+
+[CHOICE:2]I want that Spiritual Stone.
+Nothing really...",2,NPC_DIALOGUE
+0x4053,oot.o2r::text/nes_message_data_static,"Diving Game   20 Rupees
+Want to play?
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x405C,oot.o2r::text/nes_message_data_static,"Take as much as you want for 
+20 Rupees.  Want to play?
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x405E,oot.o2r::text/nes_message_data_static,"Chomp chomp chomp...
+How about some Magic Beans?
+They aren't selling very well...
+--- PAGE ---
+How about...
+10 Rupees for one piece?
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x405F,oot.o2r::text/nes_message_data_static,"Chomp chomp chomp...
+How about some Magic Beans?
+Well, they're not that popular yet.
+--- PAGE ---
+How about...
+20 Rupees for one piece?
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x4060,oot.o2r::text/nes_message_data_static,"Chomp chomp chomp...
+How about some Magic Beans?
+They are getting to be quite 
+popular...
+--- PAGE ---
+30 Rupees for one piece.
+How about it?
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x4061,oot.o2r::text/nes_message_data_static,"Chomp chomp chomp...
+How about some Magic Beans?
+They're all the rage!
+--- PAGE ---
+40 Rupees for one piece.
+
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x4062,oot.o2r::text/nes_message_data_static,"Chomp chomp chomp...
+We have the popular Magic Beans!
+You'll regret it if you don't buy 
+them now!
+--- PAGE ---
+50 Rupees for one piece.
+(Just for now.)
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x4063,oot.o2r::text/nes_message_data_static,"Chomp chomp chomp...
+These are the super-popular 
+Magic Beans! In case you're 
+wondering, they'll soon be sold out!
+--- PAGE ---
+Super price!
+60 Rupees for one piece!
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x4064,oot.o2r::text/nes_message_data_static,"Chomp chomp chomp...
+We have the super-rare 
+Magic Beans! This could be your
+last chance!
+--- PAGE ---
+Special price!
+70 Rupees for one piece!
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x4065,oot.o2r::text/nes_message_data_static,"Chomp chomp chomp...
+We have the legendary 
+Magic Beans! I'll sell them only 
+to you!
+--- PAGE ---
+Super price!
+80 Rupees for one piece!
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x4066,oot.o2r::text/nes_message_data_static,"Chomp chomp chomp...
+Do you want...Magic Beans?! 
+They aren't cheap, but...do you
+still want them?
+--- PAGE ---
+I can't let them go for less than
+90 Rupees apiece!
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x4067,oot.o2r::text/nes_message_data_static,"Chomp chomp chomp...
+We have...Magic Beans! 
+Do you want them...huh? Huh?
+--- PAGE ---
+100 Rupees for one piece!
+Keyahahah!
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x407B,oot.o2r::text/nes_message_data_static,"Well, do you want to go fishing 
+for 20 Rupees?
+[CHOICE:2]Yes
+No",2,MINIGAME
+0x407F,oot.o2r::text/nes_message_data_static,"OK, listen up!
+--- PAGE ---
+Walk up to the water's edge and
+press [C-Left] to look at a fish.
+--- PAGE ---
+While looking at a fish, you can 
+cast your line with [B]. Press [A]
+to brake the line.
+--- PAGE ---
+When the lure drops into the 
+water, you can wiggle it with [D-Pad].
+If you're a novice, you can also
+use [B].
+--- PAGE ---
+Reel in your lure with [A]. Hold 
+down [A] and [C-Down] to reel it in 
+faster.
+--- PAGE ---
+If you feel a hit, press [A] and
+[D-Pad] down to set the hook.
+After that, reel it in with [A].
+--- PAGE ---
+Do you understand?
+
+[CHOICE:2]Yes
+No",2,MINIGAME
+0x4083,oot.o2r::text/nes_message_data_static,"Well, well...it's about  pounds. 
+Do you want to keep it?
+[CHOICE:2]Yes
+No",2,MINIGAME
+0x4084,oot.o2r::text/nes_message_data_static,"What do you want?
+[CHOICE:3]Weigh my fish.
+Let's talk about something.
+I want to quit.",3,MINIGAME
+0x408A,oot.o2r::text/nes_message_data_static,"Do you want to continue fishing?
+
+[CHOICE:2]Yes
+No",2,MINIGAME
+0x4091,oot.o2r::text/nes_message_data_static,"Wow! This is a real lunker!
+Let's see...it weighs
+ pounds!
+--- PAGE ---
+Do you want to keep it?
+
+[CHOICE:2]Yes
+No",2,MINIGAME
+0x4093,oot.o2r::text/nes_message_data_static,"Hey, mister! I remember you!
+It's been a long time!
+--- PAGE ---
+How many years has it been?
+Seven years?! What have you
+been doing all this time?!
+--- PAGE ---
+You're my only customer. I'm 
+almost out of business! Seriously!
+On top of that, my hair...
+--- PAGE ---
+Uh, I mean, never mind...
+--- PAGE ---
+Well, do you want to go fishing?
+It costs only 20 Rupees!
+[CHOICE:2]Yes
+No",2,MINIGAME
+0x4097,oot.o2r::text/nes_message_data_static,"Hey, what are you doing?
+I told you not to do that!
+You're terrible!
+Seriously!
+--- PAGE ---
+Give me back my hat!
+
+[CHOICE:2]OK
+No way",2,MINIGAME
+0x4098,oot.o2r::text/nes_message_data_static,"What? Huh? Oh?
+I think the fish you already
+kept was bigger than this one...
+--- PAGE ---
+Do you still want to keep it?
+
+[CHOICE:2]No, I don't want it
+Yes, I want to keep it anyway",2,MINIGAME
+0x4099,oot.o2r::text/nes_message_data_static,"Gosh! That's a strange fish you
+caught there! On top of that, it
+weighs  pounds!
+--- PAGE ---
+What do you want to do with it?
+
+[CHOICE:2]Keep it anyway
+I don't want it",2,MINIGAME
+0x409A,oot.o2r::text/nes_message_data_static,"Wow!
+--- PAGE ---
+Is this what I think it is?
+Astonishing!
+You snagged a sinking lure!
+--- PAGE ---
+What do you want to do with it?
+
+[CHOICE:2]Use it now.
+Get rid of it.",2,MINIGAME
+0x409F,oot.o2r::text/nes_message_data_static,"Oh my gosh!
+This fish is gigantic!!
+--- PAGE ---
+A fish this big can't even fit
+on the screen, and I can't weigh it
+accurately, but it looks like it's
+about  pounds!!
+--- PAGE ---
+You'll want to keep this one,
+right?
+[CHOICE:2]Keep it
+Don't keep it",2,MINIGAME
+0x5002,oot.o2r::text/nes_message_data_static,"The gravekeeper's diary is here.
+Do you want to read it?
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x5005,oot.o2r::text/nes_message_data_static,"You defeated Poe the ghost!
+--- PAGE ---
+Do you want to catch it in 
+a bottle?
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x500C,oot.o2r::text/nes_message_data_static,"Ultimate potion! How about
+100 Rupees?
+[CHOICE:2]Buy
+Don't buy",2,NPC_DIALOGUE
+0x5011,oot.o2r::text/nes_message_data_static,"Do you want to hear what I 
+said again?
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x5019,oot.o2r::text/nes_message_data_static,"Do you want me to dig here?
+10 Rupees for one hole.
+[CHOICE:2]Yes
+Don't do it",2,NPC_DIALOGUE
+0x503F,oot.o2r::text/nes_message_data_static,"What do you think? 
+Will you try?
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x5044,oot.o2r::text/nes_message_data_static,"Do you want to keep Cojiro?
+
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x504B,oot.o2r::text/nes_message_data_static,"Hey, give it to me now!
+
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x506E,oot.o2r::text/nes_message_data_static,"Poe  30 Rupees
+
+[CHOICE:2]Buy
+Don't buy",2,NPC_DIALOGUE
+0x600D,oot.o2r::text/nes_message_data_static,"I am the Gerudo master of 
+horseback archery! On top of 
+that, I'm the Gerudo master of
+horseback riding!
+--- PAGE ---
+Want to try horseback archery
+for 20 Rupees?
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x6014,oot.o2r::text/nes_message_data_static,"This is the Gerudo's Training
+Ground.
+--- PAGE ---
+Membership card verified.
+--- PAGE ---
+One try for 10 Rupees!
+
+[CHOICE:2]Try
+Don't try",2,NPC_DIALOGUE
+0x601D,oot.o2r::text/nes_message_data_static,"I haven't seen you around, kid...
+--- PAGE ---
+What do you want?
+[CHOICE:3]To see the temple
+Looking for the Sages
+Nothing, really",3,NPC_DIALOGUE
+0x6020,oot.o2r::text/nes_message_data_static,"You have nothing to do? What 
+good timing! Can you do me a 
+favor, kid?
+--- PAGE ---
+Wait a second, I want to ask you
+first--you wouldn't happen to be
+one of Ganondorf's...
+--- PAGE ---
+followers...would you?
+
+[CHOICE:2]What if I am?
+I hate Ganondorf!",2,NPC_DIALOGUE
+0x6024,oot.o2r::text/nes_message_data_static,"I want to ask you a favor...
+--- PAGE ---
+Will you go through this tiny hole
+and get a treasure that's inside?
+--- PAGE ---
+The treasure is the Silver
+Gauntlets. If you equip them, you
+can easily push and pull very 
+heavy things!
+--- PAGE ---
+No, no, no, kid! Don't even think
+about taking this treasure for 
+yourself!
+--- PAGE ---
+The Silver Gauntlets won't fit a
+little kid like you if you try to 
+equip them! I want you to be a 
+good boy and give them to me!
+--- PAGE ---
+Ganondorf and his minions are
+using the Spirit Temple as a 
+hideout.
+--- PAGE ---
+Only the Silver Gauntlets will 
+allow me to sneak deep into the
+temple.
+--- PAGE ---
+Once there, I'm going to steal all
+the treasure inside and mess up
+their plans!
+--- PAGE ---
+How about it? Will you do it?
+
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x6041,oot.o2r::text/nes_message_data_static,"Do you want to try for 20 Rupees?
+
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x606E,oot.o2r::text/nes_message_data_static,"My Biggoron tool broke, so I was
+going to Goron City to get it
+repaired.
+--- PAGE ---
+Your coming here is great timing.
+Will you give me my saw?
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x6077,oot.o2r::text/nes_message_data_static,"Well Come!
+--- PAGE ---
+I am selling stuff, strange and 
+rare, from all over the world to 
+everybody.
+Today's special is...
+--- PAGE ---
+A dangerous, running object! 
+Terrifying! 
+I won't tell you what it is until 
+I see the money....
+--- PAGE ---
+How about 200 Rupees?
+
+[CHOICE:2]Buy
+Don't buy",2,NPC_DIALOGUE
+0x607B,oot.o2r::text/nes_message_data_static,"Do you want to hear what I said
+again?
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x607E,oot.o2r::text/nes_message_data_static,"The best time to go from here to 
+the bridge in the Lost Woods was
+.  That's my record.
+--- PAGE ---
+Will you challenge my record?
+
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x7030,oot.o2r::text/nes_message_data_static,"Do you have it? 
+
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x7033,oot.o2r::text/nes_message_data_static,"Please keep this a secret from
+everyone...
+[CHOICE:2]OK
+No",2,NPC_DIALOGUE
+0x703A,oot.o2r::text/nes_message_data_static,"Please!
+
+[CHOICE:2]OK
+I don't believe you.",2,NPC_DIALOGUE
+0x7051,oot.o2r::text/nes_message_data_static,"The Master Sword is a sacred
+blade which evil ones may never
+touch....
+--- PAGE ---
+Only one worthy of the title of
+""Hero of Time"" can pull it from 
+the Pedestal of Time....
+--- PAGE ---
+However, you were too young to 
+be the Hero of Time....
+--- PAGE ---
+Therefore, your spirit was 
+sealed here for seven years.
+--- PAGE ---
+And now that you are old enough,
+the time has come for you to
+awaken as the Hero of Time!
+--- PAGE ---
+Well, do you understand your 
+destiny?
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x7072,oot.o2r::text/nes_message_data_static,"Give me 10 Rupees...
+
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x70A2,oot.o2r::text/nes_message_data_static,"Select a mask with left or right
+on [D-Pad].
+[CHOICE:2]Talk to the shop owner.
+Don't borrow",2,NPC_DIALOGUE
+0x70AD,oot.o2r::text/nes_message_data_static,"Choose a mask with left or right 
+on [D-Pad].
+[CHOICE:2]Ask about Mask of Truth
+Don't borrow a mask",2,NPC_DIALOGUE
+0x70BC,oot.o2r::text/nes_message_data_static,"Do you want to borrow the Skull 
+Mask?
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x70BD,oot.o2r::text/nes_message_data_static,"Do you want to borrow the 
+Spooky Mask?
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x70BE,oot.o2r::text/nes_message_data_static,"Do you want to borrow the 
+Keaton Mask?
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x70BF,oot.o2r::text/nes_message_data_static,"Do you want to borrow the 
+Bunny Hood?
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x70C0,oot.o2r::text/nes_message_data_static,"Do you want to borrow the 
+Goron Mask?
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x70C1,oot.o2r::text/nes_message_data_static,"Do you want to borrow the 
+Zora Mask?
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x70C2,oot.o2r::text/nes_message_data_static,"Do you want to borrow the 
+Gerudo Mask?
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x70C3,oot.o2r::text/nes_message_data_static,"Do you want to borrow the 
+Mask of Truth?
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE
+0x70C7,oot.o2r::text/nes_message_data_static,"Oh! You haven't sold the mask
+yet. Just have faith for a 
+little while longer.
+--- PAGE ---
+Or, do you want to trade it
+for another mask?
+[CHOICE:2]Yes
+No",2,NPC_DIALOGUE

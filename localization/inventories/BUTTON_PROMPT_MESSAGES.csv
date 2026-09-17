@@ -1,0 +1,1010 @@
+id,source_file,plain_text,glyphs,category,context_hint
+0x0010,oot.o2r::text/nes_message_data_static,"You borrowed a Skull Mask.
+Wear it with [C] to show it off!
+You feel like a monster while you
+wear this mask !",C,NPC_DIALOGUE,
+0x0011,oot.o2r::text/nes_message_data_static,"You borrowed a Spooky Mask.
+Wear it with [C] to show it
+off! You can scare many people
+with this mask!",C,NPC_DIALOGUE,
+0x0012,oot.o2r::text/nes_message_data_static,"You borrowed a Keaton Mask.
+Wear it with [C] to show it
+off! You'll be a popular guy with
+this mask on!",C,NPC_DIALOGUE,
+0x0013,oot.o2r::text/nes_message_data_static,"You borrowed a Bunny Hood.
+Wear it with [C] to show it
+off! The hood's long ears are so
+cute!",C,NPC_DIALOGUE,
+0x0014,oot.o2r::text/nes_message_data_static,"You borrowed a Goron Mask.
+Wear it with [C] to show it
+off! It will make your head look
+big, though.",C,NPC_DIALOGUE,
+0x0015,oot.o2r::text/nes_message_data_static,"You borrowed a Zora Mask.
+Wear it with [C] to show it
+off! With this mask, you can
+become one of the Zoras!",C,NPC_DIALOGUE,
+0x0016,oot.o2r::text/nes_message_data_static,"You borrowed a Gerudo Mask.
+Wear it with [C] to show it off!
+This mask will make you look
+like...a girl?",C,NPC_DIALOGUE,
+0x0017,oot.o2r::text/nes_message_data_static,"You borrowed a Mask of Truth.
+Wear it with [C] to show it
+off! Show it to many people!",C,NPC_DIALOGUE,
+0x001C,oot.o2r::text/nes_message_data_static,"Bombs   (20 pieces)   80 Rupees
+Take it out with [C] and press 
+[C] again to throw it. You can't
+buy them without a bomb bag.",C,NPC_DIALOGUE,
+0x001D,oot.o2r::text/nes_message_data_static,"Bombs   (30 pieces)   120 Rupees
+Take it out with [C] and press 
+[C] again to throw it. You can't
+buy them without a bomb bag.",C,NPC_DIALOGUE,
+0x002E,oot.o2r::text/nes_message_data_static,"OKAY!!
+This is a game for grownups!
+Hyrule's famous Shooting Gallery!
+--- PAGE ---
+Take aim at the targets from that 
+platform over there! Can you hit
+ten targets? You get fifteen 
+shots!
+--- PAGE ---
+Draw your weapon with [B]. 
+Are you ready?
+Go for a perfect score!
+Good Luck!",B,NPC_DIALOGUE,
+0x0030,oot.o2r::text/nes_message_data_static,"You found the Fairy Slingshot!
+On the Select Item Subscreen,
+you can set it to [R], [L] or [Z].
+--- PAGE ---
+Press [C] to take it out and hold
+it. As you hold [C] you can aim 
+with [D-Pad]. Release [C] to unleash 
+a Deku Seed.
+--- PAGE ---
+If you want to shoot right 
+away, when you first press [C], 
+hold down [C] a little longer to 
+get a seed ready.",R|L|Z|C|D-Pad,NPC_DIALOGUE,
+0x0031,oot.o2r::text/nes_message_data_static,"You found the Fairy Bow!
+On the Select Item Subscreen,
+you can set it to [R], [L] or [Z].
+--- PAGE ---
+Press [C] to take it out
+and hold it. As you hold down
+[C] you can aim with [D-Pad]. Release
+[C] to let fly with an arrow.",R|L|Z|C|D-Pad,NPC_DIALOGUE,
+0x0032,oot.o2r::text/nes_message_data_static,"You got Bombs!
+On the Select Item Subscreen,
+you can set it to [R], [L] or [Z].
+--- PAGE ---
+Use [C] to lift and place
+it. Press [C] while running to
+throw it. If you see something
+suspicious, bomb it!",R|L|Z|C,NPC_DIALOGUE,
+0x0033,oot.o2r::text/nes_message_data_static,"You got Bombchu!
+On the Select Item Subscreen,
+you can set it to [R], [L] or [Z].
+--- PAGE ---
+ Carry and place with [C].
+This is a new type bomb that
+can even crawl up walls.
+Aim well and release it!",R|L|Z|C,NPC_DIALOGUE,
+0x0034,oot.o2r::text/nes_message_data_static,"You got a Deku Nut!
+On the Select Item Subscreen,
+you can set it to [R], [L] or [Z].
+--- PAGE ---
+Set it to [C] and try 
+throwing it! It will flash and 
+stun the enemy!",R|L|Z|C,NPC_DIALOGUE,
+0x0035,oot.o2r::text/nes_message_data_static,"You found the Boomerang!
+On the Select Item Subscreen,
+you can set it to [R], [L] or [Z].
+--- PAGE ---
+Press [C] to use it to 
+attack distant enemies!",R|L|Z|C,NPC_DIALOGUE,
+0x0036,oot.o2r::text/nes_message_data_static,"You found the Hookshot!
+It's a spring-loaded chain that
+you can cast out to hook things.
+--- PAGE ---
+You can use it to drag
+distant items toward you, or
+you can use it to pull yourself
+toward something.
+--- PAGE ---
+While holding [C], you can
+aim with [D-Pad]. Shoot it by
+releasing [C].",C|D-Pad,NPC_DIALOGUE,
+0x0037,oot.o2r::text/nes_message_data_static,"You got a Deku Stick!
+On the Select Item Subscreen,
+you can set it to [R], [L] or [Z].
+--- PAGE ---
+Set it to [C] and swing it
+with [C]!
+--- PAGE ---
+When you want to put it away, 
+stand still and press [A]. 
+You can carry up to 10 sticks,
+but don't waste them.",R|L|Z|C|A,NPC_DIALOGUE,
+0x0038,oot.o2r::text/nes_message_data_static,"You found the Megaton Hammer!
+Press [C] to smash and break 
+junk! It's so heavy, you need to 
+use two hands to swing it!",C,NPC_DIALOGUE,
+0x0039,oot.o2r::text/nes_message_data_static,"You found the Lens of Truth!
+Set it to [C] and press [C] to 
+look through it! Mysterious 
+things are hidden everywhere!
+--- PAGE ---
+Be sure to try to use it outside
+of the well. Seeing the truth will
+cost magic power, so press [C]
+again to stop using it.",C,NPC_DIALOGUE,
+0x0042,oot.o2r::text/nes_message_data_static,"You got an Empty Bottle!
+After you put something in this
+bottle, set it to [C] when you
+want to use the item inside.",C,NPC_DIALOGUE,
+0x0043,oot.o2r::text/nes_message_data_static,"You got a Red Potion!
+On the Select Item Subscreen,
+set it to [R], [L] or [Z].
+--- PAGE ---
+Drink it with [C] to recover
+your life energy.
+You carry this potion in one
+of your bottles.",R|L|Z|C,NPC_DIALOGUE,
+0x0044,oot.o2r::text/nes_message_data_static,"You got a Green Potion!
+On the Select Item Subscreen,
+set it to [R], [L] or [Z].
+--- PAGE ---
+Drink it with [C] to recover
+your magic power.
+You carry this potion in one
+of your bottles.",R|L|Z|C,NPC_DIALOGUE,
+0x0045,oot.o2r::text/nes_message_data_static,"You got a Blue Potion!
+Drink it with [C] to recover
+your life energy and magic power.",C,NPC_DIALOGUE,
+0x0046,oot.o2r::text/nes_message_data_static,"You caught a Fairy in a bottle!
+On the Select Item Subscreen,
+you can set it to [R], [L] or [Z].
+--- PAGE ---
+This tiny fairy is a reliable 
+partner who will revive you
+the moment you run out of life 
+energy.
+--- PAGE ---
+Once you set it to [C],
+though, you can ask for its help
+anytime.",R|L|Z|C,NPC_DIALOGUE,
+0x0047,oot.o2r::text/nes_message_data_static,"You got a Fish!
+Use it with [C] and something 
+might happen... It looks so 
+fresh and delicious!
+--- PAGE ---
+On the Select Item Subscreen,
+you can set it to [R], [L]
+or [Z], and then press that
+[C] to use it.",C|R|L|Z,NPC_DIALOGUE,
+0x0048,oot.o2r::text/nes_message_data_static,"You got a Magic Bean!
+Find a suitable spot for a garden
+and plant it with [C]. Then, wait
+for something fun to happen!
+--- PAGE ---
+On the Select Item Subscreen,
+you can set it to [R], [L]
+or [Z], and then use that
+[C] to plant it.",C|R|L|Z,NPC_DIALOGUE,
+0x004A,oot.o2r::text/nes_message_data_static,"You received the Fairy Ocarina!
+This is a memento from Saria.
+Set it to [C] and press [C]
+to start playing it!
+--- PAGE ---
+On the Select Item Subscreen,
+you can set it to [R], [L]
+or [Z], and then use that
+[C] to start playing it.
+--- PAGE ---
+You can play different notes
+with [A] and the four [C] Buttons. 
+Press [B] to quit playing, or 
+to start your song over again.",C|R|L|Z|A|B,NPC_DIALOGUE,
+0x004B,oot.o2r::text/nes_message_data_static,"You got the Giant's Knife!
+Hold it with both hands and use 
+[B] to attack! It's so long, you
+can't use it with a shield.",B,NPC_DIALOGUE,
+0x004C,oot.o2r::text/nes_message_data_static,"You got a Deku Shield!
+Switch to the Equipment 
+Subscreen and select the
+shield. Press [A] to equip it.
+--- PAGE ---
+Press [C-Down] to crouch and
+defend. If you press [C-Down] while 
+[C-Left] Targeting, you can move
+while defending.",A|C-Down|C-Left,NPC_DIALOGUE,
+0x004D,oot.o2r::text/nes_message_data_static,"You got a Hylian Shield!
+Switch to the Equipment 
+Subscreen and select this
+shield, then equip it with [A].",A,NPC_DIALOGUE,
+0x004E,oot.o2r::text/nes_message_data_static,"You found the Mirror Shield!
+The shield's polished surface can
+reflect light or energy. Press [C-Down]
+to use it.",C-Down,NPC_DIALOGUE,
+0x0058,oot.o2r::text/nes_message_data_static,"You found a Bomb Bag!
+This bomb-holding bag is made 
+from a Dodongo's stomach!
+--- PAGE ---
+You found 20 Bombs inside!
+Now you can set Bombs to [C]
+and blow stuff up! What a lucky 
+guy!",C,NPC_DIALOGUE,
+0x005B,oot.o2r::text/nes_message_data_static,"You found the Silver Gauntlets!
+If you wore them, you would
+feel power in your arms, the 
+power to lift big things with [A]!
+--- PAGE ---
+But, these gauntlets won't fit
+a kid... Plus, you promised to give
+them to Nabooru. You should keep
+your word...",A,NPC_DIALOGUE,
+0x005C,oot.o2r::text/nes_message_data_static,"You found the Golden Gauntlets!
+You can feel even more power 
+coursing through your arms!
+Grab with [A] and lift stuff up!",A,NPC_DIALOGUE,
+0x005D,oot.o2r::text/nes_message_data_static,"You put a Blue Fire
+into the bottle!
+This is a cool flame you can
+use with [R], [L] or [Z].",R|L|Z,NPC_DIALOGUE,
+0x0066,oot.o2r::text/nes_message_data_static,"You found the Dungeon Map!
+Press START to get into the 
+Subscreens and look at the
+Map Subscreen!
+--- PAGE ---
+Blue chambers are places 
+you have already visited. 
+Your current location is 
+the flashing room.
+--- PAGE ---
+Move [D-Pad] up and down to 
+select a floor to view.",D-Pad,NPC_DIALOGUE,
+0x0069,oot.o2r::text/nes_message_data_static,"You received Zelda's Letter!
+Wow! This letter has Princess
+Zelda's autograph! Set it to [C]
+and show it with [C].
+--- PAGE ---
+On the Select Item Subscreen,
+you can set it to [R], [L] or [Z],
+and then use that [C] to show it
+to people.",C|R|L|Z,NPC_DIALOGUE,
+0x0070,oot.o2r::text/nes_message_data_static,"You got the Fire Arrow!
+Set it to [C] and your arrows will
+be powered up! If you hit
+your target, it will catch fire.",C,NPC_DIALOGUE,
+0x0071,oot.o2r::text/nes_message_data_static,"You got the Ice Arrow!
+Set it to [C] and your arrows will
+be powered up! If you hit your 
+target, it will freeze.
+--- PAGE ---
+This arrow magic is granted
+only to those who complete the 
+difficult training of the Gerudos,
+so use it with pride!",C,NPC_DIALOGUE,
+0x0072,oot.o2r::text/nes_message_data_static,"You got the Light Arrow!
+Set it to [C] and your arrows will
+be powered up! The light of
+justice will smite evil!",C,NPC_DIALOGUE,
+0x0079,oot.o2r::text/nes_message_data_static,"You got the Goron's Bracelet!
+Now you can pull up Bomb 
+Flowers. Stand next to one and
+use [A] to pull it up!",A,NPC_DIALOGUE,
+0x007A,oot.o2r::text/nes_message_data_static,"You put a Bug in the bottle!
+You can release it by pressing
+[C]. This kind of bug prefers to
+live in small holes in the ground.",C,NPC_DIALOGUE,
+0x0083,oot.o2r::text/nes_message_data_static,"Shop around by moving the 
+[D-Pad] left or right.
+[CHOICE:2]Talk to the owner
+Quit",D-Pad,NPC_DIALOGUE,
+0x0098,oot.o2r::text/nes_message_data_static,"You got Lon Lon Milk!
+This milk is very nutritious!
+Use it with [C] to recover your 
+life energy!
+--- PAGE ---
+You will recover five hearts
+per drink. There are two
+drinks per bottle.
+--- PAGE ---
+On the Select Item Subscreen,
+you can set it to [R], [L] or [Z],
+and then use that [C] to take 
+a drink.",C|R|L|Z,NPC_DIALOGUE,
+0x0099,oot.o2r::text/nes_message_data_static,"You got an Empty Bottle!
+Put something inside and 
+press [C] to use it... What?
+Something's already inside!?",C,NPC_DIALOGUE,
+0x009A,oot.o2r::text/nes_message_data_static,"You got a Weird Egg!
+Feels like there's something
+moving inside! Set it to [C] and 
+see what happens!
+--- PAGE ---
+On the Select Item Subscreen,
+you can set it to [R], [L] or [Z],
+and then press [C] to use it.",C|R|L|Z,NPC_DIALOGUE,
+0x009F,oot.o2r::text/nes_message_data_static,"Deku Shield   40 Rupees
+Once equipped, you can defend 
+with [C-Down]. If set on fire, it will
+burn!",C-Down,NPC_DIALOGUE,
+0x00A3,oot.o2r::text/nes_message_data_static,"Bombs   (5 pieces)   25 Rupees
+Take it out with [C] and press 
+[C] to throw it. You can buy them
+only if you have a bomb bag.",C,NPC_DIALOGUE,
+0x00A4,oot.o2r::text/nes_message_data_static,"You got the Kokiri Sword!
+On the Equipment Subscreen,
+select it with the cursor and
+equip it with [A].
+--- PAGE ---
+This is a hidden treasure of
+the Kokiri, but you can borrow it
+for a while. Be sure to practice 
+with it before you really fight!",A,NPC_DIALOGUE,
+0x00AD,oot.o2r::text/nes_message_data_static,"You got Din's Fire!
+Its fireball engulfs everything!
+It's attack magic you can use
+with [C].",C,NPC_DIALOGUE,
+0x00AE,oot.o2r::text/nes_message_data_static,"You got Farore's Wind!
+This is warp magic you can use 
+with [C]. Warp when you are in 
+danger!
+--- PAGE ---
+You will teleport to the Warp
+Point. When you first use the
+magic, you will create a Warp
+Point.
+--- PAGE ---
+When you use the magic 
+again, you can either dispel
+the Warp Point you created last
+time or warp to that point.",C,NPC_DIALOGUE,
+0x00AF,oot.o2r::text/nes_message_data_static,"You got Nayru's Love!
+Cast this to create a powerful
+protective barrier. It's defensive 
+magic you can use with [C].",C,NPC_DIALOGUE,
+0x00B1,oot.o2r::text/nes_message_data_static,"Bombs  (10 pieces)  50 Rupees
+Take it out with [C] and press 
+[C] again to throw it. You can't
+buy them without a bomb bag.",C,NPC_DIALOGUE,
+0x00CB,oot.o2r::text/nes_message_data_static,"Bombs   (5 pieces)   35 Rupees
+Take it out with [C] and press 
+[C] again to throw it. You can't
+buy them without a bomb bag.",C,NPC_DIALOGUE,
+0x00CD,oot.o2r::text/nes_message_data_static,"You got the Silver Scale!
+Jump into the water and press 
+[A]. You can dive deeper than you
+could before.",A,NPC_DIALOGUE,
+0x00CE,oot.o2r::text/nes_message_data_static,"You got the Golden Scale!
+Jump into the water and press 
+[A]. Now you can dive much
+deeper than you could before!",A,NPC_DIALOGUE,
+0x00DD,oot.o2r::text/nes_message_data_static,"You mastered the secret sword
+technique of the Spin Attack!
+--- PAGE ---
+Hold [B] to charge your weapon!
+Release [B] to unleash a wave
+of energy with your spin!
+--- PAGE ---
+If you want to release energy
+without charging your weapon, just 
+rotate [D-Pad] once and press [B] for
+a very effective quick spin!",B|D-Pad,NPC_DIALOGUE,
+0x0101,oot.o2r::text/nes_message_data_static,"Look, look, [PLAYER]!
+You can see down below this web
+using [C-Right]!",C-Right,NPC_DIALOGUE,
+0x0103,oot.o2r::text/nes_message_data_static,"You can open a door by standing
+in front of it and pressing [A].
+--- PAGE ---
+Pay attention to what the
+Action Icon says.
+That's the blue icon at the top of
+the screen!",A,NPC_DIALOGUE,
+0x0107,oot.o2r::text/nes_message_data_static,"From here on, we'll be going
+through some narrow passages!
+If you take it slow, maybe you
+can sneak up on some enemies.
+--- PAGE ---
+Use [C-Left] Targeting to always look
+in the proper direction. Set your
+view so you can see down the next
+corridor before you turn a corner.
+--- PAGE ---
+Once your view is set, hold down
+[C-Left] to sidestep around the corner.
+That way you won't be surprised
+by an enemy waiting in ambush.",C-Left,NPC_DIALOGUE,
+0x0108,oot.o2r::text/nes_message_data_static,"Stand next to this block and grab
+hold of it with [A]. While holding
+[A], you can push or pull it.
+--- PAGE ---
+If you stand next to the block
+and press [A] while pressing [D-Pad]
+towards the block, you can climb
+on top of it.
+--- PAGE ---
+Pay attention to what the Action
+Icon says!",A|D-Pad,NPC_DIALOGUE,
+0x010C,oot.o2r::text/nes_message_data_static,"After you get into the water, if
+you hold down [A], you can dive!
+I bet there are some interesting
+things underwater!",A,NPC_DIALOGUE,
+0x0119,oot.o2r::text/nes_message_data_static,"You never know what will be 
+around the corner in these narrow
+paths....
+--- PAGE ---
+Use [C-Left] Targeting to always look
+in the proper direction. This is a
+useful technique, isn't it?",C-Left,NPC_DIALOGUE,
+0x0218,oot.o2r::text/nes_message_data_static,"Hi, [PLAYER]!
+Look this way!
+--- PAGE ---
+Look over here with [C-Left], and talk 
+to me with [A].",C-Left|A,SIGN,
+0x0336,oot.o2r::text/nes_message_data_static,"Thrust Attack Signs!
+To thrust with your sword, press
+[D-Pad] toward your target while 
+[C-Left] Targeting, then press [B].",D-Pad|C-Left|B,SIGN,
+0x0337,oot.o2r::text/nes_message_data_static,"Hole of ""Z""
+Let's go through this small
+hole!
+--- PAGE ---
+Stand in front of the hole and
+push [D-Pad] towards it. When the 
+Action Icon shows ""Enter,"" press
+[A] to crawl into the hole.
+--- PAGE ---
+Pay attention to what the Action
+Icon says!",D-Pad|A,SIGN,
+0x0338,oot.o2r::text/nes_message_data_static,"Cut Grass With Your Sword
+If you just swing with [B], you'll 
+cut horizontally. If you hold [C-Left] as 
+you swing, you'll cut vertically.",B|C-Left,SIGN,
+0x0340,oot.o2r::text/nes_message_data_static,"View Point with [C-Left] Targeting
+When you have no object to look
+at, you can just look forward
+with [C-Left].
+--- PAGE ---
+Stop moving and then change the
+direction you are facing, or hold
+down [C-Left] for a little while.
+--- PAGE ---
+This can help you get oriented in
+the direction you want to face.
+It's quite convenient!
+--- PAGE ---
+If you hold down [C-Left], you can
+walk sideways while facing 
+straight ahead.
+--- PAGE ---
+Walking sideways can be a very
+important technique in dungeon
+corridors. Turn around and try
+doing this right now.",C-Left,SIGN,
+0x0343,oot.o2r::text/nes_message_data_static,"Switch Targeting
+If you see a [Control Stick] icon above an 
+object, you can target it with [C-Left].
+--- PAGE ---
+In other words, if you press [C-Left] 
+when you see [Control Stick] above an object,
+you can lock on to it.
+--- PAGE ---
+If you press [C-Left] again, the lock
+will either release or it will
+transfer to the next object with
+the [Control Stick] above it.
+--- PAGE ---
+When you have many enemies in
+your field of view and you want
+to escape, press [C-Left] while holding
+back on [D-Pad] to cancel targeting.
+--- PAGE ---
+You can target the stones next to
+this sign for practice!",Control Stick|C-Left|D-Pad,SIGN,
+0x0401,oot.o2r::text/nes_message_data_static,"They say that you can swim faster
+by continuously pressing [B].",B,NPC_DIALOGUE,
+0x060D,oot.o2r::text/nes_message_data_static,"Dodongo
+Watch out for its fiery breath!
+Use [C-Left] Targeting techniques!",C-Left,NPC_DIALOGUE,
+0x060F,oot.o2r::text/nes_message_data_static,"Lizalfos 
+Use your shield well and fight 
+with [C-Left] Targeting techniques!",C-Left,NPC_DIALOGUE,
+0x0610,oot.o2r::text/nes_message_data_static,"Dinolfos 
+Use your shield well and fight 
+with [C-Left] Targeting techniques!",C-Left,NPC_DIALOGUE,
+0x0612,oot.o2r::text/nes_message_data_static,"Keese
+When you get close to it, use 
+[C-Left] Targeting. Even if it flies
+away, you can still target it.",C-Left,NPC_DIALOGUE,
+0x0643,oot.o2r::text/nes_message_data_static,"Poe of the graveyard?
+If you stare at it with [C-Left] 
+Targeting, it will disappear...",C-Left,NPC_DIALOGUE,
+0x0644,oot.o2r::text/nes_message_data_static,"Poe
+If you stare at it with [C-Left] 
+Targeting, it will disappear...",C-Left,NPC_DIALOGUE,
+0x0645,oot.o2r::text/nes_message_data_static,"Red Tektite
+Lock on to it as it jumps with [C-Left]
+Targeting!",C-Left,NPC_DIALOGUE,
+0x086D,oot.o2r::text/nes_message_data_static,Play using [A] and [C].,A|C,NPC_DIALOGUE,
+0x086E,oot.o2r::text/nes_message_data_static,Play using [A] and [C]; [B] to Stop.,A|C|B,NPC_DIALOGUE,
+0x087C,oot.o2r::text/nes_message_data_static,Play using [A] and [C]; [B] to Stop.,A|C|B,NPC_DIALOGUE,
+0x1004,oot.o2r::text/nes_message_data_static,"[A] by the stone, pick it up!
+[A] by the stone, pick it up!
+--- PAGE ---
+Mean old Mido...he made me pick 
+up the rocks in front of his house.",A,NPC_DIALOGUE,
+0x1007,oot.o2r::text/nes_message_data_static,"Hey, let's work on some moves!
+--- PAGE ---
+To jump sideways while [C-Left] 
+Targeting, press [A] as you move
+right or left.
+--- PAGE ---
+To do a backflip while [C-Left] 
+Targeting, press [A] as you move
+backwards.
+--- PAGE ---
+To do a roll attack while [C-Left] 
+Targeting, press [A] as you move
+forward. While you roll, you can
+avoid damage.
+--- PAGE ---
+If you have your sword ready while
+[C-Left] Targeting, you can do a jump 
+attack by pressing [A]! A jump 
+attack does double damage!
+--- PAGE ---
+You can use [C-Left] Targeting on the
+stone next to me, so let's 
+practice!",C-Left|A,NPC_DIALOGUE,
+0x100D,oot.o2r::text/nes_message_data_static,"When a fairy flies near a person 
+or thing, press [C-Left] to look in that
+direction.
+--- PAGE ---
+If you use [C-Left] Targeting, you can 
+talk to people from a distance, 
+like we're doing now.
+--- PAGE ---
+When you have nothing that you
+can target, you can press [C-Left] just
+to look forward.
+Try it!",C-Left,NPC_DIALOGUE,
+0x1017,oot.o2r::text/nes_message_data_static,"Then enter, brave 
+[PLAYER], and thou too, 
+Navi...
+--- PAGE ---
+Navi the fairy...  
+Thou must aid [PLAYER]...
+--- PAGE ---
+And [PLAYER]...When Navi 
+speaks, use [C-Right] to listen well 
+to her words of wisdom...",C-Right,NPC_DIALOGUE,
+0x1018,oot.o2r::text/nes_message_data_static,"Perhaps you do not yet have 
+confidence in your abilities...
+Return to the Kokiri Forest to
+learn the skills of combat...
+--- PAGE ---
+When thou art ready, return here 
+and speak with me by using [C-Left]...",C-Left,NPC_DIALOGUE,
+0x101A,oot.o2r::text/nes_message_data_static,"Ow-ow-ow! Forgive me, master!
+If I give you a clue, will you let 
+me go?
+--- PAGE ---
+When you jump off a high cliff,
+if you hold [D-Pad] forward, you will
+roll on the ground when you land 
+and won't get hurt from the fall.
+--- PAGE ---
+I can't guarantee it will
+work, though, if the cliff is really,
+really high, heh heh!
+--- PAGE ---
+Well, try it if you are feeling
+bold!
+Wah ha hah!",D-Pad,NPC_DIALOGUE,
+0x1022,oot.o2r::text/nes_message_data_static,"Did you know that if you hold [Control Stick]
+forward when you jump off a cliff,
+you'll roll when you land. This will
+absorb the shock of your landing.
+--- PAGE ---
+If you fall too far, though, you'll
+still get hurt...",Control Stick,NPC_DIALOGUE,
+0x1025,oot.o2r::text/nes_message_data_static,"You have a cool Slingshot, huh?
+--- PAGE ---
+You know what's cool about it?
+You can aim while holding down
+[C] and shoot by releasing the
+button! How cool!
+--- PAGE ---
+If you have the Slingshot ready,
+you can use [C-Left] Targeting to 
+shoot while moving.... Did you 
+know that?",C|C-Left,NPC_DIALOGUE,
+0x1036,oot.o2r::text/nes_message_data_static,"The three yellow icons in the 
+upper right are called [C] icons.
+--- PAGE ---
+They display the things you can
+use with the [R], [L] and 
+[Z] buttons.
+--- PAGE ---
+Once you get a [C] Button item, 
+go into the Select Item Subscreen 
+and set it to one of the three
+[C] Buttons.",C|R|L|Z,NPC_DIALOGUE,
+0x1037,oot.o2r::text/nes_message_data_static,"The blue icon at the top of the
+screen is called the Action Icon.
+--- PAGE ---
+This Action Icon shows you 
+what action you will perform
+when you press [A].
+--- PAGE ---
+Stop in many spots to see the
+different things you can do.",A,NPC_DIALOGUE,
+0x1039,oot.o2r::text/nes_message_data_static,"There is a map displayed at the
+bottom right of the screen.
+--- PAGE ---
+The yellow arrow shows your 
+current position and direction you
+are facing. The red mark shows
+where you entered the area from.
+--- PAGE ---
+You can turn the map display on
+and off with the [C-Up].
+--- PAGE ---
+If you want to see the name of a
+place, press START.
+--- PAGE ---
+You'll get into the Subscreens.
+Select the Map Subscreen.
+--- PAGE ---
+On the Map Subscreen, you can 
+see a map of Hyrule.
+Did you get all that?",C-Up,NPC_DIALOGUE,
+0x103A,oot.o2r::text/nes_message_data_static,"There are three kinds of items:
+Equipment items, [C] Button items
+and Quest items.
+--- PAGE ---
+Equipment items are things like 
+the sword, shield and clothes 
+that are effective when you equip
+them.
+--- PAGE ---
+[C] Button items can be set to 
+[R], [L], and [Z], and
+used by pressing those buttons.
+--- PAGE ---
+Quest items are things you 
+collect during your adventure. You
+just carry them around.
+--- PAGE ---
+If you want to change equipment
+or just check on your inventory,
+press START. 
+You will get into the Subscreens.
+--- PAGE ---
+Switch to one of the four 
+different Subscreens with [C-Left] or
+[C-Down] and change or check items as
+you please. Take a look around!
+--- PAGE ---
+When you decide to equip an 
+Equipment item, press [A]. For
+[C] Button items, press [R],
+[L] or [Z].
+--- PAGE ---
+That was a pretty long explanation.
+Did you understand everything?",C|R|L|Z|C-Left|C-Down|A,NPC_DIALOGUE,
+0x103B,oot.o2r::text/nes_message_data_static,"Well, just remember this. If you
+want to save, press START to get
+into the Subscreens, then press
+[B].",B,NPC_DIALOGUE,
+0x103D,oot.o2r::text/nes_message_data_static,"This shop...It sells things you
+can get in the forest for free!
+Tee hee!
+--- PAGE ---
+Do you know how to use the 
+Deku Shield? Tee hee!
+--- PAGE ---
+When you get the shield, press
+START to get into the Subscreens.
+Select the Equipment Subscreen
+with [C-Left] or [C-Down].
+--- PAGE ---
+On the Equipment Subscreen, 
+choose the item you want to equip
+and press [A] to equip that item.
+--- PAGE ---
+Once you equip it, hold it up
+with [C-Down] and change its angle
+with [D-Pad]. Tee hee!",C-Left|C-Down|A|D-Pad,NPC_DIALOGUE,
+0x103E,oot.o2r::text/nes_message_data_static,"Do you want to know how to use
+the [C-Right] Button?
+[CHOICE:2]Yes
+No",C-Right,NPC_DIALOGUE,
+0x103F,oot.o2r::text/nes_message_data_static,"If you press [C-Right], you can
+change your view.
+--- PAGE ---
+In a place like this, it will switch
+to a top-down view. Outdoors, in
+a field for example, it will switch
+to a first-person perspective.
+--- PAGE ---
+Also, when ""Navi"" is displayed in
+the upper right of your screen, 
+Navi the fairy wants to talk to
+you. Use [C-Right] to listen to her!",C-Right,NPC_DIALOGUE,
+0x1072,oot.o2r::text/nes_message_data_static,"Teach me some fancy fencing!
+All I've ever done is tap [B] all
+my life!",B,NPC_DIALOGUE,
+0x10C5,oot.o2r::text/nes_message_data_static,"If you hold the Ocarina with [C]
+where a melody is necessary, a 
+musical staff will appear.
+--- PAGE ---
+I recommend that you play a song
+you know.
+--- PAGE ---
+I also suggest that you play even
+when a score is not displayed. 
+Just like this:
+Hoo hoo hoo hoot hoot hoot!",C,NPC_DIALOGUE,
+0x10D8,oot.o2r::text/nes_message_data_static,"Look! Isn't this view pretty?
+Change your viewpoint with [C-Right],
+so you can look around the forest
+with [D-Pad].",C-Right|D-Pad,NPC_DIALOGUE,
+0x2035,oot.o2r::text/nes_message_data_static,"Approach the horse quietly and 
+stand by its side. Press [A] to 
+mount up.
+--- PAGE ---
+Use the [D-Pad] to make it run. 
+Once it starts running, press
+[A] to tap it with the whip. 
+It will speed up!
+--- PAGE ---
+When you want to jump over a
+fence, accelerate and hit it
+head on!
+--- PAGE ---
+If you try to jump over a fence 
+at an angle, the horse won't like
+it, and it won't jump.
+--- PAGE ---
+After the horse comes to a 
+complete stop, press [A] to 
+dismount. Now, have fun!",A|D-Pad,NPC_DIALOGUE,
+0x2036,oot.o2r::text/nes_message_data_static,"If you use [C-Left] Targeting, you can 
+talk to me from horseback.
+--- PAGE ---
+Are you ready to go home so 
+soon?
+[CHOICE:2]No, I want to ride.
+Yes, I'm done.",C-Left,NPC_DIALOGUE,
+0x2037,oot.o2r::text/nes_message_data_static,"When you want to dismount, stop 
+and press [A].
+--- PAGE ---
+Hey young man!
+Do I know you? I just felt as 
+though I've seen you
+somewhere before...",A,NPC_DIALOGUE,
+0x2044,oot.o2r::text/nes_message_data_static,"Set the egg to [C] to incubate it.
+Hee hee!
+--- PAGE ---
+My dad is really troublesome,
+for an adult, isn't he?!
+Hee hee!",C,NPC_DIALOGUE,
+0x2065,oot.o2r::text/nes_message_data_static,"Go straight this way and you will
+see Hyrule Castle.
+--- PAGE ---
+You will meet a princess there...
+--- PAGE ---
+If you are lost and don't know 
+which way to go, look at the 
+Map.
+--- PAGE ---
+The areas you have explored will 
+be shown on the Map. Press 
+START to enter the Subscreens
+and [C-Left] or [C-Down] to find the Map.
+--- PAGE ---
+On the Map Subscreen, you will
+also see a flashing dot showing
+you which way you should go next.",C-Left|C-Down,NPC_DIALOGUE,
+0x2071,oot.o2r::text/nes_message_data_static,"Beyond this point lies Lake Hylia.
+It is full of deep, pure water.The Zoras, who live all the 
+way upstream, guard the sunken
+temple at the lake's bottom, as 
+well as Zora's Fountain.
+--- PAGE ---
+If you want to confirm its location 
+on the map, press START to 
+switch to the Subscreens and [C-Left] 
+or [C-Down] to find the Map.
+--- PAGE ---
+All the places you have visited 
+will be shown on the map. 
+Ho hoo hoot!",C-Left|C-Down,NPC_DIALOGUE,
+0x300C,oot.o2r::text/nes_message_data_static,"Those plants growing over there 
+are Bomb Flowers. They are
+""mining plants"" that grow only on
+this mountain.
+--- PAGE ---
+They usually grow only in dark 
+places, like caves, so Bomb 
+Flowers that grow in a place like
+this are extremely rare.
+--- PAGE ---
+If you have the Goron's Bracelet,
+even a little kid like you could
+easily pick it with [A].",A,NPC_DIALOGUE,
+0x301C,oot.o2r::text/nes_message_data_static,"Heeey!! What a nice tune!
+--- PAGE ---
+Just like that, my depression is
+all gone! Something just came 
+over me! I suddenly wanted to
+dance like crazy!
+--- PAGE ---
+I am Darunia!
+--- PAGE ---
+I'm the big boss of the Gorons!
+Was there something you wanted 
+to ask me about?
+--- PAGE ---
+What?
+--- PAGE ---
+You want the Spiritual Stone of
+Fire, too?
+--- PAGE ---
+The Spiritual Stone of Fire, also
+known as the Goron's Ruby, is our
+race's hidden treasure....
+--- PAGE ---
+But hold on--I'm not going to give
+it to you that easily.
+If you want it so badly...
+--- PAGE ---
+Why don't you go destroy the 
+monsters inside of the Dodongo's 
+Cavern and prove you're a real man?
+--- PAGE ---
+That way, everybody will be 
+happy again! If you do it, I 
+will give you anything you want,
+even the Spiritual Stone!
+--- PAGE ---
+I have something for you. I'm not
+really giving you this in
+return for anything, but take it
+anyway.
+--- PAGE ---
+If you wear this, even a little 
+fella like you can pick a Bomb 
+Flower using [A].",A,NPC_DIALOGUE,
+0x3022,oot.o2r::text/nes_message_data_static,"I know a trick to conserve sticks!
+If you light a stick on fire, it will 
+burn to ashes. Press [A] to put it
+away before it completely burns!
+--- PAGE ---
+By the way, I hid a stick
+somewhere...
+Hehehee...",A,NPC_DIALOGUE,
+0x302B,oot.o2r::text/nes_message_data_static,"You pick the Bomb Flowers with 
+[A]. Press [A] again to set it.",A,NPC_DIALOGUE,
+0x406A,oot.o2r::text/nes_message_data_static,"Set a bean to [C] and use it on
+the dirt right here.",C,NPC_DIALOGUE,
+0x407F,oot.o2r::text/nes_message_data_static,"OK, listen up!
+--- PAGE ---
+Walk up to the water's edge and
+press [C-Left] to look at a fish.
+--- PAGE ---
+While looking at a fish, you can 
+cast your line with [B]. Press [A]
+to brake the line.
+--- PAGE ---
+When the lure drops into the 
+water, you can wiggle it with [D-Pad].
+If you're a novice, you can also
+use [B].
+--- PAGE ---
+Reel in your lure with [A]. Hold 
+down [A] and [C-Down] to reel it in 
+faster.
+--- PAGE ---
+If you feel a hit, press [A] and
+[D-Pad] down to set the hook.
+After that, reel it in with [A].
+--- PAGE ---
+Do you understand?
+
+[CHOICE:2]Yes
+No",C-Left|B|A|D-Pad|C-Down,MINIGAME,
+0x4080,oot.o2r::text/nes_message_data_static,"I'm so generous, I'll let you fish
+for as long as you want. However,
+you can keep only one fish.
+--- PAGE ---
+The biggest fish ever caught here
+weighed  pounds.
+--- PAGE ---
+After you cast, you can change
+your view with [C-Left].
+--- PAGE ---
+Let's fish!",C-Left,MINIGAME,
+0x4081,oot.o2r::text/nes_message_data_static,"Wah ha haah!
+Did you set the hook by pressing
+[A] and [D-Pad] down?",A|D-Pad,MINIGAME,
+0x5056,oot.o2r::text/nes_message_data_static,"To get a good view, use [C-Right] and 
+look around with [D-Pad].",C-Right|D-Pad,NPC_DIALOGUE,
+0x7004,oot.o2r::text/nes_message_data_static,"Man, I am SO bored...
+Things would sure be more
+interesting if there were more...
+troubles in the world...
+--- PAGE ---
+Hey, that's just between you and
+me, OK?
+--- PAGE ---
+Anyway, maybe we can let off 
+some steam by breaking these 
+jars.
+--- PAGE ---
+Stand near a jar and press [A] to
+lift it. Press [A] again to toss it!",A,NPC_DIALOGUE,
+0x700C,oot.o2r::text/nes_message_data_static,"Please...with [C]...
+Please sell me the contents of a
+bottle...
+Please...with [C]...",C,NPC_DIALOGUE,
+0x70A2,oot.o2r::text/nes_message_data_static,"Select a mask with left or right
+on [D-Pad].
+[CHOICE:2]Talk to the shop owner.
+Don't borrow",D-Pad,NPC_DIALOGUE,
+0x70A3,oot.o2r::text/nes_message_data_static,"A mask is a [C] Button item. Set
+it to [C] and press [C] to wear it.
+--- PAGE ---
+If you talk to someone with a 
+mask on, you might get a reaction.
+--- PAGE ---
+If anyone is interested in the
+mask, he or she will ask you 
+about it. Someone may want the 
+mask.
+--- PAGE ---
+Somewhere in the world, somebody
+is waiting for these masks.
+--- PAGE ---
+Just have faith...",C,NPC_DIALOGUE,
+0x70AD,oot.o2r::text/nes_message_data_static,"Choose a mask with left or right 
+on [D-Pad].
+[CHOICE:2]Ask about Mask of Truth
+Don't borrow a mask",D-Pad,NPC_DIALOGUE,
+0x70ED,oot.o2r::text/nes_message_data_static,"Please...with [C]...
+Please sell me something...
+Please...with [C]...",C,NPC_DIALOGUE,
+Hint::RHT_BRIDGE_OPEN_HINT::398,soh/soh/Enhancements/randomizer/3drando/hint_list.cpp,"[ICON:l]The awakened ones have #already created a bridge# to the castle where the evil dwells.
+--- PAGE ---",L,RANDOMIZER,
+Hint::RHT_GANON_BK_START_WITH_HINT::405,soh/soh/Enhancements/randomizer/3drando/hint_list.cpp,"[ICON:b]And the #evil one#'s key will be #given from the start#.
+--- PAGE ---",B,RANDOMIZER,
+Hint::RHT_GANON_BK_VANILLA_HINT::406,soh/soh/Enhancements/randomizer/3drando/hint_list.cpp,"[ICON:b]And the #evil one#'s key will be kept in a big chest #inside its tower#.
+--- PAGE ---",B,RANDOMIZER,
+Hint::RHT_GANON_BK_OWN_DUNGEON_HINT::407,soh/soh/Enhancements/randomizer/3drando/hint_list.cpp,"[ICON:b]And the #evil one#'s key will be hidden somewhere #inside its castle#.
+--- PAGE ---",B,RANDOMIZER,
+Hint::RHT_GANON_BK_OVERWORLD_HINT::408,soh/soh/Enhancements/randomizer/3drando/hint_list.cpp,"[ICON:b]And the #evil one#'s key will be hidden #outside of dungeons# in Hyrule.
+--- PAGE ---",B,RANDOMIZER,
+Hint::RHT_GANON_BK_ANY_DUNGEON_HINT::409,soh/soh/Enhancements/randomizer/3drando/hint_list.cpp,"[ICON:b]And the #evil one#'s key will be hidden #inside a dungeon# in Hyrule.
+--- PAGE ---",B,RANDOMIZER,
+Hint::RHT_GANON_BK_ANYWHERE_HINT::410,soh/soh/Enhancements/randomizer/3drando/hint_list.cpp,"[ICON:b]And the #evil one#'s key will be hidden somewhere
+#in Hyrule#.
+--- PAGE ---",B,RANDOMIZER,
+Hint::RHT_GANON_BK_TRIFORCE_HINT::411,soh/soh/Enhancements/randomizer/3drando/hint_list.cpp,"[ICON:b]And the #evil one#'s key will be given to the Hero once the #Triforce is completed.
+--- PAGE ---",B,RANDOMIZER,
+Hint::RHT_GANON_BK_SKULLTULA_HINT::412,soh/soh/Enhancements/randomizer/3drando/hint_list.cpp,"[ICON:b]And the #evil one#'s key will be provided by the cursed rich man once #100 Gold Skulltula Tokens# are retrieved.
+--- PAGE ---",B,RANDOMIZER,
+Hint::RHT_LACS_VANILLA_HINT::413,soh/soh/Enhancements/randomizer/3drando/hint_list.cpp,"[ICON:b]And the #evil one#'s key will be provided by #Zelda# once the #Shadow and Spirit Medallions# are retrieved.
+--- PAGE ---",B,RANDOMIZER,
+Hint::RHT_LACS_MEDALLIONS_HINT::414,soh/soh/Enhancements/randomizer/3drando/hint_list.cpp,"[ICON:b]And the #evil one#'s key will be provided by #Zelda# once #[d] Medallion|# is|s# are| retrieved.
+--- PAGE ---",B,RANDOMIZER,
+Hint::RHT_LACS_STONES_HINT::415,soh/soh/Enhancements/randomizer/3drando/hint_list.cpp,"[ICON:b]And the #evil one#'s key will be provided by #Zelda# once #[d] Spiritual Stone|# is|s# are| retrieved.
+--- PAGE ---",B,RANDOMIZER,
+Hint::RHT_LACS_REWARDS_HINT::416,soh/soh/Enhancements/randomizer/3drando/hint_list.cpp,"[ICON:b]And the #evil one#'s key will be provided by #Zelda# once #[d]# #Spiritual Stone|# or #Medallion# is|s# and #Medallions# are| retrieved.
+--- PAGE ---",B,RANDOMIZER,
+Hint::RHT_LACS_DUNGEONS_HINT::417,soh/soh/Enhancements/randomizer/3drando/hint_list.cpp,"[ICON:b]And the #evil one#'s key will be provided by #Zelda# once #[d] Dungeon|# is|s# are| conquered.
+--- PAGE ---",B,RANDOMIZER,
+Hint::RHT_CHILD_ALTAR_TEXT_END_DOTSONGONLY::430,soh/soh/Enhancements/randomizer/3drando/hint_list.cpp,"[ICON:c]Ye who may become a Hero...
+Stand with the Ocarina and
+play the Song of Time.",C,RANDOMIZER,

@@ -1,0 +1,5 @@
+file,symbol,change,reason,risk,lines_added,lines_removed
+soh/src/code/z_kanfont.c,Font_LoadChar,Call GlyphResolver_GetZTexture for character 0x84 before the existing fontTbl copy,Central dynamic Z substitution with classic fallback,Low; only Z glyph resource selection changes,9,0
+soh/soh/Enhancements/glyphs/GlyphResolver.cpp,GlyphResolver_GetZTexture,Query profile Player 1 BTN_Z SDL trigger mapping and explicit Xbox/XInput device name,Resolve LT only for an active supported binding,Medium; runtime device/API behavior still needs hardware smoke,84,0
+soh/include/glyph_resolver.h,GlyphResolver_GetZTexture,Declare C ABI resolver entry point,Bridge C message code and C++ controller implementation,Low,10,0
+soh/assets/custom/textures/buttons/LTBtn.ppm,LTBtn.ppm,Add original 16x16 P3 monochrome LT glyph,Provide the dynamic pilot texture,Low; isolated custom asset,19,0

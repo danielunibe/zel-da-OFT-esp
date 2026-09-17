@@ -1,0 +1,12 @@
+source_file,component,g02_touch_status,l03b_touch_status,conflict_class,conflict_details,resolution_strategy
+soh/src/code/z_kanfont.c,fontTbl,ACTIVE_MODIFIED,PLANNED_TOUCH,POTENTIAL_CONFLICT,Codex G02 touches button glyph slots 0x9F..0xAB; L03B touches European slots 0x80..0x9E,Disjoint index ranges: G02 works on indices 127..139 while L03B works on indices 96..126. Zero line collision if applied sequentially.
+soh/src/code/z_message_PAL.c,sFontWidths & Message_OpenText,READ_ONLY_OR_TOUCH,PLANNED_TOUCH,POTENTIAL_CONFLICT,G02 may modify button glyph rendering; L03B adds Spanish message table routing and 11 font width tweaks,Disjoint functional blocks: L03B touches sFontWidths indices 96..126 and message table switch statements.
+soh/include/glyph_resolver.h,GlyphResolver,G02_EXCLUSIVE,DO_NOT_TOUCH,SAFE,Dynamic glyph system created exclusively by Codex for Xbox controller buttons,No interaction with Spanish language subsystem.
+soh/soh/Enhancements/glyphs/,GlyphTextures,G02_EXCLUSIVE,DO_NOT_TOUCH,SAFE,Xbox controller textures (A B X Y LT RT etc.) created by Codex G02,No interaction with Spanish font textures.
+soh/include/z64.h,Language enum,UNTOUCHED_BY_G02,PLANNED_TOUCH,SAFE,Codex G02 does not touch Language enum; L03B adds LANGUAGE_ESP,Clean independent patch.
+soh/soh/SohGui/SohMenu.h,sLanguageOptions,UNTOUCHED_BY_G02,PLANNED_TOUCH,SAFE,G02 does not touch language selection UI,Clean independent patch.
+soh/soh/SohGui/SohMenuSettings.cpp,messageTables array,UNTOUCHED_BY_G02,PLANNED_TOUCH,SAFE,G02 does not touch message table routing,Clean independent patch.
+soh/soh/SaveManager.cpp,SaveManager,UNTOUCHED_BY_G02,PLANNED_TOUCH,SAFE,G02 does not touch save serialization,Clean independent patch.
+soh/soh/Enhancements/custom-message/CustomMessageManager.cpp,CustomMessageTable,UNTOUCHED_BY_G02,PLANNED_TOUCH,SAFE,G02 does not touch custom message manager,Clean independent patch.
+soh/soh/Enhancements/randomizer/3drando/text.hpp,3drando text,UNTOUCHED_BY_G02,PLANNED_TOUCH,SAFE,G02 does not touch randomizer hints,Clean independent patch.
+soh/soh/Enhancements/tts/tts.cpp,TTS engine,UNTOUCHED_BY_G02,PLANNED_TOUCH,SAFE,G02 does not touch speech synthesizer,Clean independent patch.

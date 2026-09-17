@@ -1,0 +1,31 @@
+id,domain,english_term,expected_es_419,found_in_text,context
+Z_MESSAGE_OTR::L118,MAIN_GAME,Gold Skulltula,Skulltula Dorada,Gold Skulltula,"You got a rGold Skulltula Tokenw!
+You've collected r[gsCount"
+Z_MESSAGE_OTR::L126,MAIN_GAME,Gold Skulltula,Skulltula Dorada,Gold Skulltula,"You got a rGold Skulltula Tokenw!
+You've collected r[gsCount"
+0x0140,MAIN_GAME,Deku Tree,Árbol Deku,Deku Tree,"The Great Deku Tree has 
+summoned you!
+Please come with me!"
+0x0141,MAIN_GAME,Deku Tree,Árbol Deku,Deku Tree,"C'mon! Be brave!
+Let's go into the 
+Great Deku Tree!"
+0x0142,MAIN_GAME,Deku Tree,Árbol Deku,Deku Tree,"The Great Deku Tree wanted us
+to go to visit the princess at"
+0x0163,MAIN_GAME,Deku Tree,Árbol Deku,Deku Tree,"Are you collecting Spiritual
+Stones? You have one more to
+fi"
+0x0164,MAIN_GAME,Deku Tree,Árbol Deku,Deku Tree,"Are you collecting Spiritual
+Stones? You have one more to
+fi"
+0x0620,MAIN_GAME,Gold Skulltula,Skulltula Dorada,Gold Skulltula,"Gold Skulltula
+This is also known as a Spider of
+the Curse. "
+0x10D0,MAIN_GAME,Deku Tree,Árbol Deku,Deku Tree,"What?! You've got a fairy?!
+Say what? The Great Deku Tree
+ac"
+0x10D1,MAIN_GAME,Deku Tree,Árbol Deku,Deku Tree,"Whaaaaaaat?!
+--- PAGE ---
+Why would he summon you and not 
+t"
+0x10D9,MAIN_GAME,Deku Tree,Árbol Deku,Deku Tree,"What did you do to the Great
+Deku Tree?"

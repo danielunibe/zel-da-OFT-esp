@@ -1,0 +1,13 @@
+{
+  "domain": "RANDOMIZER",
+  "locale": "es-419",
+  "entry_count": 3746,
+  "source_hash": "6ec7e1f08cfe91c53d63df1baec46215c56b82ef8cf4776c5213da0a98f715cc",
+  "generated_hash": "7c242ee34567559ab4e6654df8164f50e2d6e0fef1ca718c4def0ce33f02d93d",
+  "generator_version": "1.0.0-L03A",
+  "character_set_hash": "8b76dc681d6239737d40bc19546e9e7102b1f523ed3163caa115d27991efdd99",
+  "font_map_version": "ES419-V1-11SLOTS",
+  "font_map_hash": "47053165419c009d3e09ab812ce8d0f7db3af400f675e2ce0a479215ce821cc0",
+  "timestamp": "2026-09-16T06:44:10.792923+00:00",
+  "validation_status": "CERTIFIED_VALID"
+}

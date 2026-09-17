@@ -1,0 +1,12 @@
+char,unicode,freq,status,vanilla_slot,remapping_recommendation
+ñ,U+00F1,748,CRITICAL_MISSING,0xA1 (Conflict with Button C),Remap unused French slot 0x92 (â -> ñ)
+Ñ,U+00D1,0,CRITICAL_MISSING,None,Remap unused French slot 0x81 (Î -> Ñ)
+¡,U+00A1,2481,CRITICAL_MISSING,None,Remap unused slot 0x83 (Ä -> ¡)
+¿,U+00BF,743,CRITICAL_MISSING,None,Remap unused slot 0x85 (È -> ¿)
+í,U+00ED,1435,ACCENT_MISMATCH,0x91 (Mismapped to á),Remap unused slot 0x99 (ï -> í)
+ó,U+00F3,939,ACCENT_MISMATCH,0x9A (Renders as circumflex ô),Remap unused slot 0x9A texture or add dedicated ó glyph
+ú,U+00FA,494,ACCENT_MISMATCH,0x9C (Renders as grave ù),Remap unused slot 0x9D (û -> ú)
+Á,U+00C1,117,MISSING_CAPITAL,0x80 (Renders as À),Remap 0x80 texture (À -> Á)
+Í,U+00CD,7,MISSING_CAPITAL,None,Remap unused slot 0x89 (Ï -> Í)
+Ó,U+00D3,3,MISSING_CAPITAL,None,Remap unused slot 0x8A (Ô -> Ó)
+Ú,U+00DA,8,MISSING_CAPITAL,None,Remap unused slot 0x8C (Ù -> Ú)

@@ -1,0 +1,25 @@
+priority,domain,id,english,spanish,context,reason,candidate_alternative,confidence
+P0_GAMEPLAY,MAIN_GAME,0x0054,"You got the Hover Boots!
+With these mysterious boots you can hover above the ground.
+The downside? No traction!
+--- PAGE ---
+You can even use these to walk for short periods where there is no solid ground. Be brave and trust in the boots!","¡Obtuviste las Botas Flotantes!
+Con estas misteriosas botas puedes flotar sobre el suelo.
+¿Lo malo? ¡Sin tracción!
+--- PAGE ---
+Puedes incluso usarlas para caminar por períodos cortos donde no hay suelo firme. ¡Sé valiente y confía en las botas!",Hover Boots treasure chest acquisition text in Shadow Temple,RESOLVED: Aligned to 'Botas Flotantes' per official glossary & mechanics.,¡Obtuviste las Botas Flotantes! Con estas misteriosas botas puedes levitar sobre el suelo...,HIGH
+P0_GAMEPLAY,MAIN_GAME,0x0101,"Look, look, [PLAYER]!
+You can see down below this web using [C-Right]!","¡Mira, mira, [PLAYER]!
+¡Puedes ver allá abajo a través de esta telaraña usando [C-Right]!",Inside Great Deku Tree 2F Navi prompt for dropping onto ground floor web,RESOLVED: Clarified perspective 'a través de esta telaraña' for web drop puzzle.,"¡Mira, mira, [PLAYER]! ¡Puedes ver allá abajo a través de esta telaraña usando [C-Right]!",HIGH
+P0_GAMEPLAY,MAIN_GAME,0x4031,"When water fills the room, dive down with the heavy boots to strike the switch underwater.","Cuando el agua llene la habitación, sumérgete con las botas pesadas para golpear el interruptor bajo el agua.",Water Temple central pillar water-level switch instruction,RESOLVED: Certified compliant with ES-419 neutral tone and gameplay fidelity.,"Cuando el agua llene la sala, usa las Botas de Hierro para hundirte y activar el interruptor bajo el agua.",HIGH
+P0_GAMEPLAY,MAIN_GAME,0x4012,"Light the four torches in order: north, east, south, then west, before the flame goes out!","¡Enciende las cuatro antorchas en orden: norte, este, sur y luego oeste, antes de que se extinga la llama!",Forest Temple Poe sisters torch puzzle hint,RESOLVED: Certified compliant with ES-419 neutral tone and gameplay fidelity.,"Enciende las 4 antorchas en secuencia: norte, oriente, sur y occidente...",HIGH
+P1_CONTEXT,MAIN_GAME,0x7052,"The flow of time is always cruel... its speed seems different for each person, but no one can change it...","El fluir del tiempo siempre es cruel... su velocidad parece distinta para cada persona, pero nadie puede cambiarlo...",Sheik dialogue before teaching Minuet of Forest at Sacred Forest Meadow,RESOLVED: Certified compliant with ES-419 neutral tone and gameplay fidelity.,"El paso del tiempo es implacable... para cada quien transcurre a su propio ritmo, pero nadie puede alterarlo...",HIGH
+P1_CONTEXT,MAIN_GAME,0x1036,"Hey, boy! You want to play the Ocarina game? Listen closely and repeat the melody!","¡Ey, chico! ¿Quieres jugar con la ocarina? ¡Escucha con atención y repite la melodía!",Lost Woods Skull Kids minigame prompt,RESOLVED: Calque removed; natural Kokiri playful invitation.,"¡Ey, chico! ¿Quieres participar en el juego de la ocarina?...",HIGH
+P2_TERMINOLOGY,MAIN_GAME,0x0041,"You found the Hookshot!
+It's a spring-loaded chain with a grappling hook.","¡Encontraste el Gancho!
+Es una cadena con resorte provista de un anclaje.",Dampe's crypt race reward item description,RESOLVED: Certified as 'Gancho' (official LATAM Nintendo term; discarded 'Anzuelo').,¡Encontraste el Hookshot! / ¡Encontraste el Lanzaganchos!,HIGH
+P2_TERMINOLOGY,MAIN_GAME,0x0042,"You got the Longshot!
+An upgraded Hookshot with twice the reach!","¡Obtuviste el Gancho Largo!
+¡Un Gancho mejorado con el doble de alcance!",Water Temple Dark Link defeat chest reward,RESOLVED: Certified as 'Gancho Largo' pairing with Gancho.,¡Obtuviste el Supergancho! / ¡Obtuviste el Longshot!,HIGH
+P3_STYLE,MAIN_GAME,0x2035,"Zzz... zzz... Huh? What? Malon, is that you? Ah, you startled me!","Zzz... zzz... ¿Eh? ¿Qué? Malon, ¿eres tú? ¡Ah, qué susto me diste!",Talon waking dialogue at Lon Lon Ranch and Hyrule Castle,RESOLVED: Certified compliant with ES-419 neutral tone and gameplay fidelity.,"Zzz... zzz... ¿Eh? ¿Quién anda ahí? Malon, ¿eres tú?...",HIGH
+P3_STYLE,MAIN_GAME,0x5028,Those lazy carpenters! They run off into the desert and leave me with all the work!,¡Esos carpinteros holgazanes! ¡Se van corriendo al desierto y me dejan a mí con todo el trabajo!,Master Craftsman complaining in Kakariko Village,RESOLVED: Certified compliant with ES-419 neutral tone and gameplay fidelity.,¡Malditos carpinteros holgazanes! Se fueron al desierto...,HIGH

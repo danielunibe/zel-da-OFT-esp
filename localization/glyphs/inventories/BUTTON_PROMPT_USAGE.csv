@@ -1,0 +1,2 @@
+message_id,source_file,category,glyphs,context_hint,prompt_count,dynamic_candidate,notes
+0x0010..0x607B,localization_workspace/inventories/BUTTON_PROMPT_MESSAGES.csv,NPC_DIALOGUE/SIGN/MINIGAME/RANDOMIZER,see source inventory,,137,PILOT,Independent count and usage audit; source inventory remains authoritative for per-message text.

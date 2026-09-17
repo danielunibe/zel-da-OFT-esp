@@ -1,0 +1,200 @@
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1574", "plain_text": "DisplayType.Inventory", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1576", "plain_text": "DisplayType.Equipment", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1578", "plain_text": "DisplayType.Misc", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1580", "plain_text": "DisplayType.DungeonRewards", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1582", "plain_text": "DisplayType.Songs", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1584", "plain_text": "DisplayType.DungeonItems", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1586", "plain_text": "DisplayType.Greg", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1588", "plain_text": "DisplayType.TriforcePieces", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1590", "plain_text": "DisplayType.FishingPole", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1592", "plain_text": "DisplayType.Notes", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1597", "plain_text": "DisplayType.Notes", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1604", "plain_text": "DisplayType.Inventory", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1611", "plain_text": "DisplayType.Equipment", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1618", "plain_text": "DisplayType.Misc", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1625", "plain_text": "DisplayType.DungeonRewards", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1628", "plain_text": "DungeonRewardsLayout", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1641", "plain_text": "DisplayType.Songs", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1648", "plain_text": "DisplayType.DungeonItems", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1651", "plain_text": "DungeonItems.Layout", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1652", "plain_text": "DungeonItems.DisplayMaps", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1663", "plain_text": "DisplayType.Greg", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1670", "plain_text": "DisplayType.TriforcePieces", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1677", "plain_text": "DisplayType.BossSouls", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1684", "plain_text": "DisplayType.OcarinaButtons", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1691", "plain_text": "DisplayType.OverworldKeys", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1698", "plain_text": "DisplayType.FishingPole", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1705", "plain_text": "DisplayType.Notes", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1707", "plain_text": "WindowType", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1708", "plain_text": "WindowType", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1709", "plain_text": "DisplayType.Main", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1748", "plain_text": "Floating", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1749", "plain_text": "Window", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1752", "plain_text": "Always", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1757", "plain_text": "C-Up", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1757", "plain_text": "C-Down", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1758", "plain_text": "C-Left", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1758", "plain_text": "C-Right", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1760", "plain_text": "Start", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1761", "plain_text": "D-Up", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1761", "plain_text": "D-Down", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1762", "plain_text": "D-Left", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1762", "plain_text": "D-Right", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1765", "plain_text": "Hidden", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1767", "plain_text": "Separate", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1770", "plain_text": "Hidden", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1773", "plain_text": "Separate", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1776", "plain_text": "Hidden", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1776", "plain_text": "Separate", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1792", "plain_text": "WindowType", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1793", "plain_text": "Draggable", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1796", "plain_text": "ShowOnlyPaused", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1800", "plain_text": "DisplayType.Main", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1808", "plain_text": "DisplayType.Main", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1810", "plain_text": "ComboButton1", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1818", "plain_text": "ComboButton2", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1829", "plain_text": "IconSize", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1831", "plain_text": "IconSpacing", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1833", "plain_text": "TextSize", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1838", "plain_text": "ItemCountType", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1840", "plain_text": "ItemCountType", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1842", "plain_text": "ItemCountAlignLeft", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1853", "plain_text": "Inventory", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1853", "plain_text": "DisplayType.Inventory", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1861", "plain_text": "Equipment", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1861", "plain_text": "DisplayType.Equipment", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1869", "plain_text": "Misc", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1869", "plain_text": "DisplayType.Misc", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1877", "plain_text": "DisplayType.DungeonRewards", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1885", "plain_text": "DisplayType.DungeonRewards", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1887", "plain_text": "DungeonRewardsLayout", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1892", "plain_text": "Songs", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1892", "plain_text": "DisplayType.Songs", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1901", "plain_text": "DisplayType.DungeonItems", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1903", "plain_text": "DisplayType.DungeonItems", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1905", "plain_text": "DungeonItems.Layout", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1910", "plain_text": "DungeonItems.DisplayMaps", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1922", "plain_text": "TotalChecks.DisplayType", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1954", "plain_text": "BgColor", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1957", "plain_text": "Randomizer", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1960", "plain_text": "WindowType", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1968", "plain_text": "Randomizer", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1973", "plain_text": "ItemCountType", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1982", "plain_text": "Randomizer", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1985", "plain_text": "KeyCounts", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1993", "plain_text": "Randomizer", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L1996", "plain_text": "DisplayType.TriforcePieces", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L2004", "plain_text": "Randomizer", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L2007", "plain_text": "DisplayType.DungeonItems", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L2017", "plain_text": "Randomizer", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L2019", "plain_text": "Greg", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L2020", "plain_text": "DisplayType.Greg", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L2029", "plain_text": "Randomizer", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L2032", "plain_text": "DisplayType.BossSouls", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L2041", "plain_text": "Randomizer", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L2044", "plain_text": "TriforcePieceCounts", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L2052", "plain_text": "Randomizer", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L2055", "plain_text": "DisplayType.OcarinaButtons", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L2065", "plain_text": "Randomizer", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L2068", "plain_text": "DisplayType.OverworldKeys", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L2078", "plain_text": "Randomizer", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L2081", "plain_text": "DisplayType.FishingPole", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L2091", "plain_text": "Randomizer", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L2096", "plain_text": "DisplayType.Notes", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L2104", "plain_text": "WindowType", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L2105", "plain_text": "DisplayType.Main", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L2113", "plain_text": "Randomizer", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L2116", "plain_text": "HookshotIdentifier", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::randomizer_item_tracker_cpp::L2120", "plain_text": "Randomizer", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::option_descriptions_cpp::L192", "plain_text": "Full\\", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::option_descriptions_cpp::L467", "plain_text": "D-pad.\\n", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "SOH_UI::soh::soh::Enhancements::randomizer::option_descriptions_cpp::L604", "plain_text": "Tokens.", "category": "RANDOMIZER", "subcategory": ""}
+{"id": "ACCESSIBILITY::filechoose_eng::file1", "plain_text": "File 1", "category": "SYSTEM", "subcategory": "file1"}
+{"id": "ACCESSIBILITY::filechoose_eng::file2", "plain_text": "File 2", "category": "SYSTEM", "subcategory": "file2"}
+{"id": "ACCESSIBILITY::filechoose_eng::file3", "plain_text": "File 3", "category": "SYSTEM", "subcategory": "file3"}
+{"id": "ACCESSIBILITY::filechoose_eng::options", "plain_text": "Options", "category": "SYSTEM", "subcategory": "options"}
+{"id": "ACCESSIBILITY::filechoose_eng::copy", "plain_text": "Copy", "category": "SYSTEM", "subcategory": "copy"}
+{"id": "ACCESSIBILITY::filechoose_eng::erase", "plain_text": "Erase", "category": "SYSTEM", "subcategory": "erase"}
+{"id": "ACCESSIBILITY::filechoose_eng::quit", "plain_text": "Quit", "category": "SYSTEM", "subcategory": "quit"}
+{"id": "ACCESSIBILITY::filechoose_eng::confirm", "plain_text": "Yes", "category": "SYSTEM", "subcategory": "confirm"}
+{"id": "ACCESSIBILITY::filechoose_eng::end", "plain_text": "End", "category": "SYSTEM", "subcategory": "end"}
+{"id": "ACCESSIBILITY::filechoose_eng::hyphen", "plain_text": "Hyphen", "category": "SYSTEM", "subcategory": "hyphen"}
+{"id": "ACCESSIBILITY::filechoose_eng::period", "plain_text": "Period", "category": "SYSTEM", "subcategory": "period"}
+{"id": "ACCESSIBILITY::filechoose_eng::space", "plain_text": "Space", "category": "SYSTEM", "subcategory": "space"}
+{"id": "ACCESSIBILITY::filechoose_eng::backspace", "plain_text": "Backspace", "category": "SYSTEM", "subcategory": "backspace"}
+{"id": "ACCESSIBILITY::filechoose_eng::capital_letter", "plain_text": "Capital $0", "category": "SYSTEM", "subcategory": "capital_letter"}
+{"id": "ACCESSIBILITY::filechoose_eng::audio_stereo", "plain_text": "Sound - Stereo", "category": "SYSTEM", "subcategory": "audio_stereo"}
+{"id": "ACCESSIBILITY::filechoose_eng::audio_mono", "plain_text": "Sound - Mono", "category": "SYSTEM", "subcategory": "audio_mono"}
+{"id": "ACCESSIBILITY::filechoose_eng::audio_headset", "plain_text": "Sound - Headset", "category": "SYSTEM", "subcategory": "audio_headset"}
+{"id": "ACCESSIBILITY::filechoose_eng::audio_surround", "plain_text": "Sound - Surround", "category": "SYSTEM", "subcategory": "audio_surround"}
+{"id": "ACCESSIBILITY::filechoose_eng::target_switch", "plain_text": "Targeting Mode - Switch", "category": "SYSTEM", "subcategory": "target_switch"}
+{"id": "ACCESSIBILITY::filechoose_eng::target_hold", "plain_text": "Targeting Mode - Hold", "category": "SYSTEM", "subcategory": "target_hold"}
+{"id": "ACCESSIBILITY::filechoose_eng::language_english", "plain_text": "Language - English", "category": "SYSTEM", "subcategory": "language_english"}
+{"id": "ACCESSIBILITY::filechoose_eng::language_german", "plain_text": "Language - German", "category": "SYSTEM", "subcategory": "language_german"}
+{"id": "ACCESSIBILITY::filechoose_eng::language_french", "plain_text": "Language - French", "category": "SYSTEM", "subcategory": "language_french"}
+{"id": "ACCESSIBILITY::filechoose_eng::quest_sel_vanilla", "plain_text": "Quest - Original", "category": "SYSTEM", "subcategory": "quest_sel_vanilla"}
+{"id": "ACCESSIBILITY::filechoose_eng::quest_sel_mq", "plain_text": "Quest - Master Quest", "category": "SYSTEM", "subcategory": "quest_sel_mq"}
+{"id": "ACCESSIBILITY::filechoose_eng::quest_sel_randomizer", "plain_text": "Quest - Randomizer", "category": "SYSTEM", "subcategory": "quest_sel_randomizer"}
+{"id": "ACCESSIBILITY::filechoose_eng::quest_sel_boss_rush", "plain_text": "Quest - Boss Rush", "category": "SYSTEM", "subcategory": "quest_sel_boss_rush"}
+{"id": "ACCESSIBILITY::misc_eng::minutes_plural", "plain_text": "$0 minutes", "category": "SYSTEM", "subcategory": "minutes_plural"}
+{"id": "ACCESSIBILITY::misc_eng::minutes_singular", "plain_text": "$0 minute", "category": "SYSTEM", "subcategory": "minutes_singular"}
+{"id": "ACCESSIBILITY::misc_eng::seconds_plural", "plain_text": "$0 seconds", "category": "SYSTEM", "subcategory": "seconds_plural"}
+{"id": "ACCESSIBILITY::misc_eng::seconds_singular", "plain_text": "$0 second", "category": "SYSTEM", "subcategory": "seconds_singular"}
+{"id": "ACCESSIBILITY::misc_eng::input_button_a", "plain_text": "the A button", "category": "SYSTEM", "subcategory": "input_button_a"}
+{"id": "ACCESSIBILITY::misc_eng::input_button_b", "plain_text": "the B button", "category": "SYSTEM", "subcategory": "input_button_b"}
+{"id": "ACCESSIBILITY::misc_eng::input_button_c", "plain_text": "the C button", "category": "SYSTEM", "subcategory": "input_button_c"}
+{"id": "ACCESSIBILITY::misc_eng::input_button_l", "plain_text": "the L button", "category": "SYSTEM", "subcategory": "input_button_l"}
+{"id": "ACCESSIBILITY::misc_eng::input_button_r", "plain_text": "the R button", "category": "SYSTEM", "subcategory": "input_button_r"}
+{"id": "ACCESSIBILITY::misc_eng::input_button_z", "plain_text": "the Z button", "category": "SYSTEM", "subcategory": "input_button_z"}
+{"id": "ACCESSIBILITY::misc_eng::input_button_c_up", "plain_text": "C Up", "category": "SYSTEM", "subcategory": "input_button_c_up"}
+{"id": "ACCESSIBILITY::misc_eng::input_button_c_down", "plain_text": "C Down", "category": "SYSTEM", "subcategory": "input_button_c_down"}
+{"id": "ACCESSIBILITY::misc_eng::input_button_c_left", "plain_text": "C Left", "category": "SYSTEM", "subcategory": "input_button_c_left"}
+{"id": "ACCESSIBILITY::misc_eng::input_button_c_right", "plain_text": "C Right", "category": "SYSTEM", "subcategory": "input_button_c_right"}
+{"id": "ACCESSIBILITY::misc_eng::input_analog_stick", "plain_text": "the Analog Stick", "category": "SYSTEM", "subcategory": "input_analog_stick"}
+{"id": "ACCESSIBILITY::misc_eng::input_d_pad", "plain_text": "the D-Pad", "category": "SYSTEM", "subcategory": "input_d_pad"}
+{"id": "ACCESSIBILITY::misc_eng::input_d_pad_up", "plain_text": "D-Pad Up", "category": "SYSTEM", "subcategory": "input_d_pad_up"}
+{"id": "ACCESSIBILITY::misc_eng::input_d_pad_down", "plain_text": "D-Pad Down", "category": "SYSTEM", "subcategory": "input_d_pad_down"}
+{"id": "ACCESSIBILITY::misc_eng::input_d_pad_left", "plain_text": "D-Pad Left", "category": "SYSTEM", "subcategory": "input_d_pad_left"}
+{"id": "ACCESSIBILITY::misc_eng::input_d_pad_right", "plain_text": "D-Pad Right", "category": "SYSTEM", "subcategory": "input_d_pad_right"}
+{"id": "ACCESSIBILITY::misc_eng::yes", "plain_text": "Yes", "category": "SYSTEM", "subcategory": "yes"}
+{"id": "ACCESSIBILITY::misc_eng::no", "plain_text": "No", "category": "SYSTEM", "subcategory": "no"}
+{"id": "ACCESSIBILITY::kaleidoscope_ger::health", "plain_text": "Energie - $0 Herzen", "category": "SYSTEM", "subcategory": "health"}
+{"id": "ACCESSIBILITY::kaleidoscope_ger::magic", "plain_text": "Magie - $0", "category": "SYSTEM", "subcategory": "magic"}
+{"id": "ACCESSIBILITY::kaleidoscope_ger::rupees", "plain_text": "Rubine - $0", "category": "SYSTEM", "subcategory": "rupees"}
+{"id": "ACCESSIBILITY::kaleidoscope_ger::keys", "plain_text": "Schlüssel - $0", "category": "SYSTEM", "subcategory": "keys"}
+{"id": "ACCESSIBILITY::kaleidoscope_ger::floor", "plain_text": "Etage $0", "category": "SYSTEM", "subcategory": "floor"}
+{"id": "ACCESSIBILITY::kaleidoscope_ger::basement", "plain_text": "Keller $0", "category": "SYSTEM", "subcategory": "basement"}
+{"id": "ACCESSIBILITY::kaleidoscope_ger::item_menu", "plain_text": "Gegenstände", "category": "SYSTEM", "subcategory": "item_menu"}
+{"id": "ACCESSIBILITY::kaleidoscope_ger::map_menu", "plain_text": "Karte - $0", "category": "SYSTEM", "subcategory": "map_menu"}
+{"id": "ACCESSIBILITY::kaleidoscope_ger::quest_menu", "plain_text": "Quest Status", "category": "SYSTEM", "subcategory": "quest_menu"}
+{"id": "ACCESSIBILITY::kaleidoscope_ger::equip_menu", "plain_text": "Ausrüstung", "category": "SYSTEM", "subcategory": "equip_menu"}
+{"id": "ACCESSIBILITY::kaleidoscope_ger::overworld", "plain_text": "Überwelt", "category": "SYSTEM", "subcategory": "overworld"}
+{"id": "ACCESSIBILITY::kaleidoscope_ger::equipped", "plain_text": "$0 - Ausgerüstet", "category": "SYSTEM", "subcategory": "equipped"}
+{"id": "ACCESSIBILITY::kaleidoscope_ger::save_prompt", "plain_text": "Spielstand sichern ?", "category": "SYSTEM", "subcategory": "save_prompt"}
+{"id": "ACCESSIBILITY::kaleidoscope_ger::game_saved", "plain_text": "Spielstand gesichert", "category": "SYSTEM", "subcategory": "game_saved"}
+{"id": "ACCESSIBILITY::kaleidoscope_ger::game_over", "plain_text": "Game Over", "category": "SYSTEM", "subcategory": "game_over"}
+{"id": "ACCESSIBILITY::kaleidoscope_ger::continue_game", "plain_text": "Spiel fortsetzen ?", "category": "SYSTEM", "subcategory": "continue_game"}
+{"id": "ACCESSIBILITY::kaleidoscope_ger::assigned_to", "plain_text": "$0 zugeordnet", "category": "SYSTEM", "subcategory": "assigned_to"}
+{"id": "ACCESSIBILITY::kaleidoscope_ger::0", "plain_text": "Deku-Stab - $0", "category": "SYSTEM", "subcategory": "0"}
+{"id": "ACCESSIBILITY::kaleidoscope_ger::1", "plain_text": "Deku-Nuß - $0", "category": "SYSTEM", "subcategory": "1"}
+{"id": "ACCESSIBILITY::kaleidoscope_ger::2", "plain_text": "Bombe - $0", "category": "SYSTEM", "subcategory": "2"}
+{"id": "ACCESSIBILITY::kaleidoscope_ger::3", "plain_text": "Feen-Bogen - $0", "category": "SYSTEM", "subcategory": "3"}
+{"id": "ACCESSIBILITY::kaleidoscope_ger::4", "plain_text": "Feuer-Pfeil", "category": "SYSTEM", "subcategory": "4"}
+{"id": "ACCESSIBILITY::kaleidoscope_ger::5", "plain_text": "Dins Feuerinferno", "category": "SYSTEM", "subcategory": "5"}
+{"id": "ACCESSIBILITY::kaleidoscope_ger::6", "plain_text": "Feen-Schleuder - $0", "category": "SYSTEM", "subcategory": "6"}
+{"id": "ACCESSIBILITY::kaleidoscope_ger::7", "plain_text": "Feen-Okarina", "category": "SYSTEM", "subcategory": "7"}
+{"id": "ACCESSIBILITY::kaleidoscope_ger::8", "plain_text": "Okarina der Zeit", "category": "SYSTEM", "subcategory": "8"}
+{"id": "ACCESSIBILITY::kaleidoscope_ger::9", "plain_text": "Krabbelmine - $0", "category": "SYSTEM", "subcategory": "9"}
+{"id": "ACCESSIBILITY::kaleidoscope_ger::10", "plain_text": "Fanghaken", "category": "SYSTEM", "subcategory": "10"}
+{"id": "ACCESSIBILITY::kaleidoscope_ger::11", "plain_text": "Enterhaken", "category": "SYSTEM", "subcategory": "11"}
+{"id": "ACCESSIBILITY::kaleidoscope_ger::12", "plain_text": "Eis-Pfeil", "category": "SYSTEM", "subcategory": "12"}
+{"id": "ACCESSIBILITY::kaleidoscope_ger::13", "plain_text": "Farores Donnersturm", "category": "SYSTEM", "subcategory": "13"}
+{"id": "ACCESSIBILITY::kaleidoscope_ger::14", "plain_text": "Bumerang", "category": "SYSTEM", "subcategory": "14"}
+{"id": "ACCESSIBILITY::kaleidoscope_ger::15", "plain_text": "Auge der Wahrheit", "category": "SYSTEM", "subcategory": "15"}
+{"id": "ACCESSIBILITY::kaleidoscope_ger::16", "plain_text": "Wundererbsen - $0", "category": "SYSTEM", "subcategory": "16"}
+{"id": "ACCESSIBILITY::kaleidoscope_ger::17", "plain_text": "Stahlhammer", "category": "SYSTEM", "subcategory": "17"}
+{"id": "ACCESSIBILITY::kaleidoscope_ger::18", "plain_text": "Licht-Pfeil", "category": "SYSTEM", "subcategory": "18"}
+{"id": "ACCESSIBILITY::kaleidoscope_ger::19", "plain_text": "Nayrus Umarmung", "category": "SYSTEM", "subcategory": "19"}
+{"id": "ACCESSIBILITY::kaleidoscope_ger::20", "plain_text": "Flasche", "category": "SYSTEM", "subcategory": "20"}
+{"id": "ACCESSIBILITY::kaleidoscope_ger::21", "plain_text": "Rotes Elixier", "category": "SYSTEM", "subcategory": "21"}
+{"id": "ACCESSIBILITY::kaleidoscope_ger::22", "plain_text": "Grünes Elixier", "category": "SYSTEM", "subcategory": "22"}

@@ -1,0 +1,11 @@
+message_id,category,pages,line_count,max_line_chars,has_choice,layout_risk,evaluated_criteria,staging_result,notes
+0x3007,Goron Dialogue,1,3,48,NO,Line length boundary,Text wrapping & margin clearance,PREFLIGHT_PASS,Fits safely within standard 3-line box without horizontal clipping
+0x101A,Kokiri Lore,4,12,46,NO,Page break transitions,Page transition control codes (0x04),PREFLIGHT_PASS,All 4 pages contain exactly <= 3 lines per page; zero vertical overflow
+0x0101,Item Description,1,2,49,NO,Width boundary,Item box margin & padding,PREFLIGHT_PASS,2 lines fit comfortably inside blue acquisition frame
+0x2071,Market Gossip,3,9,47,YES,Choice alignment,Choice branch positioning,PREFLIGHT_PASS,Choice arrow aligns on 2nd line without colliding with text
+0x10D0,Saria Farewell,1,2,45,NO,Punctuation spacing,Inverted punctuation clearance,PREFLIGHT_PASS,¡ and ¿ sit cleanly within character cell baseline
+0x706C,Castle Climax,1,4,47,NO,Vertical boundary,4-line maximum capacity check,PREFLIGHT_PASS,Exactly 4 lines; bottom line sits above lower border with 2px margin
+0x6036,Spirit Puzzle Hint,1,3,48,NO,Puzzle comprehension,Clue legibility & word wrapping,PREFLIGHT_PASS,Key directional nouns remain unbroken on single lines
+0x70B2,Ending Epilogue,1,2,46,NO,Pacing & text speed,Text speed delay code (0x08),PREFLIGHT_PASS,Speed control codes render transparently
+0x306B,Death Mountain Guide,3,10,48,NO,Multi-page continuity,Accented capital letters in body,PREFLIGHT_PASS,Accented letters do not clip into preceding line
+0x2065,Lon Lon Ranch Event,5,16,47,YES,Choice & multi-page,Complex state preservation,PREFLIGHT_PASS,Cursor resets properly across multiple pages

@@ -1,0 +1,200 @@
+{"id": "LOCATION::RC_LH_HYRULE_LOACH", "plain_text": "Lh Hyrule Loach", "category": "LOCATION_NAME", "subcategory": "RC_LH_HYRULE_LOACH", "variables": []}
+{"id": "LOCATION::RC_LH_LAB_DIVE", "plain_text": "Lh Lab Dive", "category": "LOCATION_NAME", "subcategory": "RC_LH_LAB_DIVE", "variables": []}
+{"id": "LOCATION::RC_LH_TRADE_FROG", "plain_text": "Lh Trade Frog", "category": "LOCATION_NAME", "subcategory": "RC_LH_TRADE_FROG", "variables": []}
+{"id": "LOCATION::RC_LH_UNDERWATER_ITEM", "plain_text": "Lh Underwater Item", "category": "LOCATION_NAME", "subcategory": "RC_LH_UNDERWATER_ITEM", "variables": []}
+{"id": "LOCATION::RC_LH_SUN", "plain_text": "Lh Sun", "category": "LOCATION_NAME", "subcategory": "RC_LH_SUN", "variables": []}
+{"id": "LOCATION::RC_LH_FREESTANDING_POH", "plain_text": "Lh Freestanding Poh", "category": "LOCATION_NAME", "subcategory": "RC_LH_FREESTANDING_POH", "variables": []}
+{"id": "LOCATION::RC_LH_DEKU_SCRUB_GROTTO_LEFT", "plain_text": "Lh Deku Scrub Grotto Left", "category": "LOCATION_NAME", "subcategory": "RC_LH_DEKU_SCRUB_GROTTO_LEFT", "variables": []}
+{"id": "LOCATION::RC_LH_DEKU_SCRUB_GROTTO_RIGHT", "plain_text": "Lh Deku Scrub Grotto Right", "category": "LOCATION_NAME", "subcategory": "RC_LH_DEKU_SCRUB_GROTTO_RIGHT", "variables": []}
+{"id": "LOCATION::RC_LH_DEKU_SCRUB_GROTTO_CENTER", "plain_text": "Lh Deku Scrub Grotto Center", "category": "LOCATION_NAME", "subcategory": "RC_LH_DEKU_SCRUB_GROTTO_CENTER", "variables": []}
+{"id": "LOCATION::RC_GV_CHEST", "plain_text": "Gv Chest", "category": "LOCATION_NAME", "subcategory": "RC_GV_CHEST", "variables": []}
+{"id": "LOCATION::RC_GV_TRADE_SAW", "plain_text": "Gv Trade Saw", "category": "LOCATION_NAME", "subcategory": "RC_GV_TRADE_SAW", "variables": []}
+{"id": "LOCATION::RC_GV_WATERFALL_FREESTANDING_POH", "plain_text": "Gv Waterfall Freestanding Poh", "category": "LOCATION_NAME", "subcategory": "RC_GV_WATERFALL_FREESTANDING_POH", "variables": []}
+{"id": "LOCATION::RC_GV_CRATE_FREESTANDING_POH", "plain_text": "Gv Crate Freestanding Poh", "category": "LOCATION_NAME", "subcategory": "RC_GV_CRATE_FREESTANDING_POH", "variables": []}
+{"id": "LOCATION::RC_GV_DEKU_SCRUB_GROTTO_REAR", "plain_text": "Gv Deku Scrub Grotto Rear", "category": "LOCATION_NAME", "subcategory": "RC_GV_DEKU_SCRUB_GROTTO_REAR", "variables": []}
+{"id": "LOCATION::RC_GV_DEKU_SCRUB_GROTTO_FRONT", "plain_text": "Gv Deku Scrub Grotto Front", "category": "LOCATION_NAME", "subcategory": "RC_GV_DEKU_SCRUB_GROTTO_FRONT", "variables": []}
+{"id": "LOCATION::RC_GF_CHEST", "plain_text": "Gf Chest", "category": "LOCATION_NAME", "subcategory": "RC_GF_CHEST", "variables": []}
+{"id": "LOCATION::RC_GF_HBA_1000_POINTS", "plain_text": "Gf Hba 1000 Points", "category": "LOCATION_NAME", "subcategory": "RC_GF_HBA_1000_POINTS", "variables": []}
+{"id": "LOCATION::RC_GF_HBA_1500_POINTS", "plain_text": "Gf Hba 1500 Points", "category": "LOCATION_NAME", "subcategory": "RC_GF_HBA_1500_POINTS", "variables": []}
+{"id": "LOCATION::RC_TH_FREED_CARPENTERS", "plain_text": "Th Freed Carpenters", "category": "LOCATION_NAME", "subcategory": "RC_TH_FREED_CARPENTERS", "variables": []}
+{"id": "LOCATION::RC_TH_1_TORCH_CARPENTER", "plain_text": "Th 1 Torch Carpenter", "category": "LOCATION_NAME", "subcategory": "RC_TH_1_TORCH_CARPENTER", "variables": []}
+{"id": "LOCATION::RC_TH_DEAD_END_CARPENTER", "plain_text": "Th Dead End Carpenter", "category": "LOCATION_NAME", "subcategory": "RC_TH_DEAD_END_CARPENTER", "variables": []}
+{"id": "LOCATION::RC_TH_DOUBLE_CELL_CARPENTER", "plain_text": "Th Double Cell Carpenter", "category": "LOCATION_NAME", "subcategory": "RC_TH_DOUBLE_CELL_CARPENTER", "variables": []}
+{"id": "LOCATION::RC_TH_STEEP_SLOPE_CARPENTER", "plain_text": "Th Steep Slope Carpenter", "category": "LOCATION_NAME", "subcategory": "RC_TH_STEEP_SLOPE_CARPENTER", "variables": []}
+{"id": "LOCATION::RC_WASTELAND_CHEST", "plain_text": "Wasteland Chest", "category": "LOCATION_NAME", "subcategory": "RC_WASTELAND_CHEST", "variables": []}
+{"id": "LOCATION::RC_WASTELAND_BOMBCHU_SALESMAN", "plain_text": "Wasteland Bombchu Salesman", "category": "LOCATION_NAME", "subcategory": "RC_WASTELAND_BOMBCHU_SALESMAN", "variables": []}
+{"id": "LOCATION::RC_COLOSSUS_FREESTANDING_POH", "plain_text": "Colossus Freestanding Poh", "category": "LOCATION_NAME", "subcategory": "RC_COLOSSUS_FREESTANDING_POH", "variables": []}
+{"id": "LOCATION::RC_COLOSSUS_DEKU_SCRUB_GROTTO_REAR", "plain_text": "Colossus Deku Scrub Grotto Rear", "category": "LOCATION_NAME", "subcategory": "RC_COLOSSUS_DEKU_SCRUB_GROTTO_REAR", "variables": []}
+{"id": "LOCATION::RC_COLOSSUS_DEKU_SCRUB_GROTTO_FRONT", "plain_text": "Colossus Deku Scrub Grotto Front", "category": "LOCATION_NAME", "subcategory": "RC_COLOSSUS_DEKU_SCRUB_GROTTO_FRONT", "variables": []}
+{"id": "LOCATION::RC_MARKET_TREASURE_CHEST_GAME_REWARD", "plain_text": "Market Treasure Chest Game Reward", "category": "LOCATION_NAME", "subcategory": "RC_MARKET_TREASURE_CHEST_GAME_REWARD", "variables": []}
+{"id": "LOCATION::RC_MARKET_BOMBCHU_BOWLING_FIRST_PRIZE", "plain_text": "Market Bombchu Bowling First Prize", "category": "LOCATION_NAME", "subcategory": "RC_MARKET_BOMBCHU_BOWLING_FIRST_PRIZE", "variables": []}
+{"id": "LOCATION::RC_MARKET_BOMBCHU_BOWLING_SECOND_PRIZE", "plain_text": "Market Bombchu Bowling Second Prize", "category": "LOCATION_NAME", "subcategory": "RC_MARKET_BOMBCHU_BOWLING_SECOND_PRIZE", "variables": []}
+{"id": "LOCATION::RC_MARKET_LOST_DOG", "plain_text": "Market Lost Dog", "category": "LOCATION_NAME", "subcategory": "RC_MARKET_LOST_DOG", "variables": []}
+{"id": "LOCATION::RC_MARKET_SHOOTING_GALLERY_REWARD", "plain_text": "Market Shooting Gallery Reward", "category": "LOCATION_NAME", "subcategory": "RC_MARKET_SHOOTING_GALLERY_REWARD", "variables": []}
+{"id": "LOCATION::RC_MARKET_10_BIG_POES", "plain_text": "Market 10 Big Poes", "category": "LOCATION_NAME", "subcategory": "RC_MARKET_10_BIG_POES", "variables": []}
+{"id": "LOCATION::RC_MARKET_TREASURE_CHEST_GAME_ITEM_1", "plain_text": "Market Treasure Chest Game Item 1", "category": "LOCATION_NAME", "subcategory": "RC_MARKET_TREASURE_CHEST_GAME_ITEM_1", "variables": []}
+{"id": "LOCATION::RC_MARKET_TREASURE_CHEST_GAME_ITEM_2", "plain_text": "Market Treasure Chest Game Item 2", "category": "LOCATION_NAME", "subcategory": "RC_MARKET_TREASURE_CHEST_GAME_ITEM_2", "variables": []}
+{"id": "LOCATION::RC_MARKET_TREASURE_CHEST_GAME_ITEM_3", "plain_text": "Market Treasure Chest Game Item 3", "category": "LOCATION_NAME", "subcategory": "RC_MARKET_TREASURE_CHEST_GAME_ITEM_3", "variables": []}
+{"id": "LOCATION::RC_MARKET_TREASURE_CHEST_GAME_ITEM_4", "plain_text": "Market Treasure Chest Game Item 4", "category": "LOCATION_NAME", "subcategory": "RC_MARKET_TREASURE_CHEST_GAME_ITEM_4", "variables": []}
+{"id": "LOCATION::RC_MARKET_TREASURE_CHEST_GAME_ITEM_5", "plain_text": "Market Treasure Chest Game Item 5", "category": "LOCATION_NAME", "subcategory": "RC_MARKET_TREASURE_CHEST_GAME_ITEM_5", "variables": []}
+{"id": "LOCATION::RC_MARKET_TREASURE_CHEST_GAME_KEY_1", "plain_text": "Market Treasure Chest Game Key 1", "category": "LOCATION_NAME", "subcategory": "RC_MARKET_TREASURE_CHEST_GAME_KEY_1", "variables": []}
+{"id": "LOCATION::RC_MARKET_TREASURE_CHEST_GAME_KEY_2", "plain_text": "Market Treasure Chest Game Key 2", "category": "LOCATION_NAME", "subcategory": "RC_MARKET_TREASURE_CHEST_GAME_KEY_2", "variables": []}
+{"id": "LOCATION::RC_MARKET_TREASURE_CHEST_GAME_KEY_3", "plain_text": "Market Treasure Chest Game Key 3", "category": "LOCATION_NAME", "subcategory": "RC_MARKET_TREASURE_CHEST_GAME_KEY_3", "variables": []}
+{"id": "LOCATION::RC_MARKET_TREASURE_CHEST_GAME_KEY_4", "plain_text": "Market Treasure Chest Game Key 4", "category": "LOCATION_NAME", "subcategory": "RC_MARKET_TREASURE_CHEST_GAME_KEY_4", "variables": []}
+{"id": "LOCATION::RC_MARKET_TREASURE_CHEST_GAME_KEY_5", "plain_text": "Market Treasure Chest Game Key 5", "category": "LOCATION_NAME", "subcategory": "RC_MARKET_TREASURE_CHEST_GAME_KEY_5", "variables": []}
+{"id": "LOCATION::RC_HC_MALON_EGG", "plain_text": "Hc Malon Egg", "category": "LOCATION_NAME", "subcategory": "RC_HC_MALON_EGG", "variables": []}
+{"id": "LOCATION::RC_HC_ZELDAS_LETTER", "plain_text": "Hc Zeldas Letter", "category": "LOCATION_NAME", "subcategory": "RC_HC_ZELDAS_LETTER", "variables": []}
+{"id": "LOCATION::RC_KAK_REDEAD_GROTTO_CHEST", "plain_text": "Kak Redead Grotto Chest", "category": "LOCATION_NAME", "subcategory": "RC_KAK_REDEAD_GROTTO_CHEST", "variables": []}
+{"id": "LOCATION::RC_KAK_OPEN_GROTTO_CHEST", "plain_text": "Kak Open Grotto Chest", "category": "LOCATION_NAME", "subcategory": "RC_KAK_OPEN_GROTTO_CHEST", "variables": []}
+{"id": "LOCATION::RC_KAK_10_GOLD_SKULLTULA_REWARD", "plain_text": "Kak 10 Gold Skulltula Reward", "category": "LOCATION_NAME", "subcategory": "RC_KAK_10_GOLD_SKULLTULA_REWARD", "variables": []}
+{"id": "LOCATION::RC_KAK_20_GOLD_SKULLTULA_REWARD", "plain_text": "Kak 20 Gold Skulltula Reward", "category": "LOCATION_NAME", "subcategory": "RC_KAK_20_GOLD_SKULLTULA_REWARD", "variables": []}
+{"id": "LOCATION::RC_KAK_30_GOLD_SKULLTULA_REWARD", "plain_text": "Kak 30 Gold Skulltula Reward", "category": "LOCATION_NAME", "subcategory": "RC_KAK_30_GOLD_SKULLTULA_REWARD", "variables": []}
+{"id": "LOCATION::RC_KAK_40_GOLD_SKULLTULA_REWARD", "plain_text": "Kak 40 Gold Skulltula Reward", "category": "LOCATION_NAME", "subcategory": "RC_KAK_40_GOLD_SKULLTULA_REWARD", "variables": []}
+{"id": "LOCATION::RC_KAK_50_GOLD_SKULLTULA_REWARD", "plain_text": "Kak 50 Gold Skulltula Reward", "category": "LOCATION_NAME", "subcategory": "RC_KAK_50_GOLD_SKULLTULA_REWARD", "variables": []}
+{"id": "LOCATION::RC_KAK_100_GOLD_SKULLTULA_REWARD", "plain_text": "Kak 100 Gold Skulltula Reward", "category": "LOCATION_NAME", "subcategory": "RC_KAK_100_GOLD_SKULLTULA_REWARD", "variables": []}
+{"id": "LOCATION::RC_KAK_MAN_ON_ROOF", "plain_text": "Kak Man On Roof", "category": "LOCATION_NAME", "subcategory": "RC_KAK_MAN_ON_ROOF", "variables": []}
+{"id": "LOCATION::RC_KAK_SHOOTING_GALLERY_REWARD", "plain_text": "Kak Shooting Gallery Reward", "category": "LOCATION_NAME", "subcategory": "RC_KAK_SHOOTING_GALLERY_REWARD", "variables": []}
+{"id": "LOCATION::RC_KAK_TRADE_ODD_MUSHROOM", "plain_text": "Kak Trade Odd Mushroom", "category": "LOCATION_NAME", "subcategory": "RC_KAK_TRADE_ODD_MUSHROOM", "variables": []}
+{"id": "LOCATION::RC_KAK_GRANNYS_SHOP", "plain_text": "Kak Grannys Shop", "category": "LOCATION_NAME", "subcategory": "RC_KAK_GRANNYS_SHOP", "variables": []}
+{"id": "LOCATION::RC_KAK_ANJU_AS_ADULT", "plain_text": "Kak Anju As Adult", "category": "LOCATION_NAME", "subcategory": "RC_KAK_ANJU_AS_ADULT", "variables": []}
+{"id": "LOCATION::RC_KAK_ANJU_AS_CHILD", "plain_text": "Kak Anju As Child", "category": "LOCATION_NAME", "subcategory": "RC_KAK_ANJU_AS_CHILD", "variables": []}
+{"id": "LOCATION::RC_KAK_TRADE_POCKET_CUCCO", "plain_text": "Kak Trade Pocket Cucco", "category": "LOCATION_NAME", "subcategory": "RC_KAK_TRADE_POCKET_CUCCO", "variables": []}
+{"id": "LOCATION::RC_KAK_IMPAS_HOUSE_FREESTANDING_POH", "plain_text": "Kak Impas House Freestanding Poh", "category": "LOCATION_NAME", "subcategory": "RC_KAK_IMPAS_HOUSE_FREESTANDING_POH", "variables": []}
+{"id": "LOCATION::RC_KAK_WINDMILL_FREESTANDING_POH", "plain_text": "Kak Windmill Freestanding Poh", "category": "LOCATION_NAME", "subcategory": "RC_KAK_WINDMILL_FREESTANDING_POH", "variables": []}
+{"id": "LOCATION::RC_GRAVEYARD_SHIELD_GRAVE_CHEST", "plain_text": "Graveyard Shield Grave Chest", "category": "LOCATION_NAME", "subcategory": "RC_GRAVEYARD_SHIELD_GRAVE_CHEST", "variables": []}
+{"id": "LOCATION::RC_GRAVEYARD_HEART_PIECE_GRAVE_CHEST", "plain_text": "Graveyard Heart Piece Grave Chest", "category": "LOCATION_NAME", "subcategory": "RC_GRAVEYARD_HEART_PIECE_GRAVE_CHEST", "variables": []}
+{"id": "LOCATION::RC_GRAVEYARD_ROYAL_FAMILYS_TOMB_CHEST", "plain_text": "Graveyard Royal Familys Tomb Chest", "category": "LOCATION_NAME", "subcategory": "RC_GRAVEYARD_ROYAL_FAMILYS_TOMB_CHEST", "variables": []}
+{"id": "LOCATION::RC_GRAVEYARD_HOOKSHOT_CHEST", "plain_text": "Graveyard Hookshot Chest", "category": "LOCATION_NAME", "subcategory": "RC_GRAVEYARD_HOOKSHOT_CHEST", "variables": []}
+{"id": "LOCATION::RC_GRAVEYARD_FREESTANDING_POH", "plain_text": "Graveyard Freestanding Poh", "category": "LOCATION_NAME", "subcategory": "RC_GRAVEYARD_FREESTANDING_POH", "variables": []}
+{"id": "LOCATION::RC_GRAVEYARD_DAMPE_RACE_FREESTANDING_POH", "plain_text": "Graveyard Dampe Race Freestanding Poh", "category": "LOCATION_NAME", "subcategory": "RC_GRAVEYARD_DAMPE_RACE_FREESTANDING_POH", "variables": []}
+{"id": "LOCATION::RC_GRAVEYARD_DAMPE_GRAVEDIGGING_TOUR", "plain_text": "Graveyard Dampe Gravedigging Tour", "category": "LOCATION_NAME", "subcategory": "RC_GRAVEYARD_DAMPE_GRAVEDIGGING_TOUR", "variables": []}
+{"id": "LOCATION::RC_DMT_CHEST", "plain_text": "Dmt Chest", "category": "LOCATION_NAME", "subcategory": "RC_DMT_CHEST", "variables": []}
+{"id": "LOCATION::RC_DMT_STORMS_GROTTO_CHEST", "plain_text": "Dmt Storms Grotto Chest", "category": "LOCATION_NAME", "subcategory": "RC_DMT_STORMS_GROTTO_CHEST", "variables": []}
+{"id": "LOCATION::RC_DMT_TRADE_BROKEN_SWORD", "plain_text": "Dmt Trade Broken Sword", "category": "LOCATION_NAME", "subcategory": "RC_DMT_TRADE_BROKEN_SWORD", "variables": []}
+{"id": "LOCATION::RC_DMT_TRADE_EYEDROPS", "plain_text": "Dmt Trade Eyedrops", "category": "LOCATION_NAME", "subcategory": "RC_DMT_TRADE_EYEDROPS", "variables": []}
+{"id": "LOCATION::RC_DMT_TRADE_CLAIM_CHECK", "plain_text": "Dmt Trade Claim Check", "category": "LOCATION_NAME", "subcategory": "RC_DMT_TRADE_CLAIM_CHECK", "variables": []}
+{"id": "LOCATION::RC_DMT_FREESTANDING_POH", "plain_text": "Dmt Freestanding Poh", "category": "LOCATION_NAME", "subcategory": "RC_DMT_FREESTANDING_POH", "variables": []}
+{"id": "LOCATION::RC_GC_MAZE_LEFT_CHEST", "plain_text": "Gc Maze Left Chest", "category": "LOCATION_NAME", "subcategory": "RC_GC_MAZE_LEFT_CHEST", "variables": []}
+{"id": "LOCATION::RC_GC_MAZE_RIGHT_CHEST", "plain_text": "Gc Maze Right Chest", "category": "LOCATION_NAME", "subcategory": "RC_GC_MAZE_RIGHT_CHEST", "variables": []}
+{"id": "LOCATION::RC_GC_MAZE_CENTER_CHEST", "plain_text": "Gc Maze Center Chest", "category": "LOCATION_NAME", "subcategory": "RC_GC_MAZE_CENTER_CHEST", "variables": []}
+{"id": "LOCATION::RC_GC_ROLLING_GORON_AS_CHILD", "plain_text": "Gc Rolling Goron As Child", "category": "LOCATION_NAME", "subcategory": "RC_GC_ROLLING_GORON_AS_CHILD", "variables": []}
+{"id": "LOCATION::RC_GC_ROLLING_GORON_AS_ADULT", "plain_text": "Gc Rolling Goron As Adult", "category": "LOCATION_NAME", "subcategory": "RC_GC_ROLLING_GORON_AS_ADULT", "variables": []}
+{"id": "LOCATION::RC_GC_DARUNIAS_JOY", "plain_text": "Gc Darunias Joy", "category": "LOCATION_NAME", "subcategory": "RC_GC_DARUNIAS_JOY", "variables": []}
+{"id": "LOCATION::RC_GC_POT_FREESTANDING_POH", "plain_text": "Gc Pot Freestanding Poh", "category": "LOCATION_NAME", "subcategory": "RC_GC_POT_FREESTANDING_POH", "variables": []}
+{"id": "LOCATION::RC_GC_DEKU_SCRUB_GROTTO_LEFT", "plain_text": "Gc Deku Scrub Grotto Left", "category": "LOCATION_NAME", "subcategory": "RC_GC_DEKU_SCRUB_GROTTO_LEFT", "variables": []}
+{"id": "LOCATION::RC_GC_DEKU_SCRUB_GROTTO_RIGHT", "plain_text": "Gc Deku Scrub Grotto Right", "category": "LOCATION_NAME", "subcategory": "RC_GC_DEKU_SCRUB_GROTTO_RIGHT", "variables": []}
+{"id": "LOCATION::RC_GC_DEKU_SCRUB_GROTTO_CENTER", "plain_text": "Gc Deku Scrub Grotto Center", "category": "LOCATION_NAME", "subcategory": "RC_GC_DEKU_SCRUB_GROTTO_CENTER", "variables": []}
+{"id": "LOCATION::RC_GC_MEDIGORON", "plain_text": "Gc Medigoron", "category": "LOCATION_NAME", "subcategory": "RC_GC_MEDIGORON", "variables": []}
+{"id": "LOCATION::RC_DMC_UPPER_GROTTO_CHEST", "plain_text": "Dmc Upper Grotto Chest", "category": "LOCATION_NAME", "subcategory": "RC_DMC_UPPER_GROTTO_CHEST", "variables": []}
+{"id": "LOCATION::RC_DMC_WALL_FREESTANDING_POH", "plain_text": "Dmc Wall Freestanding Poh", "category": "LOCATION_NAME", "subcategory": "RC_DMC_WALL_FREESTANDING_POH", "variables": []}
+{"id": "LOCATION::RC_DMC_VOLCANO_FREESTANDING_POH", "plain_text": "Dmc Volcano Freestanding Poh", "category": "LOCATION_NAME", "subcategory": "RC_DMC_VOLCANO_FREESTANDING_POH", "variables": []}
+{"id": "LOCATION::RC_DMC_DEKU_SCRUB", "plain_text": "Dmc Deku Scrub", "category": "LOCATION_NAME", "subcategory": "RC_DMC_DEKU_SCRUB", "variables": []}
+{"id": "LOCATION::RC_DMC_DEKU_SCRUB_GROTTO_LEFT", "plain_text": "Dmc Deku Scrub Grotto Left", "category": "LOCATION_NAME", "subcategory": "RC_DMC_DEKU_SCRUB_GROTTO_LEFT", "variables": []}
+{"id": "LOCATION::RC_DMC_DEKU_SCRUB_GROTTO_RIGHT", "plain_text": "Dmc Deku Scrub Grotto Right", "category": "LOCATION_NAME", "subcategory": "RC_DMC_DEKU_SCRUB_GROTTO_RIGHT", "variables": []}
+{"id": "LOCATION::RC_DMC_DEKU_SCRUB_GROTTO_CENTER", "plain_text": "Dmc Deku Scrub Grotto Center", "category": "LOCATION_NAME", "subcategory": "RC_DMC_DEKU_SCRUB_GROTTO_CENTER", "variables": []}
+{"id": "LOCATION::RC_ZR_OPEN_GROTTO_CHEST", "plain_text": "Zr Open Grotto Chest", "category": "LOCATION_NAME", "subcategory": "RC_ZR_OPEN_GROTTO_CHEST", "variables": []}
+{"id": "LOCATION::RC_ZR_MAGIC_BEAN_SALESMAN", "plain_text": "Zr Magic Bean Salesman", "category": "LOCATION_NAME", "subcategory": "RC_ZR_MAGIC_BEAN_SALESMAN", "variables": []}
+{"id": "LOCATION::RC_ZR_FROGS_ZELDAS_LULLABY", "plain_text": "Zr Frogs Zeldas Lullaby", "category": "LOCATION_NAME", "subcategory": "RC_ZR_FROGS_ZELDAS_LULLABY", "variables": []}
+{"id": "LOCATION::RC_ZR_FROGS_EPONAS_SONG", "plain_text": "Zr Frogs Eponas Song", "category": "LOCATION_NAME", "subcategory": "RC_ZR_FROGS_EPONAS_SONG", "variables": []}
+{"id": "LOCATION::RC_ZR_FROGS_SARIAS_SONG", "plain_text": "Zr Frogs Sarias Song", "category": "LOCATION_NAME", "subcategory": "RC_ZR_FROGS_SARIAS_SONG", "variables": []}
+{"id": "LOCATION::RC_ZR_FROGS_SUNS_SONG", "plain_text": "Zr Frogs Suns Song", "category": "LOCATION_NAME", "subcategory": "RC_ZR_FROGS_SUNS_SONG", "variables": []}
+{"id": "LOCATION::RC_ZR_FROGS_SONG_OF_TIME", "plain_text": "Zr Frogs Song Of Time", "category": "LOCATION_NAME", "subcategory": "RC_ZR_FROGS_SONG_OF_TIME", "variables": []}
+{"id": "LOCATION::RC_ZR_FROGS_IN_THE_RAIN", "plain_text": "Zr Frogs In The Rain", "category": "LOCATION_NAME", "subcategory": "RC_ZR_FROGS_IN_THE_RAIN", "variables": []}
+{"id": "LOCATION::RC_ZR_FROGS_OCARINA_GAME", "plain_text": "Zr Frogs Ocarina Game", "category": "LOCATION_NAME", "subcategory": "RC_ZR_FROGS_OCARINA_GAME", "variables": []}
+{"id": "LOCATION::RC_ZR_NEAR_OPEN_GROTTO_FREESTANDING_POH", "plain_text": "Zr Near Open Grotto Freestanding Poh", "category": "LOCATION_NAME", "subcategory": "RC_ZR_NEAR_OPEN_GROTTO_FREESTANDING_POH", "variables": []}
+{"id": "LOCATION::RC_ZR_NEAR_DOMAIN_FREESTANDING_POH", "plain_text": "Zr Near Domain Freestanding Poh", "category": "LOCATION_NAME", "subcategory": "RC_ZR_NEAR_DOMAIN_FREESTANDING_POH", "variables": []}
+{"id": "LOCATION::RC_ZR_DEKU_SCRUB_GROTTO_REAR", "plain_text": "Zr Deku Scrub Grotto Rear", "category": "LOCATION_NAME", "subcategory": "RC_ZR_DEKU_SCRUB_GROTTO_REAR", "variables": []}
+{"id": "LOCATION::RC_ZR_DEKU_SCRUB_GROTTO_FRONT", "plain_text": "Zr Deku Scrub Grotto Front", "category": "LOCATION_NAME", "subcategory": "RC_ZR_DEKU_SCRUB_GROTTO_FRONT", "variables": []}
+{"id": "LOCATION::RC_ZD_CHEST", "plain_text": "Zd Chest", "category": "LOCATION_NAME", "subcategory": "RC_ZD_CHEST", "variables": []}
+{"id": "LOCATION::RC_ZD_DIVING_MINIGAME", "plain_text": "Zd Diving Minigame", "category": "LOCATION_NAME", "subcategory": "RC_ZD_DIVING_MINIGAME", "variables": []}
+{"id": "LOCATION::RC_ZD_KING_ZORA_THAWED", "plain_text": "Zd King Zora Thawed", "category": "LOCATION_NAME", "subcategory": "RC_ZD_KING_ZORA_THAWED", "variables": []}
+{"id": "LOCATION::RC_ZD_TRADE_PRESCRIPTION", "plain_text": "Zd Trade Prescription", "category": "LOCATION_NAME", "subcategory": "RC_ZD_TRADE_PRESCRIPTION", "variables": []}
+{"id": "LOCATION::RC_ZF_ICEBERG_FREESTANDING_POH", "plain_text": "Zf Iceberg Freestanding Poh", "category": "LOCATION_NAME", "subcategory": "RC_ZF_ICEBERG_FREESTANDING_POH", "variables": []}
+{"id": "LOCATION::RC_ZF_BOTTOM_FREESTANDING_POH", "plain_text": "Zf Bottom Freestanding Poh", "category": "LOCATION_NAME", "subcategory": "RC_ZF_BOTTOM_FREESTANDING_POH", "variables": []}
+{"id": "LOCATION::RC_LLR_TALONS_CHICKENS", "plain_text": "Llr Talons Chickens", "category": "LOCATION_NAME", "subcategory": "RC_LLR_TALONS_CHICKENS", "variables": []}
+{"id": "LOCATION::RC_LLR_FREESTANDING_POH", "plain_text": "Llr Freestanding Poh", "category": "LOCATION_NAME", "subcategory": "RC_LLR_FREESTANDING_POH", "variables": []}
+{"id": "LOCATION::RC_LLR_DEKU_SCRUB_GROTTO_LEFT", "plain_text": "Llr Deku Scrub Grotto Left", "category": "LOCATION_NAME", "subcategory": "RC_LLR_DEKU_SCRUB_GROTTO_LEFT", "variables": []}
+{"id": "LOCATION::RC_LLR_DEKU_SCRUB_GROTTO_RIGHT", "plain_text": "Llr Deku Scrub Grotto Right", "category": "LOCATION_NAME", "subcategory": "RC_LLR_DEKU_SCRUB_GROTTO_RIGHT", "variables": []}
+{"id": "LOCATION::RC_LLR_DEKU_SCRUB_GROTTO_CENTER", "plain_text": "Llr Deku Scrub Grotto Center", "category": "LOCATION_NAME", "subcategory": "RC_LLR_DEKU_SCRUB_GROTTO_CENTER", "variables": []}
+{"id": "LOCATION::RC_DEKU_TREE_MAP_CHEST", "plain_text": "Deku Tree Map Chest", "category": "LOCATION_NAME", "subcategory": "RC_DEKU_TREE_MAP_CHEST", "variables": []}
+{"id": "LOCATION::RC_DEKU_TREE_COMPASS_CHEST", "plain_text": "Deku Tree Compass Chest", "category": "LOCATION_NAME", "subcategory": "RC_DEKU_TREE_COMPASS_CHEST", "variables": []}
+{"id": "LOCATION::RC_DEKU_TREE_COMPASS_ROOM_SIDE_CHEST", "plain_text": "Deku Tree Compass Room Side Chest", "category": "LOCATION_NAME", "subcategory": "RC_DEKU_TREE_COMPASS_ROOM_SIDE_CHEST", "variables": []}
+{"id": "LOCATION::RC_DEKU_TREE_BASEMENT_CHEST", "plain_text": "Deku Tree Basement Chest", "category": "LOCATION_NAME", "subcategory": "RC_DEKU_TREE_BASEMENT_CHEST", "variables": []}
+{"id": "LOCATION::RC_DEKU_TREE_SLINGSHOT_CHEST", "plain_text": "Deku Tree Slingshot Chest", "category": "LOCATION_NAME", "subcategory": "RC_DEKU_TREE_SLINGSHOT_CHEST", "variables": []}
+{"id": "LOCATION::RC_DEKU_TREE_SLINGSHOT_ROOM_SIDE_CHEST", "plain_text": "Deku Tree Slingshot Room Side Chest", "category": "LOCATION_NAME", "subcategory": "RC_DEKU_TREE_SLINGSHOT_ROOM_SIDE_CHEST", "variables": []}
+{"id": "LOCATION::RC_DEKU_TREE_MQ_MAP_CHEST", "plain_text": "Deku Tree Mq Map Chest", "category": "LOCATION_NAME", "subcategory": "RC_DEKU_TREE_MQ_MAP_CHEST", "variables": []}
+{"id": "LOCATION::RC_DEKU_TREE_MQ_COMPASS_CHEST", "plain_text": "Deku Tree Mq Compass Chest", "category": "LOCATION_NAME", "subcategory": "RC_DEKU_TREE_MQ_COMPASS_CHEST", "variables": []}
+{"id": "LOCATION::RC_DEKU_TREE_MQ_SLINGSHOT_CHEST", "plain_text": "Deku Tree Mq Slingshot Chest", "category": "LOCATION_NAME", "subcategory": "RC_DEKU_TREE_MQ_SLINGSHOT_CHEST", "variables": []}
+{"id": "LOCATION::RC_DEKU_TREE_MQ_SLINGSHOT_ROOM_BACK_CHEST", "plain_text": "Deku Tree Mq Slingshot Room Back Chest", "category": "LOCATION_NAME", "subcategory": "RC_DEKU_TREE_MQ_SLINGSHOT_ROOM_BACK_CHEST", "variables": []}
+{"id": "LOCATION::RC_DEKU_TREE_MQ_BASEMENT_CHEST", "plain_text": "Deku Tree Mq Basement Chest", "category": "LOCATION_NAME", "subcategory": "RC_DEKU_TREE_MQ_BASEMENT_CHEST", "variables": []}
+{"id": "LOCATION::RC_DEKU_TREE_MQ_BEFORE_SPINNING_LOG_CHEST", "plain_text": "Deku Tree Mq Before Spinning Log Chest", "category": "LOCATION_NAME", "subcategory": "RC_DEKU_TREE_MQ_BEFORE_SPINNING_LOG_CHEST", "variables": []}
+{"id": "LOCATION::RC_DEKU_TREE_MQ_AFTER_SPINNING_LOG_CHEST", "plain_text": "Deku Tree Mq After Spinning Log Chest", "category": "LOCATION_NAME", "subcategory": "RC_DEKU_TREE_MQ_AFTER_SPINNING_LOG_CHEST", "variables": []}
+{"id": "LOCATION::RC_DEKU_TREE_MQ_DEKU_SCRUB", "plain_text": "Deku Tree Mq Deku Scrub", "category": "LOCATION_NAME", "subcategory": "RC_DEKU_TREE_MQ_DEKU_SCRUB", "variables": []}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_BOSS_ROOM_CHEST", "plain_text": "Dodongos Cavern Boss Room Chest", "category": "LOCATION_NAME", "subcategory": "RC_DODONGOS_CAVERN_BOSS_ROOM_CHEST", "variables": []}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_MAP_CHEST", "plain_text": "Dodongos Cavern Map Chest", "category": "LOCATION_NAME", "subcategory": "RC_DODONGOS_CAVERN_MAP_CHEST", "variables": []}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_COMPASS_CHEST", "plain_text": "Dodongos Cavern Compass Chest", "category": "LOCATION_NAME", "subcategory": "RC_DODONGOS_CAVERN_COMPASS_CHEST", "variables": []}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_BOMB_FLOWER_PLATFORM_CHEST", "plain_text": "Dodongos Cavern Bomb Flower Platform Chest", "category": "LOCATION_NAME", "subcategory": "RC_DODONGOS_CAVERN_BOMB_FLOWER_PLATFORM_CHEST", "variables": []}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_BOMB_BAG_CHEST", "plain_text": "Dodongos Cavern Bomb Bag Chest", "category": "LOCATION_NAME", "subcategory": "RC_DODONGOS_CAVERN_BOMB_BAG_CHEST", "variables": []}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_END_OF_BRIDGE_CHEST", "plain_text": "Dodongos Cavern End Of Bridge Chest", "category": "LOCATION_NAME", "subcategory": "RC_DODONGOS_CAVERN_END_OF_BRIDGE_CHEST", "variables": []}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_DEKU_SCRUB_NEAR_BOMB_BAG_LEFT", "plain_text": "Dodongos Cavern Deku Scrub Near Bomb Bag Left", "category": "LOCATION_NAME", "subcategory": "RC_DODONGOS_CAVERN_DEKU_SCRUB_NEAR_BOMB_BAG_LEFT", "variables": []}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_DEKU_SCRUB_SIDE_ROOM_NEAR_DODONGOS", "plain_text": "Dodongos Cavern Deku Scrub Side Room Near Dodongos", "category": "LOCATION_NAME", "subcategory": "RC_DODONGOS_CAVERN_DEKU_SCRUB_SIDE_ROOM_NEAR_DODONGOS", "variables": []}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_DEKU_SCRUB_NEAR_BOMB_BAG_RIGHT", "plain_text": "Dodongos Cavern Deku Scrub Near Bomb Bag Right", "category": "LOCATION_NAME", "subcategory": "RC_DODONGOS_CAVERN_DEKU_SCRUB_NEAR_BOMB_BAG_RIGHT", "variables": []}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_DEKU_SCRUB_LOBBY", "plain_text": "Dodongos Cavern Deku Scrub Lobby", "category": "LOCATION_NAME", "subcategory": "RC_DODONGOS_CAVERN_DEKU_SCRUB_LOBBY", "variables": []}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_MQ_MAP_CHEST", "plain_text": "Dodongos Cavern Mq Map Chest", "category": "LOCATION_NAME", "subcategory": "RC_DODONGOS_CAVERN_MQ_MAP_CHEST", "variables": []}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_MQ_BOMB_BAG_CHEST", "plain_text": "Dodongos Cavern Mq Bomb Bag Chest", "category": "LOCATION_NAME", "subcategory": "RC_DODONGOS_CAVERN_MQ_BOMB_BAG_CHEST", "variables": []}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_MQ_COMPASS_CHEST", "plain_text": "Dodongos Cavern Mq Compass Chest", "category": "LOCATION_NAME", "subcategory": "RC_DODONGOS_CAVERN_MQ_COMPASS_CHEST", "variables": []}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_MQ_LARVAE_ROOM_CHEST", "plain_text": "Dodongos Cavern Mq Larvae Room Chest", "category": "LOCATION_NAME", "subcategory": "RC_DODONGOS_CAVERN_MQ_LARVAE_ROOM_CHEST", "variables": []}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_MQ_TORCH_PUZZLE_ROOM_CHEST", "plain_text": "Dodongos Cavern Mq Torch Puzzle Room Chest", "category": "LOCATION_NAME", "subcategory": "RC_DODONGOS_CAVERN_MQ_TORCH_PUZZLE_ROOM_CHEST", "variables": []}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_MQ_UNDER_GRAVE_CHEST", "plain_text": "Dodongos Cavern Mq Under Grave Chest", "category": "LOCATION_NAME", "subcategory": "RC_DODONGOS_CAVERN_MQ_UNDER_GRAVE_CHEST", "variables": []}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_MQ_DEKU_SCRUB_LOBBY_REAR", "plain_text": "Dodongos Cavern Mq Deku Scrub Lobby Rear", "category": "LOCATION_NAME", "subcategory": "RC_DODONGOS_CAVERN_MQ_DEKU_SCRUB_LOBBY_REAR", "variables": []}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_MQ_DEKU_SCRUB_LOBBY_FRONT", "plain_text": "Dodongos Cavern Mq Deku Scrub Lobby Front", "category": "LOCATION_NAME", "subcategory": "RC_DODONGOS_CAVERN_MQ_DEKU_SCRUB_LOBBY_FRONT", "variables": []}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_MQ_DEKU_SCRUB_STAIRCASE", "plain_text": "Dodongos Cavern Mq Deku Scrub Staircase", "category": "LOCATION_NAME", "subcategory": "RC_DODONGOS_CAVERN_MQ_DEKU_SCRUB_STAIRCASE", "variables": []}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_MQ_DEKU_SCRUB_SIDE_ROOM_NEAR_LOWER_LIZALFOS", "plain_text": "Dodongos Cavern Mq Deku Scrub Side Room Near Lower Lizalfos", "category": "LOCATION_NAME", "subcategory": "RC_DODONGOS_CAVERN_MQ_DEKU_SCRUB_SIDE_ROOM_NEAR_LOWER_LIZALFOS", "variables": []}
+{"id": "LOCATION::RC_JABU_JABUS_BELLY_MAP_CHEST", "plain_text": "Jabu Jabus Belly Map Chest", "category": "LOCATION_NAME", "subcategory": "RC_JABU_JABUS_BELLY_MAP_CHEST", "variables": []}
+{"id": "LOCATION::RC_JABU_JABUS_BELLY_COMPASS_CHEST", "plain_text": "Jabu Jabus Belly Compass Chest", "category": "LOCATION_NAME", "subcategory": "RC_JABU_JABUS_BELLY_COMPASS_CHEST", "variables": []}
+{"id": "LOCATION::RC_JABU_JABUS_BELLY_BOOMERANG_CHEST", "plain_text": "Jabu Jabus Belly Boomerang Chest", "category": "LOCATION_NAME", "subcategory": "RC_JABU_JABUS_BELLY_BOOMERANG_CHEST", "variables": []}
+{"id": "LOCATION::RC_JABU_JABUS_BELLY_DEKU_SCRUB", "plain_text": "Jabu Jabus Belly Deku Scrub", "category": "LOCATION_NAME", "subcategory": "RC_JABU_JABUS_BELLY_DEKU_SCRUB", "variables": []}
+{"id": "LOCATION::RC_JABU_JABUS_BELLY_MQ_FIRST_ROOM_SIDE_CHEST", "plain_text": "Jabu Jabus Belly Mq First Room Side Chest", "category": "LOCATION_NAME", "subcategory": "RC_JABU_JABUS_BELLY_MQ_FIRST_ROOM_SIDE_CHEST", "variables": []}
+{"id": "LOCATION::RC_JABU_JABUS_BELLY_MQ_MAP_CHEST", "plain_text": "Jabu Jabus Belly Mq Map Chest", "category": "LOCATION_NAME", "subcategory": "RC_JABU_JABUS_BELLY_MQ_MAP_CHEST", "variables": []}
+{"id": "LOCATION::RC_JABU_JABUS_BELLY_MQ_SECOND_ROOM_LOWER_CHEST", "plain_text": "Jabu Jabus Belly Mq Second Room Lower Chest", "category": "LOCATION_NAME", "subcategory": "RC_JABU_JABUS_BELLY_MQ_SECOND_ROOM_LOWER_CHEST", "variables": []}
+{"id": "LOCATION::RC_JABU_JABUS_BELLY_MQ_COMPASS_CHEST", "plain_text": "Jabu Jabus Belly Mq Compass Chest", "category": "LOCATION_NAME", "subcategory": "RC_JABU_JABUS_BELLY_MQ_COMPASS_CHEST", "variables": []}
+{"id": "LOCATION::RC_JABU_JABUS_BELLY_MQ_SECOND_ROOM_UPPER_CHEST", "plain_text": "Jabu Jabus Belly Mq Second Room Upper Chest", "category": "LOCATION_NAME", "subcategory": "RC_JABU_JABUS_BELLY_MQ_SECOND_ROOM_UPPER_CHEST", "variables": []}
+{"id": "LOCATION::RC_JABU_JABUS_BELLY_MQ_BASEMENT_NEAR_SWITCHES_CHEST", "plain_text": "Jabu Jabus Belly Mq Basement Near Switches Chest", "category": "LOCATION_NAME", "subcategory": "RC_JABU_JABUS_BELLY_MQ_BASEMENT_NEAR_SWITCHES_CHEST", "variables": []}
+{"id": "LOCATION::RC_JABU_JABUS_BELLY_MQ_BASEMENT_NEAR_VINES_CHEST", "plain_text": "Jabu Jabus Belly Mq Basement Near Vines Chest", "category": "LOCATION_NAME", "subcategory": "RC_JABU_JABUS_BELLY_MQ_BASEMENT_NEAR_VINES_CHEST", "variables": []}
+{"id": "LOCATION::RC_JABU_JABUS_BELLY_MQ_NEAR_BOSS_CHEST", "plain_text": "Jabu Jabus Belly Mq Near Boss Chest", "category": "LOCATION_NAME", "subcategory": "RC_JABU_JABUS_BELLY_MQ_NEAR_BOSS_CHEST", "variables": []}
+{"id": "LOCATION::RC_JABU_JABUS_BELLY_MQ_FALLING_LIKE_LIKE_ROOM_CHEST", "plain_text": "Jabu Jabus Belly Mq Falling Like Like Room Chest", "category": "LOCATION_NAME", "subcategory": "RC_JABU_JABUS_BELLY_MQ_FALLING_LIKE_LIKE_ROOM_CHEST", "variables": []}
+{"id": "LOCATION::RC_JABU_JABUS_BELLY_MQ_BOOMERANG_ROOM_SMALL_CHEST", "plain_text": "Jabu Jabus Belly Mq Boomerang Room Small Chest", "category": "LOCATION_NAME", "subcategory": "RC_JABU_JABUS_BELLY_MQ_BOOMERANG_ROOM_SMALL_CHEST", "variables": []}
+{"id": "LOCATION::RC_JABU_JABUS_BELLY_MQ_BOOMERANG_CHEST", "plain_text": "Jabu Jabus Belly Mq Boomerang Chest", "category": "LOCATION_NAME", "subcategory": "RC_JABU_JABUS_BELLY_MQ_BOOMERANG_CHEST", "variables": []}
+{"id": "LOCATION::RC_FOREST_TEMPLE_FIRST_ROOM_CHEST", "plain_text": "Forest Temple First Room Chest", "category": "LOCATION_NAME", "subcategory": "RC_FOREST_TEMPLE_FIRST_ROOM_CHEST", "variables": []}
+{"id": "LOCATION::RC_FOREST_TEMPLE_FIRST_STALFOS_CHEST", "plain_text": "Forest Temple First Stalfos Chest", "category": "LOCATION_NAME", "subcategory": "RC_FOREST_TEMPLE_FIRST_STALFOS_CHEST", "variables": []}
+{"id": "LOCATION::RC_FOREST_TEMPLE_RAISED_ISLAND_COURTYARD_CHEST", "plain_text": "Forest Temple Raised Island Courtyard Chest", "category": "LOCATION_NAME", "subcategory": "RC_FOREST_TEMPLE_RAISED_ISLAND_COURTYARD_CHEST", "variables": []}
+{"id": "LOCATION::RC_FOREST_TEMPLE_MAP_CHEST", "plain_text": "Forest Temple Map Chest", "category": "LOCATION_NAME", "subcategory": "RC_FOREST_TEMPLE_MAP_CHEST", "variables": []}
+{"id": "LOCATION::RC_FOREST_TEMPLE_WELL_CHEST", "plain_text": "Forest Temple Well Chest", "category": "LOCATION_NAME", "subcategory": "RC_FOREST_TEMPLE_WELL_CHEST", "variables": []}
+{"id": "LOCATION::RC_FOREST_TEMPLE_FALLING_CEILING_ROOM_CHEST", "plain_text": "Forest Temple Falling Ceiling Room Chest", "category": "LOCATION_NAME", "subcategory": "RC_FOREST_TEMPLE_FALLING_CEILING_ROOM_CHEST", "variables": []}
+{"id": "LOCATION::RC_FOREST_TEMPLE_EYE_SWITCH_CHEST", "plain_text": "Forest Temple Eye Switch Chest", "category": "LOCATION_NAME", "subcategory": "RC_FOREST_TEMPLE_EYE_SWITCH_CHEST", "variables": []}
+{"id": "LOCATION::RC_FOREST_TEMPLE_BOSS_KEY_CHEST", "plain_text": "Forest Temple Boss Key Chest", "category": "LOCATION_NAME", "subcategory": "RC_FOREST_TEMPLE_BOSS_KEY_CHEST", "variables": []}
+{"id": "LOCATION::RC_FOREST_TEMPLE_FLOORMASTER_CHEST", "plain_text": "Forest Temple Floormaster Chest", "category": "LOCATION_NAME", "subcategory": "RC_FOREST_TEMPLE_FLOORMASTER_CHEST", "variables": []}
+{"id": "LOCATION::RC_FOREST_TEMPLE_BOW_CHEST", "plain_text": "Forest Temple Bow Chest", "category": "LOCATION_NAME", "subcategory": "RC_FOREST_TEMPLE_BOW_CHEST", "variables": []}
+{"id": "LOCATION::RC_FOREST_TEMPLE_RED_POE_CHEST", "plain_text": "Forest Temple Red Poe Chest", "category": "LOCATION_NAME", "subcategory": "RC_FOREST_TEMPLE_RED_POE_CHEST", "variables": []}
+{"id": "LOCATION::RC_FOREST_TEMPLE_BLUE_POE_CHEST", "plain_text": "Forest Temple Blue Poe Chest", "category": "LOCATION_NAME", "subcategory": "RC_FOREST_TEMPLE_BLUE_POE_CHEST", "variables": []}
+{"id": "LOCATION::RC_FOREST_TEMPLE_BASEMENT_CHEST", "plain_text": "Forest Temple Basement Chest", "category": "LOCATION_NAME", "subcategory": "RC_FOREST_TEMPLE_BASEMENT_CHEST", "variables": []}
+{"id": "LOCATION::RC_FOREST_TEMPLE_MQ_FIRST_ROOM_CHEST", "plain_text": "Forest Temple Mq First Room Chest", "category": "LOCATION_NAME", "subcategory": "RC_FOREST_TEMPLE_MQ_FIRST_ROOM_CHEST", "variables": []}
+{"id": "LOCATION::RC_FOREST_TEMPLE_MQ_WOLFOS_CHEST", "plain_text": "Forest Temple Mq Wolfos Chest", "category": "LOCATION_NAME", "subcategory": "RC_FOREST_TEMPLE_MQ_WOLFOS_CHEST", "variables": []}
+{"id": "LOCATION::RC_FOREST_TEMPLE_MQ_BOW_CHEST", "plain_text": "Forest Temple Mq Bow Chest", "category": "LOCATION_NAME", "subcategory": "RC_FOREST_TEMPLE_MQ_BOW_CHEST", "variables": []}
+{"id": "LOCATION::RC_FOREST_TEMPLE_MQ_RAISED_ISLAND_COURTYARD_LOWER_CHEST", "plain_text": "Forest Temple Mq Raised Island Courtyard Lower Chest", "category": "LOCATION_NAME", "subcategory": "RC_FOREST_TEMPLE_MQ_RAISED_ISLAND_COURTYARD_LOWER_CHEST", "variables": []}
+{"id": "LOCATION::RC_FOREST_TEMPLE_MQ_RAISED_ISLAND_COURTYARD_UPPER_CHEST", "plain_text": "Forest Temple Mq Raised Island Courtyard Upper Chest", "category": "LOCATION_NAME", "subcategory": "RC_FOREST_TEMPLE_MQ_RAISED_ISLAND_COURTYARD_UPPER_CHEST", "variables": []}
+{"id": "LOCATION::RC_FOREST_TEMPLE_MQ_WELL_CHEST", "plain_text": "Forest Temple Mq Well Chest", "category": "LOCATION_NAME", "subcategory": "RC_FOREST_TEMPLE_MQ_WELL_CHEST", "variables": []}
+{"id": "LOCATION::RC_FOREST_TEMPLE_MQ_MAP_CHEST", "plain_text": "Forest Temple Mq Map Chest", "category": "LOCATION_NAME", "subcategory": "RC_FOREST_TEMPLE_MQ_MAP_CHEST", "variables": []}
+{"id": "LOCATION::RC_FOREST_TEMPLE_MQ_COMPASS_CHEST", "plain_text": "Forest Temple Mq Compass Chest", "category": "LOCATION_NAME", "subcategory": "RC_FOREST_TEMPLE_MQ_COMPASS_CHEST", "variables": []}
+{"id": "LOCATION::RC_FOREST_TEMPLE_MQ_FALLING_CEILING_ROOM_CHEST", "plain_text": "Forest Temple Mq Falling Ceiling Room Chest", "category": "LOCATION_NAME", "subcategory": "RC_FOREST_TEMPLE_MQ_FALLING_CEILING_ROOM_CHEST", "variables": []}
+{"id": "LOCATION::RC_FOREST_TEMPLE_MQ_BASEMENT_CHEST", "plain_text": "Forest Temple Mq Basement Chest", "category": "LOCATION_NAME", "subcategory": "RC_FOREST_TEMPLE_MQ_BASEMENT_CHEST", "variables": []}
+{"id": "LOCATION::RC_FOREST_TEMPLE_MQ_REDEAD_CHEST", "plain_text": "Forest Temple Mq Redead Chest", "category": "LOCATION_NAME", "subcategory": "RC_FOREST_TEMPLE_MQ_REDEAD_CHEST", "variables": []}
+{"id": "LOCATION::RC_FOREST_TEMPLE_MQ_BOSS_KEY_CHEST", "plain_text": "Forest Temple Mq Boss Key Chest", "category": "LOCATION_NAME", "subcategory": "RC_FOREST_TEMPLE_MQ_BOSS_KEY_CHEST", "variables": []}
+{"id": "LOCATION::RC_FIRE_TEMPLE_NEAR_BOSS_CHEST", "plain_text": "Fire Temple Near Boss Chest", "category": "LOCATION_NAME", "subcategory": "RC_FIRE_TEMPLE_NEAR_BOSS_CHEST", "variables": []}
+{"id": "LOCATION::RC_FIRE_TEMPLE_FLARE_DANCER_CHEST", "plain_text": "Fire Temple Flare Dancer Chest", "category": "LOCATION_NAME", "subcategory": "RC_FIRE_TEMPLE_FLARE_DANCER_CHEST", "variables": []}
+{"id": "LOCATION::RC_FIRE_TEMPLE_BOSS_KEY_CHEST", "plain_text": "Fire Temple Boss Key Chest", "category": "LOCATION_NAME", "subcategory": "RC_FIRE_TEMPLE_BOSS_KEY_CHEST", "variables": []}
+{"id": "LOCATION::RC_FIRE_TEMPLE_BIG_LAVA_ROOM_BLOCKED_DOOR_CHEST", "plain_text": "Fire Temple Big Lava Room Blocked Door Chest", "category": "LOCATION_NAME", "subcategory": "RC_FIRE_TEMPLE_BIG_LAVA_ROOM_BLOCKED_DOOR_CHEST", "variables": []}
+{"id": "LOCATION::RC_FIRE_TEMPLE_BIG_LAVA_ROOM_LOWER_OPEN_DOOR_CHEST", "plain_text": "Fire Temple Big Lava Room Lower Open Door Chest", "category": "LOCATION_NAME", "subcategory": "RC_FIRE_TEMPLE_BIG_LAVA_ROOM_LOWER_OPEN_DOOR_CHEST", "variables": []}
+{"id": "LOCATION::RC_FIRE_TEMPLE_BOULDER_MAZE_LOWER_CHEST", "plain_text": "Fire Temple Boulder Maze Lower Chest", "category": "LOCATION_NAME", "subcategory": "RC_FIRE_TEMPLE_BOULDER_MAZE_LOWER_CHEST", "variables": []}
+{"id": "LOCATION::RC_FIRE_TEMPLE_BOULDER_MAZE_UPPER_CHEST", "plain_text": "Fire Temple Boulder Maze Upper Chest", "category": "LOCATION_NAME", "subcategory": "RC_FIRE_TEMPLE_BOULDER_MAZE_UPPER_CHEST", "variables": []}
+{"id": "LOCATION::RC_FIRE_TEMPLE_BOULDER_MAZE_SIDE_ROOM_CHEST", "plain_text": "Fire Temple Boulder Maze Side Room Chest", "category": "LOCATION_NAME", "subcategory": "RC_FIRE_TEMPLE_BOULDER_MAZE_SIDE_ROOM_CHEST", "variables": []}

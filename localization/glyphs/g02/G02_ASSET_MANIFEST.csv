@@ -1,0 +1,2 @@
+asset,format,dimensions,path,usage,status,notes
+LTBtn.ppm,P3 PPM,16x16,soh/assets/custom/textures/buttons/LTBtn.ppm,Dynamic Xbox Player 1 Z glyph,BUILD_INCLUDED,Original monochrome LT pilot; OTR generation log listed textures/buttons/LTBtn.ppm; runtime visual decode not verified

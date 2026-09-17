@@ -1,0 +1,48 @@
+n64_button,n64_label_xbox_english,xbox_button,xbox_label_es_419,context,notes
+A,A,Botón A,A,standard action,presiona A
+B,B,Botón B,B,secondary action,presiona B
+C-Left,C Izquierda,C Izquierda,C Izquierda,contextual,C-Left
+C-Right,C Derecha,C Derecha,C Derecha,contextual,C-Right
+C-Up,C Arriba,C Arriba,C Arriba,contextual,C-Up
+C-Down,C Abajo,C Abajo,C Abajo,contextual,C-Down
+L,L,Botón L,Botón L,left shoulder,Botón L
+R,R,Botón R,Botón R,right shoulder,Botón R
+Z,Z,Botón Z,Botón Z,trigger/back,Botón Z
+Start,Start,Botón Start,Botón Start,menu/pause,Start
+Analog Stick,Palanca Analógica,Palanca Izquierda,Palanca Izquierda,movement,Palanca Analógica
+Control Stick,Palanca de Control,Palanca Izquierda,Palanca Izquierda,alternative name,Palanca de Control
+D-Pad Up,Arriba,Cruz Digital Arriba,Flecha Arriba,navigation,Flecha Arriba
+D-Pad Down,Abajo,Cruz Digital Abajo,Flecha Abajo,navigation,Flecha Abajo
+D-Pad Left,Izquierda,Cruz Digital Izquierda,Flecha Izquierda,navigation,Flecha Izquierda
+D-Pad Right,Derecha,Cruz Digital Derecha,Flecha Derecha,navigation,Flecha Derecha
+,Presiona el botón,,Presiona el botón,text template,Presiona el botón
+,Presiona,,Presiona,text template,Presiona
+,Usa,,Usa,text template,Usa
+,Mantén presionado,,Mantén presionado,text template,Mantén presionado
+,Mantén,,Mantén,text template,Mantén
+,Mueve,,Mueve,text template,Mueve
+,Direction,,Dirección,text template,Dirección
+,up,,arriba,text template,arriba
+,down,,abajo,text template,abajo
+,left,,izquierda,text template,izquierda
+,right,,derecha,text template,derecha
+,para,,para,text template,para
+,para abrir,,para abrir,text template,para abrir
+,para atacar,,para atacar,text template,para atacar
+,para defender,,para defender,text template,para defender
+,para Saltar,,para Saltar,text template,para Saltar
+,para correr,,para correr,text template,para correr
+,para nadar,,para nadar,text template,para nadar
+,para escalar,,para escalar,text template,para escalar
+,para hablar,,para hablar,text template,para hablar
+,para leer,,para leer,text template,para leer
+,para abrir la puerta,,para abrir la puerta,text template,para abrir la puerta
+,para tomar,,para tomar,text template,para tomar
+,para soltar,,para soltar,text template,para soltar
+,para equipar,,para equipar,text template,para equipar
+,para usar,,para usar,text template,para usar
+,para检查,,para revisar,text template,para revisar
+,para places,,para colocar,text template,para colocar
+,para lugares,,para lugares,text template,para lugares
+,para places,,para lugares,text template,para lugares
+,para places,,para lugares,text template,para lugares

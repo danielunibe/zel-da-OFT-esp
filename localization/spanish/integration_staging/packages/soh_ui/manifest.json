@@ -1,0 +1,14 @@
+{
+  "domain": "SOH_UI",
+  "locale": "es-419",
+  "entry_count": 1673,
+  "unique_key_count": 1621,
+  "source_hash": "703978269f23553a129af4766d2b07b100ccb3c5fb1e2f76c5b5ebaee274a49b",
+  "generated_hash": "2bfb8c4a795a108e327951863227763532008c787695a184b3c514a21db54fd6",
+  "generator_version": "1.0.0-L03A",
+  "character_set_hash": "8b76dc681d6239737d40bc19546e9e7102b1f523ed3163caa115d27991efdd99",
+  "font_map_version": "ES419-V1-11SLOTS",
+  "font_map_hash": "47053165419c009d3e09ab812ce8d0f7db3af400f675e2ce0a479215ce821cc0",
+  "timestamp": "2026-09-16T06:44:10.792923+00:00",
+  "validation_status": "CERTIFIED_VALID"
+}

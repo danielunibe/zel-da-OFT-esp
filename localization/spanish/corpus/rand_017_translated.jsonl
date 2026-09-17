@@ -1,0 +1,200 @@
+{"id": "LOCATION::RC_FIRE_TEMPLE_BOULDER_MAZE_SHORTCUT_CHEST", "plain_text_es_419": "Templo del Fuego Cofre del Atajo del Laberinto de Rocas", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FIRE_TEMPLE_SCARECROW_CHEST", "plain_text_es_419": "Templo del Fuego Cofre del Espantapájaros", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FIRE_TEMPLE_MAP_CHEST", "plain_text_es_419": "Templo del Fuego Mapa Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FIRE_TEMPLE_COMPASS_CHEST", "plain_text_es_419": "Templo del Fuego Brújula Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FIRE_TEMPLE_HIGHEST_GORON_CHEST", "plain_text_es_419": "Templo del Fuego Cofre del Goron Más Alto", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FIRE_TEMPLE_MEGATON_HAMMER_CHEST", "plain_text_es_419": "Templo del Fuego Cofre del Martillo Megatón", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FIRE_TEMPLE_MQ_NEAR_BOSS_CHEST", "plain_text_es_419": "Templo del Fuego Mq Cofre Cerca del Jefe", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FIRE_TEMPLE_MQ_MEGATON_HAMMER_CHEST", "plain_text_es_419": "Templo del Fuego Mq Cofre del Martillo Megatón", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FIRE_TEMPLE_MQ_COMPASS_CHEST", "plain_text_es_419": "Templo del Fuego Mq Brújula Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FIRE_TEMPLE_MQ_LIZALFOS_MAZE_LOWER_CHEST", "plain_text_es_419": "Templo del Fuego Mq Cofre Inferior del Laberinto de Lizalfos", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FIRE_TEMPLE_MQ_LIZALFOS_MAZE_UPPER_CHEST", "plain_text_es_419": "Templo del Fuego Mq Cofre Superior del Laberinto de Lizalfos", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FIRE_TEMPLE_MQ_CHEST_ON_FIRE", "plain_text_es_419": "Templo del Fuego Mq Cofre en Llamas", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FIRE_TEMPLE_MQ_MAP_ROOM_SIDE_CHEST", "plain_text_es_419": "Templo del Fuego Mq Cofre Lateral de la Sala del Mapa", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FIRE_TEMPLE_MQ_MAP_CHEST", "plain_text_es_419": "Templo del Fuego Mq Mapa Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FIRE_TEMPLE_MQ_BOSS_KEY_CHEST", "plain_text_es_419": "Templo del Fuego Mq Cofre de la Llave Jefe", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FIRE_TEMPLE_MQ_BIG_LAVA_ROOM_BLOCKED_DOOR_CHEST", "plain_text_es_419": "Templo del Fuego Mq Grande Lava Sala Bloqueada Puerta Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FIRE_TEMPLE_MQ_LIZALFOS_MAZE_SIDE_ROOM_CHEST", "plain_text_es_419": "Templo del Fuego Mq Cofre de la Sala Lateral del Laberinto de Lizalfos", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FIRE_TEMPLE_MQ_FREESTANDING_KEY", "plain_text_es_419": "Templo del Fuego Mq Llave Independiente", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_WATER_TEMPLE_MAP_CHEST", "plain_text_es_419": "Templo del Agua Mapa Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_WATER_TEMPLE_COMPASS_CHEST", "plain_text_es_419": "Templo del Agua Brújula Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_WATER_TEMPLE_TORCHES_CHEST", "plain_text_es_419": "Templo del Agua Cofre de las Antorchas", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_WATER_TEMPLE_DRAGON_CHEST", "plain_text_es_419": "Templo del Agua Cofre del Dragón", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_WATER_TEMPLE_CENTRAL_BOW_TARGET_CHEST", "plain_text_es_419": "Templo del Agua Cofre del Blanco Central de Arco", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_WATER_TEMPLE_CENTRAL_PILLAR_CHEST", "plain_text_es_419": "Templo del Agua Cofre del Pilar Central", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_WATER_TEMPLE_CRACKED_WALL_CHEST", "plain_text_es_419": "Templo del Agua Cofre del Muro Agrietado", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_WATER_TEMPLE_BOSS_KEY_CHEST", "plain_text_es_419": "Templo del Agua Cofre de la Llave Jefe", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_WATER_TEMPLE_LONGSHOT_CHEST", "plain_text_es_419": "Templo del Agua Cofre del Anzuelo Largo", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_WATER_TEMPLE_RIVER_CHEST", "plain_text_es_419": "Templo del Agua Cofre del Río", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_WATER_TEMPLE_MQ_CENTRAL_PILLAR_CHEST", "plain_text_es_419": "Templo del Agua Mq Cofre del Pilar Central", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_WATER_TEMPLE_MQ_BOSS_KEY_CHEST", "plain_text_es_419": "Templo del Agua Mq Cofre de la Llave Jefe", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_WATER_TEMPLE_MQ_LONGSHOT_CHEST", "plain_text_es_419": "Templo del Agua Mq Cofre del Anzuelo Largo", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_WATER_TEMPLE_MQ_COMPASS_CHEST", "plain_text_es_419": "Templo del Agua Mq Brújula Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_WATER_TEMPLE_MQ_MAP_CHEST", "plain_text_es_419": "Templo del Agua Mq Mapa Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_WATER_TEMPLE_MQ_FREESTANDING_KEY", "plain_text_es_419": "Templo del Agua Mq Llave Independiente", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_SILVER_GAUNTLETS_CHEST", "plain_text_es_419": "Templo del Espíritu Cofre de los Guantes de Plata", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_MIRROR_SHIELD_CHEST", "plain_text_es_419": "Templo del Espíritu Cofre del Escudo Espejo", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_CHILD_BRIDGE_CHEST", "plain_text_es_419": "Templo del Espíritu Cofre del Puente del Niño", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_CHILD_EARLY_TORCHES_CHEST", "plain_text_es_419": "Templo del Espíritu Cofre de las Antorchas Tempranas del Niño", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_COMPASS_CHEST", "plain_text_es_419": "Templo del Espíritu Brújula Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_EARLY_ADULT_RIGHT_CHEST", "plain_text_es_419": "Templo del Espíritu Cofre Derecha Temprano de Adulto", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_FIRST_MIRROR_LEFT_CHEST", "plain_text_es_419": "Templo del Espíritu Cofre Izquierda del Primer Espejo", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_FIRST_MIRROR_RIGHT_CHEST", "plain_text_es_419": "Templo del Espíritu Cofre Derecha del Primer Espejo", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_MAP_CHEST", "plain_text_es_419": "Templo del Espíritu Mapa Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_CHILD_CLIMB_NORTH_CHEST", "plain_text_es_419": "Templo del Espíritu Cofre de Escalada Norte del Niño", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_CHILD_CLIMB_EAST_CHEST", "plain_text_es_419": "Templo del Espíritu Cofre de Escalada Este del Niño", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_SUN_BLOCK_ROOM_CHEST", "plain_text_es_419": "Templo del Espíritu Cofre de la Sala del Bloque de Sol", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_STATUE_ROOM_HAND_CHEST", "plain_text_es_419": "Templo del Espíritu Cofre de la Mano de la Sala de la Estatua", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_STATUE_ROOM_NORTHEAST_CHEST", "plain_text_es_419": "Templo del Espíritu Cofre Noreste de la Sala de la Estatua", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_NEAR_FOUR_ARMOS_CHEST", "plain_text_es_419": "Templo del Espíritu Cerca de los Cuatro Armos Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_HALLWAY_RIGHT_INVISIBLE_CHEST", "plain_text_es_419": "Templo del Espíritu Cofre Invisible Derecha del Pasillo", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_HALLWAY_LEFT_INVISIBLE_CHEST", "plain_text_es_419": "Templo del Espíritu Cofre Invisible Izquierda del Pasillo", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_BOSS_KEY_CHEST", "plain_text_es_419": "Templo del Espíritu Cofre de la Llave Jefe", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_TOPMOST_CHEST", "plain_text_es_419": "Templo del Espíritu Cofre Más Alto", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_MQ_ENTRANCE_FRONT_LEFT_CHEST", "plain_text_es_419": "Templo del Espíritu Mq Entrance Frente Izquierda Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_MQ_ENTRANCE_BACK_RIGHT_CHEST", "plain_text_es_419": "Templo del Espíritu Mq Entrance Atrás Derecha Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_MQ_ENTRANCE_FRONT_RIGHT_CHEST", "plain_text_es_419": "Templo del Espíritu Mq Entrance Frente Derecha Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_MQ_ENTRANCE_BACK_LEFT_CHEST", "plain_text_es_419": "Templo del Espíritu Mq Entrance Atrás Izquierda Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_MQ_CHILD_HAMMER_SWITCH_CHEST", "plain_text_es_419": "Templo del Espíritu Mq Cofre del Interruptor del Martillo del Niño", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_MQ_MAP_CHEST", "plain_text_es_419": "Templo del Espíritu Mq Mapa Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_MQ_MAP_ROOM_ENEMY_CHEST", "plain_text_es_419": "Templo del Espíritu Mq Cofre del Enemigo de la Sala del Mapa", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_MQ_CHILD_CLIMB_NORTH_CHEST", "plain_text_es_419": "Templo del Espíritu Mq Cofre de Escalada Norte del Niño", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_MQ_CHILD_CLIMB_SOUTH_CHEST", "plain_text_es_419": "Templo del Espíritu Mq Cofre de Escalada Sur del Niño", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_MQ_COMPASS_CHEST", "plain_text_es_419": "Templo del Espíritu Mq Brújula Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_MQ_STATUE_ROOM_LULLABY_CHEST", "plain_text_es_419": "Templo del Espíritu Mq Cofre de la Nana de la Sala de la Estatua", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_MQ_STATUE_ROOM_INVISIBLE_CHEST", "plain_text_es_419": "Templo del Espíritu Mq Cofre Invisible de la Sala de la Estatua", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_MQ_SILVER_BLOCK_HALLWAY_CHEST", "plain_text_es_419": "Templo del Espíritu Mq Cofre del Pasillo del Bloque de Plata", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_MQ_SUN_BLOCK_ROOM_CHEST", "plain_text_es_419": "Templo del Espíritu Mq Cofre de la Sala del Bloque de Sol", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_MQ_SYMPHONY_ROOM_CHEST", "plain_text_es_419": "Templo del Espíritu Mq Cofre de la Sala de la Sinfonía", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_MQ_LEEVER_ROOM_CHEST", "plain_text_es_419": "Templo del Espíritu Mq Cofre de la Sala del Leever", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_MQ_BEAMOS_ROOM_CHEST", "plain_text_es_419": "Templo del Espíritu Mq Cofre de la Sala del Beamos", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_MQ_CHEST_SWITCH_CHEST", "plain_text_es_419": "Templo del Espíritu Mq Cofre del Interruptor del Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_MQ_BOSS_KEY_CHEST", "plain_text_es_419": "Templo del Espíritu Mq Cofre de la Llave Jefe", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SPIRIT_TEMPLE_MQ_MIRROR_PUZZLE_INVISIBLE_CHEST", "plain_text_es_419": "Templo del Espíritu Mq Cofre Invisible del Rompecabezas del Espejo", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SHADOW_TEMPLE_MAP_CHEST", "plain_text_es_419": "Templo de la Sombra Mapa Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SHADOW_TEMPLE_HOVER_BOOTS_CHEST", "plain_text_es_419": "Templo de la Sombra Cofre de las Botas Voladoras", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SHADOW_TEMPLE_COMPASS_CHEST", "plain_text_es_419": "Templo de la Sombra Brújula Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SHADOW_TEMPLE_EARLY_SILVER_RUPEE_CHEST", "plain_text_es_419": "Templo de la Sombra Cofre de la Rupia de Plata Temprana", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SHADOW_TEMPLE_INVISIBLE_BLADES_VISIBLE_CHEST", "plain_text_es_419": "Templo de la Sombra Cofre Visible de las Hojas Invisibles", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SHADOW_TEMPLE_INVISIBLE_BLADES_INVISIBLE_CHEST", "plain_text_es_419": "Templo de la Sombra Cofre Invisible de las Hojas Invisibles", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SHADOW_TEMPLE_FALLING_SPIKES_LOWER_CHEST", "plain_text_es_419": "Templo de la Sombra Púas Caídas Inferior Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SHADOW_TEMPLE_FALLING_SPIKES_UPPER_CHEST", "plain_text_es_419": "Templo de la Sombra Púas Caídas Superior Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SHADOW_TEMPLE_FALLING_SPIKES_SWITCH_CHEST", "plain_text_es_419": "Templo de la Sombra Cofre del Interruptor de las Púas Caídas", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SHADOW_TEMPLE_INVISIBLE_SPIKES_CHEST", "plain_text_es_419": "Templo de la Sombra Cofre de las Púas Invisibles", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SHADOW_TEMPLE_WIND_HINT_CHEST", "plain_text_es_419": "Templo de la Sombra Cofre de la Pista de Viento", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SHADOW_TEMPLE_AFTER_WIND_ENEMY_CHEST", "plain_text_es_419": "Templo de la Sombra Cofre del Enemigo Después del Viento", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SHADOW_TEMPLE_AFTER_WIND_HIDDEN_CHEST", "plain_text_es_419": "Templo de la Sombra Cofre Oculto Después del Viento", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SHADOW_TEMPLE_SPIKE_WALLS_LEFT_CHEST", "plain_text_es_419": "Templo de la Sombra Cofre de los Muros de Púas Izquierda", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SHADOW_TEMPLE_BOSS_KEY_CHEST", "plain_text_es_419": "Templo de la Sombra Cofre de la Llave Jefe", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SHADOW_TEMPLE_INVISIBLE_FLOORMASTER_CHEST", "plain_text_es_419": "Templo de la Sombra Cofre Invisible del Maestro del Suelo", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SHADOW_TEMPLE_FREESTANDING_KEY", "plain_text_es_419": "Templo de la Sombra Llave Independiente", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SHADOW_TEMPLE_MQ_COMPASS_CHEST", "plain_text_es_419": "Templo de la Sombra Mq Brújula Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SHADOW_TEMPLE_MQ_HOVER_BOOTS_CHEST", "plain_text_es_419": "Templo de la Sombra Mq Cofre de las Botas Voladoras", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SHADOW_TEMPLE_MQ_EARLY_GIBDOS_CHEST", "plain_text_es_419": "Templo de la Sombra Mq Cofre de los Gibdos Tempranos", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SHADOW_TEMPLE_MQ_MAP_CHEST", "plain_text_es_419": "Templo de la Sombra Mq Mapa Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SHADOW_TEMPLE_MQ_BEAMOS_SILVER_RUPEES_CHEST", "plain_text_es_419": "Templo de la Sombra Mq Beamos Plateado Rupees Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SHADOW_TEMPLE_MQ_FALLING_SPIKES_SWITCH_CHEST", "plain_text_es_419": "Templo de la Sombra Mq Cofre del Interruptor de las Púas Caídas", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SHADOW_TEMPLE_MQ_FALLING_SPIKES_LOWER_CHEST", "plain_text_es_419": "Templo de la Sombra Mq Púas Caídas Inferior Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SHADOW_TEMPLE_MQ_FALLING_SPIKES_UPPER_CHEST", "plain_text_es_419": "Templo de la Sombra Mq Púas Caídas Superior Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SHADOW_TEMPLE_MQ_INVISIBLE_SPIKES_CHEST", "plain_text_es_419": "Templo de la Sombra Mq Cofre de las Púas Invisibles", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SHADOW_TEMPLE_MQ_BOSS_KEY_CHEST", "plain_text_es_419": "Templo de la Sombra Mq Cofre de la Llave Jefe", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SHADOW_TEMPLE_MQ_SPIKE_WALLS_LEFT_CHEST", "plain_text_es_419": "Templo de la Sombra Mq Cofre de los Muros de Púas Izquierda", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SHADOW_TEMPLE_MQ_STALFOS_ROOM_CHEST", "plain_text_es_419": "Templo de la Sombra Mq Stalfos Sala Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SHADOW_TEMPLE_MQ_INVISIBLE_BLADES_INVISIBLE_CHEST", "plain_text_es_419": "Templo de la Sombra Mq Cofre Invisible de las Hojas Invisibles", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SHADOW_TEMPLE_MQ_INVISIBLE_BLADES_VISIBLE_CHEST", "plain_text_es_419": "Templo de la Sombra Mq Cofre Visible de las Hojas Invisibles", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SHADOW_TEMPLE_MQ_BOMB_FLOWER_CHEST", "plain_text_es_419": "Templo de la Sombra Mq Cofre de la Flor de Bomba", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SHADOW_TEMPLE_MQ_WIND_HINT_CHEST", "plain_text_es_419": "Templo de la Sombra Mq Cofre de la Pista de Viento", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SHADOW_TEMPLE_MQ_AFTER_WIND_HIDDEN_CHEST", "plain_text_es_419": "Templo de la Sombra Mq Cofre Oculto Después del Viento", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SHADOW_TEMPLE_MQ_AFTER_WIND_ENEMY_CHEST", "plain_text_es_419": "Templo de la Sombra Mq Cofre del Enemigo Después del Viento", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SHADOW_TEMPLE_MQ_NEAR_SHIP_INVISIBLE_CHEST", "plain_text_es_419": "Templo de la Sombra Mq Cofre Invisible Cerca del Barco", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_SHADOW_TEMPLE_MQ_FREESTANDING_KEY", "plain_text_es_419": "Templo de la Sombra Mq Llave Independiente", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_BOTTOM_OF_THE_WELL_FRONT_LEFT_FAKE_WALL_CHEST", "plain_text_es_419": "Fondo del Pozo Cofre del Muro Falso Frente Izquierda", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_BOTTOM_OF_THE_WELL_FRONT_CENTER_BOMBABLE_CHEST", "plain_text_es_419": "Fondo del Pozo Cofre Destructible con Bombas Frente Centro", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_BOTTOM_OF_THE_WELL_RIGHT_BOTTOM_FAKE_WALL_CHEST", "plain_text_es_419": "Fondo del Pozo Cofre del Muro Falso Derecha Inferior", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_BOTTOM_OF_THE_WELL_COMPASS_CHEST", "plain_text_es_419": "Fondo del Pozo Brújula Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_BOTTOM_OF_THE_WELL_CENTER_SKULLTULA_CHEST", "plain_text_es_419": "Fondo del Pozo Centro Skulltula Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_BOTTOM_OF_THE_WELL_BACK_LEFT_BOMBABLE_CHEST", "plain_text_es_419": "Fondo del Pozo Cofre Destructible con Bombas Atrás Izquierda", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_BOTTOM_OF_THE_WELL_LENS_OF_TRUTH_CHEST", "plain_text_es_419": "Fondo del Pozo Cofre de la Lente de la Verdad", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_BOTTOM_OF_THE_WELL_INVISIBLE_CHEST", "plain_text_es_419": "Fondo del Pozo Cofre Invisible", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_BOTTOM_OF_THE_WELL_UNDERWATER_FRONT_CHEST", "plain_text_es_419": "Fondo del Pozo Cofre Subterráneo Frente", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_BOTTOM_OF_THE_WELL_UNDERWATER_LEFT_CHEST", "plain_text_es_419": "Fondo del Pozo Cofre Subterráneo Izquierda", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_BOTTOM_OF_THE_WELL_MAP_CHEST", "plain_text_es_419": "Fondo del Pozo Mapa Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_BOTTOM_OF_THE_WELL_FIRE_KEESE_CHEST", "plain_text_es_419": "Fondo del Pozo Cofre del Keese de Fuego", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_BOTTOM_OF_THE_WELL_LIKE_LIKE_CHEST", "plain_text_es_419": "Fondo del Pozo Cofre del Like Like", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_BOTTOM_OF_THE_WELL_FREESTANDING_KEY", "plain_text_es_419": "Fondo del Pozo Llave Independiente", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_BOTTOM_OF_THE_WELL_MQ_MAP_CHEST", "plain_text_es_419": "Fondo del Pozo Mq Mapa Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_BOTTOM_OF_THE_WELL_MQ_LENS_OF_TRUTH_CHEST", "plain_text_es_419": "Fondo del Pozo Mq Cofre de la Lente de la Verdad", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_BOTTOM_OF_THE_WELL_MQ_COMPASS_CHEST", "plain_text_es_419": "Fondo del Pozo Mq Brújula Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_BOTTOM_OF_THE_WELL_MQ_DEAD_HAND_FREESTANDING_KEY", "plain_text_es_419": "Fondo del Pozo Mq Mano Muerta Independiente Llave", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_BOTTOM_OF_THE_WELL_MQ_EAST_INNER_ROOM_FREESTANDING_KEY", "plain_text_es_419": "Fondo del Pozo Mq Este Interior Sala Independiente Llave", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_ICE_CAVERN_MAP_CHEST", "plain_text_es_419": "Caverna de Hielo Mapa Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_ICE_CAVERN_COMPASS_CHEST", "plain_text_es_419": "Caverna de Hielo Brújula Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_ICE_CAVERN_IRON_BOOTS_CHEST", "plain_text_es_419": "Caverna de Hielo Cofre de las Botas de Hierro", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_ICE_CAVERN_FREESTANDING_POH", "plain_text_es_419": "Caverna de Hielo Poe Independiente", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_ICE_CAVERN_MQ_IRON_BOOTS_CHEST", "plain_text_es_419": "Caverna de Hielo Mq Cofre de las Botas de Hierro", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_ICE_CAVERN_MQ_COMPASS_CHEST", "plain_text_es_419": "Caverna de Hielo Mq Brújula Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_ICE_CAVERN_MQ_MAP_CHEST", "plain_text_es_419": "Caverna de Hielo Mq Mapa Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_ICE_CAVERN_MQ_FREESTANDING_POH", "plain_text_es_419": "Caverna de Hielo Mq Poe Independiente", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GERUDO_TRAINING_GROUND_LOBBY_LEFT_CHEST", "plain_text_es_419": "Campo de Entrenamiento Gerudo Cofre Izquierda de la Sala Principal", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GERUDO_TRAINING_GROUND_LOBBY_RIGHT_CHEST", "plain_text_es_419": "Campo de Entrenamiento Gerudo Cofre Derecha de la Sala Principal", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GERUDO_TRAINING_GROUND_STALFOS_CHEST", "plain_text_es_419": "Campo de Entrenamiento Gerudo Stalfos Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GERUDO_TRAINING_GROUND_BEAMOS_CHEST", "plain_text_es_419": "Campo de Entrenamiento Gerudo Beamos Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GERUDO_TRAINING_GROUND_HIDDEN_CEILING_CHEST", "plain_text_es_419": "Campo de Entrenamiento Gerudo Cofre del Techo Oculto", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GERUDO_TRAINING_GROUND_MAZE_PATH_FIRST_CHEST", "plain_text_es_419": "Campo de Entrenamiento Gerudo Cofre Primer del Camino del Laberinto", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GERUDO_TRAINING_GROUND_MAZE_PATH_SECOND_CHEST", "plain_text_es_419": "Campo de Entrenamiento Gerudo Cofre Segundo del Camino del Laberinto", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GERUDO_TRAINING_GROUND_MAZE_PATH_THIRD_CHEST", "plain_text_es_419": "Campo de Entrenamiento Gerudo Cofre Tercer del Camino del Laberinto", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GERUDO_TRAINING_GROUND_MAZE_PATH_FINAL_CHEST", "plain_text_es_419": "Campo de Entrenamiento Gerudo Cofre Final del Camino del Laberinto", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GERUDO_TRAINING_GROUND_MAZE_RIGHT_CENTRAL_CHEST", "plain_text_es_419": "Campo de Entrenamiento Gerudo Cofre Derecha Central del Laberinto", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GERUDO_TRAINING_GROUND_MAZE_RIGHT_SIDE_CHEST", "plain_text_es_419": "Campo de Entrenamiento Gerudo Cofre Lado Derecho del Laberinto", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GERUDO_TRAINING_GROUND_UNDERWATER_SILVER_RUPEE_CHEST", "plain_text_es_419": "Campo de Entrenamiento Gerudo Subterráneo Plateado Rupia Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GERUDO_TRAINING_GROUND_HAMMER_ROOM_CLEAR_CHEST", "plain_text_es_419": "Campo de Entrenamiento Gerudo Cofre Limpio de la Sala del Martillo", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GERUDO_TRAINING_GROUND_HAMMER_ROOM_SWITCH_CHEST", "plain_text_es_419": "Campo de Entrenamiento Gerudo Cofre del Interruptor de la Sala del Martillo", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GERUDO_TRAINING_GROUND_EYE_STATUE_CHEST", "plain_text_es_419": "Campo de Entrenamiento Gerudo Cofre de la Estatua de Ojo", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GERUDO_TRAINING_GROUND_NEAR_SCARECROW_CHEST", "plain_text_es_419": "Campo de Entrenamiento Gerudo Cofre Cerca del Espantapájaros", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GERUDO_TRAINING_GROUND_BEFORE_HEAVY_BLOCK_CHEST", "plain_text_es_419": "Campo de Entrenamiento Gerudo Cofre Antes del Bloque Pesado", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GERUDO_TRAINING_GROUND_HEAVY_BLOCK_FIRST_CHEST", "plain_text_es_419": "Campo de Entrenamiento Gerudo Cofre Primer del Bloque Pesado", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GERUDO_TRAINING_GROUND_HEAVY_BLOCK_SECOND_CHEST", "plain_text_es_419": "Campo de Entrenamiento Gerudo Cofre Segundo del Bloque Pesado", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GERUDO_TRAINING_GROUND_HEAVY_BLOCK_THIRD_CHEST", "plain_text_es_419": "Campo de Entrenamiento Gerudo Cofre Tercer del Bloque Pesado", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GERUDO_TRAINING_GROUND_HEAVY_BLOCK_FOURTH_CHEST", "plain_text_es_419": "Campo de Entrenamiento Gerudo Cofre Cuarto del Bloque Pesado", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GERUDO_TRAINING_GROUND_FREESTANDING_KEY", "plain_text_es_419": "Campo de Entrenamiento Gerudo Llave Independiente", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GERUDO_TRAINING_GROUND_MQ_LOBBY_RIGHT_CHEST", "plain_text_es_419": "Campo de Entrenamiento Gerudo Mq Cofre Derecha de la Sala Principal", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GERUDO_TRAINING_GROUND_MQ_LOBBY_LEFT_CHEST", "plain_text_es_419": "Campo de Entrenamiento Gerudo Mq Cofre Izquierda de la Sala Principal", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GERUDO_TRAINING_GROUND_MQ_FIRST_IRON_KNUCKLE_CHEST", "plain_text_es_419": "Campo de Entrenamiento Gerudo Mq Primer Iron Knuckle Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GERUDO_TRAINING_GROUND_MQ_BEFORE_HEAVY_BLOCK_CHEST", "plain_text_es_419": "Campo de Entrenamiento Gerudo Mq Cofre Antes del Bloque Pesado", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GERUDO_TRAINING_GROUND_MQ_EYE_STATUE_CHEST", "plain_text_es_419": "Campo de Entrenamiento Gerudo Mq Cofre de la Estatua de Ojo", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GERUDO_TRAINING_GROUND_MQ_FLAME_CIRCLE_CHEST", "plain_text_es_419": "Campo de Entrenamiento Gerudo Mq Flame Circle Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GERUDO_TRAINING_GROUND_MQ_SECOND_IRON_KNUCKLE_CHEST", "plain_text_es_419": "Campo de Entrenamiento Gerudo Mq Segundo Iron Knuckle Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GERUDO_TRAINING_GROUND_MQ_DINOLFOS_CHEST", "plain_text_es_419": "Campo de Entrenamiento Gerudo Mq Dinolfos Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GERUDO_TRAINING_GROUND_MQ_ICE_ARROWS_CHEST", "plain_text_es_419": "Campo de Entrenamiento Gerudo Mq Cofre de las Flechas de Hielo", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GERUDO_TRAINING_GROUND_MQ_MAZE_RIGHT_CENTRAL_CHEST", "plain_text_es_419": "Campo de Entrenamiento Gerudo Mq Cofre Derecha Central del Laberinto", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GERUDO_TRAINING_GROUND_MQ_MAZE_PATH_FIRST_CHEST", "plain_text_es_419": "Campo de Entrenamiento Gerudo Mq Cofre Primer del Camino del Laberinto", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GERUDO_TRAINING_GROUND_MQ_MAZE_RIGHT_SIDE_CHEST", "plain_text_es_419": "Campo de Entrenamiento Gerudo Mq Cofre Lado Derecho del Laberinto", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GERUDO_TRAINING_GROUND_MQ_MAZE_PATH_THIRD_CHEST", "plain_text_es_419": "Campo de Entrenamiento Gerudo Mq Cofre Tercer del Camino del Laberinto", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GERUDO_TRAINING_GROUND_MQ_MAZE_PATH_SECOND_CHEST", "plain_text_es_419": "Campo de Entrenamiento Gerudo Mq Cofre Segundo del Camino del Laberinto", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GERUDO_TRAINING_GROUND_MQ_HIDDEN_CEILING_CHEST", "plain_text_es_419": "Campo de Entrenamiento Gerudo Mq Cofre del Techo Oculto", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GERUDO_TRAINING_GROUND_MQ_UNDERWATER_SILVER_RUPEE_CHEST", "plain_text_es_419": "Campo de Entrenamiento Gerudo Mq Subterráneo Plateado Rupia Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GERUDO_TRAINING_GROUND_MQ_HEAVY_BLOCK_CHEST", "plain_text_es_419": "Campo de Entrenamiento Gerudo Mq Bloque Pesado Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GANONS_TOWER_BOSS_KEY_CHEST", "plain_text_es_419": "Torre de Ganon Cofre de la Llave Jefe", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GANONS_CASTLE_FOREST_TRIAL_CHEST", "plain_text_es_419": "Castillo de Ganon Bosque Prueba Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GANONS_CASTLE_WATER_TRIAL_LEFT_CHEST", "plain_text_es_419": "Castillo de Ganon Agua Prueba Izquierda Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GANONS_CASTLE_WATER_TRIAL_RIGHT_CHEST", "plain_text_es_419": "Castillo de Ganon Agua Prueba Derecha Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GANONS_CASTLE_SHADOW_TRIAL_FRONT_CHEST", "plain_text_es_419": "Castillo de Ganon Sombra Prueba Frente Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GANONS_CASTLE_SHADOW_TRIAL_GOLDEN_GAUNTLETS_CHEST", "plain_text_es_419": "Castillo de Ganon Sombra Prueba Dorado Guantes Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GANONS_CASTLE_SPIRIT_TRIAL_CRYSTAL_SWITCH_CHEST", "plain_text_es_419": "Castillo de Ganon Espíritu Prueba Crystal Interruptor Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GANONS_CASTLE_SPIRIT_TRIAL_INVISIBLE_CHEST", "plain_text_es_419": "Castillo de Ganon Cofre Invisible de la Prueba del Espíritu", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GANONS_CASTLE_LIGHT_TRIAL_FIRST_LEFT_CHEST", "plain_text_es_419": "Castillo de Ganon Cofre Primer Izquierda de la Prueba de la Luz", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GANONS_CASTLE_LIGHT_TRIAL_SECOND_LEFT_CHEST", "plain_text_es_419": "Castillo de Ganon Cofre Segundo Izquierda de la Prueba de la Luz", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GANONS_CASTLE_LIGHT_TRIAL_THIRD_LEFT_CHEST", "plain_text_es_419": "Castillo de Ganon Cofre Tercer Izquierda de la Prueba de la Luz", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GANONS_CASTLE_LIGHT_TRIAL_FIRST_RIGHT_CHEST", "plain_text_es_419": "Castillo de Ganon Cofre Primer Derecha de la Prueba de la Luz", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GANONS_CASTLE_LIGHT_TRIAL_SECOND_RIGHT_CHEST", "plain_text_es_419": "Castillo de Ganon Cofre Segundo Derecha de la Prueba de la Luz", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GANONS_CASTLE_LIGHT_TRIAL_THIRD_RIGHT_CHEST", "plain_text_es_419": "Castillo de Ganon Cofre Tercer Derecha de la Prueba de la Luz", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GANONS_CASTLE_LIGHT_TRIAL_INVISIBLE_ENEMIES_CHEST", "plain_text_es_419": "Castillo de Ganon Cofre de los Enemigos Invisibles de la Prueba de la Luz", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GANONS_CASTLE_LIGHT_TRIAL_LULLABY_CHEST", "plain_text_es_419": "Castillo de Ganon Cofre de la Nana de la Prueba de la Luz", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GANONS_CASTLE_DEKU_SCRUB_CENTER_LEFT", "plain_text_es_419": "Castillo de Ganon Joven Deku Centro Izquierda", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GANONS_CASTLE_DEKU_SCRUB_CENTER_RIGHT", "plain_text_es_419": "Castillo de Ganon Joven Deku Centro Derecha", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GANONS_CASTLE_DEKU_SCRUB_RIGHT", "plain_text_es_419": "Castillo de Ganon Joven Deku Derecha", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GANONS_CASTLE_DEKU_SCRUB_LEFT", "plain_text_es_419": "Castillo de Ganon Joven Deku Izquierda", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GANONS_CASTLE_MQ_WATER_TRIAL_CHEST", "plain_text_es_419": "Castillo de Ganon Mq Cofre de la Prueba del Agua", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GANONS_CASTLE_MQ_FOREST_TRIAL_EYE_SWITCH_CHEST", "plain_text_es_419": "Castillo de Ganon Mq Cofre del Interruptor de Ojo de la Prueba del Bosque", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GANONS_CASTLE_MQ_FOREST_TRIAL_FROZEN_EYE_SWITCH_CHEST", "plain_text_es_419": "Castillo de Ganon Mq Cofre del Interruptor de Ojo Congelado de la Prueba del Bosque", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GANONS_CASTLE_MQ_LIGHT_TRIAL_LULLABY_CHEST", "plain_text_es_419": "Castillo de Ganon Mq Cofre de la Nana de la Prueba de la Luz", "translation_status": "TRANSLATED"}

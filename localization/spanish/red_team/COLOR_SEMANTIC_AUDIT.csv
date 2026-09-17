@@ -1,0 +1,2 @@
+id,system,english_color_tokens,spanish_color_tokens,semantic_shift_detected,status,notes
+Z_MESSAGE_OTR::L118,MAIN_GAME,[],"['%r', '%w', '%r', '%w']",YES,FLAGGED,Color highlight surrounds exact corresponding semantic entity

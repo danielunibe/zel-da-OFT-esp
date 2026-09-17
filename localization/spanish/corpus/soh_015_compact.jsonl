@@ -1,0 +1,200 @@
+{"id": "ACCESSIBILITY::misc_ger::input_button_a", "plain_text": "den A-Knopf", "category": "SYSTEM", "subcategory": "input_button_a"}
+{"id": "ACCESSIBILITY::misc_ger::input_button_b", "plain_text": "den B-Knopf", "category": "SYSTEM", "subcategory": "input_button_b"}
+{"id": "ACCESSIBILITY::misc_ger::input_button_c", "plain_text": "den C-Knopf", "category": "SYSTEM", "subcategory": "input_button_c"}
+{"id": "ACCESSIBILITY::misc_ger::input_button_l", "plain_text": "den L-Knopf", "category": "SYSTEM", "subcategory": "input_button_l"}
+{"id": "ACCESSIBILITY::misc_ger::input_button_r", "plain_text": "den R-Knopf", "category": "SYSTEM", "subcategory": "input_button_r"}
+{"id": "ACCESSIBILITY::misc_ger::input_button_z", "plain_text": "den Z-Knopf", "category": "SYSTEM", "subcategory": "input_button_z"}
+{"id": "ACCESSIBILITY::misc_ger::input_button_c_up", "plain_text": "C Oben", "category": "SYSTEM", "subcategory": "input_button_c_up"}
+{"id": "ACCESSIBILITY::misc_ger::input_button_c_down", "plain_text": "C Unten", "category": "SYSTEM", "subcategory": "input_button_c_down"}
+{"id": "ACCESSIBILITY::misc_ger::input_button_c_left", "plain_text": "C Links", "category": "SYSTEM", "subcategory": "input_button_c_left"}
+{"id": "ACCESSIBILITY::misc_ger::input_button_c_right", "plain_text": "C Rechts", "category": "SYSTEM", "subcategory": "input_button_c_right"}
+{"id": "ACCESSIBILITY::misc_ger::input_analog_stick", "plain_text": "den Analog-Stick", "category": "SYSTEM", "subcategory": "input_analog_stick"}
+{"id": "ACCESSIBILITY::misc_ger::input_d_pad", "plain_text": "das Steuerkreuz", "category": "SYSTEM", "subcategory": "input_d_pad"}
+{"id": "ACCESSIBILITY::misc_ger::input_d_pad_up", "plain_text": "Steuerkreuz Oben", "category": "SYSTEM", "subcategory": "input_d_pad_up"}
+{"id": "ACCESSIBILITY::misc_ger::input_d_pad_down", "plain_text": "Steuerkreuz Unten", "category": "SYSTEM", "subcategory": "input_d_pad_down"}
+{"id": "ACCESSIBILITY::misc_ger::input_d_pad_left", "plain_text": "Steuerkreuz Links", "category": "SYSTEM", "subcategory": "input_d_pad_left"}
+{"id": "ACCESSIBILITY::misc_ger::input_d_pad_right", "plain_text": "Steuerkreuz Rechts", "category": "SYSTEM", "subcategory": "input_d_pad_right"}
+{"id": "ACCESSIBILITY::misc_ger::yes", "plain_text": "Ja", "category": "SYSTEM", "subcategory": "yes"}
+{"id": "ACCESSIBILITY::misc_ger::no", "plain_text": "Nein", "category": "SYSTEM", "subcategory": "no"}
+{"id": "ACCESSIBILITY::scenes_eng::0", "plain_text": "Inside the Deku Tree", "category": "SYSTEM", "subcategory": "0"}
+{"id": "ACCESSIBILITY::scenes_eng::1", "plain_text": "Dodongo's Cavern", "category": "SYSTEM", "subcategory": "1"}
+{"id": "ACCESSIBILITY::scenes_eng::2", "plain_text": "Inside Jabu-Jabu's Belly", "category": "SYSTEM", "subcategory": "2"}
+{"id": "ACCESSIBILITY::scenes_eng::3", "plain_text": "Forest Temple", "category": "SYSTEM", "subcategory": "3"}
+{"id": "ACCESSIBILITY::scenes_eng::4", "plain_text": "Fire Temple", "category": "SYSTEM", "subcategory": "4"}
+{"id": "ACCESSIBILITY::scenes_eng::5", "plain_text": "Water Temple", "category": "SYSTEM", "subcategory": "5"}
+{"id": "ACCESSIBILITY::scenes_eng::6", "plain_text": "Spirit Temple", "category": "SYSTEM", "subcategory": "6"}
+{"id": "ACCESSIBILITY::scenes_eng::7", "plain_text": "Shadow Temple", "category": "SYSTEM", "subcategory": "7"}
+{"id": "ACCESSIBILITY::scenes_eng::8", "plain_text": "Bottom of The Well", "category": "SYSTEM", "subcategory": "8"}
+{"id": "ACCESSIBILITY::scenes_eng::9", "plain_text": "Ice Cavern", "category": "SYSTEM", "subcategory": "9"}
+{"id": "ACCESSIBILITY::scenes_eng::11", "plain_text": "Gerudo Training Ground", "category": "SYSTEM", "subcategory": "11"}
+{"id": "ACCESSIBILITY::scenes_eng::12", "plain_text": "Thieves' Hideout", "category": "SYSTEM", "subcategory": "12"}
+{"id": "ACCESSIBILITY::scenes_eng::13", "plain_text": "Ganon's Castle", "category": "SYSTEM", "subcategory": "13"}
+{"id": "ACCESSIBILITY::scenes_eng::16", "plain_text": "Treasure Box Shop", "category": "SYSTEM", "subcategory": "16"}
+{"id": "ACCESSIBILITY::scenes_eng::17", "plain_text": "Parasitic Armored Arachnid - Gohma", "category": "SYSTEM", "subcategory": "17"}
+{"id": "ACCESSIBILITY::scenes_eng::18", "plain_text": "Infernal Dinosaur - King Dodongo", "category": "SYSTEM", "subcategory": "18"}
+{"id": "ACCESSIBILITY::scenes_eng::19", "plain_text": "Bio-electric Anemone - Barinade", "category": "SYSTEM", "subcategory": "19"}
+{"id": "ACCESSIBILITY::scenes_eng::20", "plain_text": "Evil Spirit from Beyond - Phantom Ganon", "category": "SYSTEM", "subcategory": "20"}
+{"id": "ACCESSIBILITY::scenes_eng::21", "plain_text": "Subterranean Lava Dragon - Volvagia", "category": "SYSTEM", "subcategory": "21"}
+{"id": "ACCESSIBILITY::scenes_eng::22", "plain_text": "Giant Aquatic Amoeba - Morpha", "category": "SYSTEM", "subcategory": "22"}
+{"id": "ACCESSIBILITY::scenes_eng::23", "plain_text": "Sorceress Sisters - Twinrova", "category": "SYSTEM", "subcategory": "23"}
+{"id": "ACCESSIBILITY::scenes_eng::24", "plain_text": "Phantom Shadow Beast - Bongo Bongo", "category": "SYSTEM", "subcategory": "24"}
+{"id": "ACCESSIBILITY::scenes_eng::25", "plain_text": "Great King of Evil - Ganondorf", "category": "SYSTEM", "subcategory": "25"}
+{"id": "ACCESSIBILITY::scenes_eng::30", "plain_text": "Back Alley", "category": "SYSTEM", "subcategory": "30"}
+{"id": "ACCESSIBILITY::scenes_eng::31", "plain_text": "Back Alley", "category": "SYSTEM", "subcategory": "31"}
+{"id": "ACCESSIBILITY::scenes_eng::32", "plain_text": "Market", "category": "SYSTEM", "subcategory": "32"}
+{"id": "ACCESSIBILITY::scenes_eng::33", "plain_text": "Market", "category": "SYSTEM", "subcategory": "33"}
+{"id": "ACCESSIBILITY::scenes_eng::34", "plain_text": "Market", "category": "SYSTEM", "subcategory": "34"}
+{"id": "ACCESSIBILITY::scenes_eng::36", "plain_text": "SCENE_SHRINE_N", "category": "SYSTEM", "subcategory": "36"}
+{"id": "ACCESSIBILITY::scenes_eng::37", "plain_text": "SCENE_SHRINE_R", "category": "SYSTEM", "subcategory": "37"}
+{"id": "ACCESSIBILITY::scenes_eng::44", "plain_text": "Bazaar", "category": "SYSTEM", "subcategory": "44"}
+{"id": "ACCESSIBILITY::scenes_eng::45", "plain_text": "Kokiri Shop", "category": "SYSTEM", "subcategory": "45"}
+{"id": "ACCESSIBILITY::scenes_eng::46", "plain_text": "Goron Shop", "category": "SYSTEM", "subcategory": "46"}
+{"id": "ACCESSIBILITY::scenes_eng::47", "plain_text": "Zora Shop", "category": "SYSTEM", "subcategory": "47"}
+{"id": "ACCESSIBILITY::scenes_eng::49", "plain_text": "Potion Shop", "category": "SYSTEM", "subcategory": "49"}
+{"id": "ACCESSIBILITY::scenes_eng::51", "plain_text": "Happy Mask Shop", "category": "SYSTEM", "subcategory": "51"}
+{"id": "ACCESSIBILITY::scenes_eng::54", "plain_text": "Stable", "category": "SYSTEM", "subcategory": "54"}
+{"id": "ACCESSIBILITY::scenes_eng::56", "plain_text": "Lakeside Laboratory", "category": "SYSTEM", "subcategory": "56"}
+{"id": "ACCESSIBILITY::scenes_eng::58", "plain_text": "Gravekeepers Hut", "category": "SYSTEM", "subcategory": "58"}
+{"id": "ACCESSIBILITY::scenes_eng::59", "plain_text": "Great Fairy's Fountain", "category": "SYSTEM", "subcategory": "59"}
+{"id": "ACCESSIBILITY::scenes_eng::60", "plain_text": "Fairy's Fountain", "category": "SYSTEM", "subcategory": "60"}
+{"id": "ACCESSIBILITY::scenes_eng::61", "plain_text": "Great Fairy's Fountain", "category": "SYSTEM", "subcategory": "61"}
+{"id": "ACCESSIBILITY::scenes_eng::65", "plain_text": "Royal Family's Tomb", "category": "SYSTEM", "subcategory": "65"}
+{"id": "ACCESSIBILITY::scenes_eng::66", "plain_text": "Shooting Gallery", "category": "SYSTEM", "subcategory": "66"}
+{"id": "ACCESSIBILITY::scenes_eng::67", "plain_text": "Temple of Time", "category": "SYSTEM", "subcategory": "67"}
+{"id": "ACCESSIBILITY::scenes_eng::68", "plain_text": "Chamber of The Sages", "category": "SYSTEM", "subcategory": "68"}
+{"id": "ACCESSIBILITY::scenes_eng::69", "plain_text": "Castle Courtyard", "category": "SYSTEM", "subcategory": "69"}
+{"id": "ACCESSIBILITY::scenes_eng::70", "plain_text": "Castle Courtyard", "category": "SYSTEM", "subcategory": "70"}
+{"id": "ACCESSIBILITY::scenes_eng::72", "plain_text": "Unknown Place", "category": "SYSTEM", "subcategory": "72"}
+{"id": "ACCESSIBILITY::scenes_eng::73", "plain_text": "Fishing Pond", "category": "SYSTEM", "subcategory": "73"}
+{"id": "ACCESSIBILITY::scenes_eng::74", "plain_text": "Castle Courtyard", "category": "SYSTEM", "subcategory": "74"}
+{"id": "ACCESSIBILITY::scenes_eng::75", "plain_text": "Bombchu Bowling Alley", "category": "SYSTEM", "subcategory": "75"}
+{"id": "ACCESSIBILITY::scenes_eng::79", "plain_text": "Ganon", "category": "SYSTEM", "subcategory": "79"}
+{"id": "ACCESSIBILITY::scenes_eng::80", "plain_text": "House of Skulltula", "category": "SYSTEM", "subcategory": "80"}
+{"id": "ACCESSIBILITY::scenes_eng::81", "plain_text": "Hyrule Field", "category": "SYSTEM", "subcategory": "81"}
+{"id": "ACCESSIBILITY::scenes_eng::82", "plain_text": "Kakariko Village", "category": "SYSTEM", "subcategory": "82"}
+{"id": "ACCESSIBILITY::scenes_eng::83", "plain_text": "Graveyard", "category": "SYSTEM", "subcategory": "83"}
+{"id": "ACCESSIBILITY::scenes_eng::84", "plain_text": "Zora's River", "category": "SYSTEM", "subcategory": "84"}
+{"id": "ACCESSIBILITY::scenes_eng::85", "plain_text": "Kokiri Forest", "category": "SYSTEM", "subcategory": "85"}
+{"id": "ACCESSIBILITY::scenes_eng::86", "plain_text": "Sacred Forest Meadow", "category": "SYSTEM", "subcategory": "86"}
+{"id": "ACCESSIBILITY::scenes_eng::87", "plain_text": "Lake Hylia", "category": "SYSTEM", "subcategory": "87"}
+{"id": "ACCESSIBILITY::scenes_eng::88", "plain_text": "Zoras Domain", "category": "SYSTEM", "subcategory": "88"}
+{"id": "ACCESSIBILITY::scenes_eng::89", "plain_text": "Zoras Fountain", "category": "SYSTEM", "subcategory": "89"}
+{"id": "ACCESSIBILITY::scenes_eng::90", "plain_text": "Gerudo Valley", "category": "SYSTEM", "subcategory": "90"}
+{"id": "ACCESSIBILITY::scenes_eng::91", "plain_text": "Lost Woods", "category": "SYSTEM", "subcategory": "91"}
+{"id": "ACCESSIBILITY::scenes_eng::92", "plain_text": "Desert Colossus", "category": "SYSTEM", "subcategory": "92"}
+{"id": "ACCESSIBILITY::scenes_eng::93", "plain_text": "Gerudo's Fortress", "category": "SYSTEM", "subcategory": "93"}
+{"id": "ACCESSIBILITY::scenes_eng::94", "plain_text": "Haunted Wasteland", "category": "SYSTEM", "subcategory": "94"}
+{"id": "ACCESSIBILITY::scenes_eng::95", "plain_text": "Hyrule Castle", "category": "SYSTEM", "subcategory": "95"}
+{"id": "ACCESSIBILITY::scenes_eng::96", "plain_text": "Death Mountain Trail", "category": "SYSTEM", "subcategory": "96"}
+{"id": "ACCESSIBILITY::scenes_eng::97", "plain_text": "Death Mountain Crater", "category": "SYSTEM", "subcategory": "97"}
+{"id": "ACCESSIBILITY::scenes_eng::98", "plain_text": "Goron City", "category": "SYSTEM", "subcategory": "98"}
+{"id": "ACCESSIBILITY::scenes_eng::99", "plain_text": "Lon Lon Ranch", "category": "SYSTEM", "subcategory": "99"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::health", "plain_text": "Vie - $0 Coeurs", "category": "SYSTEM", "subcategory": "health"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::magic", "plain_text": "Magie - $0", "category": "SYSTEM", "subcategory": "magic"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::rupees", "plain_text": "Rubis - $0", "category": "SYSTEM", "subcategory": "rupees"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::keys", "plain_text": "Clés - $0", "category": "SYSTEM", "subcategory": "keys"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::floor", "plain_text": "Étage $0", "category": "SYSTEM", "subcategory": "floor"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::basement", "plain_text": "Sous-sol $0", "category": "SYSTEM", "subcategory": "basement"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::item_menu", "plain_text": "Inventaire", "category": "SYSTEM", "subcategory": "item_menu"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::map_menu", "plain_text": "Carte - $0", "category": "SYSTEM", "subcategory": "map_menu"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::quest_menu", "plain_text": "Statut de la quête", "category": "SYSTEM", "subcategory": "quest_menu"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::equip_menu", "plain_text": "Equipment", "category": "SYSTEM", "subcategory": "equip_menu"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::overworld", "plain_text": "Surmonde", "category": "SYSTEM", "subcategory": "overworld"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::equipped", "plain_text": "$0 - Équipé", "category": "SYSTEM", "subcategory": "equipped"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::save_prompt", "plain_text": "Voulez-vous sauvegarder ?", "category": "SYSTEM", "subcategory": "save_prompt"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::game_saved", "plain_text": "Jeu sauvegardé", "category": "SYSTEM", "subcategory": "game_saved"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::game_over", "plain_text": "Game Over", "category": "SYSTEM", "subcategory": "game_over"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::continue_game", "plain_text": "Continuer la partie ?", "category": "SYSTEM", "subcategory": "continue_game"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::assigned_to", "plain_text": "Assigné au $0", "category": "SYSTEM", "subcategory": "assigned_to"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::0", "plain_text": "Bâton Mojo - $0", "category": "SYSTEM", "subcategory": "0"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::1", "plain_text": "Noix Mojo - $0", "category": "SYSTEM", "subcategory": "1"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::2", "plain_text": "Bombes - $0", "category": "SYSTEM", "subcategory": "2"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::3", "plain_text": "Arc des Fées - $0", "category": "SYSTEM", "subcategory": "3"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::4", "plain_text": "Flèche de Feu", "category": "SYSTEM", "subcategory": "4"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::5", "plain_text": "Feu de Din", "category": "SYSTEM", "subcategory": "5"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::6", "plain_text": "Lance-Pierre des Fées - $0", "category": "SYSTEM", "subcategory": "6"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::7", "plain_text": "Ocarina des Fées", "category": "SYSTEM", "subcategory": "7"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::8", "plain_text": "Ocarina of Temps", "category": "SYSTEM", "subcategory": "8"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::9", "plain_text": "Missiles Teigneux - $0", "category": "SYSTEM", "subcategory": "9"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::10", "plain_text": "Grappin", "category": "SYSTEM", "subcategory": "10"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::11", "plain_text": "Super Grappin", "category": "SYSTEM", "subcategory": "11"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::12", "plain_text": "Flèche de Glace", "category": "SYSTEM", "subcategory": "12"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::13", "plain_text": "Vent de Farore", "category": "SYSTEM", "subcategory": "13"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::14", "plain_text": "Boomerang", "category": "SYSTEM", "subcategory": "14"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::15", "plain_text": "Monocle de Vérité", "category": "SYSTEM", "subcategory": "15"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::16", "plain_text": "Haricot Magique - $0", "category": "SYSTEM", "subcategory": "16"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::17", "plain_text": "Masse des Titans", "category": "SYSTEM", "subcategory": "17"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::18", "plain_text": "Flèche de Lumière", "category": "SYSTEM", "subcategory": "18"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::19", "plain_text": "Amour de Nayru", "category": "SYSTEM", "subcategory": "19"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::20", "plain_text": "Bouteille Vide", "category": "SYSTEM", "subcategory": "20"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::21", "plain_text": "Potion Rouge", "category": "SYSTEM", "subcategory": "21"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::22", "plain_text": "Potion Verte", "category": "SYSTEM", "subcategory": "22"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::23", "plain_text": "Potion Bleue", "category": "SYSTEM", "subcategory": "23"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::24", "plain_text": "Fée", "category": "SYSTEM", "subcategory": "24"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::25", "plain_text": "Poisson", "category": "SYSTEM", "subcategory": "25"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::26", "plain_text": "Lait de Lon Lon", "category": "SYSTEM", "subcategory": "26"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::27", "plain_text": "Lettre de Ruto", "category": "SYSTEM", "subcategory": "27"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::28", "plain_text": "Flammme Bleue", "category": "SYSTEM", "subcategory": "28"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::29", "plain_text": "Insectes", "category": "SYSTEM", "subcategory": "29"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::30", "plain_text": "Âme", "category": "SYSTEM", "subcategory": "30"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::31", "plain_text": "Lait de Lon Lon (moitié)", "category": "SYSTEM", "subcategory": "31"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::32", "plain_text": "Esprit", "category": "SYSTEM", "subcategory": "32"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::33", "plain_text": "Oeuf Curieux", "category": "SYSTEM", "subcategory": "33"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::34", "plain_text": "Poulet", "category": "SYSTEM", "subcategory": "34"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::35", "plain_text": "Lettre de Zelda", "category": "SYSTEM", "subcategory": "35"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::36", "plain_text": "Masque du Renard", "category": "SYSTEM", "subcategory": "36"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::37", "plain_text": "Masque de Mort", "category": "SYSTEM", "subcategory": "37"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::38", "plain_text": "Masque d'Effroi", "category": "SYSTEM", "subcategory": "38"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::39", "plain_text": "Masque du Lapin", "category": "SYSTEM", "subcategory": "39"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::40", "plain_text": "Masque de Goron", "category": "SYSTEM", "subcategory": "40"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::41", "plain_text": "Masque de Zora", "category": "SYSTEM", "subcategory": "41"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::42", "plain_text": "Masque de Gerudo", "category": "SYSTEM", "subcategory": "42"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::43", "plain_text": "Masque de Vérité", "category": "SYSTEM", "subcategory": "43"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::44", "plain_text": "VENDU", "category": "SYSTEM", "subcategory": "44"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::45", "plain_text": "Oeuf de Poche", "category": "SYSTEM", "subcategory": "45"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::46", "plain_text": "Cocotte de poche", "category": "SYSTEM", "subcategory": "46"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::47", "plain_text": "P'tit Poulet", "category": "SYSTEM", "subcategory": "47"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::48", "plain_text": "Champignon suspect", "category": "SYSTEM", "subcategory": "48"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::49", "plain_text": "Mixture suspecte", "category": "SYSTEM", "subcategory": "49"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::50", "plain_text": "Scie du chasseur", "category": "SYSTEM", "subcategory": "50"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::51", "plain_text": "Épée de Goron (brisée)", "category": "SYSTEM", "subcategory": "51"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::52", "plain_text": "Ordonnance", "category": "SYSTEM", "subcategory": "52"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::53", "plain_text": "Crapaud-qui-louche", "category": "SYSTEM", "subcategory": "53"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::54", "plain_text": "Gouttes", "category": "SYSTEM", "subcategory": "54"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::55", "plain_text": "Certificat", "category": "SYSTEM", "subcategory": "55"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::56", "plain_text": "Arc et Flèche de Feu", "category": "SYSTEM", "subcategory": "56"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::57", "plain_text": "Arc et Flèche de Glace", "category": "SYSTEM", "subcategory": "57"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::58", "plain_text": "Arc et Flèche de Lumière", "category": "SYSTEM", "subcategory": "58"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::59", "plain_text": "Épée Kokiri", "category": "SYSTEM", "subcategory": "59"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::60", "plain_text": "Épée de Légende", "category": "SYSTEM", "subcategory": "60"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::61", "plain_text": "Lame des Géants", "category": "SYSTEM", "subcategory": "61"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::62", "plain_text": "Bouclier Mojo", "category": "SYSTEM", "subcategory": "62"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::63", "plain_text": "Bouclier Hylien", "category": "SYSTEM", "subcategory": "63"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::64", "plain_text": "Bouclier Miroir", "category": "SYSTEM", "subcategory": "64"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::65", "plain_text": "Tunique Kokiri", "category": "SYSTEM", "subcategory": "65"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::66", "plain_text": "Tunique Goron", "category": "SYSTEM", "subcategory": "66"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::67", "plain_text": "Tunique Zora", "category": "SYSTEM", "subcategory": "67"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::68", "plain_text": "Bottes Kokiri", "category": "SYSTEM", "subcategory": "68"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::69", "plain_text": "Bottes de plomb", "category": "SYSTEM", "subcategory": "69"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::70", "plain_text": "Bottes des airs", "category": "SYSTEM", "subcategory": "70"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::71", "plain_text": "Sac de graines (Contient 30)", "category": "SYSTEM", "subcategory": "71"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::72", "plain_text": "Sac de graines (Contient 40)", "category": "SYSTEM", "subcategory": "72"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::73", "plain_text": "Sac de graines (Contient 50)", "category": "SYSTEM", "subcategory": "73"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::74", "plain_text": "Carquois (Contient 30)", "category": "SYSTEM", "subcategory": "74"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::75", "plain_text": "Carquois (Contient 40)", "category": "SYSTEM", "subcategory": "75"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::76", "plain_text": "Carquois (Contient 50)", "category": "SYSTEM", "subcategory": "76"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::77", "plain_text": "Sac de bombes (Contient 20)", "category": "SYSTEM", "subcategory": "77"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::78", "plain_text": "Sac de bombes (Contient 30)", "category": "SYSTEM", "subcategory": "78"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::79", "plain_text": "Sac de bombes (Contient 40)", "category": "SYSTEM", "subcategory": "79"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::80", "plain_text": "Bracelet Goron", "category": "SYSTEM", "subcategory": "80"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::81", "plain_text": "Gantelets d'argent", "category": "SYSTEM", "subcategory": "81"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::82", "plain_text": "Gentelets d'or", "category": "SYSTEM", "subcategory": "82"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::83", "plain_text": "Écaille d'argent", "category": "SYSTEM", "subcategory": "83"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::84", "plain_text": "Écaille d'or", "category": "SYSTEM", "subcategory": "84"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::85", "plain_text": "Lame des Géants (Brisée)", "category": "SYSTEM", "subcategory": "85"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::86", "plain_text": "GRANDE BOURSE", "category": "SYSTEM", "subcategory": "86"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::87", "plain_text": "Bourse de Géant", "category": "SYSTEM", "subcategory": "87"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::88", "plain_text": "Deku Seeds", "category": "SYSTEM", "subcategory": "88"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::89", "plain_text": "Canne à pèche", "category": "SYSTEM", "subcategory": "89"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::90", "plain_text": "Menuet des Bois", "category": "SYSTEM", "subcategory": "90"}
+{"id": "ACCESSIBILITY::kaleidoscope_fra::91", "plain_text": "Boléro du Feu", "category": "SYSTEM", "subcategory": "91"}

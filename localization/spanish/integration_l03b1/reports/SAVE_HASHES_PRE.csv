@@ -1,0 +1,4 @@
+file_path,file_size_bytes,sha256_hash,timestamp,notes
+runtime/build-test/Save/file1.sav,204936,AAA977AFC3A77168FBD9E4B67D586061F036D9D37BF0B073026A518BF158F5DD,2026-09-16T01:23:33,Pre-task baseline save slot 1
+runtime/build-test/Save/file2.sav,48104,7263453E0D6A5E597461B7C2F229CCD76C1DFD3749931B5903000DE993FCA046,2026-09-16T01:23:33,Pre-task baseline save slot 2
+runtime/build-test/Save/global.sav,82,0507387C98B78147330533D865A1900D36E13956E8C952CAFD15F61F1A9F179E,2026-09-16T01:23:33,Pre-task baseline global settings save

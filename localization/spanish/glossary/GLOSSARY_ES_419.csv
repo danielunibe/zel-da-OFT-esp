@@ -1,0 +1,283 @@
+category,term_en,term_es_419,context,notes
+character,Link,Link,protagonist,name remains unchanged
+character,Zelda,Zelda,princess,name remains unchanged
+character,Impa,Impa,Sheikah elder,name remains unchanged
+character,Ganondorf,Ganondorf,main antagonist,name remains unchanged
+character,Ganon,Ganon,beast form,name remains unchanged
+character,Sheik,Sheik,disguise of Zelda,name remains unchanged
+character,Navi,Navi,fairy companion,name remains unchanged
+character,Fi,Fi,spirit of the Master Sword,name remains unchanged
+character,Rauru,Rauru,Sage of Light,name remains unchanged
+character,Saria,Saria,fairy friend from Kokiri Forest,name remains unchanged
+character,Malon,Malon,ranch girl,name remains unchanged
+character,Talon,Talon,ranch owner,name remains unchanged
+character,Ingo,Ingo,ranch hand,name remains unchanged
+character,Darunia,Darunia,Goron leader,name remains unchanged
+character,Ruto,Ruto,Zora princess,name remains unchanged
+character,Impa,Impa,Sheikah guardian,name remains unchanged
+character,Kaepora Gaebora,Kaepora Gaebora,wise owl,name remains unchanged
+character,Great Fairy,Gran Hada,fairy NPC,hairía in some dialects — use Gran Hada (LATAM)
+character, Skulltula,Skulltula,spider enemy,name remains unchanged
+character,Happy Mask Salesman,Vendedor de Máscaras Comerciante,happy mask shop,use Vendedor de Máscaras
+character,Shiek,Sheik,Zelda's disguise,name remains unchanged
+location,Hyrule,Hyrule,kingdom,name remains unchanged
+location,Kokiri Forest,Bosque Kokiri,starting area,Kokiri stays as proper noun
+location,Death Mountain,Monte Muerte,volcanic area,Monte Muerte (LATAM)
+location,Lake Hylia,Lago Hylia,large lake,Hylia stays as proper noun
+location,Gerudo Valley,Valle Gerudo,desert valley,Gerudo stays as proper noun
+location,Legend Temple,Templo Legend,first dungeon,Templo Legend
+location,Forest Temple,Templo del Bosque,forest dungeon,Templo del Bosque
+location,Fire Temple,Templo del Fuego,fire dungeon,Templo del Fuego
+location,Water Temple,Templo del Agua,water dungeon,Templo del Agua
+location,Spirit Temple,Templo del Espíritu,spirit dungeon,Templo del Espíritu
+location,Shadow Temple,Templo de la Sombra,shadow dungeon,Templo de la Sombra
+location,Inside Ganon's Castle,Interior del Castillo de Ganon,final dungeon,Interior del Castillo de Ganon
+location,Hyrule Castle, Castillo de Hyrule,main castle,castillo de Hyrule (lowercase unless start of sentence)
+location,Castle Town,Pueblo del Castillo,town area,Pueblo del Castillo
+location,Kakariko Village,Aldea Kakariko,Kakariko village,Aldea Kakariko
+location,Goron City,Ciudad Goron,Goron settlement,Ciudad Goron
+location,Zora's Domain,Dominio Zora,Zora area,Domino Zora
+location,Zora's Fountain, Fuente Zora,fountain,Fuente Zora
+location,Hidden Village,Aldea Oculta,hidden area,Aldea Oculta
+location,Gerudo Training Ground,Entrenamiento Gerudo,training area,Entrenamiento Gerudo
+location,Temple of Time,Templo del Tiempo,sacred temple,Templo del Tiempo
+location,Market,Pueblo,marketplace,use Pueblo or mercado
+location,Lost Woods,Bosque Perdido,forest area,Bosque Perdido
+location,Skulltula House,Casa Skulltula,cursed house,Casa Skulltula
+location,Graveyard,Cementerio,burial ground,Cementerio
+location,Domain Zora,Dominio Zora,Zora area,alternate for Zora's Domain
+item,Kokiri Sword,Espada Kokiri,first sword,Espada Kokiri
+item,Master Sword,Espada Maestra,sacred sword,Espada Maestra
+item,Biggoron Sword,Espada Biggoron,largest sword,Espada Biggoron
+item,Broken Biggoron Sword,Espada Biggoron Rota,quest item,Espada Biggoron Rota
+item,Hover Boots, Botas Flotantes,hover ability,Botas Flotantes
+item,Iron Boots,Botas de Hierro,heavy boots,Botas de Hierro
+item,Kokiri Tunic,Túnica Kokiri,starting tunic,Túnice Kokiri
+item,Goron Tunic,Túnica Goron,fire tunic,Túnice Goron
+item,Zora Tunic,Túnica Zora,water tunic,Túnice Zora
+item,Hover Boots,Botas Flotantes,hover ability,Botas Flotantes
+item,Deku Shield,Escudo Deku,wooden shield,Escudo Deku
+item,Hylian Shield,Escudo Hyliano,metal shield,Escudo Hyliana
+item,Mirror Shield,Escudo Espejo,reflective shield,Escudo Espejo
+item,Bow,Arco,projectile weapon,Arco
+item,Fire Arrow,Flecha de Fuego,elemental arrow,Flecha de Fuego
+item,Ice Arrow,Flecha de Hielo,elemental arrow,Flecha de Hielo
+item,Light Arrow,Flecha de Luz,sacred arrow,Flecha de Luz
+item,Hookshot,Gancho,grappling device,use Anzuelo (LATAM) or gancho
+item,Longshot,Gancho Largo,upgraded hookshot,Anzuelo Largo
+item,Deku Nut, Nuez Deku,stunning item,Nuez Deku
+item,Deku Stick,Palo Deku,combustible item,Palo Deku
+item,Bomb,Bomba,explosive,Bomba
+item,Bombchu,Bombchu,robotic bomb,name stays
+item,Boomerang,Bumerán,returning weapon,Bumerán
+item,Dins Fire,Fuego de Din,spell,Fuego de Din
+item,Nayrus Love,Amor de Nayru,spell,Amor de Nayru
+item,Farores Wind,Viento de Farore,spell,Viento de Farore
+item,Magic Meter,Medidor de Magia,magic gauge,Medidor de Magia
+item,Ocarina,Ocarina,musical instrument,name stays
+item,Ocarina of Time,Ocarina del Tiempo,main item,Ocarina del Tiempo
+item,Ocarina of Winds,Ocarina de los Vientos,wind instrument,Ocarina de los Vientos
+item,Golden Skulltula Token,Token de Skulltula Dorada,collectible,Token de Skulltula Dorada
+item,Heart Container,Contenedor de Corazón,health upgrade,Contenedor de Corazón
+item,Small Heart Container,Pequeño Contenedor de Corazón,health piece,Pequeño Contenedor de Corazón
+item Piece of Heart,Pieza de Corazón,health fragment,Pieza de Corazón,
+item,Rupee,Rupee,currency,name stays
+item,Green Rupee,Rupee Verde,common currency,Rupee Verde
+item,Blue Rupee,Rupee Azul,uncommon currency,Rupee Azul
+item,Red Rupee,Rupee Rojo,rare currency,Rupee Rojo
+item,Purple Rupee,Rupee Púrpura,valuable currency,Rupee Púrpura
+item,Orange Rupee,Rupee Naranja,very valuable,Rupee Naranja
+item,Key,Llave,dungeon key,Llave
+item,Boss Key,Gran Llave,boss dungeon key,Llave Jefe
+item,Compass,Brújula,dungeon item,Brújula
+item,Dungeon Map,Mapa del Calabozo,dungeon map,Mapa del Calabozo
+item,Small Key,Llave Pequeña,minor key,Llave Pequeña
+item,Green potion,Poción Verde,magic recovery,Poción Verde
+item,Blue potion,Poción Azul,magic + health,Poción Azul
+item,Red potion,Poción Roja,health recovery,Poción Roja
+item,Forest Medallion,Medallón del Bosque,sage relic,Medallón del Bosque
+item,Fire Medallion,Medallón del Fuego,sage relic,Medallón del Fuego
+item,Water Medallion,Medallón del Agua,sage relic,Medallón del Agua
+item,Spirit Medallion,Medallón del Espíritu,sage relic,Medallón del Espíritu
+item,Shadow Medallion,Medallón de la Sombra,sage relic,Medallón de la Sombra
+item,Light Medallion,Medallón de la Luz,sage relic,Medallón de la Luz
+item,Kokiri Emerald,Esmeralda Kokiri,spiritual stone,Esmeralda Kokiri
+item,Goron Ruby,Rubí Goron,spiritual stone,Rubí Goron
+item,Zora Sapphire,Zafiro Zora,spiritual stone,Zafiro Zora
+item,Magic Bean, Semilla Mágica,growable item,Semilla Mágica
+item,Weird Egg,Huevo Raro,quest start,Huevo Raro
+item,Chicken,Pollo,animal,Pollo
+item,Lon Lon Milk,Leche Lon Lon,consumable,Leche Lon Lon
+item,Empty Bottle, Botella Vacía,container,Botella Vacía
+item,Bottle,Botella,container,Botella
+item,Fairy,Hada,companion/health,Hada
+item,Phoenix Tail,Cola de Fénix,quest item,Cola de Fénix
+item,Odd Mushroom,Hongo Extraño,quest item,Hongo Extraño
+item,Odd Potion,Poción Extraña,quest item,Poción Extraña
+item,Odolwa's Remains,Restos de Odolwa,boss remains,Restos de Odolwa
+item,Twinrova's Remains,Restos de Twinrova,boss remains,Restos de Twinrova
+item,Morpha's Remains,Restos de Morpha,boss remains,Restos de Morpha
+item,Gohma's Remains,Restos de Gohma,boss remains,Restos de Gohma
+item,Bongo Bongo's Remains,Restos de Bongo Bongo,boss remains,Restos de Bongo Bongo
+item,Volvagia's Remains,Restos de Volvagia,boss remains,Restos de Volvagia
+enemy,Gohma,Gohma,spider boss,name stays
+enemy,Parasitic Tentacle,Tentáculo Parásito,mini-boss,Tentáculo Parasito
+enemy,King Dodongo,Rey Dodongo,boss,name stays
+enemy,Barinade,Barinade,electric boss,name stays
+enemy,Phantom Ganon,Phantom Ganon,ghost boss,name stays
+enemy,Volvagia,Volvagia,fire dragon,name stays
+enemy,Morpha,Morpha,water boss,name stays
+enemy,Bongo Bongo,Bongo Bongo,shadow boss,name stays
+enemy,Twinrova,Twinrova,witch bosses,name stays
+enemy,Dead Hand,Mano Muerta,shadow temple enemy,Mano Muerta
+enemy,Stalfos,Stalfos,skeleton warrior,name stays
+enemy,Gibdo,Gibdo,mummy enemy,name stays
+enemy,ReDeads,ReDeads,zombie enemy,name stays
+enemy,Like Like,Like Like,shield-eating enemy,name stays
+enemy,Keese,Keese,bat enemy,name stays
+enemy,Tektite,Tektite,spider-like enemy,name stays
+enemy,Peahat,Peahat,flying enemy,name stays
+enemy,Deku Baba,Deku Baba,plant enemy,Deku Baba
+enemy,Freezard,Freezard,ice enemy,name stays
+enemy,Armos,Armos,statue enemy,name stays
+enemy,Bubble,Bubble,skull enemy,name stays
+enemy,Wallmaster,Wallmaster,hand enemy,name stays
+enemy,Floormaster,Floormaster,ceiling hand,name stays
+enemy,Skulltula,Skulltula,spider enemy,name stays
+enemy,Gold Skulltula,Skulltula Dorada,collectible enemy,Skulltula Dorada
+enemy,Dark Link,Dark Link,shadow copy,name stays
+NPC,Rauru,Rauru,Sage of Light,name stays
+NPC,Saria,Saria,fairy friend,name stays
+NPC,Malon,Malon,ranch girl,name stays
+NPC,Talon,Talon,ranch owner,name stays
+NPC,Ingo,Ingo,ranch hand,name stays
+NPC,Darunia,Darunia,Goron leader,name stays
+NPC,Ruto,Ruto,Zora princess,name stays
+NPC,Kaepora Gaebora,Kaepora Gaebora,wise owl,name stays
+NPC,Happy Mask Salesman,Vendedor de Máscaras,mask shop NPC,use Vendedor de Máscaras
+NPC,Guard,Guard,castle guard,use Guardia
+NPC,Old Man,Viejo,graveyard NPC,use Viejo
+NPC,Gravekeeper,Sepulturero,graveyard keeper,use Sepulturero
+NPC,Cursed Rich Man,Hombre Rico Maldito,Skulltula house,use Hombre Rico Maldito
+action,Press,Presiona,input command,Presiona (informal)
+action,Open,Abrir,interaction,Abrir
+action,Grab,Agarrar,interaction,Agarrar
+action,Throw,Lanzar,interaction,Lanzar
+action,Roll,Voltear,dodge move,Voltear or Rodar
+action,Attack,Atacar,combat,Atacar
+action,Defend,Defender,combat,Defender
+action,Run,Correr,movement,Correr
+action,Walk,Caminar,movement,Caminar
+action,Jump,Saltar,movement,Salto (noun) / Saltar (verb)
+action,Swim,Nadar,water movement,Nadar
+action,Climb,Escalar,vertical movement,Escalar
+action,Read,Leer,text interaction,Leer
+action,Play,Tocar,music interaction,Tocar (an instrument)
+action,Shoot,Disparar,ranged attack,Disparar
+action,Light,Encender,use fire,Encender
+action,Pull,Tirar,grab and move,Tirar
+action,Place,Colocar,set down,Colocar
+action,Place,Colocar,set down,Colocar
+action,Talk,Hablar,interaction,Hablar
+action,Return,Regresar,go back,Regresar
+action,Steal,Robar,thievery,Robar
+action,Wait,Esperar,hold position,Esperar
+action,Save,Guardar,save game,Guardar
+action,Check,Revisar,inspect,Revisar
+action,Examine,Examinar,detailed look,Examinar
+gameplay,Triforce,Triforce,sacred relic,name stays
+gameplay,Master Quest,Gran Aventura,challenge mode,use Gran Aventura or Maestra Quest
+gameplay,Time Travel,Viaje en el Tiempo,core mechanic,Viaje en el Tiempo
+gameplay,Spiritual Stone,Piedra Espiritual,quest item,Piedra Espiritual
+gameplay,Sage,Sabio,sage character,Sabio
+gameplay,Dungeon,Calabozo,dungeon,use Calabozo or Mazmorra
+gameplay,Boss,Boss,final enemy,name stays or Jefe
+gameplay,Mini-Boss,Mini-Boss,sub-boss,name stays or Jefe menor
+gameplay,Hidden Heart Piece,Pieza de Corazón Oculta,collectible,Pieza de Corazón Oculta
+gameplay,Gold Skulltula Token,Token de Skulltula Dorada,collectible,Token de Skulltula Dorada
+gameplay,Strength Upgrade,Mejora de Fuerza,upgrade,Mejora de Fuerza
+gameplay,Hover Boots,Botas Flotantes,hover ability,Botas Flotantes
+gameplay,Iron Boots,Botas de Hierro,heavy boots,Botas de Hierro
+gameplay,Longshot,Gancho Largo,extended hookshot,Anzuelo Largo
+gameplay,Goron's Bracelet,Pulsera Goron,strength item,Pulsera Goron
+gameplay,Silver Gauntlets,Guantes de Plata,strength upgrade,Guantes de Plata
+gameplay,Golden Gauntlets,Guantes de Oro,strength upgrade,Guantes de Oro
+gameplay,Magic Spin Attack,Ataque Giratorio Mágico,charged attack,Ataque Giratorio Mágico
+gameplay,Extended Magic, Magia Extendida,magic upgrade,Magia Extendida
+gameplay,Double Defense,Doble Defensa,defense upgrade,Doble Defensa
+gameplay,Heart Container,Contenedor de Corazón,health upgrade,Contenedor de Corazón
+gameplay,Piece of Heart,Pieza de Corazón,health fragment,Pieza de Corazón
+gameplay,Skull Token,Token de Calavera,collectible,Token de Calavera
+gameplay,Kokiri Emerald,Esmeralda Kokiri,spiritual stone,Esmeralda Kokiri
+gameplay,Goron Ruby,Rubí Goron,spiritual stone,Rubí Goron
+gameplay,Zora Sapphire,Zafiro Zora,spiritual stone,Zafiro Zora
+gameplay,Forest Medallion,Medallón del Bosque,sage relic,Medallón del Bosque
+gameplay,Fire Medallion,Medallón del Fuego,sage relic,Medallón del Fuego
+gameplay,Water Medallion,Medallón del Agua,sage relic,Medallón del Agua
+gameplay,Spirit Medallion,Medallón del Espíritu,sage relic,Medallón del Espíritu
+gameplay,Shadow Medallion,Medallón de la Sombra,sage relic,Medallón de la Sombra
+gameplay,Light Medallion,Medallón de la Luz,sage relic,Medallón de la Luz
+gameplay,Forest Temple,Templo del Bosque,dungeon,Templo del Bosque
+gameplay,Fire Temple,Templo del Fuego,dungeon,Templo del Fuego
+gameplay,Water Temple,Templo del Agua,dungeon,Templo del Agua
+gameplay,Spirit Temple,Templo del Espíritu,dungeon,Templo del Espíritu
+gameplay,Shadow Temple,Templo de la Sombra,dungeon,Templo de la Sombra
+gameplay,Inside Ganon's Castle,Interior del Castillo de Ganon,final area,Interior del Castillo de Ganon
+gameplay,Chest,Cofre,container,Cofre
+gameplay,Switch,Interruptor,mechanism,Interruptor
+gameplay,Torch, Antorcha,light source,Antorcha
+gameplay,Hookshot Target,Objetivo de Anzuelo,grapple point,Objetivo de Anzuelo
+gameplay,Crystal,Cristal,sacred object,Cristal
+gameplay,Light Beam,Rayo de Luz,sacred light,Rayo de Luz
+gameplay,Portal,Portal,teleporter,Portal
+gameplay,Warp Pad,Plataforma de Teletransporte,warp point,Plataforma de Teletransporte
+gameplay,Fairy Fountain,Fuente de Hadas,fairy location,Fuente de Hadas
+gameplay,Grave,Cementerio,burial site,Cementerio
+gameplay,Crate,Caja,container,Caja
+gameplay,Barrel,Barril,container,Barril
+gameplay,Sign,Letrero,text display,Letrero
+gameplay,Tree,Árbol,obstacle/collectible,Árbol
+gameplay,Shrub,Arbusto,breakable,Arbusto
+gameplay,Boulder,Roca,obstacle,Roca
+gameplay,Web,Red,obstacle,Red
+gameplay,Ice Block,Bloque de Hielo,obstacle,Bloque de Hielo
+gameplay,Switch,Interruptor,mechanism,Interruptor
+gameplay,Pressure Plate,Placa de Presión,mechanism,Placa de Presión
+gameplay,Door,Puerta,entrance,Puerta
+gameplay,Locked Door,Puerta Cerrada,needs key,Puerta Cerrada
+gameplay,Boss Door,Puerta de Jefe,boss entrance,Puerta de Jefe
+gameplay,Small Key,Llave Pequeña,unlocks doors,Llave Pequeña
+gameplay,Boss Key,Gran Llave,boss door,Llave Jefe
+gameplay,Compass,Brújula,shows map,Brújula
+gameplay,Dungeon Map,Mapa del Calabozo,shows layout,Mapa del Calabozo
+menu,Start,Iniciar,main menu,Iniciar
+menu,Options,Opciones,settings,Opciones
+menu,Save,Guardar,save game,Guardar
+menu,Load,Cargar,load game,Cargar
+menu,Continue,Continuar,resume,Continuar
+menu,Game Over,Fin del juego,death screen,Fin del juego
+menu,Yes,Sí,affirmative,Sí
+menu,No,Negative,negative,Negative
+menu,OK,Aceptar,confirm,Aceptar
+menu,Cancel,Cancelar,reject,Cancelar
+menu,Back,Volver,return,Volver
+menu,Quit,Salir,exit,Salir
+menu,Pause,Pausa,game pause,Pausa
+menu,Resume,Reanudar,unpause,Reanudar
+menu,Restart,Reiniciar,retry,Reiniciar
+menu,Return to Title,Volver al Título,exit to title,Volver al Título
+button,A Button,Botón A,controller,Botón A
+button,B Button,Botón B,controller,Botón B
+button,C Button,Botón C,controller,Botón C
+button,L Button,Botón L,controller,Botón L
+button,R Button,Botón R,controller,Botón R
+button,Z Button,Botón Z,controller,Botón Z
+button,C-Up,Botón C Arriba,controller directional,Botón C Arriba
+button,C-Down,Botón C Abajo,controller directional,Botón C Abajo
+button,C-Left,Botón C Izquierda,controller directional,Botón C Izquierda
+button,C-Right,Botón C Derecha,controller directional,Botón C Derecha
+button,Analog Stick,Palanca Analógica,controller movement,Palanca Analógica
+button,Control Stick,Palanca de Control,controller movement,Palanca de Control
+button,D-Pad,Cruz Digital,controller directional,Cruz Digital
+button,Start Button,Botón Start,controller,Botón Start
+button,Shoulder Button,Botón de Hombro,L/R buttons,Botón de Hombro

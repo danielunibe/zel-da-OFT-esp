@@ -1,0 +1,100 @@
+{"id": "0x00C9", "plain_text_es_419": "¡Muy bien, ya terminaste!\nPor favor espera afuera mientras preparo \ntu próximo desafío!", "translation_status": "TRANSLATED"}
+{"id": "0x00CA", "plain_text_es_419": "Bombas   5 piezas   35 Rupias\n\n[CHOICE:2]Comprar\nNo comprar", "translation_status": "TRANSLATED"}
+{"id": "0x00CB", "plain_text_es_419": "Bombas   (5 piezas)   35 Rupias\nSácalo con [C] y presiona \n[C] otra vez para lanzarlo. No puedes\ncomprarlos sin un saco de bombas.", "translation_status": "TRANSLATED"}
+{"id": "0x00CC", "plain_text_es_419": "¡Obtuviste una Rupia Azul!\n¡Son cinco Rupias!", "translation_status": "TRANSLATED"}
+{"id": "0x00CD", "plain_text_es_419": "¡Obtuviste la Escama de Plata!\nSalta al agua y presiona \n[A]. Puedes bucear más profundo de lo que\npodías antes.", "translation_status": "TRANSLATED"}
+{"id": "0x00CE", "plain_text_es_419": "¡Obtuviste la Escama de Oro!\nSalta al agua y presiona \n[A]. ¡Ahora puedes bucear mucho\nmás profundo de lo que podías antes!", "translation_status": "TRANSLATED"}
+{"id": "0x00CF", "plain_text_es_419": "Parece que este objeto no \nfunciona aquí...", "translation_status": "TRANSLATED"}
+{"id": "0x00D0", "plain_text_es_419": "¡No se abre!", "translation_status": "TRANSLATED"}
+{"id": "0x00D1", "plain_text_es_419": "¡Aprendiste la Canción de Saria!", "translation_status": "TRANSLATED"}
+{"id": "0x00D2", "plain_text_es_419": "¡Aprendiste la Canción de Epona!", "translation_status": "TRANSLATED"}
+{"id": "0x00D3", "plain_text_es_419": "¡Aprendiste la Canción del Sol!", "translation_status": "TRANSLATED"}
+{"id": "0x00D4", "plain_text_es_419": "¡Aprendiste la Nana de Zelda!", "translation_status": "TRANSLATED"}
+{"id": "0x00D5", "plain_text_es_419": "¡Aprendiste la Canción del Tiempo!", "translation_status": "TRANSLATED"}
+{"id": "0x00D6", "plain_text_es_419": "¡Aprendiste la Canción de las Tormentas!", "translation_status": "TRANSLATED"}
+{"id": "0x00D7", "plain_text_es_419": "¡Bienvenido [PLAYER]!\n¡Soy la Hada del Poder!\n--- PAGE ---\nVoy a otorgarte una técnica\nde espada.\n--- PAGE ---\n¡Recíbela ahora!", "translation_status": "TRANSLATED"}
+{"id": "0x00D8", "plain_text_es_419": "¡Bienvenido [PLAYER]!\n¡Soy la Hada de la Sabiduría!\n--- PAGE ---\nVoy a potenciar tu \npoder mágico.\n--- PAGE ---\n¡Recíbelo ahora!", "translation_status": "TRANSLATED"}
+{"id": "0x00D9", "plain_text_es_419": "¡Bienvenido [PLAYER]!\n¡Soy la Hada del Valor!\n--- PAGE ---\nVoy a potenciar tu \npoder defensivo.\n--- PAGE ---\n¡Recíbelo ahora!", "translation_status": "TRANSLATED"}
+{"id": "0x00DA", "plain_text_es_419": "Cuando estés cansado de batallar,\n¡por favor vuelve a visitarme!", "translation_status": "TRANSLATED"}
+{"id": "0x00DB", "plain_text_es_419": "¡Bienvenido [PLAYER]!\nTe aliviaré las heridas.", "translation_status": "TRANSLATED"}
+{"id": "0x00DC", "plain_text_es_419": "¡Obtuviste Semillas Deku!\nEstas son semillas pequeñas y duras\nque puedes usar como balas\npara tu honda.", "translation_status": "TRANSLATED"}
+{"id": "0x00DD", "plain_text_es_419": "¡Dominaste la técnica secreta de espada\ndel Ataque Giratorio!\n--- PAGE ---\n¡Mantén [B] presionado para cargar tu arma!\nSuelta [B] para liberar una onda\nde energía con tu giro!\n--- PAGE ---\nSi quieres liberar energía\nsin cargar tu arma, solo \ngira [D-Pad] una vez y presiona [B] para\nun giro rápido muy efectivo!", "translation_status": "TRANSLATED"}
+{"id": "0x00DE", "plain_text_es_419": "Semillas Deku 30 piezas 30 Rupias\n\n[CHOICE:2]Comprar\nNo comprar", "translation_status": "TRANSLATED"}
+{"id": "0x00DF", "plain_text_es_419": "Semilla Deku (30 piezas) 30 Rupias\nPuedes usarlas como balas para\ntu honda. No puedes comprarlas\na menos que tengas una honda.", "translation_status": "TRANSLATED"}
+{"id": "0x00E0", "plain_text_es_419": "¿Quieres hablar con Saria, verdad?\n\n[CHOICE:2]Hablar con Saria\nNo", "translation_status": "TRANSLATED"}
+{"id": "0x00E1", "plain_text_es_419": "¿De verdad? ¿Entonces quieres hablar\nconmigo?\n[CHOICE:2]Sí\nNo", "translation_status": "TRANSLATED"}
+{"id": "0x00E2", "plain_text_es_419": "[PLAYER]...?\nAquí es Saria. ¿Puedes oírme?", "translation_status": "TRANSLATED"}
+{"id": "0x00E3", "plain_text_es_419": "¿Quieres hablar con Saria\notra vez?\n[CHOICE:2]Sí\nNo", "translation_status": "TRANSLATED"}
+{"id": "0x00E4", "plain_text_es_419": "¡Tu Medidor de Magia ha sido potenciado!", "translation_status": "TRANSLATED"}
+{"id": "0x00E5", "plain_text_es_419": "¡Tu poder defensivo ha sido potenciado!", "translation_status": "TRANSLATED"}
+{"id": "0x00E6", "plain_text_es_419": "¡Obtuviste un manojo de flechas!", "translation_status": "TRANSLATED"}
+{"id": "0x00E7", "plain_text_es_419": "Cuando cargas poder para un Ataque\nGiratorio, se consume poder mágico.\n¡Presta atención a tu\nMedidor de Magia verde!\n--- PAGE ---\n¡Oye, chico! Eres un mensajero de\nla Familia Real, ¿no?\n--- PAGE ---\nLa próxima vez que estés por\nsu zona, deberías visitar\na una amiga mía que vive cerca\ndel Castillo de Hyrule.\n--- PAGE ---\n¡Seguramente te otorgará\notro poder nuevo!", "translation_status": "TRANSLATED"}
+{"id": "0x00E8", "plain_text_es_419": "¡Tu poder mágico ha sido \npotenciado! ¡Ahora tienes el doble\nde Poder Mágico!", "translation_status": "TRANSLATED"}
+{"id": "0x00E9", "plain_text_es_419": "¡Tu poder defensivo ha sido \npotenciado! El daño infligido por \nenemigos se reducirá a la mitad.", "translation_status": "TRANSLATED"}
+{"id": "0x00EA", "plain_text_es_419": "¡Bienvenido [PLAYER]!\n¡Soy la Hada de la Magia!\n--- PAGE ---\nTe daré un hechizo mágico.\nPor favor, tómalo.", "translation_status": "TRANSLATED"}
+{"id": "0x00EB", "plain_text_es_419": "Lo siento, pero aún no puedes\npedir prestada esta máscara.", "translation_status": "TRANSLATED"}
+{"id": "0x00EC", "plain_text_es_419": "¡Puedes usar el Fuego de Din no solo\npara atacar sino también para\nquemar cosas!", "translation_status": "TRANSLATED"}
+{"id": "0x00ED", "plain_text_es_419": "Recuerda, solo puedes usar el Viento\nde Farore en mazmorras que tengan\nun mapa de mazmorra oculto dentro, ¿sí?", "translation_status": "TRANSLATED"}
+{"id": "0x00EE", "plain_text_es_419": "El Amor de Nayru solo está activo por\nun tiempo limitado, así que úsalo con cuidado.", "translation_status": "TRANSLATED"}
+{"id": "0x00EF", "plain_text_es_419": "Cuando la batalla te haya agotado,\npor favor vuelve a verme.", "translation_status": "TRANSLATED"}
+{"id": "0x00F0", "plain_text_es_419": "¡Obtuviste una Rupia Roja!\n¡Son veinte Rupias!", "translation_status": "TRANSLATED"}
+{"id": "0x00F1", "plain_text_es_419": "¡Obtuviste una Rupia Púrpura!\n¡Son cincuenta Rupias!", "translation_status": "TRANSLATED"}
+{"id": "0x00F2", "plain_text_es_419": "¡Obtuviste una Rupia Gigante!\n¡Esta Rupia vale nada menos que\ndoscientas Rupias!", "translation_status": "TRANSLATED"}
+{"id": "0x00F3", "plain_text_es_419": "¡Obtuviste una Llave de Puerta!\nUsa esta llave para continuar a la\nsiguiente habitación. ¡Selecciona un cofre\ndel tesoro y averigua cuán afortunado estás!", "translation_status": "TRANSLATED"}
+{"id": "0x00F4", "plain_text_es_419": "¡Perdiste!\n--- PAGE ---\nSolo encontraste una Rupia.\nNo tienes mucha suerte.", "translation_status": "TRANSLATED"}
+{"id": "0x00F5", "plain_text_es_419": "¡Perdiste!\n--- PAGE ---\nEncontraste cinco Rupias.\nAun así, no tienes mucha suerte.", "translation_status": "TRANSLATED"}
+{"id": "0x00F6", "plain_text_es_419": "¡Perdiste!\n--- PAGE ---\nEncontraste veinte Rupias.\nTu última selección fue un error,\n¡no es así! ¡Qué frustrante!", "translation_status": "TRANSLATED"}
+{"id": "0x00F7", "plain_text_es_419": "¡Ganaste!\n--- PAGE ---\nEncontraste cincuenta Rupias.\n¡Eres un tipo realmente afortunado!", "translation_status": "TRANSLATED"}
+{"id": "0x00F8", "plain_text_es_419": "", "translation_status": "SKIPPED_NO_TEXT"}
+{"id": "0x00F9", "plain_text_es_419": "¡Metiste un Gran Poe en una botella!\n¡Vendámoslo en la Tienda de Fantasmas!\n¡Puede que algo bueno suceda!", "translation_status": "TRANSLATED"}
+{"id": "0x00FA", "plain_text_es_419": "¡¡GANASTE!!\n--- PAGE ---\n¡Obtuviste una Pieza de Corazón!\nReúne cuatro piezas en total para\nobtener otro Contenedor de Corazón.\n¡Más contenedores significan más energía de vida!", "translation_status": "TRANSLATED"}
+{"id": "0x00FB", "plain_text_es_419": "¡¡GANASTE!!\n--- PAGE ---\n¡Obtuviste una Pieza de Corazón!\nHasta ahora has recolectado dos \npiezas. ¡Con dos piezas más,\nganarás más energía de vida!", "translation_status": "TRANSLATED"}
+{"id": "0x00FC", "plain_text_es_419": "¡¡GANASTE!!\n--- PAGE ---\n¡Obtuviste una Pieza de Corazón!\n¡Has recolectado tres piezas!\n¡Con una pieza más, tu energía\nde vida será potenciada!", "translation_status": "TRANSLATED"}
+{"id": "0x00FD", "plain_text_es_419": "¡¡GANASTE!!\n--- PAGE ---\n¡Obtuviste una Pieza de Corazón!\n¡Has completado otro Contenedor\nde Corazón! ¡Tu energía de vida\nmáxima ha aumentado!", "translation_status": "TRANSLATED"}
+{"id": "0x00FE", "plain_text_es_419": "Búscalos no solo a cielo abierto,\nsino también dentro de las mazmorras.\n--- PAGE ---\nPor supuesto, esto es solo nuestro sueño...\nNo tienes que hacerlo si no\nquieres...", "translation_status": "TRANSLATED"}
+{"id": "0x0100", "plain_text_es_419": "¿Qué es eso?", "translation_status": "TRANSLATED"}
+{"id": "0x0101", "plain_text_es_419": "¡Mira, mira, [PLAYER]!\n¡Puedes ver debajo de esta telaraña\nusando [C-Right]!", "translation_status": "TRANSLATED"}
+{"id": "0x0102", "plain_text_es_419": "¡Mira esta pared! Las enredaderas\nque crecen en ella le dan una\nsuperficie áspera... ¡Quizás puedas\nescalarla, [PLAYER]!", "translation_status": "TRANSLATED"}
+{"id": "0x0103", "plain_text_es_419": "Puedes abrir una puerta parándote\nfrente a ella y presionando [A].\n--- PAGE ---\nPresta atención a lo que dice\nel Icono de Acción.\n¡Es el ícono azul en la parte superior\nde la pantalla!", "translation_status": "TRANSLATED"}
+{"id": "0x0104", "plain_text_es_419": "¡Mira! ¡Algo está colgado\nahí arriba! ¡Parece una escalera vieja!", "translation_status": "TRANSLATED"}
+{"id": "0x0105", "plain_text_es_419": "Oye...\n¿No es ese el mismo diseño que\nestá en la Puerta del Tiempo?", "translation_status": "TRANSLATED"}
+{"id": "0x0106", "plain_text_es_419": "Parece que esa antorcha estaba\nencendida hace no mucho tiempo...", "translation_status": "TRANSLATED"}
+{"id": "0x0107", "plain_text_es_419": "De aquí en adelante, pasaremos\npor algunos pasajes estrechos!\nSi vas despacio, quizás puedas\nacercarte a algunos enemigos.\n--- PAGE ---\nUsa la Fijación con [C-Left] para siempre mirar\nen la dirección correcta. Ajusta tu\nvista para que puedas ver por el siguiente\ncorredor antes de doblar una esquina.\n--- PAGE ---\nUna vez que tu vista esté ajustada,\nmantén presionado [C-Left] para rodear la esquina.\nAsí no serás sorprendido\npor un enemigo esperando en emboscada.", "translation_status": "TRANSLATED"}
+{"id": "0x0108", "plain_text_es_419": "Párate junto a este bloque y\nagárralo con [A]. Mientras mantengas\n[A], puedes empujarlo o jalarlo.\n--- PAGE ---\nSi te paras junto al bloque\ny presionas [A] mientras presionas [D-Pad]\nhacia el bloque, puedes escalar\nencima de él.\n--- PAGE ---\n¡Presta atención a lo que dice\nel Icono de Acción!", "translation_status": "TRANSLATED"}
+{"id": "0x0109", "plain_text_es_419": "", "translation_status": "SKIPPED_NO_TEXT"}
+{"id": "0x010A", "plain_text_es_419": "", "translation_status": "SKIPPED_NO_TEXT"}
+{"id": "0x010B", "plain_text_es_419": "", "translation_status": "SKIPPED_NO_TEXT"}
+{"id": "0x010C", "plain_text_es_419": "Después de que entres al agua, si\nmantienes presionado [A], ¡puedes bucear!\n¡Apuesto a que hay cosas interesantes\ndebajo del agua!", "translation_status": "TRANSLATED"}
+{"id": "0x010D", "plain_text_es_419": "", "translation_status": "SKIPPED_NO_TEXT"}
+{"id": "0x010E", "plain_text_es_419": "", "translation_status": "SKIPPED_NO_TEXT"}
+{"id": "0x010F", "plain_text_es_419": "", "translation_status": "SKIPPED_NO_TEXT"}
+{"id": "0x0110", "plain_text_es_419": "", "translation_status": "SKIPPED_NO_TEXT"}
+{"id": "0x0111", "plain_text_es_419": "", "translation_status": "SKIPPED_NO_TEXT"}
+{"id": "0x0112", "plain_text_es_419": "", "translation_status": "SKIPPED_NO_TEXT"}
+{"id": "0x0113", "plain_text_es_419": "", "translation_status": "SKIPPED_NO_TEXT"}
+{"id": "0x0114", "plain_text_es_419": "¡Guau! ¡Mira todas esas\nFlores Bomba!\n--- PAGE ---\n¿Hay alguna manera de activarlas\na todas a la vez?", "translation_status": "TRANSLATED"}
+{"id": "0x0115", "plain_text_es_419": "Parece que hay muchos pozos\nde lava por aquí, ¡así que cuidado\ncon dónde pisas!", "translation_status": "TRANSLATED"}
+{"id": "0x0116", "plain_text_es_419": "Con ese interruptor encendido, la\nplataforma móvil sube más. ¡Ahora puedes\nllegar rápidamente al segundo piso!", "translation_status": "TRANSLATED"}
+{"id": "0x0117", "plain_text_es_419": "", "translation_status": "SKIPPED_NO_TEXT"}
+{"id": "0x0118", "plain_text_es_419": "", "translation_status": "SKIPPED_NO_TEXT"}
+{"id": "0x0119", "plain_text_es_419": "Nunca sabes lo que habrá\nen la esquina en estos senderos\nestrechos....\n--- PAGE ---\nUsa la Fijación con [C-Left] para siempre mirar\nen la dirección correcta. Esta es una\ntécnica útil, ¿no es así?", "translation_status": "TRANSLATED"}
+{"id": "0x011A", "plain_text_es_419": "", "translation_status": "SKIPPED_NO_TEXT"}
+{"id": "0x011B", "plain_text_es_419": "", "translation_status": "SKIPPED_NO_TEXT"}
+{"id": "0x011C", "plain_text_es_419": "", "translation_status": "SKIPPED_NO_TEXT"}
+{"id": "0x011D", "plain_text_es_419": "", "translation_status": "SKIPPED_NO_TEXT"}
+{"id": "0x011E", "plain_text_es_419": "", "translation_status": "SKIPPED_NO_TEXT"}
+{"id": "0x011F", "plain_text_es_419": "[PLAYER], ¿qué estás\nmirando?", "translation_status": "TRANSLATED"}
+{"id": "0x0120", "plain_text_es_419": "", "translation_status": "SKIPPED_NO_TEXT"}
+{"id": "0x0121", "plain_text_es_419": "", "translation_status": "SKIPPED_NO_TEXT"}
+{"id": "0x0122", "plain_text_es_419": "", "translation_status": "SKIPPED_NO_TEXT"}
+{"id": "0x0123", "plain_text_es_419": "", "translation_status": "SKIPPED_NO_TEXT"}
+{"id": "0x0124", "plain_text_es_419": "La cara del Coloso del Desierto...¡seguro\nse ve maligna!", "translation_status": "TRANSLATED"}
+{"id": "0x0125", "plain_text_es_419": "", "translation_status": "SKIPPED_NO_TEXT"}
+{"id": "0x0126", "plain_text_es_419": "Puedo escuchar a los espíritus susurrando\nen esta habitación...\n--- PAGE ---\n\"Busca el ojo de la verdad...\"\n¡Eso es lo que dicen!", "translation_status": "TRANSLATED"}
+{"id": "0x0127", "plain_text_es_419": "", "translation_status": "SKIPPED_NO_TEXT"}
+{"id": "0x0128", "plain_text_es_419": "Aquí...puedo escuchar a los espíritus\nsusurrando en esta habitación...\n--- PAGE ---\n\"Los que tienen pies sagrados\ndeben dejar que el viento los guíe.\nEntonces, serán llevados por\nel camino oculto.\"\n--- PAGE ---\n¡Eso es lo que dicen!", "translation_status": "TRANSLATED"}
+{"id": "0x0129", "plain_text_es_419": "Esta pared...dice algo aquí...\n\"Peligro arriba...\"\nEso es lo que dice.", "translation_status": "TRANSLATED"}
+{"id": "0x012A", "plain_text_es_419": "Esta pared...dice algo aquí...\n\"Peligro abajo...\"\nEso es lo que dice.", "translation_status": "TRANSLATED"}
+{"id": "0x012B", "plain_text_es_419": "El agua que fluye de esta\nestatua está inundando todo el piso.", "translation_status": "TRANSLATED"}
+{"id": "0x012C", "plain_text_es_419": "", "translation_status": "SKIPPED_NO_TEXT"}
+{"id": "0x012D", "plain_text_es_419": "", "translation_status": "SKIPPED_NO_TEXT"}

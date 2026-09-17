@@ -1,0 +1,13 @@
+{
+  "domain": "MAIN_GAME",
+  "locale": "es-419",
+  "entry_count": 2233,
+  "source_hash": "a57988fa9f3b60c357fc6804bb3e1e46cd5e250d855bbf895a36ba9770d64937",
+  "generated_hash": "e43ef02de2b60eccaf8238110767f69987d347db44e96242203030039e0a7ffa",
+  "generator_version": "1.0.0-L03A",
+  "character_set_hash": "8b76dc681d6239737d40bc19546e9e7102b1f523ed3163caa115d27991efdd99",
+  "font_map_version": "ES419-V1-11SLOTS",
+  "font_map_hash": "47053165419c009d3e09ab812ce8d0f7db3af400f675e2ce0a479215ce821cc0",
+  "timestamp": "2026-09-16T06:44:10.792923+00:00",
+  "validation_status": "CERTIFIED_VALID"
+}

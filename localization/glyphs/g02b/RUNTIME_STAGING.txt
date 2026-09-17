@@ -1,0 +1,5 @@
+old_runtime_sha256=DA436565BE77704D2A856676803D5415556AFF06930CDA01B190B8744B021D61
+new_runtime_sha256=3282A70E68A53E8535ED7AB8C8E4ECCE56D5B2542A0A09FB9224747B02B6ADA4
+source_sha256=3282A70E68A53E8535ED7AB8C8E4ECCE56D5B2542A0A09FB9224747B02B6ADA4
+source_path=C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\x64\Release\soh.exe
+runtime_path=C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\runtime\build-test\soh.exe

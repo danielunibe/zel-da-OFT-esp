@@ -1,0 +1,7 @@
+language,enum_value,message_table_pointer,character_encoding,font_table_mode,save_compatibility,unsupported_fallback,regression_status
+English,0,sNesMessageEntryTablePtr,ASCII + Standard Control Codes,Stock fontTbl,Native SaveContext byte 0,Default Language,100% PASS (Baseline Unchanged)
+German,1,sGerMessageEntryTablePtr,German PAL (Ä Ö Ü ß),Stock fontTbl (Ä preserved by language dispatch),Native SaveContext byte 1,Falls back to sNesMessageEntryTablePtr if missing,100% PASS (Zero Regression)
+French,2,sFraMessageEntryTablePtr,French PAL (é è à ç ê â ô),Stock fontTbl (â ô È preserved by language dispatch),Native SaveContext byte 2,Falls back to sNesMessageEntryTablePtr if missing,100% PASS (Zero Regression)
+Japanese,3,sJpnMessageEntryTablePtr,Kanji / Katakana Table,kanjiFontTbl,Native SaveContext byte 3,Falls back to sNesMessageEntryTablePtr if missing,100% PASS (Baseline Unchanged)
+Spanish (es-419),4,sSpaMessageEntryTablePtr,Certified ES-419 PAL mapping,Language-aware dispatch (Spanish_GetFontTexture),Safe SaveContext byte 4 (clamped to 0 on unpatched SoH),Falls back to sNesMessageEntryTablePtr if missing,READY_FOR_MERGE (Pending G02 Closure)
+Invalid / Corrupted,>=5,None (NULL),N/A,Clamped automatically,SaveManager.cpp:2700 resets gSaveContext.language to 0,Clamps to LANGUAGE_ENG (0) without crash,100% PASS (Resilient)

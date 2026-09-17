@@ -1,0 +1,101 @@
+priority,id,system,length,pages,choices,reason,recommended_scene
+P1_001,0x3007,MAIN_GAME,105,1,NO,Lines per page (1) > 4 or line length (105) > 52 chars,Kokiri Forest / Market
+P1_002,Z_MESSAGE_OTR::L118,MAIN_GAME,102,1,NO,Lines per page (1) > 4 or line length (102) > 52 chars,Kokiri Forest / Market
+P1_003,Z_MESSAGE_OTR::L172,MAIN_GAME,101,2,NO,Lines per page (1) > 4 or line length (88) > 52 chars,Kokiri Forest / Market
+P1_004,0x705C,MAIN_GAME,1008,1,NO,Lines per page (25) > 4 or line length (88) > 52 chars,Kokiri Forest / Market
+P1_005,Rando::CUSTOM_MSG::L4609,MAIN_GAME,87,1,NO,Lines per page (1) > 4 or line length (87) > 52 chars,Kokiri Forest / Market
+P1_006,0x7036,MAIN_GAME,499,1,NO,Lines per page (12) > 4 or line length (73) > 52 chars,Kokiri Forest / Market
+P1_007,0x2008,MAIN_GAME,172,1,NO,Lines per page (4) > 4 or line length (72) > 52 chars,Kokiri Forest / Market
+P1_008,Rando::CUSTOM_MSG::L589,MAIN_GAME,71,1,NO,Lines per page (1) > 4 or line length (71) > 52 chars,Kokiri Forest / Market
+P1_009,0x101A,MAIN_GAME,378,4,NO,Lines per page (3) > 4 or line length (69) > 52 chars,Kokiri Forest / Market
+P1_010,0x0101,MAIN_GAME,89,1,NO,Lines per page (2) > 4 or line length (66) > 52 chars,Kokiri Forest / Market
+P1_011,0x2071,MAIN_GAME,450,3,NO,Lines per page (5) > 4 or line length (63) > 52 chars,Kokiri Forest / Market
+P1_012,0x10D0,MAIN_GAME,84,1,NO,Lines per page (2) > 4 or line length (62) > 52 chars,Kokiri Forest / Market
+P1_013,0x706C,MAIN_GAME,137,1,NO,Lines per page (4) > 4 or line length (62) > 52 chars,Kokiri Forest / Market
+P1_014,0x6036,MAIN_GAME,129,1,NO,Lines per page (3) > 4 or line length (61) > 52 chars,Kokiri Forest / Market
+P1_015,0x70B2,MAIN_GAME,98,1,NO,Lines per page (2) > 4 or line length (60) > 52 chars,Kokiri Forest / Market
+P1_016,0x70B6,MAIN_GAME,101,1,NO,Lines per page (2) > 4 or line length (60) > 52 chars,Kokiri Forest / Market
+P1_017,0x306B,MAIN_GAME,285,3,NO,Lines per page (4) > 4 or line length (59) > 52 chars,Kokiri Forest / Market
+P1_018,0x2065,MAIN_GAME,448,5,NO,Lines per page (4) > 4 or line length (58) > 52 chars,Kokiri Forest / Market
+P1_019,0x10D1,MAIN_GAME,345,5,NO,Lines per page (3) > 4 or line length (57) > 52 chars,Kokiri Forest / Market
+P1_020,Z_MESSAGE_OTR::L148,MAIN_GAME,101,1,NO,Lines per page (3) > 4 or line length (54) > 52 chars,Kokiri Forest / Market
+P1_021,0x7015,MAIN_GAME,123,1,NO,Lines per page (3) > 4 or line length (54) > 52 chars,Kokiri Forest / Market
+P1_022,0x0343,MAIN_GAME,597,5,NO,Lines per page (5) > 4 or line length (44) > 52 chars,Kokiri Forest / Market
+P1_023,0x1065,MAIN_GAME,582,1,NO,Lines per page (20) > 4 or line length (44) > 52 chars,Kokiri Forest / Market
+P1_024,0x0340,MAIN_GAME,614,5,NO,Lines per page (5) > 4 or line length (40) > 52 chars,Kokiri Forest / Market
+P1_025,0x1007,MAIN_GAME,632,6,NO,Lines per page (5) > 4 or line length (39) > 52 chars,Kokiri Forest / Market
+P1_026,0x4076,MAIN_GAME,164,1,NO,Lines per page (5) > 4 or line length (39) > 52 chars,Kokiri Forest / Market
+P1_027,0x2068,MAIN_GAME,145,1,NO,Lines per page (5) > 4 or line length (38) > 52 chars,Kokiri Forest / Market
+P1_028,0x4025,MAIN_GAME,265,3,NO,Lines per page (5) > 4 or line length (38) > 52 chars,Kokiri Forest / Market
+P1_029,0x103A,MAIN_GAME,896,8,NO,Lines per page (5) > 4 or line length (37) > 52 chars,Kokiri Forest / Market
+P1_030,0x103F,MAIN_GAME,350,3,NO,Lines per page (5) > 4 or line length (37) > 52 chars,Kokiri Forest / Market
+P1_031,0x5031,MAIN_GAME,572,5,NO,Lines per page (5) > 4 or line length (37) > 52 chars,Kokiri Forest / Market
+P1_032,0x300C,MAIN_GAME,366,3,NO,Lines per page (5) > 4 or line length (36) > 52 chars,Kokiri Forest / Market
+P1_033,0x5063,MAIN_GAME,532,5,NO,Lines per page (5) > 4 or line length (36) > 52 chars,Kokiri Forest / Market
+P1_034,0x0636,MAIN_GAME,113,1,NO,Lines per page (5) > 4 or line length (35) > 52 chars,Kokiri Forest / Market
+P1_035,0x103D,MAIN_GAME,484,5,NO,Lines per page (5) > 4 or line length (35) > 52 chars,Kokiri Forest / Market
+P1_036,0x300B,MAIN_GAME,411,4,NO,Lines per page (5) > 4 or line length (35) > 52 chars,Kokiri Forest / Market
+P1_037,0x306C,MAIN_GAME,203,2,NO,Lines per page (5) > 4 or line length (35) > 52 chars,Kokiri Forest / Market
+P1_038,0x5025,MAIN_GAME,630,6,NO,Lines per page (5) > 4 or line length (35) > 52 chars,Kokiri Forest / Market
+P1_039,0x506C,MAIN_GAME,140,1,NO,Lines per page (5) > 4 or line length (35) > 52 chars,Kokiri Forest / Market
+P1_040,0x0335,MAIN_GAME,153,1,NO,Lines per page (5) > 4 or line length (34) > 52 chars,Kokiri Forest / Market
+P1_041,0x063F,MAIN_GAME,119,1,NO,Lines per page (5) > 4 or line length (34) > 52 chars,Kokiri Forest / Market
+P1_042,0x2064,MAIN_GAME,255,2,NO,Lines per page (5) > 4 or line length (34) > 52 chars,Kokiri Forest / Market
+P1_043,0x3016,MAIN_GAME,639,8,NO,Lines per page (5) > 4 or line length (34) > 52 chars,Kokiri Forest / Market
+P1_044,0x3039,MAIN_GAME,1035,12,NO,Lines per page (5) > 4 or line length (34) > 52 chars,Kokiri Forest / Market
+P1_045,0x3062,MAIN_GAME,617,5,NO,Lines per page (5) > 4 or line length (34) > 52 chars,Kokiri Forest / Market
+P1_046,0x4038,MAIN_GAME,321,3,NO,Lines per page (6) > 4 or line length (34) > 52 chars,Kokiri Forest / Market
+P1_047,0x503E,MAIN_GAME,637,6,NO,Lines per page (5) > 4 or line length (34) > 52 chars,Kokiri Forest / Market
+P1_048,0x5067,MAIN_GAME,199,2,NO,Lines per page (5) > 4 or line length (34) > 52 chars,Kokiri Forest / Market
+P1_049,0x603F,MAIN_GAME,345,3,NO,Lines per page (5) > 4 or line length (34) > 52 chars,Kokiri Forest / Market
+P1_050,0x0620,MAIN_GAME,114,1,NO,Lines per page (5) > 4 or line length (33) > 52 chars,Kokiri Forest / Market
+P1_051,0x1022,MAIN_GAME,232,2,NO,Lines per page (6) > 4 or line length (33) > 52 chars,Kokiri Forest / Market
+P1_052,0x108E,MAIN_GAME,268,1,NO,Lines per page (10) > 4 or line length (33) > 52 chars,Kokiri Forest / Market
+P1_053,0x3022,MAIN_GAME,238,2,NO,Lines per page (6) > 4 or line length (33) > 52 chars,Kokiri Forest / Market
+P1_054,0x4002,MAIN_GAME,106,1,NO,Lines per page (5) > 4 or line length (33) > 52 chars,Kokiri Forest / Market
+P1_055,0x4003,MAIN_GAME,680,6,NO,Lines per page (5) > 4 or line length (33) > 52 chars,Kokiri Forest / Market
+P1_056,0x4031,MAIN_GAME,387,4,NO,Lines per page (5) > 4 or line length (33) > 52 chars,Kokiri Forest / Market
+P1_057,0x605C,MAIN_GAME,311,3,NO,Lines per page (5) > 4 or line length (33) > 52 chars,Kokiri Forest / Market
+P1_058,0x605E,MAIN_GAME,472,4,NO,Lines per page (5) > 4 or line length (33) > 52 chars,Kokiri Forest / Market
+P1_059,0x088D,MAIN_GAME,59,1,NO,Lines per page (5) > 4 or line length (32) > 52 chars,Kokiri Forest / Market
+P1_060,0x0890,MAIN_GAME,59,1,NO,Lines per page (5) > 4 or line length (32) > 52 chars,Kokiri Forest / Market
+P2_061,0x206F,MAIN_GAME,325,3,NO,Boundary line length (51) or dynamic [PLAYER] token on line,Kokiri Forest / Market
+P2_062,0x40AF,MAIN_GAME,222,2,NO,Boundary line length (51) or dynamic [PLAYER] token on line,Kokiri Forest / Market
+P2_063,0x0107,MAIN_GAME,464,3,NO,Boundary line length (50) or dynamic [PLAYER] token on line,Kokiri Forest / Market
+P2_064,0x70DD,MAIN_GAME,85,1,NO,Boundary line length (50) or dynamic [PLAYER] token on line,Kokiri Forest / Market
+P2_065,0x0030,MAIN_GAME,397,3,NO,Boundary line length (49) or dynamic [PLAYER] token on line,Kokiri Forest / Market
+P2_066,0x0050,MAIN_GAME,159,1,NO,Boundary line length (49) or dynamic [PLAYER] token on line,Kokiri Forest / Market
+P2_067,0x00FA,MAIN_GAME,177,2,NO,Boundary line length (49) or dynamic [PLAYER] token on line,Kokiri Forest / Market
+P2_068,0x00A4,MAIN_GAME,267,2,NO,Boundary line length (48) or dynamic [PLAYER] token on line,Kokiri Forest / Market
+P2_069,0x0216,MAIN_GAME,121,1,NO,Boundary line length (48) or dynamic [PLAYER] token on line,Kokiri Forest / Market
+P2_070,0x702A,MAIN_GAME,141,4,NO,Boundary line length (48) or dynamic [PLAYER] token on line,Kokiri Forest / Market
+P2_071,0x707F,MAIN_GAME,146,1,NO,Boundary line length (48) or dynamic [PLAYER] token on line,Kokiri Forest / Market
+P2_072,0x70AD,MAIN_GAME,132,1,NO,Boundary line length (48) or dynamic [PLAYER] token on line,Kokiri Forest / Market
+P2_073,0x00C2,MAIN_GAME,152,1,NO,Boundary line length (47) or dynamic [PLAYER] token on line,Kokiri Forest / Market
+P2_074,0x0119,MAIN_GAME,195,2,NO,Boundary line length (47) or dynamic [PLAYER] token on line,Kokiri Forest / Market
+P2_075,0x2016,MAIN_GAME,115,2,NO,Boundary line length (47) or dynamic [PLAYER] token on line,Kokiri Forest / Market
+P2_076,0x408F,MAIN_GAME,167,2,NO,Boundary line length (47) or dynamic [PLAYER] token on line,Kokiri Forest / Market
+P2_077,0x7095,MAIN_GAME,162,2,NO,Boundary line length (47) or dynamic [PLAYER] token on line,Kokiri Forest / Market
+P2_078,0x0029,MAIN_GAME,194,3,NO,Boundary line length (46) or dynamic [PLAYER] token on line,Kokiri Forest / Market
+P2_079,0x00AE,MAIN_GAME,407,3,NO,Boundary line length (46) or dynamic [PLAYER] token on line,Kokiri Forest / Market
+P2_080,0x00EE,MAIN_GAME,84,1,NO,Boundary line length (46) or dynamic [PLAYER] token on line,Kokiri Forest / Market
+P2_081,0x022A,MAIN_GAME,168,2,NO,Boundary line length (46) or dynamic [PLAYER] token on line,Kokiri Forest / Market
+P2_082,0x0311,MAIN_GAME,143,2,NO,Boundary line length (46) or dynamic [PLAYER] token on line,Kokiri Forest / Market
+P2_083,0x10C9,MAIN_GAME,144,2,NO,Boundary line length (46) or dynamic [PLAYER] token on line,Kokiri Forest / Market
+P2_084,0x206D,MAIN_GAME,107,1,NO,Boundary line length (46) or dynamic [PLAYER] token on line,Kokiri Forest / Market
+P2_085,0x306A,MAIN_GAME,179,2,NO,Boundary line length (46) or dynamic [PLAYER] token on line,Kokiri Forest / Market
+P2_086,0x70A2,MAIN_GAME,119,1,NO,Boundary line length (46) or dynamic [PLAYER] token on line,Kokiri Forest / Market
+P2_087,0x0032,MAIN_GAME,228,2,NO,Boundary line length (45) or dynamic [PLAYER] token on line,Kokiri Forest / Market
+P2_088,0x004C,MAIN_GAME,257,2,NO,Boundary line length (45) or dynamic [PLAYER] token on line,Kokiri Forest / Market
+P2_089,0x00A9,MAIN_GAME,131,1,NO,Boundary line length (45) or dynamic [PLAYER] token on line,Kokiri Forest / Market
+P2_090,0x2015,MAIN_GAME,981,11,NO,Boundary line length (45) or dynamic [PLAYER] token on line,Kokiri Forest / Market
+P2_091,0x2051,MAIN_GAME,308,4,NO,Boundary line length (45) or dynamic [PLAYER] token on line,Kokiri Forest / Market
+P2_092,Z_MESSAGE_OTR::L154,MAIN_GAME,87,1,NO,Boundary line length (44) or dynamic [PLAYER] token on line,Kokiri Forest / Market
+P2_093,0x7067,MAIN_GAME,351,4,NO,Boundary line length (43) or dynamic [PLAYER] token on line,Kokiri Forest / Market
+P2_094,0x016A,MAIN_GAME,259,3,NO,Boundary line length (42) or dynamic [PLAYER] token on line,Kokiri Forest / Market
+P2_095,0x300A,MAIN_GAME,180,2,NO,Boundary line length (42) or dynamic [PLAYER] token on line,Kokiri Forest / Market
+P2_096,0x70E0,MAIN_GAME,62,1,NO,Boundary line length (42) or dynamic [PLAYER] token on line,Kokiri Forest / Market
+P2_097,0x704F,MAIN_GAME,581,6,NO,Boundary line length (41) or dynamic [PLAYER] token on line,Kokiri Forest / Market
+P2_098,0x70D1,MAIN_GAME,189,2,NO,Boundary line length (41) or dynamic [PLAYER] token on line,Kokiri Forest / Market
+P2_099,0x70F4,MAIN_GAME,755,9,NO,Boundary line length (41) or dynamic [PLAYER] token on line,Kokiri Forest / Market
+P2_100,0x200D,MAIN_GAME,293,5,NO,Boundary line length (40) or dynamic [PLAYER] token on line,Kokiri Forest / Market

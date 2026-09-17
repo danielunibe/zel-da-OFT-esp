@@ -1,0 +1,13 @@
+file,symbol,purpose,planned_change,dependency,risk,conflict_with_G02,notes
+soh/include/z64.h,Language,Enum defining active game language,Add LANGUAGE_ESP=4 and update LANGUAGE_MAX=5,None,LOW,SAFE,G02 touches glyphs not Language enum
+soh/include/z64save.h,SaveContext::language,Struct field storing active language (offset 0x1409),Preserve u8 type; verify struct size remains identical,z64.h,LOW,SAFE,Fixed offset struct
+soh/src/code/z_kanfont.c,fontTbl,Array of font texture asset pointers,Map 11 Spanish glyph textures into slots 0x80..0x9E,z_kanfont textures,MEDIUM,POTENTIAL_CONFLICT,Codex G02 touches 0x9F..0xAB; L03B touches 0x80..0x9E (strictly disjoint ranges)
+soh/src/code/z_message_PAL.c,sFontWidths,Array of proportional font widths,Adjust character widths for the 11 remapped slots in 0x80..0x9E,z_kanfont.c,MEDIUM,POTENTIAL_CONFLICT,G02 may modify button glyph widths (0x9F..0xAB); keep disjoint
+soh/src/code/z_message_PAL.c,Message_OpenText,Initializes text box and routes message table,Add case for LANGUAGE_ESP routing to Spanish table,sSpaMessageEntryTablePtr,LOW,SAFE,Message table routing
+soh/soh/SohGui/SohMenu.h,sLanguageOptions,GUI array for language selection dropdown,Add entry { LANGUAGE_ESP "Español (Latinoamérica)" },z64.h,LOW,SAFE,UI menu definition
+soh/soh/SohGui/SohMenuSettings.cpp,messageTables,Array mapping Language enum to message table pointers,Add &sSpaMessageEntryTablePtr to array index 4,z64.h,LOW,SAFE,Message table lookup
+soh/soh/SaveManager.cpp,SaveManager_LoadSettings,Loads language setting from CVar,Verify LANGUAGE_ESP boundary check (line 2700),z64.h,LOW,SAFE,Automatic fallback logic
+soh/soh/Enhancements/custom-message/CustomMessageManager.cpp,CreateCustomMessageTable,Custom message table initialization,Add LANGUAGE_ESP iteration and table creation,z64.h,LOW,SAFE,Extends loop to LANGUAGE_MAX
+soh/soh/Enhancements/randomizer/3drando/text.hpp,GetText,Randomizer text localization lookup,Add case 4 for Spanish randomizer hints,z64.h,LOW,SAFE,Randomizer string routing
+soh/soh/Enhancements/tts/tts.cpp,TTS_SpeakMessage,Accessibility screen reader speech synthesis,Add Spanish speech strings for actions and scene names,z64.h,LOW,SAFE,Screen reader voice cues
+soh/src/overlays/gamestates/ovl_file_choose/z_file_nameset_PAL.c,FileChoose_DrawLanguageMenu,N64 PAL in-game language select,Allow LANGUAGE_ESP in boundary check (line 762),z64.h,LOW,SAFE,PAL file choose screen

@@ -1,0 +1,113 @@
+id,before,after,reason,context_evidence,risk_level
+Z_MESSAGE_OTR::L118,"¡Obtuviste un Token de Gold Skulltula!
+¡Has coleccionado r[gsCount]w tokens
+en total!\x0E\x3C",¡Obtuviste un %rToken de Skulltula Dorada%w!&¡Has recolectado %r[[gsCount]]%w tokens&en total!\x0E\x3C,Fix untranslated 'Gold' in 'Token de Gold Skulltula' and restore %r/%w color tags,Gold Skulltula token acquisition message,MEDIUM_RISK
+Z_MESSAGE_OTR::L126,"¡Obtuviste un Token de Gold Skulltula!
+¡Has coleccionado r[gsCount]w tokens
+en total!","¡Obtuviste un Token de Skulltula Dorada!
+¡Has coleccionado r[gsCount]w tokens
+en total!",Terminology alignment: Untranslated Gold Skulltula: 'Gold Skulltula' -> 'Skulltula Dorada',"GLOSSARY_ES_419 alignment against You got a rGold Skulltula Tokenw!
+You've",HIGH_RISK
+0x0140,"¡El Gran Deku Tree te ha
+llamado!
+¡Por favor, ven conmigo!","¡El Gran Árbol Deku te ha
+llamado!
+¡Por favor, ven conmigo!",Terminology alignment: Untranslated Deku Tree: 'Deku Tree' -> 'Árbol Deku',"GLOSSARY_ES_419 alignment against The Great Deku Tree has 
+summoned you!
+P",LOW_RISK
+0x0141,"¡Vamos! ¡Sé valiente!
+¡Entremos al
+Gran Deku Tree!","¡Vamos! ¡Sé valiente!
+¡Entremos al
+Gran Árbol Deku!",Terminology alignment: Untranslated Deku Tree: 'Deku Tree' -> 'Árbol Deku',"GLOSSARY_ES_419 alignment against C'mon! Be brave!
+Let's go into the 
+Grea",LOW_RISK
+0x0142,"El Gran Deku Tree quiso que
+fuéramos a visitar a la princesa en
+el Castillo de Hyrule... ¿No deberíamos
+ir?","El Gran Árbol Deku quiso que
+fuéramos a visitar a la princesa en
+el Castillo de Hyrule... ¿No deberíamos
+ir?",Terminology alignment: Untranslated Deku Tree: 'Deku Tree' -> 'Árbol Deku',"GLOSSARY_ES_419 alignment against The Great Deku Tree wanted us
+to go to v",HIGH_RISK
+0x0163,"¿Estás recogiendo Piedras
+Espirituales? ¿Te falta una por
+encontrar? ¿Te refieres a la Piedra
+Espiritual del Agua, no?
+--- PAGE ---
+El Gran Deku Tree me dijo una vez
+que el Rey Zora, gobernante del Dominio
+de Zora, la tiene...","¿Estás recogiendo Piedras
+Espirituales? ¿Te falta una por
+encontrar? ¿Te refieres a la Piedra
+Espiritual del Agua, no?
+--- PAGE ---
+El Gran Árbol Deku me dijo una vez
+que el Rey Zora, gobernante del Dominio
+de Zora, la tiene...",Terminology alignment: Untranslated Deku Tree: 'Deku Tree' -> 'Árbol Deku',"GLOSSARY_ES_419 alignment against Are you collecting Spiritual
+Stones? You",MEDIUM_RISK
+0x0164,"¿Estás recogiendo Piedras
+Espirituales? ¿Te falta una por
+encontrar? ¿Te refieres a la Piedra
+Espiritual del Fuego, no?
+--- PAGE ---
+El Gran Deku Tree me dijo una vez
+que el Sr. Darunia de los Gorons
+la tiene...","¿Estás recogiendo Piedras
+Espirituales? ¿Te falta una por
+encontrar? ¿Te refieres a la Piedra
+Espiritual del Fuego, no?
+--- PAGE ---
+El Gran Árbol Deku me dijo una vez
+que el Sr. Darunia de los Gorons
+la tiene...",Terminology alignment: Untranslated Deku Tree: 'Deku Tree' -> 'Árbol Deku',"GLOSSARY_ES_419 alignment against Are you collecting Spiritual
+Stones? You",MEDIUM_RISK
+0x0620,"Gold Skulltula
+También se la conoce como
+Araña de la Maldición. ¡Si la
+derrotas, obtendrás un token como
+prueba!","Skulltula Dorada
+También se la conoce como
+Araña de la Maldición. ¡Si la
+derrotas, obtendrás un token como
+prueba!",Terminology alignment: Untranslated Gold Skulltula: 'Gold Skulltula' -> 'Skulltula Dorada',"GLOSSARY_ES_419 alignment against Gold Skulltula
+This is also known as a S",LOW_RISK
+0x10D0,"¿Qué?! ¡¿Tienes una hada?! ¿¡Cómo dices!? ¿¡El Gran Deku Tree
+te convocó de verdad?","¿Qué?! ¡¿Tienes una hada?! ¿¡Cómo dices!? ¿¡El Gran Árbol Deku
+te convocó de verdad?",Terminology alignment: Untranslated Deku Tree: 'Deku Tree' -> 'Árbol Deku',"GLOSSARY_ES_419 alignment against What?! You've got a fairy?!
+Say what? Th",LOW_RISK
+0x10D1,"¿¡Qué dijiste?! ¡¿Qué?! ¿¡Cómo así que él te convocó y no
+al gran Mido?
+--- PAGE ---
+¡Esto no tiene gracia...
+--- PAGE ---
+¡No lo puedo creer!
+¡Todavía no tienes todo
+equipado!
+--- PAGE ---
+¿Cómo piensas ayudar al Gran Deku Tree sin
+tener tanto la espada como
+el escudo listos?
+--- PAGE ---
+¿Qué? Tienes razón, no tengo
+mi equipo listo, pero...","¿¡Qué dijiste?! ¡¿Qué?! ¿¡Cómo así que él te convocó y no
+al gran Mido?
+--- PAGE ---
+¡Esto no tiene gracia...
+--- PAGE ---
+¡No lo puedo creer!
+¡Todavía no tienes todo
+equipado!
+--- PAGE ---
+¿Cómo piensas ayudar al Gran Árbol Deku sin
+tener tanto la espada como
+el escudo listos?
+--- PAGE ---
+¿Qué? Tienes razón, no tengo
+mi equipo listo, pero...",Terminology alignment: Untranslated Deku Tree: 'Deku Tree' -> 'Árbol Deku',"GLOSSARY_ES_419 alignment against Whaaaaaaat?!
+--- PAGE ---
+Why would he s",MEDIUM_RISK
+0x10D9,"¿Qué le hiciste al Gran
+Deku Tree?","¿Qué le hiciste al Gran
+Árbol Deku?",Terminology alignment: Untranslated Deku Tree: 'Deku Tree' -> 'Árbol Deku',"GLOSSARY_ES_419 alignment against What did you do to the Great
+Deku Tree?",LOW_RISK

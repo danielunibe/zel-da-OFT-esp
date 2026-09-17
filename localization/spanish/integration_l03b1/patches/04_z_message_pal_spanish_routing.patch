@@ -1,0 +1,15 @@
+--- a/soh/src/code/z_message_PAL.c
++++ b/soh/src/code/z_message_PAL.c
+@@ -50,6 +50,7 @@ MessageTableEntry* sNesMessageEntryTablePtr = NULL;
+ MessageTableEntry* sGerMessageEntryTablePtr = NULL;
+ MessageTableEntry* sFraMessageEntryTablePtr = NULL;
++MessageTableEntry* sSpaMessageEntryTablePtr = NULL;
+ 
+@@ -350,6 +351,8 @@ void Message_OpenText(PlayState* play, u16 textId) {
+     else if (gSaveContext.language == LANGUAGE_FRA)
+         messageTableEntry = sFraMessageEntryTablePtr;
++    else if (gSaveContext.language == LANGUAGE_ESP)
++        messageTableEntry = sSpaMessageEntryTablePtr;
+ 
+     // If PAL languages are not present in the OTR file, default to English
+     if (messageTableEntry == NULL)

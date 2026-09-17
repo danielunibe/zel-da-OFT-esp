@@ -1,0 +1,9 @@
+ M .gitignore
+ M soh/src/code/z_kanfont.c
+?? soh/assets/custom/textures/buttons/LTBtn.ppm
+?? soh/include/glyph_resolver.h
+?? soh/soh/Enhancements/glyphs/
+4aaad850bd5540cd77c2d83f3ad348d3b38605b2
+ .gitignore               | 14 ++++++++++++++
+ soh/src/code/z_kanfont.c |  9 +++++++++
+ 2 files changed, 23 insertions(+)

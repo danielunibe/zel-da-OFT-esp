@@ -1,0 +1,200 @@
+{"id": "LOCATION::RC_LH_HYRULE_LOACH", "plain_text_es_419": "Lago Hylia Hyrule Loach", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_LH_LAB_DIVE", "plain_text_es_419": "Lago Hylia Laboratorio Buceo", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_LH_TRADE_FROG", "plain_text_es_419": "Lago Hylia Intercambio Rana", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_LH_UNDERWATER_ITEM", "plain_text_es_419": "Lago Hylia Subterráneo Objeto", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_LH_SUN", "plain_text_es_419": "Lago Hylia Sol", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_LH_FREESTANDING_POH", "plain_text_es_419": "Lago Hylia Poe Independiente", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_LH_DEKU_SCRUB_GROTTO_LEFT", "plain_text_es_419": "Lago Hylia Cueva del Joven Deku Izquierda", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_LH_DEKU_SCRUB_GROTTO_RIGHT", "plain_text_es_419": "Lago Hylia Cueva del Joven Deku Derecha", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_LH_DEKU_SCRUB_GROTTO_CENTER", "plain_text_es_419": "Lago Hylia Cueva del Joven Deku Centro", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GV_CHEST", "plain_text_es_419": "Valle Gerudo Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GV_TRADE_SAW", "plain_text_es_419": "Valle Gerudo Intercambio Sierra", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GV_WATERFALL_FREESTANDING_POH", "plain_text_es_419": "Valle Gerudo Cascada Independiente Poe", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GV_CRATE_FREESTANDING_POH", "plain_text_es_419": "Valle Gerudo Cajón Independiente Poe", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GV_DEKU_SCRUB_GROTTO_REAR", "plain_text_es_419": "Valle Gerudo Cueva del Joven Deku Trasera", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GV_DEKU_SCRUB_GROTTO_FRONT", "plain_text_es_419": "Valle Gerudo Cueva del Joven Deku Frontal", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GF_CHEST", "plain_text_es_419": "Fortaleza Gerudo Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GF_HBA_1000_POINTS", "plain_text_es_419": "Fortaleza Gerudo Tiro con Arco a Caballo 1000 Puntos", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GF_HBA_1500_POINTS", "plain_text_es_419": "Fortaleza Gerudo Tiro con Arco a Caballo 1500 Puntos", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_TH_FREED_CARPENTERS", "plain_text_es_419": "Guarida de Ladrones Carpinteros Liberados", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_TH_1_TORCH_CARPENTER", "plain_text_es_419": "Guarida de Ladrones Carpintero 1 Antorcha", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_TH_DEAD_END_CARPENTER", "plain_text_es_419": "Guarida de Ladrones Carpintero Callejón Sin Salida", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_TH_DOUBLE_CELL_CARPENTER", "plain_text_es_419": "Guarida de Ladrones Carpintero Doble Celda", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_TH_STEEP_SLOPE_CARPENTER", "plain_text_es_419": "Guarida de Ladrones Carpintero Pendiente Empinada", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_WASTELAND_CHEST", "plain_text_es_419": "Páramo Encantado Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_WASTELAND_BOMBCHU_SALESMAN", "plain_text_es_419": "Páramo Encantado Bombchu Vendedor", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_COLOSSUS_FREESTANDING_POH", "plain_text_es_419": "Coloso del Desierto Poe Independiente", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_COLOSSUS_DEKU_SCRUB_GROTTO_REAR", "plain_text_es_419": "Coloso del Desierto Cueva del Joven Deku Trasera", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_COLOSSUS_DEKU_SCRUB_GROTTO_FRONT", "plain_text_es_419": "Coloso del Desierto Cueva del Joven Deku Frontal", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_MARKET_TREASURE_CHEST_GAME_REWARD", "plain_text_es_419": "Mercado Tesoro Cofre Juego Recompensa", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_MARKET_BOMBCHU_BOWLING_FIRST_PRIZE", "plain_text_es_419": "Mercado Bombchu Bowling Primer Premio", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_MARKET_BOMBCHU_BOWLING_SECOND_PRIZE", "plain_text_es_419": "Mercado Bombchu Bowling Segundo Premio", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_MARKET_LOST_DOG", "plain_text_es_419": "Mercado Perdido Perro", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_MARKET_SHOOTING_GALLERY_REWARD", "plain_text_es_419": "Mercado Tiro Galería Recompensa", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_MARKET_10_BIG_POES", "plain_text_es_419": "Mercado 10 Grande Poes", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_MARKET_TREASURE_CHEST_GAME_ITEM_1", "plain_text_es_419": "Mercado Tesoro Cofre Juego Objeto 1", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_MARKET_TREASURE_CHEST_GAME_ITEM_2", "plain_text_es_419": "Mercado Tesoro Cofre Juego Objeto 2", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_MARKET_TREASURE_CHEST_GAME_ITEM_3", "plain_text_es_419": "Mercado Tesoro Cofre Juego Objeto 3", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_MARKET_TREASURE_CHEST_GAME_ITEM_4", "plain_text_es_419": "Mercado Tesoro Cofre Juego Objeto 4", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_MARKET_TREASURE_CHEST_GAME_ITEM_5", "plain_text_es_419": "Mercado Tesoro Cofre Juego Objeto 5", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_MARKET_TREASURE_CHEST_GAME_KEY_1", "plain_text_es_419": "Mercado Tesoro Cofre Juego Llave 1", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_MARKET_TREASURE_CHEST_GAME_KEY_2", "plain_text_es_419": "Mercado Tesoro Cofre Juego Llave 2", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_MARKET_TREASURE_CHEST_GAME_KEY_3", "plain_text_es_419": "Mercado Tesoro Cofre Juego Llave 3", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_MARKET_TREASURE_CHEST_GAME_KEY_4", "plain_text_es_419": "Mercado Tesoro Cofre Juego Llave 4", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_MARKET_TREASURE_CHEST_GAME_KEY_5", "plain_text_es_419": "Mercado Tesoro Cofre Juego Llave 5", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_HC_MALON_EGG", "plain_text_es_419": "Castillo de Hyrule Huevo de Malon", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_HC_ZELDAS_LETTER", "plain_text_es_419": "Castillo de Hyrule Carta de Zelda", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_KAK_REDEAD_GROTTO_CHEST", "plain_text_es_419": "Kakariko Redead Cueva Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_KAK_OPEN_GROTTO_CHEST", "plain_text_es_419": "Kakariko Cofre de la Cueva Abierta", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_KAK_10_GOLD_SKULLTULA_REWARD", "plain_text_es_419": "Kakariko 10 Gold Skulltula Recompensa", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_KAK_20_GOLD_SKULLTULA_REWARD", "plain_text_es_419": "Kakariko 20 Gold Skulltula Recompensa", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_KAK_30_GOLD_SKULLTULA_REWARD", "plain_text_es_419": "Kakariko 30 Gold Skulltula Recompensa", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_KAK_40_GOLD_SKULLTULA_REWARD", "plain_text_es_419": "Kakariko 40 Gold Skulltula Recompensa", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_KAK_50_GOLD_SKULLTULA_REWARD", "plain_text_es_419": "Kakariko 50 Gold Skulltula Recompensa", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_KAK_100_GOLD_SKULLTULA_REWARD", "plain_text_es_419": "Kakariko 100 Gold Skulltula Recompensa", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_KAK_MAN_ON_ROOF", "plain_text_es_419": "Kakariko Hombre en el Tejado", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_KAK_SHOOTING_GALLERY_REWARD", "plain_text_es_419": "Kakariko Recompensa de la Galería de Tiro", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_KAK_TRADE_ODD_MUSHROOM", "plain_text_es_419": "Kakariko Intercambio Odd Hongo", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_KAK_GRANNYS_SHOP", "plain_text_es_419": "Kakariko Tienda de la Abuela", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_KAK_ANJU_AS_ADULT", "plain_text_es_419": "Kakariko Anju Como Adulto", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_KAK_ANJU_AS_CHILD", "plain_text_es_419": "Kakariko Anju Como Niño", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_KAK_TRADE_POCKET_CUCCO", "plain_text_es_419": "Kakariko Intercambio Pocket Cucco", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_KAK_IMPAS_HOUSE_FREESTANDING_POH", "plain_text_es_419": "Kakariko Impas Casa Independiente Poe", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_KAK_WINDMILL_FREESTANDING_POH", "plain_text_es_419": "Kakariko Molino Independiente Poe", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GRAVEYARD_SHIELD_GRAVE_CHEST", "plain_text_es_419": "Cementerio Escudo Tumba Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GRAVEYARD_HEART_PIECE_GRAVE_CHEST", "plain_text_es_419": "Cementerio Corazón Pieza Tumba Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GRAVEYARD_ROYAL_FAMILYS_TOMB_CHEST", "plain_text_es_419": "Cementerio Real de la Familia Tumba Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GRAVEYARD_HOOKSHOT_CHEST", "plain_text_es_419": "Cementerio Anzuelo Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GRAVEYARD_FREESTANDING_POH", "plain_text_es_419": "Cementerio Independiente Poe", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GRAVEYARD_DAMPE_RACE_FREESTANDING_POH", "plain_text_es_419": "Cementerio Dampe Carrera Independiente Poe", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GRAVEYARD_DAMPE_GRAVEDIGGING_TOUR", "plain_text_es_419": "Cementerio Dampe Gravedigging Tour", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_DMT_CHEST", "plain_text_es_419": "Sendero de la Montaña de la Muerte Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_DMT_STORMS_GROTTO_CHEST", "plain_text_es_419": "Sendero de la Montaña de la Muerte Cofre de la Cueva de las Tormentas", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_DMT_TRADE_BROKEN_SWORD", "plain_text_es_419": "Sendero de la Montaña de la Muerte Intercambio Roto Espada", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_DMT_TRADE_EYEDROPS", "plain_text_es_419": "Sendero de la Montaña de la Muerte Intercambio Eyedrops", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_DMT_TRADE_CLAIM_CHECK", "plain_text_es_419": "Sendero de la Montaña de la Muerte Intercambio Claim Check", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_DMT_FREESTANDING_POH", "plain_text_es_419": "Sendero de la Montaña de la Muerte Poe Independiente", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GC_MAZE_LEFT_CHEST", "plain_text_es_419": "Ciudad Goron Laberinto Izquierda Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GC_MAZE_RIGHT_CHEST", "plain_text_es_419": "Ciudad Goron Laberinto Derecha Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GC_MAZE_CENTER_CHEST", "plain_text_es_419": "Ciudad Goron Laberinto Centro Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GC_ROLLING_GORON_AS_CHILD", "plain_text_es_419": "Ciudad Goron Goron Rodando de Niño", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GC_ROLLING_GORON_AS_ADULT", "plain_text_es_419": "Ciudad Goron Goron Rodando de Adulto", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GC_DARUNIAS_JOY", "plain_text_es_419": "Ciudad Goron Alegría de Darunia", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GC_POT_FREESTANDING_POH", "plain_text_es_419": "Ciudad Goron Maceta Independiente Poe", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GC_DEKU_SCRUB_GROTTO_LEFT", "plain_text_es_419": "Ciudad Goron Cueva del Joven Deku Izquierda", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GC_DEKU_SCRUB_GROTTO_RIGHT", "plain_text_es_419": "Ciudad Goron Cueva del Joven Deku Derecha", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GC_DEKU_SCRUB_GROTTO_CENTER", "plain_text_es_419": "Ciudad Goron Cueva del Joven Deku Centro", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_GC_MEDIGORON", "plain_text_es_419": "Ciudad Goron Medigoron", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_DMC_UPPER_GROTTO_CHEST", "plain_text_es_419": "Cráter de la Montaña de la Muerte Superior Cueva Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_DMC_WALL_FREESTANDING_POH", "plain_text_es_419": "Cráter de la Montaña de la Muerte Muro Independiente Poe", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_DMC_VOLCANO_FREESTANDING_POH", "plain_text_es_419": "Cráter de la Montaña de la Muerte Volcán Independiente Poe", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_DMC_DEKU_SCRUB", "plain_text_es_419": "Cráter de la Montaña de la Muerte Joven Deku", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_DMC_DEKU_SCRUB_GROTTO_LEFT", "plain_text_es_419": "Cráter de la Montaña de la Muerte Cueva del Joven Deku Izquierda", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_DMC_DEKU_SCRUB_GROTTO_RIGHT", "plain_text_es_419": "Cráter de la Montaña de la Muerte Cueva del Joven Deku Derecha", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_DMC_DEKU_SCRUB_GROTTO_CENTER", "plain_text_es_419": "Cráter de la Montaña de la Muerte Cueva del Joven Deku Centro", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_ZR_OPEN_GROTTO_CHEST", "plain_text_es_419": "Río de los Zora Cofre de la Cueva Abierta", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_ZR_MAGIC_BEAN_SALESMAN", "plain_text_es_419": "Río de los Zora Vendedor de Frijoles Mágicos", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_ZR_FROGS_ZELDAS_LULLABY", "plain_text_es_419": "Río de los Zora Ranas Nana de Zelda", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_ZR_FROGS_EPONAS_SONG", "plain_text_es_419": "Río de los Zora Ranas Canción de Epona", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_ZR_FROGS_SARIAS_SONG", "plain_text_es_419": "Río de los Zora Ranas Canción de Saria", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_ZR_FROGS_SUNS_SONG", "plain_text_es_419": "Río de los Zora Ranas Canción del Sol", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_ZR_FROGS_SONG_OF_TIME", "plain_text_es_419": "Río de los Zora Ranas Canción del Tiempo", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_ZR_FROGS_IN_THE_RAIN", "plain_text_es_419": "Río de los Zora Ranas Bajo la Lluvia", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_ZR_FROGS_OCARINA_GAME", "plain_text_es_419": "Río de los Zora Ranas Juego de Ocarina", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_ZR_NEAR_OPEN_GROTTO_FREESTANDING_POH", "plain_text_es_419": "Río de los Zora Cerca de la Cueva Abierta Independiente Poe", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_ZR_NEAR_DOMAIN_FREESTANDING_POH", "plain_text_es_419": "Río de los Zora Cerca del Dominio Independiente Poe", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_ZR_DEKU_SCRUB_GROTTO_REAR", "plain_text_es_419": "Río de los Zora Cueva del Joven Deku Trasera", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_ZR_DEKU_SCRUB_GROTTO_FRONT", "plain_text_es_419": "Río de los Zora Cueva del Joven Deku Frontal", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_ZD_CHEST", "plain_text_es_419": "Dominio de los Zora Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_ZD_DIVING_MINIGAME", "plain_text_es_419": "Dominio de los Zora Minijuego de Buceo", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_ZD_KING_ZORA_THAWED", "plain_text_es_419": "Dominio de los Zora Rey Zora Descongelado", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_ZD_TRADE_PRESCRIPTION", "plain_text_es_419": "Dominio de los Zora Intercambio Receta", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_ZF_ICEBERG_FREESTANDING_POH", "plain_text_es_419": "Fuente de los Zora Iceberg Independiente Poe", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_ZF_BOTTOM_FREESTANDING_POH", "plain_text_es_419": "Fuente de los Zora Inferior Independiente Poe", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_LLR_TALONS_CHICKENS", "plain_text_es_419": "Rancho Lon Lon Pollos de Talon", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_LLR_FREESTANDING_POH", "plain_text_es_419": "Rancho Lon Lon Poe Independiente", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_LLR_DEKU_SCRUB_GROTTO_LEFT", "plain_text_es_419": "Rancho Lon Lon Cueva del Joven Deku Izquierda", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_LLR_DEKU_SCRUB_GROTTO_RIGHT", "plain_text_es_419": "Rancho Lon Lon Cueva del Joven Deku Derecha", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_LLR_DEKU_SCRUB_GROTTO_CENTER", "plain_text_es_419": "Rancho Lon Lon Cueva del Joven Deku Centro", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_DEKU_TREE_MAP_CHEST", "plain_text_es_419": "Árbol Deku Mapa Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_DEKU_TREE_COMPASS_CHEST", "plain_text_es_419": "Árbol Deku Brújula Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_DEKU_TREE_COMPASS_ROOM_SIDE_CHEST", "plain_text_es_419": "Árbol Deku Cofre Lateral de la Sala de la Brújula", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_DEKU_TREE_BASEMENT_CHEST", "plain_text_es_419": "Árbol Deku Cofre del Sótano", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_DEKU_TREE_SLINGSHOT_CHEST", "plain_text_es_419": "Árbol Deku Honda Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_DEKU_TREE_SLINGSHOT_ROOM_SIDE_CHEST", "plain_text_es_419": "Árbol Deku Honda Sala Lateral Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_DEKU_TREE_MQ_MAP_CHEST", "plain_text_es_419": "Árbol Deku Mq Mapa Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_DEKU_TREE_MQ_COMPASS_CHEST", "plain_text_es_419": "Árbol Deku Mq Brújula Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_DEKU_TREE_MQ_SLINGSHOT_CHEST", "plain_text_es_419": "Árbol Deku Mq Honda Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_DEKU_TREE_MQ_SLINGSHOT_ROOM_BACK_CHEST", "plain_text_es_419": "Árbol Deku Mq Honda Sala Atrás Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_DEKU_TREE_MQ_BASEMENT_CHEST", "plain_text_es_419": "Árbol Deku Mq Cofre del Sótano", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_DEKU_TREE_MQ_BEFORE_SPINNING_LOG_CHEST", "plain_text_es_419": "Árbol Deku Mq Antes de Giratorio Tronco Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_DEKU_TREE_MQ_AFTER_SPINNING_LOG_CHEST", "plain_text_es_419": "Árbol Deku Mq Después de Giratorio Tronco Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_DEKU_TREE_MQ_DEKU_SCRUB", "plain_text_es_419": "Árbol Deku Mq Joven Deku", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_BOSS_ROOM_CHEST", "plain_text_es_419": "Caverna de los Dodongo Cofre de la Sala del Jefe", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_MAP_CHEST", "plain_text_es_419": "Caverna de los Dodongo Mapa Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_COMPASS_CHEST", "plain_text_es_419": "Caverna de los Dodongo Brújula Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_BOMB_FLOWER_PLATFORM_CHEST", "plain_text_es_419": "Caverna de los Dodongo Cofre de la Plataforma de Flor de Bomba", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_BOMB_BAG_CHEST", "plain_text_es_419": "Caverna de los Dodongo Cofre de la Bolsa de Bombas", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_END_OF_BRIDGE_CHEST", "plain_text_es_419": "Caverna de los Dodongo End De Puente Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_DEKU_SCRUB_NEAR_BOMB_BAG_LEFT", "plain_text_es_419": "Caverna de los Dodongo Joven Deku Cerca de la Bolsa de Bombas Izquierda", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_DEKU_SCRUB_SIDE_ROOM_NEAR_DODONGOS", "plain_text_es_419": "Caverna de los Dodongo Joven Deku Lateral Sala Cerca de Dodongos", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_DEKU_SCRUB_NEAR_BOMB_BAG_RIGHT", "plain_text_es_419": "Caverna de los Dodongo Joven Deku Cerca de la Bolsa de Bombas Derecha", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_DEKU_SCRUB_LOBBY", "plain_text_es_419": "Caverna de los Dodongo Sala Principal del Joven Deku", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_MQ_MAP_CHEST", "plain_text_es_419": "Caverna de los Dodongo Mq Mapa Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_MQ_BOMB_BAG_CHEST", "plain_text_es_419": "Caverna de los Dodongo Mq Cofre de la Bolsa de Bombas", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_MQ_COMPASS_CHEST", "plain_text_es_419": "Caverna de los Dodongo Mq Brújula Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_MQ_LARVAE_ROOM_CHEST", "plain_text_es_419": "Caverna de los Dodongo Mq Cofre de la Sala de Larvas", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_MQ_TORCH_PUZZLE_ROOM_CHEST", "plain_text_es_419": "Caverna de los Dodongo Mq Cofre de la Sala del Rompecabezas de Antorchas", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_MQ_UNDER_GRAVE_CHEST", "plain_text_es_419": "Caverna de los Dodongo Mq Cofre Bajo la Tumba", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_MQ_DEKU_SCRUB_LOBBY_REAR", "plain_text_es_419": "Caverna de los Dodongo Mq Sala Principal del Joven Deku Trasera", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_MQ_DEKU_SCRUB_LOBBY_FRONT", "plain_text_es_419": "Caverna de los Dodongo Mq Sala Principal del Joven Deku Frontal", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_MQ_DEKU_SCRUB_STAIRCASE", "plain_text_es_419": "Caverna de los Dodongo Mq Escalera del Joven Deku", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_DODONGOS_CAVERN_MQ_DEKU_SCRUB_SIDE_ROOM_NEAR_LOWER_LIZALFOS", "plain_text_es_419": "Caverna de los Dodongo Mq Joven Deku Sala Lateral Cerca del Lizalfos Inferior", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_JABU_JABUS_BELLY_MAP_CHEST", "plain_text_es_419": "Vientre de Jabu-Jabu Mapa Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_JABU_JABUS_BELLY_COMPASS_CHEST", "plain_text_es_419": "Vientre de Jabu-Jabu Brújula Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_JABU_JABUS_BELLY_BOOMERANG_CHEST", "plain_text_es_419": "Vientre de Jabu-Jabu Cofre del Bumerán", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_JABU_JABUS_BELLY_DEKU_SCRUB", "plain_text_es_419": "Vientre de Jabu-Jabu Joven Deku", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_JABU_JABUS_BELLY_MQ_FIRST_ROOM_SIDE_CHEST", "plain_text_es_419": "Vientre de Jabu-Jabu Mq Cofre Lateral de la Primera Sala", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_JABU_JABUS_BELLY_MQ_MAP_CHEST", "plain_text_es_419": "Vientre de Jabu-Jabu Mq Mapa Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_JABU_JABUS_BELLY_MQ_SECOND_ROOM_LOWER_CHEST", "plain_text_es_419": "Vientre de Jabu-Jabu Mq Cofre Inferior de la Segunda Sala", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_JABU_JABUS_BELLY_MQ_COMPASS_CHEST", "plain_text_es_419": "Vientre de Jabu-Jabu Mq Brújula Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_JABU_JABUS_BELLY_MQ_SECOND_ROOM_UPPER_CHEST", "plain_text_es_419": "Vientre de Jabu-Jabu Mq Cofre Superior de la Segunda Sala", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_JABU_JABUS_BELLY_MQ_BASEMENT_NEAR_SWITCHES_CHEST", "plain_text_es_419": "Vientre de Jabu-Jabu Mq Sótano Cerca de Switches Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_JABU_JABUS_BELLY_MQ_BASEMENT_NEAR_VINES_CHEST", "plain_text_es_419": "Vientre de Jabu-Jabu Mq Sótano Cerca de Enredaderas Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_JABU_JABUS_BELLY_MQ_NEAR_BOSS_CHEST", "plain_text_es_419": "Vientre de Jabu-Jabu Mq Cofre Cerca del Jefe", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_JABU_JABUS_BELLY_MQ_FALLING_LIKE_LIKE_ROOM_CHEST", "plain_text_es_419": "Vientre de Jabu-Jabu Mq Caída Like Like Sala Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_JABU_JABUS_BELLY_MQ_BOOMERANG_ROOM_SMALL_CHEST", "plain_text_es_419": "Vientre de Jabu-Jabu Mq Cofre Pequeño de la Sala del Bumerán", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_JABU_JABUS_BELLY_MQ_BOOMERANG_CHEST", "plain_text_es_419": "Vientre de Jabu-Jabu Mq Cofre del Bumerán", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FOREST_TEMPLE_FIRST_ROOM_CHEST", "plain_text_es_419": "Templo del Bosque Cofre de la Primera Sala", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FOREST_TEMPLE_FIRST_STALFOS_CHEST", "plain_text_es_419": "Templo del Bosque Cofre del Primer Stalfos", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FOREST_TEMPLE_RAISED_ISLAND_COURTYARD_CHEST", "plain_text_es_419": "Templo del Bosque Cofre del Patio de la Isla Elevada", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FOREST_TEMPLE_MAP_CHEST", "plain_text_es_419": "Templo del Bosque Mapa Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FOREST_TEMPLE_WELL_CHEST", "plain_text_es_419": "Templo del Bosque Pozo Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FOREST_TEMPLE_FALLING_CEILING_ROOM_CHEST", "plain_text_es_419": "Templo del Bosque Cofre de la Sala del Techo Caído", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FOREST_TEMPLE_EYE_SWITCH_CHEST", "plain_text_es_419": "Templo del Bosque Cofre del Interruptor de Ojo", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FOREST_TEMPLE_BOSS_KEY_CHEST", "plain_text_es_419": "Templo del Bosque Cofre de la Llave Jefe", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FOREST_TEMPLE_FLOORMASTER_CHEST", "plain_text_es_419": "Templo del Bosque Cofre del Maestro del Suelo", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FOREST_TEMPLE_BOW_CHEST", "plain_text_es_419": "Templo del Bosque Arco Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FOREST_TEMPLE_RED_POE_CHEST", "plain_text_es_419": "Templo del Bosque Cofre del Poe Rojo", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FOREST_TEMPLE_BLUE_POE_CHEST", "plain_text_es_419": "Templo del Bosque Cofre del Poe Azul", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FOREST_TEMPLE_BASEMENT_CHEST", "plain_text_es_419": "Templo del Bosque Cofre del Sótano", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FOREST_TEMPLE_MQ_FIRST_ROOM_CHEST", "plain_text_es_419": "Templo del Bosque Mq Cofre de la Primera Sala", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FOREST_TEMPLE_MQ_WOLFOS_CHEST", "plain_text_es_419": "Templo del Bosque Mq Wolfos Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FOREST_TEMPLE_MQ_BOW_CHEST", "plain_text_es_419": "Templo del Bosque Mq Arco Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FOREST_TEMPLE_MQ_RAISED_ISLAND_COURTYARD_LOWER_CHEST", "plain_text_es_419": "Templo del Bosque Mq Cofre Inferior del Patio de la Isla Elevada", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FOREST_TEMPLE_MQ_RAISED_ISLAND_COURTYARD_UPPER_CHEST", "plain_text_es_419": "Templo del Bosque Mq Cofre Superior del Patio de la Isla Elevada", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FOREST_TEMPLE_MQ_WELL_CHEST", "plain_text_es_419": "Templo del Bosque Mq Pozo Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FOREST_TEMPLE_MQ_MAP_CHEST", "plain_text_es_419": "Templo del Bosque Mq Mapa Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FOREST_TEMPLE_MQ_COMPASS_CHEST", "plain_text_es_419": "Templo del Bosque Mq Brújula Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FOREST_TEMPLE_MQ_FALLING_CEILING_ROOM_CHEST", "plain_text_es_419": "Templo del Bosque Mq Cofre de la Sala del Techo Caído", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FOREST_TEMPLE_MQ_BASEMENT_CHEST", "plain_text_es_419": "Templo del Bosque Mq Cofre del Sótano", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FOREST_TEMPLE_MQ_REDEAD_CHEST", "plain_text_es_419": "Templo del Bosque Mq Redead Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FOREST_TEMPLE_MQ_BOSS_KEY_CHEST", "plain_text_es_419": "Templo del Bosque Mq Cofre de la Llave Jefe", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FIRE_TEMPLE_NEAR_BOSS_CHEST", "plain_text_es_419": "Templo del Fuego Cofre Cerca del Jefe", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FIRE_TEMPLE_FLARE_DANCER_CHEST", "plain_text_es_419": "Templo del Fuego Cofre del Bailarín Ígneo", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FIRE_TEMPLE_BOSS_KEY_CHEST", "plain_text_es_419": "Templo del Fuego Cofre de la Llave Jefe", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FIRE_TEMPLE_BIG_LAVA_ROOM_BLOCKED_DOOR_CHEST", "plain_text_es_419": "Templo del Fuego Grande Lava Sala Bloqueada Puerta Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FIRE_TEMPLE_BIG_LAVA_ROOM_LOWER_OPEN_DOOR_CHEST", "plain_text_es_419": "Templo del Fuego Grande Lava Sala Inferior Abierta Puerta Cofre", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FIRE_TEMPLE_BOULDER_MAZE_LOWER_CHEST", "plain_text_es_419": "Templo del Fuego Cofre Inferior del Laberinto de Rocas", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FIRE_TEMPLE_BOULDER_MAZE_UPPER_CHEST", "plain_text_es_419": "Templo del Fuego Cofre Superior del Laberinto de Rocas", "translation_status": "TRANSLATED"}
+{"id": "LOCATION::RC_FIRE_TEMPLE_BOULDER_MAZE_SIDE_ROOM_CHEST", "plain_text_es_419": "Templo del Fuego Cofre de la Sala Lateral del Laberinto de Rocas", "translation_status": "TRANSLATED"}

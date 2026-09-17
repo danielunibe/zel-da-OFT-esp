@@ -1,0 +1,100 @@
+{"id": "0x0065", "plain_text_es_419": "Poción Roja   50 Rupias\nSi la bebes, recuperarás\ntu energía vital.\nEsta es una sola dosis.", "translation_status": "TRANSLATED"}
+{"id": "0x0066", "plain_text_es_419": "¡Encontraste el Mapa del Calabozo!\nPresiona START para entrar a las\npantallas secundarias y ver la\npantalla del Mapa.\n--- PAGE ---\nLas cámaras azules son lugares\nque ya has visitado.\nTu ubicación actual es la\nhabitación que parpadea.\n--- PAGE ---\nMueve [D-Pad] arriba y abajo para\nseleccionar un piso para ver.", "translation_status": "TRANSLATED"}
+{"id": "0x0067", "plain_text_es_419": "¡Encontraste la Brújula!\nAhora puedes ver las ubicaciones\nde muchos objetos ocultos en\nel calabozo.", "translation_status": "TRANSLATED"}
+{"id": "0x0068", "plain_text_es_419": "¡Obtuviste la Piedra de la Agonía!\nSi equipas un Rumble Pak, reaccionará\ncerca de... secretos.", "translation_status": "TRANSLATED"}
+{"id": "0x0069", "plain_text_es_419": "¡Recibiste la Carta de Zelda!\n¡Vaya! ¡Esta carta tiene la\nfirma de la Princesa Zelda! Asíguala\na [C] y muéstrala con [C].\n--- PAGE ---\nEn la pantalla de Selección de\nObjetos, puedes asignarla a [R], [L]\no [Z], y luego usar ese [C] para\nmostrarla a la gente.", "translation_status": "TRANSLATED"}
+{"id": "0x006A", "plain_text_es_419": "¡Bienvenido! ¿Puedo ayudarte?\n\n[CHOICE:2]Quiero comprar\nSolo mirando", "translation_status": "TRANSLATED"}
+{"id": "0x006B", "plain_text_es_419": "¿Te gustaría comprar algo\nmás?\n[CHOICE:2]Sí\nNo", "translation_status": "TRANSLATED"}
+{"id": "0x006C", "plain_text_es_419": "¡Tu Bolsa de Balas de Semillas Deku\nse ha hecho más grande!\n¡Ahora puedes llevar más balas!\n¡Esta bolsa puede contener 50 balas!", "translation_status": "TRANSLATED"}
+{"id": "0x006D", "plain_text_es_419": "¡Abre el cofre y... sorpresa!\nSi encuentras una llave dentro,\npodrás avanzar. ¿Izquierda o\nderecha? ¡Prueba tu suerte!\n--- PAGE ---\n10 Rupias para jugar. ¿Quieres\nprobarlo?\n[CHOICE:2]Sí\nNo", "translation_status": "TRANSLATED"}
+{"id": "0x006E", "plain_text_es_419": "¡Genial! ¡Eres un verdadero\njugador!", "translation_status": "TRANSLATED"}
+{"id": "0x006F", "plain_text_es_419": "¡Obtuviste una Rupia Verde!\n¡Esa es una Rupia!", "translation_status": "TRANSLATED"}
+{"id": "0x0070", "plain_text_es_419": "¡Obtuviste la Flecha de Fuego!\nAsígala a [C] y tus flechas se\n¡potenciarán! Si golpeas tu\nobjetivo, se incendiará.", "translation_status": "TRANSLATED"}
+{"id": "0x0071", "plain_text_es_419": "¡Obtuviste la Flecha de Hielo!\nAsígala a [C] y tus flechas se\npotenciarán. Si golpeas tu\nobjetivo, se congelará.\n--- PAGE ---\nEsta magia de flecha se otorga\nsolo a quienes completan el\ndifícil entrenamiento de las Gerudo,\n¡así que úsala con orgullo!", "translation_status": "TRANSLATED"}
+{"id": "0x0072", "plain_text_es_419": "¡Obtuviste la Flecha de Luz!\nAsígala a [C] y tus flechas se\n¡potenciarán! ¡La luz de la\njusticia castigará el mal!", "translation_status": "TRANSLATED"}
+{"id": "0x0073", "plain_text_es_419": "¡Has aprendido el\nMinueto del Bosque!", "translation_status": "TRANSLATED"}
+{"id": "0x0074", "plain_text_es_419": "¡Has aprendido el\nBolero del Fuego!", "translation_status": "TRANSLATED"}
+{"id": "0x0075", "plain_text_es_419": "¡Has aprendido la\nSerenata del Agua!", "translation_status": "TRANSLATED"}
+{"id": "0x0076", "plain_text_es_419": "¡Has aprendido el\nRéquiem del Espíritu!", "translation_status": "TRANSLATED"}
+{"id": "0x0077", "plain_text_es_419": "¡Has aprendido el\nNocturno de la Sombra!", "translation_status": "TRANSLATED"}
+{"id": "0x0078", "plain_text_es_419": "¡Has aprendido el\nPreludio de la Luz!", "translation_status": "TRANSLATED"}
+{"id": "0x0079", "plain_text_es_419": "¡Obtuviste el Brazalete Goron!\nAhora puedes arrancar\nFlores Bomba. ¡Ponte junto a una\ny usa [A] para arrancarla!", "translation_status": "TRANSLATED"}
+{"id": "0x007A", "plain_text_es_419": "¡Pusiste un Bicho en la botella!\nPuedes liberarlo presionando\n[C]. Este tipo de bicho prefiere\nvivir en pequeños huecos en el suelo.", "translation_status": "TRANSLATED"}
+{"id": "0x007B", "plain_text_es_419": "¡Obtuviste la Tarjeta de\nMembresía de las Gerudo!\nPuedes entrar al campo de\nentrenamiento de las Gerudo en su escondite.", "translation_status": "TRANSLATED"}
+{"id": "0x007C", "plain_text_es_419": "Bombas  10 piezas  50 Rupias\n\n[CHOICE:2]Comprar\nNo comprar", "translation_status": "TRANSLATED"}
+{"id": "0x007D", "plain_text_es_419": "Flechas  50 piezas  90 Rupias\n\n[CHOICE:2]Comprar\nNo comprar", "translation_status": "TRANSLATED"}
+{"id": "0x007E", "plain_text_es_419": "Pescado   200 Rupias\n\n[CHOICE:2]Comprar\nNo comprar", "translation_status": "TRANSLATED"}
+{"id": "0x007F", "plain_text_es_419": "Nueces Deku   5 Piezas   15 Rupias\n\n[CHOICE:2]Comprar\nNo comprar", "translation_status": "TRANSLATED"}
+{"id": "0x0080", "plain_text_es_419": "¡Obtuviste la Esmeralda Kokiri!\nEsta es la Piedra Espiritual del\nBosque, ahora confiada a ti\npor el Gran Árbol Deku.", "translation_status": "TRANSLATED"}
+{"id": "0x0081", "plain_text_es_419": "¡Obtuviste el Rubí Goron!\nEsta es la Piedra Espiritual del\n¡Fuego heredada por los Goron!", "translation_status": "TRANSLATED"}
+{"id": "0x0082", "plain_text_es_419": "¡Obtuviste el Zafiro Zora!\nEsta es la Piedra Espiritual del\nAgua heredada por los\n¡Zora!", "translation_status": "TRANSLATED"}
+{"id": "0x0083", "plain_text_es_419": "Explora moviéndote con el\n[D-Pad] izquierda o derecha.\n[CHOICE:2]Hablar con el dueño\nSalir", "translation_status": "TRANSLATED"}
+{"id": "0x0084", "plain_text_es_419": "¡Muchas gracias!", "translation_status": "TRANSLATED"}
+{"id": "0x0085", "plain_text_es_419": "¡No tienes suficientes Rupias!", "translation_status": "TRANSLATED"}
+{"id": "0x0086", "plain_text_es_419": "No puedes obtener esto ahora.", "translation_status": "TRANSLATED"}
+{"id": "0x0087", "plain_text_es_419": "Nueces Deku   10 piezas  30 Rupias\n\n[CHOICE:2]Comprar\nNo comprar", "translation_status": "TRANSLATED"}
+{"id": "0x0088", "plain_text_es_419": "Palo Deku  1 pieza   10 Rupias\n\n[CHOICE:2]Comprar\nNo comprar", "translation_status": "TRANSLATED"}
+{"id": "0x0089", "plain_text_es_419": "Escudo Deku   40 Rupias\n\n[CHOICE:2]Comprar\nNo comprar", "translation_status": "TRANSLATED"}
+{"id": "0x008A", "plain_text_es_419": "Flecha   10 piezas   20 Rupias\n\n[CHOICE:2]Comprar\nNo comprar", "translation_status": "TRANSLATED"}
+{"id": "0x008B", "plain_text_es_419": "Bomba   5 piezas   25 Rupias\n\n[CHOICE:2]Comprar\nNo comprar", "translation_status": "TRANSLATED"}
+{"id": "0x008C", "plain_text_es_419": "Bombchu  10 piezas   100 Rupias\n\n[CHOICE:2]Comprar\nNo comprar", "translation_status": "TRANSLATED"}
+{"id": "0x008D", "plain_text_es_419": "¡No puedes usar un Poe Grande aquí!\nvéndeselo al hombre en la puerta\ndel Castillo de Hyrule.", "translation_status": "TRANSLATED"}
+{"id": "0x008E", "plain_text_es_419": "Poción Roja   30 Rupias\n\n[CHOICE:2]Comprar\nNo comprar", "translation_status": "TRANSLATED"}
+{"id": "0x008F", "plain_text_es_419": "Poción Verde   30 Rupias\n\n[CHOICE:2]Comprar\nNo comprar", "translation_status": "TRANSLATED"}
+{"id": "0x0090", "plain_text_es_419": "Ahora puedes recoger\nmuchos Palos Deku.\n¡Puedes llevar hasta 20 de ellos!", "translation_status": "TRANSLATED"}
+{"id": "0x0091", "plain_text_es_419": "¡Ahora puedes recoger\naún más Palos Deku!\nPuedes llevar hasta 30 de ellos.", "translation_status": "TRANSLATED"}
+{"id": "0x0092", "plain_text_es_419": "Escudo Hylian   80 Rupias\n\n[CHOICE:2]Comprar\nNo comprar", "translation_status": "TRANSLATED"}
+{"id": "0x0093", "plain_text_es_419": "Túnica Goron   200 Rupias\n\n[CHOICE:2]Comprar\nNo comprar", "translation_status": "TRANSLATED"}
+{"id": "0x0094", "plain_text_es_419": "Túnica Zora   300 Rupias\n\n[CHOICE:2]Comprar\nNo comprar", "translation_status": "TRANSLATED"}
+{"id": "0x0095", "plain_text_es_419": "Corazón de Recuperación   10 Rupias\n\n[CHOICE:2]Comprar\nNo comprar", "translation_status": "TRANSLATED"}
+{"id": "0x0096", "plain_text_es_419": "Lo siento... no puedo venderte esto\na menos que tengas una botella\npara guardarlo.", "translation_status": "TRANSLATED"}
+{"id": "0x0097", "plain_text_es_419": "¡Atrapaste un Poe en una botella!\n¡Algo bueno podría suceder!", "translation_status": "TRANSLATED"}
+{"id": "0x0098", "plain_text_es_419": "¡Obtuviste Leche Lon Lon!\n¡Esta leche es muy nutritiva!\nÚsala con [C] para recuperar tu\nenergía vital.\n--- PAGE ---\nRecuperarás cinco corazones\npor trago. Hay dos tragos\npor botella.\n--- PAGE ---\nEn la pantalla de Selección de\nObjetos, puedes asignarla a [R], [L]\no [Z], y luego usar ese [C] para\ntomar un trago.", "translation_status": "TRANSLATED"}
+{"id": "0x0099", "plain_text_es_419": "¡Obtuviste una Botella Vacía!\nPon algo dentro y presiona\n[C] para usarla... ¿Qué?\n¡¿Ya hay algo adentro?!", "translation_status": "TRANSLATED"}
+{"id": "0x009A", "plain_text_es_419": "¡Obtuviste un Huevo Raro!\n¡Parece que hay algo\nmoviéndose dentro! Asígalo a [C] y\n¡mira lo que pasa!\n--- PAGE ---\nEn la pantalla de Selección de\nObjetos, puedes asignarlo a [R], [L]\no [Z], y luego presionar [C] para usarlo.", "translation_status": "TRANSLATED"}
+{"id": "0x009B", "plain_text_es_419": "Flechas   30 piezas   60 Rupias\n\n[CHOICE:2]Comprar\nNo comprar", "translation_status": "TRANSLATED"}
+{"id": "0x009C", "plain_text_es_419": "Mi producto más vendido es el\nEscudo Hylian, pero podría ser\ndemasiado grande para ti, chico.", "translation_status": "TRANSLATED"}
+{"id": "0x009D", "plain_text_es_419": "Nos mudamos aquí desde la villa\ndel castillo. Sé que los tiempos están\ndifíciles, pero espero que seas\nun cliente fiel para nosotros.", "translation_status": "TRANSLATED"}
+{"id": "0x009E", "plain_text_es_419": "¡Bienvenido!", "translation_status": "TRANSLATED"}
+{"id": "0x009F", "plain_text_es_419": "Escudo Deku   40 Rupias\nUna vez equipado, puedes\ndefenderte con [C-Abajo]. Si se incendia,\n¡se quemará!", "translation_status": "TRANSLATED"}
+{"id": "0x00A0", "plain_text_es_419": "Flecha   (10 piezas)   20 Rupias\nNecesitas un arco para dispararlas.\nNo puedes comprarlas a menos que\ntengas un arco.", "translation_status": "TRANSLATED"}
+{"id": "0x00A1", "plain_text_es_419": "Palo Deku  (1 pieza)  10 Rupias\nUna rama larga recolectada del\nGran Árbol Deku. Puedes usarla\ncomo arma, pero se romperá.", "translation_status": "TRANSLATED"}
+{"id": "0x00A2", "plain_text_es_419": "Nueces Deku  (10 piezas) 30 Rupias\nLánzalas para aturdir a tus enemigos.\nPuedes comprar solo la cantidad que\nrealmente puedas llevar.", "translation_status": "TRANSLATED"}
+{"id": "0x00A3", "plain_text_es_419": "Bombas   (5 piezas)   25 Rupias\nSácalas con [C] y presiona\n[C] para lanzarlas. Solo puedes\ncomprarlas si tienes una bolsa de bombas.", "translation_status": "TRANSLATED"}
+{"id": "0x00A4", "plain_text_es_419": "¡Obtuviste la Espada Kokiri!\nEn la pantalla de Equipamiento,\nselecciónala con el cursor y\neqúípala con [A].\n--- PAGE ---\nEsta es un tesoro escondido de\nlos Kokiri, pero puedes pedirla\nprestada por un tiempo. ¡Asegúrate\nde practicar con ella antes de luchar de verdad!", "translation_status": "TRANSLATED"}
+{"id": "0x00A5", "plain_text_es_419": "Poción Roja   30 Rupias\nBebe para recuperar tu energía vital.\nEsta es solo una sola dosis.", "translation_status": "TRANSLATED"}
+{"id": "0x00A6", "plain_text_es_419": "Poción Verde   30 Rupias\nBebe para recuperar tu poder mágico.\nEsta es solo una sola dosis.", "translation_status": "TRANSLATED"}
+{"id": "0x00A7", "plain_text_es_419": "Ahora puedes llevar\nmuchas Nueces Deku.\n¡Puedes contener hasta 30 nueces!", "translation_status": "TRANSLATED"}
+{"id": "0x00A8", "plain_text_es_419": "¡Ahora puedes llevar aún\nmás Nueces Deku! Puedes llevar\nhasta 40 nueces.", "translation_status": "TRANSLATED"}
+{"id": "0x00A9", "plain_text_es_419": "Escudo Hylian   80 Rupias\nEste es un escudo grande y pesado,\nigual a los que usan los\nCaballeros Hylian. ¡Resiste ataques de fuego!", "translation_status": "TRANSLATED"}
+{"id": "0x00AA", "plain_text_es_419": "Túnica Goron   200 Rupias\nUna túnica hecha por los Goron.\nTalla adulta. Te protege del\ndaño por calor.", "translation_status": "TRANSLATED"}
+{"id": "0x00AB", "plain_text_es_419": "Túnica Zora   300 Rupias\nUna túnica hecha por los Zora.\nTalla adulta. Te impide ahogarte\nbajo el agua.", "translation_status": "TRANSLATED"}
+{"id": "0x00AC", "plain_text_es_419": "Corazón de Recuperación   10 Rupias\nEsto llenará instantáneamente\nun Contenedor de Corazón.", "translation_status": "TRANSLATED"}
+{"id": "0x00AD", "plain_text_es_419": "¡Obtuviste el Fuego de Din!\n¡Su bola de fuego lo envuelve todo!\nEs magia de ataque que puedes usar\ncon [C].", "translation_status": "TRANSLATED"}
+{"id": "0x00AE", "plain_text_es_419": "¡Obtuviste el Viento de Farore!\nEsta es magia de teletransporte que\npuedes usar con [C]. ¡Telétransportate\ncuando estés en peligro!\n--- PAGE ---\nTe teleportarás al Punto de\nTeletransporte. Cuando uses la\nmagia por primera vez, crearás un\nPunto de Teletransporte.\n--- PAGE ---\nCuando uses la magia\nde nuevo, puedes disipar el\nPunto de Teletransporte que creaste\nla última vez o teletransportarte a ese punto.", "translation_status": "TRANSLATED"}
+{"id": "0x00AF", "plain_text_es_419": "¡Obtuviste el Amor de Nayru!\nLanza esto para crear una poderosa\nbarrera protectora. Es magia defensiva\nque puedes usar con [C].", "translation_status": "TRANSLATED"}
+{"id": "0x00B0", "plain_text_es_419": "Flechas  (50 piezas)  90 Rupias\nDispara estas con un arco. No puedes\ncomprarlas a menos que tengas un arco.", "translation_status": "TRANSLATED"}
+{"id": "0x00B1", "plain_text_es_419": "Bombas  (10 piezas)  50 Rupias\nSácalas con [C] y presiona\n[C] de nuevo para lanzarlas. No puedes\ncomprarlas sin una bolsa de bombas.", "translation_status": "TRANSLATED"}
+{"id": "0x00B2", "plain_text_es_419": "Nueces Deku  (5 piezas)  15 Rupias\nLánzalas para aturdir a tus enemigos.\nPuedes llevar solo una cantidad\nlimitada de ellas.", "translation_status": "TRANSLATED"}
+{"id": "0x00B3", "plain_text_es_419": "Pescado   200 Rupias\n¡Recién pescado y tan fresco!\nPuedes guardarlo en una botella.", "translation_status": "TRANSLATED"}
+{"id": "0x00B4", "plain_text_es_419": "Destruiste un Skulltula Dorado.\n¡Obtuviste una ficha que prueba\nque lo destruiste!", "translation_status": "TRANSLATED"}
+{"id": "0x00B5", "plain_text_es_419": "Destruiste un Skulltula Dorado.\n¡Obtuviste una ficha que prueba\nque lo destruiste!", "translation_status": "TRANSLATED"}
+{"id": "0x00B6", "plain_text_es_419": "Espíritu de Hada    50 Rupias\n\n[CHOICE:2]Comprar\nNo comprar", "translation_status": "TRANSLATED"}
+{"id": "0x00B7", "plain_text_es_419": "Espíritu de Hada   50 Rupias\nNecesitas una botella vacía para\nponerla. ¡No vayas a batalla\nsin ella!", "translation_status": "TRANSLATED"}
+{"id": "0x00B8", "plain_text_es_419": "Fuego Azul    300 Rupias\n\n[CHOICE:2]Comprar\nNo comprar", "translation_status": "TRANSLATED"}
+{"id": "0x00B9", "plain_text_es_419": "Fuego Azul   300 Rupias\nNecesitas una botella vacía para\nponerlo. Úsalo para sentir\nuna refrescante frescura.", "translation_status": "TRANSLATED"}
+{"id": "0x00BA", "plain_text_es_419": "Bicho en Botella   50 Rupias\n\n[CHOICE:2]Comprar\nNo comprar", "translation_status": "TRANSLATED"}
+{"id": "0x00BB", "plain_text_es_419": "Bicho en Botella    50 Rupias\nNecesitas una botella vacía para\nponerlo. Parece solo un\nbicho común...", "translation_status": "TRANSLATED"}
+{"id": "0x00BC", "plain_text_es_419": "Bombchu  (10 piezas)  100 Rupias\nEsto parece un ratón de juguete, pero\nen realidad es una bomba de tiempo\n¡propulsada por sí misma!", "translation_status": "TRANSLATED"}
+{"id": "0x00BD", "plain_text_es_419": "Estamos temporalmente sin\nstock de ese artículo.", "translation_status": "TRANSLATED"}
+{"id": "0x00BE", "plain_text_es_419": "¡Vamos, hombre! ¡Eres demasiado\nmayor para este juego!", "translation_status": "TRANSLATED"}
+{"id": "0x00BF", "plain_text_es_419": "¿Eh? ¿Qué—!\n--- PAGE ---\n¡Uh-oh!\n--- PAGE ---\n¡Un cliente!", "translation_status": "TRANSLATED"}
+{"id": "0x00C0", "plain_text_es_419": "zzzzz...zzzzz...", "translation_status": "SKIPPED_NO_TEXT"}
+{"id": "0x00C1", "plain_text_es_419": "Flechas   (30 piezas)   60 Rupias\nNecesitas un arco para dispararlas.\nÚsalas y se te acabarán.", "translation_status": "TRANSLATED"}
+{"id": "0x00C2", "plain_text_es_419": "¡Obtuviste una Pieza de Corazón!\n¡Recoge cuatro piezas en total para\nobtener otro Contenedor de Corazón.\n¡Más contenedores significan más energía vital!", "translation_status": "TRANSLATED"}
+{"id": "0x00C3", "plain_text_es_419": "¡Obtuviste una Pieza de Corazón!\nHasta ahora, has recolectado dos\npiezas. ¡Con dos piezas más,\nganarás más energía vital!", "translation_status": "TRANSLATED"}
+{"id": "0x00C4", "plain_text_es_419": "¡Obtuviste una Pieza de Corazón!\n¡Ahora has recolectado tres\npiezas! ¡Con otra pieza más, tu\nenergía vital se potenciará!", "translation_status": "TRANSLATED"}
+{"id": "0x00C5", "plain_text_es_419": "¡Obtuviste una Pieza de Corazón!\n¡Has completado otro Contenedor\nde Corazón! ¡Tu energía vital\nmáxima ha aumentado!", "translation_status": "TRANSLATED"}
+{"id": "0x00C6", "plain_text_es_419": "¡Obtuviste un Contenedor de Corazón!\nTu energía vital máxima ha\naumentado en un corazón. Tu energía\nvital se llenará por completo.", "translation_status": "TRANSLATED"}
+{"id": "0x00C7", "plain_text_es_419": "¡Obtuviste la Llave Jefe!\nAhora puedes entrar a la\ncámara donde se esconde el Jefe.", "translation_status": "TRANSLATED"}
+{"id": "0x00C8", "plain_text_es_419": "No, no tienes suficientes\n¡Rupias!", "translation_status": "TRANSLATED"}

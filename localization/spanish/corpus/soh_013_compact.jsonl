@@ -1,0 +1,200 @@
+{"id": "ACCESSIBILITY::scenes_ger::47", "plain_text": "Zora-Laden", "category": "SYSTEM", "subcategory": "47"}
+{"id": "ACCESSIBILITY::scenes_ger::49", "plain_text": "Magie-Laden", "category": "SYSTEM", "subcategory": "49"}
+{"id": "ACCESSIBILITY::scenes_ger::51", "plain_text": "Maskenhändler", "category": "SYSTEM", "subcategory": "51"}
+{"id": "ACCESSIBILITY::scenes_ger::54", "plain_text": "Stall", "category": "SYSTEM", "subcategory": "54"}
+{"id": "ACCESSIBILITY::scenes_ger::56", "plain_text": "Hylia-See Laboratorium", "category": "SYSTEM", "subcategory": "56"}
+{"id": "ACCESSIBILITY::scenes_ger::58", "plain_text": "Hütte des Totengräbers", "category": "SYSTEM", "subcategory": "58"}
+{"id": "ACCESSIBILITY::scenes_ger::59", "plain_text": "Feen-Quelle", "category": "SYSTEM", "subcategory": "59"}
+{"id": "ACCESSIBILITY::scenes_ger::60", "plain_text": "Feen-Brunnen", "category": "SYSTEM", "subcategory": "60"}
+{"id": "ACCESSIBILITY::scenes_ger::61", "plain_text": "Feen-Quelle", "category": "SYSTEM", "subcategory": "61"}
+{"id": "ACCESSIBILITY::scenes_ger::65", "plain_text": "Königsgrab", "category": "SYSTEM", "subcategory": "65"}
+{"id": "ACCESSIBILITY::scenes_ger::66", "plain_text": "Schießbude", "category": "SYSTEM", "subcategory": "66"}
+{"id": "ACCESSIBILITY::scenes_ger::67", "plain_text": "Zitadelle der Zeit", "category": "SYSTEM", "subcategory": "67"}
+{"id": "ACCESSIBILITY::scenes_ger::68", "plain_text": "Halle der Weisen", "category": "SYSTEM", "subcategory": "68"}
+{"id": "ACCESSIBILITY::scenes_ger::69", "plain_text": "Burghof", "category": "SYSTEM", "subcategory": "69"}
+{"id": "ACCESSIBILITY::scenes_ger::70", "plain_text": "Burghof", "category": "SYSTEM", "subcategory": "70"}
+{"id": "ACCESSIBILITY::scenes_ger::72", "plain_text": "Unbekannter Ort", "category": "SYSTEM", "subcategory": "72"}
+{"id": "ACCESSIBILITY::scenes_ger::73", "plain_text": "Fischweiher", "category": "SYSTEM", "subcategory": "73"}
+{"id": "ACCESSIBILITY::scenes_ger::74", "plain_text": "Burghof", "category": "SYSTEM", "subcategory": "74"}
+{"id": "ACCESSIBILITY::scenes_ger::75", "plain_text": "Minenbowlingbahn", "category": "SYSTEM", "subcategory": "75"}
+{"id": "ACCESSIBILITY::scenes_ger::79", "plain_text": "Ganon", "category": "SYSTEM", "subcategory": "79"}
+{"id": "ACCESSIBILITY::scenes_ger::80", "plain_text": "Skulltulas Haus", "category": "SYSTEM", "subcategory": "80"}
+{"id": "ACCESSIBILITY::scenes_ger::81", "plain_text": "Hylianische Steppe", "category": "SYSTEM", "subcategory": "81"}
+{"id": "ACCESSIBILITY::scenes_ger::82", "plain_text": "Kakariko", "category": "SYSTEM", "subcategory": "82"}
+{"id": "ACCESSIBILITY::scenes_ger::83", "plain_text": "Friedhof", "category": "SYSTEM", "subcategory": "83"}
+{"id": "ACCESSIBILITY::scenes_ger::84", "plain_text": "Zora-Fluß", "category": "SYSTEM", "subcategory": "84"}
+{"id": "ACCESSIBILITY::scenes_ger::85", "plain_text": "Kokiri-Wald", "category": "SYSTEM", "subcategory": "85"}
+{"id": "ACCESSIBILITY::scenes_ger::86", "plain_text": "Waldlichtung", "category": "SYSTEM", "subcategory": "86"}
+{"id": "ACCESSIBILITY::scenes_ger::87", "plain_text": "Hylia-See", "category": "SYSTEM", "subcategory": "87"}
+{"id": "ACCESSIBILITY::scenes_ger::88", "plain_text": "Zoras Reich", "category": "SYSTEM", "subcategory": "88"}
+{"id": "ACCESSIBILITY::scenes_ger::89", "plain_text": "Zoras Quelle", "category": "SYSTEM", "subcategory": "89"}
+{"id": "ACCESSIBILITY::scenes_ger::90", "plain_text": "Gerudotal", "category": "SYSTEM", "subcategory": "90"}
+{"id": "ACCESSIBILITY::scenes_ger::91", "plain_text": "Verlorene Wälder", "category": "SYSTEM", "subcategory": "91"}
+{"id": "ACCESSIBILITY::scenes_ger::92", "plain_text": "Wüstenkoloss", "category": "SYSTEM", "subcategory": "92"}
+{"id": "ACCESSIBILITY::scenes_ger::93", "plain_text": "Gerudo-Festung", "category": "SYSTEM", "subcategory": "93"}
+{"id": "ACCESSIBILITY::scenes_ger::94", "plain_text": "Geisterwüste", "category": "SYSTEM", "subcategory": "94"}
+{"id": "ACCESSIBILITY::scenes_ger::95", "plain_text": "Schloß Hyrule", "category": "SYSTEM", "subcategory": "95"}
+{"id": "ACCESSIBILITY::scenes_ger::96", "plain_text": "Pfad zum Todesberg", "category": "SYSTEM", "subcategory": "96"}
+{"id": "ACCESSIBILITY::scenes_ger::97", "plain_text": "Todeskrater", "category": "SYSTEM", "subcategory": "97"}
+{"id": "ACCESSIBILITY::scenes_ger::98", "plain_text": "Goronia", "category": "SYSTEM", "subcategory": "98"}
+{"id": "ACCESSIBILITY::scenes_ger::99", "plain_text": "Lon Lon-Farm", "category": "SYSTEM", "subcategory": "99"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::health", "plain_text": "Health - $0 Hearts", "category": "SYSTEM", "subcategory": "health"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::magic", "plain_text": "Magic - $0", "category": "SYSTEM", "subcategory": "magic"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::rupees", "plain_text": "Rupees - $0", "category": "SYSTEM", "subcategory": "rupees"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::keys", "plain_text": "Keys - $0", "category": "SYSTEM", "subcategory": "keys"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::floor", "plain_text": "Floor $0", "category": "SYSTEM", "subcategory": "floor"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::basement", "plain_text": "Basement $0", "category": "SYSTEM", "subcategory": "basement"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::item_menu", "plain_text": "Select Item", "category": "SYSTEM", "subcategory": "item_menu"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::map_menu", "plain_text": "Map - $0", "category": "SYSTEM", "subcategory": "map_menu"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::quest_menu", "plain_text": "Quest Status", "category": "SYSTEM", "subcategory": "quest_menu"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::equip_menu", "plain_text": "Equipment", "category": "SYSTEM", "subcategory": "equip_menu"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::overworld", "plain_text": "Overworld", "category": "SYSTEM", "subcategory": "overworld"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::equipped", "plain_text": "$0 - Equipped", "category": "SYSTEM", "subcategory": "equipped"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::save_prompt", "plain_text": "Would you like to save?", "category": "SYSTEM", "subcategory": "save_prompt"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::game_saved", "plain_text": "Game saved", "category": "SYSTEM", "subcategory": "game_saved"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::game_over", "plain_text": "Game Over", "category": "SYSTEM", "subcategory": "game_over"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::continue_game", "plain_text": "Continue playing?", "category": "SYSTEM", "subcategory": "continue_game"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::assigned_to", "plain_text": "Assigned to $0", "category": "SYSTEM", "subcategory": "assigned_to"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::0", "plain_text": "Deku Stick - $0", "category": "SYSTEM", "subcategory": "0"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::1", "plain_text": "Deku Nut - $0", "category": "SYSTEM", "subcategory": "1"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::2", "plain_text": "Bomb - $0", "category": "SYSTEM", "subcategory": "2"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::3", "plain_text": "Fairy Bow - $0", "category": "SYSTEM", "subcategory": "3"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::4", "plain_text": "Fire Arrow", "category": "SYSTEM", "subcategory": "4"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::5", "plain_text": "Din's Fire", "category": "SYSTEM", "subcategory": "5"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::6", "plain_text": "Fairy Slingshot - $0", "category": "SYSTEM", "subcategory": "6"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::7", "plain_text": "Fairy Ocarina", "category": "SYSTEM", "subcategory": "7"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::8", "plain_text": "Ocarina of Time", "category": "SYSTEM", "subcategory": "8"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::9", "plain_text": "Bombchu - $0", "category": "SYSTEM", "subcategory": "9"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::10", "plain_text": "Hookshot", "category": "SYSTEM", "subcategory": "10"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::11", "plain_text": "Longshot", "category": "SYSTEM", "subcategory": "11"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::12", "plain_text": "Ice Arrow", "category": "SYSTEM", "subcategory": "12"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::13", "plain_text": "Farore's Wind", "category": "SYSTEM", "subcategory": "13"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::14", "plain_text": "Boomerang", "category": "SYSTEM", "subcategory": "14"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::15", "plain_text": "Lens of Truth", "category": "SYSTEM", "subcategory": "15"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::16", "plain_text": "Magic Beans - $0", "category": "SYSTEM", "subcategory": "16"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::17", "plain_text": "Megaton Hammer", "category": "SYSTEM", "subcategory": "17"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::18", "plain_text": "Light Arrow", "category": "SYSTEM", "subcategory": "18"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::19", "plain_text": "Nayru's Love", "category": "SYSTEM", "subcategory": "19"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::20", "plain_text": "Empty Bottle", "category": "SYSTEM", "subcategory": "20"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::21", "plain_text": "Red Potion", "category": "SYSTEM", "subcategory": "21"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::22", "plain_text": "Green Potion", "category": "SYSTEM", "subcategory": "22"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::23", "plain_text": "Blue Potion", "category": "SYSTEM", "subcategory": "23"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::24", "plain_text": "Fairy", "category": "SYSTEM", "subcategory": "24"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::25", "plain_text": "Fish", "category": "SYSTEM", "subcategory": "25"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::26", "plain_text": "Milk Bottle", "category": "SYSTEM", "subcategory": "26"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::27", "plain_text": "Ruto's Letter", "category": "SYSTEM", "subcategory": "27"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::28", "plain_text": "Blue Fire", "category": "SYSTEM", "subcategory": "28"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::29", "plain_text": "Bugs", "category": "SYSTEM", "subcategory": "29"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::30", "plain_text": "Big Poe", "category": "SYSTEM", "subcategory": "30"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::31", "plain_text": "Milk Bottle (Half)", "category": "SYSTEM", "subcategory": "31"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::32", "plain_text": "Poe", "category": "SYSTEM", "subcategory": "32"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::33", "plain_text": "Weird Egg", "category": "SYSTEM", "subcategory": "33"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::34", "plain_text": "Chicken", "category": "SYSTEM", "subcategory": "34"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::35", "plain_text": "Zelda's Letter", "category": "SYSTEM", "subcategory": "35"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::36", "plain_text": "Keaton Mask", "category": "SYSTEM", "subcategory": "36"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::37", "plain_text": "Skull Mask", "category": "SYSTEM", "subcategory": "37"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::38", "plain_text": "Spooky Mask", "category": "SYSTEM", "subcategory": "38"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::39", "plain_text": "Bunny Mask", "category": "SYSTEM", "subcategory": "39"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::40", "plain_text": "Goron Mask", "category": "SYSTEM", "subcategory": "40"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::41", "plain_text": "Zora Mask", "category": "SYSTEM", "subcategory": "41"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::42", "plain_text": "Gerudo Mask", "category": "SYSTEM", "subcategory": "42"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::43", "plain_text": "Mask of Truth", "category": "SYSTEM", "subcategory": "43"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::44", "plain_text": "Sold Out", "category": "SYSTEM", "subcategory": "44"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::45", "plain_text": "Pocket Egg", "category": "SYSTEM", "subcategory": "45"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::46", "plain_text": "Pocket Cucco", "category": "SYSTEM", "subcategory": "46"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::47", "plain_text": "Cojiro", "category": "SYSTEM", "subcategory": "47"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::48", "plain_text": "Odd Mushroom", "category": "SYSTEM", "subcategory": "48"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::49", "plain_text": "Odd Potion", "category": "SYSTEM", "subcategory": "49"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::50", "plain_text": "Saw", "category": "SYSTEM", "subcategory": "50"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::51", "plain_text": "Broken Sword", "category": "SYSTEM", "subcategory": "51"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::52", "plain_text": "Prescription", "category": "SYSTEM", "subcategory": "52"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::53", "plain_text": "Eyeball Frog", "category": "SYSTEM", "subcategory": "53"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::54", "plain_text": "Eyedrops", "category": "SYSTEM", "subcategory": "54"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::55", "plain_text": "Claim Check", "category": "SYSTEM", "subcategory": "55"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::56", "plain_text": "Bow Fire Arrow", "category": "SYSTEM", "subcategory": "56"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::57", "plain_text": "Bow Ice Arrow", "category": "SYSTEM", "subcategory": "57"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::58", "plain_text": "Bow Light Arrow", "category": "SYSTEM", "subcategory": "58"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::59", "plain_text": "Kokiri Sword", "category": "SYSTEM", "subcategory": "59"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::60", "plain_text": "Master Sword", "category": "SYSTEM", "subcategory": "60"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::61", "plain_text": "Giant's Knife", "category": "SYSTEM", "subcategory": "61"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::62", "plain_text": "Deku Shield", "category": "SYSTEM", "subcategory": "62"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::63", "plain_text": "Hylian Shield", "category": "SYSTEM", "subcategory": "63"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::64", "plain_text": "Mirror Shield", "category": "SYSTEM", "subcategory": "64"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::65", "plain_text": "Kokiri Tunic", "category": "SYSTEM", "subcategory": "65"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::66", "plain_text": "Goron Tunic", "category": "SYSTEM", "subcategory": "66"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::67", "plain_text": "Zora Tunic", "category": "SYSTEM", "subcategory": "67"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::68", "plain_text": "Kokiri Boots", "category": "SYSTEM", "subcategory": "68"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::69", "plain_text": "Iron Boots", "category": "SYSTEM", "subcategory": "69"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::70", "plain_text": "Hover Boots", "category": "SYSTEM", "subcategory": "70"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::71", "plain_text": "Bullet Bag (Holds 30)", "category": "SYSTEM", "subcategory": "71"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::72", "plain_text": "Bullet Bag (Holds 40)", "category": "SYSTEM", "subcategory": "72"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::73", "plain_text": "Bullet Bag (Holds 50)", "category": "SYSTEM", "subcategory": "73"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::74", "plain_text": "Quiver (Holds 30)", "category": "SYSTEM", "subcategory": "74"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::75", "plain_text": "Quiver (Holds 40)", "category": "SYSTEM", "subcategory": "75"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::76", "plain_text": "Quiver (Holds 50)", "category": "SYSTEM", "subcategory": "76"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::77", "plain_text": "Bomb Bag (Holds 20)", "category": "SYSTEM", "subcategory": "77"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::78", "plain_text": "Bomb Bag (Holds 30)", "category": "SYSTEM", "subcategory": "78"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::79", "plain_text": "Bomb Bag (Holds 40)", "category": "SYSTEM", "subcategory": "79"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::80", "plain_text": "Goron's Bracelet", "category": "SYSTEM", "subcategory": "80"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::81", "plain_text": "Silver Gauntlets", "category": "SYSTEM", "subcategory": "81"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::82", "plain_text": "Golden Gauntlets", "category": "SYSTEM", "subcategory": "82"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::83", "plain_text": "Silver Scale", "category": "SYSTEM", "subcategory": "83"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::84", "plain_text": "Golden Scale", "category": "SYSTEM", "subcategory": "84"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::85", "plain_text": "Giant's Knife (Broken)", "category": "SYSTEM", "subcategory": "85"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::86", "plain_text": "WALLET ADULT", "category": "SYSTEM", "subcategory": "86"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::87", "plain_text": "Giant's Wallet", "category": "SYSTEM", "subcategory": "87"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::88", "plain_text": "Deku Seeds", "category": "SYSTEM", "subcategory": "88"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::89", "plain_text": "Fishing Pole", "category": "SYSTEM", "subcategory": "89"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::90", "plain_text": "Minuet of Forest", "category": "SYSTEM", "subcategory": "90"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::91", "plain_text": "Bolero of Fire", "category": "SYSTEM", "subcategory": "91"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::92", "plain_text": "Serenade of Water", "category": "SYSTEM", "subcategory": "92"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::93", "plain_text": "Requiem of Spirit", "category": "SYSTEM", "subcategory": "93"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::94", "plain_text": "Nocturne of Shadow", "category": "SYSTEM", "subcategory": "94"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::95", "plain_text": "Prelude of Light", "category": "SYSTEM", "subcategory": "95"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::96", "plain_text": "Zelda's Lullaby", "category": "SYSTEM", "subcategory": "96"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::97", "plain_text": "Epona's Song", "category": "SYSTEM", "subcategory": "97"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::98", "plain_text": "Saria's Song", "category": "SYSTEM", "subcategory": "98"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::99", "plain_text": "Sun's Song", "category": "SYSTEM", "subcategory": "99"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::100", "plain_text": "Song of Time", "category": "SYSTEM", "subcategory": "100"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::101", "plain_text": "Song of Storms", "category": "SYSTEM", "subcategory": "101"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::102", "plain_text": "Forest Medallion", "category": "SYSTEM", "subcategory": "102"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::103", "plain_text": "Fire Medallion", "category": "SYSTEM", "subcategory": "103"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::104", "plain_text": "Water Medallion", "category": "SYSTEM", "subcategory": "104"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::105", "plain_text": "Spirit Medallion", "category": "SYSTEM", "subcategory": "105"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::106", "plain_text": "Shadow Medallion", "category": "SYSTEM", "subcategory": "106"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::107", "plain_text": "Light Medallion", "category": "SYSTEM", "subcategory": "107"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::108", "plain_text": "Kokiri's Emerald", "category": "SYSTEM", "subcategory": "108"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::109", "plain_text": "Goron's Ruby", "category": "SYSTEM", "subcategory": "109"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::110", "plain_text": "Zora Sapphire", "category": "SYSTEM", "subcategory": "110"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::111", "plain_text": "Stone of Agony", "category": "SYSTEM", "subcategory": "111"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::112", "plain_text": "Gerudo's Card", "category": "SYSTEM", "subcategory": "112"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::113", "plain_text": "Skulltula Token - $0", "category": "SYSTEM", "subcategory": "113"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::114", "plain_text": "Piece of Heart - $0", "category": "SYSTEM", "subcategory": "114"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::115", "plain_text": "Piece of Heart", "category": "SYSTEM", "subcategory": "115"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::116", "plain_text": "Boss Key", "category": "SYSTEM", "subcategory": "116"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::117", "plain_text": "Compass", "category": "SYSTEM", "subcategory": "117"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::118", "plain_text": "Dungeon Map", "category": "SYSTEM", "subcategory": "118"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::119", "plain_text": "Small Key", "category": "SYSTEM", "subcategory": "119"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::120", "plain_text": "MAGIC SMALL", "category": "SYSTEM", "subcategory": "120"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::121", "plain_text": "MAGIC LARGE", "category": "SYSTEM", "subcategory": "121"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::122", "plain_text": "Biggoron's Sword", "category": "SYSTEM", "subcategory": "122"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::123", "plain_text": "INVALID 1", "category": "SYSTEM", "subcategory": "123"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::124", "plain_text": "INVALID 2", "category": "SYSTEM", "subcategory": "124"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::125", "plain_text": "INVALID 3", "category": "SYSTEM", "subcategory": "125"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::126", "plain_text": "INVALID 4", "category": "SYSTEM", "subcategory": "126"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::127", "plain_text": "INVALID 5", "category": "SYSTEM", "subcategory": "127"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::128", "plain_text": "INVALID 6", "category": "SYSTEM", "subcategory": "128"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::129", "plain_text": "INVALID 7", "category": "SYSTEM", "subcategory": "129"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::130", "plain_text": "Milk", "category": "SYSTEM", "subcategory": "130"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::131", "plain_text": "Recovery Heart", "category": "SYSTEM", "subcategory": "131"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::132", "plain_text": "Green Rupee", "category": "SYSTEM", "subcategory": "132"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::133", "plain_text": "Blue Rupee", "category": "SYSTEM", "subcategory": "133"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::134", "plain_text": "Red Rupee", "category": "SYSTEM", "subcategory": "134"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::135", "plain_text": "Purple Rupee", "category": "SYSTEM", "subcategory": "135"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::136", "plain_text": "Gold Rupee", "category": "SYSTEM", "subcategory": "136"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::137", "plain_text": "INVALID 8", "category": "SYSTEM", "subcategory": "137"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::138", "plain_text": "STICKS 5", "category": "SYSTEM", "subcategory": "138"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::139", "plain_text": "STICKS 10", "category": "SYSTEM", "subcategory": "139"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::140", "plain_text": "NUTS 5", "category": "SYSTEM", "subcategory": "140"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::141", "plain_text": "NUTS 10", "category": "SYSTEM", "subcategory": "141"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::142", "plain_text": "BOMBS 5", "category": "SYSTEM", "subcategory": "142"}

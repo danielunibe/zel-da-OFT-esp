@@ -1,0 +1,200 @@
+{"id":"Hint::RHT_MARKET_TREASURE_CHEST_GAME_KEY_2::80","plain_text_es_419":"Dicen que el #tercer o cuarto cofre del juego# contiene #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_MARKET_TREASURE_CHEST_GAME_KEY_3::81","plain_text_es_419":"Dicen que la #tercera sala cerrada# en el juego de cofres contiene #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_MARKET_TREASURE_CHEST_GAME_KEY_3::82","plain_text_es_419":"Dicen que #apostar 3 veces# otorga #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_MARKET_TREASURE_CHEST_GAME_KEY_3::83","plain_text_es_419":"Dicen que el #quinto o sexto cofre del juego# contiene #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_MARKET_TREASURE_CHEST_GAME_KEY_4::84","plain_text_es_419":"Dicen que la #cuarta sala cerrada# en el juego de cofres contiene #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_MARKET_TREASURE_CHEST_GAME_KEY_4::85","plain_text_es_419":"Dicen que #apostar 4 veces# otorga #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_MARKET_TREASURE_CHEST_GAME_KEY_4::86","plain_text_es_419":"Dicen que el #séptimo u octavo cofre del juego# contiene #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_MARKET_TREASURE_CHEST_GAME_KEY_5::87","plain_text_es_419":"Dicen que la #quinta sala cerrada# en el juego de cofres contiene #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_MARKET_TREASURE_CHEST_GAME_KEY_5::88","plain_text_es_419":"Dicen que #apostar 5 veces# otorga #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_MARKET_TREASURE_CHEST_GAME_KEY_5::89","plain_text_es_419":"Dicen que el #noveno o décimo cofre del juego# contiene #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_GF_HBA_1500_POINTS::90","plain_text_es_419":"Dicen que obtener 1500 puntos en #tiro con arco a caballo# otorga #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_GF_HBA_1500_POINTS::91","plain_text_es_419":"Dicen que dominar #tiro con arco a caballo# otorga #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_GRAVEYARD_HEART_PIECE_GRAVE_CHEST::92","plain_text_es_419":"Dicen que tocar #Canción del Sol# en una tumba aparece #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_GC_MAZE_LEFT_CHEST::93","plain_text_es_419":"Dicen que en #Ciudad Goron# el martillo desbloquea #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_GV_CHEST::94","plain_text_es_419":"Dicen que en #Valle Gerudo# el martillo desbloquea #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_GV_TRADE_SAW::95","plain_text_es_419":"Dicen que el #jefe de los carpinteros# deja #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_GV_COW::96","plain_text_es_419":"Dicen que una #vaca en el Valle Gerudo# regala #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_HC_GS_STORMS_GROTTO::97","plain_text_es_419":"Dicen que una #araña detrás de un muro embarrado# en una cueva guarda #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_HF_GS_COW_GROTTO::98","plain_text_es_419":"Dicen que una #araña detrás de telarañas# en una cueva guarda #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_HF_COW_GROTTO_COW::99","plain_text_es_419":"Dicen que una #vaca detrás de telarañas# en una cueva regala #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_HF_COW_GROTTO_COW::100","plain_text_es_419":"Dicen que la #vaca cubierta de telarañas# regala #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_ZR_FROGS_OCARINA_GAME::101","plain_text_es_419":"Dicen que la recompensa final de las #Ranas del Río Zora# es #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_ZR_FROGS_OCARINA_GAME::102","plain_text_es_419":"Dicen que un #banquete de anfibios# produce #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_ZR_FROGS_OCARINA_GAME::103","plain_text_es_419":"Dicen que la #obra maestra del coro de croares# otorga #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_ZR_FROGS_OCARINA_GAME::104","plain_text_es_419":"Dicen que el #final ranesco# produce #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_ZF_GS_HIDDEN_CAVE::105","plain_text_es_419":"Dicen que una araña muy #arriba sobre las aguas heladas# guarda #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_WASTELAND_CHEST::106","plain_text_es_419":"Dicen que #en lo profundo del páramo# está #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_WASTELAND_GS::107","plain_text_es_419":"Dicen que una #araña en el páramo# guarda #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_GRAVEYARD_ROYAL_FAMILYS_TOMB_CHEST::108","plain_text_es_419":"Dicen que #llamas en la Tumba de los Compositores# revelan #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_ZF_BOTTOM_FREESTANDING_POH::109","plain_text_es_419":"Dicen que #bajo las aguas heladas# yace #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_GC_POT_FREESTANDING_POH::110","plain_text_es_419":"Dicen que girar #la cerámica Goron# contiene #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_ZD_KING_ZORA_THAWED::111","plain_text_es_419":"Dicen que descongelar al #Rey Zora# otorga #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_ZD_KING_ZORA_THAWED::112","plain_text_es_419":"Dicen que un #dignatario descongelado# regala #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_ZD_TRADE_PRESCRIPTION::113","plain_text_es_419":"Dicen que el #Rey Zora# confía apresuradamente #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_DMC_DEKU_SCRUB::114","plain_text_es_419":"Dicen que un solo #scrub en el cráter# vende #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_DMC_GS_CRATE::115","plain_text_es_419":"Dicen que una araña bajo una #caja en el cráter# guarda #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_DEKU_TREE_MQ_AFTER_SPINNING_LOG_CHEST::116","plain_text_es_419":"Dicen que una #piedra temporal dentro del Árbol Deku# contiene #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_DEKU_TREE_MQ_AFTER_SPINNING_LOG_CHEST::117","plain_text_es_419":"Dicen que una #piedra temporal dentro de un árbol# contiene #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_DEKU_TREE_MQ_GS_BASEMENT_GRAVES_ROOM::118","plain_text_es_419":"Dicen que una #araña en el techo del Árbol Deku# guarda #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_DEKU_TREE_MQ_GS_BASEMENT_GRAVES_ROOM::119","plain_text_es_419":"Dicen que una #araña en el techo de un árbol# guarda #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_DODONGOS_CAVERN_MQ_GS_SONG_OF_TIME_BLOCK_ROOM::120","plain_text_es_419":"Dicen que una araña bajo #piedras temporales en la Cueva de Dodongo# guarda #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_DODONGOS_CAVERN_MQ_GS_SONG_OF_TIME_BLOCK_ROOM::121","plain_text_es_419":"Dicen que una araña bajo #piedras temporales en una cueva# guarda #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_JABU_JABUS_BELLY_BOOMERANG_CHEST::122","plain_text_es_419":"Dicen que una manada de #stingers tragados por Jabu-Jabu# guarda #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_JABU_JABUS_BELLY_BOOMERANG_CHEST::123","plain_text_es_419":"Dicen que una manada de #stingers tragados por un dios# guarda #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_JABU_JABUS_BELLY_MQ_GS_INVISIBLE_ENEMIES_ROOM::124","plain_text_es_419":"Dicen que una araña rodeada de #sombras en el Vientre de Jabu-Jabu# guarda #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_JABU_JABUS_BELLY_MQ_GS_INVISIBLE_ENEMIES_ROOM::125","plain_text_es_419":"Dicen que una araña rodeada de #sombras en el vientre de un dios# guarda #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_JABU_JABUS_BELLY_MQ_COW::126","plain_text_es_419":"Dicen que una #vaca tragada por Jabu-Jabu# regala #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_JABU_JABUS_BELLY_MQ_COW::127","plain_text_es_419":"Dicen que una #vaca tragada por un dios# regala #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_FIRE_TEMPLE_SCARECROW_CHEST::128","plain_text_es_419":"Dicen que #Pierre en la cúspide del Templo del Fuego# esconde #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_FIRE_TEMPLE_SCARECROW_CHEST::129","plain_text_es_419":"Dicen que un #espantapájaros en la cúspide del volcán# esconde #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_FIRE_TEMPLE_MEGATON_HAMMER_CHEST::130","plain_text_es_419":"Dicen que el #Flare Dancer en la cúspide del Templo del Fuego# guarda un cofre que contiene #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_FIRE_TEMPLE_MEGATON_HAMMER_CHEST::131","plain_text_es_419":"Dicen que el #Flare Dancer en la cúspide del volcán# guarda un cofre que contiene #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_FIRE_TEMPLE_MQ_CHEST_ON_FIRE::132","plain_text_es_419":"Dicen que el #Flare Dancer en la cúspide del Templo del Fuego# guarda un cofre que contiene #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_FIRE_TEMPLE_MQ_CHEST_ON_FIRE::133","plain_text_es_419":"Dicen que el #Flare Dancer en la cúspide del volcán# guarda un cofre que contiene #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_FIRE_TEMPLE_MQ_GS_SKULL_ON_FIRE::134","plain_text_es_419":"Dicen que una araña bajo un bloque en el #Templo del Fuego# guarda #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_FIRE_TEMPLE_MQ_GS_SKULL_ON_FIRE::135","plain_text_es_419":"Dicen que una araña bajo un bloque en el #volcán# guarda #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_WATER_TEMPLE_RIVER_CHEST::136","plain_text_es_419":"Dicen que más allá del #río en el Templo del Agua# espera #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_WATER_TEMPLE_RIVER_CHEST::137","plain_text_es_419":"Dicen que más allá del #río bajo el lago# espera #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_WATER_TEMPLE_BOSS_KEY_CHEST::138","plain_text_es_419":"Dicen que esquivar #rocas rodantes en el Templo del Agua# conduce a #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_WATER_TEMPLE_BOSS_KEY_CHEST::139","plain_text_es_419":"Dicen que esquivar #rocas rodantes bajo el lago# conduce a #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_WATER_TEMPLE_GS_BEHIND_GATE::140","plain_text_es_419":"Dicen que una araña detrás de una #reja en el Templo del Agua# guarda #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_WATER_TEMPLE_GS_BEHIND_GATE::141","plain_text_es_419":"Dicen que una araña detrás de una #reja bajo el lago# guarda #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_WATER_TEMPLE_MQ_FREESTANDING_KEY::142","plain_text_es_419":"Dicen que escondida en una #caja en el Templo del Agua# yace #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_WATER_TEMPLE_MQ_FREESTANDING_KEY::143","plain_text_es_419":"Dicen que escondida en una #caja bajo el lago# yace #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_WATER_TEMPLE_MQ_GS_FREESTANDING_KEY_AREA::144","plain_text_es_419":"Dicen que la #araña encerrada en el Templo del Agua# guarda #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_WATER_TEMPLE_MQ_GS_FREESTANDING_KEY_AREA::145","plain_text_es_419":"Dicen que la #araña encerrada bajo el lago# guarda #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_WATER_TEMPLE_MQ_GS_TRIPLE_WALL_TORCH::146","plain_text_es_419":"Dicen que una araña detrás de una #reja en el Templo del Agua# guarda #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_WATER_TEMPLE_MQ_GS_TRIPLE_WALL_TORCH::147","plain_text_es_419":"Dicen que una araña detrás de una #reja bajo el lago# guarda #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_GERUDO_TRAINING_GROUND_UNDERWATER_SILVER_RUPEE_CHEST::148","plain_text_es_419":"Dicen que quienes buscan #rupias plateadas hundidas# encontrarán #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_GERUDO_TRAINING_GROUND_MQ_UNDERWATER_SILVER_RUPEE_CHEST::149","plain_text_es_419":"Dicen que quienes buscan #rupias plateadas hundidas# encontrarán #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_GERUDO_TRAINING_GROUND_MAZE_PATH_FINAL_CHEST::150","plain_text_es_419":"Dicen que el premio final del #entrenamiento de los ladrones# es #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_GERUDO_TRAINING_GROUND_MQ_ICE_ARROWS_CHEST::151","plain_text_es_419":"Dicen que el premio final del #entrenamiento de los ladrones# es #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_BOTTOM_OF_THE_WELL_LENS_OF_TRUTH_CHEST::152","plain_text_es_419":"Dicen que #Dead Hand en el pozo# guarda #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_BOTTOM_OF_THE_WELL_LENS_OF_TRUTH_CHEST::153","plain_text_es_419":"Dicen que el #espectral aferrado del pozo# esconde #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_BOTTOM_OF_THE_WELL_LENS_OF_TRUTH_CHEST::154","plain_text_es_419":"Dicen que un #morador del inframundo en el pozo# guarda #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_BOTTOM_OF_THE_WELL_MQ_COMPASS_CHEST::155","plain_text_es_419":"Dicen que #Dead Hand en el pozo# guarda #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_BOTTOM_OF_THE_WELL_MQ_COMPASS_CHEST::156","plain_text_es_419":"Dicen que el #espectral aferrado del pozo# esconde #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_BOTTOM_OF_THE_WELL_MQ_COMPASS_CHEST::157","plain_text_es_419":"Dicen que un #morador del inframundo en el pozo# guarda #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_SPIRIT_TEMPLE_SILVER_GAUNTLETS_CHEST::158","plain_text_es_419":"Dicen que sobre la #mano derecha del Coloso# está #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_SPIRIT_TEMPLE_SILVER_GAUNTLETS_CHEST::159","plain_text_es_419":"Dicen que el tesoro #buscado por Nabooru# es #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_SPIRIT_TEMPLE_MIRROR_SHIELD_CHEST::160","plain_text_es_419":"Dicen que sobre la #mano izquierda del Coloso# está #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_SPIRIT_TEMPLE_MQ_CHILD_HAMMER_SWITCH_CHEST::161","plain_text_es_419":"Dicen que una #paradoja temporal en el Templo del Espíritu# produce #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_SPIRIT_TEMPLE_MQ_CHILD_HAMMER_SWITCH_CHEST::162","plain_text_es_419":"Dicen que una #paradoja temporal en el Coloso# produce #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_SPIRIT_TEMPLE_MQ_SYMPHONY_ROOM_CHEST::163","plain_text_es_419":"Dicen que una #sinfonía en el Templo del Espíritu# produce #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_SPIRIT_TEMPLE_MQ_SYMPHONY_ROOM_CHEST::164","plain_text_es_419":"Dicen que una #sinfonía en el Coloso# produce #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_SPIRIT_TEMPLE_MQ_GS_SYMPHONY_ROOM::165","plain_text_es_419":"Dicen que una #sinfonía de arañas en el Templo del Espíritu# produce #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_SPIRIT_TEMPLE_MQ_GS_SYMPHONY_ROOM::166","plain_text_es_419":"Dicen que una #sinfonía de arañas en el Coloso# produce #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_SHADOW_TEMPLE_INVISIBLE_FLOORMASTER_CHEST::167","plain_text_es_419":"Dicen que sombras en un #laberinto invisible# guardan #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_SHADOW_TEMPLE_MQ_BOMB_FLOWER_CHEST::168","plain_text_es_419":"Dicen que sombras en un #laberinto invisible# guardan #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_DESERT_COLOSSUS_TO_COLOSSUS_GROTTO::169","plain_text_es_419":"Dicen que levantar una #roca en el desierto# revela #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_GV_GROTTO_LEDGE_TO_GV_OCTOROK_GROTTO::170","plain_text_es_419":"Dicen que una roca en un #baldío del valle# esconde #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_GC_GROTTO_PLATFORM_TO_GC_GROTTO::171","plain_text_es_419":"Dicen que una #piscina de lava# en Ciudad Goron bloquea el camino hacia #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_GERUDO_FORTRESS_TO_GF_STORMS_GROTTO::172","plain_text_es_419":"Dicen que una #tormenta dentro de la Fortaleza Gerudo# revela #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_ZORAS_DOMAIN_TO_ZD_STORMS_GROTTO::173","plain_text_es_419":"Dicen que una #tormenta dentro del Dominio Zora# revela #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_HYRULE_CASTLE_GROUNDS_TO_HC_STORMS_GROTTO::174","plain_text_es_419":"Dicen que una #tormenta cerca del castillo# revela #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_GV_FORTRESS_SIDE_TO_GV_STORMS_GROTTO::175","plain_text_es_419":"Dicen que una #tormenta en el valle# revela #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_DESERT_COLOSSUS_TO_COLOSSUS_GREAT_FAIRY_FOUNTAIN::176","plain_text_es_419":"Dicen que una #pared agrietada del desierto# esconde #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_GANONS_CASTLE_GROUNDS_TO_OGC_GREAT_FAIRY_FOUNTAIN::177","plain_text_es_419":"Dicen que un #pesado pilar# fuera del castillo obstruye #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_ZORAS_FOUNTAIN_TO_ZF_GREAT_FAIRY_FOUNTAIN::178","plain_text_es_419":"Dicen que una #pared de la fuente# esconde #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_GV_FORTRESS_SIDE_TO_GV_CARPENTER_TENT::179","plain_text_es_419":"Dicen que una #carpa en el valle# cubre #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_GRAVEYARD_WARP_PAD_REGION_TO_SHADOW_TEMPLE_ENTRYWAY::180","plain_text_es_419":"Dicen que al #fondo del Cementerio#, hay #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_LAKE_HYLIA_TO_WATER_TEMPLE_LOBBY::181","plain_text_es_419":"Dicen que en lo profundo #bajo un vasto lago#, se puede encontrar #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_GERUDO_FORTRESS_TO_GERUDO_TRAINING_GROUND_LOBBY::182","plain_text_es_419":"Dicen que pagar una #tarifa a los Gerudo# otorga acceso a #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_ZORAS_FOUNTAIN_TO_JABU_JABUS_BELLY_BEGINNING::183","plain_text_es_419":"Dicen que dentro de #Jabu-Jabu#, se puede encontrar #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_KAKARIKO_VILLAGE_TO_BOTTOM_OF_THE_WELL::184","plain_text_es_419":"Dicen que un #pozo del pueblo# conduce a #[1]#.","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_LINKS_POCKET::185","plain_text_es_419":"el bolsillo de Link","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_KOKIRI_FOREST::186","plain_text_es_419":"Bosque Kokiri","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_THE_LOST_WOODS::187","plain_text_es_419":"el Bosque Perdido","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_SACRED_FOREST_MEADOW::188","plain_text_es_419":"Pradera Sagrada del Bosque","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_HYRULE_FIELD::189","plain_text_es_419":"Campo de Hyrule","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_LAKE_HYLIA::190","plain_text_es_419":"Lago Hylia","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_GERUDO_VALLEY::191","plain_text_es_419":"Valle Gerudo","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_GERUDO_FORTRESS::192","plain_text_es_419":"Fortaleza Gerudo","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_HAUNTED_WASTELAND::193","plain_text_es_419":"Páramo Embrujado","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_DESERT_COLOSSUS::194","plain_text_es_419":"Coloso del Desierto","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_THE_MARKET::195","plain_text_es_419":"el Mercado","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_TEMPLE_OF_TIME::196","plain_text_es_419":"Templo del Tiempo","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_CASTLE_GROUNDS::197","plain_text_es_419":"los Jardines del Castillo","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_HYRULE_CASTLE::198","plain_text_es_419":"Castillo de Hyrule","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_OUTSIDE_GANONS_CASTLE::199","plain_text_es_419":"fuera del Castillo de Ganon","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_KAKARIKO_VILLAGE::200","plain_text_es_419":"Pueblo Kakariko","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_THE_GRAVEYARD::201","plain_text_es_419":"el Cementerio","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_DEATH_MOUNTAIN_TRAIL::202","plain_text_es_419":"Camino de la Montaña Muerte","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_GORON_CITY::203","plain_text_es_419":"Ciudad Goron","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_DEATH_MOUNTAIN_CRATER::204","plain_text_es_419":"Cráter de la Montaña Muerte","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_ZORAS_RIVER::205","plain_text_es_419":"Río Zora","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_ZORAS_DOMAIN::206","plain_text_es_419":"Dominio Zora","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_ZORAS_FOUNTAIN::207","plain_text_es_419":"Fuente Zora","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_LON_LON_RANCH::208","plain_text_es_419":"Rancho Lon Lon","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_KF_LINKS_HOUSE::209","plain_text_es_419":"Casa de Link","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_KF_MIDOS_HOUSE::210","plain_text_es_419":"casa de Mido","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_KF_SARIAS_HOUSE::211","plain_text_es_419":"Casa de Saria","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_KF_HOUSE_OF_TWINS::212","plain_text_es_419":"la #Casa de los Gemelos#","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_KF_KNOW_IT_ALL_HOUSE::213","plain_text_es_419":"Casa de los Hermanos Sabiondo","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_KF_KOKIRI_SHOP::214","plain_text_es_419":"la #Tienda Kokiri#","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_LH_LAB::215","plain_text_es_419":"el #Laboratorio del Lago#","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_LH_FISHING_POND::216","plain_text_es_419":"el #Estanque de Pesca#","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_GV_CARPENTER_TENT::217","plain_text_es_419":"la #carpa de los Carpinteros#","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_MARKET_GUARD_HOUSE::218","plain_text_es_419":"la #Casa de la Guardia#","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_MARKET_MASK_SHOP::219","plain_text_es_419":"la #Tienda de Máscaras Felices#","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_MARKET_BOMBCHU_BOWLING::220","plain_text_es_419":"la #Bolera Bombchu#","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_MARKET_POTION_SHOP::221","plain_text_es_419":"la #Tienda de Pociones del Mercado#","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_MARKET_TREASURE_CHEST_GAME::222","plain_text_es_419":"la #Tienda de Cofres del Tesoro#","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_MARKET_BOMBCHU_SHOP::223","plain_text_es_419":"la #Tienda Bombchu#","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_MARKET_MAN_IN_GREEN_HOUSE::224","plain_text_es_419":"Casa del Hombre de Verde","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_KAK_WINDMILL::225","plain_text_es_419":"el #Molino#","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_KAK_CARPENTER_BOSS_HOUSE::226","plain_text_es_419":"la #Casa del Jefe Carpintero#","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_KAK_HOUSE_OF_SKULLTULA::227","plain_text_es_419":"la #Casa de Skulltula#","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_KAK_IMPAS_HOUSE::228","plain_text_es_419":"Casa de Impa","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_KAK_IMPAS_HOUSE_BACK::229","plain_text_es_419":"jaula de la vaca de Impa","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_KAK_ODD_POTION_BUILDING::230","plain_text_es_419":"Tienda de Pociones de la Abuelita","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_GRAVEYARD_DAMPES_HOUSE::231","plain_text_es_419":"Cabaña de Dampé","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_GC_SHOP::232","plain_text_es_419":"la #Tienda Goron#","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_ZD_SHOP::233","plain_text_es_419":"la #Tienda Zora#","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_LLR_TALONS_HOUSE::234","plain_text_es_419":"Casa de Talon","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_LLR_STABLES::235","plain_text_es_419":"una #cuadra#","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_LLR_TOWER::236","plain_text_es_419":"la #Torre Lon Lon#","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_MARKET_BAZAAR::237","plain_text_es_419":"el #Bazar del Mercado#","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_MARKET_SHOOTING_GALLERY::238","plain_text_es_419":"una #Galería de Tiro con resortera#","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_KAK_BAZAAR::239","plain_text_es_419":"el #Bazar de Kakariko#","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_KAK_POTION_SHOP_FRONT::240","plain_text_es_419":"la #Tienda de Pociones de Kakariko#","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_KAK_POTION_SHOP_BACK::241","plain_text_es_419":"la #Tienda de Pociones de Kakariko#","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_KAK_SHOOTING_GALLERY::242","plain_text_es_419":"una #Galería de Tiro con Arco#","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_COLOSSUS_GREAT_FAIRY_FOUNTAIN::243","plain_text_es_419":"una #Fuente del Hada#","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_HC_GREAT_FAIRY_FOUNTAIN::244","plain_text_es_419":"una #Fuente del Hada#","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_OGC_GREAT_FAIRY_FOUNTAIN::245","plain_text_es_419":"una #Fuente del Hada#","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_DMC_GREAT_FAIRY_FOUNTAIN::246","plain_text_es_419":"una #Fuente del Hada#","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_DMT_GREAT_FAIRY_FOUNTAIN::247","plain_text_es_419":"una #Fuente del Hada#","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_ZF_GREAT_FAIRY_FOUNTAIN::248","plain_text_es_419":"una #Fuente del Hada#","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_GRAVEYARD_SHIELD_GRAVE::249","plain_text_es_419":"una #tumba con un cofre libre#","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_GRAVEYARD_HEART_PIECE_GRAVE::250","plain_text_es_419":"un cofre aparecido por #Canción del Sol#","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_GRAVEYARD_COMPOSERS_GRAVE::251","plain_text_es_419":"la #Tumba de los Compositores#","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_GRAVEYARD_DAMPES_GRAVE::252","plain_text_es_419":"Tumba de Dampé","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_DMT_COW_GROTTO::253","plain_text_es_419":"una solitaria #Vaca#","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_HC_STORMS_GROTTO::254","plain_text_es_419":"una cueva arenosa con #paredes frágiles#","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_HF_TEKTITE_GROTTO::255","plain_text_es_419":"una poza vigilada por un #Tektite#","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_HF_NEAR_KAK_GROTTO::256","plain_text_es_419":"un #Big Skulltula# custodiando uno Dorado","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_HF_COW_GROTTO::257","plain_text_es_419":"una cueva llena de #telarañas#","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_KAK_REDEAD_GROTTO::258","plain_text_es_419":"#ReDeads# custodiando un cofre","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_SFM_WOLFOS_GROTTO::259","plain_text_es_419":"#Wolfos# custodiando un cofre","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_GV_OCTOROK_GROTTO::260","plain_text_es_419":"un #Octorok# custodiando una poza rica","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_DEKU_THEATER::261","plain_text_es_419":"el #Escenario del Bosque Perdido#","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_ZR_OPEN_GROTTO::262","plain_text_es_419":"una #cueva genérica#","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_DMC_UPPER_GROTTO::263","plain_text_es_419":"una #cueva genérica#","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_DMT_STORMS_GROTTO::264","plain_text_es_419":"una #cueva genérica#","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_KAK_OPEN_GROTTO::265","plain_text_es_419":"una #cueva genérica#","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_HF_NEAR_MARKET_GROTTO::266","plain_text_es_419":"una #cueva genérica#","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_HF_OPEN_GROTTO::267","plain_text_es_419":"una #cueva genérica#","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_HF_SOUTHEAST_GROTTO::268","plain_text_es_419":"una #cueva genérica#","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_KF_STORMS_GROTTO::269","plain_text_es_419":"una #cueva genérica#","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_LW_NEAR_SHORTCUTS_GROTTO::270","plain_text_es_419":"una #cueva genérica#","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_HF_INSIDE_FENCE_GROTTO::271","plain_text_es_419":"un #solo Deku Scrub de Mejora#","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_LW_SCRUBS_GROTTO::272","plain_text_es_419":"#2 Deku Scrubs# incluyendo uno de Mejora","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_COLOSSUS_GROTTO::273","plain_text_es_419":"2 Deku Scrubs","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_ZR_STORMS_GROTTO::274","plain_text_es_419":"2 Deku Scrubs","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_SFM_STORMS_GROTTO::275","plain_text_es_419":"2 Deku Scrubs","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_GV_STORMS_GROTTO::276","plain_text_es_419":"2 Deku Scrubs","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_LH_GROTTO::277","plain_text_es_419":"3 Deku Scrubs","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_DMC_HAMMER_GROTTO::278","plain_text_es_419":"3 Deku Scrubs","translation_status":"TRANSLATED"}
+{"id":"Hint::RHT_GC_GROTTO::279","plain_text_es_419":"3 Deku Scrubs","translation_status":"TRANSLATED"}

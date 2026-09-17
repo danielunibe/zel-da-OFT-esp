@@ -1,0 +1,13 @@
+semantic_action,current_label,current_path_or_mechanism,renderer_scope,verified_state,fallback
+A,A,message/HUD/Ocarina,static message assets + HUD,PARTIAL,classic N64 A
+B,B,message/HUD/Ocarina,static message assets + HUD,PARTIAL,classic N64 B
+C_UP,C-Up,message/HUD/Ocarina,static message assets + HUD,PARTIAL,classic N64 C-Up
+C_DOWN,C-Down,message/HUD/Ocarina,static message assets + HUD,PARTIAL,classic N64 C-Down
+C_LEFT,C-Left,message/HUD/Ocarina,static message assets + HUD,PARTIAL,classic N64 C-Left
+C_RIGHT,C-Right,message/HUD/Ocarina,static message assets + HUD,PARTIAL,classic N64 C-Right
+L,L,message/HUD,static message assets + HUD,PARTIAL,classic N64 L
+R,R,message/HUD,static message assets + HUD,PARTIAL,classic N64 R
+Z,Z,message/HUD/Ocarina,static message assets + HUD,PARTIAL,classic N64 Z
+START,Start,message/HUD,static message assets + HUD,PARTIAL,classic N64 Start
+CONTROL_STICK,Control Stick,Hud/input viewer assets,HUD + SoH UI,PARTIAL,classic N64 stick
+DPAD,D-Pad,Hud/input viewer assets,HUD + SoH UI,PARTIAL,classic D-Pad

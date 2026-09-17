@@ -1,0 +1,5 @@
+id,system,english,spanish,variable_token,grammatical_risk,risk_level,mitigation,status
+RANDO_ITEM_PLACEHOLDERS,RANDOMIZER,They say that in [Location] lies #[1]#,Dicen que en [Lugar] se encuentra #[1]#,#[1]#,Gender collision if preceded by gendered article (el/la),LOW,"Template uses verbal phrases ('se encuentra', 'es', 'conducen a') without preceding articles",PASS
+RANDO_LOCATION_PLACEHOLDERS,RANDOMIZER,They say that #[1]# can be found in #[2]#,Dicen que se puede encontrar #[1]# en #[2]#,#[2]#,Preposition contraction (de + el -> del) if location has leading masculine article,LOW,Proper nouns in locations omit external leading articles in templates,PASS
+MAIN_GAME_SKULLTULA_COUNT,MAIN_GAME,You've collected r[gsCount]w tokens in total!,¡Has recolectado %r[[gsCount]]%w tokens en total!,[[gsCount]],Singular/plural mismatch if count is 1 ('1 tokens'),LOW,Matches vanilla English behavior; acceptable engine convention,PASS
+MAIN_GAME_PLAYER_NAME,MAIN_GAME,"Look, look, [PLAYER]!","¡Mira, mira, [PLAYER]!",[PLAYER],Player name length exceeding line wrap buffer,LOW,Allocated 8 character buffer; standard 24 char width per line,PASS

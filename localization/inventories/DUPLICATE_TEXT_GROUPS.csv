@@ -1,0 +1,36 @@
+id,duplicate_group,plain_text
+0x0001,DUP_0001,"You borrowed a Pocket Egg!
+A Pocket Cucco will hatch from
+it overnight. Be sure to give it
+back when you are done with it."
+0x00B4,DUP_0002,"You destroyed a Gold Skulltula.
+You got a token proving you 
+destroyed it!"
+0x00B5,DUP_0002,"You destroyed a Gold Skulltula.
+You got a token proving you 
+destroyed it!"
+0x0100,DUP_0003,What's that?
+0x023C,DUP_0004,"The Shadow will yield only to one
+with the eye of truth, handed
+down in Kakariko Village."
+0x0300,DUP_0005,
+0x030D,DUP_0004,"The Shadow will yield only to one
+with the eye of truth, handed
+down in Kakariko Village."
+0x0600,DUP_0003,What's that?
+0x086E,DUP_0006,Play using [A] and [C]; [B] to Stop.
+0x086F,DUP_0005,
+0x087C,DUP_0006,Play using [A] and [C]; [B] to Stop.
+0x10C2,DUP_0007,"Do you want to hear what I said
+again?
+[CHOICE:2]Yes
+No"
+0x607B,DUP_0007,"Do you want to hear what I said
+again?
+[CHOICE:2]Yes
+No"
+0xFFFD,DUP_0005,
+0xFFFF,DUP_0001,"You borrowed a Pocket Egg!
+A Pocket Cucco will hatch from
+it overnight. Be sure to give it
+back when you are done with it."

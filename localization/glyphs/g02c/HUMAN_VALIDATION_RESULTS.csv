@@ -1,0 +1,10 @@
+test,human_action,expected,observed,evidence,result,notes
+runtime launch,Pending user launch,game opens normally,NOT_TESTED,none,PENDING,Human confirmation required
+controller navigation,Pending A/B/stick/Menu,normal response,NOT_TESTED,none,PENDING,Human confirmation required
+message 0x100D Classic,Pending ordinary gameplay,correct message opens,NOT_TESTED,none,PENDING,No injector permitted
+Classic Z visible,Pending visual inspection,N64 Z not LT,NOT_TESTED,none,PENDING,Screenshot required
+message 0x100D Dynamic,Pending profile switch,same message opens,NOT_TESTED,none,PENDING,Human confirmation required
+Xbox LT visible,Pending visual inspection,LT replaces N64 Z,NOT_TESTED,none,PENDING,Screenshot required
+LT performs Z,Pending LT gameplay press,N64 Z behavior remains,NOT_TESTED,none,PENDING,Human confirmation required
+message progression,Pending text advance/page close,unchanged progression,NOT_TESTED,none,PENDING,Human confirmation required
+ultrawide layout,Pending screenshot review,3440x1440 acceptable,NOT_TESTED,none,PENDING,Human confirmation required

@@ -1,0 +1,16 @@
+text_id,feature_category,speaker_or_context,tested_elements,spanish_sample_preview,layout_risk,expected_result
+0x0001,Item / Long Text,Pocket Egg Trade,Accented vowels (é ó) length boundary,"Pediste prestado un Huevo de Bolsillo!...",MEDIUM_RISK,Clean 3-line wrap without overflow
+0x0030,Item Banner,Deku Shield Acquisition,Inverted exclamation ¡ ! color formatting,"¡Obtuviste el Escudo Deku!...",LOW_RISK,Authentic item banner layout
+0x003B,Item Banner,Kokiri Sword Acquisition,Key item progression button prompt,"¡Obtuviste la Espada Kokiri!...",LOW_RISK,Correct assignment to B button prompt
+0x1000,Narrative / Intro,Navi Wakeup Call,Inverted exclamation ¡ ! emotional dialogue,"¡Hola, Link! ¡Despierta! ¡El Gran Árbol Deku...",LOW_RISK,High readability and authentic tone
+0x1002,NPC Dialogue,Kokiri Resident,Consonant ñ multi-line conversational flow,"¡Oye, Link! ¿Ya fuiste a ver al Árbol Deku?...",LOW_RISK,Natural spacing without line truncation
+0x100D,Input / G02 Pilot,Z-Targeting Tutorial,Button glyph [Z]/[LT] multi-page,"Cuando un hada vuele cerca... presiona [Z]...",HIGH_RISK,Dual compatibility with N64 Z and Xbox LT
+0x1021,Story Gate / Choice,Mido Deku Tree Block,Choice branch (Sí/No) attitude tone,"¿Qué quieres? ¡No puedes pasar sin espada!...",HIGH_RISK,Choice box aligns without overlapping text
+0x1036,Signpost / Glyphs,Kokiri Signpost,Control-Stick glyph signpost formatting,"[Control-Stick] Para caminar lentamente...",LOW_RISK,Signpost border aligns with stick icon
+0x1040,Story Lore,Great Deku Tree Speech,Narrative density uppercase accents (Á É),"Escucha con atención lo que voy a decirte...",HIGH_RISK,Multi-page transitions smoothly
+0x1055,Companion Alert,Navi Fairy Hint,Inverted question ¿ ? short alert,"¿Necesitas ayuda? Presiona [C-Up]...",LOW_RISK,Immediate attention without text clipping
+0x1060,World Hint,Gossip Stone,Cryptic puzzle hint length boundary,"Dicen que las piedras chismosas conocen...",MEDIUM_RISK,Fits within standard blue textbox
+0x1080,Dialogue / Choice,Kaepora Gaebora Owl,Inverted default choice trap (¿Repetir?),"¿Entendiste todo lo que dije? -> No / Sí...",CRITICAL_RISK,Default choice cursor placed accurately
+0x2001,Character Dialogue,Malon Lon Lon Ranch,Musical lilt conversational accents,"Canto la canción que me enseñó mi madre...",LOW_RISK,Accented vowels render cleanly
+0x3000,Cutscene / Story,Darunia Encounter,Goron dialect uppercase exclamation,"¡¿Quién eres tú?! ¡¿Un mensajero real?!...",MEDIUM_RISK,Emotional punctuation renders sharply
+0x4000,Progression Gate,King Zora Audience,Sound effect triggers royal dialogue,"Mweep... Mweep... Mweep... ¿Deseas pasar?...",MEDIUM_RISK,Sound trigger matches text pacing

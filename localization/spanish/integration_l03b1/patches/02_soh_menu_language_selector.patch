@@ -1,0 +1,23 @@
+--- a/soh/soh/SohGui/SohMenu.h
++++ b/soh/soh/SohGui/SohMenu.h
+@@ -33,6 +33,7 @@ static std::unordered_map<int32_t, const char*> languages = {
+     { LANGUAGE_GER, "German" },
+     { LANGUAGE_FRA, "French" },
+     { LANGUAGE_JPN, "Japanese" },
++    { LANGUAGE_ESP, "Español" },
+ };
+ 
+ class SohMenu : public Ship::Menu {
+--- a/soh/soh/SohGui/SohMenuSettings.cpp
++++ b/soh/soh/SohGui/SohMenuSettings.cpp
+@@ -107,7 +107,9 @@ extern "C" MessageTableEntry* sFraMessageEntryTablePtr;
+ extern "C" MessageTableEntry* sJpnMessageEntryTablePtr;
++extern "C" MessageTableEntry* sSpaMessageEntryTablePtr;
+ 
+ static const std::array<MessageTableEntry**, LANGUAGE_MAX> messageTables = {
+-    &sNesMessageEntryTablePtr, &sGerMessageEntryTablePtr, &sFraMessageEntryTablePtr, &sJpnMessageEntryTablePtr
++    &sNesMessageEntryTablePtr, &sGerMessageEntryTablePtr, &sFraMessageEntryTablePtr, &sJpnMessageEntryTablePtr,
++    &sSpaMessageEntryTablePtr
+ };
+ 
+ void SohMenu::UpdateLanguageMap(std::unordered_map<int32_t, const char*>& languageMap) {

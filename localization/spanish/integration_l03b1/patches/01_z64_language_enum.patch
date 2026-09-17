@@ -1,0 +1,10 @@
+--- a/soh/include/z64.h
++++ b/soh/include/z64.h
+@@ -542,6 +542,7 @@ typedef enum {
+     LANGUAGE_GER,
+     LANGUAGE_FRA,
+     LANGUAGE_JPN,
++    LANGUAGE_ESP,
+     LANGUAGE_MAX
+ } Language;
+ 

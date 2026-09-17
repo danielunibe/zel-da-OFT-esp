@@ -1,0 +1,200 @@
+{"id": "Rando::ITEM::RG_ICE_ARROWS", "plain_text": "Light Arrow", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_LIGHT_ARROWS", "plain_text": "Gerudo Membership Card", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_GERUDO_MEMBERSHIP_CARD", "plain_text": "Magic Bean", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_MAGIC_BEAN", "plain_text": "Magic Bean Pack", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_MAGIC_BEAN_PACK", "plain_text": "Double Defense", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_DOUBLE_DEFENSE", "plain_text": "Weird Egg", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_DOUBLE_DEFENSE", "plain_text": "Zelda's Letter", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_ZELDAS_LETTER", "plain_text": "Pocket Egg", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_POCKET_EGG", "plain_text": "Cojiro", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_COJIRO", "plain_text": "Odd Mushroom", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_ODD_MUSHROOM", "plain_text": "Odd Potion", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_ODD_POTION", "plain_text": "Poacher's Saw", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_POACHERS_SAW", "plain_text": "Broken Goron's Sword", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_BROKEN_SWORD", "plain_text": "Prescription", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_PRESCRIPTION", "plain_text": "Eyeball Frog", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_EYEBALL_FROG", "plain_text": "World's Finest Eyedrops", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_EYEDROPS", "plain_text": "Claim Check", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_CLAIM_CHECK", "plain_text": "Gold Skulltula Token", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_GOLD_SKULLTULA_TOKEN", "plain_text": "Progressive Hookshot", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L60", "plain_text": "Strength Upgrade", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L62", "plain_text": "Progressive Bomb Bag", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L63", "plain_text": "Progressive Bow", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L64", "plain_text": "Progressive Slingshot", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L65", "plain_text": "Progressive Wallet", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L66", "plain_text": "Progressive Scale", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L67", "plain_text": "Progressive Nut Capacity", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L68", "plain_text": "Progressive Stick Capacity", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L69", "plain_text": "Progressive Bombchu", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L70", "plain_text": "Progressive Magic Meter", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L71", "plain_text": "Progressive Ocarina", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L72", "plain_text": "Progressive Goron Sword", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L73", "plain_text": "Empty Bottle", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L76", "plain_text": "Bottle with Milk", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L77", "plain_text": "Bottle with Red Potion", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L78", "plain_text": "Bottle with Green Potion", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L79", "plain_text": "Bottle with Blue Potion", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L80", "plain_text": "Bottle with Fairy", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L81", "plain_text": "Bottle with Fish", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L82", "plain_text": "Bottle with Blue Fire", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L83", "plain_text": "Bottle with Bugs", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L84", "plain_text": "Bottle with Poe", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L85", "plain_text": "Bottle with Ruto's Letter", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L86", "plain_text": "Bottle with Big Poe", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L87", "plain_text": "Zelda's Lullaby", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L89", "plain_text": "Epona's Song", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L90", "plain_text": "Saria's Song", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L91", "plain_text": "Sun's Song", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L92", "plain_text": "Song of Time", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L93", "plain_text": "Song of Storms", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L94", "plain_text": "Minuet of Forest", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L95", "plain_text": "Bolero of Fire", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L96", "plain_text": "Serenade of Water", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L97", "plain_text": "Nocturne of Shadow", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L98", "plain_text": "Requiem of Spirit", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L99", "plain_text": "Prelude of Light", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L100", "plain_text": "Great Deku Tree Map", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_DEKU_TREE_MAP", "plain_text": "Dodongo's Cavern Map", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_DEKU_TREE_MAP", "plain_text": "Jabu-Jabu's Belly Map", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_DODONGOS_CAVERN_MAP", "plain_text": "Forest Temple Map", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_JABU_JABUS_BELLY_MAP", "plain_text": "Fire Temple Map", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_FOREST_TEMPLE_MAP", "plain_text": "Water Temple Map", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_FIRE_TEMPLE_MAP", "plain_text": "Spirit Temple Map", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_WATER_TEMPLE_MAP", "plain_text": "Shadow Temple Map", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_SPIRIT_TEMPLE_MAP", "plain_text": "Bottom of the Well Map", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_SHADOW_TEMPLE_MAP", "plain_text": "Ice Cavern Map", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_BOTTOM_OF_THE_WELL_MAP", "plain_text": "Great Deku Tree Compass", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_ICE_CAVERN_MAP", "plain_text": "Dodongo's Cavern Compass", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_DEKU_TREE_COMPASS", "plain_text": "Jabu-Jabu's Belly Compass", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_DODONGOS_CAVERN_COMPASS", "plain_text": "Forest Temple Compass", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_JABU_JABUS_BELLY_COMPASS", "plain_text": "Fire Temple Compass", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_FOREST_TEMPLE_COMPASS", "plain_text": "Water Temple Compass", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_FIRE_TEMPLE_COMPASS", "plain_text": "Spirit Temple Compass", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_WATER_TEMPLE_COMPASS", "plain_text": "Shadow Temple Compass", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_SPIRIT_TEMPLE_COMPASS", "plain_text": "Bottom of the Well Compass", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_SHADOW_TEMPLE_COMPASS", "plain_text": "Ice Cavern Compass", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_BOTTOM_OF_THE_WELL_COMPASS", "plain_text": "Forest Temple Boss Key", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_ICE_CAVERN_COMPASS", "plain_text": "Fire Temple Boss Key", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_FOREST_TEMPLE_BOSS_KEY", "plain_text": "Water Temple Boss Key", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_FIRE_TEMPLE_BOSS_KEY", "plain_text": "Spirit Temple Boss Key", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_WATER_TEMPLE_BOSS_KEY", "plain_text": "Shadow Temple Boss Key", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_SPIRIT_TEMPLE_BOSS_KEY", "plain_text": "Ganon's Castle Boss Key", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_SHADOW_TEMPLE_BOSS_KEY", "plain_text": "Forest Temple Small Key", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_GANONS_CASTLE_BOSS_KEY", "plain_text": "Fire Temple Small Key", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_FOREST_TEMPLE_SMALL_KEY", "plain_text": "Water Temple Small Key", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_FIRE_TEMPLE_SMALL_KEY", "plain_text": "Spirit Temple Small Key", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_WATER_TEMPLE_SMALL_KEY", "plain_text": "Shadow Temple Small Key", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_SPIRIT_TEMPLE_SMALL_KEY", "plain_text": "Bottom of the Well Small Key", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_SHADOW_TEMPLE_SMALL_KEY", "plain_text": "Training Ground Small Key", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_BOTTOM_OF_THE_WELL_SMALL_KEY", "plain_text": "Gerudo Fortress Small Key", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_GERUDO_TRAINING_GROUND_SMALL_KEY", "plain_text": "Ganon's Castle Small Key", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_GERUDO_FORTRESS_SMALL_KEY", "plain_text": "Chest Game Small Key", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_GANONS_CASTLE_SMALL_KEY", "plain_text": "Guard House Key", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_TREASURE_GAME_SMALL_KEY", "plain_text": "Market Bazaar Key", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_GUARD_HOUSE_KEY", "plain_text": "Market Potion Shop Key", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_MARKET_BAZAAR_KEY", "plain_text": "Mask Shop Key", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_MARKET_POTION_SHOP_KEY", "plain_text": "Market Shooting Gallery Key", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_MASK_SHOP_KEY", "plain_text": "Bombchu Bowling Alley Key", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_MARKET_SHOOTING_GALLERY_KEY", "plain_text": "Treasure Chest Game Building Key", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_BOMBCHU_BOWLING_KEY", "plain_text": "Bombchu Shop Key", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_TREASURE_CHEST_GAME_BUILDING_KEY", "plain_text": "Richard's House Key", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_BOMBCHU_SHOP_KEY", "plain_text": "Alley House Key", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_RICHARDS_HOUSE_KEY", "plain_text": "Kakariko Bazaar Key", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_ALLEY_HOUSE_KEY", "plain_text": "Kakariko Potion Shop Key", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_KAK_BAZAAR_KEY", "plain_text": "Boss's House Key", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_KAK_POTION_SHOP_KEY", "plain_text": "Granny's Potion Shop Key", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_BOSS_HOUSE_KEY", "plain_text": "Skulltula House Key", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_GRANNYS_POTION_SHOP_KEY", "plain_text": "Impa's House Key", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_SKULLTULA_HOUSE_KEY", "plain_text": "Windmill Key", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_IMPAS_HOUSE_KEY", "plain_text": "Kakariko Shooting Gallery Key", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_WINDMILL_KEY", "plain_text": "Dampe's Hut Key", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_KAK_SHOOTING_GALLERY_KEY", "plain_text": "Talon's House Key", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_DAMPES_HUT_KEY", "plain_text": "Stables Key", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_TALONS_HOUSE_KEY", "plain_text": "Back Tower Key", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_STABLES_KEY", "plain_text": "Hylia Laboratory Key", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_BACK_TOWER_KEY", "plain_text": "Fishing Hole Key", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_HYLIA_LAB_KEY", "plain_text": "Forest Temple Key Ring", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_FISHING_HOLE_KEY", "plain_text": "Fire Temple Key Ring", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_FOREST_TEMPLE_KEY_RING", "plain_text": "Water Temple Key Ring", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_FIRE_TEMPLE_KEY_RING", "plain_text": "Spirit Temple Key Ring", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_WATER_TEMPLE_KEY_RING", "plain_text": "Shadow Temple Key Ring", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_SPIRIT_TEMPLE_KEY_RING", "plain_text": "Bottom of the Well Key Ring", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_SHADOW_TEMPLE_KEY_RING", "plain_text": "Training Ground Key Ring", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_BOTTOM_OF_THE_WELL_KEY_RING", "plain_text": "Gerudo Fortress Key Ring", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_GERUDO_TRAINING_GROUND_KEY_RING", "plain_text": "Ganon's Castle Key Ring", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_GERUDO_FORTRESS_KEY_RING", "plain_text": "Chest Game Key Ring", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_GANONS_CASTLE_KEY_RING", "plain_text": "Kokiri's Emerald", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_TREASURE_GAME_KEY_RING", "plain_text": "Goron's Ruby", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L245", "plain_text": "Zora's Sapphire", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L246", "plain_text": "Forest Medallion", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L247", "plain_text": "Fire Medallion", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L248", "plain_text": "Water Medallion", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L249", "plain_text": "Spirit Medallion", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L250", "plain_text": "Shadow Medallion", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L251", "plain_text": "Light Medallion", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L252", "plain_text": "Recovery Heart", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L253", "plain_text": "Green Rupee", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L255", "plain_text": "Greg the Green Rupee", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L256", "plain_text": "Blue Rupee", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L257", "plain_text": "Red Rupee", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L258", "plain_text": "Purple Rupee", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L259", "plain_text": "Huge Rupee", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L260", "plain_text": "Piece of Heart", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L261", "plain_text": "Heart Container", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L262", "plain_text": "Ice Trap", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L263", "plain_text": "Milk", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L264", "plain_text": "Fish", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L265", "plain_text": "Bombs (5)", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L266", "plain_text": "Bombs (10)", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L268", "plain_text": "Bombs (20)", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L269", "plain_text": "Bombchus (5)", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L270", "plain_text": "Bombchus (10)", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L271", "plain_text": "Bombchus (20)", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L273", "plain_text": "Arrows (5)", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L274", "plain_text": "Arrows (10)", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L275", "plain_text": "Arrows (30)", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L276", "plain_text": "Deku Nuts (5)", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L277", "plain_text": "Deku Nuts (10)", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L278", "plain_text": "Deku Seeds (30)", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L279", "plain_text": "Deku Stick (1)", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L280", "plain_text": "Red Potion Refill", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L281", "plain_text": "Green Potion Refill", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L282", "plain_text": "Blue Potion Refill", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L283", "plain_text": "Piece of Heart (WINNER)", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L284", "plain_text": "Green Rupee (LOSER)", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L286", "plain_text": "Buy Deku Nut (5)", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L287", "plain_text": "Buy Arrows (30)", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L289", "plain_text": "Buy Arrows (50)", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L290", "plain_text": "Buy Bombs (5) [25]", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L291", "plain_text": "Buy Deku Nut (10)", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L292", "plain_text": "Buy Deku Stick (1)", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L293", "plain_text": "Buy Bombs (10)", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L294", "plain_text": "Buy Fish", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L295", "plain_text": "Buy Red Potion [30]", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L296", "plain_text": "Buy Green Potion", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L297", "plain_text": "Buy Blue Potion", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L298", "plain_text": "Buy Hylian Shield", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L299", "plain_text": "Buy Deku Shield", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L300", "plain_text": "Buy Goron Tunic", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L301", "plain_text": "Buy Zora Tunic", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L302", "plain_text": "Buy Heart", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L303", "plain_text": "Buy Bombchu (10)", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L304", "plain_text": "Buy Bombchu (20)", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L305", "plain_text": "Buy Deku Seeds (30)", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L306", "plain_text": "Sold Out", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L307", "plain_text": "Buy Blue Fire", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L308", "plain_text": "Buy Bottle Bug", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L309", "plain_text": "Buy Poe", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L310", "plain_text": "Buy Fairy's Spirit", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L311", "plain_text": "Buy Arrows (10)", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L312", "plain_text": "Buy Bombs (20)", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L313", "plain_text": "Buy Bombs (30)", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L314", "plain_text": "Buy Bombs (5) [35]", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L315", "plain_text": "Buy Red Potion [40]", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L316", "plain_text": "Buy Red Potion [50]", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L317", "plain_text": "Gohma's Soul", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L318", "plain_text": "King Dodongo's Soul", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_GOHMA_SOUL", "plain_text": "Barinade's Soul", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_KING_DODONGO_SOUL", "plain_text": "Phantom Ganon's Soul", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_BARINADE_SOUL", "plain_text": "Volvagia's Soul", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_PHANTOM_GANON_SOUL", "plain_text": "Morpha's Soul", "category": "ITEM_NAME", "subcategory": "", "variables": []}

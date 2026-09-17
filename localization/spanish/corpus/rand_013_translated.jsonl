@@ -1,0 +1,200 @@
+{"id": "Rando::ITEM::RG_VOLVAGIA_SOUL", "plain_text_es_419": "Alma de Bongo Bongo", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::RG_MORPHA_SOUL", "plain_text_es_419": "Alma de Twinrova", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::RG_BONGO_BONGO_SOUL", "plain_text_es_419": "Alma de Ganon", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::RG_TWINROVA_SOUL", "plain_text_es_419": "Caña de Pescar", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::RG_GANON_SOUL", "plain_text_es_419": "Botón A de Ocarina", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::RG_FISHING_POLE", "plain_text_es_419": "Botón C Arriba de Ocarina", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::RG_OCARINA_A_BUTTON", "plain_text_es_419": "Botón C Abajo de Ocarina", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::RG_OCARINA_C_UP_BUTTON", "plain_text_es_419": "Botón C Izquierda de Ocarina", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::RG_OCARINA_C_DOWN_BUTTON", "plain_text_es_419": "Botón C Derecha de Ocarina", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::RG_OCARINA_C_LEFT_BUTTON", "plain_text_es_419": "Escama de Bronce", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::RG_OCARINA_C_RIGHT_BUTTON", "plain_text_es_419": "Bolsa de Bombchu", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::RG_BRONZE_SCALE", "plain_text_es_419": "Carcaj Infinito", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::L355", "plain_text_es_419": "Bolsa de Bombas Infinita", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::L358", "plain_text_es_419": "Bolsa de Balas Infinita", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::L359", "plain_text_es_419": "Capacidad de Palos Infinita", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::L360", "plain_text_es_419": "Capacidad de Nueces Infinita", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::L361", "plain_text_es_419": "Medidor de Magia Infinito", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::L362", "plain_text_es_419": "Bombchus Infinitos", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::L363", "plain_text_es_419": "Billetera Infinita", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::L364", "plain_text_es_419": "Llave Maestra", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::L366", "plain_text_es_419": "Bolsa de Palos Deku", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::L368", "plain_text_es_419": "Bolsa de Nueces Deku", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::L371", "plain_text_es_419": "Trifuerza", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::L373", "plain_text_es_419": "Pista", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::RG_TRIFORCE", "plain_text_es_419": "Anzuelo", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::L376", "plain_text_es_419": "Anzuelo Largo", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::L378", "plain_text_es_419": "Ocarina de Hada", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::L379", "plain_text_es_419": "Ocarina del Tiempo", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::L380", "plain_text_es_419": "Bolsa de Bombas", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::L381", "plain_text_es_419": "Bolsa de Bombas Grande", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::L382", "plain_text_es_419": "Bolsa de Bombas Más Grande", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::L383", "plain_text_es_419": "Arco de Hada", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::L384", "plain_text_es_419": "Carcaj Grande", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::L385", "plain_text_es_419": "Carcaj Más Grande", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::L386", "plain_text_es_419": "Honda de Hada", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::L387", "plain_text_es_419": "Bolsa de Semillas Deku Grande", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::L388", "plain_text_es_419": "Bolsa de Semillas Deku Más Grande", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::L389", "plain_text_es_419": "Pulsera Goron", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::L390", "plain_text_es_419": "Guanteletes de Plata", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::L391", "plain_text_es_419": "Guanteletes Dorados", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::L392", "plain_text_es_419": "Escama de Plata", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::L393", "plain_text_es_419": "Escama Dorada", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::L394", "plain_text_es_419": "Billetera de Adulto", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::L395", "plain_text_es_419": "Billetera Gigante", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::L396", "plain_text_es_419": "Billetera de Magnate", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::L397", "plain_text_es_419": "Billetera de Niño", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::L398", "plain_text_es_419": "Capacidad de Nueces Deku (30)", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::L399", "plain_text_es_419": "Capacidad de Nueces Deku (40)", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::L400", "plain_text_es_419": "Capacidad de Palos Deku (20)", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::L401", "plain_text_es_419": "Capacidad de Palos Deku (30)", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::L402", "plain_text_es_419": "Medidor de Magia", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::L403", "plain_text_es_419": "Medidor de Magia Mejorado", "translation_status": "TRANSLATED"}
+{"id": "Rando::ITEM::L404", "plain_text_es_419": "Pieza de Trifuerza", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L47", "plain_text_es_419": "Apariciones/Canciones de Teletransporte/Búhos", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L48", "plain_text_es_419": "Bosque Kokiri", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L49", "plain_text_es_419": "Bosque Perdido", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L50", "plain_text_es_419": "Pradera Sagrada del Bosque", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L51", "plain_text_es_419": "Aldea Kakariko", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L52", "plain_text_es_419": "Cementerio", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L53", "plain_text_es_419": "Sendero del Monte Muerte", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L54", "plain_text_es_419": "Cráter del Monte Muerte", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L55", "plain_text_es_419": "Ciudad Goron", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L56", "plain_text_es_419": "Río Zora", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L57", "plain_text_es_419": "Domino Zora", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L58", "plain_text_es_419": "Fuente Zora", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L59", "plain_text_es_419": "Campo de Hyrule", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L60", "plain_text_es_419": "Rancho Lon Lon", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L61", "plain_text_es_419": "Lago Hylia", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L62", "plain_text_es_419": "Valle Gerudo", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L63", "plain_text_es_419": "Fortaleza Gerudo", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L64", "plain_text_es_419": "Desierto Embrujado", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L65", "plain_text_es_419": "Coloso del Desierto", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L66", "plain_text_es_419": "Mercado", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L67", "plain_text_es_419": "Castillo de Hyrule", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L79", "plain_text_es_419": "Aparición de Niño", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L79", "plain_text_es_419": "Casa de Link", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L80", "plain_text_es_419": "Aparición de Adulto", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L80", "plain_text_es_419": "Templo del Tiempo", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L82", "plain_text_es_419": "Minueto del Bosque", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L82", "plain_text_es_419": "Placa de Teletransporte de Pradera Sagrada del Bosque", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L83", "plain_text_es_419": "Bolero del Fuego", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L83", "plain_text_es_419": "Placa de Teletransporte del Cráter del Monte Muerte", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L84", "plain_text_es_419": "Serenata del Agua", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L84", "plain_text_es_419": "Placa de Teletransporte del Lago Hylia", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L85", "plain_text_es_419": "Réquiem del Espíritu", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L85", "plain_text_es_419": "Placa de Teletransporte del Coloso del Desierto", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L86", "plain_text_es_419": "Nocturno de la Sombra", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L86", "plain_text_es_419": "Placa de Teletransporte del Cementerio", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L87", "plain_text_es_419": "Preludio de la Luz", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L87", "plain_text_es_419": "Placa de Teletransporte del Templo del Tiempo", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L89", "plain_text_es_419": "Vuelo del Búho del Sendero del Monte Muerte", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L89", "plain_text_es_419": "Caída del Búho de Aldea Kakariko", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L90", "plain_text_es_419": "Vuelo del Búho del Lago Hylia", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L90", "plain_text_es_419": "Caída del Búho del Campo de Hyrule", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L93", "plain_text_es_419": "Salida Inferior del Bosque Kokiri", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L93", "plain_text_es_419": "Salida Este del Puente del Bosque Perdido", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L94", "plain_text_es_419": "Salida Superior del Bosque Kokiri", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L94", "plain_text_es_419": "Salida Sur del Bosque Perdido", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L95", "plain_text_es_419": "Entrada de la Casa de Link en BK", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L95", "plain_text_es_419": "Casa de Link", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L96", "plain_text_es_419": "Entrada de la Casa de Mido en BK", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L96", "plain_text_es_419": "Casa de Mido", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L97", "plain_text_es_419": "Entrada de la Casa de Saria en BK", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L97", "plain_text_es_419": "Casa de Saria", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L98", "plain_text_es_419": "Entrada de la Casa de los Gemelos en BK", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L98", "plain_text_es_419": "Casa de los Gemelos", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L99", "plain_text_es_419": "Entrada de la Casa del Sabiondo en BK", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L99", "plain_text_es_419": "Casa del Sabiondo", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L100", "plain_text_es_419": "Entrada de la Tienda en BK", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L100", "plain_text_es_419": "Tienda Kokiri", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L102", "plain_text_es_419": "Fuera del Árbol Deku en BK", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L102", "plain_text_es_419": "Entrada del Árbol Deku", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L103", "plain_text_es_419": "Casa de Link", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L103", "plain_text_es_419": "Entrada de la Casa de Link en BK", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L104", "plain_text_es_419": "Casa de Mido", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L104", "plain_text_es_419": "Entrada de la Casa de Mido en BK", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L105", "plain_text_es_419": "Casa de Saria", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L105", "plain_text_es_419": "Entrada de la Casa de Saria en BK", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L106", "plain_text_es_419": "Casa de los Gemelos", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L106", "plain_text_es_419": "Entrada de la Casa de los Gemelos en BK", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L107", "plain_text_es_419": "Casa del Sabiondo", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L107", "plain_text_es_419": "Entrada de la Casa del Sabiondo en BK", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L108", "plain_text_es_419": "Tienda Kokiri", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L108", "plain_text_es_419": "Entrada de la Tienda en BK", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L110", "plain_text_es_419": "Entrada del Árbol Deku", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L110", "plain_text_es_419": "Fuera del Árbol Deku en BK", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L111", "plain_text_es_419": "Puerta del Jefe del Árbol Deku", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L111", "plain_text_es_419": "Gohma", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L112", "plain_text_es_419": "Gohma", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L112", "plain_text_es_419": "Puerta del Jefe del Árbol Deku", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L113", "plain_text_es_419": "Teletransporte Azul de Gohma", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L113", "plain_text_es_419": "Teletransporte Azul del Árbol Deku", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L116", "plain_text_es_419": "Salida Este del Puente del Bosque Perdido", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L116", "plain_text_es_419": "Salida Inferior del Bosque Kokiri", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L117", "plain_text_es_419": "Salida Oeste del Puente del Bosque Perdido", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L117", "plain_text_es_419": "Salida Boscosa del Campo de Hyrule", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L118", "plain_text_es_419": "Salida Sur del Bosque Perdido", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L118", "plain_text_es_419": "Salida Superior del Bosque Kokiri", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L119", "plain_text_es_419": "Atajo del Túnel del Bosque Perdido", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L119", "plain_text_es_419": "Atajo del Túnel de Ciudad Goron", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L120", "plain_text_es_419": "Atajo Submarino del Bosque Perdido", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L120", "plain_text_es_419": "Atajo Submarino del Río Zora", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L121", "plain_text_es_419": "Salida Norte del Bosque Perdido", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L121", "plain_text_es_419": "Salida Sur de la Pradera Sagrada del Bosque", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L124", "plain_text_es_419": "Teatro Deku", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L127", "plain_text_es_419": "Teatro Deku", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L130", "plain_text_es_419": "Salida Sur de la Pradera Sagrada del Bosque", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L130", "plain_text_es_419": "Salida Norte del Bosque Perdido", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L134", "plain_text_es_419": "Pradera Sagrada del Bosque Fuera del Templo del Bosque", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L134", "plain_text_es_419": "Entrada del Templo del Bosque", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L138", "plain_text_es_419": "Entrada del Templo del Bosque", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L138", "plain_text_es_419": "Pradera Sagrada del Bosque Fuera del Templo del Bosque", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L139", "plain_text_es_419": "Puerta del Jefe del Templo del Bosque", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L139", "plain_text_es_419": "Phantom Ganon", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L140", "plain_text_es_419": "Phantom Ganon", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L140", "plain_text_es_419": "Puerta del Jefe del Templo del Bosque", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L141", "plain_text_es_419": "Teletransporte Azul de Phantom Ganon", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L141", "plain_text_es_419": "Teletransporte Azul del Templo del Bosque", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L144", "plain_text_es_419": "Puerta Principal de Kakariko", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L144", "plain_text_es_419": "Salida de Escaleras del Campo de Hyrule", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L145", "plain_text_es_419": "Salida Sureste de Kakariko", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L145", "plain_text_es_419": "Entrada del Cementerio", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L146", "plain_text_es_419": "Salida de la Puerta de la Guardia de Kakariko", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L146", "plain_text_es_419": "Salida Inferior del Sendero del Monte Muerte", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L147", "plain_text_es_419": "Entrada de la Casa del Jefe de Kakariko", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L147", "plain_text_es_419": "Casa del Jefe Carpintero", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L148", "plain_text_es_419": "Entrada de la Casa Skulltula de Kakariko", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L148", "plain_text_es_419": "Casa Skulltula", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L149", "plain_text_es_419": "Entrada Delantera de la Casa de Impa en Kakariko", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L149", "plain_text_es_419": "Frente de la Casa de Impa", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L150", "plain_text_es_419": "Entrada Trasera de la Casa de Impa en Kakariko", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L150", "plain_text_es_419": "Trasera de la Casa de Impa", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L151", "plain_text_es_419": "Entrada del Molino de Kakariko", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L151", "plain_text_es_419": "Molino", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L152", "plain_text_es_419": "Entrada de la Galería de Tiro de Kakariko", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L152", "plain_text_es_419": "Galería de Tiro de Kakariko", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L153", "plain_text_es_419": "Entrada de la Tienda de Pociones de la Abuela en Kakariko", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L153", "plain_text_es_419": "Tienda de Pociones de la Abuela", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L154", "plain_text_es_419": "Entrada del Bazar de Kakariko", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L154", "plain_text_es_419": "Bazar de Kakariko", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L155", "plain_text_es_419": "Entrada Delantera de la Tienda de Pociones de Kakariko", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L155", "plain_text_es_419": "Frente de la Tienda de Pociones de Kakariko", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L156", "plain_text_es_419": "Entrada Trasera de la Tienda de Pociones de Kakariko", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L156", "plain_text_es_419": "Trasera de la Tienda de Pociones de Kakariko", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L159", "plain_text_es_419": "Fuera del Pozo en Kakariko", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L159", "plain_text_es_419": "Entrada del Fondo del Pozo", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L160", "plain_text_es_419": "Casa del Jefe Carpintero", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L160", "plain_text_es_419": "Entrada de la Casa del Jefe de Kakariko", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L161", "plain_text_es_419": "Casa Skulltula", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L161", "plain_text_es_419": "Entrada de la Casa Skulltula de Kakariko", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L162", "plain_text_es_419": "Frente de la Casa de Impa", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L162", "plain_text_es_419": "Entrada Delantera de la Casa de Impa en Kakariko", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L163", "plain_text_es_419": "Trasera de la Casa de Impa", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L163", "plain_text_es_419": "Entrada Trasera de la Casa de Impa en Kakariko", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L164", "plain_text_es_419": "Molino", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L164", "plain_text_es_419": "Entrada del Molino de Kakariko", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L165", "plain_text_es_419": "Galería de Tiro de Kakariko", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L165", "plain_text_es_419": "Entrada de la Galería de Tiro de Kakariko", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L166", "plain_text_es_419": "Tienda de Pociones de la Abuela", "translation_status": "TRANSLATED"}
+{"id": "ENTRANCE::L166", "plain_text_es_419": "Entrada de la Tienda de Pociones de la Abuela en Kakariko", "translation_status": "TRANSLATED"}

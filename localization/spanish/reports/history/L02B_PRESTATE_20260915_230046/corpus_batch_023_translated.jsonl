@@ -1,0 +1,33 @@
+{"id":"Rando::GIMESSAGE::RG_BOTTOM_OF_THE_WELL_COMPASS","plain_text_es_419":"¡Encontraste la pBrújula del\nPozow!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_ICE_CAVERN_COMPASS","plain_text_es_419":"¡Encontraste la cBrújula de la\nCaverna de Hielow!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_CHILD_WALLET","plain_text_es_419":"¡Obtuviste la rBilletera Infantilw!\n¡Ahora puedes llevar\nhasta y99 rupiasw!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_GOHMA_SOUL","plain_text_es_419":"¡Encontraste el alma de gGohmaw!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_KING_DODONGO_SOUL","plain_text_es_419":"¡Encontraste el alma de rKing\nDodongow!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_BARINADE_SOUL","plain_text_es_419":"¡Encontraste el alma de bBarinadew!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_PHANTOM_GANON_SOUL","plain_text_es_419":"¡Encontraste el alma de gPhantom\nGanonw!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_VOLVAGIA_SOUL","plain_text_es_419":"¡Encontraste el alma de rVolvagiaw!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_MORPHA_SOUL","plain_text_es_419":"¡Encontraste el alma de bMorphaw!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_BONGO_BONGO_SOUL","plain_text_es_419":"¡Encontraste el alma de pBongo\nBongow!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_TWINROVA_SOUL","plain_text_es_419":"¡Encontraste el alma de yTwinrovaw!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_GANON_SOUL","plain_text_es_419":"¡Encontraste el alma de cGanonw!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_BRONZE_SCALE","plain_text_es_419":"¡Obtuviste la rEscama de Bronzew!\n¡El poder de la flotabilidad es tuyo!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_FISHING_POLE","plain_text_es_419":"¡Encontraste una rCaña de Pescarw perdida!\n¡Es hora de ir al estanque!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_BOMBCHU_BAG","plain_text_es_419":"¡Encontraste la rBolsa de Bombchuw!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_BOMB_BAG_INF","plain_text_es_419":"¡Obtuviste una rBolsa de Bombas Infinitaw!\n¡Ahora tienes ybombas infinitasw!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_QUIVER_INF","plain_text_es_419":"¡Obtuviste un rCarcaj Infinitow!\n¡Ahora tienes yflechas infinitasw!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_STICK_UPGRADE_INF","plain_text_es_419":"¡Ahora tienes yinfinitow rPalos Dekuw!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_NUT_UPGRADE_INF","plain_text_es_419":"¡Ahora tienes yinfinitow rNueces Dekuw!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_MAGIC_INF","plain_text_es_419":"¡Ahora tienes yinfinitow rMagiaw!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_BOMBCHU_INF","plain_text_es_419":"¡Ahora tienes yinfinitow rBombchusw!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_WALLET_INF","plain_text_es_419":"¡Ahora tienes yinfinitow rdinerow!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_SKELETON_KEY","plain_text_es_419":"¡Encontraste la rLlave Esqueletow!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_DEKU_STICK_BAG","plain_text_es_419":"¡Encontraste la rBolsa de Palos Dekuw!\n¡Ahora puedes llevar Palos Deku!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_DEKU_NUT_BAG","plain_text_es_419":"¡Encontraste la rBolsa de Nueces Dekuw!\n¡Ahora puedes llevar Nueces Deku!","translation_status":"TRANSLATED"}
+{"id":"Rando::CUSTOM_MSG::L589","plain_text_es_419":"¡Vuelve cuando tengas tu propio arco y obtendrás un #premio diferente#!","translation_status":"TRANSLATED"}
+{"id":"Rando::CUSTOM_MSG::L604","plain_text_es_419":"Sistema de control del nivel de agua.\n¡Mantente alejado!","translation_status":"TRANSLATED"}
+{"id":"Rando::CUSTOM_MSG::L689","plain_text_es_419":"\\x08#[1]#  #[2]_Rupias#\n¡Oferta especial! #¡QUEDA UNO#!\n¡Consíguelo antes de que se agote!\\x0A\\x02","translation_status":"TRANSLATED"}
+{"id":"Rando::CUSTOM_MSG::L696","plain_text_es_419":"\\x08#[1]#  #[2]_Rupias#\\x09\\x1B#Comprar\nNo comprar#\\x09\\x02","translation_status":"TRANSLATED"}
+{"id":"Rando::CUSTOM_MSG::L4609","plain_text_es_419":"@, encuéntrame en gel Castillo de Ganonw una vez que obtengas la rllave de su guaridaw.","translation_status":"TRANSLATED"}
+{"id":"Rando::CUSTOM_MSG::L4615","plain_text_es_419":"Ha llegado el momento. Prepárate.","translation_status":"TRANSLATED"}
+{"id":"Rando::CUSTOM_MSG::L4646","plain_text_es_419":"Si estás listo, entonces procede.\n--- PAGE ---\nBuena suerte.","translation_status":"TRANSLATED"}
+{"id":"Rando::CUSTOM_MSG::L4670","plain_text_es_419":"¡Oye, mister! ¡Te recuerdo!\n¡Ha pasado mucho tiempo!\n--- PAGE ---","translation_status":"TRANSLATED"}

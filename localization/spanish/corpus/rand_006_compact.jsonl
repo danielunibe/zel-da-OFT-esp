@@ -1,0 +1,200 @@
+{"id": "Hint::RHT_ICE_ARROWS::103", "plain_text": "something that can stun", "category": "RANDOMIZER", "subcategory": "RHT_ICE_ARROWS", "variables": []}
+{"id": "Hint::RHT_ICE_ARROWS::104", "plain_text": "the refrigerator rocket", "category": "RANDOMIZER", "subcategory": "RHT_ICE_ARROWS", "variables": []}
+{"id": "Hint::RHT_ICE_ARROWS::105", "plain_text": "the frostbite bolts", "category": "RANDOMIZER", "subcategory": "RHT_ICE_ARROWS", "variables": []}
+{"id": "Hint::RHT_ICE_ARROWS::106", "plain_text": "an iceberg maker", "category": "RANDOMIZER", "subcategory": "RHT_ICE_ARROWS", "variables": []}
+{"id": "Hint::RHT_LIGHT_ARROWS::107", "plain_text": "the Light Arrows", "category": "RANDOMIZER", "subcategory": "RHT_LIGHT_ARROWS", "variables": []}
+{"id": "Hint::RHT_LIGHT_ARROWS::108", "plain_text": "a magic arrow", "category": "RANDOMIZER", "subcategory": "RHT_LIGHT_ARROWS", "variables": []}
+{"id": "Hint::RHT_LIGHT_ARROWS::109", "plain_text": "the shining shot", "category": "RANDOMIZER", "subcategory": "RHT_LIGHT_ARROWS", "variables": []}
+{"id": "Hint::RHT_LIGHT_ARROWS::110", "plain_text": "the luminous launcher", "category": "RANDOMIZER", "subcategory": "RHT_LIGHT_ARROWS", "variables": []}
+{"id": "Hint::RHT_LIGHT_ARROWS::111", "plain_text": "Ganondorf's bane", "category": "RANDOMIZER", "subcategory": "RHT_LIGHT_ARROWS", "variables": []}
+{"id": "Hint::RHT_LIGHT_ARROWS::112", "plain_text": "the lighting bolts", "category": "RANDOMIZER", "subcategory": "RHT_LIGHT_ARROWS", "variables": []}
+{"id": "Hint::RHT_GERUDO_MEMBERSHIP_CARD::113", "plain_text": "the Gerudo Membership Card", "category": "RANDOMIZER", "subcategory": "RHT_GERUDO_MEMBERSHIP_CARD", "variables": []}
+{"id": "Hint::RHT_GERUDO_MEMBERSHIP_CARD::114", "plain_text": "a token of recognition", "category": "RANDOMIZER", "subcategory": "RHT_GERUDO_MEMBERSHIP_CARD", "variables": []}
+{"id": "Hint::RHT_GERUDO_MEMBERSHIP_CARD::115", "plain_text": "a girl club membership", "category": "RANDOMIZER", "subcategory": "RHT_GERUDO_MEMBERSHIP_CARD", "variables": []}
+{"id": "Hint::RHT_GERUDO_MEMBERSHIP_CARD::116", "plain_text": "a desert tribe's pass", "category": "RANDOMIZER", "subcategory": "RHT_GERUDO_MEMBERSHIP_CARD", "variables": []}
+{"id": "Hint::RHT_MAGIC_BEAN::117", "plain_text": "a Magic Bean", "category": "RANDOMIZER", "subcategory": "RHT_MAGIC_BEAN", "variables": []}
+{"id": "Hint::RHT_MAGIC_BEAN::118", "plain_text": "something sometimes buried", "category": "RANDOMIZER", "subcategory": "RHT_MAGIC_BEAN", "variables": []}
+{"id": "Hint::RHT_MAGIC_BEAN::119", "plain_text": "a wizardly legume", "category": "RANDOMIZER", "subcategory": "RHT_MAGIC_BEAN", "variables": []}
+{"id": "Hint::RHT_MAGIC_BEAN_PACK::120", "plain_text": "Magic Beans", "category": "RANDOMIZER", "subcategory": "RHT_MAGIC_BEAN_PACK", "variables": []}
+{"id": "Hint::RHT_MAGIC_BEAN_PACK::121", "plain_text": "something sometimes buried", "category": "RANDOMIZER", "subcategory": "RHT_MAGIC_BEAN_PACK", "variables": []}
+{"id": "Hint::RHT_MAGIC_BEAN_PACK::122", "plain_text": "wizardly legumes", "category": "RANDOMIZER", "subcategory": "RHT_MAGIC_BEAN_PACK", "variables": []}
+{"id": "Hint::RHT_DOUBLE_DEFENSE::123", "plain_text": "Double Defense", "category": "RANDOMIZER", "subcategory": "RHT_DOUBLE_DEFENSE", "variables": []}
+{"id": "Hint::RHT_DOUBLE_DEFENSE::124", "plain_text": "a Great Fairy's power", "category": "RANDOMIZER", "subcategory": "RHT_DOUBLE_DEFENSE", "variables": []}
+{"id": "Hint::RHT_DOUBLE_DEFENSE::125", "plain_text": "something heart-shaped", "category": "RANDOMIZER", "subcategory": "RHT_DOUBLE_DEFENSE", "variables": []}
+{"id": "Hint::RHT_DOUBLE_DEFENSE::126", "plain_text": "a white outline", "category": "RANDOMIZER", "subcategory": "RHT_DOUBLE_DEFENSE", "variables": []}
+{"id": "Hint::RHT_DOUBLE_DEFENSE::127", "plain_text": "damage decrease", "category": "RANDOMIZER", "subcategory": "RHT_DOUBLE_DEFENSE", "variables": []}
+{"id": "Hint::RHT_DOUBLE_DEFENSE::128", "plain_text": "strengthened love", "category": "RANDOMIZER", "subcategory": "RHT_DOUBLE_DEFENSE", "variables": []}
+{"id": "Hint::RHT_GOLD_SKULLTULA_TOKEN::129", "plain_text": "a Gold Skulltula Token", "category": "RANDOMIZER", "subcategory": "RHT_GOLD_SKULLTULA_TOKEN", "variables": []}
+{"id": "Hint::RHT_GOLD_SKULLTULA_TOKEN::130", "plain_text": "a token of recognition", "category": "RANDOMIZER", "subcategory": "RHT_GOLD_SKULLTULA_TOKEN", "variables": []}
+{"id": "Hint::RHT_GOLD_SKULLTULA_TOKEN::131", "plain_text": "something sometimes buried", "category": "RANDOMIZER", "subcategory": "RHT_GOLD_SKULLTULA_TOKEN", "variables": []}
+{"id": "Hint::RHT_GOLD_SKULLTULA_TOKEN::132", "plain_text": "proof of destruction", "category": "RANDOMIZER", "subcategory": "RHT_GOLD_SKULLTULA_TOKEN", "variables": []}
+{"id": "Hint::RHT_GOLD_SKULLTULA_TOKEN::133", "plain_text": "an arachnid chip", "category": "RANDOMIZER", "subcategory": "RHT_GOLD_SKULLTULA_TOKEN", "variables": []}
+{"id": "Hint::RHT_GOLD_SKULLTULA_TOKEN::134", "plain_text": "spider remains", "category": "RANDOMIZER", "subcategory": "RHT_GOLD_SKULLTULA_TOKEN", "variables": []}
+{"id": "Hint::RHT_GOLD_SKULLTULA_TOKEN::135", "plain_text": "one percent of a curse", "category": "RANDOMIZER", "subcategory": "RHT_GOLD_SKULLTULA_TOKEN", "variables": []}
+{"id": "Hint::RHT_POCKET_EGG::136", "plain_text": "the Pocket Egg", "category": "RANDOMIZER", "subcategory": "RHT_POCKET_EGG", "variables": []}
+{"id": "Hint::RHT_POCKET_EGG::137", "plain_text": "a trade quest item", "category": "RANDOMIZER", "subcategory": "RHT_POCKET_EGG", "variables": []}
+{"id": "Hint::RHT_POCKET_EGG::138", "plain_text": "an egg", "category": "RANDOMIZER", "subcategory": "RHT_POCKET_EGG", "variables": []}
+{"id": "Hint::RHT_POCKET_EGG::139", "plain_text": "a Cucco container", "category": "RANDOMIZER", "subcategory": "RHT_POCKET_EGG", "variables": []}
+{"id": "Hint::RHT_POCKET_EGG::140", "plain_text": "a Cucco, eventually", "category": "RANDOMIZER", "subcategory": "RHT_POCKET_EGG", "variables": []}
+{"id": "Hint::RHT_POCKET_EGG::141", "plain_text": "a fowl youth", "category": "RANDOMIZER", "subcategory": "RHT_POCKET_EGG", "variables": []}
+{"id": "Hint::RHT_POCKET_CUCCO::142", "plain_text": "the Pocket Cucco", "category": "RANDOMIZER", "subcategory": "RHT_POCKET_CUCCO", "variables": []}
+{"id": "Hint::RHT_POCKET_CUCCO::143", "plain_text": "a trade quest item", "category": "RANDOMIZER", "subcategory": "RHT_POCKET_CUCCO", "variables": []}
+{"id": "Hint::RHT_POCKET_CUCCO::144", "plain_text": "a little clucker", "category": "RANDOMIZER", "subcategory": "RHT_POCKET_CUCCO", "variables": []}
+{"id": "Hint::RHT_COJIRO::145", "plain_text": "Cojiro", "category": "RANDOMIZER", "subcategory": "RHT_COJIRO", "variables": []}
+{"id": "Hint::RHT_COJIRO::146", "plain_text": "a trade quest item", "category": "RANDOMIZER", "subcategory": "RHT_COJIRO", "variables": []}
+{"id": "Hint::RHT_COJIRO::147", "plain_text": "a cerulean capon", "category": "RANDOMIZER", "subcategory": "RHT_COJIRO", "variables": []}
+{"id": "Hint::RHT_ODD_MUSHROOM::148", "plain_text": "an Odd Mushroom", "category": "RANDOMIZER", "subcategory": "RHT_ODD_MUSHROOM", "variables": []}
+{"id": "Hint::RHT_ODD_MUSHROOM::149", "plain_text": "a trade quest item", "category": "RANDOMIZER", "subcategory": "RHT_ODD_MUSHROOM", "variables": []}
+{"id": "Hint::RHT_ODD_MUSHROOM::150", "plain_text": "a powder ingredient", "category": "RANDOMIZER", "subcategory": "RHT_ODD_MUSHROOM", "variables": []}
+{"id": "Hint::RHT_ODD_POTION::151", "plain_text": "an Odd Potion", "category": "RANDOMIZER", "subcategory": "RHT_ODD_POTION", "variables": []}
+{"id": "Hint::RHT_ODD_POTION::152", "plain_text": "something that contains medicine", "category": "RANDOMIZER", "subcategory": "RHT_ODD_POTION", "variables": []}
+{"id": "Hint::RHT_ODD_POTION::153", "plain_text": "something with a strange smell", "category": "RANDOMIZER", "subcategory": "RHT_ODD_POTION", "variables": []}
+{"id": "Hint::RHT_ODD_POTION::154", "plain_text": "a trade quest item", "category": "RANDOMIZER", "subcategory": "RHT_ODD_POTION", "variables": []}
+{"id": "Hint::RHT_ODD_POTION::155", "plain_text": "Granny's goodies", "category": "RANDOMIZER", "subcategory": "RHT_ODD_POTION", "variables": []}
+{"id": "Hint::RHT_POACHERS_SAW::156", "plain_text": "the Poacher's Saw", "category": "RANDOMIZER", "subcategory": "RHT_POACHERS_SAW", "variables": []}
+{"id": "Hint::RHT_POACHERS_SAW::157", "plain_text": "a trade quest item", "category": "RANDOMIZER", "subcategory": "RHT_POACHERS_SAW", "variables": []}
+{"id": "Hint::RHT_POACHERS_SAW::158", "plain_text": "a tree killer", "category": "RANDOMIZER", "subcategory": "RHT_POACHERS_SAW", "variables": []}
+{"id": "Hint::RHT_BROKEN_SWORD::159", "plain_text": "the Broken Goron's Sword", "category": "RANDOMIZER", "subcategory": "RHT_BROKEN_SWORD", "variables": []}
+{"id": "Hint::RHT_BROKEN_SWORD::160", "plain_text": "a trade quest item", "category": "RANDOMIZER", "subcategory": "RHT_BROKEN_SWORD", "variables": []}
+{"id": "Hint::RHT_BROKEN_SWORD::161", "plain_text": "a sword", "category": "RANDOMIZER", "subcategory": "RHT_BROKEN_SWORD", "variables": []}
+{"id": "Hint::RHT_BROKEN_SWORD::162", "plain_text": "a shattered slicer", "category": "RANDOMIZER", "subcategory": "RHT_BROKEN_SWORD", "variables": []}
+{"id": "Hint::RHT_PRESCRIPTION::163", "plain_text": "the Prescription", "category": "RANDOMIZER", "subcategory": "RHT_PRESCRIPTION", "variables": []}
+{"id": "Hint::RHT_PRESCRIPTION::164", "plain_text": "a trade quest item", "category": "RANDOMIZER", "subcategory": "RHT_PRESCRIPTION", "variables": []}
+{"id": "Hint::RHT_PRESCRIPTION::165", "plain_text": "a pill pamphlet", "category": "RANDOMIZER", "subcategory": "RHT_PRESCRIPTION", "variables": []}
+{"id": "Hint::RHT_PRESCRIPTION::166", "plain_text": "a doctor's note", "category": "RANDOMIZER", "subcategory": "RHT_PRESCRIPTION", "variables": []}
+{"id": "Hint::RHT_EYEBALL_FROG::167", "plain_text": "the Eyeball Frog", "category": "RANDOMIZER", "subcategory": "RHT_EYEBALL_FROG", "variables": []}
+{"id": "Hint::RHT_EYEBALL_FROG::168", "plain_text": "a trade quest item", "category": "RANDOMIZER", "subcategory": "RHT_EYEBALL_FROG", "variables": []}
+{"id": "Hint::RHT_EYEBALL_FROG::169", "plain_text": "a perceiving polliwog", "category": "RANDOMIZER", "subcategory": "RHT_EYEBALL_FROG", "variables": []}
+{"id": "Hint::RHT_EYEDROPS::170", "plain_text": "the Eyedrops", "category": "RANDOMIZER", "subcategory": "RHT_EYEDROPS", "variables": []}
+{"id": "Hint::RHT_EYEDROPS::171", "plain_text": "a trade quest item", "category": "RANDOMIZER", "subcategory": "RHT_EYEDROPS", "variables": []}
+{"id": "Hint::RHT_EYEDROPS::172", "plain_text": "a vision vial", "category": "RANDOMIZER", "subcategory": "RHT_EYEDROPS", "variables": []}
+{"id": "Hint::RHT_CLAIM_CHECK::173", "plain_text": "the Claim Check", "category": "RANDOMIZER", "subcategory": "RHT_CLAIM_CHECK", "variables": []}
+{"id": "Hint::RHT_CLAIM_CHECK::174", "plain_text": "a trade quest item", "category": "RANDOMIZER", "subcategory": "RHT_CLAIM_CHECK", "variables": []}
+{"id": "Hint::RHT_CLAIM_CHECK::175", "plain_text": "a three day wait", "category": "RANDOMIZER", "subcategory": "RHT_CLAIM_CHECK", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_HOOKSHOT::176", "plain_text": "a Hookshot", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_HOOKSHOT", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_HOOKSHOT::177", "plain_text": "something that can grab things", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_HOOKSHOT", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_HOOKSHOT::178", "plain_text": "something that can stun", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_HOOKSHOT", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_HOOKSHOT::179", "plain_text": "Dampé's keepsake", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_HOOKSHOT", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_HOOKSHOT::180", "plain_text": "the Grapple Beam", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_HOOKSHOT", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_HOOKSHOT::181", "plain_text": "the BOING! chain", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_HOOKSHOT", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_STRENGTH::182", "plain_text": "a Strength Upgrade", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_STRENGTH", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_STRENGTH::183", "plain_text": "something that can remove boulders", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_STRENGTH", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_STRENGTH::184", "plain_text": "power gloves", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_STRENGTH", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_STRENGTH::185", "plain_text": "metal mittens", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_STRENGTH", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_STRENGTH::186", "plain_text": "the heavy lifty", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_STRENGTH", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_BOMB_BAG::187", "plain_text": "a Bomb Bag", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_BOMB_BAG", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_BOMB_BAG::188", "plain_text": "explosives", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_BOMB_BAG", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_BOMB_BAG::189", "plain_text": "something that can remove boulders", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_BOMB_BAG", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_BOMB_BAG::190", "plain_text": "an explosive container", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_BOMB_BAG", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_BOMB_BAG::191", "plain_text": "a blast bag", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_BOMB_BAG", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_BOW::192", "plain_text": "a Fairy Bow", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_BOW", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_BOW::193", "plain_text": "a projectile shooter", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_BOW", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_BOW::194", "plain_text": "an archery enabler", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_BOW", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_BOW::195", "plain_text": "a danger dart launcher", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_BOW", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_SLINGSHOT::196", "plain_text": "a Slingshot", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_SLINGSHOT", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_SLINGSHOT::197", "plain_text": "a projectile shooter", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_SLINGSHOT", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_SLINGSHOT::198", "plain_text": "a seed shooter", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_SLINGSHOT", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_SLINGSHOT::199", "plain_text": "a rubberband", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_SLINGSHOT", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_SLINGSHOT::200", "plain_text": "a child's catapult", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_SLINGSHOT", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_WALLET::201", "plain_text": "a Wallet", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_WALLET", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_WALLET::202", "plain_text": "a prize of the House of Skulltulas", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_WALLET", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_WALLET::203", "plain_text": "a mo' money holder", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_WALLET", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_WALLET::204", "plain_text": "a gem purse", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_WALLET", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_WALLET::205", "plain_text": "a portable bank", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_WALLET", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_SCALE::206", "plain_text": "a Zora Scale", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_SCALE", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_SCALE::207", "plain_text": "a diving tool", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_SCALE", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_SCALE::208", "plain_text": "a deeper dive", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_SCALE", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_SCALE::209", "plain_text": "a piece of Zora", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_SCALE", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_NUT_UPGRADE::210", "plain_text": "Deku Nut Capacity", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_NUT_UPGRADE", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_NUT_UPGRADE::211", "plain_text": "some Deku munitions", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_NUT_UPGRADE", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_NUT_UPGRADE::212", "plain_text": "something that can stun", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_NUT_UPGRADE", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_NUT_UPGRADE::213", "plain_text": "more nuts", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_NUT_UPGRADE", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_NUT_UPGRADE::214", "plain_text": "flashbang storage", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_NUT_UPGRADE", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_STICK_UPGRADE::215", "plain_text": "Deku Stick Capacity", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_STICK_UPGRADE", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_STICK_UPGRADE::216", "plain_text": "some Deku munitions", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_STICK_UPGRADE", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_STICK_UPGRADE::217", "plain_text": "lumber racks", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_STICK_UPGRADE", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_STICK_UPGRADE::218", "plain_text": "more flammable twigs", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_STICK_UPGRADE", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_MAGIC_METER::219", "plain_text": "a Magic Meter", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_MAGIC_METER", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_MAGIC_METER::220", "plain_text": "a Great Fairy's power", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_MAGIC_METER", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_MAGIC_METER::221", "plain_text": "mystic training", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_MAGIC_METER", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_MAGIC_METER::222", "plain_text": "pixie dust", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_MAGIC_METER", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_MAGIC_METER::223", "plain_text": "a green rectangle", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_MAGIC_METER", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_OCARINA::224", "plain_text": "an Ocarina", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_OCARINA", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_OCARINA::225", "plain_text": "something given by Saria", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_OCARINA", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_OCARINA::226", "plain_text": "something kept by the royal family", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_OCARINA", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_OCARINA::227", "plain_text": "a flute", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_OCARINA", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_OCARINA::228", "plain_text": "a music maker", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_OCARINA", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_BOMBCHUS::229", "plain_text": "Bombchus", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_BOMBCHUS", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_BOMBCHUS::230", "plain_text": "a prize of the House of Skulltulas", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_BOMBCHUS", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_BOMBCHUS::231", "plain_text": "explosives", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_BOMBCHUS", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_BOMBCHUS::232", "plain_text": "mice bombs", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_BOMBCHUS", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_BOMBCHUS::233", "plain_text": "proximity mice", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_BOMBCHUS", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_BOMBCHUS::234", "plain_text": "wall crawlers", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_BOMBCHUS", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_BOMBCHUS::235", "plain_text": "trail blazers", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_BOMBCHUS", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_GORONSWORD::236", "plain_text": "a Goron Sword", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_GORONSWORD", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_GORONSWORD::237", "plain_text": "a sword", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_GORONSWORD", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_GORONSWORD::238", "plain_text": "a long blade", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_GORONSWORD", "variables": []}
+{"id": "Hint::RHT_PROGRESSIVE_GORONSWORD::239", "plain_text": "a Goron weapon", "category": "RANDOMIZER", "subcategory": "RHT_PROGRESSIVE_GORONSWORD", "variables": []}
+{"id": "Hint::RHT_EMPTY_BOTTLE::240", "plain_text": "a bottle", "category": "RANDOMIZER", "subcategory": "RHT_EMPTY_BOTTLE", "variables": []}
+{"id": "Hint::RHT_EMPTY_BOTTLE::241", "plain_text": "a bottle", "category": "RANDOMIZER", "subcategory": "RHT_EMPTY_BOTTLE", "variables": []}
+{"id": "Hint::RHT_EMPTY_BOTTLE::242", "plain_text": "a glass container", "category": "RANDOMIZER", "subcategory": "RHT_EMPTY_BOTTLE", "variables": []}
+{"id": "Hint::RHT_EMPTY_BOTTLE::243", "plain_text": "an empty jar", "category": "RANDOMIZER", "subcategory": "RHT_EMPTY_BOTTLE", "variables": []}
+{"id": "Hint::RHT_EMPTY_BOTTLE::244", "plain_text": "encased air", "category": "RANDOMIZER", "subcategory": "RHT_EMPTY_BOTTLE", "variables": []}
+{"id": "Hint::RHT_BOTTLE_WITH_MILK::245", "plain_text": "a Milk Bottle", "category": "RANDOMIZER", "subcategory": "RHT_BOTTLE_WITH_MILK", "variables": []}
+{"id": "Hint::RHT_BOTTLE_WITH_MILK::246", "plain_text": "a bottle", "category": "RANDOMIZER", "subcategory": "RHT_BOTTLE_WITH_MILK", "variables": []}
+{"id": "Hint::RHT_BOTTLE_WITH_MILK::247", "plain_text": "cow juice", "category": "RANDOMIZER", "subcategory": "RHT_BOTTLE_WITH_MILK", "variables": []}
+{"id": "Hint::RHT_BOTTLE_WITH_MILK::248", "plain_text": "a white liquid", "category": "RANDOMIZER", "subcategory": "RHT_BOTTLE_WITH_MILK", "variables": []}
+{"id": "Hint::RHT_BOTTLE_WITH_MILK::249", "plain_text": "a baby's breakfast", "category": "RANDOMIZER", "subcategory": "RHT_BOTTLE_WITH_MILK", "variables": []}
+{"id": "Hint::RHT_BOTTLE_WITH_RED_POTION::250", "plain_text": "a Red Potion Bottle", "category": "RANDOMIZER", "subcategory": "RHT_BOTTLE_WITH_RED_POTION", "variables": []}
+{"id": "Hint::RHT_BOTTLE_WITH_RED_POTION::251", "plain_text": "a bottle", "category": "RANDOMIZER", "subcategory": "RHT_BOTTLE_WITH_RED_POTION", "variables": []}
+{"id": "Hint::RHT_BOTTLE_WITH_RED_POTION::252", "plain_text": "a vitality vial", "category": "RANDOMIZER", "subcategory": "RHT_BOTTLE_WITH_RED_POTION", "variables": []}
+{"id": "Hint::RHT_BOTTLE_WITH_RED_POTION::253", "plain_text": "a red liquid", "category": "RANDOMIZER", "subcategory": "RHT_BOTTLE_WITH_RED_POTION", "variables": []}
+{"id": "Hint::RHT_BOTTLE_WITH_GREEN_POTION::254", "plain_text": "a Green Potion Bottle", "category": "RANDOMIZER", "subcategory": "RHT_BOTTLE_WITH_GREEN_POTION", "variables": []}
+{"id": "Hint::RHT_BOTTLE_WITH_GREEN_POTION::255", "plain_text": "a bottle", "category": "RANDOMIZER", "subcategory": "RHT_BOTTLE_WITH_GREEN_POTION", "variables": []}
+{"id": "Hint::RHT_BOTTLE_WITH_GREEN_POTION::256", "plain_text": "a magic mixture", "category": "RANDOMIZER", "subcategory": "RHT_BOTTLE_WITH_GREEN_POTION", "variables": []}
+{"id": "Hint::RHT_BOTTLE_WITH_GREEN_POTION::257", "plain_text": "a green liquid", "category": "RANDOMIZER", "subcategory": "RHT_BOTTLE_WITH_GREEN_POTION", "variables": []}
+{"id": "Hint::RHT_BOTTLE_WITH_BLUE_POTION::258", "plain_text": "a Blue Potion Bottle", "category": "RANDOMIZER", "subcategory": "RHT_BOTTLE_WITH_BLUE_POTION", "variables": []}
+{"id": "Hint::RHT_BOTTLE_WITH_BLUE_POTION::259", "plain_text": "a bottle", "category": "RANDOMIZER", "subcategory": "RHT_BOTTLE_WITH_BLUE_POTION", "variables": []}
+{"id": "Hint::RHT_BOTTLE_WITH_BLUE_POTION::260", "plain_text": "an ailment antidote", "category": "RANDOMIZER", "subcategory": "RHT_BOTTLE_WITH_BLUE_POTION", "variables": []}
+{"id": "Hint::RHT_BOTTLE_WITH_BLUE_POTION::261", "plain_text": "a blue liquid", "category": "RANDOMIZER", "subcategory": "RHT_BOTTLE_WITH_BLUE_POTION", "variables": []}
+{"id": "Hint::RHT_BOTTLE_WITH_FAIRY::262", "plain_text": "a Fairy Bottle", "category": "RANDOMIZER", "subcategory": "RHT_BOTTLE_WITH_FAIRY", "variables": []}
+{"id": "Hint::RHT_BOTTLE_WITH_FAIRY::263", "plain_text": "a bottle", "category": "RANDOMIZER", "subcategory": "RHT_BOTTLE_WITH_FAIRY", "variables": []}
+{"id": "Hint::RHT_BOTTLE_WITH_FAIRY::264", "plain_text": "an imprisoned fairy", "category": "RANDOMIZER", "subcategory": "RHT_BOTTLE_WITH_FAIRY", "variables": []}
+{"id": "Hint::RHT_BOTTLE_WITH_FAIRY::265", "plain_text": "an extra life", "category": "RANDOMIZER", "subcategory": "RHT_BOTTLE_WITH_FAIRY", "variables": []}
+{"id": "Hint::RHT_BOTTLE_WITH_FAIRY::266", "plain_text": "Navi's cousin", "category": "RANDOMIZER", "subcategory": "RHT_BOTTLE_WITH_FAIRY", "variables": []}
+{"id": "Hint::RHT_BOTTLE_WITH_FISH::267", "plain_text": "a Fish Bottle", "category": "RANDOMIZER", "subcategory": "RHT_BOTTLE_WITH_FISH", "variables": []}
+{"id": "Hint::RHT_BOTTLE_WITH_FISH::268", "plain_text": "a bottle", "category": "RANDOMIZER", "subcategory": "RHT_BOTTLE_WITH_FISH", "variables": []}
+{"id": "Hint::RHT_BOTTLE_WITH_FISH::269", "plain_text": "an aquarium", "category": "RANDOMIZER", "subcategory": "RHT_BOTTLE_WITH_FISH", "variables": []}
+{"id": "Hint::RHT_BOTTLE_WITH_FISH::270", "plain_text": "a deity's snack", "category": "RANDOMIZER", "subcategory": "RHT_BOTTLE_WITH_FISH", "variables": []}
+{"id": "Hint::RHT_BOTTLE_WITH_BLUE_FIRE::271", "plain_text": "a Blue Fire Bottle", "category": "RANDOMIZER", "subcategory": "RHT_BOTTLE_WITH_BLUE_FIRE", "variables": []}
+{"id": "Hint::RHT_BOTTLE_WITH_BLUE_FIRE::272", "plain_text": "a bottle", "category": "RANDOMIZER", "subcategory": "RHT_BOTTLE_WITH_BLUE_FIRE", "variables": []}
+{"id": "Hint::RHT_BOTTLE_WITH_BLUE_FIRE::273", "plain_text": "a conflagration canteen", "category": "RANDOMIZER", "subcategory": "RHT_BOTTLE_WITH_BLUE_FIRE", "variables": []}
+{"id": "Hint::RHT_BOTTLE_WITH_BLUE_FIRE::274", "plain_text": "an icemelt jar", "category": "RANDOMIZER", "subcategory": "RHT_BOTTLE_WITH_BLUE_FIRE", "variables": []}
+{"id": "Hint::RHT_BOTTLE_WITH_BUGS::275", "plain_text": "a Bug Bottle", "category": "RANDOMIZER", "subcategory": "RHT_BOTTLE_WITH_BUGS", "variables": []}
+{"id": "Hint::RHT_BOTTLE_WITH_BUGS::276", "plain_text": "a bottle", "category": "RANDOMIZER", "subcategory": "RHT_BOTTLE_WITH_BUGS", "variables": []}
+{"id": "Hint::RHT_BOTTLE_WITH_BUGS::277", "plain_text": "an insectarium", "category": "RANDOMIZER", "subcategory": "RHT_BOTTLE_WITH_BUGS", "variables": []}
+{"id": "Hint::RHT_BOTTLE_WITH_BUGS::278", "plain_text": "Skulltula finders", "category": "RANDOMIZER", "subcategory": "RHT_BOTTLE_WITH_BUGS", "variables": []}
+{"id": "Hint::RHT_BOTTLE_WITH_POE::279", "plain_text": "a Poe Bottle", "category": "RANDOMIZER", "subcategory": "RHT_BOTTLE_WITH_POE", "variables": []}
+{"id": "Hint::RHT_BOTTLE_WITH_POE::280", "plain_text": "a bottle", "category": "RANDOMIZER", "subcategory": "RHT_BOTTLE_WITH_POE", "variables": []}
+{"id": "Hint::RHT_BOTTLE_WITH_POE::281", "plain_text": "a spooky ghost", "category": "RANDOMIZER", "subcategory": "RHT_BOTTLE_WITH_POE", "variables": []}
+{"id": "Hint::RHT_BOTTLE_WITH_POE::282", "plain_text": "a face in the jar", "category": "RANDOMIZER", "subcategory": "RHT_BOTTLE_WITH_POE", "variables": []}
+{"id": "Hint::RHT_BOTTLE_WITH_BIG_POE::283", "plain_text": "a Big Poe Bottle", "category": "RANDOMIZER", "subcategory": "RHT_BOTTLE_WITH_BIG_POE", "variables": []}
+{"id": "Hint::RHT_BOTTLE_WITH_BIG_POE::284", "plain_text": "a bottle", "category": "RANDOMIZER", "subcategory": "RHT_BOTTLE_WITH_BIG_POE", "variables": []}
+{"id": "Hint::RHT_BOTTLE_WITH_BIG_POE::285", "plain_text": "the spookiest ghost", "category": "RANDOMIZER", "subcategory": "RHT_BOTTLE_WITH_BIG_POE", "variables": []}
+{"id": "Hint::RHT_BOTTLE_WITH_BIG_POE::286", "plain_text": "a sidequest spirit", "category": "RANDOMIZER", "subcategory": "RHT_BOTTLE_WITH_BIG_POE", "variables": []}
+{"id": "Hint::RHT_RUTOS_LETTER::287", "plain_text": "Ruto's Letter", "category": "RANDOMIZER", "subcategory": "RHT_RUTOS_LETTER", "variables": []}
+{"id": "Hint::RHT_RUTOS_LETTER::288", "plain_text": "a bottle", "category": "RANDOMIZER", "subcategory": "RHT_RUTOS_LETTER", "variables": []}
+{"id": "Hint::RHT_RUTOS_LETTER::289", "plain_text": "a call for help", "category": "RANDOMIZER", "subcategory": "RHT_RUTOS_LETTER", "variables": []}
+{"id": "Hint::RHT_RUTOS_LETTER::290", "plain_text": "the note that Mweeps", "category": "RANDOMIZER", "subcategory": "RHT_RUTOS_LETTER", "variables": []}
+{"id": "Hint::RHT_RUTOS_LETTER::291", "plain_text": "an SOS call", "category": "RANDOMIZER", "subcategory": "RHT_RUTOS_LETTER", "variables": []}
+{"id": "Hint::RHT_RUTOS_LETTER::292", "plain_text": "a fishy stationery", "category": "RANDOMIZER", "subcategory": "RHT_RUTOS_LETTER", "variables": []}
+{"id": "Hint::RHT_ZELDAS_LULLABY::293", "plain_text": "Zelda's Lullaby", "category": "RANDOMIZER", "subcategory": "RHT_ZELDAS_LULLABY", "variables": []}
+{"id": "Hint::RHT_ZELDAS_LULLABY::294", "plain_text": "a regular song", "category": "RANDOMIZER", "subcategory": "RHT_ZELDAS_LULLABY", "variables": []}
+{"id": "Hint::RHT_ZELDAS_LULLABY::295", "plain_text": "something kept by the royal family", "category": "RANDOMIZER", "subcategory": "RHT_ZELDAS_LULLABY", "variables": []}
+{"id": "Hint::RHT_ZELDAS_LULLABY::296", "plain_text": "a song of royal slumber", "category": "RANDOMIZER", "subcategory": "RHT_ZELDAS_LULLABY", "variables": []}
+{"id": "Hint::RHT_ZELDAS_LULLABY::297", "plain_text": "a triforce tune", "category": "RANDOMIZER", "subcategory": "RHT_ZELDAS_LULLABY", "variables": []}
+{"id": "Hint::RHT_EPONAS_SONG::298", "plain_text": "Epona's Song", "category": "RANDOMIZER", "subcategory": "RHT_EPONAS_SONG", "variables": []}
+{"id": "Hint::RHT_EPONAS_SONG::299", "plain_text": "a regular song", "category": "RANDOMIZER", "subcategory": "RHT_EPONAS_SONG", "variables": []}
+{"id": "Hint::RHT_EPONAS_SONG::300", "plain_text": "an equestrian etude", "category": "RANDOMIZER", "subcategory": "RHT_EPONAS_SONG", "variables": []}
+{"id": "Hint::RHT_EPONAS_SONG::301", "plain_text": "Malon's melody", "category": "RANDOMIZER", "subcategory": "RHT_EPONAS_SONG", "variables": []}
+{"id": "Hint::RHT_EPONAS_SONG::302", "plain_text": "a ranch song", "category": "RANDOMIZER", "subcategory": "RHT_EPONAS_SONG", "variables": []}

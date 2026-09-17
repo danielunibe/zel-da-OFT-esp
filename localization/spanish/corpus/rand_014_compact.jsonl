@@ -1,0 +1,200 @@
+{"id": "ENTRANCE::L167", "plain_text": "Kak Bazaar", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L167", "plain_text": "Kak Bazaar Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L168", "plain_text": "Kak Potion Shop Front", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L168", "plain_text": "Kak Potion Shop Front Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L169", "plain_text": "Kak Potion Shop Back", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L169", "plain_text": "Kak Potion Shop Back Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L172", "plain_text": "Bottom of the Well Entrance", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L172", "plain_text": "Kakariko Outside the Well", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L175", "plain_text": "Graveyard Entrance", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L175", "plain_text": "Kakariko Southeast Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L176", "plain_text": "GY Dampe's Hut Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L176", "plain_text": "Dampe's Hut", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L177", "plain_text": "GY Near-Hut Grave Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L177", "plain_text": "Shield Grave", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L178", "plain_text": "GY Near-Tomb Grave Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L178", "plain_text": "Heart Piece Grave", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L179", "plain_text": "GY Royal Family's Tomb Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L179", "plain_text": "Royal Family's Tomb", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L180", "plain_text": "GY Near-Ledge Grave Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L180", "plain_text": "Dampe's Grave", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L181", "plain_text": "Graveyard Outside Temple", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L181", "plain_text": "Shadow Temple Entrance", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L182", "plain_text": "Dampe's Hut", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L182", "plain_text": "GY Dampe's Hut Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L183", "plain_text": "Shield Grave", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L183", "plain_text": "GY Near-Hut Grave Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L184", "plain_text": "Heart Piece Grave", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L184", "plain_text": "GY Near-Tomb Grave Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L185", "plain_text": "Royal Family's Tomb", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L185", "plain_text": "GY Royal Family's Tomb Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L186", "plain_text": "Dampe's Grave", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L186", "plain_text": "GY Near-Ledge Grave Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L187", "plain_text": "Shadow Temple Entrance", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L187", "plain_text": "Graveyard Outside Temple", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L188", "plain_text": "Shadow Temple Boss Door", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L188", "plain_text": "Bongo-Bongo", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L189", "plain_text": "Bongo-Bongo", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L189", "plain_text": "Shadow Temple Boss Door", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L190", "plain_text": "Bongo-Bongo Blue Warp", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L190", "plain_text": "Shadow Temple Blue Warp", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L193", "plain_text": "Death Mountain Trail Middle Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L193", "plain_text": "Goron City Upper Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L194", "plain_text": "Death Mountain Trail Bottom Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L194", "plain_text": "Kakariko Guard Gate Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L195", "plain_text": "Death Mountain Trail Top Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L195", "plain_text": "Death Mountain Crater Upper Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L196", "plain_text": "DMT Great Fairy Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L196", "plain_text": "DMT Great Fairy Fountain", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L199", "plain_text": "Death Mountain Trail Outside Dodongo's Cavern", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L199", "plain_text": "Dodongo's Cavern Entrance", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L200", "plain_text": "DMT Great Fairy Fountain", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L200", "plain_text": "DMT Great Fairy Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L203", "plain_text": "Dodongo's Cavern Entrance", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L203", "plain_text": "Death Mountain Trail Outside Dodongo's Cavern", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L204", "plain_text": "Dodongo's Cavern Boss Door", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L204", "plain_text": "King Dodongo", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L205", "plain_text": "King Dodongo", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L205", "plain_text": "Dodongo's Cavern Boss Door", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L206", "plain_text": "King Dodongo Blue Warp", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L206", "plain_text": "Dodongo's Cavern Blue Warp", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L209", "plain_text": "Death Mountain Crater Bridge Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L209", "plain_text": "Goron City Darunia's Room Backdoor", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L210", "plain_text": "Death Mountain Crater Upper Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L210", "plain_text": "Death Mountain Trail Top Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L211", "plain_text": "DMC Great Fairy Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L211", "plain_text": "DMC Great Fairy Fountain", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L214", "plain_text": "Death Mountain Crater Outside Temple", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L214", "plain_text": "Fire Temple Entrance", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L215", "plain_text": "DMC Great Fairy Fountain", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L215", "plain_text": "DMC Great Fairy Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L218", "plain_text": "Fire Temple Entrance", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L218", "plain_text": "Death Mountain Crater Outside Temple", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L219", "plain_text": "Fire Temple Boss Door", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L219", "plain_text": "Volvagia", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L220", "plain_text": "Volvagia", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L220", "plain_text": "Fire Temple Boss Door", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L221", "plain_text": "Volvagia Blue Warp", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L221", "plain_text": "Fire Temple Blue Warp", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L224", "plain_text": "Goron City Upper Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L224", "plain_text": "Death Mountain Trail Middle Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L225", "plain_text": "Goron City Darunia's Room Backdoor", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L225", "plain_text": "Death Mountain Crater Bridge Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L226", "plain_text": "Goron City Tunnel Shortcut", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L226", "plain_text": "Lost Woods Tunnel Shortcut", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L227", "plain_text": "GC Shop Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L227", "plain_text": "Goron Shop", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L229", "plain_text": "Goron Shop", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L229", "plain_text": "GC Shop Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L233", "plain_text": "Zora's River Lower Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L233", "plain_text": "Hyrule Field River Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L234", "plain_text": "Zora's River Underwater Shortcut", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L234", "plain_text": "Lost Woods Underwater Shortcut", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L235", "plain_text": "Zora's River Waterfall Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L235", "plain_text": "Zora's Domain Entrance", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L244", "plain_text": "Zora's Domain Entrance", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L244", "plain_text": "Zora's River Waterfall Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L245", "plain_text": "Zora's Domain Underwater Shortcut", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L245", "plain_text": "Lake Hylia Underwater Shortcut", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L246", "plain_text": "Zora's Domain Behind King Zora", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L246", "plain_text": "Zora's Fountain Tunnel Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L247", "plain_text": "ZD Shop Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L247", "plain_text": "Zora Shop", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L249", "plain_text": "Zora Shop", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L249", "plain_text": "ZD Shop Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L253", "plain_text": "Zora's Fountain Tunnel Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L253", "plain_text": "Zora's Domain Behind King Zora", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L254", "plain_text": "ZF Great Fairy Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L254", "plain_text": "ZF Great Fairy Fountain", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L255", "plain_text": "Zora's Fountain Outside Jabu Jabu", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L255", "plain_text": "Jabu Jabu's Belly Entrance", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L256", "plain_text": "Zora's Fountain Outside Ice Cavern", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L256", "plain_text": "Ice Cavern Entrance", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L257", "plain_text": "ZF Great Fairy Fountain", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L257", "plain_text": "ZF Great Fairy Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L258", "plain_text": "Jabu Jabu's Belly Entrance", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L258", "plain_text": "Zora's Fountain Outside Jabu Jabu", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L259", "plain_text": "Jabu Jabu's Belly Boss Door", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L259", "plain_text": "Barinade", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L260", "plain_text": "Barinade", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L260", "plain_text": "Jabu Jabu's Belly Boss Door", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L261", "plain_text": "Barinade Blue Warp", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L261", "plain_text": "Jabu Jabu's Belly Blue Warp", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L262", "plain_text": "Ice Cavern Entrance", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L262", "plain_text": "Zora's Fountain Outside Ice Cavern", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L265", "plain_text": "Hyrule Field Wooded Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L265", "plain_text": "Lost Woods Bridge West Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L266", "plain_text": "Hyrule Field Drawbridge Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L266", "plain_text": "Market Entrance South Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L267", "plain_text": "Hyrule Field Center Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L267", "plain_text": "Lon Lon Ranch Entrance", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L268", "plain_text": "Hyrule Field Stairs Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L268", "plain_text": "Kakariko Front Gate", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L269", "plain_text": "Hyrule Field River Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L269", "plain_text": "Zora's River Lower Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L270", "plain_text": "Hyrule Field Fence Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L270", "plain_text": "Lake Hylia North Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L271", "plain_text": "Hyrule Field Rocky Path", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L271", "plain_text": "Gerudo Valley East Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L290", "plain_text": "Lon Lon Ranch Entrance", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L290", "plain_text": "Hyrule Field Center Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L291", "plain_text": "LLR Talon's House Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L291", "plain_text": "Talon's House", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L292", "plain_text": "LLR Stables Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L292", "plain_text": "LLR Stables", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L293", "plain_text": "LLR Tower Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L293", "plain_text": "LLR Tower", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L295", "plain_text": "Talon's House", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L295", "plain_text": "LLR Talon's House Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L296", "plain_text": "LLR Stables", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L296", "plain_text": "LLR Stables Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L297", "plain_text": "LLR Tower", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L297", "plain_text": "LLR Tower Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L301", "plain_text": "Lake Hylia North Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L301", "plain_text": "Hyrule Field Fence Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L302", "plain_text": "Lake Hylia Underwater Shortcut", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L302", "plain_text": "Zora's Domain Underwater Shortcut", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L303", "plain_text": "LH Lab Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L303", "plain_text": "LH Lab", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L304", "plain_text": "LH Fishing Pond Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L304", "plain_text": "Fishing Pond", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L306", "plain_text": "Lake Hylia Outside Temple", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L306", "plain_text": "Water Temple Entrance", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L307", "plain_text": "LH Lab", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L307", "plain_text": "LH Lab Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L308", "plain_text": "Fishing Pond", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L308", "plain_text": "LH Fishing Pond Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L310", "plain_text": "Water Temple Entrance", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L310", "plain_text": "Lake Hylia Outside Temple", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L311", "plain_text": "Water Temple Boss Door", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L311", "plain_text": "Morpha", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L312", "plain_text": "Morpha", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L312", "plain_text": "Water Temple Boss Door", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L313", "plain_text": "Morpha Blue Warp", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L313", "plain_text": "Water Temple Blue Warp", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L316", "plain_text": "Gerudo Valley East Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L316", "plain_text": "Hyrule Field Rocky Path", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L317", "plain_text": "Gerudo Valley West Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L317", "plain_text": "Gerudo Fortress East Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L318", "plain_text": "Gerudo Valley River Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L318", "plain_text": "Lake Hylia River Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L319", "plain_text": "GV Carpenters' Tent Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L319", "plain_text": "Carpenters' Tent", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L322", "plain_text": "Carpenters' Tent", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L322", "plain_text": "GV Carpenters' Tent Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L325", "plain_text": "Gerudo Fortress East Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L325", "plain_text": "Gerudo Valley West Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L326", "plain_text": "Gerudo Fortress Gate Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L326", "plain_text": "Haunted Wasteland East Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L328", "plain_text": "GF Outside Training Ground", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L328", "plain_text": "Gerudo Training Ground Entrance", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L330", "plain_text": "Gerudo Training Ground Entrance", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L330", "plain_text": "GF Outside Training Ground", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L331", "plain_text": "GF Outskirts", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L331", "plain_text": "TH 1 Torch Cell", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L332", "plain_text": "TH 1 Torch Cell", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L333", "plain_text": "TH Kitchen Corridor", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L334", "plain_text": "GF Above GTG", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L334", "plain_text": "TH Kitchen Corridor", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L335", "plain_text": "TH Steep Slope Cell", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L336", "plain_text": "GF Bottom of Lower Vines", "category": "LOCATION_NAME", "subcategory": "", "variables": []}

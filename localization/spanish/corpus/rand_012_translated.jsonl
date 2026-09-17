@@ -1,0 +1,200 @@
+{"id":"Rando::ITEM::RG_ICE_ARROWS","plain_text_es_419":"Flecha de Luz","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_LIGHT_ARROWS","plain_text_es_419":"Tarjeta de Membresía Gerudo","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_GERUDO_MEMBERSHIP_CARD","plain_text_es_419":"Frijol Mágico","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_MAGIC_BEAN","plain_text_es_419":"Paquete de Frijoles Mágicos","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_MAGIC_BEAN_PACK","plain_text_es_419":"Defensa Doble","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_DOUBLE_DEFENSE","plain_text_es_419":"Huevo Raro","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_DOUBLE_DEFENSE","plain_text_es_419":"Carta de Zelda","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_ZELDAS_LETTER","plain_text_es_419":"Huevo de Bolsillo","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_POCKET_EGG","plain_text_es_419":"Cojiro","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_COJIRO","plain_text_es_419":"Hongo Raro","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_ODD_MUSHROOM","plain_text_es_419":"Poción Rara","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_ODD_POTION","plain_text_es_419":"Sierra del Cazador","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_POACHERS_SAW","plain_text_es_419":"Espada Goron Rota","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_BROKEN_SWORD","plain_text_es_419":"Receta Médica","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_PRESCRIPTION","plain_text_es_419":"Rana de Cristal","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_EYEBALL_FROG","plain_text_es_419":"Las Mejores Gotas Oculares del Mundo","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_EYEDROPS","plain_text_es_419":"Talón de Claim","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_CLAIM_CHECK","plain_text_es_419":"Ficha de Skulltula Dorada","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_GOLD_SKULLTULA_TOKEN","plain_text_es_419":"Anzuelo Progresivo","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L60","plain_text_es_419":"Mejora de Fuerza","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L62","plain_text_es_419":"Bolsa de Bombas Progresiva","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L63","plain_text_es_419":"Arco Progresivo","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L64","plain_text_es_419":"Resortera Progresiva","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L65","plain_text_es_419":"Billetera Progresiva","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L66","plain_text_es_419":"Escama Progresiva","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L67","plain_text_es_419":"Capacidad de Nueces Progresiva","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L68","plain_text_es_419":"Capacidad de Palos Progresiva","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L69","plain_text_es_419":"Bombchu Progresivo","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L70","plain_text_es_419":"Medidor de Magia Progresivo","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L71","plain_text_es_419":"Ocarina Progresiva","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L72","plain_text_es_419":"Espada Goron Progresiva","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L73","plain_text_es_419":"Botella Vacía","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L76","plain_text_es_419":"Botella con Leche","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L77","plain_text_es_419":"Botella con Poción Roja","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L78","plain_text_es_419":"Botella con Poción Verde","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L79","plain_text_es_419":"Botella con Poción Azul","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L80","plain_text_es_419":"Botella con Hada","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L81","plain_text_es_419":"Botella con Pez","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L82","plain_text_es_419":"Botella con Fuego Azul","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L83","plain_text_es_419":"Botella con Bichos","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L84","plain_text_es_419":"Botella con Poe","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L85","plain_text_es_419":"Botella con Carta de Ruto","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L86","plain_text_es_419":"Botella con Poe Grande","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L87","plain_text_es_419":"Canción de Cuna de Zelda","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L89","plain_text_es_419":"Canción de Epona","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L90","plain_text_es_419":"Canción de Saria","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L91","plain_text_es_419":"Canción del Sol","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L92","plain_text_es_419":"Canción del Tiempo","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L93","plain_text_es_419":"Canción de Tormentas","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L94","plain_text_es_419":"Minueto del Bosque","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L95","plain_text_es_419":"Bolero del Fuego","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L96","plain_text_es_419":"Serenata del Agua","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L97","plain_text_es_419":"Nocturno de la Sombra","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L98","plain_text_es_419":"Requiem del Espíritu","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L99","plain_text_es_419":"Preludio de la Luz","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L100","plain_text_es_419":"Mapa del Gran Árbol Deku","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_DEKU_TREE_MAP","plain_text_es_419":"Mapa de la Cueva de Dodongo","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_DEKU_TREE_MAP","plain_text_es_419":"Mapa del Vientre de Jabu-Jabu","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_DODONGOS_CAVERN_MAP","plain_text_es_419":"Mapa del Templo del Bosque","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_JABU_JABUS_BELLY_MAP","plain_text_es_419":"Mapa del Templo del Fuego","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_FOREST_TEMPLE_MAP","plain_text_es_419":"Mapa del Templo del Agua","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_FIRE_TEMPLE_MAP","plain_text_es_419":"Mapa del Templo del Espíritu","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_WATER_TEMPLE_MAP","plain_text_es_419":"Mapa del Templo de la Sombra","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_SPIRIT_TEMPLE_MAP","plain_text_es_419":"Mapa del Fondo del Pozo","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_SHADOW_TEMPLE_MAP","plain_text_es_419":"Mapa de la Caverna de Hielo","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_BOTTOM_OF_THE_WELL_MAP","plain_text_es_419":"Brújula del Gran Árbol Deku","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_ICE_CAVERN_MAP","plain_text_es_419":"Brújula de la Cueva de Dodongo","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_DEKU_TREE_COMPASS","plain_text_es_419":"Brújula del Vientre de Jabu-Jabu","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_DODONGOS_CAVERN_COMPASS","plain_text_es_419":"Brújula del Templo del Bosque","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_JABU_JABUS_BELLY_COMPASS","plain_text_es_419":"Brújula del Templo del Fuego","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_FOREST_TEMPLE_COMPASS","plain_text_es_419":"Brújula del Templo del Agua","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_FIRE_TEMPLE_COMPASS","plain_text_es_419":"Brújula del Templo del Espíritu","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_WATER_TEMPLE_COMPASS","plain_text_es_419":"Brújula del Templo de la Sombra","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_SPIRIT_TEMPLE_COMPASS","plain_text_es_419":"Brújula del Fondo del Pozo","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_SHADOW_TEMPLE_COMPASS","plain_text_es_419":"Brújula de la Caverna de Hielo","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_BOTTOM_OF_THE_WELL_COMPASS","plain_text_es_419":"Llave Jefe del Templo del Bosque","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_ICE_CAVERN_COMPASS","plain_text_es_419":"Llave Jefe del Templo del Fuego","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_FOREST_TEMPLE_BOSS_KEY","plain_text_es_419":"Llave Jefe del Templo del Agua","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_FIRE_TEMPLE_BOSS_KEY","plain_text_es_419":"Llave Jefe del Templo del Espíritu","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_WATER_TEMPLE_BOSS_KEY","plain_text_es_419":"Llave Jefe del Templo de la Sombra","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_SPIRIT_TEMPLE_BOSS_KEY","plain_text_es_419":"Llave Jefe del Castillo de Ganon","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_SHADOW_TEMPLE_BOSS_KEY","plain_text_es_419":"Llave Pequeña del Templo del Bosque","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_GANONS_CASTLE_BOSS_KEY","plain_text_es_419":"Llave Pequeña del Templo del Fuego","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_FOREST_TEMPLE_SMALL_KEY","plain_text_es_419":"Llave Pequeña del Templo del Agua","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_FIRE_TEMPLE_SMALL_KEY","plain_text_es_419":"Llave Pequeña del Templo del Espíritu","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_WATER_TEMPLE_SMALL_KEY","plain_text_es_419":"Llave Pequeña del Templo de la Sombra","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_SPIRIT_TEMPLE_SMALL_KEY","plain_text_es_419":"Llave Pequeña del Fondo del Pozo","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_SHADOW_TEMPLE_SMALL_KEY","plain_text_es_419":"Llave Pequeña del Entrenamiento","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_BOTTOM_OF_THE_WELL_SMALL_KEY","plain_text_es_419":"Llave Pequeña de la Fortaleza Gerudo","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_GERUDO_TRAINING_GROUND_SMALL_KEY","plain_text_es_419":"Llave Pequeña del Castillo de Ganon","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_GERUDO_FORTRESS_SMALL_KEY","plain_text_es_419":"Llave Pequeña del Juego de Cofres","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_GANONS_CASTLE_SMALL_KEY","plain_text_es_419":"Llave de la Casa de la Guardia","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_TREASURE_GAME_SMALL_KEY","plain_text_es_419":"Llave del Bazar del Mercado","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_GUARD_HOUSE_KEY","plain_text_es_419":"Llave de la Tienda de Pociones del Mercado","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_MARKET_BAZAAR_KEY","plain_text_es_419":"Llave de la Tienda de Máscaras","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_MARKET_POTION_SHOP_KEY","plain_text_es_419":"Llave de la Galería de Tiro del Mercado","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_MASK_SHOP_KEY","plain_text_es_419":"Llave de la Bolera Bombchu","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_MARKET_SHOOTING_GALLERY_KEY","plain_text_es_419":"Llave del Edificio del Juego de Cofres del Tesoro","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_BOMBCHU_BOWLING_KEY","plain_text_es_419":"Llave de la Tienda Bombchu","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_TREASURE_CHEST_GAME_BUILDING_KEY","plain_text_es_419":"Llave de la Casa de Richard","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_BOMBCHU_SHOP_KEY","plain_text_es_419":"Llave de la Casa del Callejón","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_RICHARDS_HOUSE_KEY","plain_text_es_419":"Llave del Bazar de Kakariko","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_ALLEY_HOUSE_KEY","plain_text_es_419":"Llave de la Tienda de Pociones de Kakariko","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_KAK_BAZAAR_KEY","plain_text_es_419":"Llave de la Casa del Jefe","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_KAK_POTION_SHOP_KEY","plain_text_es_419":"Llave de la Tienda de Pociones de la Abuelita","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_BOSS_HOUSE_KEY","plain_text_es_419":"Llave de la Casa de Skulltula","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_GRANNYS_POTION_SHOP_KEY","plain_text_es_419":"Llave de la Casa de Impa","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_SKULLTULA_HOUSE_KEY","plain_text_es_419":"Llave del Molino","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_IMPAS_HOUSE_KEY","plain_text_es_419":"Llave de la Galería de Tiro de Kakariko","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_WINDMILL_KEY","plain_text_es_419":"Llave de la Cabaña de Dampé","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_KAK_SHOOTING_GALLERY_KEY","plain_text_es_419":"Llave de la Casa de Talon","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_DAMPES_HUT_KEY","plain_text_es_419":"Llave de la Cuadra","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_TALONS_HOUSE_KEY","plain_text_es_419":"Llave de la Torre Trasera","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_STABLES_KEY","plain_text_es_419":"Llave del Laboratorio de Hylia","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_BACK_TOWER_KEY","plain_text_es_419":"Llave del Hueco de Pesca","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_HYLIA_LAB_KEY","plain_text_es_419":"Llavero del Templo del Bosque","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_FISHING_HOLE_KEY","plain_text_es_419":"Llavero del Templo del Fuego","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_FOREST_TEMPLE_KEY_RING","plain_text_es_419":"Llavero del Templo del Agua","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_FIRE_TEMPLE_KEY_RING","plain_text_es_419":"Llavero del Templo del Espíritu","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_WATER_TEMPLE_KEY_RING","plain_text_es_419":"Llavero del Templo de la Sombra","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_SPIRIT_TEMPLE_KEY_RING","plain_text_es_419":"Llavero del Fondo del Pozo","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_SHADOW_TEMPLE_KEY_RING","plain_text_es_419":"Llavero del Entrenamiento","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_BOTTOM_OF_THE_WELL_KEY_RING","plain_text_es_419":"Llavero de la Fortaleza Gerudo","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_GERUDO_TRAINING_GROUND_KEY_RING","plain_text_es_419":"Llavero del Castillo de Ganon","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_GERUDO_FORTRESS_KEY_RING","plain_text_es_419":"Llavero del Juego de Cofres","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_GANONS_CASTLE_KEY_RING","plain_text_es_419":"Esmeralda de los Kokiri","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_TREASURE_GAME_KEY_RING","plain_text_es_419":"Rubí de los Goron","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L245","plain_text_es_419":"Zafiro de los Zora","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L246","plain_text_es_419":"Medallón del Bosque","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L247","plain_text_es_419":"Medallón del Fuego","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L248","plain_text_es_419":"Medallón del Agua","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L249","plain_text_es_419":"Medallón del Espíritu","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L250","plain_text_es_419":"Medallón de la Sombra","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L251","plain_text_es_419":"Medallón de la Luz","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L252","plain_text_es_419":"Corazón de Recuperación","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L253","plain_text_es_419":"Rupia Verde","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L255","plain_text_es_419":"Greg la Rupia Verde","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L256","plain_text_es_419":"Rupia Azul","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L257","plain_text_es_419":"Rupia Roja","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L258","plain_text_es_419":"Rupia Púrpura","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L259","plain_text_es_419":"Rupia Gigante","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L260","plain_text_es_419":"Pieza de Corazón","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L261","plain_text_es_419":"Contenedor de Corazón","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L262","plain_text_es_419":"Trampa de Hielo","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L263","plain_text_es_419":"Leche","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L264","plain_text_es_419":"Pez","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L265","plain_text_es_419":"Bombas (5)","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L266","plain_text_es_419":"Bombas (10)","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L268","plain_text_es_419":"Bombas (20)","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L269","plain_text_es_419":"Bombchus (5)","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L270","plain_text_es_419":"Bombchus (10)","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L271","plain_text_es_419":"Bombchus (20)","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L273","plain_text_es_419":"Flechas (5)","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L274","plain_text_es_419":"Flechas (10)","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L275","plain_text_es_419":"Flechas (30)","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L276","plain_text_es_419":"Nueces Deku (5)","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L277","plain_text_es_419":"Nueces Deku (10)","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L278","plain_text_es_419":"Semillas Deku (30)","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L279","plain_text_es_419":"Palo Deku (1)","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L280","plain_text_es_419":"Recarga de Poción Roja","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L281","plain_text_es_419":"Recarga de Poción Verde","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L282","plain_text_es_419":"Recarga de Poción Azul","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L283","plain_text_es_419":"Pieza de Corazón (GANADOR)","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L284","plain_text_es_419":"Rupia Verde (PERDEDOR)","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L286","plain_text_es_419":"Comprar Nuez Deku (5)","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L287","plain_text_es_419":"Comprar Flechas (30)","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L289","plain_text_es_419":"Comprar Flechas (50)","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L290","plain_text_es_419":"Comprar Bombas (5) [25]","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L291","plain_text_es_419":"Comprar Nuez Deku (10)","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L292","plain_text_es_419":"Comprar Palo Deku (1)","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L293","plain_text_es_419":"Comprar Bombas (10)","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L294","plain_text_es_419":"Comprar Pez","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L295","plain_text_es_419":"Comprar Poción Roja [30]","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L296","plain_text_es_419":"Comprar Poción Verde","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L297","plain_text_es_419":"Comprar Poción Azul","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L298","plain_text_es_419":"Comprar Escudo Hyliano","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L299","plain_text_es_419":"Comprar Escudo Deku","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L300","plain_text_es_419":"Comprar Túnica Goron","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L301","plain_text_es_419":"Comprar Túnica Zora","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L302","plain_text_es_419":"Comprar Corazón","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L303","plain_text_es_419":"Comprar Bombchu (10)","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L304","plain_text_es_419":"Comprar Bombchu (20)","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L305","plain_text_es_419":"Comprar Semillas Deku (30)","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L306","plain_text_es_419":"Agotado","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L307","plain_text_es_419":"Comprar Fuego Azul","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L308","plain_text_es_419":"Comprar Bicho en Botella","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L309","plain_text_es_419":"Comprar Poe","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L310","plain_text_es_419":"Comprar Espíritu de Hada","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L311","plain_text_es_419":"Comprar Flechas (10)","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L312","plain_text_es_419":"Comprar Bombas (20)","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L313","plain_text_es_419":"Comprar Bombas (30)","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L314","plain_text_es_419":"Comprar Bombas (5) [35]","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L315","plain_text_es_419":"Comprar Poción Roja [40]","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L316","plain_text_es_419":"Comprar Poción Roja [50]","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L317","plain_text_es_419":"Alma de Gohma","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::L318","plain_text_es_419":"Alma del Rey Dodongo","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_GOHMA_SOUL","plain_text_es_419":"Alma de Barinade","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_KING_DODONGO_SOUL","plain_text_es_419":"Alma de Phantom Ganon","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_BARINADE_SOUL","plain_text_es_419":"Alma de Volvagia","translation_status":"TRANSLATED"}
+{"id":"Rando::ITEM::RG_PHANTOM_GANON_SOUL","plain_text_es_419":"Alma de Morpha","translation_status":"TRANSLATED"}

@@ -1,0 +1,10 @@
+test,profile,device,binding,expected_glyph,actual_glyph,fallback_used,result,notes
+STATIC_CLASSIC,CLASSIC,any,any,N64 Z,N64 Z,true,PASS,Profile 0 returns NULL and preserves the original fontTbl[0x84] copy
+STATIC_DYNAMIC_XBOX,DYNAMIC,explicit Xbox or XInput,Player 1 BTN_Z mapped to SDL LT trigger,LT,not applicable,PASS_STATIC,Compiled resolver and OTR asset path verified; physical runtime not executed
+STATIC_UNKNOWN,DYNAMIC,unknown or generic SDL,any,N64 Z,N64 Z,true,PASS_STATIC,Generic SDL names are intentionally not classified as Xbox
+STATIC_MISSING_BINDING,DYNAMIC,explicit Xbox or XInput,missing or unsupported BTN_Z binding,N64 Z,N64 Z,true,PASS_STATIC,Resolver returns NULL
+RUNTIME_CLASSIC,CLASSIC,not connected,any,N64 Z,NOT_EXECUTED,true,NOT_TESTED,No runtime screenshot captured
+RUNTIME_DYNAMIC_XBOX,DYNAMIC,physical Xbox/XInput,Player 1 BTN_Z to LT,LT,not applicable,NOT_TESTED,No physical controller/session available for this run
+RUNTIME_REBIND,DYNAMIC,physical Xbox/XInput,rebind Z away from LT,N64 Z,NOT_EXECUTED,true,NOT_TESTED,Requires runtime input rebinding validation
+RUNTIME_ULTRAWIDE,DYNAMIC,physical Xbox/XInput,Player 1 BTN_Z to LT,LT,NOT_EXECUTED,not applicable,NOT_TESTED,3440x1440 screenshot not captured
+SAVE_PRESERVATION,any,build-test save set,none,unchanged,unchanged,false,PASS,Pre/post SHA-256 hashes match

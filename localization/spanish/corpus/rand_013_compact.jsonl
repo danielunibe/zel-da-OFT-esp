@@ -1,0 +1,200 @@
+{"id": "Rando::ITEM::RG_VOLVAGIA_SOUL", "plain_text": "Bongo Bongo's Soul", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_MORPHA_SOUL", "plain_text": "Twinrova's Soul", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_BONGO_BONGO_SOUL", "plain_text": "Ganon's Soul", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_TWINROVA_SOUL", "plain_text": "Fishing Pole", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_GANON_SOUL", "plain_text": "Ocarina A Button", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_FISHING_POLE", "plain_text": "Ocarina C Up Button", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_OCARINA_A_BUTTON", "plain_text": "Ocarina C Down Button", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_OCARINA_C_UP_BUTTON", "plain_text": "Ocarina C Left Button", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_OCARINA_C_DOWN_BUTTON", "plain_text": "Ocarina C Right Button", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_OCARINA_C_LEFT_BUTTON", "plain_text": "Bronze Scale", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_OCARINA_C_RIGHT_BUTTON", "plain_text": "Bombchu Bag", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_BRONZE_SCALE", "plain_text": "Infinite Quiver", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L355", "plain_text": "Infinite Bomb Bag", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L358", "plain_text": "Infinite Bullet Bag", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L359", "plain_text": "Infinite Stick Capacity", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L360", "plain_text": "Infinite Nut Capacity", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L361", "plain_text": "Infinite Magic Meter", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L362", "plain_text": "Infinite Bombchus", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L363", "plain_text": "Infinite Wallet", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L364", "plain_text": "Skeleton Key", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L366", "plain_text": "Deku Stick Bag", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L368", "plain_text": "Deku Nut Bag", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L371", "plain_text": "Triforce", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L373", "plain_text": "Hint", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::RG_TRIFORCE", "plain_text": "Hookshot", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L376", "plain_text": "Longshot", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L378", "plain_text": "Fairy Ocarina", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L379", "plain_text": "Ocarina of Time", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L380", "plain_text": "Bomb Bag", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L381", "plain_text": "Big Bomb Bag", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L382", "plain_text": "Biggest Bomb Bag", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L383", "plain_text": "Fairy Bow", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L384", "plain_text": "Big Quiver", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L385", "plain_text": "Biggest Quiver", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L386", "plain_text": "Fairy Slingshot", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L387", "plain_text": "Big Deku Seed Bullet Bag", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L388", "plain_text": "Biggest Deku Seed Bullet Bag", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L389", "plain_text": "Goron's Bracelet", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L390", "plain_text": "Silver Gauntlets", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L391", "plain_text": "Golden Gauntlets", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L392", "plain_text": "Silver Scale", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L393", "plain_text": "Golden Scale", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L394", "plain_text": "Adult Wallet", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L395", "plain_text": "Giant Wallet", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L396", "plain_text": "Tycoon Wallet", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L397", "plain_text": "Child Wallet", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L398", "plain_text": "Deku Nut Capacity (30)", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L399", "plain_text": "Deku Nut Capacity (40)", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L400", "plain_text": "Deku Stick Capacity (20)", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L401", "plain_text": "Deku Stick Capacity (30)", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L402", "plain_text": "Magic Meter", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L403", "plain_text": "Enhanced Magic Meter", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "Rando::ITEM::L404", "plain_text": "Triforce Piece", "category": "ITEM_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L47", "plain_text": "Spawns/Warp Songs/Owls", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L48", "plain_text": "Kokiri Forest", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L49", "plain_text": "Lost Woods", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L50", "plain_text": "Sacred Forest Meadow", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L51", "plain_text": "Kakariko Village", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L52", "plain_text": "Graveyard", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L53", "plain_text": "Death Mountain Trail", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L54", "plain_text": "Death Mountain Crater", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L55", "plain_text": "Goron City", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L56", "plain_text": "Zora's River", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L57", "plain_text": "Zora's Domain", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L58", "plain_text": "Zora's Fountain", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L59", "plain_text": "Hyrule Field", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L60", "plain_text": "Lon Lon Ranch", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L61", "plain_text": "Lake Hylia", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L62", "plain_text": "Gerudo Valley", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L63", "plain_text": "Gerudo Fortress", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L64", "plain_text": "Haunted Wasteland", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L65", "plain_text": "Desert Colossus", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L66", "plain_text": "Market", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L67", "plain_text": "Hyrule Castle", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L79", "plain_text": "Child Spawn", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L79", "plain_text": "Link's House", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L80", "plain_text": "Adult Spawn", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L80", "plain_text": "Temple of Time", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L82", "plain_text": "Minuet of Forest", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L82", "plain_text": "SFM Warp Pad", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L83", "plain_text": "Bolero of Fire", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L83", "plain_text": "DMC Warp Pad", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L84", "plain_text": "Serenade of Water", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L84", "plain_text": "Lake Hylia Warp Pad", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L85", "plain_text": "Requiem of Spirit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L85", "plain_text": "Desert Colossus Warp Pad", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L86", "plain_text": "Nocturne of Shadow", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L86", "plain_text": "Graveyard Warp Pad", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L87", "plain_text": "Prelude of Light", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L87", "plain_text": "Temple of Time Warp Pad", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L89", "plain_text": "DMT Owl Flight", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L89", "plain_text": "Kakariko Village Owl Drop", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L90", "plain_text": "LH Owl Flight", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L90", "plain_text": "Hyrule Field Owl Drop", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L93", "plain_text": "Kokiri Forest Lower Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L93", "plain_text": "Lost Woods Bridge East Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L94", "plain_text": "Kokiri Forest Upper Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L94", "plain_text": "Lost Woods South Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L95", "plain_text": "KF Link's House Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L95", "plain_text": "Link's House", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L96", "plain_text": "KF Mido's House Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L96", "plain_text": "Mido's House", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L97", "plain_text": "KF Saria's House Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L97", "plain_text": "Saria's House", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L98", "plain_text": "KF House of Twins Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L98", "plain_text": "House of Twins", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L99", "plain_text": "KF Know-It-All House Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L99", "plain_text": "Know-It-All House", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L100", "plain_text": "KF Shop Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L100", "plain_text": "Kokiri Shop", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L102", "plain_text": "KF Outside Deku Tree", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L102", "plain_text": "Deku Tree Entrance", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L103", "plain_text": "Link's House", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L103", "plain_text": "KF Link's House Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L104", "plain_text": "Mido's House", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L104", "plain_text": "KF Mido's House Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L105", "plain_text": "Saria's House", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L105", "plain_text": "KF Saria's House Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L106", "plain_text": "House of Twins", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L106", "plain_text": "KF House of Twins Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L107", "plain_text": "Know-It-All House", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L107", "plain_text": "KF Know-It-All House Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L108", "plain_text": "Kokiri Shop", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L108", "plain_text": "KF Shop Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L110", "plain_text": "Deku Tree Entrance", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L110", "plain_text": "KF Outside Deku Tree", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L111", "plain_text": "Deku Tree Boss Door", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L111", "plain_text": "Gohma", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L112", "plain_text": "Gohma", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L112", "plain_text": "Deku Tree Boss Door", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L113", "plain_text": "Gohma Blue Warp", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L113", "plain_text": "Deku Tree Blue Warp", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L116", "plain_text": "Lost Woods Bridge East Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L116", "plain_text": "Kokiri Forest Lower Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L117", "plain_text": "Lost Woods Bridge West Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L117", "plain_text": "Hyrule Field Wooded Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L118", "plain_text": "Lost Woods South Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L118", "plain_text": "Kokiri Forest Upper Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L119", "plain_text": "Lost Woods Tunnel Shortcut", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L119", "plain_text": "Goron City Tunnel Shortcut", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L120", "plain_text": "Lost Woods Underwater Shortcut", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L120", "plain_text": "Zora's River Underwater Shortcut", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L121", "plain_text": "Lost Woods North Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L121", "plain_text": "Sacred Forest Meadow South Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L124", "plain_text": "Deku Theater", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L127", "plain_text": "Deku Theater", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L130", "plain_text": "Sacred Forest Meadow South Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L130", "plain_text": "Lost Woods North Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L134", "plain_text": "Sacred Forest Meadow Outside Forest Temple", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L134", "plain_text": "Forest Temple Entrance", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L138", "plain_text": "Forest Temple Entrance", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L138", "plain_text": "Sacred Forest Meadow Outside Forest Temple", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L139", "plain_text": "Forest Temple Boss Door", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L139", "plain_text": "Phantom Ganon", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L140", "plain_text": "Phantom Ganon", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L140", "plain_text": "Forest Temple Boss Door", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L141", "plain_text": "Phantom Ganon Blue Warp", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L141", "plain_text": "Forest Temple Blue Warp", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L144", "plain_text": "Kakariko Front Gate", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L144", "plain_text": "Hyrule Field Stairs Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L145", "plain_text": "Kakariko Southeast Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L145", "plain_text": "Graveyard Entrance", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L146", "plain_text": "Kakariko Guard Gate Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L146", "plain_text": "Death Mountain Trail Bottom Exit", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L147", "plain_text": "Kak Boss House Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L147", "plain_text": "Carpenter Boss House", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L148", "plain_text": "Kak Skulltula House Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L148", "plain_text": "House of Skulltula", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L149", "plain_text": "Kak Impa's House Front Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L149", "plain_text": "Impa's House Front", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L150", "plain_text": "Kak Impa's House Back Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L150", "plain_text": "Impa's House Back", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L151", "plain_text": "Kak Windmill Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L151", "plain_text": "Windmill", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L152", "plain_text": "Kak Shooting Gallery Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L152", "plain_text": "Kak Shooting Gallery", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L153", "plain_text": "Kak Granny's Potion Shop Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L153", "plain_text": "Granny's Potion Shop", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L154", "plain_text": "Kak Bazaar Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L154", "plain_text": "Kak Bazaar", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L155", "plain_text": "Kak Potion Shop Front Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L155", "plain_text": "Kak Potion Shop Front", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L156", "plain_text": "Kak Potion Shop Back Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L156", "plain_text": "Kak Potion Shop Back", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L159", "plain_text": "Kakariko Outside the Well", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L159", "plain_text": "Bottom of the Well Entrance", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L160", "plain_text": "Carpenter Boss House", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L160", "plain_text": "Kak Boss House Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L161", "plain_text": "House of Skulltula", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L161", "plain_text": "Kak Skulltula House Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L162", "plain_text": "Impa's House Front", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L162", "plain_text": "Kak Impa's House Front Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L163", "plain_text": "Impa's House Back", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L163", "plain_text": "Kak Impa's House Back Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L164", "plain_text": "Windmill", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L164", "plain_text": "Kak Windmill Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L165", "plain_text": "Kak Shooting Gallery", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L165", "plain_text": "Kak Shooting Gallery Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L166", "plain_text": "Granny's Potion Shop", "category": "LOCATION_NAME", "subcategory": "", "variables": []}
+{"id": "ENTRANCE::L166", "plain_text": "Kak Granny's Potion Shop Entry", "category": "LOCATION_NAME", "subcategory": "", "variables": []}

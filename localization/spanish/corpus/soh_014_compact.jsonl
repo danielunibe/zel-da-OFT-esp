@@ -1,0 +1,200 @@
+{"id": "ACCESSIBILITY::kaleidoscope_eng::143", "plain_text": "BOMBS 10", "category": "SYSTEM", "subcategory": "143"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::144", "plain_text": "BOMBS 20", "category": "SYSTEM", "subcategory": "144"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::145", "plain_text": "BOMBS 30", "category": "SYSTEM", "subcategory": "145"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::146", "plain_text": "ARROWS SMALL", "category": "SYSTEM", "subcategory": "146"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::147", "plain_text": "ARROWS MEDIUM", "category": "SYSTEM", "subcategory": "147"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::148", "plain_text": "ARROWS LARGE", "category": "SYSTEM", "subcategory": "148"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::149", "plain_text": "SEEDS 30", "category": "SYSTEM", "subcategory": "149"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::150", "plain_text": "BOMBCHUS 5", "category": "SYSTEM", "subcategory": "150"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::151", "plain_text": "BOMBCHUS 20", "category": "SYSTEM", "subcategory": "151"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::152", "plain_text": "STICK UPGRADE 20", "category": "SYSTEM", "subcategory": "152"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::153", "plain_text": "STICK UPGRADE 30", "category": "SYSTEM", "subcategory": "153"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::154", "plain_text": "NUT UPGRADE 30", "category": "SYSTEM", "subcategory": "154"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::155", "plain_text": "NUT UPGRADE 40", "category": "SYSTEM", "subcategory": "155"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::256", "plain_text": "Haunted Wasteland", "category": "SYSTEM", "subcategory": "256"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::257", "plain_text": "Gerudos Fortress", "category": "SYSTEM", "subcategory": "257"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::258", "plain_text": "Gerudo Valley", "category": "SYSTEM", "subcategory": "258"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::259", "plain_text": "Hylia Lakeside", "category": "SYSTEM", "subcategory": "259"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::260", "plain_text": "Lon Lon Ranch", "category": "SYSTEM", "subcategory": "260"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::261", "plain_text": "Market", "category": "SYSTEM", "subcategory": "261"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::262", "plain_text": "Hyrule Field", "category": "SYSTEM", "subcategory": "262"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::263", "plain_text": "Death Mountain", "category": "SYSTEM", "subcategory": "263"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::264", "plain_text": "Kakariko Village", "category": "SYSTEM", "subcategory": "264"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::265", "plain_text": "Lost Woods", "category": "SYSTEM", "subcategory": "265"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::266", "plain_text": "Kokiri Forest", "category": "SYSTEM", "subcategory": "266"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::267", "plain_text": "Zoras Domain", "category": "SYSTEM", "subcategory": "267"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::292", "plain_text": "Hyrule Field", "category": "SYSTEM", "subcategory": "292"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::293", "plain_text": "Kakariko Village", "category": "SYSTEM", "subcategory": "293"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::294", "plain_text": "Graveyard", "category": "SYSTEM", "subcategory": "294"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::295", "plain_text": "Zoras River", "category": "SYSTEM", "subcategory": "295"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::296", "plain_text": "Kokiri Forest", "category": "SYSTEM", "subcategory": "296"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::297", "plain_text": "Sacred Forest Meadow", "category": "SYSTEM", "subcategory": "297"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::298", "plain_text": "Lake Hylia", "category": "SYSTEM", "subcategory": "298"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::299", "plain_text": "Zoras Domain", "category": "SYSTEM", "subcategory": "299"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::300", "plain_text": "Zoras Fountain", "category": "SYSTEM", "subcategory": "300"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::301", "plain_text": "Gerudo Valley", "category": "SYSTEM", "subcategory": "301"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::302", "plain_text": "Lost Woods", "category": "SYSTEM", "subcategory": "302"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::303", "plain_text": "Desert Colossus", "category": "SYSTEM", "subcategory": "303"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::304", "plain_text": "Gerudo's Fortress", "category": "SYSTEM", "subcategory": "304"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::305", "plain_text": "Haunted Wasteland", "category": "SYSTEM", "subcategory": "305"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::306", "plain_text": "Market", "category": "SYSTEM", "subcategory": "306"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::307", "plain_text": "Hyrule Castle", "category": "SYSTEM", "subcategory": "307"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::308", "plain_text": "Death Mountain Trail", "category": "SYSTEM", "subcategory": "308"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::309", "plain_text": "Death Mountain Crater", "category": "SYSTEM", "subcategory": "309"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::310", "plain_text": "Goron City", "category": "SYSTEM", "subcategory": "310"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::311", "plain_text": "Lon Lon Ranch", "category": "SYSTEM", "subcategory": "311"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::312", "plain_text": "Question Mark", "category": "SYSTEM", "subcategory": "312"}
+{"id": "ACCESSIBILITY::kaleidoscope_eng::313", "plain_text": "Ganon's Castle", "category": "SYSTEM", "subcategory": "313"}
+{"id": "ACCESSIBILITY::filechoose_ger::file1", "plain_text": "Datei 1", "category": "SYSTEM", "subcategory": "file1"}
+{"id": "ACCESSIBILITY::filechoose_ger::file2", "plain_text": "Datei 2", "category": "SYSTEM", "subcategory": "file2"}
+{"id": "ACCESSIBILITY::filechoose_ger::file3", "plain_text": "Datei 3", "category": "SYSTEM", "subcategory": "file3"}
+{"id": "ACCESSIBILITY::filechoose_ger::options", "plain_text": "Optionen", "category": "SYSTEM", "subcategory": "options"}
+{"id": "ACCESSIBILITY::filechoose_ger::copy", "plain_text": "Kopieren", "category": "SYSTEM", "subcategory": "copy"}
+{"id": "ACCESSIBILITY::filechoose_ger::erase", "plain_text": "Löschen", "category": "SYSTEM", "subcategory": "erase"}
+{"id": "ACCESSIBILITY::filechoose_ger::quit", "plain_text": "Zurück", "category": "SYSTEM", "subcategory": "quit"}
+{"id": "ACCESSIBILITY::filechoose_ger::confirm", "plain_text": "Ja", "category": "SYSTEM", "subcategory": "confirm"}
+{"id": "ACCESSIBILITY::filechoose_ger::end", "plain_text": "Ende", "category": "SYSTEM", "subcategory": "end"}
+{"id": "ACCESSIBILITY::filechoose_ger::hyphen", "plain_text": "Bindestrich", "category": "SYSTEM", "subcategory": "hyphen"}
+{"id": "ACCESSIBILITY::filechoose_ger::period", "plain_text": "Punkt", "category": "SYSTEM", "subcategory": "period"}
+{"id": "ACCESSIBILITY::filechoose_ger::space", "plain_text": "Raum", "category": "SYSTEM", "subcategory": "space"}
+{"id": "ACCESSIBILITY::filechoose_ger::backspace", "plain_text": "Rücktaste", "category": "SYSTEM", "subcategory": "backspace"}
+{"id": "ACCESSIBILITY::filechoose_ger::capital_letter", "plain_text": "Großbuchstabe $0", "category": "SYSTEM", "subcategory": "capital_letter"}
+{"id": "ACCESSIBILITY::filechoose_ger::audio_stereo", "plain_text": "Sound - Stereo", "category": "SYSTEM", "subcategory": "audio_stereo"}
+{"id": "ACCESSIBILITY::filechoose_ger::audio_mono", "plain_text": "Sound - Mono", "category": "SYSTEM", "subcategory": "audio_mono"}
+{"id": "ACCESSIBILITY::filechoose_ger::audio_headset", "plain_text": "Sound - Kopfhörer", "category": "SYSTEM", "subcategory": "audio_headset"}
+{"id": "ACCESSIBILITY::filechoose_ger::audio_surround", "plain_text": "Sound - Surround", "category": "SYSTEM", "subcategory": "audio_surround"}
+{"id": "ACCESSIBILITY::filechoose_ger::target_switch", "plain_text": "Zielerfassung - Einmal drücken", "category": "SYSTEM", "subcategory": "target_switch"}
+{"id": "ACCESSIBILITY::filechoose_ger::target_hold", "plain_text": "Zielerfassung - Trigger halten", "category": "SYSTEM", "subcategory": "target_hold"}
+{"id": "ACCESSIBILITY::filechoose_ger::language_english", "plain_text": "Sprache - Englisch", "category": "SYSTEM", "subcategory": "language_english"}
+{"id": "ACCESSIBILITY::filechoose_ger::language_german", "plain_text": "Sprache - Deutsch", "category": "SYSTEM", "subcategory": "language_german"}
+{"id": "ACCESSIBILITY::filechoose_ger::language_french", "plain_text": "Sprache - Französisch", "category": "SYSTEM", "subcategory": "language_french"}
+{"id": "ACCESSIBILITY::filechoose_ger::quest_sel_vanilla", "plain_text": "Quest - Original", "category": "SYSTEM", "subcategory": "quest_sel_vanilla"}
+{"id": "ACCESSIBILITY::filechoose_ger::quest_sel_mq", "plain_text": "Quest - Master Quest", "category": "SYSTEM", "subcategory": "quest_sel_mq"}
+{"id": "ACCESSIBILITY::filechoose_ger::quest_sel_randomizer", "plain_text": "Quest - Randomizer", "category": "SYSTEM", "subcategory": "quest_sel_randomizer"}
+{"id": "ACCESSIBILITY::filechoose_ger::quest_sel_boss_rush", "plain_text": "Quest - Boss Rush", "category": "SYSTEM", "subcategory": "quest_sel_boss_rush"}
+{"id": "ACCESSIBILITY::scenes_fra::0", "plain_text": "Arbre Mojo", "category": "SYSTEM", "subcategory": "0"}
+{"id": "ACCESSIBILITY::scenes_fra::1", "plain_text": "Caverne Dodongo", "category": "SYSTEM", "subcategory": "1"}
+{"id": "ACCESSIBILITY::scenes_fra::2", "plain_text": "Ventre de Jabu-Jabu", "category": "SYSTEM", "subcategory": "2"}
+{"id": "ACCESSIBILITY::scenes_fra::3", "plain_text": "Temple de la Forêt", "category": "SYSTEM", "subcategory": "3"}
+{"id": "ACCESSIBILITY::scenes_fra::4", "plain_text": "Temple du Feu", "category": "SYSTEM", "subcategory": "4"}
+{"id": "ACCESSIBILITY::scenes_fra::5", "plain_text": "Temple de l'Eau", "category": "SYSTEM", "subcategory": "5"}
+{"id": "ACCESSIBILITY::scenes_fra::6", "plain_text": "Temple de l'Esprit", "category": "SYSTEM", "subcategory": "6"}
+{"id": "ACCESSIBILITY::scenes_fra::7", "plain_text": "Temple de l'Ombre", "category": "SYSTEM", "subcategory": "7"}
+{"id": "ACCESSIBILITY::scenes_fra::8", "plain_text": "Puits", "category": "SYSTEM", "subcategory": "8"}
+{"id": "ACCESSIBILITY::scenes_fra::9", "plain_text": "Caverne Polaire", "category": "SYSTEM", "subcategory": "9"}
+{"id": "ACCESSIBILITY::scenes_fra::11", "plain_text": "Gymnase Gerudo", "category": "SYSTEM", "subcategory": "11"}
+{"id": "ACCESSIBILITY::scenes_fra::12", "plain_text": "Repaire des Voleurs", "category": "SYSTEM", "subcategory": "12"}
+{"id": "ACCESSIBILITY::scenes_fra::13", "plain_text": "Tour de Ganon", "category": "SYSTEM", "subcategory": "13"}
+{"id": "ACCESSIBILITY::scenes_fra::16", "plain_text": "Chasse aux Trésors", "category": "SYSTEM", "subcategory": "16"}
+{"id": "ACCESSIBILITY::scenes_fra::17", "plain_text": "Monstre Insectoide Géant - Gohma", "category": "SYSTEM", "subcategory": "17"}
+{"id": "ACCESSIBILITY::scenes_fra::18", "plain_text": "Dinosaure Infernal - King Dodongo", "category": "SYSTEM", "subcategory": "18"}
+{"id": "ACCESSIBILITY::scenes_fra::19", "plain_text": "Anémone Bio-Electrique - Barinade", "category": "SYSTEM", "subcategory": "19"}
+{"id": "ACCESSIBILITY::scenes_fra::20", "plain_text": "Esprit Maléfique de l'Au-Delà - Ganon Spectral", "category": "SYSTEM", "subcategory": "20"}
+{"id": "ACCESSIBILITY::scenes_fra::21", "plain_text": "Dragon des Profondeurs - Volcania", "category": "SYSTEM", "subcategory": "21"}
+{"id": "ACCESSIBILITY::scenes_fra::22", "plain_text": "Amibe Aquatique Géante - Morpha", "category": "SYSTEM", "subcategory": "22"}
+{"id": "ACCESSIBILITY::scenes_fra::23", "plain_text": "Sorcières Jumelles - Duo Maléfique", "category": "SYSTEM", "subcategory": "23"}
+{"id": "ACCESSIBILITY::scenes_fra::24", "plain_text": "Monstre de l'Ombre - Bongo Bongo", "category": "SYSTEM", "subcategory": "24"}
+{"id": "ACCESSIBILITY::scenes_fra::25", "plain_text": "Seigneur du Malin - Ganondorf", "category": "SYSTEM", "subcategory": "25"}
+{"id": "ACCESSIBILITY::scenes_fra::30", "plain_text": "Ruelle", "category": "SYSTEM", "subcategory": "30"}
+{"id": "ACCESSIBILITY::scenes_fra::31", "plain_text": "Ruelle", "category": "SYSTEM", "subcategory": "31"}
+{"id": "ACCESSIBILITY::scenes_fra::32", "plain_text": "Place du Marché", "category": "SYSTEM", "subcategory": "32"}
+{"id": "ACCESSIBILITY::scenes_fra::33", "plain_text": "Place du Marché", "category": "SYSTEM", "subcategory": "33"}
+{"id": "ACCESSIBILITY::scenes_fra::34", "plain_text": "Place du Marché", "category": "SYSTEM", "subcategory": "34"}
+{"id": "ACCESSIBILITY::scenes_fra::36", "plain_text": "SCENE_SHRINE_N", "category": "SYSTEM", "subcategory": "36"}
+{"id": "ACCESSIBILITY::scenes_fra::37", "plain_text": "SCENE_SHRINE_R", "category": "SYSTEM", "subcategory": "37"}
+{"id": "ACCESSIBILITY::scenes_fra::44", "plain_text": "Bazar", "category": "SYSTEM", "subcategory": "44"}
+{"id": "ACCESSIBILITY::scenes_fra::45", "plain_text": "Boutique Kokiri", "category": "SYSTEM", "subcategory": "45"}
+{"id": "ACCESSIBILITY::scenes_fra::46", "plain_text": "Boutique Goron", "category": "SYSTEM", "subcategory": "46"}
+{"id": "ACCESSIBILITY::scenes_fra::47", "plain_text": "Boutique Zora", "category": "SYSTEM", "subcategory": "47"}
+{"id": "ACCESSIBILITY::scenes_fra::49", "plain_text": "Apothicaire", "category": "SYSTEM", "subcategory": "49"}
+{"id": "ACCESSIBILITY::scenes_fra::51", "plain_text": "Foire aux Masques", "category": "SYSTEM", "subcategory": "51"}
+{"id": "ACCESSIBILITY::scenes_fra::54", "plain_text": "Étable", "category": "SYSTEM", "subcategory": "54"}
+{"id": "ACCESSIBILITY::scenes_fra::56", "plain_text": "Laboratoire du Lac", "category": "SYSTEM", "subcategory": "56"}
+{"id": "ACCESSIBILITY::scenes_fra::58", "plain_text": "Cabane du fossoyeur", "category": "SYSTEM", "subcategory": "58"}
+{"id": "ACCESSIBILITY::scenes_fra::59", "plain_text": "Fontaine Royale des Fées", "category": "SYSTEM", "subcategory": "59"}
+{"id": "ACCESSIBILITY::scenes_fra::60", "plain_text": "Fontaine des Fées", "category": "SYSTEM", "subcategory": "60"}
+{"id": "ACCESSIBILITY::scenes_fra::61", "plain_text": "Fontaine Royale des Fées", "category": "SYSTEM", "subcategory": "61"}
+{"id": "ACCESSIBILITY::scenes_fra::65", "plain_text": "Tombe Royale", "category": "SYSTEM", "subcategory": "65"}
+{"id": "ACCESSIBILITY::scenes_fra::66", "plain_text": "Jeu d'adresse", "category": "SYSTEM", "subcategory": "66"}
+{"id": "ACCESSIBILITY::scenes_fra::67", "plain_text": "Temple du Temps", "category": "SYSTEM", "subcategory": "67"}
+{"id": "ACCESSIBILITY::scenes_fra::68", "plain_text": "Sanctuaire des Sages", "category": "SYSTEM", "subcategory": "68"}
+{"id": "ACCESSIBILITY::scenes_fra::69", "plain_text": "Cour du Château", "category": "SYSTEM", "subcategory": "69"}
+{"id": "ACCESSIBILITY::scenes_fra::70", "plain_text": "Cour du Château", "category": "SYSTEM", "subcategory": "70"}
+{"id": "ACCESSIBILITY::scenes_fra::72", "plain_text": "Endroit Inconnu", "category": "SYSTEM", "subcategory": "72"}
+{"id": "ACCESSIBILITY::scenes_fra::73", "plain_text": "Étang", "category": "SYSTEM", "subcategory": "73"}
+{"id": "ACCESSIBILITY::scenes_fra::74", "plain_text": "Cour du Château", "category": "SYSTEM", "subcategory": "74"}
+{"id": "ACCESSIBILITY::scenes_fra::75", "plain_text": "Bowling Teigneux", "category": "SYSTEM", "subcategory": "75"}
+{"id": "ACCESSIBILITY::scenes_fra::79", "plain_text": "Ganon", "category": "SYSTEM", "subcategory": "79"}
+{"id": "ACCESSIBILITY::scenes_fra::80", "plain_text": "Maison des Araignées", "category": "SYSTEM", "subcategory": "80"}
+{"id": "ACCESSIBILITY::scenes_fra::81", "plain_text": "Plaine d'Hyrule", "category": "SYSTEM", "subcategory": "81"}
+{"id": "ACCESSIBILITY::scenes_fra::82", "plain_text": "Village Cocorico", "category": "SYSTEM", "subcategory": "82"}
+{"id": "ACCESSIBILITY::scenes_fra::83", "plain_text": "Cimetière", "category": "SYSTEM", "subcategory": "83"}
+{"id": "ACCESSIBILITY::scenes_fra::84", "plain_text": "Fleuve Zora", "category": "SYSTEM", "subcategory": "84"}
+{"id": "ACCESSIBILITY::scenes_fra::85", "plain_text": "Forêt Kokiri", "category": "SYSTEM", "subcategory": "85"}
+{"id": "ACCESSIBILITY::scenes_fra::86", "plain_text": "Bosquet Sacré", "category": "SYSTEM", "subcategory": "86"}
+{"id": "ACCESSIBILITY::scenes_fra::87", "plain_text": "Lac Hylia", "category": "SYSTEM", "subcategory": "87"}
+{"id": "ACCESSIBILITY::scenes_fra::88", "plain_text": "Domaine Zora", "category": "SYSTEM", "subcategory": "88"}
+{"id": "ACCESSIBILITY::scenes_fra::89", "plain_text": "Fontaine Zora", "category": "SYSTEM", "subcategory": "89"}
+{"id": "ACCESSIBILITY::scenes_fra::90", "plain_text": "Vallée Gerudo", "category": "SYSTEM", "subcategory": "90"}
+{"id": "ACCESSIBILITY::scenes_fra::91", "plain_text": "Bois Perdu", "category": "SYSTEM", "subcategory": "91"}
+{"id": "ACCESSIBILITY::scenes_fra::92", "plain_text": "Colosse du Désert", "category": "SYSTEM", "subcategory": "92"}
+{"id": "ACCESSIBILITY::scenes_fra::93", "plain_text": "Forteresse Gerudo", "category": "SYSTEM", "subcategory": "93"}
+{"id": "ACCESSIBILITY::scenes_fra::94", "plain_text": "Désert Hanté", "category": "SYSTEM", "subcategory": "94"}
+{"id": "ACCESSIBILITY::scenes_fra::95", "plain_text": "Château d'Hyrule", "category": "SYSTEM", "subcategory": "95"}
+{"id": "ACCESSIBILITY::scenes_fra::96", "plain_text": "Chemin du Péril", "category": "SYSTEM", "subcategory": "96"}
+{"id": "ACCESSIBILITY::scenes_fra::97", "plain_text": "Cratère du Péril", "category": "SYSTEM", "subcategory": "97"}
+{"id": "ACCESSIBILITY::scenes_fra::98", "plain_text": "Village Goron", "category": "SYSTEM", "subcategory": "98"}
+{"id": "ACCESSIBILITY::scenes_fra::99", "plain_text": "Ranch Lon Lon", "category": "SYSTEM", "subcategory": "99"}
+{"id": "ACCESSIBILITY::misc_fra::minutes_plural", "plain_text": "$0 minutes", "category": "SYSTEM", "subcategory": "minutes_plural"}
+{"id": "ACCESSIBILITY::misc_fra::minutes_singular", "plain_text": "$0 minute", "category": "SYSTEM", "subcategory": "minutes_singular"}
+{"id": "ACCESSIBILITY::misc_fra::seconds_plural", "plain_text": "$0 secondes", "category": "SYSTEM", "subcategory": "seconds_plural"}
+{"id": "ACCESSIBILITY::misc_fra::seconds_singular", "plain_text": "$0 seconde", "category": "SYSTEM", "subcategory": "seconds_singular"}
+{"id": "ACCESSIBILITY::misc_fra::input_button_a", "plain_text": "le bouton A", "category": "SYSTEM", "subcategory": "input_button_a"}
+{"id": "ACCESSIBILITY::misc_fra::input_button_b", "plain_text": "le bouton B", "category": "SYSTEM", "subcategory": "input_button_b"}
+{"id": "ACCESSIBILITY::misc_fra::input_button_c", "plain_text": "le bouton C", "category": "SYSTEM", "subcategory": "input_button_c"}
+{"id": "ACCESSIBILITY::misc_fra::input_button_l", "plain_text": "le bouton L", "category": "SYSTEM", "subcategory": "input_button_l"}
+{"id": "ACCESSIBILITY::misc_fra::input_button_r", "plain_text": "le bouton R", "category": "SYSTEM", "subcategory": "input_button_r"}
+{"id": "ACCESSIBILITY::misc_fra::input_button_z", "plain_text": "le bouton Z", "category": "SYSTEM", "subcategory": "input_button_z"}
+{"id": "ACCESSIBILITY::misc_fra::input_button_c_up", "plain_text": "C Haut", "category": "SYSTEM", "subcategory": "input_button_c_up"}
+{"id": "ACCESSIBILITY::misc_fra::input_button_c_down", "plain_text": "C Bas", "category": "SYSTEM", "subcategory": "input_button_c_down"}
+{"id": "ACCESSIBILITY::misc_fra::input_button_c_left", "plain_text": "C Gauche", "category": "SYSTEM", "subcategory": "input_button_c_left"}
+{"id": "ACCESSIBILITY::misc_fra::input_button_c_right", "plain_text": "C Droit", "category": "SYSTEM", "subcategory": "input_button_c_right"}
+{"id": "ACCESSIBILITY::misc_fra::input_analog_stick", "plain_text": "le Stick Analogique", "category": "SYSTEM", "subcategory": "input_analog_stick"}
+{"id": "ACCESSIBILITY::misc_fra::input_d_pad", "plain_text": "D-Pad", "category": "SYSTEM", "subcategory": "input_d_pad"}
+{"id": "ACCESSIBILITY::misc_fra::input_d_pad_up", "plain_text": "D-Pad Haut", "category": "SYSTEM", "subcategory": "input_d_pad_up"}
+{"id": "ACCESSIBILITY::misc_fra::input_d_pad_down", "plain_text": "D-Pad Bas", "category": "SYSTEM", "subcategory": "input_d_pad_down"}
+{"id": "ACCESSIBILITY::misc_fra::input_d_pad_left", "plain_text": "D-Pad Gauche", "category": "SYSTEM", "subcategory": "input_d_pad_left"}
+{"id": "ACCESSIBILITY::misc_fra::input_d_pad_right", "plain_text": "D-Pad Droit", "category": "SYSTEM", "subcategory": "input_d_pad_right"}
+{"id": "ACCESSIBILITY::misc_fra::yes", "plain_text": "Oui", "category": "SYSTEM", "subcategory": "yes"}
+{"id": "ACCESSIBILITY::misc_fra::no", "plain_text": "Non", "category": "SYSTEM", "subcategory": "no"}
+{"id": "ACCESSIBILITY::filechoose_fra::file1", "plain_text": "Fichier 1", "category": "SYSTEM", "subcategory": "file1"}
+{"id": "ACCESSIBILITY::filechoose_fra::file2", "plain_text": "Fichier 2", "category": "SYSTEM", "subcategory": "file2"}
+{"id": "ACCESSIBILITY::filechoose_fra::file3", "plain_text": "Fichier 3", "category": "SYSTEM", "subcategory": "file3"}
+{"id": "ACCESSIBILITY::filechoose_fra::options", "plain_text": "Options", "category": "SYSTEM", "subcategory": "options"}
+{"id": "ACCESSIBILITY::filechoose_fra::copy", "plain_text": "Copier", "category": "SYSTEM", "subcategory": "copy"}
+{"id": "ACCESSIBILITY::filechoose_fra::erase", "plain_text": "Effacer", "category": "SYSTEM", "subcategory": "erase"}
+{"id": "ACCESSIBILITY::filechoose_fra::quit", "plain_text": "Retour", "category": "SYSTEM", "subcategory": "quit"}
+{"id": "ACCESSIBILITY::filechoose_fra::confirm", "plain_text": "Oui", "category": "SYSTEM", "subcategory": "confirm"}
+{"id": "ACCESSIBILITY::filechoose_fra::end", "plain_text": "Fin", "category": "SYSTEM", "subcategory": "end"}
+{"id": "ACCESSIBILITY::filechoose_fra::hyphen", "plain_text": "Trait d'union", "category": "SYSTEM", "subcategory": "hyphen"}
+{"id": "ACCESSIBILITY::filechoose_fra::period", "plain_text": "Point", "category": "SYSTEM", "subcategory": "period"}
+{"id": "ACCESSIBILITY::filechoose_fra::space", "plain_text": "Espace", "category": "SYSTEM", "subcategory": "space"}
+{"id": "ACCESSIBILITY::filechoose_fra::backspace", "plain_text": "Retour arrière", "category": "SYSTEM", "subcategory": "backspace"}
+{"id": "ACCESSIBILITY::filechoose_fra::capital_letter", "plain_text": "Majuscule $0", "category": "SYSTEM", "subcategory": "capital_letter"}
+{"id": "ACCESSIBILITY::filechoose_fra::audio_stereo", "plain_text": "Son - Stéréo", "category": "SYSTEM", "subcategory": "audio_stereo"}
+{"id": "ACCESSIBILITY::filechoose_fra::audio_mono", "plain_text": "Son - Mono", "category": "SYSTEM", "subcategory": "audio_mono"}
+{"id": "ACCESSIBILITY::filechoose_fra::audio_headset", "plain_text": "Son - Casque", "category": "SYSTEM", "subcategory": "audio_headset"}
+{"id": "ACCESSIBILITY::filechoose_fra::audio_surround", "plain_text": "Son - Surround", "category": "SYSTEM", "subcategory": "audio_surround"}
+{"id": "ACCESSIBILITY::filechoose_fra::target_switch", "plain_text": "Visée - Fixe", "category": "SYSTEM", "subcategory": "target_switch"}
+{"id": "ACCESSIBILITY::filechoose_fra::target_hold", "plain_text": "Visée - Maintenue", "category": "SYSTEM", "subcategory": "target_hold"}
+{"id": "ACCESSIBILITY::filechoose_fra::language_english", "plain_text": "Langue - Anglaise", "category": "SYSTEM", "subcategory": "language_english"}
+{"id": "ACCESSIBILITY::filechoose_fra::language_german", "plain_text": "Langue - Allemande", "category": "SYSTEM", "subcategory": "language_german"}
+{"id": "ACCESSIBILITY::filechoose_fra::language_french", "plain_text": "Langue - Français", "category": "SYSTEM", "subcategory": "language_french"}
+{"id": "ACCESSIBILITY::filechoose_fra::quest_sel_vanilla", "plain_text": "Quête - Originale", "category": "SYSTEM", "subcategory": "quest_sel_vanilla"}
+{"id": "ACCESSIBILITY::filechoose_fra::quest_sel_mq", "plain_text": "Quête - Master Quest", "category": "SYSTEM", "subcategory": "quest_sel_mq"}
+{"id": "ACCESSIBILITY::filechoose_fra::quest_sel_randomizer", "plain_text": "Quête - Randomizer", "category": "SYSTEM", "subcategory": "quest_sel_randomizer"}
+{"id": "ACCESSIBILITY::filechoose_fra::quest_sel_boss_rush", "plain_text": "Quête - Boss Rush", "category": "SYSTEM", "subcategory": "quest_sel_boss_rush"}
+{"id": "ACCESSIBILITY::misc_ger::minutes_plural", "plain_text": "$0 Minuten", "category": "SYSTEM", "subcategory": "minutes_plural"}
+{"id": "ACCESSIBILITY::misc_ger::minutes_singular", "plain_text": "eine Minute", "category": "SYSTEM", "subcategory": "minutes_singular"}
+{"id": "ACCESSIBILITY::misc_ger::seconds_plural", "plain_text": "$0 Sekunden", "category": "SYSTEM", "subcategory": "seconds_plural"}
+{"id": "ACCESSIBILITY::misc_ger::seconds_singular", "plain_text": "eine Sekunde", "category": "SYSTEM", "subcategory": "seconds_singular"}

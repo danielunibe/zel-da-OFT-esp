@@ -1,0 +1,100 @@
+{"id":"0x71A5","plain_text_es_419":"¿No te da un poco de miedo\nandar por ahí en medio de la noche\ncon esa apariencia?","translation_status":"TRANSLATED"}
+{"id":"0x71A6","plain_text_es_419":"¡Ja ja ja!\nDe verdad te gustan esas cosas,\n¿no?","translation_status":"TRANSLATED"}
+{"id":"0x71A7","plain_text_es_419":"Creo que he visto una piedra que\nse parece a esa en algún lado...\n¿Dónde será?\nHmmmm....","translation_status":"TRANSLATED"}
+{"id":"0x71A8","plain_text_es_419":"¡Apúrate, [PLAYER]!\nEn cualquier momento la torre se\nva a derrumbar!","translation_status":"TRANSLATED"}
+{"id":"0x71A9","plain_text_es_419":"¡Cuidado con los escombros que caen!","translation_status":"TRANSLATED"}
+{"id":"0x71AA","plain_text_es_419":"¡[PLAYER]!\n¡Ayúdame!","translation_status":"TRANSLATED"}
+{"id":"0x71AB","plain_text_es_419":"¡[PLAYER]!\n¡La salida está justo allá!","translation_status":"TRANSLATED"}
+{"id":"0x71AC","plain_text_es_419":"Gracias, [PLAYER].\n¡Ahora, apúrate!","translation_status":"TRANSLATED"}
+{"id":"0x71AD","plain_text_es_419":"¡Qué lástima!\n--- PAGE ---\n¡Practica y vuelve!","translation_status":"TRANSLATED"}
+{"id":"0x71AE","plain_text_es_419":"¡Casi lo logras!\n--- PAGE ---\nBueno... ¡está bien!\nTe dejaré intentar una vez más\ngratis...\n¡Esta vez sí tienes que lograrlo!","translation_status":"TRANSLATED"}
+{"id":"0x71AF","plain_text_es_419":"¡¡¡Maravilloso!!!\n¡¡¡Bravo!!!\n¡¡¡Perfecto!!!\n--- PAGE ---\n¡Aquí tienes un regalo fantástico!","translation_status":"TRANSLATED"}
+{"id":"0x71B0","plain_text_es_419":"¡Oh, no! ¡Se acabó el tiempo!\nLo que ibas a entregar se echó a\nperder.\n¡Intentémoslo de nuevo!","translation_status":"TRANSLATED"}
+{"id":"0x71B1","plain_text_es_419":"¡BOING! ¡BOING!\n¡La hora actual es: !","translation_status":"TRANSLATED"}
+{"id":"0x71B2","plain_text_es_419":"¿Te contaron de nosotros el guardia\nde la puerta del Monte Muerte?\nPues tengo que darte\nun buen precio entonces.","translation_status":"TRANSLATED"}
+{"id":"0xFFFD","plain_text_es_419":"","translation_status":"TRANSLATED"}
+{"id":"0xFFFF","plain_text_es_419":"¡Pediste prestado un Huevo de Bolsillo!\nDe él nacerá un Cucco de Bolsillo\nen una noche. Asegúrate de\ndevolverlo cuando termines.","translation_status":"TRANSLATED"}
+{"id":"Z_MESSAGE_OTR::L118","plain_text_es_419":"¡Obtuviste un Token de Gold Skulltula!\n¡Has coleccionado r[gsCount]w tokens\nen total!\\x0E\\x3C","translation_status":"TRANSLATED"}
+{"id":"Z_MESSAGE_OTR::L126","plain_text_es_419":"¡Obtuviste un Token de Gold Skulltula!\n¡Has coleccionado r[gsCount]w tokens\nen total!","translation_status":"TRANSLATED"}
+{"id":"Z_MESSAGE_OTR::L134","plain_text_es_419":"\\x08rBombchu  10 piezas  99 Rupias\nwEsto parece un ratón de juguete, pero\nen realidad es un","translation_status":"TRANSLATED"}
+{"id":"Z_MESSAGE_OTR::L142","plain_text_es_419":"\\x08","translation_status":"TRANSLATED"}
+{"id":"Z_MESSAGE_OTR::L148","plain_text_es_419":"¡Obtuviste un Contenedor de Corazón!\n¡Has coleccionado r[heartContainerCount]w contenedores\nen total!","translation_status":"TRANSLATED"}
+{"id":"Z_MESSAGE_OTR::L154","plain_text_es_419":"¡Obtuviste una Pieza de Corazón!\n¡Has coleccionado r[heartPieceCount]w piezas\nen total!","translation_status":"TRANSLATED"}
+{"id":"Z_MESSAGE_OTR::L160","plain_text_es_419":"Pareces aburrido. ¿Quieres salir a\ncaminar?\\x1B\nSí\nAhora","translation_status":"TRANSLATED"}
+{"id":"Z_MESSAGE_OTR::L165","plain_text_es_419":"¡Oye! ¡Oye!\n¡No puedes sacar la caña de aquí!\n¡En serio!\n--- PAGE ---\n¿Quieres abandonar?\n\\x1B\nSí\nAhora","translation_status":"TRANSLATED"}
+{"id":"Z_MESSAGE_OTR::L172","plain_text_es_419":"Lo siento, no puedo venderte estos finos ejemplares, necesitan un #dueño experimentado#.\n--- PAGE ---","translation_status":"TRANSLATED"}
+{"id":"Z_MESSAGE_OTR::L177","plain_text_es_419":"Tienes #","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_GREG_RUPEE","plain_text_es_419":"¡Encontraste a Greg!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_MASTER_SWORD","plain_text_es_419":"¡Encontraste la Espada Maestra!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_BOTTLE_WITH_BLUE_FIRE","plain_text_es_419":"¡Obtuviste una Botella con Fuego\nAzul! ¡Úsala para derretir el Hielo Rojo!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_BOTTLE_WITH_BUGS","plain_text_es_419":"¡Obtuviste un Bicho en una Botella!\n¡A ellos les encanta\ntunnelar en agujeros de tierra!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_BOTTLE_WITH_FAIRY","plain_text_es_419":"¡Obtuviste un Hada en una Botella!\n¡Úsala con sabiduría!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_BOTTLE_WITH_RED_POTION","plain_text_es_419":"¡Obtuviste una Botella de Poción Roja!\n¡Bébela para reponer tu\nvida!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_BOTTLE_WITH_GREEN_POTION","plain_text_es_419":"¡Obtuviste una Botella de Poción Verde!\n¡Bébela para reponer tu\nmagia!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_GERUDO_FORTRESS_SMALL_KEY","plain_text_es_419":"¡Encontraste una Llave Pequeña\ndel Refugio de los Ladrones!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_FOREST_TEMPLE_SMALL_KEY","plain_text_es_419":"¡Encontraste una Llave Pequeña\ndel Templo del Bosque!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_FIRE_TEMPLE_SMALL_KEY","plain_text_es_419":"¡Encontraste una Llave Pequeña\ndel Templo del Fuego!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_WATER_TEMPLE_SMALL_KEY","plain_text_es_419":"¡Encontraste una Llave Pequeña\ndel Templo del Agua!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_SPIRIT_TEMPLE_SMALL_KEY","plain_text_es_419":"¡Encontraste una Llave Pequeña\ndel Templo del Espíritu!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_SHADOW_TEMPLE_SMALL_KEY","plain_text_es_419":"¡Encontraste una Llave Pequeña\ndel Templo de la Sombra!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_BOTTOM_OF_THE_WELL_SMALL_KEY","plain_text_es_419":"¡Encontraste una Llave Pequeña\ndel Fondo del Pozo!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_GERUDO_TRAINING_GROUND_SMALL_KEY","plain_text_es_419":"¡Encontraste una Llave Pequeña\ndel Terreno de Entrenamiento Gerudo!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_GANONS_CASTLE_SMALL_KEY","plain_text_es_419":"¡Encontraste una Llave Pequeña\ndel Castillo de Ganon!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_GUARD_HOUSE_KEY","plain_text_es_419":"¡Encontraste la llave de la\ncasa de la Guardia!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_MARKET_BAZAAR_KEY","plain_text_es_419":"¡Encontraste la llave del\nBazar del Mercado!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_MARKET_POTION_SHOP_KEY","plain_text_es_419":"¡Encontraste la llave de la\ntienda de pociones del Mercado!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_MASK_SHOP_KEY","plain_text_es_419":"¡Encontraste la llave de la\ntienda de máscaras!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_MARKET_SHOOTING_GALLERY_KEY","plain_text_es_419":"¡Encontraste la llave de la\ngalería de tiro del Mercado!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_BOMBCHU_BOWLING_KEY","plain_text_es_419":"¡Encontraste la llave de la\nbolera de Bombchu!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_TREASURE_CHEST_GAME_BUILDING_KEY","plain_text_es_419":"¡Encontraste la llave del edificio\ndel juego del Cofre del Tesoro!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_BOMBCHU_SHOP_KEY","plain_text_es_419":"¡Encontraste la llave de la\ntienda de Bombchu!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_RICHARDS_HOUSE_KEY","plain_text_es_419":"¡Encontraste la llave de la\ncasa de Richard!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_ALLEY_HOUSE_KEY","plain_text_es_419":"¡Encontraste la llave de la\ncasa del callejón!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_KAK_BAZAAR_KEY","plain_text_es_419":"¡Encontraste la llave del\nBazar de Kakariko!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_KAK_POTION_SHOP_KEY","plain_text_es_419":"¡Encontraste la llave de la\ntienda de pociones de Kakariko!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_BOSS_HOUSE_KEY","plain_text_es_419":"¡Encontraste la llave de la\ncasa del Jefe!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_GRANNYS_POTION_SHOP_KEY","plain_text_es_419":"¡Encontraste la llave de la\ntienda de pociones de la Abuela!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_SKULLTULA_HOUSE_KEY","plain_text_es_419":"¡Encontraste la llave de la\ncasa de Skulltula!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_IMPAS_HOUSE_KEY","plain_text_es_419":"¡Encontraste la llave de la\ncasa de Impa!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_WINDMILL_KEY","plain_text_es_419":"¡Encontraste la llave del\nmolino!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_KAK_SHOOTING_GALLERY_KEY","plain_text_es_419":"¡Encontraste la llave de la\ngalería de tiro de Kakariko!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_DAMPES_HUT_KEY","plain_text_es_419":"¡Encontraste la llave de la\ncabaña de Dampe!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_TALONS_HOUSE_KEY","plain_text_es_419":"¡Encontraste la llave de la\ncasa de Talon!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_STABLES_KEY","plain_text_es_419":"¡Encontraste la llave de las\ncuadras!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_BACK_TOWER_KEY","plain_text_es_419":"¡Encontraste la llave de la\ntorre trasera!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_HYLIA_LAB_KEY","plain_text_es_419":"¡Encontraste la llave del\nlaboratorio de Hylia!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_FISHING_HOLE_KEY","plain_text_es_419":"¡Encontraste la llave del\nestanque!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_GERUDO_FORTRESS_KEY_RING","plain_text_es_419":"¡Encontraste un Llavero del\nRefugio de los Ladrones!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_FOREST_TEMPLE_KEY_RING","plain_text_es_419":"¡Encontraste un Llavero del\nTemplo del Bosque!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_FIRE_TEMPLE_KEY_RING","plain_text_es_419":"¡Encontraste un Llavero del\nTemplo del Fuego!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_WATER_TEMPLE_KEY_RING","plain_text_es_419":"¡Encontraste un Llavero del\nTemplo del Agua!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_SPIRIT_TEMPLE_KEY_RING","plain_text_es_419":"¡Encontraste un Llavero del\nTemplo del Espíritu!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_SHADOW_TEMPLE_KEY_RING","plain_text_es_419":"¡Encontraste un Llavero del\nTemplo de la Sombra!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_BOTTOM_OF_THE_WELL_KEY_RING","plain_text_es_419":"¡Encontraste un Llavero del\nFondo del Pozo!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_GERUDO_TRAINING_GROUND_KEY_RING","plain_text_es_419":"¡Encontraste un Llavero del\nTerreno de Entrenamiento Gerudo!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_GANONS_CASTLE_KEY_RING","plain_text_es_419":"¡Encontraste un Llavero del\nCastillo de Ganon!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_TREASURE_GAME_KEY_RING","plain_text_es_419":"¡Encontraste un Llavero del\nJuego del Cofre del Tesoro!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_FOREST_TEMPLE_BOSS_KEY","plain_text_es_419":"¡Encontraste la Llave Jefe del\nTemplo del Bosque!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_FIRE_TEMPLE_BOSS_KEY","plain_text_es_419":"¡Encontraste la Llave Jefe del\nTemplo del Fuego!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_WATER_TEMPLE_BOSS_KEY","plain_text_es_419":"¡Encontraste la Llave Jefe del\nTemplo del Agua!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_SPIRIT_TEMPLE_BOSS_KEY","plain_text_es_419":"¡Encontraste la Llave Jefe del\nTemplo del Espíritu!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_SHADOW_TEMPLE_BOSS_KEY","plain_text_es_419":"¡Encontraste la Llave Jefe del\nTemplo de la Sombra!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_GANONS_CASTLE_BOSS_KEY","plain_text_es_419":"¡Encontraste la Llave Jefe del\nCastillo de Ganon!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_DEKU_TREE_MAP","plain_text_es_419":"¡Encontraste el Mapa del\nÁrbol Deku![typeHint]","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_DODONGOS_CAVERN_MAP","plain_text_es_419":"¡Encontraste el Mapa de la\nCueva de Dodongo![typeHint]","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_JABU_JABUS_BELLY_MAP","plain_text_es_419":"¡Encontraste el Mapa de la\nBarriga de Jabu Jabu![typeHint]","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_FOREST_TEMPLE_MAP","plain_text_es_419":"¡Encontraste el Mapa del\nTemplo del Bosque![typeHint]","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_FIRE_TEMPLE_MAP","plain_text_es_419":"¡Encontraste el Mapa del\nTemplo del Fuego![typeHint]","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_WATER_TEMPLE_MAP","plain_text_es_419":"¡Encontraste el Mapa del\nTemplo del Agua![typeHint]","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_SPIRIT_TEMPLE_MAP","plain_text_es_419":"¡Encontraste el Mapa del\nTemplo del Espíritu![typeHint]","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_SHADOW_TEMPLE_MAP","plain_text_es_419":"¡Encontraste el Mapa del\nTemplo de la Sombra![typeHint]","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_BOTTOM_OF_THE_WELL_MAP","plain_text_es_419":"¡Encontraste el Mapa del\nFondo del Pozo![typeHint]","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_ICE_CAVERN_MAP","plain_text_es_419":"¡Encontraste el Mapa de la\nCueva de Hielo![typeHint]","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_DEKU_TREE_COMPASS","plain_text_es_419":"¡Encontraste la Brújula del\nÁrbol Deku!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_DODONGOS_CAVERN_COMPASS","plain_text_es_419":"¡Encontraste la Brújula de la\nCueva de Dodongo!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_JABU_JABUS_BELLY_COMPASS","plain_text_es_419":"¡Encontraste la Brújula de la\nBarriga de Jabu Jabu!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_FOREST_TEMPLE_COMPASS","plain_text_es_419":"¡Encontraste la Brújula del\nTemplo del Bosque!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_FIRE_TEMPLE_COMPASS","plain_text_es_419":"¡Encontraste la Brújula del\nTemplo del Fuego!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_WATER_TEMPLE_COMPASS","plain_text_es_419":"¡Encontraste la Brújula del\nTemplo del Agua!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_SPIRIT_TEMPLE_COMPASS","plain_text_es_419":"¡Encontraste la Brújula del\nTemplo del Espíritu!","translation_status":"TRANSLATED"}
+{"id":"Rando::GIMESSAGE::RG_SHADOW_TEMPLE_COMPASS","plain_text_es_419":"¡Encontraste la Brújula del\nTemplo de la Sombra!","translation_status":"TRANSLATED"}

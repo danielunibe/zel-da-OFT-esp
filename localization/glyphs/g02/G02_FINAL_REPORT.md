@@ -1,0 +1,32 @@
+# G02 — Final Report
+
+STATUS: PARTIAL
+TASK: G02 — Dynamic Xbox Glyphs / Input Usage Resolution
+PILOT_MESSAGE_ID: 0x1036
+PILOT_BEHAVIOR: Existing tutorial Z prompt; no message corpus change
+ACTIVE_BINDING_QUERY: PASS_STATIC
+PHYSICAL_BINDING_TYPE: ANALOG_TRIGGER
+DEVICE_FAMILY: XBOX_OR_XINPUT_ONLY_WHEN_EXPLICIT_NAME_IS_PRESENT
+XBOX_LT_GLYPH: IMPLEMENTED_STATIC / RUNTIME_UNVERIFIED
+CLASSIC_PROFILE: PASS_STATIC
+DYNAMIC_PROFILE: PASS_BUILD / RUNTIME_UNVERIFIED
+FALLBACK: PASS_STATIC
+BUILD: PASS
+RUNTIME_SMOKE: FAIL_NOT_EXECUTED
+SCREENSHOT_CLASSIC: NOT_CAPTURED
+SCREENSHOT_DYNAMIC: NOT_CAPTURED
+SOURCE_FILES_MODIFIED: soh/src/code/z_kanfont.c; soh/include/glyph_resolver.h; soh/soh/Enhancements/glyphs/GlyphResolver.cpp; soh/assets/custom/textures/buttons/LTBtn.ppm
+NEW_ASSETS: soh/assets/custom/textures/buttons/LTBtn.ppm
+INPUT_BEHAVIOR_CHANGED: NO
+CONTROLLER_MAPPING_CHANGED: NO
+SIMULATION_CHANGED: NO
+HUD_CHANGED: NO
+OCARINA_CHANGED: NO
+LOCALIZATION_CHANGED: NO
+AUDIO_CHANGED: NO
+VISUAL_SYSTEM_CHANGED: NO
+BUILD_TEST_SAVES_CHANGED: NO
+LIVE_PROJECT_CHANGED: NO
+LIVE_SAVES_CHANGED: NO
+BUILD_OUTPUT: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/source/shipwright/x64/Release/soh.exe
+BLOCKERS: Physical Xbox/XInput device and 3440x1440 runtime screenshot session were not available; runtime asset decode and actual LT glyph display remain unverified.

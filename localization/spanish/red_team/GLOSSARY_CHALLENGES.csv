@@ -1,0 +1,13 @@
+term_en,current_es,context,problem,proposed_es,impact_count,decision
+Zora's Domain,Domino Zora,Zora area,Typo 'Domino' corrected to 'Dominio' (Zora's Domain).,Dominio Zora,1,CHALLENGE_ACCEPTED
+Domain Zora,Domino Zora,Zora area,Typo 'Domino' corrected to 'Dominio' (Zora's Domain).,Dominio Zora,1,CHALLENGE_ACCEPTED
+Kokiri Tunic,Túnice Kokiri,starting tunic,Non-existent word 'Túnice' corrected to feminine noun 'Túnica'.,Túnica Kokiri,1,CHALLENGE_ACCEPTED
+Goron Tunic,Túnice Goron,fire tunic,Non-existent word 'Túnice' corrected to feminine noun 'Túnica'.,Túnica Goron,1,CHALLENGE_ACCEPTED
+Zora Tunic,Túnice Zora,water tunic,Non-existent word 'Túnice' corrected to feminine noun 'Túnica'.,Túnica Zora,1,CHALLENGE_ACCEPTED
+Hylian Shield,Escudo Hyliana,metal shield,"Gender agreement: 'Escudo' is masculine, requires 'Hyliano'.",Escudo Hyliano,1,CHALLENGE_ACCEPTED
+Hookshot,Anzuelo,grappling device,'Anzuelo' means fish hook. Canonical Nintendo LATAM terminology is 'Gancho'.,Gancho,1,CHALLENGE_ACCEPTED
+Longshot,Anzuelo Largo,upgraded hookshot,'Anzuelo Largo' corrected to 'Gancho Largo' to match Hookshot.,Gancho Largo,1,CHALLENGE_ACCEPTED
+Boss Key,Llave Jefe,boss dungeon key,Calque 'Llave Jefe' corrected to canonical Zelda term 'Gran Llave'.,Gran Llave,1,CHALLENGE_ACCEPTED
+Parasitic Tentacle,Tentáculo Parasito,mini-boss,Missing accent on proparoxytone 'Parásito'.,Tentáculo Parásito,1,CHALLENGE_ACCEPTED
+Longshot,Anzuelo Largo,extended hookshot,'Anzuelo Largo' corrected to 'Gancho Largo' to match Hookshot.,Gancho Largo,1,CHALLENGE_ACCEPTED
+Boss Key,Llave Jefe,boss door,Calque 'Llave Jefe' corrected to canonical Zelda term 'Gran Llave'.,Gran Llave,1,CHALLENGE_ACCEPTED

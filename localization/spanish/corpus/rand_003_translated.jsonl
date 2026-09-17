@@ -1,0 +1,200 @@
+{"id": "Hint::RHT_GERUDO_TRAINING_GROUND_MQ_MAZE_PATH_THIRD_CHEST::400", "plain_text_es_419": "Dicen que el tercer premio de #el entrenamiento de los ladrones# es #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GERUDO_TRAINING_GROUND_MQ_MAZE_PATH_SECOND_CHEST::401", "plain_text_es_419": "Dicen que el segundo premio de #el entrenamiento de los ladrones# es #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GERUDO_TRAINING_GROUND_MQ_HIDDEN_CEILING_CHEST::402", "plain_text_es_419": "Dicen que el #Ojo de la Verdad# en el Campo de Entrenamiento Gerudo revela #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GERUDO_TRAINING_GROUND_MQ_HEAVY_BLOCK_CHEST::403", "plain_text_es_419": "Dicen que una #hazaña de fuerza# recompensa a los ladrones con #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GERUDO_TRAINING_GROUNDS_HEART::404", "plain_text_es_419": "Dicen que observar una #prueba con Dinolfos# es #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_CRATE_GERUDO_TRAINING_GROUND::405", "plain_text_es_419": "Dicen que una #caja en el Campo de Entrenamiento Gerudo# contiene #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GANONS_TOWER_BOSS_KEY_CHEST::406", "plain_text_es_419": "Dicen que el #Rey Maligno# atesora #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GANONS_CASTLE_FOREST_TRIAL_CHEST::407", "plain_text_es_419": "Dicen que la #prueba de las selvas# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GANONS_CASTLE_WATER_TRIAL_LEFT_CHEST::408", "plain_text_es_419": "Dicen que la #prueba de los mares# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GANONS_CASTLE_WATER_TRIAL_RIGHT_CHEST::409", "plain_text_es_419": "Dicen que la #prueba de los mares# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GANONS_CASTLE_SHADOW_TRIAL_FRONT_CHEST::410", "plain_text_es_419": "Dicen que la #música en la prueba de la oscuridad# revela #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GANONS_CASTLE_SHADOW_TRIAL_GOLDEN_GAUNTLETS_CHEST::411", "plain_text_es_419": "Dicen que la #luz en la prueba de la oscuridad# revela #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GANONS_CASTLE_SPIRIT_TRIAL_CRYSTAL_SWITCH_CHEST::412", "plain_text_es_419": "Dicen que la #prueba de las arenas# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GANONS_CASTLE_SPIRIT_TRIAL_INVISIBLE_CHEST::413", "plain_text_es_419": "Dicen que la #prueba de las arenas# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GANONS_CASTLE_LIGHT_TRIAL_FIRST_LEFT_CHEST::414", "plain_text_es_419": "Dicen que la #prueba del resplandor# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GANONS_CASTLE_LIGHT_TRIAL_SECOND_LEFT_CHEST::415", "plain_text_es_419": "Dicen que la #prueba del resplandor# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GANONS_CASTLE_LIGHT_TRIAL_THIRD_LEFT_CHEST::416", "plain_text_es_419": "Dicen que la #prueba del resplandor# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GANONS_CASTLE_LIGHT_TRIAL_FIRST_RIGHT_CHEST::417", "plain_text_es_419": "Dicen que la #prueba del resplandor# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GANONS_CASTLE_LIGHT_TRIAL_SECOND_RIGHT_CHEST::418", "plain_text_es_419": "Dicen que la #prueba del resplandor# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GANONS_CASTLE_LIGHT_TRIAL_THIRD_RIGHT_CHEST::419", "plain_text_es_419": "Dicen que la #prueba del resplandor# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GANONS_CASTLE_LIGHT_TRIAL_INVISIBLE_ENEMIES_CHEST::420", "plain_text_es_419": "Dicen que la #prueba del resplandor# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GANONS_CASTLE_LIGHT_TRIAL_LULLABY_CHEST::421", "plain_text_es_419": "Dicen que la #música en la prueba del resplandor# revela #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GANONS_CASTLE_SPIRIT_TRIAL_SUN_FAIRY::422", "plain_text_es_419": "Dicen que #invocar al sol para un centinela en la prueba de las arenas# revela #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GANONS_CASTLE_SCRUBS_FAIRY::423", "plain_text_es_419": "Dicen que dentro de un #santuario antes de la prueba final# descansa #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GANONS_CASTLE_MQ_WATER_TRIAL_CHEST::424", "plain_text_es_419": "Dicen que la #prueba de los mares# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GANONS_CASTLE_MQ_FOREST_TRIAL_EYE_SWITCH_CHEST::425", "plain_text_es_419": "Dicen que la #prueba de las selvas# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GANONS_CASTLE_MQ_FOREST_TRIAL_FROZEN_EYE_SWITCH_CHEST::426", "plain_text_es_419": "Dicen que la #prueba de las selvas# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GANONS_CASTLE_MQ_LIGHT_TRIAL_LULLABY_CHEST::427", "plain_text_es_419": "Dicen que la #música en la prueba del resplandor# revela #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GANONS_CASTLE_MQ_SHADOW_TRIAL_BOMB_FLOWER_CHEST::428", "plain_text_es_419": "Dicen que la #prueba de la oscuridad# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GANONS_CASTLE_MQ_SHADOW_TRIAL_EYE_SWITCH_CHEST::429", "plain_text_es_419": "Dicen que la #prueba de la oscuridad# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GANONS_CASTLE_MQ_SPIRIT_TRIAL_GOLDEN_GAUNTLETS_CHEST::430", "plain_text_es_419": "Dicen que la #luz reflejada en la prueba de las arenas# revela #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GANONS_CASTLE_MQ_SPIRIT_TRIAL_SUN_BACK_RIGHT_CHEST::431", "plain_text_es_419": "Dicen que la #luz reflejada en la prueba de las arenas# revela #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GANONS_CASTLE_MQ_SPIRIT_TRIAL_SUN_BACK_LEFT_CHEST::432", "plain_text_es_419": "Dicen que la #luz reflejada en la prueba de las arenas# revela #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GANONS_CASTLE_MQ_SPIRIT_TRIAL_SUN_FRONT_LEFT_CHEST::433", "plain_text_es_419": "Dicen que la #luz reflejada en la prueba de las arenas# revela #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GANONS_CASTLE_MQ_SPIRIT_TRIAL_FIRST_CHEST::434", "plain_text_es_419": "Dicen que la #luz reflejada en la prueba de las arenas# revela #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GANONS_CASTLE_MQ_SPIRIT_TRIAL_INVISIBLE_CHEST::435", "plain_text_es_419": "Dicen que la #luz reflejada en la prueba de las arenas# revela #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GANONS_CASTLE_MQ_FOREST_TRIAL_FREESTANDING_KEY::436", "plain_text_es_419": "Dicen que la #prueba de las selvas# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GANONS_CASTLE_DEKU_SCRUB_CENTER_LEFT::437", "plain_text_es_419": "Dicen que los #scrubs en el Castillo de Ganon# venden #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GANONS_CASTLE_DEKU_SCRUB_CENTER_RIGHT::438", "plain_text_es_419": "Dicen que los #scrubs en el Castillo de Ganon# venden #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GANONS_CASTLE_DEKU_SCRUB_RIGHT::439", "plain_text_es_419": "Dicen que los #scrubs en el Castillo de Ganon# venden #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GANONS_CASTLE_DEKU_SCRUB_LEFT::440", "plain_text_es_419": "Dicen que los #scrubs en el Castillo de Ganon# venden #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GANONS_CASTLE_MQ_DEKU_SCRUB_RIGHT::441", "plain_text_es_419": "Dicen que los #scrubs en el Castillo de Ganon# venden #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GANONS_CASTLE_MQ_DEKU_SCRUB_CENTER_LEFT::442", "plain_text_es_419": "Dicen que los #scrubs en el Castillo de Ganon# venden #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GANONS_CASTLE_MQ_DEKU_SCRUB_CENTER::443", "plain_text_es_419": "Dicen que los #scrubs en el Castillo de Ganon# venden #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GANONS_CASTLE_MQ_DEKU_SCRUB_CENTER_RIGHT::444", "plain_text_es_419": "Dicen que los #scrubs en el Castillo de Ganon# venden #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GANONS_CASTLE_MQ_DEKU_SCRUB_LEFT::445", "plain_text_es_419": "Dicen que los #scrubs en el Castillo de Ganon# venden #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_POT_GANONS_CASTLE::446", "plain_text_es_419": "Dicen que una #olla en el Castillo de Ganon# contiene #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GANONS_CASTLE_HEART::447", "plain_text_es_419": "Dicen que un #corazón en el Castillo de Ganon# esconde #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_KF_KOKIRI_SWORD_CHEST::0", "plain_text_es_419": "Dicen que el #tesoro oculto de los Kokiri# es #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_KF_MIDOS_TOP_LEFT_CHEST::1", "plain_text_es_419": "Dicen que #dentro de la casa de Mido# está #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_KF_MIDOS_TOP_LEFT_CHEST::2", "plain_text_es_419": "Dicen que el #líder de los Kokiri# esconde #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_KF_MIDOS_TOP_RIGHT_CHEST::3", "plain_text_es_419": "Dicen que #dentro de la casa de Mido# está #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_KF_MIDOS_TOP_RIGHT_CHEST::4", "plain_text_es_419": "Dicen que el #líder de los Kokiri# esconde #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_KF_MIDOS_BOTTOM_LEFT_CHEST::5", "plain_text_es_419": "Dicen que #dentro de la casa de Mido# está #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_KF_MIDOS_BOTTOM_LEFT_CHEST::6", "plain_text_es_419": "Dicen que el #líder de los Kokiri# esconde #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_KF_MIDOS_BOTTOM_RIGHT_CHEST::7", "plain_text_es_419": "Dicen que #dentro de la casa de Mido# está #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_KF_MIDOS_BOTTOM_RIGHT_CHEST::8", "plain_text_es_419": "Dicen que el #líder de los Kokiri# esconde #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GRAVEYARD_SHIELD_GRAVE_CHEST::9", "plain_text_es_419": "Dicen que el #tesoro de un soldado caído# es #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_DMT_CHEST::10", "plain_text_es_419": "Dicen que oculto detrás de una pared en una #senda de montaña# está #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GC_MAZE_RIGHT_CHEST::11", "plain_text_es_419": "Dicen que en la #Ciudad Goron# los explosivos desbloquean #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GC_MAZE_CENTER_CHEST::12", "plain_text_es_419": "Dicen que en la #Ciudad Goron# los explosivos desbloquean #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_ZD_CHEST::13", "plain_text_es_419": "Dicen que el fuego #más allá de una cascada# revela #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GRAVEYARD_HOOKSHOT_CHEST::14", "plain_text_es_419": "Dicen que el #primer premio del difunto Dampé# es #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GRAVEYARD_HOOKSHOT_CHEST::15", "plain_text_es_419": "Dicen que un cofre oculto por un #espectro veloz# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GF_CHEST::16", "plain_text_es_419": "Dicen que en una #azotea en el desierto# se encuentra #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_KAK_REDEAD_GROTTO_CHEST::17", "plain_text_es_419": "Dicen que los #zombis bajo la tierra# custodian #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SFM_WOLFOS_GROTTO_CHEST::18", "plain_text_es_419": "Dicen que los #lobos bajo la tierra# custodian #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_HF_NEAR_MARKET_GROTTO_CHEST::19", "plain_text_es_419": "Dicen que un #hueco en un campo cerca de un puente levadizo# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_HF_NEAR_MARKET_GROTTO_FISH::20", "plain_text_es_419": "Dicen que un #pez en un hueco en un campo cerca de un puente levadizo# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_HF_SOUTHEAST_GROTTO_CHEST::21", "plain_text_es_419": "Dicen que un #hueco entre árboles en un campo# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_HF_SOUTHEAST_GROTTO_FISH::22", "plain_text_es_419": "Dicen que un #pez en un hueco entre árboles en un campo# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_HF_OPEN_GROTTO_CHEST::23", "plain_text_es_419": "Dicen que un #hueco abierto en un campo# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_HF_OPEN_GROTTO_FISH::24", "plain_text_es_419": "Dicen que un #pez en un hueco abierto en un campo# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_KAK_OPEN_GROTTO_CHEST::25", "plain_text_es_419": "Dicen que un #hueco abierto en un pueblo# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_KAK_OPEN_GROTTO_FISH::26", "plain_text_es_419": "Dicen que un #pez en un hueco abierto en un pueblo# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_ZR_OPEN_GROTTO_CHEST::27", "plain_text_es_419": "Dicen que un #hueco a lo largo de un río# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_ZR_OPEN_GROTTO_FISH::28", "plain_text_es_419": "Dicen que un #pez en un hueco a lo largo de un río# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_KF_STORMS_GROTTO_CHEST::29", "plain_text_es_419": "Dicen que un #hueco en una aldea boscosa# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_KF_STORMS_GROTTO_FISH::30", "plain_text_es_419": "Dicen que un #pez en un hueco en una aldea boscosa# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_LW_NEAR_SHORTCUTS_GROTTO_CHEST::31", "plain_text_es_419": "Dicen que un #hueco en un laberinto boscoso# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_LW_NEAR_SHORTCUTS_GROTTO_FISH::32", "plain_text_es_419": "Dicen que un #pez en un hueco en un laberinto boscoso# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_DMT_STORMS_GROTTO_CHEST::33", "plain_text_es_419": "Dicen que un #hueco inundado por la lluvia en una montaña# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_DMT_STORMS_GROTTO_FISH::34", "plain_text_es_419": "Dicen que un #pez en un hueco inundado por la lluvia en una montaña# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_DMC_UPPER_GROTTO_CHEST::35", "plain_text_es_419": "Dicen que un #hueco en un volcán# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_DMC_UPPER_GROTTO_FISH::36", "plain_text_es_419": "Dicen que un #pez en un hueco en un volcán# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_TOT_MASTER_SWORD::37", "plain_text_es_419": "Dicen que un #pedestal en un templo# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_TOT_LIGHT_ARROWS_CUTSCENE::38", "plain_text_es_419": "Dicen que el #último regalo de una princesa# es #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_LW_GIFT_FROM_SARIA::39", "plain_text_es_419": "Dicen que el #Regalo de Saria# es #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_LW_GIFT_FROM_SARIA::40", "plain_text_es_419": "Dicen que un #acaparador de papas# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_LW_GIFT_FROM_SARIA::41", "plain_text_es_419": "Dicen que una raíz melodiosa #flauta encantadora# obsequia #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_ZF_GREAT_FAIRY_REWARD::42", "plain_text_es_419": "Dicen que el hada #de los vientos# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_HC_GREAT_FAIRY_REWARD::43", "plain_text_es_419": "Dicen que el hada #del fuego# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_COLOSSUS_GREAT_FAIRY_REWARD::44", "plain_text_es_419": "Dicen que el hada #del amor# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_DMT_GREAT_FAIRY_REWARD::45", "plain_text_es_419": "Dicen que una #hada mágica# obsequia #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_DMC_GREAT_FAIRY_REWARD::46", "plain_text_es_419": "Dicen que una #hada mágica# obsequia #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_OGC_GREAT_FAIRY_REWARD::47", "plain_text_es_419": "Dicen que el hada #de la fuerza# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SONG_FROM_IMPA::48", "plain_text_es_419": "Dicen que #en lo profundo de un castillo#, Impa enseña #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SONG_FROM_MALON::49", "plain_text_es_419": "Dicen que una #chica de la granja# canta #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SONG_FROM_SARIA::50", "plain_text_es_419": "Dicen que #en lo profundo del bosque#, Saria enseña #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SONG_FROM_WINDMILL::51", "plain_text_es_419": "Dicen que un hombre #en un molino de viento# está obsesionado con #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_HC_MALON_EGG::52", "plain_text_es_419": "Dicen que una #chica buscando a su padre# da #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_HC_ZELDAS_LETTER::53", "plain_text_es_419": "Dicen que una #princesa en un castillo# obsequia #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_ZD_DIVING_MINIGAME::54", "plain_text_es_419": "Dicen que aquellos que #bucean por rupees de Zora# encontrarán #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_ZD_DIVING_MINIGAME::55", "plain_text_es_419": "Dicen que un #modelo de negocio insostenible# obsequia #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_LH_CHILD_FISHING::56", "plain_text_es_419": "Dicen que #pescar de joven# otorga #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_LH_POND_FISH::57", "plain_text_es_419": "Dicen que #golpear el estanque# revela #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_LH_HYRULE_LOACH::58", "plain_text_es_419": "Dicen que #pescar la locha de Hyrule# te dará #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_LH_HYRULE_LOACH::59", "plain_text_es_419": "Dicen que #pescar la leyenda# otorga #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_LH_ADULT_FISHING::60", "plain_text_es_419": "Dicen que #pescar de adulto# otorga #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_LH_LAB_DIVE::61", "plain_text_es_419": "Dicen que un #experimento de buceo# es recompensado con #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_ZD_FISH::62", "plain_text_es_419": "Dicen que un #pez junto a una cascada# atesora #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GC_ROLLING_GORON_AS_ADULT::63", "plain_text_es_419": "Dicen que #tranquilizar a un Goron joven# es recompensado con #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GC_ROLLING_GORON_AS_ADULT::64", "plain_text_es_419": "Dicen que #consolarte a ti mismo# proporciona #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_MARKET_BOMBCHU_BOWLING_FIRST_PRIZE::65", "plain_text_es_419": "Dicen que el #primer premio explosivo# es #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_MARKET_BOMBCHU_BOWLING_SECOND_PRIZE::66", "plain_text_es_419": "Dicen que el #segundo premio explosivo# es #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_MARKET_LOST_DOG::67", "plain_text_es_419": "Dicen que #rescatar al perro Richard# es recompensado con #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_MARKET_LOST_DOG::68", "plain_text_es_419": "Dicen que los #amantes de los cachorros# encontrarán #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_LW_OCARINA_MEMORY_GAME::69", "plain_text_es_419": "Dicen que #tocar una Ocarina en el Bosque Perdido# es recompensado con #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_LW_OCARINA_MEMORY_GAME::70", "plain_text_es_419": "Dicen que el premio por un #juego de Simón Dice# es #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_LW_OCARINA_MEMORY_GAME::71", "plain_text_es_419": "Dicen que una #canción infantil# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_KAK_10_GOLD_SKULLTULA_REWARD::72", "plain_text_es_419": "Dicen que derrotar a #10 Skulltulas Doradas# revela #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_KAK_10_GOLD_SKULLTULA_REWARD::73", "plain_text_es_419": "Dicen que las #10 insignias de bichos# recompensan #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_KAK_10_GOLD_SKULLTULA_REWARD::74", "plain_text_es_419": "Dicen que las #10 almas de arañas# ofrecen #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_KAK_10_GOLD_SKULLTULA_REWARD::75", "plain_text_es_419": "Dicen que las #10 arácnidos auríferos# conducen a #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_KAK_MAN_ON_ROOF::76", "plain_text_es_419": "Dicen que un #vagabundo en la azotea# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_ZR_MAGIC_BEAN_SALESMAN::77", "plain_text_es_419": "Dicen que un #vendedor de frijoles# ofrece #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_ZR_MAGIC_BEAN_SALESMAN::78", "plain_text_es_419": "Dicen que un vendedor de #cosechas coloridas# tiene #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_ZR_FROGS_IN_THE_RAIN::79", "plain_text_es_419": "Dicen que los #ranas en una tormenta# obsequian #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_ZR_FROGS_ZELDAS_LULLABY::80", "plain_text_es_419": "Dicen que después de escuchar la #Nana de Zelda, las ranas# obsequian #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_ZR_FROGS_ZELDAS_LULLABY::81", "plain_text_es_419": "Dicen que las #ranas soñolientas# obsequian #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_ZR_FROGS_ZELDAS_LULLABY::82", "plain_text_es_419": "Dicen que la #Rana Tenor en la parte trasera izquierda# obsequia #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_ZR_FROGS_EPONAS_SONG::83", "plain_text_es_419": "Dicen que después de escuchar la #Canción de Epona, las ranas# obsequian #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_ZR_FROGS_EPONAS_SONG::84", "plain_text_es_419": "Dicen que las #ranas equinas# obsequian #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_ZR_FROGS_EPONAS_SONG::85", "plain_text_es_419": "Dicen que la #Rana Tenor en la parte trasera derecha# obsequia #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_ZR_FROGS_SARIAS_SONG::86", "plain_text_es_419": "Dicen que después de escuchar la #Canción de Saria, las ranas# obsequian #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_ZR_FROGS_SARIAS_SONG::87", "plain_text_es_419": "Dicen que las #ranas silvanas# obsequian #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_ZR_FROGS_SARIAS_SONG::88", "plain_text_es_419": "Dicen que la #Rana Tenor en el centro# obsequia #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_ZR_FROGS_SUNS_SONG::89", "plain_text_es_419": "Dicen que después de escuchar la #Canción del Sol, las ranas# obsequian #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_ZR_FROGS_SUNS_SONG::90", "plain_text_es_419": "Dicen que las #ranas iluminadas# obsequian #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_ZR_FROGS_SUNS_SONG::91", "plain_text_es_419": "Dicen que la #Rana Tenor en la parte delantera izquierda# obsequia #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_ZR_FROGS_SONG_OF_TIME::92", "plain_text_es_419": "Dicen que después de escuchar la #Canción del Tiempo, las ranas# obsequian #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_ZR_FROGS_SONG_OF_TIME::93", "plain_text_es_419": "Dicen que las #ranas viajeras en el tiempo# obsequian #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_ZR_FROGS_SONG_OF_TIME::94", "plain_text_es_419": "Dicen que la #Rana Tenor en la parte delantera derecha# obsequia #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GF_HBA_1000_POINTS::95", "plain_text_es_419": "Dicen que alcanzar 1000 en #tiro con arco a caballo# otorga #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_MARKET_SHOOTING_GALLERY_REWARD::96", "plain_text_es_419": "Dicen que #disparar de joven# otorga #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_KAK_SHOOTING_GALLERY_REWARD::97", "plain_text_es_419": "Dicen que #disparar de adulto# otorga #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_LW_TARGET_IN_WOODS::98", "plain_text_es_419": "Dicen que disparar a un #blanco en el bosque# otorga #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_KAK_ANJU_AS_ADULT::99", "plain_text_es_419": "Dicen que una #cuidadora de pollos# ofrece a los adultos #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_LLR_TALONS_CHICKENS::100", "plain_text_es_419": "Dicen que #encontrar Super Cuccos# es recompensado con #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GC_ROLLING_GORON_AS_CHILD::101", "plain_text_es_419": "Dicen que el premio ofrecido por un #Goron grande rodando# es #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_LH_UNDERWATER_ITEM::102", "plain_text_es_419": "Dicen que el #tesoro sumergido en un lago# es #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_TH_FREED_CARPENTERS::103", "plain_text_es_419": "Dicen que #rescatar carpinteros capturados# es recompensado con #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_WASTELAND_BOMBCHU_SALESMAN::104", "plain_text_es_419": "Dicen que un #gurú de la alfombra# vende #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GC_MEDIGORON::105", "plain_text_es_419": "Dicen que #Medigoron# vende #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_KAK_GRANNYS_SHOP::106", "plain_text_es_419": "Dicen que la #señora de la tienda de pociones# vende #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_KAK_IMPAS_HOUSE_FREESTANDING_POH::107", "plain_text_es_419": "Dicen que #encerrado en una casa# se encuentra #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_HF_TEKTITE_GROTTO_FREESTANDING_POH::108", "plain_text_es_419": "Dicen que #en lo profundo bajo el agua en un hueco# está #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_KAK_WINDMILL_FREESTANDING_POH::109", "plain_text_es_419": "Dicen que en un #escalón del molino de viento# se encuentra #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GRAVEYARD_DAMPE_RACE_FREESTANDING_POH::110", "plain_text_es_419": "Dicen que el #segundo premio del difunto Dampé# es #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GRAVEYARD_DAMPE_RACE_FREESTANDING_POH::111", "plain_text_es_419": "Dicen que #correr contra un fantasma# conduce a #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_LLR_FREESTANDING_POH::112", "plain_text_es_419": "Dicen que en un #silor de granja# se encuentra #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GRAVEYARD_FREESTANDING_POH::113", "plain_text_es_419": "Dicen que una #caja en un cementerio# esconde #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GRAVEYARD_DAMPE_GRAVEDIGGING_TOUR::114", "plain_text_es_419": "Dicen que un #sepulturero desentierra# #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_ZR_NEAR_OPEN_GROTTO_FREESTANDING_POH::115", "plain_text_es_419": "Dicen que encima de un #pilar en un río# se encuentra #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_ZR_NEAR_DOMAIN_FREESTANDING_POH::116", "plain_text_es_419": "Dicen que en un #escalón de río junto a una cascada# se encuentra #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_LH_FREESTANDING_POH::117", "plain_text_es_419": "Dicen que en la parte alta de una #azotea de laboratorio# se puede encontrar #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_ZF_ICEBERG_FREESTANDING_POH::118", "plain_text_es_419": "Dicen que #flotando sobre hielo# está #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GV_WATERFALL_FREESTANDING_POH::119", "plain_text_es_419": "Dicen que detrás de una #cascada del valle# está #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GV_CRATE_FREESTANDING_POH::120", "plain_text_es_419": "Dicen que una #caja en un valle# esconde #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_COLOSSUS_FREESTANDING_POH::121", "plain_text_es_419": "Dicen que encima de un #arco de piedra# se encuentra #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_DMT_FREESTANDING_POH::122", "plain_text_es_419": "Dicen que encima de una #entrada de cueva de montaña# está #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_DMC_WALL_FREESTANDING_POH::123", "plain_text_es_419": "Dicen que anidado en una #pared volcánica# está #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_DMC_VOLCANO_FREESTANDING_POH::124", "plain_text_es_419": "Dicen que oculto por #ceniza volcánica# está #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_TH_1_TORCH_CARPENTER::125", "plain_text_es_419": "Dicen que #derrotar a la Gerudo en una sala con 1 antorcha# revela #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_TH_DEAD_END_CARPENTER::126", "plain_text_es_419": "Dicen que #derrotar a la Gerudo en un callejón sin salida# revela #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_TH_DOUBLE_CELL_CARPENTER::127", "plain_text_es_419": "Dicen que #derrotar a la Gerudo en una cárcel grande# revela #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_TH_STEEP_SLOPE_CARPENTER::128", "plain_text_es_419": "Dicen que #derrotar a la Gerudo entre pendientes pronunciadas# revela #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_HF_GS_NEAR_KAK_GROTTO::129", "plain_text_es_419": "Dicen que una #araña custodiada por una araña en un hueco# atesora #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_LLR_GS_BACK_WALL::130", "plain_text_es_419": "Dicen que la noche revela una #araña en una granja# que posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_LLR_GS_RAIN_SHED::131", "plain_text_es_419": "Dicen que la noche revela una #araña en una granja# que posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_LLR_GS_HOUSE_WINDOW::132", "plain_text_es_419": "Dicen que la noche revela una #araña en una granja# que posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_LLR_GS_TREE::133", "plain_text_es_419": "Dicen que una araña escondida en un #árbol de la granja# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_KF_GS_BEAN_PATCH::134", "plain_text_es_419": "Dicen que una #araña enterrada en un bosque# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_KF_GS_KNOW_IT_ALL_HOUSE::135", "plain_text_es_419": "Dicen que la noche en el pasado revela una #araña en un bosque# que posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_KF_GS_HOUSE_OF_TWINS::136", "plain_text_es_419": "Dicen que la noche en el futuro revela una #araña en un bosque# que posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_LW_GS_BEAN_PATCH_NEAR_BRIDGE::137", "plain_text_es_419": "Dicen que una #araña enterrada en lo profundo de un laberinto boscoso# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_LW_GS_BEAN_PATCH_NEAR_THEATER::138", "plain_text_es_419": "Dicen que una #araña enterrada en lo profundo de un laberinto boscoso# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_LW_GS_ABOVE_THEATER::139", "plain_text_es_419": "Dicen que la noche revela una #araña en lo profundo de un laberinto boscoso# que posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_SFM_GS::140", "plain_text_es_419": "Dicen que la noche revela una #araña en un prado boscoso# que posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_OGC_GS::141", "plain_text_es_419": "Dicen que una #araña fuera de la torre de un tirano# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_HC_GS_TREE::142", "plain_text_es_419": "Dicen que una araña escondida en un #árbol fuera de un castillo# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_MARKET_GS_GUARD_HOUSE::143", "plain_text_es_419": "Dicen que una #araña en una caja custodiada# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_DMC_GS_BEAN_PATCH::144", "plain_text_es_419": "Dicen que una #araña enterrada en un volcán# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_DMT_GS_BEAN_PATCH::145", "plain_text_es_419": "Dicen que una #araña enterrada fuera de una cueva# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_DMT_GS_NEAR_KAK::146", "plain_text_es_419": "Dicen que una #araña oculta en un rincón de montaña# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_DMT_GS_ABOVE_DODONGOS_CAVERN::147", "plain_text_es_419": "Dicen que el martillo revela una #araña en una montaña# que posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_DMT_GS_FALLING_ROCKS_PATH::148", "plain_text_es_419": "Dicen que el martillo revela una #araña en una montaña# que posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GC_GS_CENTER_PLATFORM::149", "plain_text_es_419": "Dicen que una #araña colgante# en la Ciudad Goron posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_GC_GS_BOULDER_MAZE::150", "plain_text_es_419": "Dicen que una araña en una #caja de la Ciudad Goron# posee #[1]#.", "translation_status": "TRANSLATED"}
+{"id": "Hint::RHT_KAK_GS_HOUSE_UNDER_CONSTRUCTION::151", "plain_text_es_419": "Dicen que la noche en el pasado revela una #araña en un pueblo# que posee #[1]#.", "translation_status": "TRANSLATED"}

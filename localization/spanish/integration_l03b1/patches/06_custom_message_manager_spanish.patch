@@ -1,0 +1,16 @@
+--- a/soh/soh/Enhancements/custom-message/CustomMessageManager.cpp
++++ b/soh/soh/Enhancements/custom-message/CustomMessageManager.cpp
+@@ -117,6 +117,7 @@ extern "C" MessageTableEntry* sGerMessageEntryTablePtr;
+ extern "C" MessageTableEntry* sFraMessageEntryTablePtr;
++extern "C" MessageTableEntry* sSpaMessageEntryTablePtr;
+ 
+ CustomMessage CustomMessage::LoadVanillaMessageTableEntry(uint16_t textId) {
+@@ -128,6 +129,8 @@ CustomMessage CustomMessage::LoadVanillaMessageTableEntry(uint16_t textId) {
+     if (gSaveContext.language == LANGUAGE_GER) {
+         msgEntry = sGerMessageEntryTablePtr;
+     } else if (gSaveContext.language == LANGUAGE_FRA) {
+         msgEntry = sFraMessageEntryTablePtr;
++    } else if (gSaveContext.language == LANGUAGE_ESP) {
++        msgEntry = sSpaMessageEntryTablePtr;
+     }
+     while (msgEntry != nullptr && msgEntry->textId != 0xFFFF) {

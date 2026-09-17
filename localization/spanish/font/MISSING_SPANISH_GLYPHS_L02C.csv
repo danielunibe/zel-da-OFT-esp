@@ -1,0 +1,12 @@
+char,unicode,freq,status,remapping_recommendation
+ñ,U+00F1,749,CRITICAL_MISSING,Remap French slot 0x92 (â -> ñ)
+Ñ,U+00D1,0,CRITICAL_MISSING,Remap French slot 0x81 (Î -> Ñ)
+¡,U+00A1,2482,CRITICAL_MISSING,Remap unused slot 0x83 (Ä -> ¡)
+¿,U+00BF,743,CRITICAL_MISSING,Remap unused slot 0x85 (È -> ¿)
+í,U+00ED,1441,ACCENT_MISMATCH,Remap unused slot 0x99 (ï -> í)
+ó,U+00F3,947,ACCENT_MISMATCH,Remap unused slot 0x9A (ô -> ó)
+ú,U+00FA,494,ACCENT_MISMATCH,Remap unused slot 0x9D (û -> ú)
+Á,U+00C1,118,MISSING_CAPITAL,Remap slot 0x80 (À -> Á)
+Í,U+00CD,7,MISSING_CAPITAL,Remap slot 0x89 (Ï -> Í)
+Ó,U+00D3,3,MISSING_CAPITAL,Remap slot 0x8A (Ô -> Ó)
+Ú,U+00DA,8,MISSING_CAPITAL,Remap slot 0x8C (Ù -> Ú)

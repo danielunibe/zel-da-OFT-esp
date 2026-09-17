@@ -1,0 +1,200 @@
+{"id": "Hint::RHT_DMT_GOSSIP_STONE_FAIRY::352", "plain_text": "They say that #playing a tune for an odd stone on a mountain cliff face# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_DMT_GOSSIP_STONE_FAIRY", "variables": ["1"]}
+{"id": "Hint::RHT_DMT_GOSSIP_STONE_FAIRY_BIG::353", "plain_text": "They say that #playing a stormy tune for an odd stone on a mountain cliff face# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_DMT_GOSSIP_STONE_FAIRY_BIG", "variables": ["1"]}
+{"id": "Hint::RHT_COLOSSUS_GOSSIP_STONE_FAIRY::354", "plain_text": "They say that #playing a tune for an odd stone near the temple of the sand# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_COLOSSUS_GOSSIP_STONE_FAIRY", "variables": ["1"]}
+{"id": "Hint::RHT_COLOSSUS_GOSSIP_STONE_FAIRY_BIG::355", "plain_text": "They say that #playing a stormy tune for an odd stone near the temple of the sand# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_COLOSSUS_GOSSIP_STONE_FAIRY_BIG", "variables": ["1"]}
+{"id": "Hint::RHT_GV_GOSSIP_STONE_FAIRY::356", "plain_text": "They say that #playing a tune for an odd stone near a canyon waterfall# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_GV_GOSSIP_STONE_FAIRY", "variables": ["1"]}
+{"id": "Hint::RHT_GV_GOSSIP_STONE_FAIRY_BIG::357", "plain_text": "They say that #playing a stormy tune for an odd stone near a canyon waterfall# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_GV_GOSSIP_STONE_FAIRY_BIG", "variables": ["1"]}
+{"id": "Hint::RHT_GC_MAZE_GOSSIP_STONE_FAIRY::358", "plain_text": "They say that #playing a tune for an odd stone behind a maze of rock# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_GC_MAZE_GOSSIP_STONE_FAIRY", "variables": ["1"]}
+{"id": "Hint::RHT_GC_MAZE_GOSSIP_STONE_FAIRY_BIG::359", "plain_text": "They say that #playing a stormy tune for an odd stone behind a maze of rock# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_GC_MAZE_GOSSIP_STONE_FAIRY_BIG", "variables": ["1"]}
+{"id": "Hint::RHT_GC_MEDIGORON_GOSSIP_STONE_FAIRY::360", "plain_text": "They say that #playing a tune for an odd stone near a blacksmith# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_GC_MEDIGORON_GOSSIP_STONE_FAIRY", "variables": ["1"]}
+{"id": "Hint::RHT_GC_MEDIGORON_GOSSIP_STONE_FAIRY_BIG::361", "plain_text": "They say that #playing a stormy tune for an odd stone near a blacksmith# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_GC_MEDIGORON_GOSSIP_STONE_FAIRY_BIG", "variables": ["1"]}
+{"id": "Hint::RHT_GRAVEYARD_GOSSIP_STONE_FAIRY::362", "plain_text": "They say that #playing a tune for an odd stone overlooking the graveyard# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_GRAVEYARD_GOSSIP_STONE_FAIRY", "variables": ["1"]}
+{"id": "Hint::RHT_GRAVEYARD_GOSSIP_STONE_FAIRY_BIG::363", "plain_text": "They say that #playing a stormy tune for an odd stone overlooking the graveyard# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_GRAVEYARD_GOSSIP_STONE_FAIRY_BIG", "variables": ["1"]}
+{"id": "Hint::RHT_HC_MALON_GOSSIP_STONE_FAIRY::364", "plain_text": "They say that #playing a tune for an odd stone overlooking the path to the castle# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_HC_MALON_GOSSIP_STONE_FAIRY", "variables": ["1"]}
+{"id": "Hint::RHT_HC_MALON_GOSSIP_STONE_FAIRY_BIG::365", "plain_text": "They say that #playing a stormy tune for an odd stone overlooking the path to the castle# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_HC_MALON_GOSSIP_STONE_FAIRY_BIG", "variables": ["1"]}
+{"id": "Hint::RHT_HC_ROCK_WALL_GOSSIP_STONE_FAIRY::366", "plain_text": "They say that #playing a tune for an odd stone near a secret path to the castle# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_HC_ROCK_WALL_GOSSIP_STONE_FAIRY", "variables": ["1"]}
+{"id": "Hint::RHT_HC_ROCK_WALL_GOSSIP_STONE_FAIRY_BIG::367", "plain_text": "They say that #playing a stormy tune for an odd stone near a secret path to the castle# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_HC_ROCK_WALL_GOSSIP_STONE_FAIRY_BIG", "variables": ["1"]}
+{"id": "Hint::RHT_HC_STORMS_GROTTO_GOSSIP_STONE_FAIRY::368", "plain_text": "They say that #playing a tune for an odd stone beneath the castle# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_HC_STORMS_GROTTO_GOSSIP_STONE_FAIRY", "variables": ["1"]}
+{"id": "Hint::RHT_HC_STORMS_GROTTO_GOSSIP_STONE_FAIRY_BIG::369", "plain_text": "They say that #playing a stormy tune for an odd stone beneath the castle# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_HC_STORMS_GROTTO_GOSSIP_STONE_FAIRY_BIG", "variables": ["1"]}
+{"id": "Hint::RHT_KF_DEKU_TREE_GOSSIP_STONE_FAIRY::370", "plain_text": "They say that #playing a tune for an odd stone near an ancient tree# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_KF_DEKU_TREE_GOSSIP_STONE_FAIRY", "variables": ["1"]}
+{"id": "Hint::RHT_KF_DEKU_TREE_GOSSIP_STONE_FAIRY_BIG::371", "plain_text": "They say that #playing a stormy tune for an odd stone near an ancient tree# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_KF_DEKU_TREE_GOSSIP_STONE_FAIRY_BIG", "variables": ["1"]}
+{"id": "Hint::RHT_KF_GOSSIP_STONE_FAIRY::372", "plain_text": "They say that #playing a tune for an odd stone overlooking a forest village# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_KF_GOSSIP_STONE_FAIRY", "variables": ["1"]}
+{"id": "Hint::RHT_KF_GOSSIP_STONE_FAIRY_BIG::373", "plain_text": "They say that #playing a stormy tune for an odd stone overlooking a forest village# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_KF_GOSSIP_STONE_FAIRY_BIG", "variables": ["1"]}
+{"id": "Hint::RHT_KF_STORMS_GROTTO_GOSSIP_STONE_FAIRY::374", "plain_text": "They say that #playing a tune for an odd stone beneath a forest village# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_KF_STORMS_GROTTO_GOSSIP_STONE_FAIRY", "variables": ["1"]}
+{"id": "Hint::RHT_KF_STORMS_GROTTO_GOSSIP_STONE_FAIRY_BIG::375", "plain_text": "They say that #playing a stormy tune for an odd stone beneath a forest village# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_KF_STORMS_GROTTO_GOSSIP_STONE_FAIRY_BIG", "variables": ["1"]}
+{"id": "Hint::RHT_LH_LAB_GOSSIP_STONE_FAIRY::376", "plain_text": "They say that #playing a tune for an odd stone overlooking the river feeding a lake# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_LH_LAB_GOSSIP_STONE_FAIRY", "variables": ["1"]}
+{"id": "Hint::RHT_LH_LAB_GOSSIP_STONE_FAIRY_BIG::377", "plain_text": "They say that #playing a stormy tune for an odd stone overlooking the river feeding a lake# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_LH_LAB_GOSSIP_STONE_FAIRY_BIG", "variables": ["1"]}
+{"id": "Hint::RHT_LH_SOUTHEAST_GOSSIP_STONE_FAIRY::378", "plain_text": "They say that #playing a tune for an odd stone at the back of a lake# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_LH_SOUTHEAST_GOSSIP_STONE_FAIRY", "variables": ["1"]}
+{"id": "Hint::RHT_LH_SOUTHEAST_GOSSIP_STONE_FAIRY_BIG::379", "plain_text": "They say that #playing a stormy tune for an odd stone at the back of a lake# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_LH_SOUTHEAST_GOSSIP_STONE_FAIRY_BIG", "variables": ["1"]}
+{"id": "Hint::RHT_LH_SOUTHWEST_GOSSIP_STONE_FAIRY::380", "plain_text": "They say that #playing a tune for an odd stone at the back of a lake# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_LH_SOUTHWEST_GOSSIP_STONE_FAIRY", "variables": ["1"]}
+{"id": "Hint::RHT_LH_SOUTHWEST_GOSSIP_STONE_FAIRY_BIG::381", "plain_text": "They say that #playing a stormy tune for an odd stone at the back of a lake# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_LH_SOUTHWEST_GOSSIP_STONE_FAIRY_BIG", "variables": ["1"]}
+{"id": "Hint::RHT_LW_GOSSIP_STONE_FAIRY::382", "plain_text": "They say that #playing a tune for an odd stone within a perplexing wood# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_LW_GOSSIP_STONE_FAIRY", "variables": ["1"]}
+{"id": "Hint::RHT_LW_GOSSIP_STONE_FAIRY_BIG::383", "plain_text": "They say that #playing a stormy tune for an odd stone within a perplexing wood# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_LW_GOSSIP_STONE_FAIRY_BIG", "variables": ["1"]}
+{"id": "Hint::RHT_SFM_MAZE_GOSSIP_STONE_FAIRY::384", "plain_text": "They say that #playing a tune for an odd stone overlooking a forest maze# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_SFM_MAZE_GOSSIP_STONE_FAIRY", "variables": ["1"]}
+{"id": "Hint::RHT_SFM_MAZE_GOSSIP_STONE_FAIRY_BIG::385", "plain_text": "They say that #playing a stormy tune for an odd stone overlooking a forest maze# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_SFM_MAZE_GOSSIP_STONE_FAIRY_BIG", "variables": ["1"]}
+{"id": "Hint::RHT_SFM_SARIA_GOSSIP_STONE_FAIRY::386", "plain_text": "They say that #playing a tune for an odd stone watching a hiding place in the woods# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_SFM_SARIA_GOSSIP_STONE_FAIRY", "variables": ["1"]}
+{"id": "Hint::RHT_SFM_SARIA_GOSSIP_STONE_FAIRY_BIG::387", "plain_text": "They say that #playing a stormy tune for an odd stone watching a hiding place in the woods# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_SFM_SARIA_GOSSIP_STONE_FAIRY_BIG", "variables": ["1"]}
+{"id": "Hint::RHT_ZD_GOSSIP_STONE_FAIRY::388", "plain_text": "They say that #playing a tune for an odd stone listening to an aquatic king# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_ZD_GOSSIP_STONE_FAIRY", "variables": ["1"]}
+{"id": "Hint::RHT_ZD_GOSSIP_STONE_FAIRY_BIG::389", "plain_text": "They say that #playing a stormy tune for an odd stone listening to an aquatic king# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_ZD_GOSSIP_STONE_FAIRY_BIG", "variables": ["1"]}
+{"id": "Hint::RHT_ZF_FAIRY_GOSSIP_STONE_FAIRY::390", "plain_text": "They say that #playing a tune for an odd stone in the outskirts of a deep fountain# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_ZF_FAIRY_GOSSIP_STONE_FAIRY", "variables": ["1"]}
+{"id": "Hint::RHT_ZF_FAIRY_GOSSIP_STONE_FAIRY_BIG::391", "plain_text": "They say that #playing a stormy tune for an odd stone in the outskirts of a deep fountain# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_ZF_FAIRY_GOSSIP_STONE_FAIRY_BIG", "variables": ["1"]}
+{"id": "Hint::RHT_ZF_JABU_GOSSIP_STONE_FAIRY::392", "plain_text": "They say that #playing a tune for an odd stone watching a guardian of the sea# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_ZF_JABU_GOSSIP_STONE_FAIRY", "variables": ["1"]}
+{"id": "Hint::RHT_ZF_JABU_GOSSIP_STONE_FAIRY_BIG::393", "plain_text": "They say that #playing a stormy tune for an odd stone watching a guardian of the sea# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_ZF_JABU_GOSSIP_STONE_FAIRY_BIG", "variables": ["1"]}
+{"id": "Hint::RHT_ZR_NEAR_GROTTOS_GOSSIP_STONE_FAIRY::394", "plain_text": "They say that #playing a tune for an odd stone overwatching a river# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_ZR_NEAR_GROTTOS_GOSSIP_STONE_FAIRY", "variables": ["1"]}
+{"id": "Hint::RHT_ZR_NEAR_GROTTOS_GOSSIP_STONE_FAIRY_BIG::395", "plain_text": "They say that #playing a stormy tune for an odd stone overwatching a river# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_ZR_NEAR_GROTTOS_GOSSIP_STONE_FAIRY_BIG", "variables": ["1"]}
+{"id": "Hint::RHT_ZR_NEAR_DOMAIN_GOSSIP_STONE_FAIRY::396", "plain_text": "They say that #playing a tune for an odd stone beneath a waterfall# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_ZR_NEAR_DOMAIN_GOSSIP_STONE_FAIRY", "variables": ["1"]}
+{"id": "Hint::RHT_ZR_NEAR_DOMAIN_GOSSIP_STONE_FAIRY_BIG::397", "plain_text": "They say that #playing a stormy tune for an odd stone beneath a waterfall# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_ZR_NEAR_DOMAIN_GOSSIP_STONE_FAIRY_BIG", "variables": ["1"]}
+{"id": "Hint::RHT_HF_COW_GROTTO_GOSSIP_STONE_FAIRY::398", "plain_text": "They say that #playing a tune for an odd stone hiding near a cow# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_HF_COW_GROTTO_GOSSIP_STONE_FAIRY", "variables": ["1"]}
+{"id": "Hint::RHT_HF_COW_GROTTO_GOSSIP_STONE_FAIRY_BIG::399", "plain_text": "They say that #playing a stormy tune for an odd stone hiding near a cow# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_HF_COW_GROTTO_GOSSIP_STONE_FAIRY_BIG", "variables": ["1"]}
+{"id": "Hint::RHT_HF_NEAR_MARKET_GROTTO_GOSSIP_STONE_FAIRY::400", "plain_text": "They say that #playing a tune for an odd stone beneath the entrance to the market# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_HF_NEAR_MARKET_GROTTO_GOSSIP_STONE_FAIRY", "variables": ["1"]}
+{"id": "Hint::RHT_HF_NEAR_MARKET_GROTTO_GOSSIP_STONE_FAIRY_BIG::401", "plain_text": "They say that #playing a stormy tune for an odd stone beneath the entrance to the market# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_HF_NEAR_MARKET_GROTTO_GOSSIP_STONE_FAIRY_BIG", "variables": ["1"]}
+{"id": "Hint::RHT_HF_SOUTHEAST_GROTTO_GOSSIP_STONE_FAIRY::402", "plain_text": "They say that #playing a tune for an odd stone beneath trees guarded by a Peahat# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_HF_SOUTHEAST_GROTTO_GOSSIP_STONE_FAIRY", "variables": ["1"]}
+{"id": "Hint::RHT_HF_SOUTHEAST_GROTTO_GOSSIP_STONE_FAIRY_BIG::403", "plain_text": "They say that #playing a stormy tune for an odd stone beneath trees guarded by a Peahat# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_HF_SOUTHEAST_GROTTO_GOSSIP_STONE_FAIRY_BIG", "variables": ["1"]}
+{"id": "Hint::RHT_KAK_OPEN_GROTTO_GOSSIP_STONE_FAIRY::404", "plain_text": "They say that #playing a tune for an odd stone beneath a village at the base of a mountain# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_KAK_OPEN_GROTTO_GOSSIP_STONE_FAIRY", "variables": ["1"]}
+{"id": "Hint::RHT_KAK_OPEN_GROTTO_GOSSIP_STONE_FAIRY_BIG::405", "plain_text": "They say that #playing a stormy tune for an odd stone beneath a village at the base of a mountain# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_KAK_OPEN_GROTTO_GOSSIP_STONE_FAIRY_BIG", "variables": ["1"]}
+{"id": "Hint::RHT_ZR_OPEN_GROTTO_GOSSIP_STONE_FAIRY::406", "plain_text": "They say that #playing a tune for an odd stone within a plateau by a river# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_ZR_OPEN_GROTTO_GOSSIP_STONE_FAIRY", "variables": ["1"]}
+{"id": "Hint::RHT_ZR_OPEN_GROTTO_GOSSIP_STONE_FAIRY_BIG::407", "plain_text": "They say that #playing a stormy tune for an odd stone within a plateau by a river# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_ZR_OPEN_GROTTO_GOSSIP_STONE_FAIRY_BIG", "variables": ["1"]}
+{"id": "Hint::RHT_LW_NEAR_SHORTCUTS_GROTTO_GOSSIP_STONE_FAIRY::408", "plain_text": "They say that #playing a tune for an odd stone beneath an escape from the forest# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_LW_NEAR_SHORTCUTS_GROTTO_GOSSIP_STONE_FAIRY", "variables": ["1"]}
+{"id": "Hint::RHT_LW_NEAR_SHORTCUTS_GROTTO_GOSSIP_STONE_FAIRY_BIG::409", "plain_text": "They say that #playing a stormy tune for an odd stone beneath an escape from the forest# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_LW_NEAR_SHORTCUTS_GROTTO_GOSSIP_STONE_FAIRY_BIG", "variables": ["1"]}
+{"id": "Hint::RHT_DMT_STORMS_GROTTO_GOSSIP_STONE_FAIRY::410", "plain_text": "They say that #playing a tune for an odd stone beneath the entrance to a village within a mountain# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_DMT_STORMS_GROTTO_GOSSIP_STONE_FAIRY", "variables": ["1"]}
+{"id": "Hint::RHT_DMT_STORMS_GROTTO_GOSSIP_STONE_FAIRY_BIG::411", "plain_text": "They say that #playing a stormy tune for an odd stone beneath the entrance to a village within a mountain# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_DMT_STORMS_GROTTO_GOSSIP_STONE_FAIRY_BIG", "variables": ["1"]}
+{"id": "Hint::RHT_DMC_UPPER_GROTTO_GOSSIP_STONE_FAIRY::412", "plain_text": "They say that #playing a tune for an odd stone within the side of a crater# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_DMC_UPPER_GROTTO_GOSSIP_STONE_FAIRY", "variables": ["1"]}
+{"id": "Hint::RHT_DMC_UPPER_GROTTO_GOSSIP_STONE_FAIRY_BIG::413", "plain_text": "They say that #playing a stormy tune for an odd stone within the side of a crater# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_DMC_UPPER_GROTTO_GOSSIP_STONE_FAIRY_BIG", "variables": ["1"]}
+{"id": "Hint::RHT_LH_ISLAND_SUN_FAIRY::414", "plain_text": "They say that #summoning the sun on the lake's island# calls #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_LH_ISLAND_SUN_FAIRY", "variables": ["1"]}
+{"id": "Hint::RHT_HF_POND_STORMS_FAIRY::415", "plain_text": "They say that #calling rain to the field's pond# summons #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_HF_POND_STORMS_FAIRY", "variables": ["1"]}
+{"id": "Hint::RHT_HF_FENCE_GROTTO_STORMS_FAIRY::416", "plain_text": "They say that #making it rain in a scrub's cave# wakes #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_HF_FENCE_GROTTO_STORMS_FAIRY", "variables": ["1"]}
+{"id": "Hint::RHT_DMT_FLAG_SUN_FAIRY::417", "plain_text": "They say that #changing the time in front of the trail's flag# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_DMT_FLAG_SUN_FAIRY", "variables": ["1"]}
+{"id": "Hint::RHT_DMT_COW_GROTTO_STORMS_FAIRY::418", "plain_text": "They say that #calling a storm for a lonely cow# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_DMT_COW_GROTTO_STORMS_FAIRY", "variables": ["1"]}
+{"id": "Hint::RHT_LW_SHORTCUT_STORMS_FAIRY::419", "plain_text": "They say that #making it rain in the Lost Woods# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_LW_SHORTCUT_STORMS_FAIRY", "variables": ["1"]}
+{"id": "Hint::RHT_TH_KITCHEN_SUN_FAIRY::420", "plain_text": "They say that #calling the sun in a guarded kitchen# exposes #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_TH_KITCHEN_SUN_FAIRY", "variables": ["1"]}
+{"id": "Hint::RHT_LW_DEKU_SCRUB_GROTTO_SUN_FAIRY::421", "plain_text": "They say that #calling the sun for scrubs in the Lost Woods# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_LW_DEKU_SCRUB_GROTTO_SUN_FAIRY", "variables": ["1"]}
+{"id": "Hint::RHT_GRAVEYARD_ROYAL_FAMILYS_TOMB_SUN_FAIRY::422", "plain_text": "They say that #calling the sun in a royal tomb# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_GRAVEYARD_ROYAL_FAMILYS_TOMB_SUN_FAIRY", "variables": ["1"]}
+{"id": "Hint::RHT_KF_GRASS::423", "plain_text": "They say that #cutting some grass in a forest# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_KF_GRASS", "variables": ["1"]}
+{"id": "Hint::RHT_LW_GRASS::424", "plain_text": "They say that #cutting some grass in the woods# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_LW_GRASS", "variables": ["1"]}
+{"id": "Hint::RHT_MARKET_GRASS::425", "plain_text": "They say that #cutting some grass in the market# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_MARKET_GRASS", "variables": ["1"]}
+{"id": "Hint::RHT_HC_GRASS::426", "plain_text": "They say that #cutting some grass near the castle# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_HC_GRASS", "variables": ["1"]}
+{"id": "Hint::RHT_KAK_GRASS::427", "plain_text": "They say that #cutting some grass in a village# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_KAK_GRASS", "variables": ["1"]}
+{"id": "Hint::RHT_GY_GRASS::428", "plain_text": "They say that #cutting some grass in a graveyard# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_GY_GRASS", "variables": ["1"]}
+{"id": "Hint::RHT_LH_GRASS::429", "plain_text": "They say that #cutting some grass near a lake# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_LH_GRASS", "variables": ["1"]}
+{"id": "Hint::RHT_HF_GRASS::430", "plain_text": "They say that #cutting some grass on a field# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_HF_GRASS", "variables": ["1"]}
+{"id": "Hint::RHT_ZR_GRASS::431", "plain_text": "They say that #cutting some grass near a river# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_ZR_GRASS", "variables": ["1"]}
+{"id": "Hint::RHT_GROTTO_GRASS::432", "plain_text": "They say that #cutting some grass in a grotto# reveals #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_GROTTO_GRASS", "variables": ["1"]}
+{"id": "Hint::RHT_CRATE_GERUDO_VALLEY::433", "plain_text": "They say that a #crate in Gerudo Valley# contains #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_CRATE_GERUDO_VALLEY", "variables": ["1"]}
+{"id": "Hint::RHT_CRATE_GERUDOS_FORTRESS::434", "plain_text": "They say that a #crate in Gerudo Fortress# contains #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_CRATE_GERUDOS_FORTRESS", "variables": ["1"]}
+{"id": "Hint::RHT_CRATE_WASTELAND::435", "plain_text": "They say that a #crate in Haunted Wasteland# contains #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_CRATE_WASTELAND", "variables": ["1"]}
+{"id": "Hint::RHT_CRATE_MARKET::436", "plain_text": "They say that a #crate in the Market# contains #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_CRATE_MARKET", "variables": ["1"]}
+{"id": "Hint::RHT_CRATE_KAKARIKO_VILLAGE::437", "plain_text": "They say that a #crate in Kakariko Village# contains #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_CRATE_KAKARIKO_VILLAGE", "variables": ["1"]}
+{"id": "Hint::RHT_CRATE_GRAVEYARD::438", "plain_text": "They say that a #crate in the Graveyard# contains #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_CRATE_GRAVEYARD", "variables": ["1"]}
+{"id": "Hint::RHT_CRATE_GORON_CITY::439", "plain_text": "They say that a #crate in Goron City# contains #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_CRATE_GORON_CITY", "variables": ["1"]}
+{"id": "Hint::RHT_CRATE_DEATH_MOUNTAIN_CRATER::440", "plain_text": "They say that a #crate in Death Mountain Crater# contains #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_CRATE_DEATH_MOUNTAIN_CRATER", "variables": ["1"]}
+{"id": "Hint::RHT_CRATE_LON_LON_RANCH::441", "plain_text": "They say that a #crate in Lon Lon Ranch# contains #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_CRATE_LON_LON_RANCH", "variables": ["1"]}
+{"id": "Hint::RHT_CRATE_LAKESIDE_LABORATORY::442", "plain_text": "They say that a #crate in the Laboratory# contains #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_CRATE_LAKESIDE_LABORATORY", "variables": ["1"]}
+{"id": "Hint::RHT_TREE_HYRULE_FIELD::443", "plain_text": "They say that a #tree in Hyrule Field# contains #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_TREE_HYRULE_FIELD", "variables": ["1"]}
+{"id": "Hint::RHT_TREE_MARKET::444", "plain_text": "They say that a #tree in Hyrule Market# contains #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_TREE_MARKET", "variables": ["1"]}
+{"id": "Hint::RHT_TREE_HYRULE_CASTLE::445", "plain_text": "They say that a #tree in Hyrule Castle# contains #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_TREE_HYRULE_CASTLE", "variables": ["1"]}
+{"id": "Hint::RHT_TREE_ZORAS_RIVER::446", "plain_text": "They say that a #tree in Zora's River# contains #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_TREE_ZORAS_RIVER", "variables": ["1"]}
+{"id": "Hint::RHT_TREE_ZORAS_FOUNTAIN::447", "plain_text": "They say that a #tree in Zora's Fountain# contains #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_TREE_ZORAS_FOUNTAIN", "variables": ["1"]}
+{"id": "Hint::RHT_TREE_LON_LON_RANCH::448", "plain_text": "They say that a #tree in Lon Lon Ranch# contains #[1]#.", "category": "RANDOMIZER", "subcategory": "RHT_TREE_LON_LON_RANCH", "variables": ["1"]}
+{"id": "Hint::RHT_KOKIRI_SWORD::0", "plain_text": "the Kokiri Sword", "category": "RANDOMIZER", "subcategory": "RHT_KOKIRI_SWORD", "variables": []}
+{"id": "Hint::RHT_KOKIRI_SWORD::1", "plain_text": "a sword", "category": "RANDOMIZER", "subcategory": "RHT_KOKIRI_SWORD", "variables": []}
+{"id": "Hint::RHT_KOKIRI_SWORD::2", "plain_text": "a butter knife", "category": "RANDOMIZER", "subcategory": "RHT_KOKIRI_SWORD", "variables": []}
+{"id": "Hint::RHT_KOKIRI_SWORD::3", "plain_text": "a starter slasher", "category": "RANDOMIZER", "subcategory": "RHT_KOKIRI_SWORD", "variables": []}
+{"id": "Hint::RHT_KOKIRI_SWORD::4", "plain_text": "a switchblade", "category": "RANDOMIZER", "subcategory": "RHT_KOKIRI_SWORD", "variables": []}
+{"id": "Hint::RHT_MASTER_SWORD::5", "plain_text": "the Master Sword", "category": "RANDOMIZER", "subcategory": "RHT_MASTER_SWORD", "variables": []}
+{"id": "Hint::RHT_MASTER_SWORD::6", "plain_text": "a sword", "category": "RANDOMIZER", "subcategory": "RHT_MASTER_SWORD", "variables": []}
+{"id": "Hint::RHT_MASTER_SWORD::7", "plain_text": "evil's bane", "category": "RANDOMIZER", "subcategory": "RHT_MASTER_SWORD", "variables": []}
+{"id": "Hint::RHT_MASTER_SWORD::8", "plain_text": "a seven year limbo", "category": "RANDOMIZER", "subcategory": "RHT_MASTER_SWORD", "variables": []}
+{"id": "Hint::RHT_GIANTS_KNIFE::9", "plain_text": "the Giant's Knife", "category": "RANDOMIZER", "subcategory": "RHT_GIANTS_KNIFE", "variables": []}
+{"id": "Hint::RHT_GIANTS_KNIFE::10", "plain_text": "a sword", "category": "RANDOMIZER", "subcategory": "RHT_GIANTS_KNIFE", "variables": []}
+{"id": "Hint::RHT_GIANTS_KNIFE::11", "plain_text": "a fragile blade", "category": "RANDOMIZER", "subcategory": "RHT_GIANTS_KNIFE", "variables": []}
+{"id": "Hint::RHT_GIANTS_KNIFE::12", "plain_text": "a breakable cleaver", "category": "RANDOMIZER", "subcategory": "RHT_GIANTS_KNIFE", "variables": []}
+{"id": "Hint::RHT_BIGGORON_SWORD::13", "plain_text": "the Biggoron Sword", "category": "RANDOMIZER", "subcategory": "RHT_BIGGORON_SWORD", "variables": []}
+{"id": "Hint::RHT_BIGGORON_SWORD::14", "plain_text": "a sword", "category": "RANDOMIZER", "subcategory": "RHT_BIGGORON_SWORD", "variables": []}
+{"id": "Hint::RHT_BIGGORON_SWORD::15", "plain_text": "the biggest blade", "category": "RANDOMIZER", "subcategory": "RHT_BIGGORON_SWORD", "variables": []}
+{"id": "Hint::RHT_BIGGORON_SWORD::16", "plain_text": "a colossal cleaver", "category": "RANDOMIZER", "subcategory": "RHT_BIGGORON_SWORD", "variables": []}
+{"id": "Hint::RHT_DEKU_SHIELD::17", "plain_text": "a Deku Shield", "category": "RANDOMIZER", "subcategory": "RHT_DEKU_SHIELD", "variables": []}
+{"id": "Hint::RHT_DEKU_SHIELD::18", "plain_text": "a shield", "category": "RANDOMIZER", "subcategory": "RHT_DEKU_SHIELD", "variables": []}
+{"id": "Hint::RHT_DEKU_SHIELD::19", "plain_text": "a wooden ward", "category": "RANDOMIZER", "subcategory": "RHT_DEKU_SHIELD", "variables": []}
+{"id": "Hint::RHT_DEKU_SHIELD::20", "plain_text": "a burnable barrier", "category": "RANDOMIZER", "subcategory": "RHT_DEKU_SHIELD", "variables": []}
+{"id": "Hint::RHT_HYLIAN_SHIELD::21", "plain_text": "a Hylian Shield", "category": "RANDOMIZER", "subcategory": "RHT_HYLIAN_SHIELD", "variables": []}
+{"id": "Hint::RHT_HYLIAN_SHIELD::22", "plain_text": "a shield", "category": "RANDOMIZER", "subcategory": "RHT_HYLIAN_SHIELD", "variables": []}
+{"id": "Hint::RHT_HYLIAN_SHIELD::23", "plain_text": "a steel safeguard", "category": "RANDOMIZER", "subcategory": "RHT_HYLIAN_SHIELD", "variables": []}
+{"id": "Hint::RHT_HYLIAN_SHIELD::24", "plain_text": "Like Like's metal meal", "category": "RANDOMIZER", "subcategory": "RHT_HYLIAN_SHIELD", "variables": []}
+{"id": "Hint::RHT_MIRROR_SHIELD::25", "plain_text": "the Mirror Shield", "category": "RANDOMIZER", "subcategory": "RHT_MIRROR_SHIELD", "variables": []}
+{"id": "Hint::RHT_MIRROR_SHIELD::26", "plain_text": "a shield", "category": "RANDOMIZER", "subcategory": "RHT_MIRROR_SHIELD", "variables": []}
+{"id": "Hint::RHT_MIRROR_SHIELD::27", "plain_text": "a reflective rampart", "category": "RANDOMIZER", "subcategory": "RHT_MIRROR_SHIELD", "variables": []}
+{"id": "Hint::RHT_MIRROR_SHIELD::28", "plain_text": "Medusa's weakness", "category": "RANDOMIZER", "subcategory": "RHT_MIRROR_SHIELD", "variables": []}
+{"id": "Hint::RHT_MIRROR_SHIELD::29", "plain_text": "a silvered surface", "category": "RANDOMIZER", "subcategory": "RHT_MIRROR_SHIELD", "variables": []}
+{"id": "Hint::RHT_GORON_TUNIC::30", "plain_text": "a Goron Tunic", "category": "RANDOMIZER", "subcategory": "RHT_GORON_TUNIC", "variables": []}
+{"id": "Hint::RHT_GORON_TUNIC::31", "plain_text": "a tunic", "category": "RANDOMIZER", "subcategory": "RHT_GORON_TUNIC", "variables": []}
+{"id": "Hint::RHT_GORON_TUNIC::32", "plain_text": "ruby robes", "category": "RANDOMIZER", "subcategory": "RHT_GORON_TUNIC", "variables": []}
+{"id": "Hint::RHT_GORON_TUNIC::33", "plain_text": "fireproof fabric", "category": "RANDOMIZER", "subcategory": "RHT_GORON_TUNIC", "variables": []}
+{"id": "Hint::RHT_GORON_TUNIC::34", "plain_text": "cooking clothes", "category": "RANDOMIZER", "subcategory": "RHT_GORON_TUNIC", "variables": []}
+{"id": "Hint::RHT_ZORA_TUNIC::35", "plain_text": "a Zora Tunic", "category": "RANDOMIZER", "subcategory": "RHT_ZORA_TUNIC", "variables": []}
+{"id": "Hint::RHT_ZORA_TUNIC::36", "plain_text": "a tunic", "category": "RANDOMIZER", "subcategory": "RHT_ZORA_TUNIC", "variables": []}
+{"id": "Hint::RHT_ZORA_TUNIC::37", "plain_text": "something expensive", "category": "RANDOMIZER", "subcategory": "RHT_ZORA_TUNIC", "variables": []}
+{"id": "Hint::RHT_ZORA_TUNIC::38", "plain_text": "a sapphire suit", "category": "RANDOMIZER", "subcategory": "RHT_ZORA_TUNIC", "variables": []}
+{"id": "Hint::RHT_ZORA_TUNIC::39", "plain_text": "scuba gear", "category": "RANDOMIZER", "subcategory": "RHT_ZORA_TUNIC", "variables": []}
+{"id": "Hint::RHT_ZORA_TUNIC::40", "plain_text": "a swimsuit", "category": "RANDOMIZER", "subcategory": "RHT_ZORA_TUNIC", "variables": []}
+{"id": "Hint::RHT_IRON_BOOTS::41", "plain_text": "the Iron Boots", "category": "RANDOMIZER", "subcategory": "RHT_IRON_BOOTS", "variables": []}
+{"id": "Hint::RHT_IRON_BOOTS::42", "plain_text": "some boots", "category": "RANDOMIZER", "subcategory": "RHT_IRON_BOOTS", "variables": []}
+{"id": "Hint::RHT_IRON_BOOTS::43", "plain_text": "a feature of the Water Temple", "category": "RANDOMIZER", "subcategory": "RHT_IRON_BOOTS", "variables": []}
+{"id": "Hint::RHT_IRON_BOOTS::44", "plain_text": "something heavy", "category": "RANDOMIZER", "subcategory": "RHT_IRON_BOOTS", "variables": []}
+{"id": "Hint::RHT_IRON_BOOTS::45", "plain_text": "sink shoes", "category": "RANDOMIZER", "subcategory": "RHT_IRON_BOOTS", "variables": []}
+{"id": "Hint::RHT_IRON_BOOTS::46", "plain_text": "clank cleats", "category": "RANDOMIZER", "subcategory": "RHT_IRON_BOOTS", "variables": []}
+{"id": "Hint::RHT_HOVER_BOOTS::47", "plain_text": "the Hover Boots", "category": "RANDOMIZER", "subcategory": "RHT_HOVER_BOOTS", "variables": []}
+{"id": "Hint::RHT_HOVER_BOOTS::48", "plain_text": "some boots", "category": "RANDOMIZER", "subcategory": "RHT_HOVER_BOOTS", "variables": []}
+{"id": "Hint::RHT_HOVER_BOOTS::49", "plain_text": "butter boots", "category": "RANDOMIZER", "subcategory": "RHT_HOVER_BOOTS", "variables": []}
+{"id": "Hint::RHT_HOVER_BOOTS::50", "plain_text": "sacred slippers", "category": "RANDOMIZER", "subcategory": "RHT_HOVER_BOOTS", "variables": []}
+{"id": "Hint::RHT_HOVER_BOOTS::51", "plain_text": "spacewalkers", "category": "RANDOMIZER", "subcategory": "RHT_HOVER_BOOTS", "variables": []}
+{"id": "Hint::RHT_ZELDAS_LETTER::52", "plain_text": "Zelda's Letter", "category": "RANDOMIZER", "subcategory": "RHT_ZELDAS_LETTER", "variables": []}
+{"id": "Hint::RHT_ZELDAS_LETTER::53", "plain_text": "an autograph", "category": "RANDOMIZER", "subcategory": "RHT_ZELDAS_LETTER", "variables": []}
+{"id": "Hint::RHT_ZELDAS_LETTER::54", "plain_text": "royal stationery", "category": "RANDOMIZER", "subcategory": "RHT_ZELDAS_LETTER", "variables": []}
+{"id": "Hint::RHT_ZELDAS_LETTER::55", "plain_text": "royal snail mail", "category": "RANDOMIZER", "subcategory": "RHT_ZELDAS_LETTER", "variables": []}
+{"id": "Hint::RHT_WEIRD_EGG::56", "plain_text": "the Weird Egg", "category": "RANDOMIZER", "subcategory": "RHT_WEIRD_EGG", "variables": []}
+{"id": "Hint::RHT_WEIRD_EGG::57", "plain_text": "an egg", "category": "RANDOMIZER", "subcategory": "RHT_WEIRD_EGG", "variables": []}
+{"id": "Hint::RHT_WEIRD_EGG::58", "plain_text": "a chicken dilemma", "category": "RANDOMIZER", "subcategory": "RHT_WEIRD_EGG", "variables": []}
+{"id": "Hint::RHT_BOOMERANG::59", "plain_text": "the Boomerang", "category": "RANDOMIZER", "subcategory": "RHT_BOOMERANG", "variables": []}
+{"id": "Hint::RHT_BOOMERANG::60", "plain_text": "something that can grab things", "category": "RANDOMIZER", "subcategory": "RHT_BOOMERANG", "variables": []}
+{"id": "Hint::RHT_BOOMERANG::61", "plain_text": "something that can stun", "category": "RANDOMIZER", "subcategory": "RHT_BOOMERANG", "variables": []}
+{"id": "Hint::RHT_BOOMERANG::62", "plain_text": "a banana", "category": "RANDOMIZER", "subcategory": "RHT_BOOMERANG", "variables": []}
+{"id": "Hint::RHT_BOOMERANG::63", "plain_text": "a stun stick", "category": "RANDOMIZER", "subcategory": "RHT_BOOMERANG", "variables": []}
+{"id": "Hint::RHT_BOOMERANG::64", "plain_text": "a yellow angle", "category": "RANDOMIZER", "subcategory": "RHT_BOOMERANG", "variables": []}
+{"id": "Hint::RHT_LENS_OF_TRUTH::65", "plain_text": "the Lens of Truth", "category": "RANDOMIZER", "subcategory": "RHT_LENS_OF_TRUTH", "variables": []}
+{"id": "Hint::RHT_LENS_OF_TRUTH::66", "plain_text": "a secret-finding tool", "category": "RANDOMIZER", "subcategory": "RHT_LENS_OF_TRUTH", "variables": []}
+{"id": "Hint::RHT_LENS_OF_TRUTH::67", "plain_text": "a lie detector", "category": "RANDOMIZER", "subcategory": "RHT_LENS_OF_TRUTH", "variables": []}
+{"id": "Hint::RHT_LENS_OF_TRUTH::68", "plain_text": "a ghost tracker", "category": "RANDOMIZER", "subcategory": "RHT_LENS_OF_TRUTH", "variables": []}
+{"id": "Hint::RHT_LENS_OF_TRUTH::69", "plain_text": "true sight", "category": "RANDOMIZER", "subcategory": "RHT_LENS_OF_TRUTH", "variables": []}
+{"id": "Hint::RHT_LENS_OF_TRUTH::70", "plain_text": "a detective's tool", "category": "RANDOMIZER", "subcategory": "RHT_LENS_OF_TRUTH", "variables": []}
+{"id": "Hint::RHT_MEGATON_HAMMER::71", "plain_text": "the Megaton Hammer", "category": "RANDOMIZER", "subcategory": "RHT_MEGATON_HAMMER", "variables": []}
+{"id": "Hint::RHT_MEGATON_HAMMER::72", "plain_text": "something that can remove boulders", "category": "RANDOMIZER", "subcategory": "RHT_MEGATON_HAMMER", "variables": []}
+{"id": "Hint::RHT_MEGATON_HAMMER::73", "plain_text": "the dragon smasher", "category": "RANDOMIZER", "subcategory": "RHT_MEGATON_HAMMER", "variables": []}
+{"id": "Hint::RHT_MEGATON_HAMMER::74", "plain_text": "the metal mallet", "category": "RANDOMIZER", "subcategory": "RHT_MEGATON_HAMMER", "variables": []}
+{"id": "Hint::RHT_MEGATON_HAMMER::75", "plain_text": "the heavy hitter", "category": "RANDOMIZER", "subcategory": "RHT_MEGATON_HAMMER", "variables": []}
+{"id": "Hint::RHT_STONE_OF_AGONY::76", "plain_text": "the Stone of Agony", "category": "RANDOMIZER", "subcategory": "RHT_STONE_OF_AGONY", "variables": []}
+{"id": "Hint::RHT_STONE_OF_AGONY::77", "plain_text": "a prize of the House of Skulltulas", "category": "RANDOMIZER", "subcategory": "RHT_STONE_OF_AGONY", "variables": []}
+{"id": "Hint::RHT_STONE_OF_AGONY::78", "plain_text": "a secret-finding tool", "category": "RANDOMIZER", "subcategory": "RHT_STONE_OF_AGONY", "variables": []}
+{"id": "Hint::RHT_STONE_OF_AGONY::79", "plain_text": "the shake stone", "category": "RANDOMIZER", "subcategory": "RHT_STONE_OF_AGONY", "variables": []}
+{"id": "Hint::RHT_STONE_OF_AGONY::80", "plain_text": "a gray alarm", "category": "RANDOMIZER", "subcategory": "RHT_STONE_OF_AGONY", "variables": []}
+{"id": "Hint::RHT_DINS_FIRE::81", "plain_text": "Din's Fire", "category": "RANDOMIZER", "subcategory": "RHT_DINS_FIRE", "variables": []}
+{"id": "Hint::RHT_DINS_FIRE::82", "plain_text": "a Great Fairy's power", "category": "RANDOMIZER", "subcategory": "RHT_DINS_FIRE", "variables": []}
+{"id": "Hint::RHT_DINS_FIRE::83", "plain_text": "an inferno", "category": "RANDOMIZER", "subcategory": "RHT_DINS_FIRE", "variables": []}
+{"id": "Hint::RHT_DINS_FIRE::84", "plain_text": "a heat wave", "category": "RANDOMIZER", "subcategory": "RHT_DINS_FIRE", "variables": []}
+{"id": "Hint::RHT_DINS_FIRE::85", "plain_text": "a red ball", "category": "RANDOMIZER", "subcategory": "RHT_DINS_FIRE", "variables": []}
+{"id": "Hint::RHT_FARORES_WIND::86", "plain_text": "Farore's Wind", "category": "RANDOMIZER", "subcategory": "RHT_FARORES_WIND", "variables": []}
+{"id": "Hint::RHT_FARORES_WIND::87", "plain_text": "a Great Fairy's power", "category": "RANDOMIZER", "subcategory": "RHT_FARORES_WIND", "variables": []}
+{"id": "Hint::RHT_FARORES_WIND::88", "plain_text": "teleportation", "category": "RANDOMIZER", "subcategory": "RHT_FARORES_WIND", "variables": []}
+{"id": "Hint::RHT_FARORES_WIND::89", "plain_text": "a relocation rune", "category": "RANDOMIZER", "subcategory": "RHT_FARORES_WIND", "variables": []}
+{"id": "Hint::RHT_FARORES_WIND::90", "plain_text": "a green ball", "category": "RANDOMIZER", "subcategory": "RHT_FARORES_WIND", "variables": []}
+{"id": "Hint::RHT_NAYRUS_LOVE::91", "plain_text": "Nayru's Love", "category": "RANDOMIZER", "subcategory": "RHT_NAYRUS_LOVE", "variables": []}
+{"id": "Hint::RHT_NAYRUS_LOVE::92", "plain_text": "a Great Fairy's power", "category": "RANDOMIZER", "subcategory": "RHT_NAYRUS_LOVE", "variables": []}
+{"id": "Hint::RHT_NAYRUS_LOVE::93", "plain_text": "a safe space", "category": "RANDOMIZER", "subcategory": "RHT_NAYRUS_LOVE", "variables": []}
+{"id": "Hint::RHT_NAYRUS_LOVE::94", "plain_text": "an impregnable aura", "category": "RANDOMIZER", "subcategory": "RHT_NAYRUS_LOVE", "variables": []}
+{"id": "Hint::RHT_NAYRUS_LOVE::95", "plain_text": "a blue barrier", "category": "RANDOMIZER", "subcategory": "RHT_NAYRUS_LOVE", "variables": []}
+{"id": "Hint::RHT_FIRE_ARROWS::96", "plain_text": "the Fire Arrows", "category": "RANDOMIZER", "subcategory": "RHT_FIRE_ARROWS", "variables": []}
+{"id": "Hint::RHT_FIRE_ARROWS::97", "plain_text": "a magic arrow", "category": "RANDOMIZER", "subcategory": "RHT_FIRE_ARROWS", "variables": []}
+{"id": "Hint::RHT_FIRE_ARROWS::98", "plain_text": "the furnace firearm", "category": "RANDOMIZER", "subcategory": "RHT_FIRE_ARROWS", "variables": []}
+{"id": "Hint::RHT_FIRE_ARROWS::99", "plain_text": "the burning bolts", "category": "RANDOMIZER", "subcategory": "RHT_FIRE_ARROWS", "variables": []}
+{"id": "Hint::RHT_FIRE_ARROWS::100", "plain_text": "a magma missile", "category": "RANDOMIZER", "subcategory": "RHT_FIRE_ARROWS", "variables": []}
+{"id": "Hint::RHT_ICE_ARROWS::101", "plain_text": "the Ice Arrows", "category": "RANDOMIZER", "subcategory": "RHT_ICE_ARROWS", "variables": []}
+{"id": "Hint::RHT_ICE_ARROWS::102", "plain_text": "a magic arrow", "category": "RANDOMIZER", "subcategory": "RHT_ICE_ARROWS", "variables": []}
