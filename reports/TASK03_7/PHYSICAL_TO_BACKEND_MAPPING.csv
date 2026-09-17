@@ -1,0 +1,19 @@
+physical_control,xinput_result,raw_sdl_result,gamecontroller_result,logical_mapping_correct,notes
+A,PASS (0x1000: 6 DOWN / 6 UP),BLOCKED (0 events),PASS via XInput bridge (Button 0),YES,Primary action button verified
+B,PASS (0x2000: 2 DOWN / 2 UP),BLOCKED (0 events),PASS via XInput bridge (Button 1),YES,Secondary action / sword attack verified
+X,PASS (0x4000: 4 DOWN / 4 UP),BLOCKED (0 events),PASS via XInput bridge (Button 2),YES,Auxiliary action verified
+Y,PASS (0x8000: 2 DOWN / 2 UP),BLOCKED (0 events),PASS via XInput bridge (Button 3),YES,Auxiliary action verified
+LB,PASS (0x0100: 10 DOWN / 10 UP),BLOCKED (0 events),PASS via XInput bridge (Button 4),YES,Mapped to N64 L button
+RB,PASS (0x0200: 10 DOWN / 10 UP),BLOCKED (0 events),PASS via XInput bridge (Button 5),YES,Mapped to N64 R / Shield button
+START,PASS (0x0010: 6 DOWN / 6 UP),BLOCKED (0 events),PASS via XInput bridge (Button 7),YES,Mapped to N64 Start / Pause Menu
+BACK,PASS (0x0020: 6 DOWN / 6 UP),BLOCKED (0 events),PASS via XInput bridge (Button 6),YES,View / Select button verified
+DPAD UP,PASS (0x0001: 10 DOWN / 10 UP),BLOCKED (0 events),PASS via XInput bridge (Hat 0.1),YES,D-Pad Up verified
+DPAD DOWN,PASS (0x0002: 8 DOWN / 8 UP),BLOCKED (0 events),PASS via XInput bridge (Hat 0.4),YES,D-Pad Down verified
+DPAD LEFT,PASS (0x0004: 4 DOWN / 4 UP),BLOCKED (0 events),PASS via XInput bridge (Hat 0.8),YES,D-Pad Left verified
+DPAD RIGHT,PASS (0x0008: 6 DOWN / 6 UP),BLOCKED (0 events),PASS via XInput bridge (Hat 0.2),YES,D-Pad Right verified
+LEFT X,PASS (-32768..32767: 335 samples),BLOCKED (0 events),PASS via XInput bridge (Axis 0),YES,N64 Control Stick horizontal
+LEFT Y,PASS (-32768..32767: 353 samples),BLOCKED (0 events),PASS via XInput bridge (Axis 1),YES,N64 Control Stick vertical
+RIGHT X,PASS (-32768..32767: 305 samples),BLOCKED (0 events),PASS via XInput bridge (Axis 2),YES,N64 C-Left / C-Right horizontal
+RIGHT Y,PASS (-32768..32767: 314 samples),BLOCKED (0 events),PASS via XInput bridge (Axis 3),YES,N64 C-Up / C-Down vertical
+LT,PASS (0..255: 74 samples idle=0),PASS Raw Axis 4 (-32768..32767),PASS via XInput bridge (Axis 4 idle=0),YES,Mapped to N64 Z-Target
+RT,PASS (0..255: 82 samples idle=0),PASS Raw Axis 5 (-32768..32767),PASS via XInput bridge (Axis 5 idle=0),YES,Right Trigger analog travel

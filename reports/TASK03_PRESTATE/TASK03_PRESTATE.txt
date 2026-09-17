@@ -1,0 +1,50 @@
+TASK03_PRESTATE_TIMESTAMP=2026-09-15T21:19:02.2712628-06:00
+SOURCE_ROOT=C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright
+RUNTIME_WORKING=C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\runtime\working
+
+--- git status --untracked-files=all ---
+ M .gitignore
+
+--- git diff ---
+diff --git a/.gitignore b/.gitignore
+index 2b7352d9..f0a74ff8 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -413,6 +413,20 @@ ReleaseObj/*
+ tags
+ *.otr
+ *.o2r
++
++# Couch Edition local/private exclusions
++rom.n64
++Save/
++Randomizer/
++logs/
++crash-dumps/
++screenshots/
++*.dmp
++navi-memory/
++ollama/
++downloads/
++.env
++.env.*
+ *.sav
+ shipofharkinian.ini
+ shipofharkinian.json
+
+--- git diff --cached ---
+
+--- git rev-parse HEAD ---
+4aaad850bd5540cd77c2d83f3ad348d3b38605b2
+
+--- git submodule status --recursive ---
+ 32e088e28c8cdd055d4bb8f3f219d33ad37963f3 OTRExporter (32e088e)
+ 684f21a475dcfeee89938ae1f4afc42768a3e7ef ZAPDTR (remotes/origin/JackMaster-58-g684f21a)
+ 17a0b7939bd05f5e617cef89457ca43774fc9a9f libultraship (1.3.1-377-g17a0b793)
+
+--- runtime SHA-256 ---
+shipofharkinian.json	585671b2215477e9ad76e82d53486d90ce502a4824ab95e1f2a6e4331b27eb26
+soh.exe	cd584df1e3a57bb07f8e2d2ab690c1cac62ce3307204e6d8f7322b1fd9d3f168
+Save\file1.sav	2ea27c4afe83211098d13738053cae64009883ce57abf770602ba20f438ac2a5
+Save\file2.sav	7263453e0d6a5e597461b7c2f229ccd76c1dfd3749931b5903000de993fca046
+Save\global.sav	0507387c98b78147330533d865a1900d36e13956e8c952cafd15f61f1a9f179e

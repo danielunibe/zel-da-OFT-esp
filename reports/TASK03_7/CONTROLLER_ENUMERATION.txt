@@ -1,0 +1,1 @@
+index=0 name=Xbox Series X Controller guid=030000005e040000130b000023057200 instance_id=0 is_game_controller=YES path=\\?\HID#{00001812-0000-1000-8000-00805f9b34fb}&Dev&VID_045e&PID_0b13&REV_0523&a88c3e15b815&IG_00#9&3198943&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030} buttons=16 axes=6

@@ -1,0 +1,12 @@
+=== SDL BACKEND HINT AUDIT (BASELINE) ===
+Timestamp: 2026-09-15T23:54:54
+
+SDL_JOYSTICK_HIDAPI = (unset / default)
+SDL_JOYSTICK_HIDAPI_XBOX = (unset / default)
+SDL_JOYSTICK_HIDAPI_XBOX_360 = (unset / default)
+SDL_JOYSTICK_HIDAPI_XBOX_ONE = (unset / default)
+SDL_JOYSTICK_RAWINPUT = (unset / default)
+SDL_XINPUT_ENABLED = (unset / default)
+SDL_JOYSTICK_THREAD = (unset / default)
+SDL_JOYSTICK_ALLOW_BACKGROUND_EVENTS = (unset / default)
+SDL_JOYSTICK_DEVICE = (unset / default)

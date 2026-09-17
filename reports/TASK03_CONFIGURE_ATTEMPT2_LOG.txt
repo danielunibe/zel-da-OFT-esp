@@ -1,0 +1,673 @@
+-- Selecting Windows SDK version 10.0.26100.0 to target Windows 10.0.
+Suppressing warnings in LUS and src
+-- Using Vcpkg triplet 'x64-windows'
+-- Auto-updating vcpkg in C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\tools\vcpkg-9c147d5304087fe85104b776b019c45745fa9c11
+You are not currently on a branch.
+Please specify which branch you want to merge with.
+See git-pull(1) for details.
+
+    git pull <remote> <branch>
+
+-- Automate VCPKG status:
+--   VCPKG_ROOT.....: C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\tools\vcpkg-9c147d5304087fe85104b776b019c45745fa9c11
+--   VCPKG_EXEC.....: C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\tools\vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/vcpkg.exe
+--   VCPKG_BOOTSTRAP: C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\tools\vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/bootstrap-vcpkg.bat
+-- Installing/Updating the following vcpkg-packages: 
+Computing installation plan...
+The following packages will be built and installed:
+    bzip2[core,tool]:x64-windows-static@1.0.8#6
+  * egl-registry:x64-windows-static@2024-01-25
+  * fmt:x64-windows-static@12.1.0
+    glew:x64-windows-static@2.2.0#6
+    glfw3:x64-windows-static@3.4#1
+    libogg:x64-windows-static@1.3.6#1
+    libpng:x64-windows-static@1.6.50
+    libvorbis:x64-windows-static@1.3.7#4
+    libzip[bzip2,core,default-aes]:x64-windows-static@1.11.4
+    nlohmann-json:x64-windows-static@3.12.0#1
+  * opengl:x64-windows-static@2022-12-04#3
+  * opengl-registry:x64-windows-static@2024-02-10#1
+    opus:x64-windows-static@1.5.2#1
+    opusfile:x64-windows-static@0.12+20221121#1
+    sdl2:x64-windows-static@2.32.10
+    sdl2-net:x64-windows-static@2.2.0#3
+    spdlog:x64-windows-static@1.16.0
+    tinyxml2:x64-windows-static@11.0.0
+  * vcpkg-cmake:x64-windows@2024-04-23
+  * vcpkg-cmake-config:x64-windows@2024-05-23
+    zlib:x64-windows-static@1.3.1
+Additional packages (*) will be modified to complete this operation.
+Detecting compiler hash for triplet x64-windows...
+Compiler found: C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/cl.exe
+Detecting compiler hash for triplet x64-windows-static...
+Compiler found: C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/cl.exe
+Restored 0 package(s) from C:\Users\danie\AppData\Local\vcpkg\archives in 4.27 ms. Use --debug to see more details.
+Installing 1/21 vcpkg-cmake:x64-windows@2024-04-23...
+Building vcpkg-cmake:x64-windows@2024-04-23...
+-- Installing: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/vcpkg-cmake_x64-windows/share/vcpkg-cmake/vcpkg_cmake_configure.cmake
+-- Installing: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/vcpkg-cmake_x64-windows/share/vcpkg-cmake/vcpkg_cmake_build.cmake
+-- Installing: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/vcpkg-cmake_x64-windows/share/vcpkg-cmake/vcpkg_cmake_install.cmake
+-- Installing: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/vcpkg-cmake_x64-windows/share/vcpkg-cmake/vcpkg-port-config.cmake
+-- Installing: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/vcpkg-cmake_x64-windows/share/vcpkg-cmake/copyright
+-- Performing post-build validation
+Starting submission of vcpkg-cmake:x64-windows@2024-04-23 to 1 binary cache(s) in the background
+Elapsed time to handle vcpkg-cmake:x64-windows: 247 ms
+vcpkg-cmake:x64-windows package ABI: 739619d448c5004d78d23e3b261dcebbe72fe7d333d7f92974fcb87c129f6d32
+Installing 2/21 bzip2[core,tool]:x64-windows-static@1.0.8#6...
+Building bzip2[core,tool]:x64-windows-static@1.0.8#6...
+Downloading bzip2-1.0.8.tar.gz, trying https://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz
+Successfully downloaded bzip2-1.0.8.tar.gz
+-- Extracting source C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/downloads/bzip2-1.0.8.tar.gz
+-- Applying patch fix-import-export-macros.patch
+-- Using source at C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/buildtrees/bzip2/src/bzip2-1-336d4794a3.clean
+-- Configuring x64-windows-static
+-- Building x64-windows-static-dbg
+-- Building x64-windows-static-rel
+-- Fixing pkgconfig file: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/bzip2_x64-windows-static/lib/pkgconfig/bzip2.pc
+Downloading msys2-mingw-w64-x86_64-pkgconf-1~2.4.3-1-any.pkg.tar.zst, trying https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-pkgconf-1~2.4.3-1-any.pkg.tar.zst
+Successfully downloaded msys2-mingw-w64-x86_64-pkgconf-1~2.4.3-1-any.pkg.tar.zst
+Downloading msys2-msys2-runtime-3.6.2-2-x86_64.pkg.tar.zst, trying https://mirror.msys2.org/msys/x86_64/msys2-runtime-3.6.2-2-x86_64.pkg.tar.zst
+Successfully downloaded msys2-msys2-runtime-3.6.2-2-x86_64.pkg.tar.zst
+-- Using msys root at C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/downloads/tools/msys2/9272adbcaf19caef
+-- Fixing pkgconfig file: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/bzip2_x64-windows-static/debug/lib/pkgconfig/bzip2.pc
+-- Installing: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/bzip2_x64-windows-static/share/bzip2/copyright
+-- Performing post-build validation
+Starting submission of bzip2[core,tool]:x64-windows-static@1.0.8#6 to 1 binary cache(s) in the background
+Elapsed time to handle bzip2:x64-windows-static: 17 s
+bzip2:x64-windows-static package ABI: ba5b8b64a3f565209d0a9bbd05d951b4521daf10f9ce98588a2e5f448e19af18
+Completed submission of vcpkg-cmake:x64-windows@2024-04-23 to 1 binary cache(s) in 186 ms
+Installing 3/21 egl-registry:x64-windows-static@2024-01-25...
+Building egl-registry:x64-windows-static@2024-01-25...
+Downloading https://github.com/KhronosGroup/EGL-Registry/archive/7db3005d4c2cb439f129a0adc931f3274f9019e6.tar.gz -> KhronosGroup-EGL-Registry-7db3005d4c2cb439f129a0adc931f3274f9019e6.tar.gz
+Successfully downloaded KhronosGroup-EGL-Registry-7db3005d4c2cb439f129a0adc931f3274f9019e6.tar.gz
+-- Extracting source C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/downloads/KhronosGroup-EGL-Registry-7db3005d4c2cb439f129a0adc931f3274f9019e6.tar.gz
+-- Using source at C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/buildtrees/egl-registry/src/274f9019e6-49d6bdb34a.clean
+-- Installing: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/egl-registry_x64-windows-static/share/egl-registry/copyright
+-- Performing post-build validation
+Starting submission of egl-registry:x64-windows-static@2024-01-25 to 1 binary cache(s) in the background
+Elapsed time to handle egl-registry:x64-windows-static: 2.5 s
+egl-registry:x64-windows-static package ABI: 9bfecc767fd883254851edaf01efc7eed8fc9cdaf4e6bc45ee6f51219f43b5bc
+Completed submission of bzip2[core,tool]:x64-windows-static@1.0.8#6 to 1 binary cache(s) in 186 ms
+Installing 4/21 vcpkg-cmake-config:x64-windows@2024-05-23...
+Building vcpkg-cmake-config:x64-windows@2024-05-23...
+-- Installing: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/vcpkg-cmake-config_x64-windows/share/vcpkg-cmake-config/vcpkg_cmake_config_fixup.cmake
+-- Installing: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/vcpkg-cmake-config_x64-windows/share/vcpkg-cmake-config/vcpkg-port-config.cmake
+-- Installing: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/vcpkg-cmake-config_x64-windows/share/vcpkg-cmake-config/copyright
+-- Skipping post-build validation due to VCPKG_POLICY_EMPTY_PACKAGE
+Starting submission of vcpkg-cmake-config:x64-windows@2024-05-23 to 1 binary cache(s) in the background
+Elapsed time to handle vcpkg-cmake-config:x64-windows: 173 ms
+vcpkg-cmake-config:x64-windows package ABI: f3479977661725c7b5ad1cefe37500a4a1751c56ab878786fbe234ff93bcf51e
+Completed submission of egl-registry:x64-windows-static@2024-01-25 to 1 binary cache(s) in 108 ms
+Installing 5/21 fmt:x64-windows-static@12.1.0...
+Building fmt:x64-windows-static@12.1.0...
+Downloading https://github.com/fmtlib/fmt/archive/12.1.0.tar.gz -> fmtlib-fmt-12.1.0.tar.gz
+Successfully downloaded fmtlib-fmt-12.1.0.tar.gz
+-- Extracting source C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/downloads/fmtlib-fmt-12.1.0.tar.gz
+-- Using source at C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/buildtrees/fmt/src/12.1.0-54f1f91231.clean
+-- Configuring x64-windows-static
+-- Building x64-windows-static-dbg
+-- Building x64-windows-static-rel
+-- Fixing pkgconfig file: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/fmt_x64-windows-static/lib/pkgconfig/fmt.pc
+-- Using cached msys2-mingw-w64-x86_64-pkgconf-1~2.4.3-1-any.pkg.tar.zst
+-- Using cached msys2-msys2-runtime-3.6.2-2-x86_64.pkg.tar.zst
+-- Using msys root at C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/downloads/tools/msys2/9272adbcaf19caef
+-- Fixing pkgconfig file: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/fmt_x64-windows-static/debug/lib/pkgconfig/fmt.pc
+-- Installing: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/fmt_x64-windows-static/share/fmt/usage
+-- Installing: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/fmt_x64-windows-static/share/fmt/copyright
+-- Performing post-build validation
+Starting submission of fmt:x64-windows-static@12.1.0 to 1 binary cache(s) in the background
+Elapsed time to handle fmt:x64-windows-static: 10 s
+fmt:x64-windows-static package ABI: 8f015630065dd89389b3954da976512d584ae445cd6a075bf4cc3aa1f5d025f8
+Completed submission of vcpkg-cmake-config:x64-windows@2024-05-23 to 1 binary cache(s) in 82 ms
+Installing 6/21 opengl-registry:x64-windows-static@2024-02-10#1...
+Building opengl-registry:x64-windows-static@2024-02-10#1...
+Downloading https://github.com/KhronosGroup/OpenGL-Registry/archive/3530768138c5ba3dfbb2c43c830493f632f7ea33.tar.gz -> KhronosGroup-OpenGL-Registry-3530768138c5ba3dfbb2c43c830493f632f7ea33.tar.gz
+Successfully downloaded KhronosGroup-OpenGL-Registry-3530768138c5ba3dfbb2c43c830493f632f7ea33.tar.gz
+-- Extracting source C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/downloads/KhronosGroup-OpenGL-Registry-3530768138c5ba3dfbb2c43c830493f632f7ea33.tar.gz
+-- Using source at C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/buildtrees/opengl-registry/src/f632f7ea33-4952f9ace9.clean
+-- Installing: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/opengl-registry_x64-windows-static/share/opengl-registry/copyright
+-- Performing post-build validation
+Starting submission of opengl-registry:x64-windows-static@2024-02-10#1 to 1 binary cache(s) in the background
+Elapsed time to handle opengl-registry:x64-windows-static: 10 s
+opengl-registry:x64-windows-static package ABI: 9e42615e29e0832b010ff5a9082b46edf6dc92b675fa2a2adf4beb7a18449826
+Completed submission of fmt:x64-windows-static@12.1.0 to 1 binary cache(s) in 590 ms
+Installing 7/21 opengl:x64-windows-static@2022-12-04#3...
+Building opengl:x64-windows-static@2022-12-04#3...
+-- Installing: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/opengl_x64-windows-static/include/GL/gl.h
+-- Installing: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/opengl_x64-windows-static/include/GL/glu.h
+-- Installing: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/opengl_x64-windows-static/lib/OpenGL32.Lib
+-- Installing: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/opengl_x64-windows-static/lib/GlU32.Lib
+-- Installing: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/opengl_x64-windows-static/debug/lib/OpenGL32.Lib
+-- Installing: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/opengl_x64-windows-static/debug/lib/GlU32.Lib
+-- Fixing pkgconfig file: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/opengl_x64-windows-static/lib/pkgconfig/glu.pc
+-- Fixing pkgconfig file: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/opengl_x64-windows-static/lib/pkgconfig/opengl.pc
+-- Using cached msys2-mingw-w64-x86_64-pkgconf-1~2.4.3-1-any.pkg.tar.zst
+-- Using cached msys2-msys2-runtime-3.6.2-2-x86_64.pkg.tar.zst
+-- Using msys root at C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/downloads/tools/msys2/9272adbcaf19caef
+-- Fixing pkgconfig file: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/opengl_x64-windows-static/debug/lib/pkgconfig/glu.pc
+-- Fixing pkgconfig file: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/opengl_x64-windows-static/debug/lib/pkgconfig/opengl.pc
+-- Installing: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/opengl_x64-windows-static/share/opengl/usage
+-- Performing post-build validation
+Starting submission of opengl:x64-windows-static@2022-12-04#3 to 1 binary cache(s) in the background
+Elapsed time to handle opengl:x64-windows-static: 573 ms
+opengl:x64-windows-static package ABI: d8f177b315cf2c54413af571191d653b89a563acd9690ed40c4c526d5892f6a0
+Completed submission of opengl-registry:x64-windows-static@2024-02-10#1 to 1 binary cache(s) in 456 ms
+Installing 8/21 glew:x64-windows-static@2.2.0#6...
+Building glew:x64-windows-static@2.2.0#6...
+Downloading https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0.tgz -> glew-2.2.0.tgz
+Successfully downloaded glew-2.2.0.tgz
+-- Extracting source C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/downloads/glew-2.2.0.tgz
+-- Applying patch fix-LNK2019.patch
+-- Applying patch base_address.patch
+-- Applying patch cmake_version.patch
+-- Using source at C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/buildtrees/glew/src/glew-325dbb3aae.clean
+-- Configuring x64-windows-static-dbg
+-- Configuring x64-windows-static-rel
+-- Building x64-windows-static-dbg
+-- Building x64-windows-static-rel
+-- Fixing pkgconfig file: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/glew_x64-windows-static/lib/pkgconfig/glew.pc
+-- Fixing pkgconfig file: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/glew_x64-windows-static/debug/lib/pkgconfig/glew.pc
+-- Installing: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/glew_x64-windows-static/share/glew/vcpkg-cmake-wrapper.cmake
+-- Installing: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/glew_x64-windows-static/share/glew/copyright
+-- Performing post-build validation
+Starting submission of glew:x64-windows-static@2.2.0#6 to 1 binary cache(s) in the background
+Elapsed time to handle glew:x64-windows-static: 1 min
+glew:x64-windows-static package ABI: b8e0251b7b1a766205570e48f7990b560551884d13376f78edb5f080675e68f8
+Completed submission of opengl:x64-windows-static@2022-12-04#3 to 1 binary cache(s) in 135 ms
+Installing 9/21 glfw3:x64-windows-static@3.4#1...
+Building glfw3:x64-windows-static@3.4#1...
+Downloading https://github.com/glfw/glfw/archive/3.4.tar.gz -> glfw-glfw-3.4.tar.gz
+Successfully downloaded glfw-glfw-3.4.tar.gz
+-- Extracting source C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/downloads/glfw-glfw-3.4.tar.gz
+-- Using source at C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/buildtrees/glfw3/src/3.4-2448ff4533.clean
+-- Configuring x64-windows-static
+-- Building x64-windows-static-dbg
+-- Building x64-windows-static-rel
+-- Fixing pkgconfig file: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/glfw3_x64-windows-static/lib/pkgconfig/glfw3.pc
+-- Using cached msys2-mingw-w64-x86_64-pkgconf-1~2.4.3-1-any.pkg.tar.zst
+-- Using cached msys2-msys2-runtime-3.6.2-2-x86_64.pkg.tar.zst
+-- Using msys root at C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/downloads/tools/msys2/9272adbcaf19caef
+-- Fixing pkgconfig file: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/glfw3_x64-windows-static/debug/lib/pkgconfig/glfw3.pc
+-- Installing: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/glfw3_x64-windows-static/share/glfw3/copyright
+-- Performing post-build validation
+Starting submission of glfw3:x64-windows-static@3.4#1 to 1 binary cache(s) in the background
+Elapsed time to handle glfw3:x64-windows-static: 11 s
+glfw3:x64-windows-static package ABI: 6d98a0f714a7f59aafe5d06f8391eec86bc3c2173beeb6d21d49a160549af744
+Completed submission of glew:x64-windows-static@2.2.0#6 to 1 binary cache(s) in 1 s
+Installing 10/21 libogg:x64-windows-static@1.3.6#1...
+Building libogg:x64-windows-static@1.3.6#1...
+Downloading https://github.com/xiph/ogg/archive/v1.3.6.tar.gz -> xiph-ogg-v1.3.6.tar.gz
+Successfully downloaded xiph-ogg-v1.3.6.tar.gz
+-- Extracting source C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/downloads/xiph-ogg-v1.3.6.tar.gz
+-- Using source at C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/buildtrees/libogg/src/v1.3.6-4ad11a7327.clean
+-- Configuring x64-windows-static
+-- Building x64-windows-static-dbg
+-- Building x64-windows-static-rel
+-- Fixing pkgconfig file: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/libogg_x64-windows-static/lib/pkgconfig/ogg.pc
+-- Using cached msys2-mingw-w64-x86_64-pkgconf-1~2.4.3-1-any.pkg.tar.zst
+-- Using cached msys2-msys2-runtime-3.6.2-2-x86_64.pkg.tar.zst
+-- Using msys root at C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/downloads/tools/msys2/9272adbcaf19caef
+-- Fixing pkgconfig file: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/libogg_x64-windows-static/debug/lib/pkgconfig/ogg.pc
+-- Installing: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/libogg_x64-windows-static/share/libogg/copyright
+-- Performing post-build validation
+Starting submission of libogg:x64-windows-static@1.3.6#1 to 1 binary cache(s) in the background
+Elapsed time to handle libogg:x64-windows-static: 24 s
+libogg:x64-windows-static package ABI: 5b13b58fa6aea687d2fd6a3fc6b43e82257a903868788a542d70ccedc29aded8
+Completed submission of glfw3:x64-windows-static@3.4#1 to 1 binary cache(s) in 552 ms
+Installing 11/21 zlib:x64-windows-static@1.3.1...
+Building zlib:x64-windows-static@1.3.1...
+Downloading https://github.com/madler/zlib/archive/v1.3.1.tar.gz -> madler-zlib-v1.3.1.tar.gz
+Successfully downloaded madler-zlib-v1.3.1.tar.gz
+-- Extracting source C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/downloads/madler-zlib-v1.3.1.tar.gz
+-- Applying patch 0001-Prevent-invalid-inclusions-when-HAVE_-is-set-to-0.patch
+-- Applying patch 0002-build-static-or-shared-not-both.patch
+-- Applying patch 0003-android-and-mingw-fixes.patch
+-- Using source at C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/buildtrees/zlib/src/v1.3.1-2e5db616bf.clean
+-- Configuring x64-windows-static
+-- Building x64-windows-static-dbg
+-- Building x64-windows-static-rel
+-- Installing: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/zlib_x64-windows-static/share/zlib/vcpkg-cmake-wrapper.cmake
+-- Fixing pkgconfig file: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/zlib_x64-windows-static/lib/pkgconfig/zlib.pc
+-- Using cached msys2-mingw-w64-x86_64-pkgconf-1~2.4.3-1-any.pkg.tar.zst
+-- Using cached msys2-msys2-runtime-3.6.2-2-x86_64.pkg.tar.zst
+-- Using msys root at C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/downloads/tools/msys2/9272adbcaf19caef
+-- Fixing pkgconfig file: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/zlib_x64-windows-static/debug/lib/pkgconfig/zlib.pc
+-- Installing: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/zlib_x64-windows-static/share/zlib/copyright
+-- Performing post-build validation
+Starting submission of zlib:x64-windows-static@1.3.1 to 1 binary cache(s) in the background
+Elapsed time to handle zlib:x64-windows-static: 12 s
+zlib:x64-windows-static package ABI: 01392627fa9659c6248e63b508675b6fe26b1796e024c60da9f6da68264db817
+Completed submission of libogg:x64-windows-static@1.3.6#1 to 1 binary cache(s) in 116 ms
+Installing 12/21 libpng:x64-windows-static@1.6.50...
+Building libpng:x64-windows-static@1.6.50...
+Downloading https://github.com/pnggroup/libpng/archive/v1.6.50.tar.gz -> pnggroup-libpng-v1.6.50.tar.gz
+Successfully downloaded pnggroup-libpng-v1.6.50.tar.gz
+-- Extracting source C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/downloads/pnggroup-libpng-v1.6.50.tar.gz
+-- Applying patch cmake.patch
+-- Using source at C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/buildtrees/libpng/src/v1.6.50-13b6aa9451.clean
+-- Configuring x64-windows-static
+-- Building x64-windows-static-dbg
+-- Building x64-windows-static-rel
+-- Installing: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/libpng_x64-windows-static/share/png/vcpkg-cmake-wrapper.cmake
+-- Installing: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/libpng_x64-windows-static/share/libpng/libpng-config.cmake
+-- Fixing pkgconfig file: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/libpng_x64-windows-static/lib/pkgconfig/libpng16.pc
+-- Using cached msys2-mingw-w64-x86_64-pkgconf-1~2.4.3-1-any.pkg.tar.zst
+-- Using cached msys2-msys2-runtime-3.6.2-2-x86_64.pkg.tar.zst
+-- Using msys root at C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/downloads/tools/msys2/9272adbcaf19caef
+-- Fixing pkgconfig file: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/libpng_x64-windows-static/debug/lib/pkgconfig/libpng16.pc
+-- Installing: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/libpng_x64-windows-static/debug/lib/pkgconfig/libpng.pc
+-- Installing: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/libpng_x64-windows-static/lib/pkgconfig/libpng.pc
+-- Installing: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/libpng_x64-windows-static/share/libpng/usage
+-- Installing: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/libpng_x64-windows-static/share/libpng/copyright
+-- Performing post-build validation
+Starting submission of libpng:x64-windows-static@1.6.50 to 1 binary cache(s) in the background
+Elapsed time to handle libpng:x64-windows-static: 11 s
+libpng:x64-windows-static package ABI: d940835a82cc8db0e94d7f018ce74cb7202ffd09b01be13a4361d83a693539f7
+Completed submission of zlib:x64-windows-static@1.3.1 to 1 binary cache(s) in 147 ms
+Installing 13/21 libvorbis:x64-windows-static@1.3.7#4...
+Building libvorbis:x64-windows-static@1.3.7#4...
+Downloading https://github.com/xiph/vorbis/archive/v1.3.7.tar.gz -> xiph-vorbis-v1.3.7.tar.gz
+Successfully downloaded xiph-vorbis-v1.3.7.tar.gz
+-- Extracting source C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/downloads/xiph-vorbis-v1.3.7.tar.gz
+-- Applying patch 0001-Dont-export-vorbisenc-functions.patch
+-- Applying patch 0002-Fixup-pkgconfig-libs.patch
+-- Applying patch 0003-def-mingw-compat.patch
+-- Applying patch 0004-ogg-find-dependency.patch
+-- Using source at C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/buildtrees/libvorbis/src/v1.3.7-c32164610e.clean
+-- Configuring x64-windows-static
+-- Building x64-windows-static-dbg
+-- Building x64-windows-static-rel
+-- Fixing pkgconfig file: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/libvorbis_x64-windows-static/lib/pkgconfig/vorbis.pc
+-- Fixing pkgconfig file: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/libvorbis_x64-windows-static/lib/pkgconfig/vorbisenc.pc
+-- Fixing pkgconfig file: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/libvorbis_x64-windows-static/lib/pkgconfig/vorbisfile.pc
+-- Using cached msys2-mingw-w64-x86_64-pkgconf-1~2.4.3-1-any.pkg.tar.zst
+-- Using cached msys2-msys2-runtime-3.6.2-2-x86_64.pkg.tar.zst
+-- Using msys root at C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/downloads/tools/msys2/9272adbcaf19caef
+-- Fixing pkgconfig file: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/libvorbis_x64-windows-static/debug/lib/pkgconfig/vorbis.pc
+-- Fixing pkgconfig file: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/libvorbis_x64-windows-static/debug/lib/pkgconfig/vorbisenc.pc
+-- Fixing pkgconfig file: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/libvorbis_x64-windows-static/debug/lib/pkgconfig/vorbisfile.pc
+-- Installing: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/libvorbis_x64-windows-static/share/libvorbis/usage
+-- Installing: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/libvorbis_x64-windows-static/share/libvorbis/copyright
+-- Performing post-build validation
+Starting submission of libvorbis:x64-windows-static@1.3.7#4 to 1 binary cache(s) in the background
+Elapsed time to handle libvorbis:x64-windows-static: 12 s
+libvorbis:x64-windows-static package ABI: 6dbf7bb9adf29ce2af259866186b94df56477b5a1af1d21c9ae2eb2a3bfd08e2
+Completed submission of libpng:x64-windows-static@1.6.50 to 1 binary cache(s) in 461 ms
+Installing 14/21 libzip[bzip2,core,default-aes]:x64-windows-static@1.11.4...
+Building libzip[bzip2,core,default-aes]:x64-windows-static@1.11.4...
+Downloading https://github.com/nih-at/libzip/archive/v1.11.4.tar.gz -> nih-at-libzip-v1.11.4.tar.gz
+Successfully downloaded nih-at-libzip-v1.11.4.tar.gz
+-- Extracting source C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/downloads/nih-at-libzip-v1.11.4.tar.gz
+-- Applying patch config-vars.diff
+-- Applying patch dependencies.diff
+-- Applying patch use-requires.patch
+-- Using source at C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/buildtrees/libzip/src/v1.11.4-05742a9dee.clean
+-- Selecting the system AES backend.
+-- Configuring x64-windows-static
+-- Building x64-windows-static-dbg
+-- Building x64-windows-static-rel
+-- Fixing pkgconfig file: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/libzip_x64-windows-static/lib/pkgconfig/libzip.pc
+-- Using cached msys2-mingw-w64-x86_64-pkgconf-1~2.4.3-1-any.pkg.tar.zst
+-- Using cached msys2-msys2-runtime-3.6.2-2-x86_64.pkg.tar.zst
+-- Using msys root at C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/downloads/tools/msys2/9272adbcaf19caef
+-- Fixing pkgconfig file: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/libzip_x64-windows-static/debug/lib/pkgconfig/libzip.pc
+-- Installing: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/libzip_x64-windows-static/share/libzip/copyright
+-- Performing post-build validation
+Starting submission of libzip[bzip2,core,default-aes]:x64-windows-static@1.11.4 to 1 binary cache(s) in the background
+Elapsed time to handle libzip:x64-windows-static: 1.4 min
+libzip:x64-windows-static package ABI: be42b84c3ffa0a2e09e23b34b1c86df65a49d65fa8d92b7fc30fece1ff56c0df
+Completed submission of libvorbis:x64-windows-static@1.3.7#4 to 1 binary cache(s) in 309 ms
+Installing 15/21 nlohmann-json:x64-windows-static@3.12.0#1...
+Building nlohmann-json:x64-windows-static@3.12.0#1...
+Downloading https://github.com/nlohmann/json/archive/v3.12.0.tar.gz -> nlohmann-json-v3.12.0.tar.gz
+Successfully downloaded nlohmann-json-v3.12.0.tar.gz
+-- Extracting source C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/downloads/nlohmann-json-v3.12.0.tar.gz
+-- Applying patch fix-4742_std_optional.patch
+-- Using source at C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/buildtrees/nlohmann-json/src/v3.12.0-087f34fe5c.clean
+-- Configuring x64-windows-static
+-- Building x64-windows-static-dbg
+-- Building x64-windows-static-rel
+-- Fixing pkgconfig file: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/nlohmann-json_x64-windows-static/share/pkgconfig/nlohmann_json.pc
+-- Using cached msys2-mingw-w64-x86_64-pkgconf-1~2.4.3-1-any.pkg.tar.zst
+-- Using cached msys2-msys2-runtime-3.6.2-2-x86_64.pkg.tar.zst
+-- Using msys root at C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/downloads/tools/msys2/9272adbcaf19caef
+-- Fixing pkgconfig file: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/nlohmann-json_x64-windows-static/debug/share/pkgconfig/nlohmann_json.pc
+-- Installing: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/nlohmann-json_x64-windows-static/share/nlohmann-json/copyright
+-- Performing post-build validation
+Starting submission of nlohmann-json:x64-windows-static@3.12.0#1 to 1 binary cache(s) in the background
+Elapsed time to handle nlohmann-json:x64-windows-static: 7.1 s
+nlohmann-json:x64-windows-static package ABI: a42c13b551c137b8f9fe9d401872a32d7a3eea2e4675f54ea4e883573f24177f
+Completed submission of libzip[bzip2,core,default-aes]:x64-windows-static@1.11.4 to 1 binary cache(s) in 345 ms
+Installing 16/21 opus:x64-windows-static@1.5.2#1...
+Building opus:x64-windows-static@1.5.2#1...
+Downloading https://github.com/xiph/opus/archive/v1.5.2.tar.gz -> xiph-opus-v1.5.2.tar.gz
+Successfully downloaded xiph-opus-v1.5.2.tar.gz
+-- Extracting source C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/downloads/xiph-opus-v1.5.2.tar.gz
+-- Applying patch fix-pkgconfig-version.patch
+-- Using source at C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/buildtrees/opus/src/v1.5.2-81ed242155.clean
+-- Configuring x64-windows-static
+-- Building x64-windows-static-dbg
+-- Building x64-windows-static-rel
+-- Fixing pkgconfig file: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/opus_x64-windows-static/lib/pkgconfig/opus.pc
+-- Using cached msys2-mingw-w64-x86_64-pkgconf-1~2.4.3-1-any.pkg.tar.zst
+-- Using cached msys2-msys2-runtime-3.6.2-2-x86_64.pkg.tar.zst
+-- Using msys root at C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/downloads/tools/msys2/9272adbcaf19caef
+-- Fixing pkgconfig file: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/opus_x64-windows-static/debug/lib/pkgconfig/opus.pc
+-- Installing: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/opus_x64-windows-static/share/opus/copyright
+-- Performing post-build validation
+Starting submission of opus:x64-windows-static@1.5.2#1 to 1 binary cache(s) in the background
+Elapsed time to handle opus:x64-windows-static: 41 s
+opus:x64-windows-static package ABI: c90accce7ae9fe6d12e7e358a35b514c99cfb17829d70ba5d4a04d873b36a193
+Completed submission of nlohmann-json:x64-windows-static@3.12.0#1 to 1 binary cache(s) in 123 ms
+Installing 17/21 opusfile:x64-windows-static@0.12+20221121#1...
+Building opusfile:x64-windows-static@0.12+20221121#1...
+Downloading https://github.com/xiph/opusfile/archive/9d718345ce03b2fad5d7d28e0bcd1cc69ab2b166.tar.gz -> xiph-opusfile-9d718345ce03b2fad5d7d28e0bcd1cc69ab2b166.tar.gz
+Successfully downloaded xiph-opusfile-9d718345ce03b2fad5d7d28e0bcd1cc69ab2b166.tar.gz
+-- Extracting source C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/downloads/xiph-opusfile-9d718345ce03b2fad5d7d28e0bcd1cc69ab2b166.tar.gz
+-- Using source at C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/buildtrees/opusfile/src/c69ab2b166-6cc7de23ec.clean
+-- Configuring x64-windows-static
+-- Building x64-windows-static-dbg
+-- Building x64-windows-static-rel
+-- Fixing pkgconfig file: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/opusfile_x64-windows-static/lib/pkgconfig/opusfile.pc
+-- Using cached msys2-mingw-w64-x86_64-pkgconf-1~2.4.3-1-any.pkg.tar.zst
+-- Using cached msys2-msys2-runtime-3.6.2-2-x86_64.pkg.tar.zst
+-- Using msys root at C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/downloads/tools/msys2/9272adbcaf19caef
+-- Fixing pkgconfig file: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/opusfile_x64-windows-static/debug/lib/pkgconfig/opusfile.pc
+-- Installing: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/opusfile_x64-windows-static/share/opusfile/copyright
+-- Installing: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/opusfile_x64-windows-static/share/opusfile/usage
+-- Performing post-build validation
+Starting submission of opusfile:x64-windows-static@0.12+20221121#1 to 1 binary cache(s) in the background
+Elapsed time to handle opusfile:x64-windows-static: 11 s
+opusfile:x64-windows-static package ABI: 38b8eaec3b5067fd92ea4df267d8c64c01543a0b60f4bcfa81e9f954c2d9156d
+Completed submission of opus:x64-windows-static@1.5.2#1 to 1 binary cache(s) in 625 ms
+Installing 18/21 sdl2:x64-windows-static@2.32.10...
+Building sdl2:x64-windows-static@2.32.10...
+Downloading https://github.com/libsdl-org/SDL/archive/release-2.32.10.tar.gz -> libsdl-org-SDL-release-2.32.10.tar.gz
+Successfully downloaded libsdl-org-SDL-release-2.32.10.tar.gz
+-- Extracting source C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/downloads/libsdl-org-SDL-release-2.32.10.tar.gz
+-- Applying patch deps.patch
+-- Applying patch alsa-dep-fix.patch
+-- Applying patch cxx-linkage-pkgconfig.diff
+-- Using source at C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/buildtrees/sdl2/src/se-2.32.10-3b143ac573.clean
+-- Configuring x64-windows-static
+-- Building x64-windows-static-dbg
+-- Building x64-windows-static-rel
+-- Fixing pkgconfig file: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/sdl2_x64-windows-static/lib/pkgconfig/sdl2.pc
+-- Using cached msys2-mingw-w64-x86_64-pkgconf-1~2.4.3-1-any.pkg.tar.zst
+-- Using cached msys2-msys2-runtime-3.6.2-2-x86_64.pkg.tar.zst
+-- Using msys root at C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/downloads/tools/msys2/9272adbcaf19caef
+-- Fixing pkgconfig file: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/sdl2_x64-windows-static/debug/lib/pkgconfig/sdl2.pc
+-- Installing: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/sdl2_x64-windows-static/share/sdl2/usage
+-- Installing: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/sdl2_x64-windows-static/share/sdl2/copyright
+-- Performing post-build validation
+Starting submission of sdl2:x64-windows-static@2.32.10 to 1 binary cache(s) in the background
+Elapsed time to handle sdl2:x64-windows-static: 1.6 min
+sdl2:x64-windows-static package ABI: a2735c20d8a9f1d771ccb3710dc92c018a46a053150d5f62f1d4b2c88351bd7d
+Completed submission of opusfile:x64-windows-static@0.12+20221121#1 to 1 binary cache(s) in 233 ms
+Installing 19/21 sdl2-net:x64-windows-static@2.2.0#3...
+Building sdl2-net:x64-windows-static@2.2.0#3...
+Downloading https://github.com/libsdl-org/SDL_net/archive/669e75b84632e2c6cc5c65974ec9e28052cb7a4e.tar.gz -> libsdl-org-SDL_net-669e75b84632e2c6cc5c65974ec9e28052cb7a4e.tar.gz
+Successfully downloaded libsdl-org-SDL_net-669e75b84632e2c6cc5c65974ec9e28052cb7a4e.tar.gz
+-- Extracting source C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/downloads/libsdl-org-SDL_net-669e75b84632e2c6cc5c65974ec9e28052cb7a4e.tar.gz
+-- Applying patch fix-uwp.patch
+-- Using source at C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/buildtrees/sdl2-net/src/8052cb7a4e-5eb8996ab7.clean
+-- Configuring x64-windows-static
+-- Building x64-windows-static-dbg
+-- Building x64-windows-static-rel
+-- Installing: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/sdl2-net_x64-windows-static/share/sdl2-net/usage
+-- Installing: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/sdl2-net_x64-windows-static/share/sdl2-net/copyright
+-- Performing post-build validation
+Starting submission of sdl2-net:x64-windows-static@2.2.0#3 to 1 binary cache(s) in the background
+Elapsed time to handle sdl2-net:x64-windows-static: 7.2 s
+sdl2-net:x64-windows-static package ABI: 1bab380541d75e82915d88add2a3440419af6effd38d5e07682aa6ec1f4eb572
+Completed submission of sdl2:x64-windows-static@2.32.10 to 1 binary cache(s) in 3.4 s
+Installing 20/21 spdlog:x64-windows-static@1.16.0...
+Building spdlog:x64-windows-static@1.16.0...
+Downloading https://github.com/gabime/spdlog/archive/v1.16.0.tar.gz -> gabime-spdlog-v1.16.0.tar.gz
+Successfully downloaded gabime-spdlog-v1.16.0.tar.gz
+-- Extracting source C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/downloads/gabime-spdlog-v1.16.0.tar.gz
+-- Using source at C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/buildtrees/spdlog/src/v1.16.0-e349c3b9b7.clean
+-- Configuring x64-windows-static
+-- Building x64-windows-static-dbg
+-- Building x64-windows-static-rel
+-- Fixing pkgconfig file: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/spdlog_x64-windows-static/lib/pkgconfig/spdlog.pc
+-- Using cached msys2-mingw-w64-x86_64-pkgconf-1~2.4.3-1-any.pkg.tar.zst
+-- Using cached msys2-msys2-runtime-3.6.2-2-x86_64.pkg.tar.zst
+-- Using msys root at C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/downloads/tools/msys2/9272adbcaf19caef
+-- Fixing pkgconfig file: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/spdlog_x64-windows-static/debug/lib/pkgconfig/spdlog.pc
+-- Installing: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/spdlog_x64-windows-static/share/spdlog/usage
+-- Installing: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/spdlog_x64-windows-static/share/spdlog/copyright
+-- Performing post-build validation
+Starting submission of spdlog:x64-windows-static@1.16.0 to 1 binary cache(s) in the background
+Elapsed time to handle spdlog:x64-windows-static: 15 s
+spdlog:x64-windows-static package ABI: 8863679c7326b0c74494093854c64d711f447e830d6a9c2b9961cb6e1bbe9929
+Completed submission of sdl2-net:x64-windows-static@2.2.0#3 to 1 binary cache(s) in 182 ms
+Installing 21/21 tinyxml2:x64-windows-static@11.0.0...
+Building tinyxml2:x64-windows-static@11.0.0...
+Downloading https://github.com/leethomason/tinyxml2/archive/11.0.0.tar.gz -> leethomason-tinyxml2-11.0.0.tar.gz
+Successfully downloaded leethomason-tinyxml2-11.0.0.tar.gz
+-- Extracting source C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/downloads/leethomason-tinyxml2-11.0.0.tar.gz
+-- Applying patch 0001-fix-do-not-force-export-the-symbols-when-building-st.patch
+-- Applying patch 0002-fix-check-for-TINYXML2_EXPORT-on-non-windows.patch
+-- Using source at C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/buildtrees/tinyxml2/src/11.0.0-f00fa8a9d2.clean
+-- Configuring x64-windows-static
+-- Building x64-windows-static-dbg
+-- Building x64-windows-static-rel
+-- Fixing pkgconfig file: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/tinyxml2_x64-windows-static/lib/pkgconfig/tinyxml2.pc
+-- Using cached msys2-mingw-w64-x86_64-pkgconf-1~2.4.3-1-any.pkg.tar.zst
+-- Using cached msys2-msys2-runtime-3.6.2-2-x86_64.pkg.tar.zst
+-- Using msys root at C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/downloads/tools/msys2/9272adbcaf19caef
+-- Fixing pkgconfig file: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/tinyxml2_x64-windows-static/debug/lib/pkgconfig/tinyxml2.pc
+-- Installing: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/packages/tinyxml2_x64-windows-static/share/tinyxml2/copyright
+-- Performing post-build validation
+Starting submission of tinyxml2:x64-windows-static@11.0.0 to 1 binary cache(s) in the background
+Elapsed time to handle tinyxml2:x64-windows-static: 9.6 s
+tinyxml2:x64-windows-static package ABI: 8ee529695f0073cbeecc06147af97512802a58dcbe1662cf6968a1fc8718776f
+Total install time: 7.3 min
+Installed contents are licensed to you by owners. Microsoft is not responsible for, nor does it grant any licenses to, third-party packages.
+Some packages did not declare an SPDX license. Check the `copyright` file for each package for more information about their licensing.
+Packages installed in this vcpkg installation declare the following licenses:
+BSD-3-Clause
+MIT
+Zlib
+bzip2-1.0.6
+libpng-2.0
+The package bzip2 is compatible with built-in CMake targets:
+
+    find_package(BZip2 REQUIRED)
+    target_link_libraries(main PRIVATE BZip2::BZip2)
+
+The package glew is compatible with built-in CMake targets:
+
+    find_package(GLEW REQUIRED)
+    target_link_libraries(main PRIVATE GLEW::GLEW)
+
+glfw3 provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(glfw3 CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE glfw)
+
+glfw3 provides pkg-config modules:
+
+  # A multi-platform library for OpenGL, window and input
+  glfw3
+
+libogg provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(Ogg CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE Ogg::ogg)
+
+libogg provides pkg-config modules:
+
+  # ogg is a library for manipulating ogg bitstreams
+  ogg
+
+The package zlib is compatible with built-in CMake targets:
+
+    find_package(ZLIB REQUIRED)
+    target_link_libraries(main PRIVATE ZLIB::ZLIB)
+
+libpng provides CMake targets:
+
+  find_package(PNG REQUIRED)
+  target_link_libraries(main PRIVATE PNG::PNG)
+
+The package libvorbis provides CMake targets:
+
+    # Vorbis reference encoder and decoder, low-level API
+    find_package(Vorbis CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Vorbis::vorbis)
+
+    # Audio stream decoding and basic manipulation, high-level API
+    find_package(Vorbis CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Vorbis::vorbisfile)
+
+    # Convenience API for setting up an encoding environment
+    find_package(Vorbis CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Vorbis::vorbisenc)
+
+libzip provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(libzip CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE libzip::zip)
+
+libzip provides pkg-config modules:
+
+  # library for handling zip archives
+  libzip
+
+The package nlohmann-json provides CMake targets:
+
+    find_package(nlohmann_json CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE nlohmann_json::nlohmann_json)
+
+The package nlohmann-json can be configured to not provide implicit conversions via a custom triplet file:
+
+    set(nlohmann-json_IMPLICIT_CONVERSIONS OFF)
+
+For more information, see the docs here:
+    
+    https://json.nlohmann.me/api/macros/json_use_implicit_conversions/
+
+opus provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(Opus CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE Opus::opus)
+
+opus provides pkg-config modules:
+
+  # Opus IETF audio codec ( build)
+  opus
+
+The package opusfile provides CMake targets:
+
+    find_package(OpusFile CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE OpusFile::opusfile)
+
+    # To use the opusurl API
+    target_link_libraries(main PRIVATE OpusFile::opusurl)
+
+sdl2 provides CMake targets:
+
+    find_package(SDL2 CONFIG REQUIRED)
+    target_link_libraries(main
+        PRIVATE
+        $<TARGET_NAME_IF_EXISTS:SDL2::SDL2main>
+        $<IF:$<TARGET_EXISTS:SDL2::SDL2>,SDL2::SDL2,SDL2::SDL2-static>
+    )
+
+sdl2-net provides CMake targets:
+
+    find_package(SDL2_net CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE $<IF:$<TARGET_EXISTS:SDL2_net::SDL2_net>,SDL2_net::SDL2_net,SDL2_net::SDL2_net-static>)
+
+The package spdlog provides CMake targets:
+
+    find_package(spdlog CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE spdlog::spdlog)
+
+    # Or use the header-only version
+    find_package(spdlog CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE spdlog::spdlog_header_only)
+
+tinyxml2 provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(tinyxml2 CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE tinyxml2::tinyxml2)
+
+tinyxml2 provides pkg-config modules:
+
+  # simple, small, C++ XML parser
+  tinyxml2
+
+Completed submission of spdlog:x64-windows-static@1.16.0 to 1 binary cache(s) in 2.1 s
+Waiting for 1 remaining binary cache submissions...
+Completed submission of tinyxml2:x64-windows-static@11.0.0 to 1 binary cache(s) in 189 ms (1/1)
+All requested installations completed successfully in: 7.3 min
+x64 architecture in use
+-- Windows
+-- Found ZLIB: optimized;C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/installed/x64-windows-static/lib/zlib.lib;debug;C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/installed/x64-windows-static/debug/lib/zlibd.lib (found version "1.3.1")
+-- Found BZip2: optimized;C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/installed/x64-windows-static/lib/bz2.lib;debug;C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/installed/x64-windows-static/debug/lib/bz2d.lib (found version "1.0.8")
+-- Looking for BZ2_bzCompressInit
+-- Looking for BZ2_bzCompressInit - found
+-- Linking against dependent libraries statically
+CMake Deprecation Warning at C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/build/shipwright-9.1.1/_deps/prism-src/CMakeLists.txt:2 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+x64 architecture in use
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+-- Looking for pthread_create in pthreads
+-- Looking for pthread_create in pthreads - not found
+-- Looking for pthread_create in pthread
+-- Looking for pthread_create in pthread - not found
+-- Found Threads: TRUE
+-- Found ZLIB: optimized;C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/installed/x64-windows-static/lib/zlib.lib;debug;C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/installed/x64-windows-static/debug/lib/zlibd.lib (found suitable version "1.3.1", minimum required is "1.1.2")
+-- Found nlohmann_json: C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/installed/x64-windows-static/share/nlohmann_json/nlohmann_jsonConfig.cmake (found version "3.12.0")
+-- Found ZLIB: optimized;C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/installed/x64-windows-static/lib/zlib.lib;debug;C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/installed/x64-windows-static/debug/lib/zlibd.lib (found version "1.3.1")
+-- Found PNG: optimized;C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/installed/x64-windows-static/lib/libpng16.lib;debug;C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/tools/vcpkg-9c147d5304087fe85104b776b019c45745fa9c11/installed/x64-windows-static/debug/lib/libpng16d.lib (found version "1.6.50")
+x64 architecture in use
+Versión de MSBuild 17.14.51+25f168cee para .NET Framework
+
+  1>Checking Build System
+  1>Creating directories for 'dr_libs-populate'
+  Performing download step (git clone) for 'dr_libs-populate'
+  Cloning into 'dr_libs-src'...
+  HEAD is now at da35f9d dr_mp3: Version 0.6.39
+  Submodule 'tests/external/miniaudio' (https://github.com/dr-soft/miniaudio.git) registered for path 'tests/external/miniaudio'
+  Cloning into 'C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/build/shipwright-9.1.1/_deps/dr_libs-src/tests/external/miniaudio'...
+  fatal: not a git repository: 'C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/build/shipwright-9.1.1/_deps/dr_libs-src/.git/modules/tests/external/miniaudio'
+  fatal: remote did not send all necessary objects
+  fatal: clone of 'https://github.com/dr-soft/miniaudio.git' into submodule path 'C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/build/shipwright-9.1.1/_deps/dr_libs-src/tests/external/miniaudio' failed
+  Failed to clone 'tests/external/miniaudio'. Retry scheduled
+  fatal: not a git repository (or any of the parent directories): .git
+  Failed to clone 'tests/external/miniaudio' a second time, aborting
+  CMake Error at dr_libs-subbuild/dr_libs-populate-prefix/tmp/dr_libs-populate-gitclone.cmake:75 (message):
+    Failed to update submodules in:
+    'C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/build/shipwright-9.1.1/_deps/dr_libs-src'
+  
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(254,5): error MSB8066: Compilación personalizada de "C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1\_deps\dr_libs-subbuild\CMakeFiles\d18b8f9224d8ea672ca20a013f96472d\dr_libs-populate-download.rule;C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1\_deps\dr_libs-subbuild\CMakeFiles\d18b8f9224d8ea672ca20a013f96472d\dr_libs-populate-update.rule;C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1\_deps\dr_libs-subbuild\CMakeFiles\d18b8f9224d8ea672ca20a013f96472d\dr_libs-populate-patch.rule;C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1\_deps\dr_libs-subbuild\CMakeFiles\d18b8f9224d8ea672ca20a013f96472d\dr_libs-populate-configure.rule;C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1\_deps\dr_libs-subbuild\CMakeFiles\d18b8f9224d8ea672ca20a013f96472d\dr_libs-populate-build.rule;C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1\_deps\dr_libs-subbuild\CMakeFiles\d18b8f9224d8ea672ca20a013f96472d\dr_libs-populate-install.rule;C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1\_deps\dr_libs-subbuild\CMakeFiles\d18b8f9224d8ea672ca20a013f96472d\dr_libs-populate-test.rule;C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1\_deps\dr_libs-subbuild\CMakeFiles\caffc3fe3177578bf90b64e4d6d50f84\dr_libs-populate-complete.rule;C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1\_deps\dr_libs-subbuild\CMakeFiles\8f714189ee5a32667883731276dee57b\dr_libs-populate.rule;C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1\_deps\dr_libs-subbuild\CMakeLists.txt" terminada con el código 1. [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1\_deps\dr_libs-subbuild\dr_libs-populate.vcxproj]
+
+CMake Error at C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.31/Modules/FetchContent.cmake:1918 (message):
+  Build step for dr_libs failed: 1
+Call Stack (most recent call first):
+  C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.31/Modules/FetchContent.cmake:1609 (__FetchContent_populateSubbuild)
+  C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.31/Modules/FetchContent.cmake:2145:EVAL:2 (__FetchContent_doPopulation)
+  C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.31/Modules/FetchContent.cmake:2145 (cmake_language)
+  C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.31/Modules/FetchContent.cmake:2384 (__FetchContent_Populate)
+  soh/CMakeLists.txt:295 (FetchContent_MakeAvailable)
+
+
+-- Configuring incomplete, errors occurred!

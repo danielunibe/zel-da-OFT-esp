@@ -1,0 +1,1679 @@
+TASK03 BUILD START=2026-09-15T21:36:56.4355509-06:00
+BUILD_ROOT=C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean
+COMMAND=call "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\Tools\VsDevCmd.bat" -arch=x64 -host_arch=x64 >nul && set VCPKG_ROOT=C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\tools\vcpkg-9c147d5304087fe85104b776b019c45745fa9c11 && cmake --build "C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean" --config Release --target GenerateSohOtr && cmake --build "C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean" --config Release
+--- BUILD OUTPUT ---
+Versión de MSBuild 17.14.51+25f168cee para .NET Framework
+
+  ImGui.vcxproj -> C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\libultraship\Release\ImGui.lib
+  libgfxd.vcxproj -> C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\libultraship\Release\libgfxd.lib
+  prism.vcxproj -> C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\_deps\prism-build\Release\prism.lib
+  stb.vcxproj -> C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\libultraship\Release\stb.lib
+  storm.vcxproj -> C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\_deps\stormlib-build\Release\StormLib.lib
+  libultraship.vcxproj -> C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\x64\Release\libultraship.lib
+  OTRExporter.vcxproj -> C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\x64\Release\OTRExporter.lib
+  ZAPDLib.vcxproj -> C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\x64\Release\ZAPDLib.lib
+  ZAPD.vcxproj -> C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\x64\Release\ZAPD.exe
+  Building Custom Rule C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/source/shipwright/soh/CMakeLists.txt
+  ActorDB.cpp
+  CrashHandlerExt.cpp
+  AssignableTunicsAndBoots.cpp
+  Autosave.cpp
+  BonkDamage.cpp
+  BootToDebugWarpScreen.cpp
+  DekuStick.cpp
+  EasyFrameAdvance.cpp
+  EasyISG.cpp
+  EasyQPA.cpp
+  FreezeTime.cpp
+  Ammo.cpp
+  Health.cpp
+  Magic.cpp
+  Money.cpp
+  NayrusLove.cpp
+  MoonJump.cpp
+  NoKeeseGuayTarget.cpp
+  NoRedeadFreeze.cpp
+  UnrestrictedItems.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\ActorDB.cpp(485,25): warning C4267: '=': conversión de 'size_t' a 'int32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\ActorDB.cpp(555,19): warning C4267: 'return': conversión de 'size_t' a 'int'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  CuccosToReturn.cpp
+  DampeFire.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\Cheats\Infinite\Ammo.cpp(21,24): warning C4244: '=': conversión de 'uint16_t' a 'int8_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\Cheats\Infinite\Ammo.cpp(22,22): warning C4244: '=': conversión de 'uint16_t' a 'int8_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\Cheats\Infinite\Ammo.cpp(23,23): warning C4244: '=': conversión de 'uint16_t' a 'int8_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\Cheats\Infinite\Ammo.cpp(24,22): warning C4244: '=': conversión de 'uint16_t' a 'int8_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\Cheats\Infinite\Ammo.cpp(25,28): warning C4244: '=': conversión de 'uint16_t' a 'int8_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  DisableSandstorm.cpp
+  RupeeDash.cpp
+  ShadowTag.cpp
+  ExtraTraps.cpp
+  FileSelectEnhancements.cpp
+  BrokenGiantsKnife.cpp
+  DekuNutUpgradeFix.cpp
+  Disable2DBackgrounds.cpp
+  ToTMedallions.cpp
+  Presets.cpp
+  DaytimeGS.cpp
+  OpenAllHours.cpp
+  PauseWarp.cpp
+  RebottleBlueFire.cpp
+  RemoveSpinAttackDarkness.cpp
+  ResetGameplayFrames.cpp
+  BottleAdventure.cpp
+  GraveHoleJumps.cpp
+  N64WeirdFrames.cpp
+  WeirdAnimation.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\RemoveSpinAttackDarkness.cpp(25,58): warning C4244: 'argumento': conversión de 'f32' a 'int16_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\RemoveSpinAttackDarkness.cpp(24,113): warning C4244: 'argumento': conversión de 'f32' a 'int16_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\RemoveSpinAttackDarkness.cpp(24,82): warning C4244: 'argumento': conversión de 'f32' a 'int16_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\ResourceManagerHelpers.h(15,34): warning C4190: 'ResourceMgr_GetResourceByNameHandlingMQ' tiene una vinculación C especificada, pero devuelve 'std::shared_ptr<Ship::IResource>', que es incompatible con C [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  (compilando archivo de origen "../../../source/shipwright/soh/soh/Enhancements/Graphics/ToTMedallions.cpp")
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(1565,7):
+      vea la declaración de 'std::shared_ptr<Ship::IResource>'
+  
+  PauseBufferInputs.cpp
+  WideShutterDoorRanges.cpp
+  SkipAmyPuzzle.cpp
+  SwitchTimerMultiplier.cpp
+  TimeDisplay.cpp
+  CrawlSpeed.cpp
+  FasterBeanSkulltula.cpp
+  FasterBottleEmpty.cpp
+  FasterHeavyBlockLift.cpp
+  FasterPauseMenu.cpp
+  FasterRupeeAccumulator.cpp
+  FasterShadowShip.cpp
+  SkipIntro.cpp
+  SkipBlueWarp.cpp
+  SkipDekuTreeIntro.cpp
+  SkipLostWoodsBridge.cpp
+  SkipToGivingZeldasLetter.cpp
+  SkipZeldaFleeingCastle.cpp
+  MoveJabuJabuElevator.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\TimeDisplay\TimeDisplay.cpp(57,27): warning C4244: 'inicializando': conversión de 'double' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\TimeDisplay\TimeDisplay.cpp(89,49): warning C4244: 'argumento': conversión de 'uint64_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  MoveMidoInKokiriForest.cpp
+  SkipChildRutoInteractions.cpp
+  TreesDropSticks.cpp
+  AudioCollection.cpp
+  AudioEditor.cpp
+  AudioHooks.cpp
+  BossRush.cpp
+  InputViewer.cpp
+  Mouse.cpp
+  SohInputEditorWindow.cpp
+  CosmeticsEditor.cpp
+  CustomLogoTitle.cpp
+  NoMasterSword.cpp
+  TimeFlowFileSelect.cpp
+  authenticGfxPatches.cpp
+  debugconsole.cpp
+  MessageViewer.cpp
+  SohConsoleWindow.cpp
+  SohGfxDebuggerWindow.cpp
+  SohStatsWindow.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\libultraship\include\fast\lus_gbi.h(133,9): warning C4005: 'GIMMCMD': redefinición de macro [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  (compilando archivo de origen "../../../source/shipwright/soh/soh/Enhancements/controls/SohInputEditorWindow.cpp")
+      C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\libultraship\include\libultraship\libultra\gbi.h(255,9):
+      vea la definición anterior de “GIMMCMD”
+  
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\boss-rush\BossRush.cpp(305,23): warning C4244: 'inicializando': conversión de 'int16_t' a 'uint8_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\boss-rush\BossRush.cpp(354,104): warning C4244: 'argumento': conversión de 'int' a 'f32'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\boss-rush\BossRush.cpp(359,40): warning C4244: 'argumento': conversión de 'int' a 'f32'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\boss-rush\BossRush.cpp(358,101): warning C4244: 'argumento': conversión de 'int' a 'f32'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\cosmetics\CustomLogoTitle.cpp(43,12): warning C4305: '=': truncamiento de 'double' a 'f32' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\cosmetics\CustomLogoTitle.cpp(44,12): warning C4305: '=': truncamiento de 'double' a 'f32' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\cosmetics\CustomLogoTitle.cpp(48,12): warning C4305: '=': truncamiento de 'double' a 'f32' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\cosmetics\CustomLogoTitle.cpp(114,82): warning C4244: 'argumento': conversión de 'int16_t' a 'uint8_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\cosmetics\CustomLogoTitle.cpp(116,24): warning C4244: '+=': conversión de 'float' a 'int16_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\cosmetics\CustomLogoTitle.cpp(32,9): warning C4101: 'pad1': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\cosmetics\CustomLogoTitle.cpp(36,9): warning C4101: 'pad2': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugconsole.cpp(93,45): warning C4244: '=': conversión de 'int' a 'f32'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugconsole.cpp(96,45): warning C4244: '=': conversión de 'int' a 'f32'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugconsole.cpp(99,45): warning C4244: '=': conversión de 'int' a 'f32'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugconsole.cpp(68,47): warning C4101: 'ex': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugconsole.cpp(135,43): warning C4101: 'ex': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugconsole.cpp(175,43): warning C4101: 'ex': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugconsole.cpp(243,43): warning C4101: 'ex': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugconsole.cpp(284,43): warning C4101: 'ex': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugconsole.cpp(358,51): warning C4244: '=': conversión de 'const _Ty2' a 'uint8_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugconsole.cpp(358,51): warning C4244:         with [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugconsole.cpp(358,51): warning C4244:         [ [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugconsole.cpp(358,51): warning C4244:             _Ty2=uint16_t [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugconsole.cpp(358,51): warning C4244:         ] [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugconsole.cpp(340,43): warning C4101: 'ex': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugconsole.cpp(419,43): warning C4101: 'ex': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugconsole.cpp(585,43): warning C4101: 'ex': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugconsole.cpp(610,43): warning C4101: 'ex': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugconsole.cpp(637,43): warning C4101: 'ex': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugconsole.cpp(665,43): warning C4101: 'ex': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugconsole.cpp(693,43): warning C4101: 'ex': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugconsole.cpp(725,43): warning C4101: 'ex': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugconsole.cpp(758,40): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugconsole.cpp(758,30): warning C4244: '=': conversión de 'float' a 'int32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugconsole.cpp(759,43): warning C4101: 'ex': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugconsole.cpp(784,43): warning C4101: 'ex': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugconsole.cpp(826,43): warning C4101: 'ex': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugconsole.cpp(858,43): warning C4101: 'ex': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugconsole.cpp(889,43): warning C4101: 'ex': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\cosmetics\authenticGfxPatches.cpp(103,33): warning C4267: 'inicializando': conversión de 'size_t' a 'int'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\cosmetics\authenticGfxPatches.cpp(120,33): warning C4267: 'inicializando': conversión de 'size_t' a 'int'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\cosmetics\authenticGfxPatches.cpp(151,29): warning C4267: 'inicializando': conversión de 'size_t' a 'int'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugconsole.cpp(942,43): warning C4101: 'ex': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\cosmetics\authenticGfxPatches.cpp(168,29): warning C4267: 'inicializando': conversión de 'size_t' a 'int'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\cosmetics\authenticGfxPatches.cpp(201,33): warning C4267: 'inicializando': conversión de 'size_t' a 'int'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugconsole.cpp(970,43): warning C4101: 'ex': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\cosmetics\authenticGfxPatches.cpp(218,33): warning C4267: 'inicializando': conversión de 'size_t' a 'int'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\cosmetics\authenticGfxPatches.cpp(253,33): warning C4267: 'inicializando': conversión de 'size_t' a 'int'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\cosmetics\authenticGfxPatches.cpp(270,33): warning C4267: 'inicializando': conversión de 'size_t' a 'int'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugconsole.cpp(998,43): warning C4101: 'ex': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugconsole.cpp(1026,43): warning C4101: 'ex': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugconsole.cpp(1055,43): warning C4101: 'ex': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugconsole.cpp(1083,43): warning C4101: 'ex': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugconsole.cpp(1112,43): warning C4101: 'ex': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugconsole.cpp(1137,43): warning C4101: 'ex': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugconsole.cpp(1258,43): warning C4101: 'ex': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugconsole.cpp(1333,43): warning C4101: 'ex': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugconsole.cpp(1464,47): warning C4101: 'ex': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugconsole.cpp(1485,47): warning C4101: 'ex': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  actorViewer.cpp
+  colViewer.cpp
+  debugSaveEditor.cpp
+  dlViewer.cpp
+  hookDebugger.cpp
+  performanceTimer.cpp
+  valueViewer.cpp
+  enemyrandomizer.cpp
+  GameInteractionEffect.cpp
+  GameInteractor.cpp
+  GameInteractor_Hooks.cpp
+  GameInteractor_RawAction.cpp
+  GameInteractor_State.cpp
+  gameplaystats.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\audio\AudioEditor.cpp(547,90): warning C4244: 'argumento': conversión de 'float' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\audio\AudioEditor.cpp(548,88): warning C4244: 'argumento': conversión de 'float' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\audio\AudioEditor.cpp(549,89): warning C4244: 'argumento': conversión de 'float' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\audio\AudioEditor.cpp(550,92): warning C4244: 'argumento': conversión de 'float' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\audio\AudioEditor.cpp(551,94): warning C4244: 'argumento': conversión de 'float' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\audio\AudioEditor.cpp(552,91): warning C4244: 'argumento': conversión de 'float' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\audio\AudioEditor.cpp(553,90): warning C4244: 'argumento': conversión de 'float' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\audio\AudioEditor.cpp(560,103): warning C4244: 'argumento': conversión de 'float' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\audio\AudioEditor.cpp(561,100): warning C4244: 'argumento': conversión de 'float' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\audio\AudioEditor.cpp(562,92): warning C4244: 'argumento': conversión de 'float' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\controls\SohInputEditorWindow.cpp(83,57): warning C4244: '=': conversión de 'float' a 'int32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\controls\SohInputEditorWindow.cpp(104,64): warning C4244: '=': conversión de 'float' a 'int32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\controls\SohInputEditorWindow.cpp(909,46): warning C4244: '=': conversión de 'float' a 'int32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\controls\SohInputEditorWindow.cpp(1103,46): warning C4244: '=': conversión de 'double' a 'uint8_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\controls\SohInputEditorWindow.cpp(1104,46): warning C4244: '=': conversión de 'double' a 'uint8_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\controls\SohInputEditorWindow.cpp(1105,46): warning C4244: '=': conversión de 'double' a 'uint8_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\controls\SohInputEditorWindow.cpp(1337,79): warning C4244: 'argumento': conversión de 'float' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\controls\SohInputEditorWindow.cpp(1338,85): warning C4244: 'argumento': conversión de 'float' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\controls\SohInputEditorWindow.cpp(1370,80): warning C4244: 'argumento': conversión de 'float' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\controls\SohInputEditorWindow.cpp(1373,84): warning C4244: 'argumento': conversión de 'float' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\controls\SohInputEditorWindow.cpp(1442,76): warning C4244: 'argumento': conversión de 'float' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\controls\SohInputEditorWindow.cpp(1475,77): warning C4244: 'argumento': conversión de 'float' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\controls\SohInputEditorWindow.cpp(1476,76): warning C4244: 'argumento': conversión de 'float' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\MessageViewer.cpp(164,31): warning C4244: '=': conversión de '__int64' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\MessageViewer.cpp(209,45): warning C4267: '=': conversión de 'size_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\MessageViewer.cpp(247,49): warning C4244: '=': conversión de 'uint16_t' a 'uint8_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  ItemTableManager.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\item-tables\ItemTableManager.cpp(20,39): warning C4101: 'oor': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\item-tables\ItemTableManager.cpp(30,33): warning C4101: 'oor': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\item-tables\ItemTableManager.cpp(38,39): warning C4101: 'oor': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  kaleido.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\game-interactor\GameInteractionEffect.cpp(267,60): warning C4244: 'argumento': conversión de 'int32_t' a 'float'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\enemyrandomizer.cpp(185,25): warning C4838: la conversión de 'int' en 'int16_t' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\enemyrandomizer.cpp(185,25): warning C4309: 'inicializando': truncamiento de valor constante [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\enemyrandomizer.cpp(186,26): warning C4838: la conversión de 'int' en 'int16_t' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\enemyrandomizer.cpp(186,26): warning C4309: 'inicializando': truncamiento de valor constante [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\enemyrandomizer.cpp(187,25): warning C4838: la conversión de 'int' en 'int16_t' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\enemyrandomizer.cpp(187,25): warning C4309: 'inicializando': truncamiento de valor constante [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\enemyrandomizer.cpp(188,25): warning C4838: la conversión de 'int' en 'int16_t' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\enemyrandomizer.cpp(188,25): warning C4309: 'inicializando': truncamiento de valor constante [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\enemyrandomizer.cpp(417,28): warning C4244: 'inicializando': conversión de 'uint64_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\enemyrandomizer.cpp(420,65): warning C4267: 'argumento': conversión de 'size_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\enemyrandomizer.cpp(423,72): warning C4267: 'argumento': conversión de 'size_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  mod_menu.cpp
+  mods.cpp
+  nametag.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\colViewer.cpp(175,57): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\colViewer.cpp(175,21): warning C4244: 'inicializando': conversión de 'float' a 'short'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\colViewer.cpp(176,57): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\colViewer.cpp(176,21): warning C4244: 'inicializando': conversión de 'float' a 'short'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\colViewer.cpp(177,50): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\colViewer.cpp(177,28): warning C4244: 'inicializando': conversión de 'float' a 'signed char'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\colViewer.cpp(178,51): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\colViewer.cpp(178,28): warning C4244: 'inicializando': conversión de 'float' a 'signed char'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  custom_messages.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\colViewer.cpp(335,14): warning C4101: 'gm': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\colViewer.cpp(334,14): warning C4101: 'cm': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\colViewer.cpp(548,77): warning C4244: 'argumento': conversión de 'int' a 'f32'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\colViewer.cpp(626,16): warning C4838: la conversión de 'int16_t' en 'f32' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\colViewer.cpp(626,29): warning C4838: la conversión de 'int16_t' en 'f32' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\colViewer.cpp(626,53): warning C4838: la conversión de 'int' en 'f32' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\colViewer.cpp(626,53): warning C4244: 'inicializando': conversión de 'int' a 'f32'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\colViewer.cpp(627,23): warning C4838: la conversión de 'int' en 'f32' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\colViewer.cpp(627,23): warning C4244: 'inicializando': conversión de 'int' a 'f32'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\colViewer.cpp(627,46): warning C4838: la conversión de 'int16_t' en 'f32' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\colViewer.cpp(627,70): warning C4838: la conversión de 'int' en 'f32' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\colViewer.cpp(627,70): warning C4244: 'inicializando': conversión de 'int' a 'f32'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\colViewer.cpp(628,23): warning C4838: la conversión de 'int' en 'f32' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\colViewer.cpp(628,23): warning C4244: 'inicializando': conversión de 'int' a 'f32'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\colViewer.cpp(628,46): warning C4838: la conversión de 'int16_t' en 'f32' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\colViewer.cpp(628,63): warning C4838: la conversión de 'int16_t' en 'f32' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\colViewer.cpp(629,16): warning C4838: la conversión de 'int16_t' en 'f32' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\colViewer.cpp(629,29): warning C4838: la conversión de 'int16_t' en 'f32' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\colViewer.cpp(629,46): warning C4838: la conversión de 'int16_t' en 'f32' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\colViewer.cpp(630,16): warning C4838: la conversión de 'int16_t' en 'f32' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\colViewer.cpp(630,53): warning C4838: la conversión de 'int' en 'f32' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\colViewer.cpp(630,53): warning C4244: 'inicializando': conversión de 'int' a 'f32'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\colViewer.cpp(631,23): warning C4838: la conversión de 'int' en 'f32' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\colViewer.cpp(631,23): warning C4244: 'inicializando': conversión de 'int' a 'f32'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\colViewer.cpp(631,70): warning C4838: la conversión de 'int' en 'f32' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\colViewer.cpp(631,70): warning C4244: 'inicializando': conversión de 'int' a 'f32'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\colViewer.cpp(632,23): warning C4838: la conversión de 'int' en 'f32' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\colViewer.cpp(632,23): warning C4244: 'inicializando': conversión de 'int' a 'f32'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\colViewer.cpp(632,63): warning C4838: la conversión de 'int16_t' en 'f32' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\colViewer.cpp(633,16): warning C4838: la conversión de 'int16_t' en 'f32' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\colViewer.cpp(633,46): warning C4838: la conversión de 'int16_t' en 'f32' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\actorViewer.cpp(617,17): warning C4244: 'inicializando': conversión de 'int16_t' a 'uint8_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\actorViewer.cpp(756,19): warning C4244: 'inicializando': conversión de 'int16_t' a 'uint8_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  fill.cpp
+  hint_list.cpp
+  hint_list_exclude_dungeon.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\colViewer.cpp(678,25): warning C4244: 'argumento': conversión de 'double' a 'unsigned __int64'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+      C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\colViewer.cpp(678,25):
+      el contexto de creación de instancias de la plantilla (el más antiguo primero) es
+          C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\colViewer.cpp(687,5):
+          Vea la referencia a la creación de una instancia de la función plantilla "size_t ResetVector<std::vector<Gfx,std::allocator<Gfx>>>(T &)" que se está compilando
+          with
+          [
+              T=std::vector<Gfx,std::allocator<Gfx>>
+          ]
+  
+  hint_list_exclude_overworld.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\kaleido.cpp(377,63): warning C4804: '>': uso no seguro del tipo 'bool' en la operación [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\kaleido.cpp(378,63): warning C4804: '>': uso no seguro del tipo 'bool' en la operación [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\kaleido.cpp(379,63): warning C4804: '>': uso no seguro del tipo 'bool' en la operación [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\kaleido.cpp(380,63): warning C4804: '>': uso no seguro del tipo 'bool' en la operación [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\kaleido.cpp(381,63): warning C4804: '>': uso no seguro del tipo 'bool' en la operación [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\dlViewer.cpp(147,21): warning C4244: 'inicializando': conversión de 'uintptr_t' a 'int'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\dlViewer.cpp(333,36): warning C4101: 'e': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  hint_list_item.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\debugSaveEditor.cpp(201,42): warning C4244: '=': conversión de 'int16_t' a 'int8_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  hints.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\debugSaveEditor.cpp(932,31): warning C4018: '<': no coinciden signed/unsigned [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\debugSaveEditor.cpp(937,54): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  item_pool.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\debugSaveEditor.cpp(1516,54): warning C4305: '=': truncamiento de 'ItemID' a 'int8_t' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\debugSaveEditor.cpp(1516,54): warning C4309: '=': truncamiento de valor constante [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  playthrough.cpp
+  rando_main.cpp
+  random.cpp
+  shops.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\valueViewer.cpp(83,43): warning C4244: 'argumento': conversión de 'float' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\valueViewer.cpp(82,98): warning C4244: 'argumento': conversión de 'float' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\valueViewer.cpp(82,75): warning C4244: 'argumento': conversión de 'float' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\debugger\valueViewer.cpp(82,52): warning C4244: 'argumento': conversión de 'float' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  spoiler_log.cpp
+  starting_inventory.cpp
+  ColoredMapsAndCompasses.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\nametag.cpp(100,50): warning C4244: 'argumento': conversión de 'int' a 'f32'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\nametag.cpp(172,38): warning C4805: '==': combinación no segura del tipo 'bool' y el tipo 'const uint8_t' en la operación [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  LockOverworldDoors.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\mods.cpp(319,23): warning C4244: 'inicializando': conversión de 'uint64_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\mods.cpp(624,88): warning C4244: '=': conversión de 'uint64_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\mods.cpp(627,84): warning C4244: '=': conversión de 'uint64_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\mods.cpp(630,85): warning C4244: '=': conversión de 'uint64_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\mods.cpp(633,81): warning C4244: '=': conversión de 'uint64_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\mods.cpp(637,89): warning C4244: '=': conversión de 'uint64_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\mods.cpp(640,81): warning C4244: '=': conversión de 'uint64_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\mods.cpp(643,82): warning C4244: '=': conversión de 'uint64_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\mods.cpp(646,87): warning C4244: '=': conversión de 'uint64_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\mods.cpp(649,84): warning C4244: '=': conversión de 'uint64_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\mods.cpp(652,84): warning C4244: '=': conversión de 'uint64_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\mods.cpp(709,35): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\mods.cpp(714,35): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\mods.cpp(727,44): warning C4244: '=': conversión de 'float' a 'uint8_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  Plandomizer.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\randomizer\3drando\fill.cpp(745,16): warning C4267: 'inicializando': conversión de 'size_t' a 'int'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  ShuffleBeehives.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\gameplaystats.cpp(282,58): warning C4244: 'argumento': conversión de 'uint64_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  ShuffleCows.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\gameplaystats.cpp(454,75): warning C4244: 'argumento': conversión de 'uint64_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\gameplaystats.cpp(457,74): warning C4244: 'argumento': conversión de 'uint64_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\gameplaystats.cpp(593,23): warning C4018: '<': no coinciden signed/unsigned [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\gameplaystats.cpp(614,23): warning C4018: '<': no coinciden signed/unsigned [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  ShuffleCrates.cpp
+  ShuffleFairies.cpp
+  ShuffleFreestanding.cpp
+  ShuffleGrass.cpp
+  ShufflePots.cpp
+  ShuffleSongs.cpp
+  ShuffleTrees.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\randomizer\ShuffleBeehives.cpp(92,74): warning C4244: '=': conversión de 'f32' a 'int16_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  context.cpp
+  draw.cpp
+  dungeon.cpp
+  entrance.cpp
+  fishsanity.cpp
+  hint.cpp
+  hook_handlers.cpp
+  item.cpp
+  item_list.cpp
+  item_location.cpp
+  item_override.cpp
+  location.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\randomizer\ShuffleTrees.cpp(96,37): warning C4305: 'argumento': truncamiento de 'double' a 'f32' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\randomizer\ShuffleTrees.cpp(96,31): warning C4305: 'argumento': truncamiento de 'double' a 'f32' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\randomizer\ShuffleTrees.cpp(96,26): warning C4305: 'argumento': truncamiento de 'double' a 'f32' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\randomizer\ShuffleTrees.cpp(100,37): warning C4305: 'argumento': truncamiento de 'double' a 'f32' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\randomizer\ShuffleTrees.cpp(100,31): warning C4305: 'argumento': truncamiento de 'double' a 'f32' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\randomizer\ShuffleTrees.cpp(100,26): warning C4305: 'argumento': truncamiento de 'double' a 'f32' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\randomizer\ShuffleTrees.cpp(104,37): warning C4305: 'argumento': truncamiento de 'double' a 'f32' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\randomizer\ShuffleTrees.cpp(104,31): warning C4305: 'argumento': truncamiento de 'double' a 'f32' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\randomizer\ShuffleTrees.cpp(104,26): warning C4305: 'argumento': truncamiento de 'double' a 'f32' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\randomizer\ShuffleTrees.cpp(108,37): warning C4305: 'argumento': truncamiento de 'double' a 'f32' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\randomizer\ShuffleTrees.cpp(108,31): warning C4305: 'argumento': truncamiento de 'double' a 'f32' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\randomizer\ShuffleTrees.cpp(108,26): warning C4305: 'argumento': truncamiento de 'double' a 'f32' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\randomizer\ShuffleTrees.cpp(112,37): warning C4305: 'argumento': truncamiento de 'double' a 'f32' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\randomizer\ShuffleTrees.cpp(112,31): warning C4305: 'argumento': truncamiento de 'double' a 'f32' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\randomizer\ShuffleTrees.cpp(112,26): warning C4305: 'argumento': truncamiento de 'double' a 'f32' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\randomizer\ShuffleTrees.cpp(125,38): warning C4305: 'argumento': truncamiento de 'double' a 'f32' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\randomizer\ShuffleTrees.cpp(125,32): warning C4305: 'argumento': truncamiento de 'double' a 'f32' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\randomizer\ShuffleTrees.cpp(125,26): warning C4305: 'argumento': truncamiento de 'double' a 'f32' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\randomizer\ShuffleTrees.cpp(147,51): warning C4244: '=': conversión de 'f32' a 'int16_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  location_access.cpp
+  bottom_of_the_well.cpp
+  deku_tree.cpp
+  dodongos_cavern.cpp
+  fire_temple.cpp
+  forest_temple.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\randomizer\hint.cpp(163,41): warning C4267: '=': conversión de 'size_t' a 'uint8_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\randomizer\hint.cpp(165,39): warning C4267: '=': conversión de 'size_t' a 'uint8_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\randomizer\hint.cpp(193,72): warning C4267: 'argumento': conversión de 'size_t' a 'uint8_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\randomizer\hook_handlers.cpp(2075,104): warning C4309: 'argumento': truncamiento de valor constante [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\randomizer\hook_handlers.cpp(2086,43): warning C4309: '=': truncamiento de valor constante [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  ganons_castle.cpp
+  gerudo_training_ground.cpp
+  ice_cavern.cpp
+  jabujabus_belly.cpp
+  shadow_temple.cpp
+  spirit_temple.cpp
+  water_temple.cpp
+  castle_grounds.cpp
+  death_mountain_crater.cpp
+  death_mountain_trail.cpp
+  desert_colossus.cpp
+  gerudo_fortress.cpp
+  gerudo_valley.cpp
+  goron_city.cpp
+  graveyard.cpp
+  haunted_wasteland.cpp
+  hyrule_field.cpp
+  kakariko.cpp
+  kokiri_forest.cpp
+  lake_hylia.cpp
+  lon_lon_ranch.cpp
+  lost_woods.cpp
+  market.cpp
+  sacred_forest_meadow.cpp
+  temple_of_time.cpp
+  thieves_hideout.cpp
+  zoras_domain.cpp
+  zoras_fountain.cpp
+  zoras_river.cpp
+  location_list.cpp
+  logic.cpp
+  option.cpp
+  option_descriptions.cpp
+  randomizer.cpp
+  randomizer_check_objects.cpp
+  randomizer_check_tracker.cpp
+  randomizer_entrance_tracker.cpp
+  randomizer_item_tracker.cpp
+  savefile.cpp
+  settings.cpp
+  static_data.cpp
+  trial.cpp
+  tricks.cpp
+  savestates.cpp
+  SAPISpeechSynthesizer.cpp
+  SpeechLogger.cpp
+  SpeechSynthesizer.cpp
+  timesaver_hook_handlers.cpp
+  TimeSplits.cpp
+  Extract.cpp
+  GbiWrap.cpp
+  CrowdControl.cpp
+  Network.cpp
+  Sail.cpp
+  Notification.cpp
+  ActorListIndex.cpp
+  ActorMaximumHealth.cpp
+  ObjectExtension.cpp
+  ResourceManagerHelpers.cpp
+  SaveManager.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\randomizer\randomizer.cpp(410,30): warning C4101: 'e': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\libultraship\include\ship\utils\binarytools\BitConverter.h(169,65): warning C4267: 'argumento': conversión de 'size_t' a 'int32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  (compilando archivo de origen "../../../source/shipwright/soh/soh/Extractor/Extract.cpp")
+  
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\libultraship\include\ship\utils\binarytools\BitConverter.h(174,65): warning C4267: 'argumento': conversión de 'size_t' a 'int32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  (compilando archivo de origen "../../../source/shipwright/soh/soh/Extractor/Extract.cpp")
+  
+  ShipUtils.cpp
+  ImGuiUtils.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\randomizer\randomizer_check_tracker.cpp(2129,93): warning C4244: 'argumento': conversión de 'float' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\randomizer\randomizer_check_tracker.cpp(2131,88): warning C4244: 'argumento': conversión de 'float' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\randomizer\randomizer_check_tracker.cpp(2161,92): warning C4244: 'argumento': conversión de 'float' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\randomizer\randomizer_check_tracker.cpp(2164,96): warning C4244: 'argumento': conversión de 'float' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\randomizer\randomizer_check_tracker.cpp(2166,84): warning C4244: 'argumento': conversión de 'float' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\randomizer\randomizer_check_tracker.cpp(2168,87): warning C4244: 'argumento': conversión de 'float' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\randomizer\randomizer_check_tracker.cpp(2171,95): warning C4244: 'argumento': conversión de 'float' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  ResolutionEditor.cpp
+  SohGui.cpp
+  SohMenu.cpp
+  SohMenuBar.cpp
+  SohMenuDevTools.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Notification\Notification.cpp(51,29): warning C4146: operador unario menos aplicado a un tipo unsigned; el resultado aún no tiene signo [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Notification\Notification.cpp(51,28): warning C4146: operador unario menos aplicado a un tipo unsigned; el resultado aún no tiene signo [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Notification\Notification.cpp(51,26): warning C4267: 'inicializando': conversión de 'size_t' a 'int'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  SohMenuEnhancements.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\libultraship\include\fast\lus_gbi.h(133,9): warning C4005: 'GIMMCMD': redefinición de macro [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  (compilando archivo de origen "../../../source/shipwright/soh/soh/ResourceManagerHelpers.cpp")
+      C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\libultraship\include\libultraship\libultra\gbi.h(255,9):
+      vea la definición anterior de “GIMMCMD”
+  
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\ResourceManagerHelpers.cpp(21,107): warning C4267: 'return': conversión de 'size_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\ResourceManagerHelpers.cpp(157,28): warning C4267: '=': conversión de 'size_t' a 'int'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  SohMenuNetwork.cpp
+  SohMenuRandomizer.cpp
+  SohMenuSettings.cpp
+  SohModals.cpp
+  UIWidgets.cpp
+  ConfigUpdaters.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\libultraship\include\fast\lus_gbi.h(133,9): warning C4005: 'GIMMCMD': redefinición de macro [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  (compilando archivo de origen "../../../source/shipwright/soh/soh/SohGui/ResolutionEditor.cpp")
+      C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\libultraship\include\libultraship\libultra\gbi.h(255,9):
+      vea la definición anterior de “GIMMCMD”
+  
+  frame_interpolation.cpp
+  AnimationFactory.cpp
+  ArrayFactory.cpp
+  AudioSampleFactory.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\timesplits\TimeSplits.cpp(353,69): warning C4244: '=': conversión de 'uint64_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\timesplits\TimeSplits.cpp(589,46): warning C4244: '=': conversión de 'uint64_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\timesplits\TimeSplits.cpp(592,47): warning C4244: '=': conversión de 'uint64_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\timesplits\TimeSplits.cpp(595,55): warning C4244: '=': conversión de 'uint64_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\timesplits\TimeSplits.cpp(614,61): warning C4244: '=': conversión de 'uint64_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\timesplits\TimeSplits.cpp(618,36): warning C4244: '=': conversión de 'uint64_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\timesplits\TimeSplits.cpp(622,65): warning C4244: '=': conversión de 'uint64_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\timesplits\TimeSplits.cpp(686,62): warning C4244: 'argumento': conversión de 'uint64_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\timesplits\TimeSplits.cpp(1026,57): warning C4244: 'argumento': conversión de 'uint16_t' a 'uint8_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\timesplits\TimeSplits.cpp(1031,77): warning C4244: 'argumento': conversión de 'int16_t' a 'uint8_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\timesplits\TimeSplits.cpp(1035,60): warning C4244: 'argumento': conversión de 'int16_t' a 'uint8_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\timesplits\TimeSplits.cpp(1040,59): warning C4244: 'argumento': conversión de 'int16_t' a 'uint8_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\timesplits\TimeSplits.cpp(1048,69): warning C4244: 'argumento': conversión de 'int16_t' a 'uint8_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  AudioSequenceFactory.cpp
+  AudioSoundFontFactory.cpp
+  BackgroundFactory.cpp
+  CollisionHeaderFactory.cpp
+  CutsceneFactory.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(595,55): warning C4309: '=': truncamiento de valor constante [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(705,58): warning C4838: la conversión de 'int' en '_Ty' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(705,58): warning C4838:         with [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(705,58): warning C4838:         [ [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(705,58): warning C4838:             _Ty=char [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(705,58): warning C4838:         ] [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(705,58): warning C4309: 'inicializando': truncamiento de valor constante [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(705,64): warning C4838: la conversión de 'int' en '_Ty' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(705,64): warning C4838:         with [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(705,64): warning C4838:         [ [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(705,64): warning C4838:             _Ty=char [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(705,64): warning C4838:         ] [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(705,64): warning C4309: 'inicializando': truncamiento de valor constante [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(705,76): warning C4838: la conversión de 'int' en '_Ty' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(705,76): warning C4838:         with [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(705,76): warning C4838:         [ [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(705,76): warning C4838:             _Ty=char [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(705,76): warning C4838:         ] [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(705,76): warning C4309: 'inicializando': truncamiento de valor constante [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(705,82): warning C4838: la conversión de 'int' en '_Ty' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(705,82): warning C4838:         with [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(705,82): warning C4838:         [ [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(705,82): warning C4838:             _Ty=char [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(705,82): warning C4838:         ] [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(705,82): warning C4309: 'inicializando': truncamiento de valor constante [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(705,88): warning C4838: la conversión de 'int' en '_Ty' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(705,88): warning C4838:         with [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(705,88): warning C4838:         [ [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(705,88): warning C4838:             _Ty=char [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(705,88): warning C4838:         ] [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(705,88): warning C4309: 'inicializando': truncamiento de valor constante [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(705,94): warning C4838: la conversión de 'int' en '_Ty' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(705,94): warning C4838:         with [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(705,94): warning C4838:         [ [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(705,94): warning C4838:             _Ty=char [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(705,94): warning C4838:         ] [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(705,94): warning C4309: 'inicializando': truncamiento de valor constante [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(705,100): warning C4838: la conversión de 'int' en '_Ty' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(705,100): warning C4838:         with [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(705,100): warning C4838:         [ [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(705,100): warning C4838:             _Ty=char [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(705,100): warning C4838:         ] [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(705,100): warning C4309: 'inicializando': truncamiento de valor constante [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(711,58): warning C4838: la conversión de 'int' en '_Ty' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(711,58): warning C4838:         with [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(711,58): warning C4838:         [ [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(711,58): warning C4838:             _Ty=char [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(711,58): warning C4838:         ] [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(711,58): warning C4309: 'inicializando': truncamiento de valor constante [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(711,64): warning C4838: la conversión de 'int' en '_Ty' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(711,64): warning C4838:         with [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(711,64): warning C4838:         [ [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(711,64): warning C4838:             _Ty=char [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(711,64): warning C4838:         ] [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(711,64): warning C4309: 'inicializando': truncamiento de valor constante [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(711,70): warning C4838: la conversión de 'int' en '_Ty' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(711,70): warning C4838:         with [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(711,70): warning C4838:         [ [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(711,70): warning C4838:             _Ty=char [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(711,70): warning C4838:         ] [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(711,70): warning C4309: 'inicializando': truncamiento de valor constante [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(711,76): warning C4838: la conversión de 'int' en '_Ty' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(711,76): warning C4838:         with [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(711,76): warning C4838:         [ [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(711,76): warning C4838:             _Ty=char [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(711,76): warning C4838:         ] [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(711,76): warning C4309: 'inicializando': truncamiento de valor constante [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(711,82): warning C4838: la conversión de 'int' en '_Ty' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(711,82): warning C4838:         with [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(711,82): warning C4838:         [ [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(711,82): warning C4838:             _Ty=char [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(711,82): warning C4838:         ] [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(711,82): warning C4309: 'inicializando': truncamiento de valor constante [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(711,88): warning C4838: la conversión de 'int' en '_Ty' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(711,88): warning C4838:         with [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(711,88): warning C4838:         [ [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(711,88): warning C4838:             _Ty=char [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(711,88): warning C4838:         ] [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(711,88): warning C4309: 'inicializando': truncamiento de valor constante [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(711,94): warning C4838: la conversión de 'int' en '_Ty' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(711,94): warning C4838:         with [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(711,94): warning C4838:         [ [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(711,94): warning C4838:             _Ty=char [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(711,94): warning C4838:         ] [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(711,94): warning C4309: 'inicializando': truncamiento de valor constante [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(711,100): warning C4838: la conversión de 'int' en '_Ty' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(711,100): warning C4838:         with [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(711,100): warning C4838:         [ [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(711,100): warning C4838:             _Ty=char [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(711,100): warning C4838:         ] [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(711,100): warning C4309: 'inicializando': truncamiento de valor constante [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(826,58): warning C4838: la conversión de 'int' en '_Ty' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(826,58): warning C4838:         with [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(826,58): warning C4838:         [ [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(826,58): warning C4838:             _Ty=char [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(826,58): warning C4838:         ] [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(826,58): warning C4309: 'inicializando': truncamiento de valor constante [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(826,64): warning C4838: la conversión de 'int' en '_Ty' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(826,64): warning C4838:         with [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(826,64): warning C4838:         [ [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(826,64): warning C4838:             _Ty=char [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(826,64): warning C4838:         ] [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(826,64): warning C4309: 'inicializando': truncamiento de valor constante [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(826,76): warning C4838: la conversión de 'int' en '_Ty' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(826,76): warning C4838:         with [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(826,76): warning C4838:         [ [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(826,76): warning C4838:             _Ty=char [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(826,76): warning C4838:         ] [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(826,76): warning C4309: 'inicializando': truncamiento de valor constante [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(826,82): warning C4838: la conversión de 'int' en '_Ty' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(826,82): warning C4838:         with [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(826,82): warning C4838:         [ [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(826,82): warning C4838:             _Ty=char [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(826,82): warning C4838:         ] [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(826,82): warning C4309: 'inicializando': truncamiento de valor constante [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(826,88): warning C4838: la conversión de 'int' en '_Ty' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(826,88): warning C4838:         with [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(826,88): warning C4838:         [ [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(826,88): warning C4838:             _Ty=char [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(826,88): warning C4838:         ] [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(826,88): warning C4309: 'inicializando': truncamiento de valor constante [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(826,94): warning C4838: la conversión de 'int' en '_Ty' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(826,94): warning C4838:         with [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(826,94): warning C4838:         [ [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(826,94): warning C4838:             _Ty=char [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(826,94): warning C4838:         ] [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(826,94): warning C4309: 'inicializando': truncamiento de valor constante [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(826,100): warning C4838: la conversión de 'int' en '_Ty' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(826,100): warning C4838:         with [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(826,100): warning C4838:         [ [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(826,100): warning C4838:             _Ty=char [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(826,100): warning C4838:         ] [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(826,100): warning C4309: 'inicializando': truncamiento de valor constante [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(832,58): warning C4838: la conversión de 'int' en '_Ty' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(832,58): warning C4838:         with [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(832,58): warning C4838:         [ [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(832,58): warning C4838:             _Ty=char [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(832,58): warning C4838:         ] [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(832,58): warning C4309: 'inicializando': truncamiento de valor constante [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(832,64): warning C4838: la conversión de 'int' en '_Ty' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(832,64): warning C4838:         with [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(832,64): warning C4838:         [ [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(832,64): warning C4838:             _Ty=char [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(832,64): warning C4838:         ] [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(832,64): warning C4309: 'inicializando': truncamiento de valor constante [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(832,70): warning C4838: la conversión de 'int' en '_Ty' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(832,70): warning C4838:         with [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(832,70): warning C4838:         [ [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(832,70): warning C4838:             _Ty=char [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(832,70): warning C4838:         ] [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(832,70): warning C4309: 'inicializando': truncamiento de valor constante [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(832,76): warning C4838: la conversión de 'int' en '_Ty' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(832,76): warning C4838:         with [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(832,76): warning C4838:         [ [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(832,76): warning C4838:             _Ty=char [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(832,76): warning C4838:         ] [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(832,76): warning C4309: 'inicializando': truncamiento de valor constante [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(832,82): warning C4838: la conversión de 'int' en '_Ty' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(832,82): warning C4838:         with [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(832,82): warning C4838:         [ [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(832,82): warning C4838:             _Ty=char [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(832,82): warning C4838:         ] [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(832,82): warning C4309: 'inicializando': truncamiento de valor constante [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(832,88): warning C4838: la conversión de 'int' en '_Ty' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(832,88): warning C4838:         with [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(832,88): warning C4838:         [ [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(832,88): warning C4838:             _Ty=char [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(832,88): warning C4838:         ] [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(832,88): warning C4309: 'inicializando': truncamiento de valor constante [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(832,94): warning C4838: la conversión de 'int' en '_Ty' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(832,94): warning C4838:         with [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(832,94): warning C4838:         [ [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(832,94): warning C4838:             _Ty=char [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(832,94): warning C4838:         ] [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(832,94): warning C4309: 'inicializando': truncamiento de valor constante [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(832,100): warning C4838: la conversión de 'int' en '_Ty' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(832,100): warning C4838:         with [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(832,100): warning C4838:         [ [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(832,100): warning C4838:             _Ty=char [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(832,100): warning C4838:         ] [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(832,100): warning C4309: 'inicializando': truncamiento de valor constante [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\AudioSampleFactory.cpp(80,16): warning C4267: 'return': conversión de 'size_t' a 'long'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\AudioSampleFactory.cpp(289,32): warning C4267: '=': conversión de 'size_t' a 'u32'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\AudioSampleFactory.cpp(294,66): warning C4267: '=': conversión de 'size_t' a 'u32'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  PathFactory.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(1225,36): warning C4101: 'e': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SaveManager.cpp(1255,55): warning C4101: 'ex': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\CollisionHeaderFactory.cpp(235,86): warning C4267: '=': conversión de 'size_t' a 'uint16_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\CollisionHeaderFactory.cpp(236,86): warning C4267: '=': conversión de 'size_t' a 'uint16_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\CollisionHeaderFactory.cpp(237,76): warning C4267: '=': conversión de 'size_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\CollisionHeaderFactory.cpp(238,66): warning C4267: '=': conversión de 'size_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\CollisionHeaderFactory.cpp(239,68): warning C4267: '=': conversión de 'size_t' a 'int32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\CollisionHeaderFactory.cpp(240,90): warning C4267: '=': conversión de 'size_t' a 'uint16_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  PlayerAnimationFactory.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\AudioSequenceFactory.cpp(26,27): warning C4018: '<': no coinciden signed/unsigned [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\AudioSequenceFactory.cpp(38,27): warning C4018: '<': no coinciden signed/unsigned [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\AudioSequenceFactory.cpp(182,51): warning C4244: '=': conversión de 'uint64_t' a 'uint16_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\AudioSequenceFactory.cpp(184,39): warning C4244: '=': conversión de 'uint64_t' a 'uint16_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\AudioSequenceFactory.cpp(198,42): warning C4244: '=': conversión de 'uint64_t' a 'uint16_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\AudioSequenceFactory.cpp(204,49): warning C4244: '=': conversión de 'uint64_t' a 'uint16_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\AudioSequenceFactory.cpp(214,40): warning C4244: '=': conversión de 'uint64_t' a 'uint16_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\AudioSequenceFactory.cpp(247,51): warning C4244: '=': conversión de 'uint64_t' a 'uint16_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\AudioSequenceFactory.cpp(249,39): warning C4244: '=': conversión de 'uint64_t' a 'uint16_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\AudioSequenceFactory.cpp(265,43): warning C4244: '=': conversión de 'uint64_t' a 'uint16_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\AudioSequenceFactory.cpp(268,50): warning C4244: '=': conversión de 'uint64_t' a 'uint16_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\AudioSequenceFactory.cpp(277,43): warning C4244: '=': conversión de 'uint64_t' a 'uint16_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\AudioSequenceFactory.cpp(280,50): warning C4244: '=': conversión de 'uint64_t' a 'uint16_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\AudioSequenceFactory.cpp(288,26): warning C4244: 'inicializando': conversión de 'uint64_t' a 'uint16_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\AudioSequenceFactory.cpp(295,42): warning C4244: '=': conversión de 'uint64_t' a 'uint16_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\AudioSequenceFactory.cpp(301,42): warning C4244: '=': conversión de 'uint64_t' a 'uint16_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\AudioSequenceFactory.cpp(235,14): warning C4101: 'layerStart': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\AudioSequenceFactory.cpp(349,69): warning C4267: '=': conversión de 'size_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\AudioSequenceFactory.cpp(357,73): warning C4267: '=': conversión de 'size_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\AudioSequenceFactory.cpp(380,25): warning C4244: '=': conversión de 'float' a 'uint16_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\AudioSequenceFactory.cpp(387,68): warning C4267: '=': conversión de 'size_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  SceneFactory.cpp
+  SkeletonFactory.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\frame_interpolation.cpp(240,24): warning C4305: 'argumento': truncamiento de 'double' a 'float' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\frame_interpolation.cpp(242,20): warning C4305: '+=': truncamiento de 'double' a 'f32' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\frame_interpolation.cpp(244,24): warning C4305: 'argumento': truncamiento de 'double' a 'float' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\frame_interpolation.cpp(246,20): warning C4305: '+=': truncamiento de 'double' a 'f32' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\frame_interpolation.cpp(250,24): warning C4305: '+=': truncamiento de 'double' a 'f32' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\frame_interpolation.cpp(252,24): warning C4305: '+=': truncamiento de 'double' a 'f32' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\AudioSoundFontFactory.cpp(267,66): warning C4267: '=': conversión de 'size_t' a 'u8'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\AudioSoundFontFactory.cpp(357,78): warning C4267: '=': conversión de 'size_t' a 'u8'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\AudioSoundFontFactory.cpp(394,63): warning C4267: '=': conversión de 'size_t' a 'u16'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SohGui\UIWidgets.cpp(32,32): warning C4018: '>=': no coinciden signed/unsigned [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  SkeletonLimbFactory.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SohGui\UIWidgets.cpp(926,27): warning C4244: '=': conversión de 'double' a 'uint8_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SohGui\UIWidgets.cpp(927,27): warning C4244: '=': conversión de 'double' a 'uint8_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SohGui\UIWidgets.cpp(928,27): warning C4244: '=': conversión de 'double' a 'uint8_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\frame_interpolation.cpp(732,15): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SohGui\UIWidgets.cpp(1171,33): warning C4838: la conversión de 'float' en 'uint8_t' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SohGui\UIWidgets.cpp(1171,33): warning C4244: 'inicializando': conversión de 'float' a 'uint8_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SohGui\UIWidgets.cpp(1171,46): warning C4838: la conversión de 'float' en 'uint8_t' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SohGui\UIWidgets.cpp(1171,46): warning C4244: 'inicializando': conversión de 'float' a 'uint8_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SohGui\UIWidgets.cpp(1171,59): warning C4838: la conversión de 'float' en 'uint8_t' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SohGui\UIWidgets.cpp(1171,59): warning C4244: 'inicializando': conversión de 'float' a 'uint8_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SohGui\UIWidgets.cpp(1171,72): warning C4838: la conversión de 'float' en 'uint8_t' requiere una conversión de restricción [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SohGui\UIWidgets.cpp(1171,72): warning C4244: 'inicializando': conversión de 'float' a 'uint8_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  TextFactory.cpp
+  EndMarkerFactory.cpp
+  SceneCommandFactory.cpp
+  SetActorListFactory.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SohGui\ResolutionEditor.cpp(119,72): warning C4244: '=': conversión de 'float' a 'int32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SohGui\ResolutionEditor.cpp(138,32): warning C4244: '=': conversión de 'int32_t' a 'float'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SohGui\ResolutionEditor.cpp(139,32): warning C4244: '=': conversión de 'int32_t' a 'float'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SohGui\ResolutionEditor.cpp(155,76): warning C4244: '=': conversión de 'float' a 'int32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SohGui\ResolutionEditor.cpp(169,28): warning C4244: '=': conversión de 'int32_t' a 'float'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SohGui\ResolutionEditor.cpp(170,28): warning C4244: '=': conversión de 'int32_t' a 'float'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SohGui\ResolutionEditor.cpp(270,76): warning C4244: '=': conversión de 'float' a 'int32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SohGui\ResolutionEditor.cpp(275,80): warning C4244: '=': conversión de 'float' a 'int32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SohGui\ResolutionEditor.cpp(462,80): warning C4244: '=': conversión de 'float' a 'int32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SohGui\ResolutionEditor.cpp(585,64): warning C4244: '=': conversión de 'float' a 'int32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  SetAlternateHeadersFactory.cpp
+  SetCameraSettingsFactory.cpp
+  SetCollisionHeaderFactory.cpp
+  SetCsCameraFactory.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\SceneFactory.cpp(77,18): warning C4146: operador unario menos aplicado a un tipo unsigned; el resultado aún no tiene signo [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\SceneFactory.cpp(77,18): warning C4309: 'argumento': truncamiento de valor constante [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  SetCutscenesFactory.cpp
+  SetEchoSettingsFactory.cpp
+  SetEntranceListFactory.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\PathFactory.cpp(86,42): warning C4267: '=': conversión de 'size_t' a 'uint8_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\PathFactory.cpp(96,38): warning C4267: '=': conversión de 'size_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  SetExitListFactory.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\SkeletonLimbFactory.cpp(175,68): warning C4267: '=': conversión de 'size_t' a 'uint16_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\SkeletonLimbFactory.cpp(180,76): warning C4267: '=': conversión de 'size_t' a 'uint16_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  SetLightListFactory.cpp
+  SetLightingSettingsFactory.cpp
+  SetMeshFactory.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\scenecommand\SetActorListFactory.cpp(64,59): warning C4267: '=': conversión de 'size_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  SetObjectListFactory.cpp
+  SetPathwaysFactory.cpp
+  SetRoomBehaviorFactory.cpp
+  SetRoomListFactory.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\scenecommand\SetAlternateHeadersFactory.cpp(62,72): warning C4267: '=': conversión de 'size_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  SetSkyboxModifierFactory.cpp
+  SetSkyboxSettingsFactory.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\scenecommand\SetEntranceListFactory.cpp(53,68): warning C4267: '=': conversión de 'size_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  SetSoundSettingsFactory.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\scenecommand\SetExitListFactory.cpp(44,52): warning C4267: '=': conversión de 'size_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\scenecommand\SetLightListFactory.cpp(78,59): warning C4267: '=': conversión de 'size_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  SetSpecialObjectsFactory.cpp
+  SetStartPositionListFactory.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\scenecommand\SetMeshFactory.cpp(97,25): warning C4312: 'conversión de tipo': conversión de 'uint32_t' a 'void *' de mayor tamaño [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\scenecommand\SetMeshFactory.cpp(281,25): warning C4312: 'conversión de tipo': conversión de 'uint32_t' a 'void *' de mayor tamaño [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\scenecommand\SetObjectListFactory.cpp(44,60): warning C4267: '=': conversión de 'size_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  SetTimeSettingsFactory.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\scenecommand\SetPathwaysFactory.cpp(53,52): warning C4267: '=': conversión de 'size_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\scenecommand\SetRoomListFactory.cpp(60,52): warning C4267: '=': conversión de 'size_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  SetTransitionActorListFactory.cpp
+  SetWindSettingsFactory.cpp
+  PathLogger.cpp
+  SceneCommandLoggers.cpp
+  Animation.cpp
+  Array.cpp
+  AudioSample.cpp
+  AudioSequence.cpp
+  AudioSoundFont.cpp
+  Background.cpp
+  CollisionHeader.cpp
+  Cutscene.cpp
+  Path.cpp
+  PlayerAnimation.cpp
+  Scene.cpp
+  Skeleton.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\scenecommand\SetStartPositionListFactory.cpp(66,88): warning C4267: '=': conversión de 'size_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  SkeletonLimb.cpp
+  Text.cpp
+  EndMarker.cpp
+  SetActorList.cpp
+  SetAlternateHeaders.cpp
+  SetCameraSettings.cpp
+  SetCollisionHeader.cpp
+  SetCsCamera.cpp
+  SetCutscenes.cpp
+  SetEchoSettings.cpp
+  SetEntranceList.cpp
+  SetExitList.cpp
+  SetLightList.cpp
+  SetLightingSettings.cpp
+  SetMesh.cpp
+  SetObjectList.cpp
+  SetPathways.cpp
+  SetRoomBehavior.cpp
+  SetRoomList.cpp
+  SetSkyboxModifier.cpp
+  SetSkyboxSettings.cpp
+  SetSoundSettings.cpp
+  SetSpecialObjects.cpp
+  SetStartPositionList.cpp
+  SetTimeSettings.cpp
+  SetTransitionActorList.cpp
+  SetWindSettings.cpp
+  util.cpp
+  z_message_OTR.cpp
+  z_play_otr.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\resource\importer\scenecommand\SetTransitionActorListFactory.cpp(70,99): warning C4267: '=': conversión de 'size_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  z_scene_otr.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\z_message_OTR.cpp(23,38): warning C4267: '=': conversión de 'size_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\z_scene_otr.cpp(156,11): warning C4101: 'nextPtr': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\z_scene_otr.cpp(153,19): warning C4101: 'status2': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\z_scene_otr.cpp(252,85): warning C4244: '=': conversión de 'float' a 'uint16_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\z_scene_otr.cpp(505,48): warning C4244: '=': conversión de 'uintptr_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  bootcommands.c
+  gameconsole.c
+  ShuffleTradeItems.c
+  randomizer_entrance.c
+  randomizer_grotto.c
+  FastCrc32C.c
+  framebuffer_effects.c
+  gu_pc.c
+  mixer.c
+  stubs.c
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\mixer.c(10,9): warning C4068: pragma "GCC" desconocida [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Extractor\FastCrc32C.c(83,9): warning C4244: '=': conversión de 'unsigned __int64' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\mixer.c(519,9): warning C4068: pragma "GCC" desconocida [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\mixer.c(520,9): warning C4068: pragma "GCC" desconocida [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\mixer.c(524,9): warning C4068: pragma "GCC" desconocida [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\gu_pc.c(12,33): warning C4244: '=': conversión de 'float' a 'int32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\gu_pc.c(13,37): warning C4244: '=': conversión de 'float' a 'int32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\gu_pc.c(55,18): warning C4133: 'función': tipos incompatibles, de 'Mtx_t' a 'f32 (*)[4]' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\mixer.c(634,34): warning C4133: 'función': tipos incompatibles, de 'int16_t *' a '__m128i *' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\mixer.c(626,9): warning C4101: 'i': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\mixer.c(627,13): warning C4101: 'sample': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\framebuffer_effects.c(96,57): warning C4244: 'inicializando': conversión de 'float' a 'int16_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\stubs.c(234,20): warning C4267: 'función': conversión de 'size_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  CustomMessageManager.cpp
+  tts.cpp
+  OTRGlobals.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\custom-message\CustomMessageManager.cpp(121,17): warning C4101: 'nextSeg': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\custom-message\CustomMessageManager.cpp(120,17): warning C4101: 'foundSeg': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\libultraship\include\fast\lus_gbi.h(133,9): warning C4005: 'GIMMCMD': redefinición de macro [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  (compilando archivo de origen "../../../source/shipwright/soh/soh/OTRGlobals.cpp")
+      C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\libultraship\include\libultraship\libultra\gbi.h(255,9):
+      vea la definición anterior de “GIMMCMD”
+  
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\tts\tts.cpp(361,32): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\tts\tts.cpp(436,38): warning C4267: '=': conversión de 'size_t' a 'int8_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\tts\tts.cpp(517,40): warning C4244: 'inicializando': conversión de 'uint16_t' a 'uint8_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\tts\tts.cpp(536,42): warning C4267: '=': conversión de 'size_t' a 'int8_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\OTRGlobals.cpp(455,20): warning C4996: 'strdup': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _strdup. See online help for details. [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\OTRGlobals.cpp(1109,55): warning C4101: 'ex': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\OTRGlobals.cpp(1124,55): warning C4101: 'ex': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\OTRGlobals.cpp(1324,11): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\OTRGlobals.cpp(1168,55): warning C4101: 'ex': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\OTRGlobals.cpp(1185,55): warning C4101: 'ex': variable local sin referencia [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\OTRGlobals.cpp(1698,78): warning C4267: 'argumento': conversión de 'size_t' a 'int'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\OTRGlobals.cpp(1831,32): warning C4244: 'argumento': conversión de 'const _Elem' a 'char'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\OTRGlobals.cpp(1831,32): warning C4244:         with [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\OTRGlobals.cpp(1831,32): warning C4244:         [ [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\OTRGlobals.cpp(1831,32): warning C4244:             _Elem=wchar_t [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\OTRGlobals.cpp(1831,32): warning C4244:         ] [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\OTRGlobals.cpp(1849,41): warning C4244: 'argumento': conversión de '__int64' a 'char'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\OTRGlobals.cpp(1854,41): warning C4244: 'argumento': conversión de '__int64' a 'char'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\OTRGlobals.cpp(1859,41): warning C4244: 'argumento': conversión de '__int64' a 'char'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\OTRGlobals.cpp(1864,41): warning C4244: 'argumento': conversión de '__int64' a 'char'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\OTRGlobals.cpp(1965,27): warning C4244: '=': conversión de 'float' a 'uint8_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\OTRGlobals.cpp(1966,27): warning C4244: '=': conversión de 'float' a 'uint8_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\OTRGlobals.cpp(1967,27): warning C4244: '=': conversión de 'float' a 'uint8_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\OTRGlobals.cpp(2076,46): warning C4267: 'argumento': conversión de 'size_t' a 'uint8_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\OTRGlobals.cpp(2117,27): warning C4267: 'inicializando': conversión de 'size_t' a 'int'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\OTRGlobals.cpp(2412,102): warning C4267: '=': conversión de 'size_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\OTRGlobals.cpp(2737,56): warning C4267: '=': conversión de 'size_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\OTRGlobals.cpp(2740,56): warning C4267: '=': conversión de 'size_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\OTRGlobals.cpp(2744,56): warning C4267: '=': conversión de 'size_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  menu.cpp
+  Menu.cpp
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SohGui\Menu.cpp(72,25): warning C4244: 'return': conversión de '__int64' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SohGui\Menu.cpp(99,64): warning C4267: '=': conversión de 'size_t' a 'uint32_t'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SohGui\Menu.cpp(134,34): warning C4244: '=': conversión de 'int32_t' a 'float'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SohGui\Menu.cpp(135,34): warning C4244: '=': conversión de 'int32_t' a 'float'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SohGui\Menu.cpp(136,33): warning C4244: '=': conversión de 'int32_t' a 'float'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SohGui\Menu.cpp(137,33): warning C4244: '=': conversión de 'int32_t' a 'float'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SohGui\Menu.cpp(810,48): warning C4244: 'argumento': conversión de 'float' a 'ImDrawFlags'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\SohGui\Menu.cpp(860,92): warning C4244: 'argumento': conversión de 'float' a 'ImDrawFlags'; posible pérdida de datos [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+cl : línea de comandos  warning D9025: invalidando '/W3' con '/w' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+cl : línea de comandos  warning D9025: invalidando '/W3' con '/w' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  boot_main.c
+cl : línea de comandos  warning D9025: invalidando '/W3' con '/w' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+cl : línea de comandos  warning D9025: invalidando '/W3' con '/w' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+cl : línea de comandos  warning D9025: invalidando '/W3' con '/w' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+cl : línea de comandos  warning D9025: invalidando '/W3' con '/w' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+cl : línea de comandos  warning D9025: invalidando '/W3' con '/w' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  build.c
+  idle.c
+cl : línea de comandos  warning D9025: invalidando '/W3' con '/w' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+cl : línea de comandos  warning D9025: invalidando '/W3' con '/w' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  is_debug.c
+  logutils.c
+cl : línea de comandos  warning D9025: invalidando '/W3' con '/w' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  stackcheck.c
+cl : línea de comandos  warning D9025: invalidando '/W3' con '/w' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+cl : línea de comandos  warning D9025: invalidando '/W3' con '/w' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+cl : línea de comandos  warning D9025: invalidando '/W3' con '/w' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+cl : línea de comandos  warning D9025: invalidando '/W3' con '/w' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+cl : línea de comandos  warning D9025: invalidando '/W3' con '/w' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+cl : línea de comandos  warning D9025: invalidando '/W3' con '/w' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+cl : línea de comandos  warning D9025: invalidando '/W3' con '/w' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+cl : línea de comandos  warning D9025: invalidando '/W3' con '/w' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+cl : línea de comandos  warning D9025: invalidando '/W3' con '/w' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+cl : línea de comandos  warning D9025: invalidando '/W3' con '/w' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  viconfig.c
+cl : línea de comandos  warning D9025: invalidando '/W3' con '/w' [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  yaz0.c
+  z_locale.c
+  z_std_dma.c
+  gfxbuffers.c
+  heaps.c
+  zbuffer.c
+  PreRender.c
+  TwoHeadArena.c
+  __osMalloc.c
+  audioMgr.c
+  audio_data.c
+  audio_effects.c
+  audio_heap.c
+  audio_init_params.c
+  audio_load.c
+  audio_playback.c
+  audio_seqplayer.c
+  audio_sound_params.c
+  audio_synthesis.c
+  code_800430A0.c
+  code_8006C3A0.c
+  code_8006C510.c
+  code_800A9F30.c
+  code_800BB0A0.c
+  code_800C3C20.c
+  code_800D2E30.c
+  code_800D31A0.c
+  code_800E4FE0.c
+  code_800E6840.c
+  code_800EC960.c
+  code_800F7260.c
+  code_800F9280.c
+  code_800FBCE0.c
+  code_800FC620.c
+  code_800FCE80.c
+  code_800FD970.c
+  code_801067F0.c
+  code_801068B0.c
+  db_camera.c
+  debug_malloc.c
+  fault.c
+  fault_drawer.c
+  flg_set.c
+  game.c
+  gamealloc.c
+  gfxprint.c
+  graph.c
+  irqmgr.c
+  jpegdecoder.c
+  jpegutils.c
+  listalloc.c
+  loadfragment2.c
+  logseverity.c
+  main.c
+  mempak.c
+  mtxuty-cvt.c
+  padmgr.c
+  padsetup.c
+  padutils.c
+  printutils.c
+  relocation.c
+  sched.c
+  shrink_window.c
+  sleep.c
+  speed_meter.c
+  sys_cfb.c
+  sys_math.c
+  sys_math3d.c
+  sys_math_atan.c
+  sys_matrix.c
+  sys_ucode.c
+  system_malloc.c
+  title_setup.c
+  ucode_disas.c
+  z_DLF.c
+  z_actor.c
+  z_bg_item.c
+  z_bgcheck.c
+  z_camera.c
+  z_cheap_proc.c
+  z_collision_btltbls.c
+  z_collision_check.c
+  z_common_data.c
+  z_construct.c
+  z_debug.c
+  z_debug_display.c
+  z_demo.c
+  z_draw.c
+  z_eff_blure.c
+  z_eff_shield_particle.c
+  z_eff_spark.c
+  z_eff_ss_dead.c
+  z_effect.c
+  z_effect_soft_sprite.c
+  z_effect_soft_sprite_dlftbls.c
+  z_effect_soft_sprite_old_init.c
+  z_elf_message.c
+  z_en_a_keep.c
+  z_en_item00.c
+  z_face_reaction.c
+  z_fbdemo.c
+  z_fbdemo_circle.c
+  z_fbdemo_fade.c
+  z_fbdemo_triforce.c
+  z_fbdemo_wipe1.c
+  z_fcurve_data_skelanime.c
+  z_frame_advance.c
+  z_game_dlftbls.c
+  z_game_over.c
+  z_horse.c
+  z_inventory.c
+  z_jpeg.c
+  z_kaleido_manager.c
+  z_kaleido_scope_call.c
+  z_kaleido_setup.c
+  z_kanfont.c
+  z_kanji.c
+  z_kankyo.c
+  z_lib.c
+  z_lifemeter.c
+  z_lights.c
+  z_malloc.c
+  z_map_data.c
+  z_map_exp.c
+  z_map_mark.c
+  z_message_PAL.c
+  z_moji.c
+  z_msgevent.c
+  z_olib.c
+  z_onepointdemo.c
+  z_parameter.c
+  z_path.c
+  z_play.c
+  z_player_call.c
+  z_player_lib.c
+  z_prenmi.c
+  z_prenmi_buff.c
+  z_quake.c
+  z_rcp.c
+  z_room.c
+  z_sample.c
+  z_scene.c
+  z_scene_table.c
+  z_skelanime.c
+  z_skin.c
+  z_skin_awb.c
+  z_skin_matrix.c
+  z_sound_source.c
+  z_sram.c
+  z_ss_sram.c
+  z_view.c
+  z_vimode.c
+  z_viscvg.c
+  z_vismono.c
+  z_viszbuf.c
+  z_vr_box.c
+  z_vr_box_draw.c
+  coss.c
+  guLookAt.c
+  guLookAtHilite.c
+  guPerspectiveF.c
+  guPosition.c
+  guS2DInitBg.c
+  ortho.c
+  rotate.c
+  sins.c
+  sintable.c
+  z_arms_hook.c
+  z_arrow_fire.c
+  z_arrow_ice.c
+  z_arrow_light.c
+  z_bg_bdan_objects.c
+  z_bg_bdan_switch.c
+  z_bg_bom_guard.c
+  z_bg_bombwall.c
+  z_bg_bowl_wall.c
+  z_bg_breakwall.c
+  z_bg_ddan_jd.c
+  z_bg_ddan_kd.c
+  z_bg_dodoago.c
+  z_bg_dy_yoseizo.c
+  z_bg_ganon_otyuka.c
+  z_bg_gate_shutter.c
+  z_bg_gjyo_bridge.c
+  z_bg_gnd_darkmeiro.c
+  z_bg_gnd_firemeiro.c
+  z_bg_gnd_iceblock.c
+  z_bg_gnd_nisekabe.c
+  z_bg_gnd_soulmeiro.c
+  z_bg_haka.c
+  z_bg_haka_gate.c
+  z_bg_haka_huta.c
+  z_bg_haka_megane.c
+  z_bg_haka_meganebg.c
+  z_bg_haka_sgami.c
+  z_bg_haka_ship.c
+  z_bg_haka_trap.c
+  z_bg_haka_tubo.c
+  z_bg_haka_water.c
+  z_bg_haka_zou.c
+  z_bg_heavy_block.c
+  z_bg_hidan_curtain.c
+  z_bg_hidan_dalm.c
+  z_bg_hidan_firewall.c
+  z_bg_hidan_fslift.c
+  z_bg_hidan_fwbig.c
+  z_bg_hidan_hamstep.c
+  z_bg_hidan_hrock.c
+  z_bg_hidan_kousi.c
+  z_bg_hidan_kowarerukabe.c
+  z_bg_hidan_rock.c
+  z_bg_hidan_rsekizou.c
+  z_bg_hidan_sekizou.c
+  z_bg_hidan_sima.c
+  z_bg_hidan_syoku.c
+  z_bg_ice_objects.c
+  z_bg_ice_shelter.c
+  z_bg_ice_shutter.c
+  z_bg_ice_turara.c
+  z_bg_ingate.c
+  z_bg_jya_1flift.c
+  z_bg_jya_amishutter.c
+  z_bg_jya_bigmirror.c
+  z_bg_jya_block.c
+  z_bg_jya_bombchuiwa.c
+  z_bg_jya_bombiwa.c
+  z_bg_jya_cobra.c
+  z_bg_jya_goroiwa.c
+  z_bg_jya_haheniron.c
+  z_bg_jya_ironobj.c
+  z_bg_jya_kanaami.c
+  z_bg_jya_lift.c
+  z_bg_jya_megami.c
+  z_bg_jya_zurerukabe.c
+  z_bg_menkuri_eye.c
+  z_bg_menkuri_kaiten.c
+  z_bg_menkuri_nisekabe.c
+  z_bg_mizu_bwall.c
+  z_bg_mizu_movebg.c
+  z_bg_mizu_shutter.c
+  z_bg_mizu_uzu.c
+  z_bg_mizu_water.c
+  z_bg_mjin.c
+  z_bg_mori_bigst.c
+  z_bg_mori_elevator.c
+  z_bg_mori_hashigo.c
+  z_bg_mori_hashira4.c
+  z_bg_mori_hineri.c
+  z_bg_mori_idomizu.c
+  z_bg_mori_kaitenkabe.c
+  z_bg_mori_rakkatenjo.c
+  z_bg_po_event.c
+  z_bg_po_syokudai.c
+  z_bg_pushbox.c
+  z_bg_relay_objects.c
+  z_bg_spot00_break.c
+  z_bg_spot00_hanebasi.c
+  z_bg_spot01_fusya.c
+  z_bg_spot01_idohashira.c
+  z_bg_spot01_idomizu.c
+  z_bg_spot01_idosoko.c
+  z_bg_spot01_objects2.c
+  z_bg_spot02_objects.c
+  z_bg_spot03_taki.c
+  z_bg_spot05_soko.c
+  z_bg_spot06_objects.c
+  z_bg_spot07_taki.c
+  z_bg_spot08_bakudankabe.c
+  z_bg_spot08_iceblock.c
+  z_bg_spot09_obj.c
+  z_bg_spot11_bakudankabe.c
+  z_bg_spot11_oasis.c
+  z_bg_spot12_gate.c
+  z_bg_spot12_saku.c
+  z_bg_spot15_rrbox.c
+  z_bg_spot15_saku.c
+  z_bg_spot16_bombstone.c
+  z_bg_spot16_doughnut.c
+  z_bg_spot17_bakudankabe.c
+  z_bg_spot17_funen.c
+  z_bg_spot18_basket.c
+  z_bg_spot18_futa.c
+  z_bg_spot18_obj.c
+  z_bg_spot18_shutter.c
+  z_bg_sst_floor.c
+  z_bg_toki_hikari.c
+  z_bg_toki_swd.c
+  z_bg_toki_swd_cutscene_data_1.c
+  z_bg_toki_swd_cutscene_data_2.c
+  z_bg_toki_swd_cutscene_data_3.c
+  z_bg_treemouth.c
+  z_bg_treemouth_cutscene_data.c
+  z_bg_umajump.c
+  z_bg_vb_sima.c
+  z_bg_ydan_hasi.c
+  z_bg_ydan_maruta.c
+  z_bg_ydan_sp.c
+  z_bg_zg.c
+  z_boss_dodongo.c
+  z_boss_dodongo_data.c
+  z_boss_fd.c
+  z_boss_fd_colchk.c
+  z_boss_fd2.c
+  z_boss_fd2_colchk.c
+  z_boss_ganon.c
+  z_boss_ganon2.c
+  z_boss_ganon2_data.c
+  z_boss_ganondrof.c
+  z_boss_goma.c
+  z_boss_mo.c
+  z_boss_mo_colchk.c
+  z_boss_sst.c
+  z_boss_sst_colchk.c
+  z_boss_tw.c
+  z_boss_va.c
+  z_demo_6k.c
+  z_demo_du.c
+  z_demo_du_cutscene_data.c
+  z_demo_ec.c
+  z_demo_effect.c
+  z_demo_ext.c
+  z_demo_geff.c
+  z_demo_gj.c
+  z_demo_go.c
+  z_demo_gt.c
+  z_demo_ik.c
+  z_demo_im.c
+  z_demo_im_cutscene_data.c
+  z_demo_kankyo.c
+  z_demo_kankyo_cutscene_data1.c
+  z_demo_kankyo_cutscene_data2.c
+  z_demo_kankyo_cutscene_data3.c
+  z_demo_kankyo_cutscene_data4.c
+  z_demo_kankyo_cutscene_data5.c
+  z_demo_kankyo_cutscene_data6.c
+  z_demo_kankyo_cutscene_data7.c
+  z_demo_kankyo_cutscene_data8.c
+  z_demo_kekkai.c
+  z_demo_sa.c
+  z_demo_sa_cutscene_data.c
+  z_demo_shd.c
+  z_demo_tre_lgt.c
+  z_door_ana.c
+  z_door_gerudo.c
+  z_door_killer.c
+  z_door_shutter.c
+  z_door_toki.c
+  z_door_warp1.c
+  z_efc_erupc.c
+  z_eff_dust.c
+  z_elf_msg.c
+  z_elf_msg2.c
+  z_en_am.c
+  z_en_ani.c
+  z_en_anubice.c
+  z_en_anubice_fire.c
+  z_en_anubice_tag.c
+  z_en_arow_trap.c
+  z_en_arrow.c
+  z_en_attack_niw.c
+  z_en_ba.c
+  z_en_bb.c
+  z_en_bdfire.c
+  z_en_bigokuta.c
+  z_en_bili.c
+  z_en_bird.c
+  z_en_blkobj.c
+  z_en_bom.c
+  z_en_bom_bowl_man.c
+  z_en_bom_bowl_pit.c
+  z_en_bom_chu.c
+  z_en_bombf.c
+  z_en_boom.c
+  z_en_box.c
+  z_en_brob.c
+  z_en_bubble.c
+  z_en_butte.c
+  z_en_bw.c
+  z_en_bx.c
+  z_en_changer.c
+  z_en_clear_tag.c
+  z_en_cow.c
+  z_en_crow.c
+  z_en_cs.c
+  z_en_daiku.c
+  z_en_daiku_kakariko.c
+  z_en_dekubaba.c
+  z_en_dekunuts.c
+  z_en_dh.c
+  z_en_dha.c
+  z_en_diving_game.c
+  z_en_dns.c
+  z_en_dnt_demo.c
+  z_en_dnt_jiji.c
+  z_en_dnt_nomal.c
+  z_en_dodojr.c
+  z_en_dodongo.c
+  z_en_dog.c
+  z_en_door.c
+  z_en_ds.c
+  z_en_du.c
+  z_en_dy_extra.c
+  z_en_eg.c
+  z_en_eiyer.c
+  z_en_elf.c
+  z_en_encount1.c
+  z_en_encount2.c
+  z_en_ex_item.c
+  z_en_ex_ruppy.c
+  z_en_fd.c
+  z_en_fd_fire.c
+  z_en_fhg_fire.c
+  z_en_fire_rock.c
+  z_en_firefly.c
+  z_en_fish.c
+  z_en_floormas.c
+  z_en_fr.c
+  z_en_fu.c
+  z_en_fw.c
+  z_en_fz.c
+  z_en_g_switch.c
+  z_en_ganon_mant.c
+  z_en_ganon_organ.c
+  z_en_gb.c
+  z_en_ge1.c
+  z_en_ge2.c
+  z_en_ge3.c
+  z_en_geldb.c
+  z_en_girla.c
+  z_en_gm.c
+  z_en_go.c
+  z_en_go2.c
+  z_en_goma.c
+  z_en_goroiwa.c
+  z_en_gs.c
+  z_en_guest.c
+  z_en_hata.c
+  z_en_heishi1.c
+  z_en_heishi2.c
+  z_en_heishi3.c
+  z_en_heishi4.c
+  z_en_hintnuts.c
+  z_en_holl.c
+  z_en_honotrap.c
+  z_en_horse.c
+  z_en_horse_game_check.c
+  z_en_horse_ganon.c
+  z_en_horse_link_child.c
+  z_en_horse_normal.c
+  z_en_horse_zelda.c
+  z_en_hs.c
+  z_en_hs2.c
+  z_en_hy.c
+  z_en_ice_hono.c
+  z_en_ik.c
+  z_en_in.c
+  z_en_insect.c
+  z_en_ishi.c
+  z_en_it.c
+  z_en_jj.c
+  z_en_jj_cutscene_data.c
+  z_en_js.c
+  z_en_jsjutan.c
+  z_en_kakasi.c
+  z_en_kakasi2.c
+  z_en_kakasi3.c
+  z_en_kanban.c
+  z_en_kanban_gfx.c
+  z_en_karebaba.c
+  z_en_ko.c
+  z_en_kusa.c
+  z_en_kz.c
+  z_en_light.c
+  z_en_lightbox.c
+  z_en_m_fire1.c
+  z_en_m_thunder.c
+  z_en_ma1.c
+  z_en_ma2.c
+  z_en_ma3.c
+  z_en_mag.c
+  z_en_mb.c
+  z_en_md.c
+  z_en_mk.c
+  z_en_mm.c
+  z_en_mm2.c
+  z_en_ms.c
+  z_en_mu.c
+  z_en_nb.c
+  z_en_nb_cutscene_data.c
+  z_en_niw.c
+  z_en_niw_girl.c
+  z_en_niw_lady.c
+  z_en_nutsball.c
+  z_en_nwc.c
+  z_en_ny.c
+  z_en_oe2.c
+  z_en_okarina_effect.c
+  z_en_okarina_tag.c
+  z_en_okarina_tag_cutscene_data.c
+  z_en_okuta.c
+  z_en_ossan.c
+  z_en_owl.c
+  z_en_part.c
+  z_en_partner.c
+  z_en_peehat.c
+  z_en_po_desert.c
+  z_en_po_field.c
+  z_en_po_relay.c
+  z_en_po_sisters.c
+  z_en_poh.c
+  z_en_pu_box.c
+  z_en_rd.c
+  z_en_reeba.c
+  z_en_river_sound.c
+  z_en_rl.c
+  z_en_rr.c
+  z_en_ru1.c
+  z_en_ru1_cutscene_data.c
+  z_en_ru2.c
+  z_en_ru2_cutscene_data.c
+  z_en_sa.c
+  z_en_sb.c
+  z_en_scene_change.c
+  z_en_sda.c
+  z_en_shopnuts.c
+  z_en_si.c
+  z_en_siofuki.c
+  z_en_skb.c
+  z_en_skj.c
+  z_en_skjneedle.c
+  z_en_ssh.c
+  z_en_st.c
+  z_en_sth.c
+  z_en_stream.c
+  z_en_sw.c
+  z_en_syateki_itm.c
+  z_en_syateki_man.c
+  z_en_syateki_niw.c
+  z_en_ta.c
+  z_en_takara_man.c
+  z_en_tana.c
+  z_en_test.c
+  z_en_tg.c
+  z_en_tite.c
+  z_en_tk.c
+  z_en_torch.c
+  z_en_torch2.c
+  z_en_toryo.c
+  z_en_tp.c
+  z_en_tr.c
+  z_en_trap.c
+  z_en_tubo_trap.c
+  z_en_vali.c
+  z_en_vase.c
+  z_en_vb_ball.c
+  z_en_viewer.c
+  z_en_vm.c
+  z_en_wall_tubo.c
+  z_en_wallmas.c
+  z_en_weather_tag.c
+  z_en_weiyer.c
+  z_en_wf.c
+  z_en_wonder_item.c
+  z_en_wonder_talk.c
+  z_en_wonder_talk2.c
+  z_en_wood02.c
+  z_en_xc.c
+  z_en_yabusame_mark.c
+  z_en_yukabyun.c
+  z_en_zf.c
+  z_en_zl1.c
+  z_en_zl1_camera_data.c
+  z_en_zl1_cutscene_data.c
+  z_en_zl2.c
+  z_en_zl3.c
+  z_en_zl4.c
+  z_en_zl4_cutscene_data.c
+  z_en_zo.c
+  z_en_fhg.c
+  z_end_title.c
+  z_fishing.c
+  z_item_b_heart.c
+  z_item_etcetera.c
+  z_item_inbox.c
+  z_item_ocarina.c
+  z_item_shield.c
+  z_magic_dark.c
+  z_magic_fire.c
+  z_magic_wind.c
+  z_mir_ray.c
+  z_obj_bean.c
+  z_obj_blockstop.c
+  z_obj_bombiwa.c
+  z_obj_comb.c
+  z_obj_dekujr.c
+  z_obj_elevator.c
+  z_obj_hamishi.c
+  z_obj_hana.c
+  z_obj_hsblock.c
+  z_obj_ice_poly.c
+  z_obj_kibako.c
+  z_obj_kibako2.c
+  z_obj_lift.c
+  z_obj_lightswitch.c
+  z_obj_makekinsuta.c
+  z_obj_makeoshihiki.c
+  z_obj_mure.c
+  z_obj_mure2.c
+  z_obj_mure3.c
+  z_obj_oshihiki.c
+  z_obj_roomtimer.c
+  z_obj_switch.c
+  z_obj_syokudai.c
+  z_obj_timeblock.c
+  z_obj_tsubo.c
+  z_obj_warp2block.c
+  z_object_kankyo.c
+  z_oceff_spot.c
+  z_oceff_storm.c
+  z_oceff_wipe.c
+  z_oceff_wipe2.c
+  z_oceff_wipe3.c
+  z_oceff_wipe4.c
+  z_shot_sun.c
+  z_player.c
+  z_eff_ss_blast.c
+  z_eff_ss_bomb.c
+  z_eff_ss_bomb2.c
+  z_eff_ss_bubble.c
+  z_eff_ss_d_fire.c
+  z_eff_ss_dead_db.c
+  z_eff_ss_dead_dd.c
+  z_eff_ss_dead_ds.c
+  z_eff_ss_dead_sound.c
+  z_eff_ss_dt_bubble.c
+  z_eff_ss_dust.c
+  z_eff_ss_en_fire.c
+  z_eff_ss_en_ice.c
+  z_eff_ss_extra.c
+  z_eff_ss_fcircle.c
+  z_eff_ss_fhg_flash.c
+  z_eff_ss_fire_tail.c
+  z_eff_ss_g_fire.c
+  z_eff_ss_g_magma.c
+  z_eff_ss_g_magma2.c
+  z_eff_ss_g_ripple.c
+  z_eff_ss_g_spk.c
+  z_eff_ss_g_splash.c
+  z_eff_ss_hahen.c
+  z_eff_ss_hitmark.c
+  z_eff_ss_ice_piece.c
+  z_eff_ss_ice_smoke.c
+  z_eff_ss_k_fire.c
+  z_eff_ss_kakera.c
+  z_eff_ss_kirakira.c
+  z_eff_ss_lightning.c
+  z_eff_ss_sibuki.c
+  z_eff_ss_sibuki2.c
+  z_eff_ss_solder_srch_ball.c
+  z_eff_ss_stick.c
+  z_eff_ss_stone1.c
+  z_file_choose.c
+  z_file_copy_erase.c
+  z_file_nameset_NES.c
+  z_file_nameset_PAL.c
+  z_file_nameset_data.c
+  z_opening.c
+  z_select.c
+  z_title.c
+  z_kaleido_collect.c
+  z_kaleido_debug.c
+  z_kaleido_equipment.c
+  z_kaleido_item.c
+  z_kaleido_map_PAL.c
+  z_kaleido_prompt.c
+  z_kaleido_scope_PAL.c
+  z_lmap_mark.c
+  z_lmap_mark_data.c
+  z_map_mark_data.c
+  sprintf.c
+  Generando código
+  Previous IPDB not found, fall back to full compilation.
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\stubs.c(261): warning C4716: 'osSpTaskYielded': debe devolver un valor [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\stubs.c(258): warning C4716: 'osStopTimer': debe devolver un valor [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\stubs.c(201): warning C4716: 'osContSetCh': debe devolver un valor [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\stubs.c(67): warning C4716: 'osPfsInitPak': debe devolver un valor [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\stubs.c(115): warning C4716: 'osContStartQuery': debe devolver un valor [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\stubs.c(210): warning C4716: '__osSpGetStatus': debe devolver un valor [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\stubs.c(61): warning C4716: 'osPfsDeleteFile': debe devolver un valor [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\stubs.c(76): warning C4716: 'osPfsFindFile': debe devolver un valor [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\stubs.c(79): warning C4716: 'osPfsAllocateFile': debe devolver un valor [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\stubs.c(64): warning C4716: 'osPfsFileState': debe devolver un valor [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\stubs.c(52): warning C4716: 'osPfsFreeBlocks': debe devolver un valor [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\stubs.c(58): warning C4716: 'osPfsReadWriteFile': debe devolver un valor [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\stubs.c(204): warning C4716: 'osDpGetStatus': debe devolver un valor [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\stubs.c(40): warning C4716: 'osGetThreadId': debe devolver un valor [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\stubs.c(235): warning C4716: '_Printf': debe devolver un valor [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\ResourceManagerHelpers.cpp(76): warning C4715: 'ResourceMgr_GetGameRegion': no todas las rutas de acceso de control devuelven un valor [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\ResourceManagerHelpers.cpp(51): warning C4715: 'ResourceMgr_GetGamePlatform': no todas las rutas de acceso de control devuelven un valor [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\util.cpp(744): warning C4172: dirección de devolución de variable local o temporal [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\util.cpp(685): warning C4172: dirección de devolución de variable local o temporal [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\util.cpp(734): warning C4172: dirección de devolución de variable local o temporal [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\util.cpp(710): warning C4172: dirección de devolución de variable local o temporal [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\soh\soh\Enhancements\tts\tts.cpp(93): warning C4715: 'GetParameritizedText': no todas las rutas de acceso de control devuelven un valor [C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\build\shipwright-9.1.1-clean\soh\soh.vcxproj]
+  All 95280 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Generación de código finalizada
+  soh.vcxproj -> C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\source\shipwright\x64\Release\soh.exe
+  		Copying asset xmls...
+  Building Custom Rule C:/Users/danie/Desktop/Ocarina_CouchEdition_DEV/source/shipwright/CMakeLists.txt
+--- BUILD METADATA ---
+END=2026-09-15T21:53:06.0987806-06:00
+DURATION=00:16:09.6632297
+EXIT_CODE=0

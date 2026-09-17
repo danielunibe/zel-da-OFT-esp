@@ -1,0 +1,13 @@
+-- Selecting Windows SDK version 10.0.26100.0 to target Windows 10.0.
+Suppressing warnings in LUS and src
+-- Using Vcpkg triplet 'x64-windows'
+-- Auto-updating vcpkg in C:\Program Files\Microsoft Visual Studio\2022\Community\VC\vcpkg
+fatal: not a git repository (or any of the parent directories): .git
+CMake Error at CMake/automate-vcpkg.cmake:131 (message):
+  ***** FATAL ERROR: Could not clone vcpkg *****
+Call Stack (most recent call first):
+  CMake/automate-vcpkg.cmake:94 (_install_or_update_vcpkg)
+  CMakeLists.txt:86 (vcpkg_bootstrap)
+
+
+-- Configuring incomplete, errors occurred!

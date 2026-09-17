@@ -1,0 +1,9 @@
+SOURCE_REPOSITORY=https://github.com/HarbourMasters/Shipwright.git
+SOURCE_TAG=9.1.1
+SOURCE_COMMIT=4aaad850bd5540cd77c2d83f3ad348d3b38605b2
+SOURCE_BRANCH=couch-edition
+SOURCE_MATCH_CONFIDENCE=EXACT
+SUBMODULES=OTRExporter@32e088e28c8cdd055d4bb8f3f219d33ad37963f3;ZAPDTR@684f21a475dcfeee89938ae1f4afc42768a3e7ef;libultraship@17a0b7939bd05f5e617cef89457ca43774fc9a9f
+CLONE_MODE=single-branch tag 9.1.1, then local branch couch-edition
+FUNCTIONAL_SOURCE_CHANGES=none
+ADMINISTRATIVE_SOURCE_CHANGE=.gitignore couch-private exclusions

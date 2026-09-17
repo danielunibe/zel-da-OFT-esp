@@ -1,0 +1,15 @@
+step,expected_control,expected_sdl,observed_sdl,status,notes
+1,A,button 0,,UNVERIFIED,Interactive session stopped at READY,A before physical input
+2,B,button 1,,UNVERIFIED,Not reached
+3,LB,button 4,,UNVERIFIED,Not reached
+4,RB,button 5,,UNVERIFIED,Not reached
+5,Menu/Start,button 7,,UNVERIFIED,Not reached
+6,LT/Z,axis 4 positive,,UNVERIFIED,Not reached
+7,Left Stick Up,axis 1 negative,,UNVERIFIED,Not reached
+8,Left Stick Down,axis 1 positive,,UNVERIFIED,Not reached
+9,Left Stick Left,axis 0 negative,,UNVERIFIED,Not reached
+10,Left Stick Right,axis 0 positive,,UNVERIFIED,Not reached
+11,Right Stick Up,axis 3 negative,,UNVERIFIED,Not reached
+12,Right Stick Down,axis 3 positive,,UNVERIFIED,Not reached
+13,Right Stick Left,axis 2 negative,,UNVERIFIED,Not reached
+14,Right Stick Right,axis 2 positive,,UNVERIFIED,Not reached

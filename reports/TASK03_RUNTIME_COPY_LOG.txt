@@ -1,0 +1,29 @@
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Herramienta para copia eficaz de archivos         
+-------------------------------------------------------------------------------
+
+  Iniciado : martes, 15 de septiembre de 2026 09:54:39 p. m.
+   Origen : C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\runtime\working\
+     Destino : C:\Users\danie\Desktop\Ocarina_CouchEdition_DEV\runtime\build-test\
+
+    Archivos: *.*
+	    
+  Opciones: *.* /NDL /NFL /S /E /DCOPY:T /COPY:DAT /NP /R:2 /W:1 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiado   OmitidoNo coincidencia     ERROR    Extras
+Director.:       210       209         1         0         0         0
+ Archivos:      7729      7729         0         0         0         0
+    Bytes:  300.26 m  300.26 m         0         0         0         0
+   Tiempo:   0:00:30   0:00:30                       0:00:00   0:00:00
+
+
+Velocidad:           10,391,121 Bytes/s
+Velocidad:              594.585 Megabytes/min
+   Finalizado: martes, 15 de septiembre de 2026 09:55:09 p. m.
+

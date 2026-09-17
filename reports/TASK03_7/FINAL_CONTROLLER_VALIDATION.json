@@ -1,0 +1,59 @@
+{
+  "timestamp": "2026-09-15T23:59:45",
+  "controller_name": "Xbox Series X Controller",
+  "guid": "0300fa675e040000130b000023057801",
+  "path": "XInput#0",
+  "instance_id": 0,
+  "connection": "XINPUT_BRIDGE (BLUETOOTH_LE)",
+  "mapping": "0300fa675e040000130b000023057801,*,a:b0,b:b1,back:b6,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,dpup:h0.1,guide:b10,leftshoulder:b4,leftstick:b8,lefttrigger:a2,leftx:a0,lefty:a1,rightshoulder:b5,rightstick:b9,righttrigger:a5,rightx:a3,righty:a4,start:b7,x:b2,y:b3,platform:Windows",
+  "controls_validated": {
+    "A": "PASS",
+    "B": "PASS",
+    "X": "PASS",
+    "Y": "PASS",
+    "LB": "PASS",
+    "RB": "PASS",
+    "START": "PASS",
+    "BACK": "PASS",
+    "LT": "PASS",
+    "RT": "PASS",
+    "LEFT_STICK": "PASS",
+    "RIGHT_STICK": "PASS",
+    "DPAD": "PASS"
+  },
+  "left_stick_stats": {
+    "center_x": 116,
+    "center_y": 713,
+    "min_x": -32768,
+    "max_x": 32767,
+    "min_y": -32768,
+    "max_y": 32767,
+    "drift": false,
+    "status": "PASS"
+  },
+  "right_stick_stats": {
+    "center_x": 212,
+    "center_y": 462,
+    "min_x": -32768,
+    "max_x": 32767,
+    "min_y": -32768,
+    "max_y": 32767,
+    "drift": false,
+    "status": "PASS"
+  },
+  "right_stick_c_mapping": {
+    "rs_up": "C-Up",
+    "rs_down": "C-Down",
+    "rs_left": "C-Left",
+    "rs_right": "C-Right",
+    "diagonals": "PASS",
+    "native_rs_c_behavior": "ACCEPTABLE"
+  },
+  "free_camera_conflict": false,
+  "rumble": {
+    "sdl_rumble_call": "SUCCESS (0)",
+    "physical_motor_verified": true,
+    "status": "PASS"
+  },
+  "overall_result": "PASS"
+}

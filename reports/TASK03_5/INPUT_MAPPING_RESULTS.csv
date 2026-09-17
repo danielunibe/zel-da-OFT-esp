@@ -1,0 +1,13 @@
+control,task_profile_expected,observed_sdl_gamecontroller_mapping,build_test_config_after_review,physical_event_status,classification
+A,button 0,b0,button 0,UNVERIFIED,SDL mapping metadata agrees; press not observed
+B,button 1,b1,button 1,UNVERIFIED,SDL mapping metadata agrees; press not observed
+LB/L,button 9,b4,button 4,UNVERIFIED,CONFIG_ERROR in prior profile; corrected in build-test only
+RB/R,button 10,b5,button 5,UNVERIFIED,CONFIG_ERROR in prior profile; corrected in build-test only
+Menu/Start,button 6,b7,button 7,UNVERIFIED,CONFIG_ERROR in prior profile; corrected in build-test only
+LT/Z,axis 4 positive,a4 lefttrigger,UNVERIFIED,SDL mapping metadata agrees; physical axis event not observed
+Left Stick X/Y,axes 0/1,a0/a1,axes 0/1,UNVERIFIED,SDL mapping metadata agrees; drift/range not measured
+Right Stick X/Y,axes 2/3,a2/a3,axes 2/3,UNVERIFIED,SDL mapping metadata agrees; quadrants not measured
+RS Up/C-Up,axis 3 negative,a3 righty negative,axis 3 negative,UNVERIFIED,physical quadrant not observed
+RS Down/C-Down,axis 3 positive,a3 righty positive,axis 3 positive,UNVERIFIED,physical quadrant not observed
+RS Left/C-Left,axis 2 negative,a2 rightx negative,axis 2 negative,UNVERIFIED,physical quadrant not observed
+RS Right/C-Right,axis 2 positive,a2 rightx positive,axis 2 positive,UNVERIFIED,physical quadrant not observed

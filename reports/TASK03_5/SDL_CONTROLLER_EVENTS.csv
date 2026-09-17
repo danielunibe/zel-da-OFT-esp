@@ -1,0 +1,9 @@
+timestamp,event_type,device_index,control,value,notes
+VALIDATION_RUN,DEVICE_ENUMERATED,0,device,Xbox Series X Controller,SDL 2.32.10
+VALIDATION_RUN,GUID,0,device,030000005e040000130b000023057200,SDL GameController GUID
+VALIDATION_RUN,AXIS_COUNT,0,device,6,SDL joystick metadata
+VALIDATION_RUN,BUTTON_COUNT,0,device,16,SDL joystick metadata
+VALIDATION_RUN,HAT_COUNT,0,device,1,SDL joystick metadata
+VALIDATION_RUN,MAPPING_AVAILABLE,0,device,YES,SDL GameController mapping available
+VALIDATION_RUN,RUMBLE_CAPABILITY,0,device,YES,SDL_GameControllerHasRumble reported available
+VALIDATION_RUN,EVENT,0,device_added,0,No physical control event was generated during the probe window

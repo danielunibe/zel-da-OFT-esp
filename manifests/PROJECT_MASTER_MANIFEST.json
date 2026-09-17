@@ -1,0 +1,101 @@
+{
+  "project_name": "Ocarina of Time PC — Couch Edition",
+  "version": "V03.1.1",
+  "date": "2026-09-17",
+  "current_phase": "V03.1.1 Production Hotfix",
+  "repository": "https://github.com/danielunibe/zel-da-OFT-esp.git",
+  "canonical_branches": [
+    "main"
+  ],
+  "pinned_commits": {
+    "shipwright": {
+      "repository": "https://github.com/HarbourMasters/Shipwright.git",
+      "commit": "4aaad850bd5540cd77c2d83f3ad348d3b38605b2",
+      "tag": "9.1.1",
+      "branch": "main"
+    },
+    "libultraship": {
+      "repository": "https://github.com/HarbourMasters/libultraship.git",
+      "commit": "17a0b7939bd05f5e617cef89457ca43774fc9a9f",
+      "branch": "main"
+    }
+  },
+  "canonical_patch_files": [
+    {
+      "file": "patches/shipwright_couch_edition_v03_1_1.patch",
+      "sha256": "4c8f00030fe53775fba1895a6332ea155169a924ae655f4dbbe32a0c64188b20",
+      "size_bytes": 90415,
+      "target": "Shipwright",
+      "validation": "CLEAN_APPLY"
+    },
+    {
+      "file": "patches/libultraship_couch_edition_v03_1_1.patch",
+      "sha256": "fc1a329eeffeb3b05423f71c4c1d763ff44a5dca89635bdfa4fa0a4fa77c385b",
+      "size_bytes": 209536,
+      "target": "LibUltraShip",
+      "validation": "CLEAN_APPLY"
+    }
+  ],
+  "source_recovery_mechanisms": {
+    "source_overlay": {
+      "root": "source-overlay/",
+      "apply_script": "tools/apply_source_overlay.ps1",
+      "components": [
+        "source-overlay/shipwright",
+        "source-overlay/libultraship"
+      ]
+    },
+    "reproducible_patch_set": {
+      "root": "patches/",
+      "apply_tool": "git apply --check"
+    }
+  },
+  "datasets": {
+    "material_intelligence_01": {
+      "path": "materials/material_intelligence_01/",
+      "total_compiled_rules": 1407,
+      "coverage_inventory_file": "02_RESOURCE_INVENTORY.csv",
+      "classification_file": "04_MATERIAL_CLASSIFICATION.csv",
+      "rules_file": "17_MATERIAL_RULES_CANDIDATE.json",
+      "status": "CANONICAL_AUDITED"
+    },
+    "spanish_localization": {
+      "path": "localization/",
+      "canonical_messages_table": "localization/spanish/corpus/spa_message_data_static",
+      "total_messages_verified": 2116,
+      "status": "CANONICAL_AUDITED"
+    }
+  },
+  "excluded_copyrighted_assets": [
+    {
+      "asset": "oot.o2r",
+      "reason": "Base game proprietary asset extracted from Nintendo ROM. Must be legally provided by user.",
+      "git_status": "EXCLUDED"
+    },
+    {
+      "asset": "*.z64, *.n64, *.v64",
+      "reason": "Nintendo 64 ROM cartridges and disk images. Prohibited from Git redistribution.",
+      "git_status": "EXCLUDED"
+    },
+    {
+      "asset": "*.sav",
+      "reason": "Personal user save progress games.",
+      "git_status": "EXCLUDED"
+    }
+  ],
+  "build_instructions": {
+    "script": "pwsh -File tools/build_from_overlay.ps1 -Configuration Release",
+    "prerequisites": [
+      "Visual Studio 2022 C++ (MSVC v143)",
+      "CMake 3.24+",
+      "Git for Windows",
+      "Python 3.10+"
+    ]
+  },
+  "current_known_issues": [
+    "PBR lighting pipeline is METADATA_ONLY (material classification and rules active in memory; visual shading uses standard D3D11 / ACES pipeline)",
+    "F1 menu remains in English per upstream Harbour Masters design (in-game dialogues, UI and game text are 100% Spanish ES-419)",
+    "RTX / DXR is not implemented in V03.1.1 (planned for future architectural phases)"
+  ],
+  "latest_stable_runtime_phase": "V03.1.1"
+}

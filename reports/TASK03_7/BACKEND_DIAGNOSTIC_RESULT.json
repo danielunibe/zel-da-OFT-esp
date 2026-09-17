@@ -1,0 +1,39 @@
+{
+  "timestamp": "2026-09-15T23:59:30",
+  "status": "PASS",
+  "canonical_dev_root": "C:\\Users\\danie\\Desktop\\Ocarina_CouchEdition_DEV",
+  "controller_name": "Xbox Series X Controller",
+  "guid": "030000005e040000130b000023057200",
+  "vendor_id": "0x045E",
+  "product_id": "0x0B13",
+  "connection": "BLUETOOTH_LE_HOGP",
+  "backend_classification": "CASE_C",
+  "backend_classification_details": "SDL_GAMECONTROLLER = FAILS under baseline RawInput/Bluetooth GATT; SDL_RAW = FAILS (axes 4/5 only); XINPUT = WORKS (100% buttons, full axis ranges, zero idle triggers). Root cause: SDL Bluetooth GATT HID descriptor issue on Windows; resolved by setting SDL XInput-preferred hints.",
+  "physical_test_results": {
+    "total_trace_events": 2198,
+    "xinput_events": 1609,
+    "buttons_verified": [
+      "A", "B", "X", "Y", "LB", "RB", "START", "BACK", "DPAD_UP", "DPAD_DOWN", "DPAD_LEFT", "DPAD_RIGHT"
+    ],
+    "triggers": {
+      "LT": { "min": 0, "max": 255, "idle": 0, "status": "PASS" },
+      "RT": { "min": 0, "max": 255, "idle": 0, "status": "PASS" }
+    },
+    "sticks": {
+      "left_stick": { "min_x": -32768, "max_x": 32767, "min_y": -32768, "max_y": 32767, "drift": "NO", "status": "PASS" },
+      "right_stick": { "min_x": -32768, "max_x": 32767, "min_y": -32768, "max_y": 32767, "drift": "NO", "status": "PASS" }
+    }
+  },
+  "sdl_xinput_bridge_verification": {
+    "sdl_guid": "0300fa675e040000130b000023057801",
+    "sdl_path": "XInput#0",
+    "idle_triggers": "LT: 0, RT: 0",
+    "stick_centers": "LeftStick(116, 713), RightStick(212, 462)",
+    "sdl_rumble_result": "SUCCESS (0)",
+    "status": "PASS"
+  },
+  "source_changed": false,
+  "runtime_changed": false,
+  "live_project_changed": false,
+  "task04_started": false
+}
