@@ -172,12 +172,12 @@
   ],
   "captureStages": [
     "RASTER_HDR",
-    "DXR_DIRECT_SHADED",
+    "RASTER_SCENE_COLOR_COPY",
     "DXR_REFLECTION_RGBA16F",
     "DXR_INDIRECT_RGBA16F",
     "COMPOSITE_PRE_TONEMAP",
     "POST_ACES_PRE_PRESENT",
-    "FINAL_SDR",
+    "FINAL_SDR_PRE_PRESENT",
     "EMISSIVE_MASK"
   ],
   "bloom": {

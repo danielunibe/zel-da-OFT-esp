@@ -146,9 +146,13 @@ public:
     const std::vector<MaterialType>& GetCurrentFrameClassifications() const { return mFrameClassifications; }
 
     static bool IsEnhancedVisualProfile() { return Instance().GetProfile() >= static_cast<int>(VisualProfileId::ENHANCED); }
-    static bool IsHybridRtProfile() { return Instance().GetProfile() >= static_cast<int>(VisualProfileId::HYBRID_RT); }
+    static bool IsHybridRtProfile() {
+        const int profile = Instance().GetProfile();
+        return profile == static_cast<int>(VisualProfileId::HYBRID_RT) ||
+               profile == static_cast<int>(VisualProfileId::PATH_TRACED_EXPERIMENTAL);
+    }
     static bool IsPathTracedExperimentalProfile() {
-        return Instance().GetProfile() >= static_cast<int>(VisualProfileId::PATH_TRACED_EXPERIMENTAL);
+        return Instance().GetProfile() == static_cast<int>(VisualProfileId::PATH_TRACED_EXPERIMENTAL);
     }
 
     void WriteDrawCallInventory(const std::string& path) const;

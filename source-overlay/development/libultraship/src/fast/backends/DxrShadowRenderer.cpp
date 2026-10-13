@@ -1150,6 +1150,7 @@ void DxrShadowRenderer::RenderShadows(ID3D12Device* device, ID3D12GraphicsComman
 
     cmdList->ResourceBarrier(3, midBarriers);
     mMaskTrackedState = (unsigned)D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
+    mStats.signalOutputsProduced += doDispatch ? 1 : 0;
 
     // Temporal denoising must consume this frame's freshly traced mask. The
     // old wiring ran reprojection before DispatchRays, which meant it only
@@ -1220,6 +1221,7 @@ void DxrShadowRenderer::RenderShadows(ID3D12Device* device, ID3D12GraphicsComman
 
     cmdList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
     cmdList->DrawInstanced(3, 1, 0, 0); // Fullscreen Triangle
+    ++mStats.compositePasses;
 
     if (mStats.dispatchRaysCalls == 1) {
         LogCouchDxrShadow("[COUCH-DXR] First DispatchRays SUCCESS! Resolution=" + std::to_string(width) + "x" + std::to_string(height));

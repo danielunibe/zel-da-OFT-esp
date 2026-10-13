@@ -254,7 +254,9 @@ void GfxRenderingAPIDX12::CopyFramebuffer(int dst, int src, int sx0, int sy0, in
     auto& sourceState = FramebufferColorState(src); auto& destinationState = FramebufferColorState(dst);
     const auto previousSource = sourceState; const auto previousDestination = destinationState;
     // Same-size copies preserve exact pixels and don't disturb raster state.
-    if (!mFramebufferTonemap && sx1-sx0 == dx1-dx0 && sy1-sy0 == dy1-dy0) {
+    if (!mFramebufferTonemap && source->GetDesc().Format == destination->GetDesc().Format &&
+        source->GetDesc().SampleDesc.Count == destination->GetDesc().SampleDesc.Count &&
+        sx1-sx0 == dx1-dx0 && sy1-sy0 == dy1-dy0) {
         TransitionResource(source, sourceState, D3D12_RESOURCE_STATE_COPY_SOURCE);
         TransitionResource(destination, destinationState, D3D12_RESOURCE_STATE_COPY_DEST);
         D3D12_TEXTURE_COPY_LOCATION from{}; from.pResource = source; from.Type = D3D12_TEXTURE_COPY_TYPE_SUBRESOURCE_INDEX;

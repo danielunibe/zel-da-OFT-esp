@@ -1,5 +1,6 @@
 #include <chrono>
 #include <fstream>
+#include <filesystem>
 #if defined(ENABLE_DX11) || defined(ENABLE_DX12)
 
 #include <stdint.h>
@@ -946,6 +947,30 @@ void GfxWindowBackendDXGI::SwapBuffersBegin() {
         hr = swap_chain->Present(mVsyncEnabled, DXGI_PRESENT_ALLOW_TEARING);
     } else {
         hr = swap_chain->Present(mVsyncEnabled, 0);
+    }
+    if (mD3D12ForensicCapture && mD3D12ForensicFrame >= 0) {
+        const char* outputRoot = std::getenv("COUCH_DXR_OUTPUT");
+        const char* presentStatus = hr == S_OK ? "ACCEPTED_BY_DXGI"
+            : hr == DXGI_STATUS_OCCLUDED ? "OCCLUDED"
+            : SUCCEEDED(hr) ? "SUCCEEDED_STATUS" : "FAILED";
+        FILE* log = fopen(couch_diagnostics_path(), "a");
+        if (log) {
+            fprintf(log, "[COUCH-FORENSIC][PRESENT_RESULT] forensicFrame=%d presentFrame=%llu status=%s hr=0x%08X physicalScanout=NOT_VERIFIABLE\n",
+                    mD3D12ForensicFrame, (unsigned long long)mD3D12Frame, presentStatus, (unsigned)hr);
+            fclose(log);
+        }
+        if (outputRoot && *outputRoot) {
+            std::ofstream evidence(std::filesystem::path(outputRoot) / "presentation.evidence.jsonl",
+                                   std::ios::binary | std::ios::app);
+            if (evidence) {
+                evidence << "{\"forensic_frame\":" << mD3D12ForensicFrame
+                         << ",\"present_frame\":" << mD3D12Frame
+                         << ",\"hresult\":\"0x" << std::hex << std::uppercase
+                         << static_cast<unsigned long>(hr) << std::dec
+                         << "\",\"dxgi_present_call\":\"" << presentStatus
+                         << "\",\"physical_scanout\":\"NOT_VERIFIABLE\"}\n";
+            }
+        }
     }
     const auto presentedAt=std::chrono::steady_clock::now();
     static auto previousPresentedAt=presentedAt;

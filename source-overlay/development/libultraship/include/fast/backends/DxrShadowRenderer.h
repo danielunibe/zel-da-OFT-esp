@@ -27,6 +27,8 @@ struct DxrShadowStats {
     
     uint64_t dispatchRaysCalls = 0;
     uint64_t rayGenInvocations = 0;
+    uint64_t signalOutputsProduced = 0;
+    uint64_t compositePasses = 0;
     bool rayDispatchIssued = false;
 
     bool debugMaskPassRecorded = false;
@@ -59,7 +61,7 @@ public:
     bool Init(ID3D12Device* device);
     bool IsSupported() const { return mSupported; }
     bool IsEnabled() const { return mEnabled; }
-    void SetEnabled(bool enabled) { mEnabled = enabled; }
+    void SetEnabled(bool enabled) { mEnabled = enabled && mInitialized && mSupported; }
 
     // Diagnostic switches (Phase 2): COUCH_DXR_DISPATCH_ENABLE / COUCH_DXR_COMPOSITE_ENABLE
     bool IsDispatchEnabled() const { return mDispatchEnabled; }
