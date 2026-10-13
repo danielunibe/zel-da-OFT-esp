@@ -10,6 +10,9 @@
 
 Este repositorio constituye el **respaldo maestro completo, auditable y reproducible** de todo el desarrollo propio del proyecto: arquitectura visual Direct3D 11 con mapeo de tonos fílmico ACES, niebla atmosférica F3DEX2, dataset de inteligencia de materiales (1.407 reglas compiladas), aislamiento de interfaz, localización completa al español latinoamericano (ES-419) con glifos auténticos, herramientas de compilación con guardián de procesos y suites de validación automatizadas de tiempo de ejecución.
 
+
+> **Estado canónico (12 de octubre de 2026):** V03.1.1 continúa siendo el último runtime estable. El árbol de desarrollo más reciente se conserva aparte en [source-overlay/development](source-overlay/development/) y [patches/development](patches/development/). Su trabajo D3D12/DXR y el harness siguen siendo experimentales; no certifican RTX visible ni una nueva release. Consulta [la integración actual](docs/development/CURRENT_CANONICAL_SNAPSHOT.md).
+
 ---
 
 ## ⚠️ AVISO CRÍTICO DE DERECHOS DE AUTOR Y POLÍTICA DE ROMS
@@ -38,7 +41,7 @@ Este repositorio constituye el **respaldo maestro completo, auditable y reproduc
 - **Inteligencia de Materiales (`material_intelligence_01`):**
   - Base de datos exhaustiva y 1.407 reglas compiladas (`MaterialRulesPilot.h`) integradas en `MaterialRegistry`.
   - **Estado técnico honesto:** **`METADATA_ONLY`** (clasificación activa en memoria; no se declara sombreado PBR activo en pantalla en esta fase).
-  - **RTX / DXR:** **`NOT IMPLEMENTED`** (planificado para etapas arquitectónicas posteriores).
+  - **RTX / DXR en V03.1.1:** **`NOT IMPLEMENTED`**. El código experimental posterior se conserva en el snapshot de desarrollo y aún no está certificado.
 
 ### 🌎 2. Localización Canónica Español Latino (ES-419)
 - **2.116 mensajes traducidos y verificados:** Textos de historia, misiones, diálogos y descripciones.
@@ -90,18 +93,29 @@ Consulte la guía completa y detallada en [`docs/RECOVERY_FROM_ZERO.md`](docs/RE
    - Proporcione su archivo legal `oot.o2r` (extraído con la ROM original).
    - Inicie `soh.exe`.
 
+## Snapshot canónico de desarrollo
+
+La guía [CURRENT_CANONICAL_SNAPSHOT.md](docs/development/CURRENT_CANONICAL_SNAPSHOT.md) identifica el árbol más reciente y sus límites de validación. Para reconstruirlo desde los commits upstream fijados:
+
+```powershell
+pwsh -File tools/setup_upstream.ps1
+pwsh -File tools/apply_development_overlay.ps1
+```
+
+El overlay de desarrollo requiere un checkout limpio y verifica las revisiones exactas antes de copiar archivos.
+
 ---
 
 ## 📁 Arquitectura del Repositorio
 
 Consulte [`docs/PROJECT_STRUCTURE.md`](docs/PROJECT_STRUCTURE.md) para el detalle de roles de cada directorio:
-- `docs/`: Documentación técnica, arquitectónica y guías de recuperación.
-- `patches/`: Parches canónicos de producción V03.1.1.
-- `source-overlay/`: Árbol de código fuente propio modificado de Shipwright y LibUltraShip.
+- `docs/`: Documentación técnica, arquitectónica, guías de recuperación y estado del snapshot actual.
+- `patches/`: Parches de V03.1.1 y del snapshot de desarrollo actual.
+- `source-overlay/`: Overlay estable V03.1.1 más `development/` para el código fuente más reciente.
 - `localization/`: Fuentes canónicas ES-419, tablas de mensajes, scripts y glifos.
 - `materials/`: Datasets, reglas compiladas y taxonomía de `material_intelligence_01`.
 - `visual/`: Documentación de pipeline visual, análisis ACES y niebla F3DEX2.
-- `tools/`: Herramientas de build, exportación de parches y utilidades de automatización.
+- `tools/`: Herramientas de build, exportador del snapshot de desarrollo y aplicadores de overlays.
 - `tests/`: Suites de validación automatizada de runtime y certificación de recuperación.
 - `reports/`: Informes técnicos de consolidación y certificaciones QA.
 - `manifests/`: `PROJECT_MASTER_MANIFEST.json` y matrices de inventario.

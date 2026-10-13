@@ -1,6 +1,6 @@
-# SOURCE-OVERLAY: DESARROLLO PROPIO DE COUCH EDITION
+# SOURCE-OVERLAY: SNAPSHOTS ESTABLE Y DE DESARROLLO
 
-Este directorio contiene el conjunto completo y canónico de archivos fuente modificados y añadidos que transforman el código upstream de Harbour Masters en *Ocarina of Time PC: Couch Edition*.
+`shipwright/` y `libultraship/` en la raíz preservan el overlay del release estable V03.1.1. La base de desarrollo más reciente está separada en `development/shipwright/` y `development/libultraship/`; su estado y límites están documentados en `../docs/development/CURRENT_CANONICAL_SNAPSHOT.md`.
 
 ---
 
@@ -22,6 +22,12 @@ O si el código fuente upstream se encuentra en una ruta personalizada:
 
 ```powershell
 pwsh -File apply_source_overlay.ps1 -TargetSourceDir "C:\Ruta\A\source\shipwright"
+```
+
+Para aplicar el snapshot de desarrollo actual (solo sobre un checkout limpio con las mismas revisiones base), usa desde la raíz del repositorio:
+
+```powershell
+pwsh -File tools/apply_development_overlay.ps1
 ```
 
 ---

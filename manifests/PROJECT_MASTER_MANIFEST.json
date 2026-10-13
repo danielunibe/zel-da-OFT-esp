@@ -2,7 +2,7 @@
   "project_name": "Ocarina of Time PC — Couch Edition",
   "version": "V03.1.1",
   "date": "2026-09-17",
-  "current_phase": "V03.1.1 Production Hotfix",
+  "current_phase": "V03.1.1 stable + current canonical development snapshot (experimental)",
   "repository": "https://github.com/danielunibe/zel-da-OFT-esp.git",
   "canonical_branches": [
     "main"
@@ -95,7 +95,49 @@
   "current_known_issues": [
     "PBR lighting pipeline is METADATA_ONLY (material classification and rules active in memory; visual shading uses standard D3D11 / ACES pipeline)",
     "F1 menu remains in English per upstream Harbour Masters design (in-game dialogues, UI and game text are 100% Spanish ES-419)",
-    "RTX / DXR is not implemented in V03.1.1 (planned for future architectural phases)"
+    "RTX / DXR is not implemented in V03.1.1 (planned for future architectural phases)",
+    "The latest development snapshot contains experimental D3D12/DXR and scene-harness work; it is not a new release, visible RTX remains unverified, and its runtime evidence gate is incomplete."
   ],
-  "latest_stable_runtime_phase": "V03.1.1"
+  "latest_stable_runtime_phase": "V03.1.1",
+  "latest_development_snapshot": {
+    "date": "2026-10-12",
+    "status": "CANONICAL_DEVELOPMENT_SNAPSHOT_EXPERIMENTAL_NOT_RELEASE_CERTIFIED",
+    "source_authority": "Ocarina_CouchEdition_DEV/source/shipwright worktree at the pinned Shipwright and libultraship base commits",
+    "base_commits": {
+      "shipwright": "4aaad850bd5540cd77c2d83f3ad348d3b38605b2",
+      "libultraship": "17a0b7939bd05f5e617cef89457ca43774fc9a9f"
+    },
+    "source_head_commits": {
+      "shipwright": "4aaad850bd5540cd77c2d83f3ad348d3b38605b2",
+      "libultraship": "17a0b7939bd05f5e617cef89457ca43774fc9a9f"
+    },
+    "source_file_counts": {
+      "shipwright_modified_or_added": 42,
+      "libultraship_modified_or_added": 55
+    },
+    "source_overlay_root": "source-overlay/development/",
+    "source_file_manifest": "docs/development/SNAPSHOT_FILES.json",
+    "apply_script": "tools/apply_development_overlay.ps1",
+    "export_script": "tools/export_development_snapshot.py",
+    "patches": [
+      {
+        "path": "patches/development/shipwright_9_1_1_development.patch",
+        "size_bytes": 340554,
+        "sha256": "7f687e09ac6bebd2669b288945434b0a2981c59082499a6d58fd33fcb685b8c1"
+      },
+      {
+        "path": "patches/development/libultraship_1_3_1_development.patch",
+        "size_bytes": 1569986,
+        "sha256": "475781b45a5779f5c8c280452729c4196b74d49fda41d09ad058eef266f5750d"
+      }
+    ],
+    "validation_boundary": {
+      "fresh_build_during_github_integration": "NOT_RUN",
+      "latest_available_build_record": "2026-10-08 Release build passed 32/32 steps in the development checkout",
+      "runtime_harness": "FAIL: verifier rejected evidence.json because embedded saveIntegrity was absent; independent save and OTR hash checks passed",
+      "fog_gate": "BLOCKED: sequential fog passes confirmed; first violating pixel boundary and visual root cause remain unproven",
+      "visible_rtx": "NOT_CERTIFIED",
+      "patch_clean_apply": "PASS: git apply --cached --check succeeded for both patches against indexes at the pinned base commits"
+    }
+  }
 }

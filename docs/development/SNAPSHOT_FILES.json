@@ -1,0 +1,514 @@
+{
+  "schema_version": 1,
+  "base_commits": {
+    "shipwright": "4aaad850bd5540cd77c2d83f3ad348d3b38605b2",
+    "libultraship": "17a0b7939bd05f5e617cef89457ca43774fc9a9f"
+  },
+  "source_head": {
+    "shipwright": "4aaad850bd5540cd77c2d83f3ad348d3b38605b2",
+    "libultraship": "17a0b7939bd05f5e617cef89457ca43774fc9a9f"
+  },
+  "files": {
+    "shipwright": [
+      {
+        "path": ".gitignore",
+        "size_bytes": 7324,
+        "sha256": "22ed2b0faa3d0714fbded2065b3a095d9e7474e74ab4f1fca51d5841ca4758b8"
+      },
+      {
+        "path": "CMakeLists.txt",
+        "size_bytes": 14582,
+        "sha256": "54cd2364b3fc7fa32a7e67f77a26bd5614f0f9229fab08742dffc48f9f21ade7"
+      },
+      {
+        "path": "scripts/Generate-DxrShadowBytecode.ps1",
+        "size_bytes": 2414,
+        "sha256": "fefdbbb54299a4155f78d63c559839cfd1391633bc55ac8be594e41dc62b3da3"
+      },
+      {
+        "path": "scripts/scene-harness/run-scene.ps1",
+        "size_bytes": 22230,
+        "sha256": "4b5807f3d58dee0a949ede51efb653ed86cb3ac7cebef8dceba13da00c0e0aaa"
+      },
+      {
+        "path": "scripts/scene-harness/scenarios/scenarios.v1.json",
+        "size_bytes": 4295,
+        "sha256": "e4f0e9ed62ed10336ac516670abc2bf39cd2cfacc8a1601679168f6cfa906269"
+      },
+      {
+        "path": "scripts/scene-harness/verify-run.ps1",
+        "size_bytes": 17679,
+        "sha256": "b2f30d38305b842501da8a6bf692288a1cea5609700f24cf2c32fdd49e02bdca"
+      },
+      {
+        "path": "soh/assets/custom/textures/buttons/LTBtn.i4.png",
+        "size_bytes": 193,
+        "sha256": "74d32bef7ce11a52075d41c169d6c3ef121d7206548666fe10a91588d8241298"
+      },
+      {
+        "path": "soh/CMakeLists.txt",
+        "size_bytes": 27687,
+        "sha256": "5bb9ca006df77ae4da89745d7db4671854522df155297fb591c7e3193f667ac6"
+      },
+      {
+        "path": "soh/include/glyph_resolver.h",
+        "size_bytes": 210,
+        "sha256": "760daf80c96cdf2db577111586a938f5ff5b6f797e405fbbeb8edd62f6bbbbaf"
+      },
+      {
+        "path": "soh/include/z64.h",
+        "size_bytes": 81823,
+        "sha256": "396e780b689239afba6af629502ea2a00fc6c8393b5f7efe2aec596bc5ac2433"
+      },
+      {
+        "path": "soh/soh/Enhancements/Autosave.cpp",
+        "size_bytes": 2743,
+        "sha256": "aae0e6182d80a4663f3517b889845e393c5dc41f9b0996d8e5486501808321be"
+      },
+      {
+        "path": "soh/soh/Enhancements/BootToDebugWarpScreen.cpp",
+        "size_bytes": 2233,
+        "sha256": "3befe99f5904820e694e7e4e697a2d69ffdf311920b8dfa7dbd053f09a536bab"
+      },
+      {
+        "path": "soh/soh/Enhancements/boss-rush/BossRush.cpp",
+        "size_bytes": 41833,
+        "sha256": "13fd2bce5cfc4139e40d47a4fcd0f23b13429d25eae8807667671e55a4fb1acf"
+      },
+      {
+        "path": "soh/soh/Enhancements/custom-message/CustomMessageManager.cpp",
+        "size_bytes": 35617,
+        "sha256": "238f55bc6a510a05a137087e0899007923eebb3ad047b9303bc313ea68071073"
+      },
+      {
+        "path": "soh/soh/Enhancements/custom-message/CustomMessageManager.h",
+        "size_bytes": 13105,
+        "sha256": "a32bb0f7b64f6e9cca0d319493d2b619fb81aac9ff7f4cc086e58da295b2e3a7"
+      },
+      {
+        "path": "soh/soh/Enhancements/debugger/MessageViewer.cpp",
+        "size_bytes": 10629,
+        "sha256": "810b5c8dd9f8bb3d1bd233f4affb4a892431907fec248ae0d0dc8762a3bb4c5b"
+      },
+      {
+        "path": "soh/soh/Enhancements/FileSelectEnhancements.cpp",
+        "size_bytes": 1987,
+        "sha256": "802bcfb2b3c6537ebf568d409d3bc9f07cc4a27bdc0002cbef86285f8909c156"
+      },
+      {
+        "path": "soh/soh/Enhancements/glyphs/GlyphResolver.cpp",
+        "size_bytes": 805,
+        "sha256": "4aa3d30d51d0e6b94c31948fd2c73b314085005a69750d614bf4a2020c7d607b"
+      },
+      {
+        "path": "soh/soh/Enhancements/scene-harness/SceneTestHarness.cpp",
+        "size_bytes": 35734,
+        "sha256": "1abda30891cf7162fe36a9655f9d95700546698705c7221f7b56d758205fe830"
+      },
+      {
+        "path": "soh/soh/OTRGlobals.cpp",
+        "size_bytes": 146865,
+        "sha256": "2c225f77a58e94aefec5ec2473d7fdd3aa4854166b1852072e0e346588bdc397"
+      },
+      {
+        "path": "soh/soh/ResourceManagerHelpers.cpp",
+        "size_bytes": 17595,
+        "sha256": "7c81cd2f1434d336e81184cc6a76984a798b40247cb31beec8d410f07c4f1b6a"
+      },
+      {
+        "path": "soh/soh/SaveManager.cpp",
+        "size_bytes": 149508,
+        "sha256": "76f4343081f3cd5b89abd84847affa9364e8e527a076d699571ded10a7949eb2"
+      },
+      {
+        "path": "soh/soh/ShipUtils.cpp",
+        "size_bytes": 4518,
+        "sha256": "62e8bc6bc3518446b1f70a3b9420eee5ad0637eda97a93eea588f82cddb97b6a"
+      },
+      {
+        "path": "soh/soh/SohGui/Menu.cpp",
+        "size_bytes": 43936,
+        "sha256": "a018dbe5622f8c244cae4fd850f7a4ea6033ac4fd2ef73c0e1d59b325c92fedb"
+      },
+      {
+        "path": "soh/soh/SohGui/ResolutionEditor.cpp",
+        "size_bytes": 33778,
+        "sha256": "46af83e4230e9e1d9ae355938407dc98d3c0ed5c9fac4ecef68d640276c03c75"
+      },
+      {
+        "path": "soh/soh/SohGui/SohMenu.h",
+        "size_bytes": 1584,
+        "sha256": "3a7bd0850cc2ebc142b6a8071923531d411fce5022903e57d12f3de2e7b96e7e"
+      },
+      {
+        "path": "soh/soh/SohGui/SohMenuSettings.cpp",
+        "size_bytes": 30511,
+        "sha256": "043e4afe0df2838cb6f261f9715ede7cbc86326620f221b9991330944e656eaf"
+      },
+      {
+        "path": "soh/soh/SohGui/SohModals.cpp",
+        "size_bytes": 3038,
+        "sha256": "0314203ac563a5b053e9fae7d85e23fce26c1a6bcb1530512be7dca9b89a1262"
+      },
+      {
+        "path": "soh/soh/SohGui/UIWidgets.cpp",
+        "size_bytes": 144037,
+        "sha256": "8874c93bc05f715b4791ea4c2957a1ad27fcb19f2e53f407bfcd45adaa2e1336"
+      },
+      {
+        "path": "soh/soh/SohGui/UIWidgets.hpp",
+        "size_bytes": 35496,
+        "sha256": "61223d9d2bf8d927a63bc949b15eac4e634ebe3bf8cc00751c2e9999bead48b1"
+      },
+      {
+        "path": "soh/soh/z_message_OTR.cpp",
+        "size_bytes": 12218,
+        "sha256": "53272de015366e86e6eadef21e59ef34fdcffddcea9548d81adfa42a2ce7f56e"
+      },
+      {
+        "path": "soh/src/code/game.c",
+        "size_bytes": 20523,
+        "sha256": "10766e886a665e9efd922ec0c437c56c489b04171237a9125279c12ddf7d9d82"
+      },
+      {
+        "path": "soh/src/code/z_kanfont.c",
+        "size_bytes": 111627,
+        "sha256": "64251add4f3851223b4862dc50400bfd05caa284b6b6e43cffac39114061acbe"
+      },
+      {
+        "path": "soh/src/code/z_lights.c",
+        "size_bytes": 14889,
+        "sha256": "a9bf1a2bff9ee26a746698f4d3bd97bb3c94bc92e08b85c04ee19bdb335e642a"
+      },
+      {
+        "path": "soh/src/code/z_message_PAL.c",
+        "size_bytes": 226623,
+        "sha256": "24c6d7850e5f36e4818b25b302b30968693ad7f9c0a43dd84ee34ac8ec42c42d"
+      },
+      {
+        "path": "soh/src/code/z_parameter.c",
+        "size_bytes": 344678,
+        "sha256": "a66e48a5c784ae3cbec33de9898beded0565bc356634dc5796d4a1c15b334a17"
+      },
+      {
+        "path": "soh/src/code/z_play.c",
+        "size_bytes": 85420,
+        "sha256": "fbf800a3b3675135caf4d5ef48edd7999bde56022ab847161d0307743de9f400"
+      },
+      {
+        "path": "soh/src/overlays/actors/ovl_En_Mag/z_en_mag.c",
+        "size_bytes": 29117,
+        "sha256": "b4528717dde7c98819d634c05c08914fbe53163ce0315a6aff8bd140fad53291"
+      },
+      {
+        "path": "soh/src/overlays/gamestates/ovl_file_choose/z_file_choose.c",
+        "size_bytes": 175746,
+        "sha256": "397de34e47330362a4b52dd98f1fd95c48d2e47959db429726f182b688f590fb"
+      },
+      {
+        "path": "soh/src/overlays/gamestates/ovl_file_choose/z_file_nameset_PAL.c",
+        "size_bytes": 55788,
+        "sha256": "030a5849498c5b568c116318595f420ccf39e2a5be989b1eaca37d9079af16fb"
+      },
+      {
+        "path": "soh/src/overlays/misc/ovl_kaleido_scope/z_kaleido_map_PAL.c",
+        "size_bytes": 42584,
+        "sha256": "9d3689c05de4a9f2122a51d039b79f6e118c8d715626254636d68853d8b1aad9"
+      },
+      {
+        "path": "soh/src/overlays/misc/ovl_kaleido_scope/z_kaleido_scope_PAL.c",
+        "size_bytes": 219595,
+        "sha256": "76fb77e87329394531137846d6097e98efa0d4ad5b5f34291257b13eeee6394c"
+      }
+    ],
+    "libultraship": [
+      {
+        "path": "cmake/dependencies/windows.cmake",
+        "size_bytes": 413,
+        "sha256": "175a75d6338cee39af0cff49c4823b5d0a886ae7057f7101e55094af6c43c5ca"
+      },
+      {
+        "path": "include/fast/backends/dxr_shadow_cso.h",
+        "size_bytes": 343161,
+        "sha256": "d9c1d1a35500bcceb2b4ced30fb61458e6877f233d91ecc208074f9794e320af"
+      },
+      {
+        "path": "include/fast/backends/DxrAccelerationStructureManager.h",
+        "size_bytes": 8314,
+        "sha256": "58198d017baa77c5bd99b4e82c710c95c817d55a101da6daead1d73b19edebfa"
+      },
+      {
+        "path": "include/fast/backends/DxrDescriptorRing.h",
+        "size_bytes": 1828,
+        "sha256": "435a73e844be3093f37eaf0d7376be6cc066d0427c96b33a07c02dfdef2f62bb"
+      },
+      {
+        "path": "include/fast/backends/DxrShadowRenderer.h",
+        "size_bytes": 6382,
+        "sha256": "fee9fb054930ee79131ed50b1bb9dd675e6be3fb856fa6e7d614adf3b4acbbf7"
+      },
+      {
+        "path": "include/fast/backends/DxrSurfaceRenderer.h",
+        "size_bytes": 13756,
+        "sha256": "1ce0e31fb986c9ef0c1b5b3d63d3d8051bc94a7cf2bbe96208e554c710b54725"
+      },
+      {
+        "path": "include/fast/backends/gfx_direct3d12.h",
+        "size_bytes": 18509,
+        "sha256": "d874100b9f53bcbc96a61048f7c0cdbd5e55eb4909379fa3bb0e5e639609b47c"
+      },
+      {
+        "path": "include/fast/backends/gfx_direct3d_common.h",
+        "size_bytes": 8976,
+        "sha256": "7f6677dd6d68657679dd909e436b99d964d319c6a97fa450e6c0202ef9969f4e"
+      },
+      {
+        "path": "include/fast/backends/gfx_dxgi.h",
+        "size_bytes": 5368,
+        "sha256": "ff2e93e0905bdce0da1f997cd95f6b68f06d406ce6d5766eb9c10c3b74ef62a7"
+      },
+      {
+        "path": "include/fast/backends/gfx_rendering_api.h",
+        "size_bytes": 7564,
+        "sha256": "ed51cd7788a4c62091d008bc7f076aee110ed4f22383a38504738ce48c1f6005"
+      },
+      {
+        "path": "include/fast/backends/GpuProfilerD3D12.h",
+        "size_bytes": 2973,
+        "sha256": "3760beb428b162c49bac5c36c2d9ba7055531ec9953f1f92561e4bf696d287b4"
+      },
+      {
+        "path": "include/fast/backends/RtxQuality.h",
+        "size_bytes": 3009,
+        "sha256": "59dcd128e1ea0fd4215b986506d332ca54f505ae1320f645553a75f011188824"
+      },
+      {
+        "path": "include/fast/backends/TemporalManager.h",
+        "size_bytes": 9885,
+        "sha256": "7df1bc1f63b56623374720347f8a31c51b057a4cfcb58e63f7dfb1ad048aa552"
+      },
+      {
+        "path": "include/fast/backends/TemporalTrace.h",
+        "size_bytes": 9093,
+        "sha256": "80e6236d15563c2f7a2483b988d9bdd99d27cae0a5bf32e78757305da0c43299"
+      },
+      {
+        "path": "include/fast/couch_diagnostics.h",
+        "size_bytes": 287,
+        "sha256": "4d15a1bd8de5ade03ca0e10b787a633b1a04150d6f94dbd77162aa13a128d0d8"
+      },
+      {
+        "path": "include/fast/Fast3DAlphaPolicy.h",
+        "size_bytes": 4250,
+        "sha256": "8ef46872c9a8a8be6df407c5c8a04ad07799880ca38210126e2f0cae4b104bc7"
+      },
+      {
+        "path": "include/fast/Fast3dWindow.h",
+        "size_bytes": 2699,
+        "sha256": "fb0daee51d0825d4d2dbc6603ce67510fa88e6679e71d8f4dc1d5e00ad81eab5"
+      },
+      {
+        "path": "include/fast/GeometryCapture.h",
+        "size_bytes": 6096,
+        "sha256": "b43a4eff6a6f99e01ad7a126fcb2d4cf2e70d87f31a34255096bc80c8aeafad7"
+      },
+      {
+        "path": "include/fast/interpreter.h",
+        "size_bytes": 18950,
+        "sha256": "97d40f0893b53e47ad44cd48d3f4afb65c45dfcc9b32e0d798c81ca9c2b79dca"
+      },
+      {
+        "path": "include/fast/MaterialRegistry.h",
+        "size_bytes": 8676,
+        "sha256": "1e80e9908aa48b9443286134f7d2e7864aaac576b5bddce448e73ff7a35f626c"
+      },
+      {
+        "path": "include/fast/MaterialRulesPilot.h",
+        "size_bytes": 149093,
+        "sha256": "513c4a7aa222fd88c235661a2c1073495e81230fd69afa0f8c3a3d183a28aa46"
+      },
+      {
+        "path": "include/fast/PersistentScene.h",
+        "size_bytes": 7329,
+        "sha256": "031cc236a9241fc92793b649fa9750a54c780f331e1de21313d6673204be80aa"
+      },
+      {
+        "path": "include/fast/VertexAlphaContract.h",
+        "size_bytes": 1422,
+        "sha256": "7a969ca4668ced526a2645f316e4ddb8836e6d83fa3d6dcf56acc84f9ad1ab15"
+      },
+      {
+        "path": "include/ship/controller/controldevice/controller/mapping/keyboard/KeyboardKeyToAnyMapping.h",
+        "size_bytes": 622,
+        "sha256": "f88fbfd43ae5a1c78693b339d35522fc3c3c037aa9443c008b8cdea09242cc56"
+      },
+      {
+        "path": "include/ship/window/gui/Gui.h",
+        "size_bytes": 4292,
+        "sha256": "c841401e048c886a40caea75cb8097e37bd4e43b4beb34d157f2ca0de41dcb0a"
+      },
+      {
+        "path": "src/fast/backends/DxrAccelerationStructureManager.cpp",
+        "size_bytes": 57602,
+        "sha256": "51347ec79e9ca4cd9ff452f7647917a0c19d0428fd38c4d8717b08cc1fd0e38c"
+      },
+      {
+        "path": "src/fast/backends/DxrShadowRenderer.cpp",
+        "size_bytes": 57917,
+        "sha256": "96b9f8674f3989a9956c74088e2ee8f891f5bbdad7b859fd35fa08d5bbf85c64"
+      },
+      {
+        "path": "src/fast/backends/DxrSurfaceRenderer.cpp",
+        "size_bytes": 176301,
+        "sha256": "c1002b966975940fdbe900d47e02a8e5d2fc19af0b3bef37a89935e99878190b"
+      },
+      {
+        "path": "src/fast/backends/gfx_direct3d11.cpp",
+        "size_bytes": 72081,
+        "sha256": "534986f9bc11043d263a243c8583ce94516626b40af8d2e5e2c6ceb30be2a642"
+      },
+      {
+        "path": "src/fast/backends/gfx_direct3d12.cpp",
+        "size_bytes": 218435,
+        "sha256": "f6866ed3f78219abd9b983e9580e540f1362dc05a2bba66b68ba69fafd1e9947"
+      },
+      {
+        "path": "src/fast/backends/gfx_direct3d12_framebuffer.cpp",
+        "size_bytes": 40724,
+        "sha256": "2cdcac3fec6d7905f8cb678b787413042a6bc39c3e241644ab655819f04039de"
+      },
+      {
+        "path": "src/fast/backends/gfx_direct3d12_gui.cpp",
+        "size_bytes": 8623,
+        "sha256": "1f65713a2becf6cf401bb89abe4f031f71738fd78af432e3387644f13272e4fb"
+      },
+      {
+        "path": "src/fast/backends/gfx_dxgi.cpp",
+        "size_bytes": 44439,
+        "sha256": "62422d79dcc86c41ef72fdeff820ed03cfd47a588480719146e40999e61ed32b"
+      },
+      {
+        "path": "src/fast/backends/GpuProfilerD3D12.cpp",
+        "size_bytes": 13969,
+        "sha256": "7096fb5ca7b56d2ccafb28d96da7c3de98e06eaec4c8b633c56ef8aa46236fb9"
+      },
+      {
+        "path": "src/fast/backends/TemporalManager.cpp",
+        "size_bytes": 51796,
+        "sha256": "8b1bc46adc3f718fb208a92b1a2af31be0208cd26bf163ff7ca6bc60e9881ad2"
+      },
+      {
+        "path": "src/fast/backends/TemporalTrace.cpp",
+        "size_bytes": 11347,
+        "sha256": "2d2b8be14b88695cb70493f86e8e7e041df1e67b1fcef4c183a1289129a8125d"
+      },
+      {
+        "path": "src/fast/Fast3dWindow.cpp",
+        "size_bytes": 19063,
+        "sha256": "327023cc42b13864f1e856ab4cf531a041ebb6cac94d08329b1538ff8b87bb96"
+      },
+      {
+        "path": "src/fast/GeometryCapture.cpp",
+        "size_bytes": 20317,
+        "sha256": "405598cdde5040bc9e31800d302cb1141ff867c25ac03467db009415dfe2b2eb"
+      },
+      {
+        "path": "src/fast/interpreter.cpp",
+        "size_bytes": 216877,
+        "sha256": "9a3901c67c0943c3d550f7c8cc41143e55be125fe57c940ade6f1c090aab28e3"
+      },
+      {
+        "path": "src/fast/MaterialRegistry.cpp",
+        "size_bytes": 40111,
+        "sha256": "27244b6289e17fa97800950d6b14d630e5f2bddbbe7c2f9a06db04a0ca205a93"
+      },
+      {
+        "path": "src/fast/PersistentScene.cpp",
+        "size_bytes": 18879,
+        "sha256": "32387ec4c3b7ebec7bada04a175d1169fd1e9b0453145101bed3755cb2e053e7"
+      },
+      {
+        "path": "src/fast/shaders/dxr_shadow.hlsl",
+        "size_bytes": 73866,
+        "sha256": "67de5fd6c5e933e20ab0fac04684030b38aa6ef39236d121108b4e76b3bf87ed"
+      },
+      {
+        "path": "src/ship/audio/Audio.cpp",
+        "size_bytes": 2729,
+        "sha256": "5b3d53bbc9a4874d9f201beb95c469c7b595b94266e6316a5b3bc8bcde9b26f9"
+      },
+      {
+        "path": "src/ship/Context.cpp",
+        "size_bytes": 15747,
+        "sha256": "654d14ba5c8a5c025636ff58733d7b21c4151bc15c23438ed9f848f7581e571c"
+      },
+      {
+        "path": "src/ship/controller/controldevice/controller/ControllerStick.cpp",
+        "size_bytes": 19161,
+        "sha256": "857a00901b0226f2527d6a2513c39fd82ca97a9072528f44c860a410746f04f7"
+      },
+      {
+        "path": "src/ship/controller/controldevice/controller/mapping/keyboard/KeyboardKeyToAnyMapping.cpp",
+        "size_bytes": 1369,
+        "sha256": "97ae2b6185aedbd4ab11b0827f94aae1fe781e8ac1579e3ba9c57ef785f4f7c3"
+      },
+      {
+        "path": "src/ship/controller/controldevice/controller/mapping/keyboard/KeyboardKeyToAxisDirectionMapping.cpp",
+        "size_bytes": 3527,
+        "sha256": "b3a9b83f3200eebbcb352c727693980af6a93862260c1b5ec447460f5ea50e16"
+      },
+      {
+        "path": "src/ship/controller/controldevice/controller/mapping/keyboard/KeyboardKeyToButtonMapping.cpp",
+        "size_bytes": 2997,
+        "sha256": "3d73b131708ea293aeafda7796e443c24b6738d2cc536d2e27416f28541b86b2"
+      },
+      {
+        "path": "src/ship/resource/ResourceManager.cpp",
+        "size_bytes": 20239,
+        "sha256": "14f05b4ea6a938de2e647b1074fef6ae37cb1d327acffbee856e15b63927f4e1"
+      },
+      {
+        "path": "src/ship/window/gui/ConsoleWindow.cpp",
+        "size_bytes": 26774,
+        "sha256": "a31bd74e62751ce9b3d2658a5b49ecb81eaa976a635a1b469233a07dfbf6488c"
+      },
+      {
+        "path": "src/ship/window/gui/GameOverlay.cpp",
+        "size_bytes": 9783,
+        "sha256": "b914cca5a1c08e546fa5712449b0569804bb8c449bf07b7969204dc713cd9b3d"
+      },
+      {
+        "path": "src/ship/window/gui/Gui.cpp",
+        "size_bytes": 42447,
+        "sha256": "697ce3afcc786bd982248b8162011b41511810a0aa21ee1d839218f4b7c7eb49"
+      },
+      {
+        "path": "src/ship/window/gui/GuiWindow.cpp",
+        "size_bytes": 9813,
+        "sha256": "f721db5d3b5b5a6088066093b682fe2c0051b9d7454651282af62dc33818771a"
+      },
+      {
+        "path": "src/ship/window/gui/InputEditorWindow.cpp",
+        "size_bytes": 67363,
+        "sha256": "679845c03e878135d346944d96fd61a080c12f5e31b5058a99f3528ac681dcba"
+      },
+      {
+        "path": "src/ship/window/gui/StatsWindow.cpp",
+        "size_bytes": 931,
+        "sha256": "6c4126a75eff4c957ca4fc33c94503dbc860d8668c54db11dc3063d1e35c6343"
+      }
+    ]
+  },
+  "patches": {
+    "shipwright": {
+      "path": "patches/development/shipwright_9_1_1_development.patch",
+      "size_bytes": 340554,
+      "sha256": "7f687e09ac6bebd2669b288945434b0a2981c59082499a6d58fd33fcb685b8c1"
+    },
+    "libultraship": {
+      "path": "patches/development/libultraship_1_3_1_development.patch",
+      "size_bytes": 1569986,
+      "sha256": "475781b45a5779f5c8c280452729c4196b74d49fda41d09ad058eef266f5750d"
+    }
+  }
+}

@@ -1,5 +1,7 @@
 # GUÍA DE RECUPERACIÓN TOTAL DESDE CERO (RECOVERY FROM ZERO)
 
+> **Alcance:** los pasos de esta guía reconstruyen el último runtime estable, V03.1.1. Para la base de desarrollo más reciente (experimental), sigue [CURRENT_CANONICAL_SNAPSHOT.md](development/CURRENT_CANONICAL_SNAPSHOT.md).
+
 > **Escenario de Catástrofe:** *"Mi equipo local se ha destruido o formateado por completo; únicamente dispongo del repositorio en GitHub (`danielunibe/zel-da-OFT-esp`)."*
 
 Esta guía documenta el procedimiento determinista, reproducible y validado para reconstruir el entorno completo de desarrollo y ejecución de *Ocarina of Time PC: Couch Edition* desde cero.

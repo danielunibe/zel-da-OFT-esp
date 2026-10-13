@@ -13,6 +13,13 @@ Este documento detalla la taxonomía y propósito de cada directorio dentro del 
 
 ---
 
+## Autoridad vigente al 12 de octubre de 2026
+
+- V03.1.1 y su overlay permanecen como el último runtime estable documentado.
+- El checkout de desarrollo más reciente se preserva bajo `source-overlay/development/` y `patches/development/`, contra los mismos commits upstream fijados.
+- D3D12/DXR y el harness del snapshot actual son experimentales; el código no certifica salida RTX visible ni una release.
+- Los resultados, hashes locales de guardados/OTR y artefactos de build del diagnóstico de octubre no se importan al repositorio.
+
 ## Mapa de Directorios
 
 ### 1. Repositorio Canónico (`zel-da-OFT-esp/`)
@@ -21,15 +28,15 @@ Este documento detalla la taxonomía y propósito de cada directorio dentro del 
 | `README.md` | CANONICAL | Documentación principal, instrucciones de construcción y configuración. |
 | `LICENSE` / `NOTICE.md` | CANONICAL | Licenciamiento MIT, términos legales y atribuciones a Nintendo y Harbour Masters. |
 | `.gitignore` / `.gitattributes` | CANONICAL | Reglas de exclusión rigurosas y normalización de fin de línea (LF forzoso en parches). |
-| `patches/` | CANONICAL | Parches unificados de producción aplicables sobre los commits upstream fijados. |
-| `source-overlay/` | CANONICAL | Árbol con todos los archivos propios modificados o añadidos para integración directa. |
+| `patches/` | CANONICAL | Parches de producción V03.1.1 y snapshot experimental actual, ambos contra commits upstream fijados. |
+| `source-overlay/` | CANONICAL | Overlay raíz de V03.1.1 más `development/` para la base más reciente. Cada snapshot se aplica por separado. |
 | `localization/` | CANONICAL | Fuentes completas de traducción ES-419 (`spa_message_data_static`), corpus, herramientas y glifos. |
 | `materials/` | CANONICAL | Conjunto de datos `material_intelligence_01` (1.407 reglas compiladas, CSVs y clasificadores PBR). |
 | `visual/` | CANONICAL | Arquitectura visual, perfiles Enhanced, mapeo de tonos ACES y análisis de niebla/color. |
-| `tools/` | CANONICAL | Herramientas de build (`agent_build_guard.ps1`, `build_shipwright_9_1_1.ps1`), exportadores y generadores. |
+| `tools/` | CANONICAL | Herramientas de build, exportador del snapshot de desarrollo y aplicador de overlays estable/desarrollo. |
 | `tests/` | CANONICAL | Suites automatizadas de pruebas de runtime, semántica de diálogos y validación de parches. |
-| `reports/` | CANONICAL | Informes técnicos de consolidación, certificación de runtime y notas de lanzamiento. |
-| `manifests/` | CANONICAL | `PROJECT_MASTER_MANIFEST.json`, listas de exclusión e inventarios de integridad SHA-256. |
+| `reports/` | CANONICAL | Informes de consolidación y validación histórica; no contiene los hashes privados del diagnóstico local de octubre. |
+| `manifests/` | CANONICAL | `PROJECT_MASTER_MANIFEST.json`, exclusiones e inventarios; el manifiesto distingue release estable y snapshot experimental. |
 | `runtime-template/` | CANONICAL | Plantilla limpia de distribución con estructura de carpetas y guía de provisión de `oot.o2r`. |
 | `archive/legacy-patches/` | HISTORICAL | Parches de versiones anteriores archivados con directiva `DO_NOT_APPLY.md`. |
 
@@ -38,8 +45,8 @@ Este documento detalla la taxonomía y propósito de cada directorio dentro del 
 ### 2. Entorno de Desarrollo Local (`Ocarina_CouchEdition_DEV/`)
 | Directorio | Estado | Descripción y Destino |
 | :--- | :--- | :--- |
-| `source/shipwright/` | CANONICAL | Árbol fuente activo de desarrollo. Sus diferencias alimentan `source-overlay/` y `patches/`. |
-| `source/shipwright/libultraship/` | CANONICAL | Submódulo LUS con MaterialRegistry, D3D11 Enhanced y extensiones gráficas. |
+| `source/shipwright/` | CANONICAL | Autoridad de desarrollo en el checkout local. Sus diferencias actuales alimentan `source-overlay/development/` y `patches/development/`. |
+| `source/shipwright/libultraship/` | CANONICAL | Submódulo fijado con MaterialRegistry y D3D11 Enhanced; D3D12/DXR del snapshot actual sigue experimental. |
 | `localization_workspace/` | WORKSPACE | Entorno de desarrollo de traducción al español, tablas de mensajes y scripts auxiliares. |
 | `glyph_workspace/` | WORKSPACE | Recursos gráficos para fuentes y glifos especiales (acentos, botones). |
 | `visual_workspace/` | WORKSPACE | Investigaciones visuales, prototipos de materiales y compilación de perfiles. |
