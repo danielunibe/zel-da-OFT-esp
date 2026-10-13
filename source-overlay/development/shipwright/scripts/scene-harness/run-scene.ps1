@@ -1,10 +1,12 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     [string]$RunScenario = $env:COUCH_DXR_SCENARIO,
     [string]$TruthMode = $env:COUCH_DXR_MODE,
     [string]$Executable,
     [switch]$EnableD3D12DebugLayer,
-    [int]$PollSeconds = 60
+    [int]$PollSeconds = 60,
+    [string]$RendererBackend = 'D3D12',
+    [int]$VisualProfile = 2
 )
 
 $ErrorActionPreference = 'Stop'
@@ -95,14 +97,28 @@ if ([string]::IsNullOrWhiteSpace($TruthMode)) { $TruthMode = 'NORMAL' }
 $validModes = @('NORMAL', 'HIT_MISS', 'WORLD_NORMAL', 'HIT_DISTANCE', 'INSTANCE_IDS', 'SYNTHETIC_LAMBERT', 'GAME_LIGHT_LAMBERT')
 if ($TruthMode -notin $validModes) { Stop-WithCode 'HARNESS_UNKNOWN_TRUTH_MODE' "Unsupported TRUTH_MODE '$TruthMode'." 22 }
 
+$validRendererBackends = @('D3D12', 'D3D11')
+if ($RendererBackend -cnotin $validRendererBackends) {
+    Stop-WithCode 'HARNESS_UNKNOWN_RENDERER_BACKEND' "Unsupported RENDERER_BACKEND '$RendererBackend'." 21
+}
+$visualProfileName = if ($VisualProfile -eq 3) { 'PATH_TRACED_EXPERIMENTAL' } else { 'HYBRID_RT' }
+if ($RendererBackend -ceq 'D3D11') {
+    Stop-WithCode 'HARNESS_DXR_REQUIRES_D3D12' 'The DXR hybrid path requires the Direct3D 12 backend; the D3D11 backend cannot activate the DXR hybrid path.' 41
+}
+if ($VisualProfile -ne 2 -and $VisualProfile -ne 3) {
+    Stop-WithCode 'HARNESS_PROFILE_REQUIRES_DXR' 'The DXR harness requires the HYBRID_RT (2) or PATH_TRACED_EXPERIMENTAL (3) visual profile.' 42
+}
+Write-Host "Renderer backend: $RendererBackend (forced via COUCH_D3D12=1)"
+Write-Host "Visual profile: $VisualProfile ($visualProfileName; forced via COUCH_VISUAL_PROFILE=$VisualProfile)"
+
 $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
 $workspaceRoot = Split-Path -Parent (Split-Path -Parent $repoRoot)
 $manifestPath = Join-Path $PSScriptRoot 'scenarios\scenarios.v1.json'
 $runtimeRoot = Join-Path $workspaceRoot 'runtime\build-test'
-$defaultExe = Join-Path $repoRoot 'x64\Release\soh_dxr_harness.exe'
+$defaultExe = Join-Path $repoRoot 'x64\Release\soh.exe'
 if ([string]::IsNullOrWhiteSpace($Executable)) { $Executable = $defaultExe }
 $Executable = (Resolve-Path -LiteralPath $Executable -ErrorAction SilentlyContinue).Path
-if ([string]::IsNullOrWhiteSpace($Executable)) { Stop-WithCode 'HARNESS_EXECUTABLE_NOT_FOUND' 'Build soh_scene_harness.exe before launching.' 23 }
+if ([string]::IsNullOrWhiteSpace($Executable)) { Stop-WithCode 'HARNESS_EXECUTABLE_NOT_FOUND' 'Build soh.exe before launching, or pass -Executable with the Release build path.' 23 }
 if (-not (Test-Path -LiteralPath $manifestPath -PathType Leaf)) { Stop-WithCode 'HARNESS_MANIFEST_NOT_FOUND' $manifestPath 24 }
 if (-not (Test-Path -LiteralPath $runtimeRoot -PathType Container)) { Stop-WithCode 'HARNESS_RUNTIME_NOT_FOUND' $runtimeRoot 25 }
 
@@ -174,6 +190,9 @@ $manifestResolvedLauncher = [ordered]@{
     viewId = $scenario.viewId
     truthMode = $TruthMode
     backendTruthMode = [int]$diagnostic.backendMode
+    rendererBackend = $RendererBackend
+    visualProfile = [int]$VisualProfile
+    visualProfileName = $visualProfileName
     d3d12DebugLayerRequested = [bool]$EnableD3D12DebugLayer
     entrance = ('0x{0:X3}' -f [int]$scenario.entrance)
     scene = ('0x{0:X2}' -f [int]$scenario.expectedScene)
@@ -192,7 +211,8 @@ $manifestResolvedLauncher | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (
 $harnessEnvNames = @('COUCH_DXR_HARNESS', 'COUCH_DXR_CAPTURE_SEQUENCE', 'COUCH_DXR_MANIFEST', 'COUCH_DXR_OUTPUT',
     'COUCH_DXR_SAVE_ROOT', 'COUCH_DXR_SCENARIO', 'COUCH_DXR_MODE', 'COUCH_DXR_TRUTH_MODE',
     'COUCH_DXR_TARGET_SCENE', 'COUCH_FORENSIC_CAPTURES', 'COUCH_DXR_TRUTH_SEQUENCE',
-    'COUCH_DXR_TRUTH_V2_SEQUENCE', 'COUCH_DXR_DIAGNOSTIC_SEQUENCE', 'COUCH_D3D12_DEBUG')
+    'COUCH_DXR_TRUTH_V2_SEQUENCE', 'COUCH_DXR_DIAGNOSTIC_SEQUENCE', 'COUCH_D3D12_DEBUG',
+    'COUCH_D3D12', 'COUCH_VISUAL_PROFILE')
 $savedHarnessEnv = @{}
 foreach ($name in $harnessEnvNames) { $savedHarnessEnv[$name] = [Environment]::GetEnvironmentVariable($name, 'Process') }
 $env:COUCH_DXR_HARNESS = '1'
@@ -209,6 +229,8 @@ $env:COUCH_DXR_TRUTH_SEQUENCE = '0'
 $env:COUCH_DXR_TRUTH_V2_SEQUENCE = '0'
 $env:COUCH_DXR_DIAGNOSTIC_SEQUENCE = '0'
 $env:COUCH_D3D12_DEBUG = if ($EnableD3D12DebugLayer) { '1' } else { '0' }
+$env:COUCH_D3D12 = '1'
+$env:COUCH_VISUAL_PROFILE = [string]$VisualProfile
 
 $stdoutPath = Join-Path $runRoot 'stdout.log'
 $stderrPath = Join-Path $runRoot 'stderr.log'
@@ -241,6 +263,8 @@ while ((Get-Date) -lt $deadline) {
     }
     if (Test-Path -LiteralPath (Join-Path $runRoot 'RUN_PASS') -PathType Leaf) { break }
     if (Test-Path -LiteralPath (Join-Path $runRoot 'RUN_FAIL') -PathType Leaf) { break }
+    if (Test-Path -LiteralPath (Join-Path $runRoot 'CAPTURE_COMPLETE') -PathType Leaf) { break }
+    if (Test-Path -LiteralPath (Join-Path $runRoot 'CAPTURE_PARTIAL') -PathType Leaf) { break }
     if (-not $windowReady -and (Get-Date) -ge $startupDeadline) {
         Set-Content -LiteralPath (Join-Path $runRoot 'RUN_FAIL') -Value 'HARNESS_STARTUP_TIMEOUT' -Encoding utf8
         break
@@ -337,36 +361,38 @@ if (-not $originalUnchanged) {
     Stop-WithCode 'HARNESS_ORIGINAL_SAVE_CHANGED' 'An original save hash changed during the run.' 37
 }
 
-$evidenceVerification = 'NOT_RUN_NO_CAPTURE_PASS'
+$evidenceVerification = 'NOT_RUN_CAPTURE_INCOMPLETE'
 $evidenceVerificationFailed = $false
-if (Test-Path -LiteralPath (Join-Path $runRoot 'RUN_PASS') -PathType Leaf) {
+if (Test-Path -LiteralPath (Join-Path $runRoot 'CAPTURE_COMPLETE') -PathType Leaf) {
     $verifyScript = Join-Path $PSScriptRoot 'verify-run.ps1'
     try {
         $verification = & $verifyScript -RunRoot $runRoot -OriginalSaveRoot $originalSaveRoot -AsLibrary
-        if ($null -eq $verification -or $verification.status -cne 'PASS') {
+        if ($null -eq $verification -or $verification.status -ceq 'FAIL') {
             $evidenceVerificationFailed = $true
             $evidenceVerification = 'FAIL'
-            Remove-Item -LiteralPath (Join-Path $runRoot 'RUN_PASS') -Force -ErrorAction SilentlyContinue
             Set-Content -LiteralPath (Join-Path $runRoot 'RUN_FAIL') -Value 'HARNESS_EVIDENCE_VERIFY_FAILED' -Encoding utf8
             [ordered]@{ status = 'FAIL'; blocker = 'HARNESS_EVIDENCE_VERIFY_FAILED'; verification = $verification;
                 runId = $runId; pid = $process.Id } | ConvertTo-Json -Depth 8 |
                 Set-Content -LiteralPath (Join-Path $runRoot 'evidence-verification.status.json') -Encoding utf8
         } else {
-            $evidenceVerification = 'PASS'
+            $evidenceVerification = [string]$verification.status
         }
     } catch {
         $evidenceVerificationFailed = $true
         $evidenceVerification = 'FAIL'
-        Remove-Item -LiteralPath (Join-Path $runRoot 'RUN_PASS') -Force -ErrorAction SilentlyContinue
         Set-Content -LiteralPath (Join-Path $runRoot 'RUN_FAIL') -Value 'HARNESS_EVIDENCE_VERIFY_FAILED' -Encoding utf8
         [ordered]@{ status = 'FAIL'; blocker = 'HARNESS_EVIDENCE_VERIFY_FAILED'; error = $_.Exception.Message;
             runId = $runId; pid = $process.Id } | ConvertTo-Json -Depth 6 |
             Set-Content -LiteralPath (Join-Path $runRoot 'evidence-verification.status.json') -Encoding utf8
     }
+} elseif (Test-Path -LiteralPath (Join-Path $runRoot 'CAPTURE_PARTIAL') -PathType Leaf) {
+    $evidenceVerification = 'PARTIAL'
 }
 
 $launcherStatus = if (Test-Path -LiteralPath (Join-Path $runRoot 'RUN_PASS')) { 'PASS' }
                   elseif (Test-Path -LiteralPath (Join-Path $runRoot 'RUN_FAIL')) { 'FAIL' }
+                  elseif ((Test-Path -LiteralPath (Join-Path $runRoot 'CAPTURE_COMPLETE')) -and $evidenceVerification -eq 'PARTIAL') { 'PARTIAL' }
+                  elseif (Test-Path -LiteralPath (Join-Path $runRoot 'CAPTURE_PARTIAL')) { 'PARTIAL' }
                   elseif ($process.HasExited) { 'PROCESS_EXITED' }
                   else { 'POLL_TIMEOUT_PROCESS_LEFT_OPEN' }
 [ordered]@{

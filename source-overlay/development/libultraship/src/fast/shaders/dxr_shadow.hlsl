@@ -406,6 +406,14 @@ float3 DecodeMaterialHit(uint instanceIndex, uint primitiveIndex, uint probeMode
     vertexColor = v0.color * bary.x + v1.color * bary.y + v2.color * bary.z;
     vertexAlpha = vertexColor.a;
     const float rawInterpolatedVertexAlpha = vertexAlpha;
+    // The rasterizer reuses vertex alpha for fog. It is not opacity. Recover
+    // the captured RSP alpha only on fog vertices; ordinary vertex alpha and
+    // sampled texture alpha still govern cutout and transparent materials.
+    float3 opacityAlpha = float3(v0.fogMode != 0u ? float(v0.sourceAlpha) / 255.0f : v0.color.a,
+                                v1.fogMode != 0u ? float(v1.sourceAlpha) / 255.0f : v1.color.a,
+                                v2.fogMode != 0u ? float(v2.sourceAlpha) / 255.0f : v2.color.a);
+    vertexAlpha = dot(opacityAlpha, bary);
+    vertexColor.a = vertexAlpha;
     if (probeMode == 1u && (((uint)gDiagnosticInfo.x & 64u) != 0u)) {
         vertexColor.a = 1.0f;
         vertexAlpha = 1.0f;
@@ -837,9 +845,9 @@ void RayGenReflection() {
     float3 f0 = lerp(0.04f * surface.detail.z.xxx, baseColor, metallic);
     float fresnelPower = pow(1.0f - saturate(dot(normal, viewDirection)), 5.0f);
     float3 fresnel = f0 + (1.0f - f0) * fresnelPower;
-    float materialCoverage = (surface.materialIndex == 4u || surface.materialIndex == 5u ||
-                              surface.materialIndex == 11u || surface.materialIndex == 14u)
-        ? 1.0f : saturate(surface.detail.w);
+    // detail.w is geometric coverage computed from the material alpha class
+    // in ClosestHit, never raster fog alpha or a material-name whitelist.
+    float materialCoverage = saturate(surface.detail.w);
     // Alpha-blended/additive Fast3D geometry has no physically based opacity
     // model here. Keep the original raster pixel for those effects instead of
     // replacing it with a solid path-traced hit. ClosestHitReflection encodes
@@ -983,10 +991,6 @@ void RayGenReflection() {
         reflectedRadiance = lerp(transmittedRadiance, reflectedRadiance, saturate(Luminance(reflectionWeight)));
     }
 
-    gSurfaceMask[launchIndex] = float4(reflectionContribution, transmissiveFactor,
-                                       materialCoverage, 1.0f);
-    gReflectionColor[launchIndex] = float4(max(0.0f, reflectedRadiance + baseColor * emissiveStrength),
-                                          reflectionContribution);
     float3 indirectRadiance = 0.0f;
     uint samples = min(8u, (uint)max(0.0f, gQuality.x));
     float3 giTangent = normalize(abs(normal.y) < 0.9f ? cross(normal, float3(0,1,0)) : cross(normal, float3(1,0,0)));
@@ -1015,9 +1019,22 @@ void RayGenReflection() {
     float3 indirectContribution = samples > 0u
         ? (indirectRadiance / samples) * diffuseReflectance * (indirectScale * materialCoverage)
         : 0.0f;
+    float3 reflectionResult = max(0.0f, reflectedRadiance + baseColor * emissiveStrength);
+    float3 pathResult = max(0.0f, surface.radiance.rgb) + indirectContribution;
+    if (any(isnan(reflectionResult)) || any(isinf(reflectionResult)) ||
+        any(isnan(pathResult)) || any(isinf(pathResult))) {
+        ClearSurfaceSignals(launchIndex);
+        return;
+    }
+    gSurfaceMask[launchIndex] = float4(reflectionContribution, transmissiveFactor, materialCoverage, 1.0f);
+    // FP16 has a finite maximum; reject overflow rather than storing infinity.
+    if (any(reflectionResult > 65504.0f) || any(pathResult > 65504.0f)) {
+        ClearSurfaceSignals(launchIndex);
+        return;
+    }
+    gReflectionColor[launchIndex] = float4(reflectionResult, reflectionContribution);
     if (gParams.w > 0.5f) {
-        gIndirectMask[launchIndex] = float4(
-            max(0.0f, surface.radiance.rgb) + indirectContribution, 2.0f);
+        gIndirectMask[launchIndex] = float4(pathResult, 2.0f);
     } else {
         gIndirectMask[launchIndex] = float4(indirectContribution, samples > 0u ? 1.0f : 0.0f);
     }
@@ -1225,7 +1242,12 @@ void ClosestHitReflection(inout ReflectionPayload payload, in BuiltInTriangleInt
     const bool primaryRasterBlend = rawPrimaryRasterBlend && !bypassPrimaryRasterBlend;
     payload.surfaceOptics = float4(reflectivity, material.emissiveStrength, RayTCurrent(),
                                    primaryRasterBlend ? 3.0f : (frontFace ? 2.0f : 1.0f));
-    payload.detail = float4(uv, material.specular, baseColor.a);
+    float coverage = 0.0f;
+    const bool opacityValid = !isnan(baseColor.a) && !isinf(baseColor.a);
+    if (opacityValid && policyAlphaMode == 0u) coverage = 1.0f; // opaque alpha is not opacity
+    else if (opacityValid && policyAlphaMode == 1u) coverage = baseColor.a >= 0.5f ? 1.0f : 0.0f;
+    else if (opacityValid && pbrTransmissiveMaterial) coverage = saturate(baseColor.a);
+    payload.detail = float4(uv, material.specular, coverage);
 
     if (payload.probeMode == 1u && gParams.w <= 0.5f) {
         payload.radiance = float4(baseColor.rgb, Luminance(baseColor.rgb));

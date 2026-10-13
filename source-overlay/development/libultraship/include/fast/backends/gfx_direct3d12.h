@@ -6,6 +6,7 @@
 #include "fast/interpreter.h"
 #include <imgui.h>
 #include "RtxQuality.h"
+#include "fast/backends/DxrPipelinePolicy.h"
 #include <chrono>
 #include <d3d12.h>
 #include <dxgi1_4.h>
@@ -110,6 +111,7 @@ public:
 
     void DrawTriangles(float buf_vbo[], size_t buf_vbo_len, size_t buf_vbo_num_tris) override;
     bool SupportsPhysicalDrawData() const override { return true; }
+    const DxrFrameEvidence& GetDxrFrameEvidence() const { return mDxrFrameEvidence; }
     void DrawTrianglesPhysical(float buf_vbo[], size_t buf_vbo_len, size_t buf_vbo_num_tris,
                                const PhysicalVertexData* physicalVertices, size_t physicalVertexCount,
                                const PhysicalDrawData& physicalDraw) override;
@@ -353,6 +355,8 @@ private:
     uint64_t mInvalidDrawCount;
     bool mCommandListOpen;
     bool mDxrPassesRunThisFrame = false;
+    bool mDxrWorkAttemptedThisFrame = false;
+    DxrFrameEvidence mDxrFrameEvidence{};
     bool mLastFrameHadDxr = false;
     bool mDeviceRemoved;
 

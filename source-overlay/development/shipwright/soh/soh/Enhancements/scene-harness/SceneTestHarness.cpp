@@ -9,6 +9,14 @@ extern "C" {
 
 #include <nlohmann/json.hpp>
 
+#define NOMINMAX
+#include "fast/MaterialRegistry.h"
+#if defined(_WIN32)
+#include "fast/backends/DxrSurfaceRenderer.h"
+#endif
+#include "ship/Context.h"
+#include "ship/config/ConsoleVariable.h"
+
 #include <algorithm>
 #include <array>
 #include <cmath>
@@ -30,7 +38,13 @@ namespace {
 using Json = nlohmann::json;
 using namespace std::string_view_literals;
 
-enum class HarnessState { Disabled, Booting, SelectingSlot, WaitingForScene, Stabilizing, Capturing, Passed, Failed };
+enum class HarnessState { Disabled, Booting, SelectingSlot, WaitingForScene, Stabilizing, Capturing,
+                          CaptureComplete, Passed, Failed };
+
+bool IsHarnessTerminal(HarnessState state) {
+    return state == HarnessState::CaptureComplete || state == HarnessState::Passed ||
+           state == HarnessState::Failed;
+}
 
 struct HarnessConfig {
     std::filesystem::path outputRoot;
@@ -65,6 +79,7 @@ int sStableFrameCount = 0;
 std::array<s8, 2> sRawCameraStick{};
 bool sSaveLoaded = false;
 bool sDxrReady = false;
+bool sDxrRuntimeValidated = false;
 bool sGameLightProductive = false;
 std::string sGameLightSyncStatus = "UNKNOWN";
 bool sPlayerFreezeRequested = false;
@@ -122,7 +137,7 @@ void Log(const std::string& event, const Json& fields = Json::object()) {
 }
 
 void Fail(const std::string& code, const std::string& message) {
-    if (sState == HarnessState::Failed || sState == HarnessState::Passed) return;
+    if (IsHarnessTerminal(sState)) return;
     sState = HarnessState::Failed;
     Json evidence = {{"schema_version", 1}, {"result", "FAIL"}, {"blocker", code}, {"message", message},
                      {"scenario_id", sConfig.scenarioId}, {"view_id", sConfig.viewId},
@@ -322,6 +337,55 @@ bool BackendDxrReady() {
     return false;
 }
 
+bool IsD3D12BackendActive() {
+    auto context = Ship::Context::GetInstance();
+    if (context) {
+        auto cvars = context->GetConsoleVariables();
+        if (cvars && cvars->GetInteger("gEnhancements.Graphics.RendererBackend", -1) == 1) {
+            return true;
+        }
+    }
+    if (!sConfig.outputRoot.empty()) {
+        std::ifstream d3d12Log(sConfig.outputRoot / "harness-d3d12.log", std::ios::binary);
+        if (d3d12Log) {
+            const std::string log((std::istreambuf_iterator<char>(d3d12Log)),
+                                  std::istreambuf_iterator<char>());
+            if (log.find("[COUCH-D3D12] Backend = D3D12") != std::string::npos) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+// The DXR hybrid path only activates for the HYBRID_RT and
+// PATH_TRACED_EXPERIMENTAL visual profiles, and it requires the
+// Direct3D 12 backend. Interpreter::StartFrame applies the
+// COUCH_VISUAL_PROFILE override before the first gameplay frame, so
+// the effective runtime configuration is validated once, on the
+// first gameplay frame.
+void ValidateDxrRuntime() {
+    if (sDxrRuntimeValidated) return;
+    sDxrRuntimeValidated = true;
+
+    const bool d3d12Backend = IsD3D12BackendActive();
+    const int profile = Fast::MaterialRegistry::Instance().GetProfile();
+    const char* profileName = Fast::MaterialRegistry::Instance().GetProfileName();
+    if (!d3d12Backend) {
+        Fail("HARNESS_BACKEND_MISMATCH", "The DXR hybrid path requires the Direct3D 12 backend.");
+        return;
+    }
+    if (!Fast::MaterialRegistry::IsHybridRtProfile()) {
+        Fail("HARNESS_PROFILE_MISMATCH", std::string("DXR requires the HYBRID_RT or PATH_TRACED_EXPERIMENTAL visual profile; active profile is '") +
+             profileName + "' (" + std::to_string(profile) + ").");
+        return;
+    }
+    Log("DXR_PROFILE_VALIDATED", {{"renderer_backend", "Direct3D 12"},
+                                      {"renderer_backend_cvar", "gEnhancements.Graphics.RendererBackend=1"},
+                                      {"visual_profile", profile},
+                                      {"profile_name", profileName}});
+}
+
 void OnTitleUpdate(void* gameState) {
     if (sState != HarnessState::Booting) return;
     auto* title = static_cast<TitleContext*>(gameState);
@@ -353,7 +417,7 @@ void OnFileChooseMain(void* gameState) {
 }
 
 void OnLoadGame(int32_t fileNum) {
-    if (sState == HarnessState::Disabled || sState == HarnessState::Failed || sState == HarnessState::Passed) return;
+    if (sState == HarnessState::Disabled || IsHarnessTerminal(sState)) return;
     if (fileNum != 0xFF) {
         Fail("HARNESS_UNEXPECTED_SAVE_MODE", "The debug-save route did not produce the temporary harness save.");
         return;
@@ -374,7 +438,7 @@ void OnLoadGame(int32_t fileNum) {
 }
 
 void OnGameStateMainStart() {
-    if (sState == HarnessState::Disabled || sState == HarnessState::Failed || sState == HarnessState::Passed) return;
+    if (sState == HarnessState::Disabled || IsHarnessTerminal(sState)) return;
     ++sGameFrame;
     if (!sSaveLoaded || !gPlayState || !sConfig.freezePlayer ||
         gPlayState->sceneNum != sConfig.expectedScene || gPlayState->roomCtx.curRoom.num != sConfig.expectedRoom) {
@@ -422,8 +486,8 @@ void OnGameStateMainStart() {
 }
 
 void OnPlayDrawEnd() {
-    if (!sSaveLoaded || sState == HarnessState::Disabled || sState == HarnessState::Failed ||
-        sState == HarnessState::Passed || !gPlayState || !sConfig.freezePlayer ||
+    if (!sSaveLoaded || sState == HarnessState::Disabled || IsHarnessTerminal(sState) ||
+        !gPlayState || !sConfig.freezePlayer ||
         gPlayState->sceneNum != sConfig.expectedScene || gPlayState->roomCtx.curRoom.num != sConfig.expectedRoom) {
         return;
     }
@@ -455,7 +519,7 @@ void OnPlayDrawEnd() {
 }
 
 void OnSceneInit(int16_t sceneNum) {
-    if (!sSaveLoaded || sState == HarnessState::Failed || sState == HarnessState::Passed) return;
+    if (!sSaveLoaded || IsHarnessTerminal(sState)) return;
     if (sceneNum == sConfig.expectedScene) {
         // SceneInit and TransitionEnd can both report the same successful target entry.
         // Keep the first target-scene frame as the start of one stabilization interval.
@@ -474,7 +538,7 @@ void OnSceneInit(int16_t sceneNum) {
 }
 
 void OnFrameUpdate() {
-    if (sState == HarnessState::Disabled || sState == HarnessState::Failed || sState == HarnessState::Passed) return;
+    if (sState == HarnessState::Disabled || IsHarnessTerminal(sState)) return;
     if (!sSaveLoaded) {
         if (sGameFrame - sStateStartFrame > static_cast<std::uint64_t>(sConfig.timeoutFrames)) {
             const std::string blocker = sMainSlotInputInjected ? "HARNESS_AUTOLOAD_TIMEOUT"
@@ -488,6 +552,10 @@ void OnFrameUpdate() {
         gSaveContext.dayTime = sFrozenDayTime;
         gSaveContext.skyboxTime = sFrozenSkyboxTime;
     }
+    if (!sDxrRuntimeValidated) {
+        ValidateDxrRuntime();
+        if (sState == HarnessState::Failed) return;
+    }
     if (sState == HarnessState::Capturing) {
         const auto ackPath = sConfig.outputRoot / "capture.ack.json";
         if (std::filesystem::exists(ackPath)) {
@@ -495,16 +563,51 @@ void OnFrameUpdate() {
             try {
                 std::ifstream ackFile(ackPath, std::ios::binary);
                 ackFile >> ack;
-                if (ack.value("result", "") != "PASS" || ack.value("sequence", 0) != 1) {
+                const std::string captureResult = ack.value("result", "");
+                if ((captureResult != "CAPTURE_COMPLETE" && captureResult != "PARTIAL") ||
+                    ack.value("sequence", 0) != 1) {
                     Fail("HARNESS_CAPTURE_ACK_INVALID", "The renderer did not confirm capture sequence 1.");
+                    return;
+                }
+                if (captureResult == "PARTIAL") {
+                    sState = HarnessState::CaptureComplete;
+                    Json evidence = { {"schema_version", 2}, {"result", "PARTIAL"},
+                                      {"capture_status", "PARTIAL"}, {"capture_frame", ack.value("capture_frame", -1)},
+                                      {"dxr_frame", ack.value("dxr_frame", Json::object())},
+                                      {"captures", ack.value("captures", Json::object())},
+                                      {"reason", "One or more capture files failed content validation."} };
+                    WriteJson(sConfig.outputRoot / "evidence.json", evidence);
+                    std::ofstream partial(sConfig.outputRoot / "CAPTURE_PARTIAL", std::ios::binary | std::ios::trunc);
+                    partial << "CAPTURE_PARTIAL\n";
+                    Log("CAPTURE_PARTIAL", evidence);
+                    return;
+                }
+                if (ack.value("capture_mask", 0) != 255 || ack.value("capture_frame", -1) < 0) {
+                    Fail("HARNESS_CAPTURE_ACK_INVALID", "Capture completion requires eight valid same-frame stages.");
                     return;
                 }
             } catch (...) {
                 Fail("HARNESS_CAPTURE_ACK_INVALID", "The renderer acknowledgment is malformed.");
                 return;
             }
-            sState = HarnessState::Passed;
-            Json evidence = {{"schema_version", 1}, {"result", "PASS"}, {"scenario_id", sConfig.scenarioId},
+            const Json dxrFrame = ack.value("dxr_frame", Json::object());
+            const bool sameDxrFrame = dxrFrame.value("request_matches_capture", false);
+            const std::string executionStatus = sameDxrFrame
+                ? dxrFrame.value("execution_status", "NOT_RUN") : "NOT_RUN";
+            const std::string compositionStatus = sameDxrFrame
+                ? dxrFrame.value("composition_status", "NOT_RUN") : "NOT_RUN";
+            const std::string visualStatus = sameDxrFrame
+                ? dxrFrame.value("visual_status", "NOT_RUN") : "NOT_RUN";
+            sState = HarnessState::CaptureComplete;
+            Json evidence = {{"schema_version", 2}, {"result", "CAPTURE_COMPLETE"},
+                            {"capture_status", "CAPTURE_COMPLETE"}, {"capture_frame", ack.value("capture_frame", -1)},
+                            {"dxr_execution_status", executionStatus},
+                            {"dxr_composition_status", compositionStatus},
+                            {"dxr_visual_verified", visualStatus},
+                            {"dxr_visual_reason", "Causal same-frame ablation was not run."},
+                            {"presentation_status", "PRE_PRESENT_CAPTURE"},
+                            {"physical_presentation_status", "NOT_RUN"},
+                            {"scenario_id", sConfig.scenarioId},
                             {"view_id", sConfig.viewId}, {"truth_mode", sConfig.truthMode},
                             {"entrance", HexValue(sConfig.entrance)}, {"scene", HexValue(sConfig.expectedScene)},
                             {"room", sConfig.expectedRoom}, {"stable_frames", sStableFrameCount},
@@ -516,7 +619,7 @@ void OnFrameUpdate() {
                             {"player_position", Json::array({sFrozenPlayerTransform[0], sFrozenPlayerTransform[1],
                                                                sFrozenPlayerTransform[2]})},
                             {"player_yaw", sFrozenPlayerTransform[3]},
-                            {"dxr_ready", sDxrReady},
+                            {"dxr_ready", sDxrReady}, {"dxr_frame", dxrFrame},
                             {"game_light_productive", sGameLightProductive},
                             {"game_light_sync_status", sGameLightSyncStatus},
                             {"player_input_lock_enabled", sPlayerFreezeRequested},
@@ -529,10 +632,9 @@ void OnFrameUpdate() {
                                                       : "NOT_RUN_DEBUG_LAYER_OFF"},
                             {"captures", ack.value("captures", Json::object())}};
             WriteJson(sConfig.outputRoot / "evidence.json", evidence);
-            std::ofstream pass(sConfig.outputRoot / "RUN_PASS", std::ios::binary | std::ios::trunc);
-            pass << "DXR_SCENARIO_HARNESS=PASS\n";
-            Log("DONE", evidence);
-            Log("RUN_PASS", evidence);
+            std::ofstream complete(sConfig.outputRoot / "CAPTURE_COMPLETE", std::ios::binary | std::ios::trunc);
+            complete << "CAPTURE_COMPLETE\n";
+            Log("CAPTURE_COMPLETE", evidence);
             return;
         }
         if (sGameFrame - sStateStartFrame > static_cast<std::uint64_t>(sConfig.timeoutFrames)) {
@@ -669,7 +771,9 @@ void RegisterSceneTestHarness() {
     Log("HARNESS_ENABLED", {{"entrance", HexValue(sConfig.entrance)},
                             {"expected_scene", HexValue(sConfig.expectedScene)},
                             {"expected_room", sConfig.expectedRoom},
-                            {"audio_output", "MUTED_NULL_BACKEND"}});
+                            {"audio_output", "MUTED_NULL_BACKEND"},
+                            {"renderer_backend_env", ReadEnv("COUCH_D3D12")},
+                            {"visual_profile_env", ReadEnv("COUCH_VISUAL_PROFILE")}});
 }
 
 static RegisterShipInitFunc sSceneTestHarnessInit(RegisterSceneTestHarness);

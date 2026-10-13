@@ -1570,9 +1570,27 @@ bool DxrSurfaceRenderer::CreateCompositePipeline(ID3D12Device* device, DXGI_FORM
         "  }\n"
         "  if (depth >= 0.9999) return float4(gSceneHdr > 0.5 ? CompositeSrgbToLinear(originalEncoded) : originalEncoded, 1.0);\n"
         "  float3 original = gSceneHdr > 0.5 ? originalEncoded : CompositeSrgbToLinear(originalEncoded);\n"
+        // OCZ-RTX-REPAIR REPAIR-03: consistent coverage policy between the
+        // raygen shaders and this compositor. surface.z is the material
+        // coverage (alpha) written per-pixel by RayGenReflection:
+        //   opaque / cutout-covered / water / glass / lava / emissive -> >0,
+        //   transparent or additive blends (surfaceOptics.w 3/4) -> cleared 0,
+        //   misses and background -> cleared 0 (surface.w == 0).
+        // surface.w is the validity flag: 1.0 for a normal-path DXR surface,
+        // 0.0 for cleared pixels. A non-finite sample must never drive the
+        // blend (saturate(NaN) is undefined); invalid signals fall back to
+        // the raster pixel. Valid materials keep their full DXR contribution.
+        "  float dxrSignalInvalid = (DiagnosticInvalid(surface) || DiagnosticInvalid(indirectSample) ||\n"
+        "      DiagnosticInvalid(reflectionSample) || isnan(emissive) || isinf(emissive)) ? 1.0 : 0.0;\n"
+        "  if (dxrSignalInvalid > 0.5) return float4(original, 1.0);\n"
         // Alpha values above one mark a valid per-pixel DXR path-radiance result.
-        "  float pathTrace = step(1.5, indirectSample.a);\n"
-        "  float pathWeight = pathTrace * saturate(surface.z);\n"
+        "  float pathSignal = step(1.5, indirectSample.a);\n"
+        "  float rawCoverage = surface.z;\n"
+        "  float coverageFinite = (!isnan(rawCoverage) && !isinf(rawCoverage)) ? 1.0 : 0.0;\n"
+        "  float clippedCoverage = coverageFinite > 0.5 ? saturate(rawCoverage) : 0.0;\n"
+        "  float surfaceValid = step(0.5, saturate(surface.w));\n"
+        "  float pathTrace = pathSignal;\n"
+        "  float pathWeight = pathSignal * clippedCoverage * surfaceValid;\n"
         "  original = lerp(original, gSceneHdr > 0.5 ? indirectSample.rgb : ToneMapRadiance(indirectSample.rgb), pathWeight);\n"
         // Keep the R16F DXR radiance intact until the SDR composite shoulder;
         // saturating here discarded bright specular and emissive energy.
@@ -2297,6 +2315,7 @@ void DxrSurfaceRenderer::RenderReflections(ID3D12Device* device, ID3D12GraphicsC
     post[8].Transition.StateBefore = D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE;
     post[8].Transition.StateAfter = D3D12_RESOURCE_STATE_DEPTH_WRITE;
     cmdList->ResourceBarrier(9, post);
+    ++mStats.signalOutputsProduced;
     mMaskTrackedState = static_cast<unsigned>(D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
     mReflectionColorTrackedState = static_cast<unsigned>(D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
     mEmissiveTrackedState = static_cast<unsigned>(D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
@@ -2345,20 +2364,65 @@ void DxrSurfaceRenderer::RenderReflections(ID3D12Device* device, ID3D12GraphicsC
     // depth resource is already restored by `post[8]`, and the render target
     // is back in RENDER_TARGET state, so returning here leaves the raster
     // image intact while preserving DXR shadows/TLAS and surface dispatch.
+    // OCZ-RTX-REPAIR REPAIR-02: the fullscreen composite is part of the DXR
+    // profiles, not an opt-in overlay. HYBRID_RT and PATH_TRACED_EXPERIMENTAL
+    // (both covered by IsHybridRtProfile) composite by default so valid
+    // shadow/reflection/indirect signals reach the presented framebuffer.
+    // An explicit COUCH_DXR_SURFACE_COMPOSITE=0 keeps the user's opt-out;
+    // an explicit =1 can never enable the composite on Classic/Enhanced
+    // raster profiles (it only confirms the default on DXR profiles).
+    // The probes above already dispatched, so returning here still leaves the
+    // raster image intact while preserving DXR shadows/TLAS and dispatches.
     const char* compositeEnv = getenv("COUCH_DXR_SURFACE_COMPOSITE");
     const bool compositeExplicitOn = compositeEnv && strcmp(compositeEnv, "1") == 0;
     const bool compositeExplicitOff = compositeEnv && strcmp(compositeEnv, "0") == 0;
-    const bool compositeEnabled = compositeExplicitOn ||
-        (!compositeEnv && MaterialRegistry::IsHybridRtProfile() && !compositeExplicitOff);
+    const bool dxrCompositeProfile = MaterialRegistry::IsHybridRtProfile();
+    const bool compositeEnabled = dxrCompositeProfile && !compositeExplicitOff;
     if (!compositeEnabled) {
         mPathHistoryValid = false;
         static bool loggedCompositeGate = false;
         if (!loggedCompositeGate) {
             LogCouchDxrSurface(
-                "[COUCH-DXR-SURFACE] composite=OFF for this profile; use Hybrid RT or COUCH_DXR_SURFACE_COMPOSITE=1");
+                "[COUCH-DXR-SURFACE] composite=OFF profile='" +
+                std::string(MaterialRegistry::Instance().GetProfileName()) + "' env=" +
+                std::string(compositeEnv ? compositeEnv : "<unset>") +
+                "; DXR profiles composite by default, COUCH_DXR_SURFACE_COMPOSITE=0 opts out");
             loggedCompositeGate = true;
         }
+        if (compositeExplicitOn && !dxrCompositeProfile) {
+            static bool loggedCompositeConflict = false;
+            if (!loggedCompositeConflict) {
+                LogCouchDxrSurface(
+                    "[COUCH-DXR-SURFACE] COUCH_DXR_SURFACE_COMPOSITE=1 ignored on raster profile '" +
+                    std::string(MaterialRegistry::Instance().GetProfileName()) +
+                    "'; select Hybrid RT to composite DXR signals");
+                loggedCompositeConflict = true;
+            }
+        }
         return;
+    }
+    // OCZ-RTX-REPAIR REPAIR-02: frame coherence. The composite resamples the
+    // current frame's render target, depth, and DXR masks. A dimension or
+    // resource mismatch must skip the fullscreen draw (raster stays intact)
+    // instead of stretching stale descriptors across the scene.
+    {
+        const auto targetDesc = renderTarget ? renderTarget->GetDesc() : D3D12_RESOURCE_DESC{};
+        const auto depthDesc = depthBuffer ? depthBuffer->GetDesc() : D3D12_RESOURCE_DESC{};
+        const bool dimsMatch = renderTarget && depthBuffer &&
+            static_cast<uint32_t>(targetDesc.Width) == width &&
+            targetDesc.Height == height &&
+            static_cast<uint32_t>(depthDesc.Width) == width &&
+            depthDesc.Height == height;
+        if (!dimsMatch) {
+            mPathHistoryValid = false;
+            LogCouchDxrSurface("[COUCH-DXR-SURFACE][FRAME_MISMATCH] composite skipped: target=" +
+                               std::to_string(renderTarget ? targetDesc.Width : 0) + "x" +
+                               std::to_string(renderTarget ? targetDesc.Height : 0) + " depth=" +
+                               std::to_string(depthBuffer ? depthDesc.Width : 0) + "x" +
+                               std::to_string(depthBuffer ? depthDesc.Height : 0) + " expected=" +
+                               std::to_string(width) + "x" + std::to_string(height));
+            return;
+        }
     }
 
     if (diagnosticView != 0) mPathHistoryValid = false;
@@ -2402,6 +2466,13 @@ void DxrSurfaceRenderer::RenderReflections(ID3D12Device* device, ID3D12GraphicsC
     cmdList->RSSetViewports(1, &viewport);
     cmdList->RSSetScissorRects(1, &scissor);
     cmdList->SetGraphicsRootSignature(mCompositeRootSig.Get());
+    // OCZ-RTX-REPAIR REPAIR-02: the compute dispatches above (path temporal,
+    // ray passes) leave an unrelated heap bound. The fullscreen tables below
+    // address mDescriptorHeap slots, so bind it on every path -- not only
+    // when the temporal pass is off -- or the composite samples stale
+    // descriptors from the previous heap.
+    ID3D12DescriptorHeap* compositeHeaps[] = { mDescriptorHeap.Get() };
+    cmdList->SetDescriptorHeaps(1, compositeHeaps);
     D3D12_GPU_DESCRIPTOR_HANDLE descriptorBase = mDescriptorHeap->GetGPUDescriptorHandleForHeapStart();
     D3D12_GPU_DESCRIPTOR_HANDLE sceneSrvGpu = descriptorBase;
     sceneSrvGpu.ptr += (kSurfaceSrvDescriptorBase + 1) * mDescriptorSize;
@@ -2493,6 +2564,19 @@ void DxrSurfaceRenderer::RenderReflections(ID3D12Device* device, ID3D12GraphicsC
                            " emissiveMask=" + (mEmissiveFormat == DXGI_FORMAT_R16_FLOAT ? "R16F" : "R32F") +
                            " bloom=5x5 indirectSamples=" +
                            std::string(MaterialRegistry::IsPathTracedExperimentalProfile() ? "2" : "1"));
+    }
+    // OCZ-RTX-REPAIR REPAIR-02/04: machine-readable proof that the fullscreen
+    // composite was recorded into the current framebuffer this frame. The
+    // scene harness (GATE-B) matches this marker to confirm the DXR signal
+    // path reached the presented image instead of stalling in probe buffers.
+    ++mStats.compositeExecutions;
+    if ((mStats.compositeExecutions % 60) == 1) {
+        LogCouchDxrSurface("[COUCH-DXR-SURFACE] COMPOSITE_EXECUTED frame=" +
+                           std::to_string(diagnosticFrame) + " target=" +
+                           std::to_string(width) + "x" + std::to_string(height) + " hdr=" +
+                           std::string(hdrScene ? "1" : "0") + " diagnosticView=" +
+                           std::to_string(boundedDiagnosticView) + " executions=" +
+                           std::to_string(mStats.compositeExecutions));
     }
 }
 

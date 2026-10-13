@@ -75,6 +75,11 @@ struct DxrSurfaceStats {
     bool dispatchActive = false;
     uint64_t dispatchRaysCalls = 0;
     uint64_t approxRaysDispatched = 0;
+    uint64_t signalOutputsProduced = 0;
+    // OCZ-RTX-REPAIR REPAIR-02: fullscreen composite executions this session.
+    // The scene harness matches COMPOSITE_EXECUTED log markers (GATE-B) and
+    // this counter proves the DXR signal reached the framebuffer.
+    uint64_t compositeExecutions = 0;
     uint32_t width = 0;
     uint32_t height = 0;
 };
@@ -90,7 +95,7 @@ public:
     bool Init(ID3D12Device* device);
     bool IsSupported() const { return mSupported; }
     bool IsEnabled() const { return mEnabled; }
-    void SetEnabled(bool enabled) { mEnabled = enabled; }
+    void SetEnabled(bool enabled) { mEnabled = enabled && mInitialized && mSupported; }
 
     void InvalidateCameraMatrices() { mMatricesValid = false; }
     void SetQuality(float scale, unsigned samples) { mQualityScale = scale; mIndirectSamples = samples; }
@@ -122,7 +127,7 @@ public:
     ID3D12Resource* GetReflectionColorForCapture() const { return mReflectionColor.Get(); }
     ID3D12Resource* GetEmissiveMaskForCapture() const { return mEmissiveMask.Get(); }
     ID3D12Resource* GetIndirectMaskForCapture() const { return mIndirectMask.Get(); }
-    ID3D12Resource* GetSceneColorCopyForTrace() const { return mSceneColorCopy.Get(); }
+    ID3D12Resource* GetRasterSceneColorCopyForCapture() const { return mSceneColorCopy.Get(); }
     unsigned GetReflectionMaskState() const { return mMaskTrackedState; }
     unsigned GetReflectionColorState() const { return mReflectionColorTrackedState; }
     unsigned GetEmissiveMaskState() const { return mEmissiveTrackedState; }

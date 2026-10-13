@@ -28,18 +28,18 @@
       },
       {
         "path": "scripts/scene-harness/run-scene.ps1",
-        "size_bytes": 22230,
-        "sha256": "4b5807f3d58dee0a949ede51efb653ed86cb3ac7cebef8dceba13da00c0e0aaa"
+        "size_bytes": 23858,
+        "sha256": "5556f83cb86a3396e74a12d7a4542e85fd27abb25876a81947ff4ac36f5f551e"
       },
       {
         "path": "scripts/scene-harness/scenarios/scenarios.v1.json",
-        "size_bytes": 4104,
-        "sha256": "5694214c2552efe8053866ea99bfaed8c1db51d3cc3a47c18539160920c11807"
+        "size_bytes": 4122,
+        "sha256": "5244dffdc9670583c9b2f529a416c27fb0045c103fced5973278d8a1cf849026"
       },
       {
         "path": "scripts/scene-harness/verify-run.ps1",
-        "size_bytes": 17401,
-        "sha256": "c6e8a26e0b0c10d0bab9e208452d98e4c8d06a7ced78595534ec2f678bf0011c"
+        "size_bytes": 41210,
+        "sha256": "5dfc0a9954b4bf2a95bf884d2a8a4700fc7ed60c344a7eb982e1236ab083186f"
       },
       {
         "path": "soh/assets/custom/textures/buttons/LTBtn.i4.png",
@@ -103,8 +103,8 @@
       },
       {
         "path": "soh/soh/Enhancements/scene-harness/SceneTestHarness.cpp",
-        "size_bytes": 35724,
-        "sha256": "6c5c1ed0b4e0ca65bec56eafc56c25a7c51b6bed78db30ed890f7f35e7558644"
+        "size_bytes": 40936,
+        "sha256": "f0f0e5a1730897b11d313b631ecde9a8095c9b408ec85027da662e1f4c78e7fd"
       },
       {
         "path": "soh/soh/OTRGlobals.cpp",
@@ -235,8 +235,8 @@
       },
       {
         "path": "include/fast/backends/DxrAccelerationStructureManager.h",
-        "size_bytes": 8314,
-        "sha256": "58198d017baa77c5bd99b4e82c710c95c817d55a101da6daead1d73b19edebfa"
+        "size_bytes": 8344,
+        "sha256": "42f7d60f24de9b3c00edf974d70b8f0e798634ed3b1c95fa19d6d7b4e86fc128"
       },
       {
         "path": "include/fast/backends/DxrDescriptorRing.h",
@@ -244,19 +244,29 @@
         "sha256": "435a73e844be3093f37eaf0d7376be6cc066d0427c96b33a07c02dfdef2f62bb"
       },
       {
+        "path": "include/fast/backends/DxrPipelinePolicy.h",
+        "size_bytes": 3140,
+        "sha256": "b3f31044470d20b79a321b6ca1538b937cefe0e928f2edded97def4e9d50ca6a"
+      },
+      {
+        "path": "include/fast/backends/DxrSequencePolicy.h",
+        "size_bytes": 2315,
+        "sha256": "eca316c0279f3a17e7af403e233010badc326ccc78c397faf581a93efc16403b"
+      },
+      {
         "path": "include/fast/backends/DxrShadowRenderer.h",
-        "size_bytes": 6382,
-        "sha256": "fee9fb054930ee79131ed50b1bb9dd675e6be3fb856fa6e7d614adf3b4acbbf7"
+        "size_bytes": 6486,
+        "sha256": "05888489617d3d6d6b400ec71d831ee69aed2692f7b7e0e6eab655d075e495f4"
       },
       {
         "path": "include/fast/backends/DxrSurfaceRenderer.h",
-        "size_bytes": 13756,
-        "sha256": "1ce0e31fb986c9ef0c1b5b3d63d3d8051bc94a7cf2bbe96208e554c710b54725"
+        "size_bytes": 14095,
+        "sha256": "36ba48b17c99dad67783f5986dcc85521abaf3bc2f0f7e51b23e1afa02491153"
       },
       {
         "path": "include/fast/backends/gfx_direct3d12.h",
-        "size_bytes": 18509,
-        "sha256": "d874100b9f53bcbc96a61048f7c0cdbd5e55eb4909379fa3bb0e5e639609b47c"
+        "size_bytes": 18727,
+        "sha256": "8aa50d267eff4e9e18395c18227656740957d542452fbddcb630402d33f7497f"
       },
       {
         "path": "include/fast/backends/gfx_direct3d_common.h",
@@ -320,8 +330,8 @@
       },
       {
         "path": "include/fast/MaterialRegistry.h",
-        "size_bytes": 8676,
-        "sha256": "1e80e9908aa48b9443286134f7d2e7864aaac576b5bddce448e73ff7a35f626c"
+        "size_bytes": 8814,
+        "sha256": "6eeb655f99f04da0afb0df963bf88748acbacbea49dd8f787b194564f21ebe1d"
       },
       {
         "path": "include/fast/MaterialRulesPilot.h",
@@ -355,13 +365,13 @@
       },
       {
         "path": "src/fast/backends/DxrShadowRenderer.cpp",
-        "size_bytes": 57917,
-        "sha256": "96b9f8674f3989a9956c74088e2ee8f891f5bbdad7b859fd35fa08d5bbf85c64"
+        "size_bytes": 58003,
+        "sha256": "8de698f02098fcce7f3f5cbccd69db5a751b4c4e706477172b8c1dcd61f3f72c"
       },
       {
         "path": "src/fast/backends/DxrSurfaceRenderer.cpp",
-        "size_bytes": 176082,
-        "sha256": "713b098e6ca2c8d36b8effc094a27b2a3d9fca13d507f8d91052e9eb748e5bc8"
+        "size_bytes": 181687,
+        "sha256": "10c973c14e20a64d569ca6acaad099dd17877e2ec08d190ae19300f29b4abd7a"
       },
       {
         "path": "src/fast/backends/gfx_direct3d11.cpp",
@@ -370,13 +380,13 @@
       },
       {
         "path": "src/fast/backends/gfx_direct3d12.cpp",
-        "size_bytes": 218435,
-        "sha256": "f6866ed3f78219abd9b983e9580e540f1362dc05a2bba66b68ba69fafd1e9947"
+        "size_bytes": 236697,
+        "sha256": "8618635b0791a30dc51ae2594401223db9567ad5a292ba722e85c5eb473deaca"
       },
       {
         "path": "src/fast/backends/gfx_direct3d12_framebuffer.cpp",
-        "size_bytes": 40724,
-        "sha256": "2cdcac3fec6d7905f8cb678b787413042a6bc39c3e241644ab655819f04039de"
+        "size_bytes": 40882,
+        "sha256": "bdf18a77cedac8d846f1471e8964ef448fe2440cb31cd670d7cd5332245dd800"
       },
       {
         "path": "src/fast/backends/gfx_direct3d12_gui.cpp",
@@ -385,8 +395,8 @@
       },
       {
         "path": "src/fast/backends/gfx_dxgi.cpp",
-        "size_bytes": 44439,
-        "sha256": "62422d79dcc86c41ef72fdeff820ed03cfd47a588480719146e40999e61ed32b"
+        "size_bytes": 45847,
+        "sha256": "949e31af16659f9f3a97d51984db5b4346c2352584ea0c3c1794e21979ff9d17"
       },
       {
         "path": "src/fast/backends/GpuProfilerD3D12.cpp",
@@ -430,8 +440,8 @@
       },
       {
         "path": "src/fast/shaders/dxr_shadow.hlsl",
-        "size_bytes": 73866,
-        "sha256": "67de5fd6c5e933e20ab0fac04684030b38aa6ef39236d121108b4e76b3bf87ed"
+        "size_bytes": 75227,
+        "sha256": "d8e63643a1e0fc5e536db4a229314077bac24dd5e10075751fff761ad481dd21"
       },
       {
         "path": "src/ship/audio/Audio.cpp",
@@ -503,13 +513,13 @@
   "patches": {
     "shipwright": {
       "path": "patches/development/shipwright_9_1_1_development.patch",
-      "size_bytes": 340713,
-      "sha256": "fd68f9cffea698df1c06d4e4816e61cd1fff0fd22c2c2a6f455b3d0fc8872aa2"
+      "size_bytes": 372060,
+      "sha256": "fc1678423acb8dd7992845764489cfeaa7093ea22bc06210040559ca3191004e"
     },
     "libultraship": {
       "path": "patches/development/libultraship_1_3_1_development.patch",
-      "size_bytes": 1569986,
-      "sha256": "475781b45a5779f5c8c280452729c4196b74d49fda41d09ad058eef266f5750d"
+      "size_bytes": 1604336,
+      "sha256": "ee21fd14dad57c446b86215e45ac31fc3d436c16dbb50d81bd0d8da466633c0d"
     }
   }
 }

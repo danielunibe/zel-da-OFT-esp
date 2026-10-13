@@ -160,7 +160,7 @@ public:
     bool Init(ID3D12Device* device);
     bool IsSupported() const { return mSupported; }
     bool IsEnabled() const { return mEnabled; }
-    void SetEnabled(bool enabled) { mEnabled = enabled; }
+    void SetEnabled(bool enabled) { mEnabled = enabled && mInitialized && mSupported; }
 
     void ProcessFrame(ID3D12Device* device, ID3D12GraphicsCommandList* cmdList,
                       uint32_t frameIndex, uint64_t fenceValue, uint64_t completedFenceValue);
