@@ -138,6 +138,7 @@
       "fog_gate": "BLOCKED: sequential fog passes confirmed; first violating pixel boundary and visual root cause remain unproven",
       "visible_rtx": "NOT_CERTIFIED",
       "patch_clean_apply": "PASS: git apply --cached --check succeeded for both patches against indexes at the pinned base commits"
-    }
+    },
+    "source_file_hash_policy": "SHA-256 and size after CRLF-to-LF normalization for text files; binary files are hashed as stored"
   }
 }

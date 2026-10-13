@@ -119,6 +119,14 @@ def write_patch(path: Path, data: bytes, replace: bool) -> None:
     path.write_bytes(data)
 
 
+def canonical_file_bytes(data: bytes) -> bytes:
+    # Git's text normalization stores CRLF as LF; hash that portable form.
+    # Binary assets retain their exact byte representation.
+    if b"\0" not in data:
+        return data.replace(b"\r\n", b"\n")
+    return data
+
+
 def copy_overlay(source_root: Path, relative_paths: list[str], target_root: Path) -> list[dict[str, object]]:
     target_root.mkdir(parents=True, exist_ok=True)
     records: list[dict[str, object]] = []
@@ -128,8 +136,9 @@ def copy_overlay(source_root: Path, relative_paths: list[str], target_root: Path
         target = target_root.joinpath(*rel.parts)
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(source, target)
-        digest = hashlib.sha256(target.read_bytes()).hexdigest()
-        records.append({"path": relative, "size_bytes": target.stat().st_size, "sha256": digest})
+        canonical = canonical_file_bytes(target.read_bytes())
+        digest = hashlib.sha256(canonical).hexdigest()
+        records.append({"path": relative, "size_bytes": len(canonical), "sha256": digest})
     return records
 
 
@@ -183,6 +192,7 @@ def main() -> int:
             "shipwright": SHIPWRIGHT_BASE,
             "libultraship": LIBULTRASHIP_BASE,
         },
+        "file_hash_policy": "SHA-256 and size after CRLF-to-LF normalization for text files; binary files are hashed as stored",
         "source_head": {
             "shipwright": run_git(source_root, "rev-parse", "HEAD").decode().strip(),
             "libultraship": run_git(lus_root, "rev-parse", "HEAD").decode().strip(),

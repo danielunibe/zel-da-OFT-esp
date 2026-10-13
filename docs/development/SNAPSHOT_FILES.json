@@ -4,6 +4,7 @@
     "shipwright": "4aaad850bd5540cd77c2d83f3ad348d3b38605b2",
     "libultraship": "17a0b7939bd05f5e617cef89457ca43774fc9a9f"
   },
+  "file_hash_policy": "SHA-256 and size after CRLF-to-LF normalization for text files; binary files are hashed as stored",
   "source_head": {
     "shipwright": "4aaad850bd5540cd77c2d83f3ad348d3b38605b2",
     "libultraship": "17a0b7939bd05f5e617cef89457ca43774fc9a9f"
@@ -32,13 +33,13 @@
       },
       {
         "path": "scripts/scene-harness/scenarios/scenarios.v1.json",
-        "size_bytes": 4295,
-        "sha256": "e4f0e9ed62ed10336ac516670abc2bf39cd2cfacc8a1601679168f6cfa906269"
+        "size_bytes": 4104,
+        "sha256": "5694214c2552efe8053866ea99bfaed8c1db51d3cc3a47c18539160920c11807"
       },
       {
         "path": "scripts/scene-harness/verify-run.ps1",
-        "size_bytes": 17679,
-        "sha256": "b2f30d38305b842501da8a6bf692288a1cea5609700f24cf2c32fdd49e02bdca"
+        "size_bytes": 17401,
+        "sha256": "c6e8a26e0b0c10d0bab9e208452d98e4c8d06a7ced78595534ec2f678bf0011c"
       },
       {
         "path": "soh/assets/custom/textures/buttons/LTBtn.i4.png",
@@ -57,8 +58,8 @@
       },
       {
         "path": "soh/include/z64.h",
-        "size_bytes": 81823,
-        "sha256": "396e780b689239afba6af629502ea2a00fc6c8393b5f7efe2aec596bc5ac2433"
+        "size_bytes": 79458,
+        "sha256": "cf4a0fb8c3d1f55336cff971655c8a976cc4435ca25c675b38347edd5a03c105"
       },
       {
         "path": "soh/soh/Enhancements/Autosave.cpp",
@@ -72,8 +73,8 @@
       },
       {
         "path": "soh/soh/Enhancements/boss-rush/BossRush.cpp",
-        "size_bytes": 41833,
-        "sha256": "13fd2bce5cfc4139e40d47a4fcd0f23b13429d25eae8807667671e55a4fb1acf"
+        "size_bytes": 40879,
+        "sha256": "176c447cb2d4632eb121efb3a2e250318b29b1e280b54117e0c41186e8f20b40"
       },
       {
         "path": "soh/soh/Enhancements/custom-message/CustomMessageManager.cpp",
@@ -92,8 +93,8 @@
       },
       {
         "path": "soh/soh/Enhancements/FileSelectEnhancements.cpp",
-        "size_bytes": 1987,
-        "sha256": "802bcfb2b3c6537ebf568d409d3bc9f07cc4a27bdc0002cbef86285f8909c156"
+        "size_bytes": 1916,
+        "sha256": "69232f0553edc2bb44651ec9f3056ba0a946611fff3635c5fe0188b6110ed8f8"
       },
       {
         "path": "soh/soh/Enhancements/glyphs/GlyphResolver.cpp",
@@ -102,8 +103,8 @@
       },
       {
         "path": "soh/soh/Enhancements/scene-harness/SceneTestHarness.cpp",
-        "size_bytes": 35734,
-        "sha256": "1abda30891cf7162fe36a9655f9d95700546698705c7221f7b56d758205fe830"
+        "size_bytes": 35724,
+        "sha256": "6c5c1ed0b4e0ca65bec56eafc56c25a7c51b6bed78db30ed890f7f35e7558644"
       },
       {
         "path": "soh/soh/OTRGlobals.cpp",
@@ -187,8 +188,8 @@
       },
       {
         "path": "soh/src/code/z_parameter.c",
-        "size_bytes": 344678,
-        "sha256": "a66e48a5c784ae3cbec33de9898beded0565bc356634dc5796d4a1c15b334a17"
+        "size_bytes": 337712,
+        "sha256": "c67ef08b686144760fffc25345114dd7ecf4fb68db19eb4426c68030a920652e"
       },
       {
         "path": "soh/src/code/z_play.c",
@@ -197,28 +198,28 @@
       },
       {
         "path": "soh/src/overlays/actors/ovl_En_Mag/z_en_mag.c",
-        "size_bytes": 29117,
-        "sha256": "b4528717dde7c98819d634c05c08914fbe53163ce0315a6aff8bd140fad53291"
+        "size_bytes": 28364,
+        "sha256": "b1c557b62c9c66cedee14f94e94eb6d003f774cd05ca28bd41cb138a10758b89"
       },
       {
         "path": "soh/src/overlays/gamestates/ovl_file_choose/z_file_choose.c",
-        "size_bytes": 175746,
-        "sha256": "397de34e47330362a4b52dd98f1fd95c48d2e47959db429726f182b688f590fb"
+        "size_bytes": 172013,
+        "sha256": "4eeba17ce1234425d7ca2a2ab74077c383de62efe0b590b6e54d7caa844fa8f6"
       },
       {
         "path": "soh/src/overlays/gamestates/ovl_file_choose/z_file_nameset_PAL.c",
-        "size_bytes": 55788,
-        "sha256": "030a5849498c5b568c116318595f420ccf39e2a5be989b1eaca37d9079af16fb"
+        "size_bytes": 54613,
+        "sha256": "ca45a2bc52e9dfa30698b065c8de9b6f82b1e6512b7d9c5a229516002df09d90"
       },
       {
         "path": "soh/src/overlays/misc/ovl_kaleido_scope/z_kaleido_map_PAL.c",
-        "size_bytes": 42584,
-        "sha256": "9d3689c05de4a9f2122a51d039b79f6e118c8d715626254636d68853d8b1aad9"
+        "size_bytes": 41747,
+        "sha256": "27ef3d89c8e016411e3b7b09e56006e3c610a474a73514459166ed835b89f80a"
       },
       {
         "path": "soh/src/overlays/misc/ovl_kaleido_scope/z_kaleido_scope_PAL.c",
-        "size_bytes": 219595,
-        "sha256": "76fb77e87329394531137846d6097e98efa0d4ad5b5f34291257b13eeee6394c"
+        "size_bytes": 214710,
+        "sha256": "e8a4c95fe17d2e30f1076f37b5e9065dde6cc58de31bd7636165c25ea705fca7"
       }
     ],
     "libultraship": [
@@ -229,8 +230,8 @@
       },
       {
         "path": "include/fast/backends/dxr_shadow_cso.h",
-        "size_bytes": 343161,
-        "sha256": "d9c1d1a35500bcceb2b4ced30fb61458e6877f233d91ecc208074f9794e320af"
+        "size_bytes": 339691,
+        "sha256": "5ba70d523de0f731276e82f31147a79a5fcc7c4f7b253ba94189f87bdd138faf"
       },
       {
         "path": "include/fast/backends/DxrAccelerationStructureManager.h",
@@ -259,8 +260,8 @@
       },
       {
         "path": "include/fast/backends/gfx_direct3d_common.h",
-        "size_bytes": 8976,
-        "sha256": "7f6677dd6d68657679dd909e436b99d964d319c6a97fa450e6c0202ef9969f4e"
+        "size_bytes": 8761,
+        "sha256": "e11c571973633dd0f72917f09b0189411271d320198f945c2465fce6104bdf2f"
       },
       {
         "path": "include/fast/backends/gfx_dxgi.h",
@@ -269,8 +270,8 @@
       },
       {
         "path": "include/fast/backends/gfx_rendering_api.h",
-        "size_bytes": 7564,
-        "sha256": "ed51cd7788a4c62091d008bc7f076aee110ed4f22383a38504738ce48c1f6005"
+        "size_bytes": 7487,
+        "sha256": "8c0c7a71af3addc2fe7bd92a17bb9ba4add5ea8b6cc1959e75c0f512b2b0f76d"
       },
       {
         "path": "include/fast/backends/GpuProfilerD3D12.h",
@@ -289,8 +290,8 @@
       },
       {
         "path": "include/fast/backends/TemporalTrace.h",
-        "size_bytes": 9093,
-        "sha256": "80e6236d15563c2f7a2483b988d9bdd99d27cae0a5bf32e78757305da0c43299"
+        "size_bytes": 8876,
+        "sha256": "f42f324c9b97a743aea6fff890a90b40284ad1d16f47567da6923b23f1ce94fc"
       },
       {
         "path": "include/fast/couch_diagnostics.h",
@@ -324,8 +325,8 @@
       },
       {
         "path": "include/fast/MaterialRulesPilot.h",
-        "size_bytes": 149093,
-        "sha256": "513c4a7aa222fd88c235661a2c1073495e81230fd69afa0f8c3a3d183a28aa46"
+        "size_bytes": 147732,
+        "sha256": "e77696f10729e42307ded0657f5987e32ad4d11bec68fa316f2b6777761d70fd"
       },
       {
         "path": "include/fast/PersistentScene.h",
@@ -359,13 +360,13 @@
       },
       {
         "path": "src/fast/backends/DxrSurfaceRenderer.cpp",
-        "size_bytes": 176301,
-        "sha256": "c1002b966975940fdbe900d47e02a8e5d2fc19af0b3bef37a89935e99878190b"
+        "size_bytes": 176082,
+        "sha256": "713b098e6ca2c8d36b8effc094a27b2a3d9fca13d507f8d91052e9eb748e5bc8"
       },
       {
         "path": "src/fast/backends/gfx_direct3d11.cpp",
-        "size_bytes": 72081,
-        "sha256": "534986f9bc11043d263a243c8583ce94516626b40af8d2e5e2c6ceb30be2a642"
+        "size_bytes": 70437,
+        "sha256": "0a4f8e3f1146b4cf8f05aff9ca070a402a26862706658e1389fcfbf67e21d29b"
       },
       {
         "path": "src/fast/backends/gfx_direct3d12.cpp",
@@ -434,13 +435,13 @@
       },
       {
         "path": "src/ship/audio/Audio.cpp",
-        "size_bytes": 2729,
-        "sha256": "5b3d53bbc9a4874d9f201beb95c469c7b595b94266e6316a5b3bc8bcde9b26f9"
+        "size_bytes": 2684,
+        "sha256": "7fdad1083366694e8d31e9de729a6bd021ea9976de80a644e77d5cce96f6795f"
       },
       {
         "path": "src/ship/Context.cpp",
-        "size_bytes": 15747,
-        "sha256": "654d14ba5c8a5c025636ff58733d7b21c4151bc15c23438ed9f848f7581e571c"
+        "size_bytes": 15222,
+        "sha256": "0346b4b56b8a21fd2dc963f8b0dbafdf4dcd121b886a47794d559495f110cc10"
       },
       {
         "path": "src/ship/controller/controldevice/controller/ControllerStick.cpp",
@@ -464,18 +465,18 @@
       },
       {
         "path": "src/ship/resource/ResourceManager.cpp",
-        "size_bytes": 20239,
-        "sha256": "14f05b4ea6a938de2e647b1074fef6ae37cb1d327acffbee856e15b63927f4e1"
+        "size_bytes": 19721,
+        "sha256": "4b428321ba03b73b8fa06d4cd93a8a6cd4e681b622b6d1882eaee4a9d567213f"
       },
       {
         "path": "src/ship/window/gui/ConsoleWindow.cpp",
-        "size_bytes": 26774,
-        "sha256": "a31bd74e62751ce9b3d2658a5b49ecb81eaa976a635a1b469233a07dfbf6488c"
+        "size_bytes": 26064,
+        "sha256": "7ab5bb16481acd19bc2573a91a333ef1716969c5e10c362f8c7a96f2398321f2"
       },
       {
         "path": "src/ship/window/gui/GameOverlay.cpp",
-        "size_bytes": 9783,
-        "sha256": "b914cca5a1c08e546fa5712449b0569804bb8c449bf07b7969204dc713cd9b3d"
+        "size_bytes": 9514,
+        "sha256": "b7a792fa783100cfccba98a4ab627db9f3b389b504ee4e29c0d09e02ce08034e"
       },
       {
         "path": "src/ship/window/gui/Gui.cpp",
@@ -484,18 +485,18 @@
       },
       {
         "path": "src/ship/window/gui/GuiWindow.cpp",
-        "size_bytes": 9813,
-        "sha256": "f721db5d3b5b5a6088066093b682fe2c0051b9d7454651282af62dc33818771a"
+        "size_bytes": 9610,
+        "sha256": "5421f9a6c9440ee2cfa56081ecbd3ae98e1cd6a0f08209683522dd504ef97888"
       },
       {
         "path": "src/ship/window/gui/InputEditorWindow.cpp",
-        "size_bytes": 67363,
-        "sha256": "679845c03e878135d346944d96fd61a080c12f5e31b5058a99f3528ac681dcba"
+        "size_bytes": 66027,
+        "sha256": "24bcbb696b10cf74fc96d6100ed4717cf1ef0cc0c7adb6440ee22d28969541c3"
       },
       {
         "path": "src/ship/window/gui/StatsWindow.cpp",
-        "size_bytes": 931,
-        "sha256": "6c4126a75eff4c957ca4fc33c94503dbc860d8668c54db11dc3063d1e35c6343"
+        "size_bytes": 902,
+        "sha256": "a24fabf96ae8afb55a7f9fc34a7ba4eba2e13db76fff324320f22fbd49f3ba97"
       }
     ]
   },

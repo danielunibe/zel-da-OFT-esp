@@ -19,6 +19,7 @@ La integración conserva el overlay y los parches de V03.1.1 como material hist�
 - `source-overlay/development/`: 42 archivos modificados o añadidos de Shipwright y 55 de LibUltraShip.
 - `patches/development/`: parches reproducibles contra los commits upstream indicados arriba.
 - `docs/development/SNAPSHOT_FILES.json`: lista de archivos, tamaños y hashes SHA-256 del snapshot.
+  Los textos se hashean tras normalizar CRLF a LF; los binarios se hashean sin modificar.
 - `tools/export_development_snapshot.py`: vuelve a exportar un checkout que conserve exactamente esos commits base.
 - `tools/apply_development_overlay.ps1`: aplica el overlay de desarrollo a un checkout limpio con esos commits.
 
