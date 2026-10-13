@@ -1,8 +1,16 @@
 diff --git a/.gitignore b/.gitignore
-index 2b7352d950b23e99441fc1dd10d96011bf043ac3..f0a74ff8c952482f345ff2f62539bead5ca1683b 100644
+index 2b7352d950b23e99441fc1dd10d96011bf043ac3..16007faa2b26f1ba9ab9168991a3bd8432cad991 100644
 --- a/.gitignore
 +++ b/.gitignore
-@@ -413,6 +413,20 @@ ReleaseObj/*
+@@ -57,6 +57,7 @@ graphs/
+ .extracted-assets.json
+ 
+ !OTRExporter/assets/**/*.png
++!soh/assets/custom/textures/buttons/LTBtn.i4.png
+ 
+ # Docs
+ !docs/tutorial/
+@@ -413,6 +414,20 @@ ReleaseObj/*
  tags
  *.otr
  *.o2r

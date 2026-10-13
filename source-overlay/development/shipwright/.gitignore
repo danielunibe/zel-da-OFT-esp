@@ -57,6 +57,7 @@ graphs/
 .extracted-assets.json
 
 !OTRExporter/assets/**/*.png
+!soh/assets/custom/textures/buttons/LTBtn.i4.png
 
 # Docs
 !docs/tutorial/

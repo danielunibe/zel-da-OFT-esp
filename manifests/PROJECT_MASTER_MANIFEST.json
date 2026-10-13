@@ -122,8 +122,8 @@
     "patches": [
       {
         "path": "patches/development/shipwright_9_1_1_development.patch",
-        "size_bytes": 340554,
-        "sha256": "7f687e09ac6bebd2669b288945434b0a2981c59082499a6d58fd33fcb685b8c1"
+        "size_bytes": 340713,
+        "sha256": "fd68f9cffea698df1c06d4e4816e61cd1fff0fd22c2c2a6f455b3d0fc8872aa2"
       },
       {
         "path": "patches/development/libultraship_1_3_1_development.patch",

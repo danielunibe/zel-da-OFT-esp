@@ -12,8 +12,8 @@
     "shipwright": [
       {
         "path": ".gitignore",
-        "size_bytes": 7324,
-        "sha256": "22ed2b0faa3d0714fbded2065b3a095d9e7474e74ab4f1fca51d5841ca4758b8"
+        "size_bytes": 7373,
+        "sha256": "cc19816478d7e8c2d3972ada968f0493e335c90d9ba7047644c8ee05a0f07b26"
       },
       {
         "path": "CMakeLists.txt",
@@ -502,8 +502,8 @@
   "patches": {
     "shipwright": {
       "path": "patches/development/shipwright_9_1_1_development.patch",
-      "size_bytes": 340554,
-      "sha256": "7f687e09ac6bebd2669b288945434b0a2981c59082499a6d58fd33fcb685b8c1"
+      "size_bytes": 340713,
+      "sha256": "fd68f9cffea698df1c06d4e4816e61cd1fff0fd22c2c2a6f455b3d0fc8872aa2"
     },
     "libultraship": {
       "path": "patches/development/libultraship_1_3_1_development.patch",
