@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-14T01:35:31.6893344-06:00",
+  "status": "PASS_SCOPED",
+  "activeOwnGameProcesses": 0,
+  "resources": [
+    {
+      "name": "oot.o2r",
+      "sha256": "6FC0211FD1EA450FC41AA0991C0ABFD73FF61B81DB39039033EDFDB2653D9E4B",
+      "matchesInitial": true
+    },
+    {
+      "name": "soh.o2r",
+      "sha256": "CBF3227F7C52A595C211B60D4937C6A0CE0DF691511FEC526E4AD509E9A5EB17",
+      "matchesInitial": true
+    },
+    {
+      "name": "es.o2r",
+      "sha256": "D9037A8A4086D0073F90CC297FCBFE558A78AC3758F27B11A250537883FD990D",
+      "matchesInitial": true
+    },
+    {
+      "name": "gamecontrollerdb.txt",
+      "sha256": "8055F1EA5F2EB367476A57FD153429D1EC3C0AA2E6C93E88A5EA85C922245F2D",
+      "matchesInitial": true
+    }
+  ],
+  "modsSpanishMatchesRoot": true,
+  "runs": [
+    {
+      "runId": "20261014_012213_907_BASELINE_KOKIRI_GAME_LIGHT_LAMBERT",
+      "gpuObservation": "PASS_SCOPED_GPU_OBSERVATION",
+      "captureFrame": 277,
+      "hiddenNoPresent": true,
+      "processExited": true,
+      "saveIntegrity": true,
+      "captures": 8.0
+    },
+    {
+      "runId": "20261014_012312_754_BASELINE_KOKIRI_HIT_MISS",
+      "gpuObservation": "PASS_SCOPED_GPU_OBSERVATION",
+      "captureFrame": 277,
+      "hiddenNoPresent": true,
+      "processExited": true,
+      "saveIntegrity": true,
+      "captures": 8.0
+    },
+    {
+      "runId": "20261014_012403_110_BASELINE_KOKIRI_WORLD_NORMAL",
+      "gpuObservation": "PASS_SCOPED_GPU_OBSERVATION",
+      "captureFrame": 277,
+      "hiddenNoPresent": true,
+      "processExited": true,
+      "saveIntegrity": true,
+      "captures": 8.0
+    },
+    {
+      "runId": "20261014_012500_221_BASELINE_KOKIRI_HIT_DISTANCE",
+      "gpuObservation": "PASS_SCOPED_GPU_OBSERVATION",
+      "captureFrame": 277,
+      "hiddenNoPresent": true,
+      "processExited": true,
+      "saveIntegrity": true,
+      "captures": 8.0
+    },
+    {
+      "runId": "20261014_012634_914_BASELINE_KOKIRI_INSTANCE_IDS",
+      "gpuObservation": "PASS_SCOPED_GPU_OBSERVATION",
+      "captureFrame": 277,
+      "hiddenNoPresent": true,
+      "processExited": true,
+      "saveIntegrity": true,
+      "captures": 8.0
+    },
+    {
+      "runId": "20261014_012815_249_BASELINE_KOKIRI_NORMAL",
+      "gpuObservation": "PASS_SCOPED_GPU_OBSERVATION",
+      "captureFrame": 277,
+      "hiddenNoPresent": true,
+      "processExited": true,
+      "saveIntegrity": true,
+      "captures": 8.0
+    },
+    {
+      "runId": "20261014_013103_318_BASELINE_KOKIRI_NORMAL",
+      "gpuObservation": "PASS_SCOPED_GPU_OBSERVATION",
+      "captureFrame": 277,
+      "hiddenNoPresent": true,
+      "processExited": true,
+      "saveIntegrity": true,
+      "captures": 8.0
+    }
+  ],
+  "physicalPresentation": "NOT_RUN",
+  "visualCertification": "PARTIAL"
+}

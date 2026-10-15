@@ -12,7 +12,10 @@ namespace Fast {
 enum NormalStatus : uint8_t {
     NORMAL_SOURCE_UNAVAILABLE = 0,
     NORMAL_SOURCE_AVAILABLE   = 1,
-    NORMAL_DERIVED            = 2
+    NORMAL_DERIVED            = 2,
+    // Captured RGB was generated from normals/lights by Fast3D, so DXR must
+    // not multiply that already-lit color into the texture albedo again.
+    NORMAL_FLAG_FAST3D_LIT_COLOR = 1u << 2
 };
 
 enum AlphaMode : uint8_t {
@@ -37,15 +40,18 @@ struct CapturedVertex {
     float posX, posY, posZ;         // Espacio Local de Objeto / Modelo
     float worldX, worldY, worldZ;   // Espacio de Mundo (sin matriz de proyección)
     float normX, normY, normZ;      // Normal unitaria
-    float u, v;                     // Coordenadas UV normalizadas
+    float u, v;                     // Tile 0 UV normalizada
+    float u1, v1;                   // Tile 1 UV normalizada
     uint32_t color;                 // Color RGBA
-    uint8_t normalStatus;           // NormalStatus
+    uint32_t sourceColor;           // Original Fast3D tint before vertex lighting
+    uint8_t normalStatus;           // NormalStatus plus source-color provenance flags
     uint8_t sourceAlpha;            // Original F3DVtx.cn[3] before fog reuse
     uint8_t recordLoadedAlpha;      // LoadedVertex.color.a passed to GeometryCapture
     uint8_t fogMode;                // G_FOG active when this RSP vertex was loaded
 };
 
 struct CapturedDraw {
+    uint32_t lightOwnerId = 0, lightRole = 0;
     uint32_t vertexStart;
     uint32_t vertexCount;
     uint32_t indexStart;
@@ -58,6 +64,12 @@ struct CapturedDraw {
     MaterialDefinition material;     // Snapshot de parámetros del draw capturado
     uint64_t resourceId;            // Hash CRC64 estable del recurso de textura
     std::string resourcePath;       // Ruta OTR si está disponible
+    uint32_t textureSrvIndex;       // Exact raster descriptor saved with this draw
+    uint32_t textureSrvIndex1;      // Exact descriptor for RDP tile 1
+    uint32_t textureTileModes[2];   // Clamp/mirror/filter state for each RDP tile
+    uint8_t primitiveColor[4];      // Fast3D combiner PRIMITIVE input
+    uint8_t environmentColor[4];    // Fast3D combiner ENVIRONMENT input
+    uint8_t fogColor[4];            // Fast3D post-combiner fog input
 
     uint32_t geometryMode;
     uint32_t otherModeL;
@@ -127,16 +139,22 @@ public:
     // Intercepción durante el procesamiento de vértices y triángulos
     void RecordLoadedVertex(uint16_t vtxIdx, float objX, float objY, float objZ,
                             float normX, float normY, float normZ, bool hasNormal,
-                            float u, float v, uint32_t color,
-                            uint8_t sourceAlpha, bool fogMode);
+                            float u, float v, uint32_t color, uint32_t sourceColor,
+                            uint8_t sourceAlpha, bool fogMode, const float modelView[4][4]);
 
-    void RecordTriangle(uint16_t idx0, uint16_t idx1, uint16_t idx2);
+    bool RequiresFlushForTriangle(uint16_t idx0, uint16_t idx1, uint16_t idx2) const;
+    void RecordTriangle(uint16_t idx0, uint16_t idx1, uint16_t idx2, const float uv[2][3][2]);
 
-    void FlushDraw(const float transform[4][4], uint64_t materialId,
+    void FlushDraw(uint64_t materialId,
                    const MaterialDefinition& material,
                    uint64_t resourceId, const std::string& resourcePath,
+                   uint32_t textureSrvIndex, uint32_t textureSrvIndex1,
+                   const uint32_t textureTileModes[2],
+                   const uint8_t primitiveColor[4], const uint8_t environmentColor[4],
+                   const uint8_t fogColor[4],
                    uint32_t geometryMode, uint32_t otherModeL, uint32_t otherModeH,
-                   uint64_t combineMode, bool isDepthTest, bool isDecal);
+                   uint64_t combineMode, bool isDepthTest, bool isDecal,
+                   uint32_t lightOwnerId = 0, uint32_t lightRole = 0);
 
     // Exportación de snapshots
     bool ExportSnapshot(const std::string& outputPath);
@@ -181,15 +199,19 @@ private:
         bool hasNormal;
         float u, v;
         uint32_t color;
+        uint32_t sourceColor;
         uint8_t sourceAlpha;
         bool fogMode;
         bool valid;
+        float modelView[4][4]; // Fast3D transforms at vertex load, not at Flush.
     };
     RSPVertexCache mRspVertices[128];
 
     // Acumulador de triángulos pendientes antes de Flush
     std::vector<uint32_t> mPendingIndices;
     std::vector<CapturedVertex> mPendingVertices;
+    float mPendingTransform[4][4] = {};
+    bool mPendingBakedViewSpace = false;
 
     // Deduplicación e instancing
     std::unordered_map<uint64_t, CapturedAssetSummary> mUniqueAssets;

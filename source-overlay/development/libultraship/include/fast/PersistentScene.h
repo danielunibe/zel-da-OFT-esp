@@ -52,9 +52,11 @@ struct AABB {
 struct LocalVertex {
     float posX, posY, posZ;         // Espacio Local / Objeto
     float normX, normY, normZ;      // Normal
-    float u, v;                     // Coordenadas de textura
+    float u, v;                     // Coordenadas del tile 0
+    float u1, v1;                   // Coordenadas del tile 1
     uint32_t color;                 // Color RGBA
-    uint8_t normalState;            // NormalStatus (SOURCE_NORMAL, DERIVED_NORMAL, UNAVAILABLE)
+    uint32_t sourceColor;           // Original Fast3D tint before vertex lighting
+    uint8_t normalState;            // NormalStatus plus source-color provenance flags
     uint8_t sourceAlpha;            // Original F3DVtx.cn[3]
     uint8_t recordLoadedAlpha;      // LoadedVertex.color.a entering capture
     uint8_t capturedAlpha;          // CapturedVertex.color.a
@@ -62,8 +64,9 @@ struct LocalVertex {
 };
 
 struct GeometryAsset {
+    uint32_t lightOwnerId = 0, lightRole = 0;
     uint64_t id;                    // Hash FNV-1a64 único del asset
-    uint64_t geometryHash;          // Hash exclusivo de geometría local e índices (SIN transform)
+    uint64_t geometryHash;          // BLAS identity: local positions, indices and opaque/alpha class
     
     std::vector<LocalVertex> vertexBuffer;
     std::vector<uint32_t> indexBuffer;
@@ -76,6 +79,12 @@ struct GeometryAsset {
     std::string resourcePath;       // Ruta canónica OTR
     uint64_t materialId;            // Identificador en MaterialRegistry
     MaterialDefinition material;     // Parámetros exactos del material de este asset
+    uint32_t textureSrvIndex;       // Descriptor captured from the raster draw
+    uint32_t textureSrvIndex1;      // Descriptor for the second RDP tile
+    uint32_t textureTileModes[2];   // Clamp/mirror/filter state
+    uint8_t primitiveColor[4];      // Fast3D combiner input
+    uint8_t environmentColor[4];    // Fast3D combiner input
+    uint8_t fogColor[4];            // Fast3D post-combiner fog input
 
     uint8_t alphaMode;              // AlphaMode (OPAQUE, ALPHA_TEST, etc.)
     uint32_t sourceGeometryMode;

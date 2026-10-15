@@ -1,0 +1,36 @@
+{
+  "temple_night": {
+    "scenario": "TEMPLE_NIGHT_SOLE_LIGHT",
+    "runId": "20261015_154945_367_NAVI_TEMPLE_NIGHT_SOLE_LIGHT_NORMAL",
+    "resolution": [
+      640,
+      480
+    ],
+    "differingPixelsDxrVsRaster": 250343,
+    "differingPixelsPercent": 81.49186197916667,
+    "naviActivePixels": 24366,
+    "naviPercent": 7.931640625,
+    "blueDominantPixels": 24122,
+    "linkActivePixels": 16025,
+    "linkPercent": 43.47059461805556,
+    "linkMeanDelta": 20.88728904724121,
+    "linkMaxDelta": 186.0
+  },
+  "kokiri_night": {
+    "scenario": "KOKIRI_NIGHT_SOLE_LIGHT",
+    "runId": "20261015_155050_070_NAVI_KOKIRI_NIGHT_SOLE_LIGHT_NORMAL",
+    "resolution": [
+      640,
+      480
+    ],
+    "differingPixelsDxrVsRaster": 295521,
+    "differingPixelsPercent": 96.1982421875,
+    "naviActivePixels": 4188,
+    "naviPercent": 1.36328125,
+    "blueDominantPixels": 4058,
+    "linkActivePixels": 117,
+    "linkPercent": 0.3173828125,
+    "linkMeanDelta": 0.030698422342538834,
+    "linkMaxDelta": 61.0
+  }
+}

@@ -146,56 +146,116 @@ void GfxSetInstance(std::shared_ptr<Interpreter> gfx) {
     mInstance = gfx;
 }
 
+DrawCallInfo Interpreter::CurrentDrawInfo(bool isRect, const bool usedTextures[2], const uint32_t tileModes[2]) const {
+    DrawCallInfo dcInfo = {};
+    dcInfo.lightOwnerId = mLightOwnerId;
+    dcInfo.lightRole = mLightRole;
+    for (int textureSlot = 0; textureSlot < 2; ++textureSlot) {
+        dcInfo.textureUsed[textureSlot] = usedTextures[textureSlot];
+        dcInfo.textureTileModes[textureSlot] = tileModes[textureSlot];
+        if (usedTextures[textureSlot]) {
+            const auto& tile = mRdp->texture_tile[mRdp->first_tile_index + textureSlot];
+            const auto& metadata = mRdp->loaded_texture[tile.tmem_index].raw_tex_metadata;
+            dcInfo.textureHashes[textureSlot] = metadata.resourceHash;
+            dcInfo.texturePaths[textureSlot] = metadata.resourcePath;
+            if (dcInfo.textureHash == 0) {
+                dcInfo.textureHash = metadata.resourceHash;
+                dcInfo.resourcePath = metadata.resourcePath;
+            }
+        }
+    }
+    dcInfo.combineMode = mRdp->combine_mode;
+    dcInfo.geometryMode = mRsp->geometry_mode;
+    dcInfo.otherModeL = mRdp->other_mode_l;
+    dcInfo.otherModeH = mRdp->other_mode_h;
+    dcInfo.primR = mRdp->prim_color.r;
+    dcInfo.primG = mRdp->prim_color.g;
+    dcInfo.primB = mRdp->prim_color.b;
+    dcInfo.primA = mRdp->prim_color.a;
+    dcInfo.envR = mRdp->env_color.r;
+    dcInfo.envG = mRdp->env_color.g;
+    dcInfo.envB = mRdp->env_color.b;
+    dcInfo.envA = mRdp->env_color.a;
+    dcInfo.fogR = mRdp->fog_color.r;
+    dcInfo.fogG = mRdp->fog_color.g;
+    dcInfo.fogB = mRdp->fog_color.b;
+    dcInfo.fogA = mRdp->fog_color.a;
+    dcInfo.fogMul = (uint16_t)mRsp->fog_mul;
+    dcInfo.fogOffset = (uint16_t)mRsp->fog_offset;
+    dcInfo.isRect = isRect;
+    dcInfo.is2D = (mRsp->geometry_mode & G_ZBUFFER) == 0;
+    return dcInfo;
+}
+
+static bool SameCouchDrawInfo(const DrawCallInfo& a, const DrawCallInfo& b) {
+    return
+        a.textureHash == b.textureHash &&
+        a.resourcePath == b.resourcePath &&
+        a.lightOwnerId == b.lightOwnerId && a.lightRole == b.lightRole &&
+        a.textureHashes[0] == b.textureHashes[0] &&
+        a.textureHashes[1] == b.textureHashes[1] &&
+        a.texturePaths[0] == b.texturePaths[0] &&
+        a.texturePaths[1] == b.texturePaths[1] &&
+        a.textureUsed[0] == b.textureUsed[0] &&
+        a.textureUsed[1] == b.textureUsed[1] &&
+        a.textureTileModes[0] == b.textureTileModes[0] &&
+        a.textureTileModes[1] == b.textureTileModes[1] &&
+        a.combineMode == b.combineMode &&
+        a.geometryMode == b.geometryMode &&
+        a.otherModeL == b.otherModeL &&
+        a.otherModeH == b.otherModeH &&
+        a.primR == b.primR &&
+        a.primG == b.primG &&
+        a.primB == b.primB &&
+        a.primA == b.primA &&
+        a.envR == b.envR &&
+        a.envG == b.envG &&
+        a.envB == b.envB &&
+        a.envA == b.envA &&
+        a.fogR == b.fogR && a.fogG == b.fogG && a.fogB == b.fogB && a.fogA == b.fogA &&
+        a.fogMul == b.fogMul &&
+        a.fogOffset == b.fogOffset &&
+        a.isRect == b.isRect &&
+        a.is2D == b.is2D;
+}
+
 void Interpreter::Flush() {
     if (mBufVboLen > 0) {
-        if (MaterialRegistry::IsEnhancedVisualProfile()) {
-            DrawCallInfo dcInfo = {};
-            dcInfo.textureHash = mCurrentTextureHash;
-            dcInfo.resourcePath = mCurrentTexturePath;
-            dcInfo.combineMode = mRdp->combine_mode;
-            dcInfo.geometryMode = mRsp->geometry_mode;
-            dcInfo.otherModeL = mRdp->other_mode_l;
-            dcInfo.otherModeH = mRdp->other_mode_h;
-            dcInfo.primR = mRdp->prim_color.r;
-            dcInfo.primG = mRdp->prim_color.g;
-            dcInfo.primB = mRdp->prim_color.b;
-            dcInfo.primA = mRdp->prim_color.a;
-            dcInfo.envR = mRdp->env_color.r;
-            dcInfo.envG = mRdp->env_color.g;
-            dcInfo.envB = mRdp->env_color.b;
-            dcInfo.envA = mRdp->env_color.a;
-            dcInfo.fogMul = (uint16_t)mRsp->fog_mul;
-            dcInfo.fogOffset = (uint16_t)mRsp->fog_offset;
-            dcInfo.isRect = false;
-            dcInfo.is2D = (mRsp->geometry_mode & G_ZBUFFER) == 0;
-            MaterialRegistry::Instance().RecordDrawCall(dcInfo);
+        // RSP/RDP state can already describe the next triangle. Use the
+        // metadata saved when this batch's first raster vertex was appended.
+        const auto& drawInfo = mBufferedDrawInfo;
+        const bool captureGeometry = Fast::GeometryCapture::Instance().IsEnabled();
+        if (MaterialRegistry::IsEnhancedVisualProfile() || captureGeometry) {
+            MaterialRegistry::Instance().RecordDrawCall(drawInfo);
         }
-        if (Fast::GeometryCapture::Instance().IsEnabled()) {
-            int stackIdx = mRsp->modelview_matrix_stack_size - 1;
-            if (stackIdx < 0) stackIdx = 0;
-            const MaterialDefinition drawMaterial =
-                Fast::MaterialRegistry::Instance().GetMaterialForTexture(mCurrentTextureHash);
-            uint64_t matId = Fast::MaterialRegistry::Instance().GetMaterialId(mCurrentTextureHash);
+        if (captureGeometry) {
+            const MaterialDefinition drawMaterial = Fast::MaterialRegistry::Instance().GetMaterialForDraw(drawInfo);
+            const uint64_t matId = Fast::MaterialRegistry::Instance().GetMaterialIdForDraw(drawInfo);
+            const uint8_t primitiveColor[4] = { drawInfo.primR, drawInfo.primG, drawInfo.primB, drawInfo.primA };
+            const uint8_t environmentColor[4] = { drawInfo.envR, drawInfo.envG, drawInfo.envB, drawInfo.envA };
+            const uint8_t fogColor[4] = { drawInfo.fogR, drawInfo.fogG, drawInfo.fogB, drawInfo.fogA };
             Fast::GeometryCapture::Instance().FlushDraw(
-                mRsp->modelview_matrix_stack[stackIdx],
                 matId,
                 drawMaterial,
-                mCurrentTextureHash,
-                mCurrentTexturePath,
-                mRsp->geometry_mode,
-                mRdp->other_mode_l,
-                mRdp->other_mode_h,
-                mRdp->combine_mode,
-                (mRsp->geometry_mode & G_ZBUFFER) != 0,
-                false
+                drawInfo.textureHash,
+                drawInfo.resourcePath,
+                mBufferedTextureSrvIndices[0], mBufferedTextureSrvIndices[1],
+                drawInfo.textureTileModes, primitiveColor, environmentColor, fogColor,
+                drawInfo.geometryMode,
+                drawInfo.otherModeL,
+                drawInfo.otherModeH,
+                drawInfo.combineMode,
+                !drawInfo.is2D && !drawInfo.isRect,
+                (drawInfo.otherModeL & ZMODE_DEC) == ZMODE_DEC,
+                drawInfo.lightOwnerId, drawInfo.lightRole
             );
         }
         // The explicit OVERLAY_DISP marker resolves the complete world.
         // Depth-disabled world and pre-render draws are not a HUD boundary.
         PhysicalDrawData physicalDraw{};
         physicalDraw.materialIndex = static_cast<uint32_t>(
-            MaterialRegistry::Instance().GetMaterialId(mCurrentTextureHash));
-        const MaterialDefinition drawMaterial = MaterialRegistry::Instance().GetMaterialForTexture(mCurrentTextureHash);
+            MaterialRegistry::Instance().GetMaterialForDraw(drawInfo).type);
+        const MaterialDefinition drawMaterial = MaterialRegistry::Instance().GetMaterialForDraw(drawInfo);
         physicalDraw.materialSurface[0] = drawMaterial.roughness;
         physicalDraw.materialSurface[1] = drawMaterial.metallic;
         physicalDraw.materialSurface[2] = drawMaterial.specular;
@@ -212,7 +272,7 @@ void Interpreter::Flush() {
         // the fixed world key light by the same camera view matrix so the
         // material highlight stays anchored in the scene while the camera
         // moves.
-        const float(*cameraView)[4] = mRsp->modelview_matrix_stack[0];
+        const float(*cameraView)[4] = mBufferedCameraView;
         const float worldLight[3] = { 0.22f, 0.94f, 0.26f };
         float viewLight[3] = {
             worldLight[0] * cameraView[0][0] + worldLight[1] * cameraView[1][0] + worldLight[2] * cameraView[2][0],
@@ -411,26 +471,13 @@ void Interpreter::Flush() {
                     sceneWorldRawLength[0], capturedDirectionalLuminance[0]);
             }
             Fast::MaterialRegistry::Instance().NoteGamePointProbe(capturedPointLights);
-            // Scene-wide light sources are captured from the original
-            // LightInfo list by Lights_BindAll. RSP's per-actor point lights
-            // have already been converted to actor-relative direction vectors
-            // and must not be mistaken for global DXR lights here.
-            // DXR V2.5 PRODUCTIVE DELIVERY FIX: forward the real strongest
-            // scene directional into the productive snapshot via the EXISTING
-            // CaptureSceneLighting merge/selection policy (brightest-wins,
-            // dedup, primary+secondary). Previously this call always passed
-            // hasDirectionalLight=false, so productive DXR consumers only
-            // ever saw defaults with directionalLightCount=0. Points stay
-            // nullptr (unchanged behavior); ambient path unchanged.
-            const float noDirection[3] = {};
-            const float noColor[3] = {};
-            const bool hasSceneDirectional = (capturedDirectionalCount > 0);
-            Fast::MaterialRegistry::Instance().CaptureSceneLighting(
-                hasSceneDirectional ? sceneWorldLights[0] : noDirection,
-                hasSceneDirectional ? sceneDirectionalColors[0] : noColor,
-                sceneAmbientColor, nullptr, nullptr, 0, hasSceneDirectional);
+            // This draw's RSP light table is an observation, not the scene's
+            // authoritative light list. In particular, Lights_BindPoint has
+            // converted positional sources into actor-relative directions.
+            // Keep these values in the forensic probe above and leave the
+            // productive DXR snapshot sourced from CouchCaptureNativeLight.
         }
-        if ((mRsp->geometry_mode & G_ZBUFFER) == 0) {
+        if (drawInfo.is2D || drawInfo.isRect) {
             physicalDraw.flags |= PHYSICAL_UI_2D;
         }
         if (mRapi->SupportsPhysicalDrawData()) {
@@ -447,6 +494,7 @@ void Interpreter::Flush() {
 ShaderProgram* Interpreter::LookupOrCreateShaderProgram(uint64_t id0, uint64_t id1) {
     ShaderProgram* prg = mRapi->LookupShader(id0, id1);
     if (prg == nullptr) {
+        Flush(); // Finish the old vertex layout before switching to a new shader.
         mRapi->UnloadShader(mRenderingState.mShaderProgram);
         prg = mRapi->CreateAndLoadNewShader(id0, id1);
         mRenderingState.mShaderProgram = prg;
@@ -1238,6 +1286,7 @@ void Interpreter::ImportTexture(int i, int tile, bool importReplacement) {
 
     const RawTexMetadata* metadata = &mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].raw_tex_metadata;
     const uint8_t* origAddr = mRdp->loaded_texture[tmemIdex].addr;
+    mRapi->SetTextureResourceIdentity(metadata->resourceHash);
     if (importReplacement && (metadata->resource != nullptr)) {
         auto it = mMaskedTextures.find(GetBaseTexturePath(metadata->resource->GetInitData()->Path));
         if (it != mMaskedTextures.end()) {
@@ -1709,12 +1758,16 @@ void Interpreter::GfxSpVertex(size_t n_vertices, size_t dest_index, const F3DVtx
                 normZ = vn->n[2] / 127.0f;
             }
             uint32_t colorRGBA = (d->color.r) | (d->color.g << 8) | (d->color.b << 16) | (d->color.a << 24);
+            const uint32_t sourceColorRGBA = (mRsp->geometry_mode & G_LIGHTING)
+                ? 0xFFFFFFFFu
+                : static_cast<uint32_t>(v->cn[0]) | (static_cast<uint32_t>(v->cn[1]) << 8u) |
+                  (static_cast<uint32_t>(v->cn[2]) << 16u) | (static_cast<uint32_t>(v->cn[3]) << 24u);
             Fast::GeometryCapture::Instance().RecordLoadedVertex(
                 dest_index,
                 v->ob[0], v->ob[1], v->ob[2],
                 normX, normY, normZ, hasNormal,
                 v->tc[0] / 32.0f, v->tc[1] / 32.0f,
-                colorRGBA, static_cast<uint8_t>(v->cn[3]), fogModeForCapture
+                colorRGBA, sourceColorRGBA, static_cast<uint8_t>(v->cn[3]), fogModeForCapture, view
             );
         }
     }
@@ -1783,15 +1836,11 @@ void Interpreter::GfxSpTri1(uint8_t vtx1_idx, uint8_t vtx2_idx, uint8_t vtx3_idx
         }
     }
 
-    if (Fast::GeometryCapture::Instance().IsEnabled()) {
-        Fast::GeometryCapture::Instance().RecordTriangle(vtx1_idx, vtx2_idx, vtx3_idx);
-    }
-
     bool depth_test = (mRsp->geometry_mode & G_ZBUFFER) == G_ZBUFFER;
     if (depth_test) {
         mHasDrawn3DThisFrame = true;
 #if defined(_WIN32)
-        if (!mFbActive &&
+        if (!mFbActive && !is_rect &&
             (Fast::DxrShadowRenderer::Instance().IsEnabled() ||
              Fast::DxrSurfaceRenderer::Instance().IsEnabled())) {
             const float aspect = mCurDimensions.height > 0
@@ -1799,6 +1848,14 @@ void Interpreter::GfxSpTri1(uint8_t vtx1_idx, uint8_t vtx2_idx, uint8_t vtx3_idx
                 : (4.0f / 3.0f);
             const float clipXScale = mFbActive || aspect <= 0.0f ? 1.0f : (4.0f / 3.0f) / aspect;
             const float(*cameraView)[4] = mRsp->modelview_matrix_stack[0];
+            const float framebufferWidth = static_cast<float>(
+                std::max(mRendersToFb ? mCurDimensions.width : mGfxCurrentWindowDimensions.width, 1u));
+            const float framebufferHeight = static_cast<float>(
+                std::max(mRendersToFb ? mCurDimensions.height : mGfxCurrentWindowDimensions.height, 1u));
+            const float rasterViewport[4] = {
+                mRdp->viewport.x / framebufferWidth, mRdp->viewport.y / framebufferHeight,
+                mRdp->viewport.width / framebufferWidth, mRdp->viewport.height / framebufferHeight
+            };
             double projectedPixelArea = 0.0;
             bool projectedVerticesValid = true;
             double projectedX[3] = {};
@@ -1820,13 +1877,15 @@ void Interpreter::GfxSpTri1(uint8_t vtx1_idx, uint8_t vtx2_idx, uint8_t vtx3_idx
                 const double twiceArea = fabs(
                     (projectedX[1] - projectedX[0]) * (projectedY[2] - projectedY[0]) -
                     (projectedY[1] - projectedY[0]) * (projectedX[2] - projectedX[0]));
-                const double screenPixels = static_cast<double>(mCurDimensions.width) * mCurDimensions.height;
+                const double screenPixels = static_cast<double>(mRdp->viewport.width) * mRdp->viewport.height;
                 projectedPixelArea = std::min(screenPixels, twiceArea * screenPixels / 8.0);
             }
             auto candidate = std::find_if(
                 mDxrCameraMatrixCandidates.begin(), mDxrCameraMatrixCandidates.end(),
-                [this, clipXScale](const DxrCameraMatrixCandidate& item) {
+                [this, clipXScale, cameraView, &rasterViewport](const DxrCameraMatrixCandidate& item) {
                     return memcmp(item.projection, mRsp->P_matrix, sizeof(item.projection)) == 0 &&
+                           memcmp(item.view, cameraView, sizeof(item.view)) == 0 &&
+                           memcmp(item.viewport, rasterViewport, sizeof(item.viewport)) == 0 &&
                            fabsf(item.clipXScale - clipXScale) <= 1.0e-5f;
                 });
             if (candidate == mDxrCameraMatrixCandidates.end()) {
@@ -1834,6 +1893,7 @@ void Interpreter::GfxSpTri1(uint8_t vtx1_idx, uint8_t vtx2_idx, uint8_t vtx3_idx
                 memcpy(item.view, cameraView, sizeof(item.view));
                 memcpy(item.projection, mRsp->P_matrix, sizeof(item.projection));
                 item.clipXScale = clipXScale;
+                memcpy(item.viewport, rasterViewport, sizeof(item.viewport));
                 mDxrCameraMatrixCandidates.push_back(item);
                 candidate = std::prev(mDxrCameraMatrixCandidates.end());
             }
@@ -1956,6 +2016,7 @@ void Interpreter::GfxSpTri1(uint8_t vtx1_idx, uint8_t vtx2_idx, uint8_t vtx3_idx
     ColorCombiner* comb = LookupOrCreateColorCombiner(key);
 
     uint32_t tm = 0;
+    uint32_t captureTileModes[2] = {};
     uint32_t tex_width[2], tex_height[2], tex_width2[2], tex_height2[2];
     for (int i = 0; i < 2; i++) {
         uint32_t tile = mRdp->first_tile_index + i;
@@ -2023,11 +2084,17 @@ void Interpreter::GfxSpTri1(uint8_t vtx1_idx, uint8_t vtx2_idx, uint8_t vtx3_idx
                 cmt &= ~G_TX_CLAMP;
             }
 
+            const bool linear_filter = (mRdp->other_mode_h & (3U << G_MDSFT_TEXTFILT)) != G_TF_POINT;
+            const bool clampS = (tm & (1 << (2 * i))) != 0 || (cms & G_TX_CLAMP) != 0;
+            const bool clampT = (tm & (1 << (2 * i + 1))) != 0 || (cmt & G_TX_CLAMP) != 0;
+            captureTileModes[i] = (clampS ? 1u : 0u) | ((cms & G_TX_MIRROR) ? 2u : 0u) |
+                                  (clampT ? 4u : 0u) | ((cmt & G_TX_MIRROR) ? 8u : 0u) |
+                                  (linear_filter ? 16u : 0u);
+
             if (mRenderingState.mTextures[i] == nullptr) {
                 continue;
             }
 
-            bool linear_filter = (mRdp->other_mode_h & (3U << G_MDSFT_TEXTFILT)) != G_TF_POINT;
             if (linear_filter != mRenderingState.mTextures[i]->second.linear_filter ||
                 cms != mRenderingState.mTextures[i]->second.cms || cmt != mRenderingState.mTextures[i]->second.cmt) {
                 Flush();
@@ -2067,6 +2134,32 @@ void Interpreter::GfxSpTri1(uint8_t vtx1_idx, uint8_t vtx2_idx, uint8_t vtx3_idx
     mRapi->ShaderGetInfo(prg, &numInputs, usedTextures);
 
     struct GfxClipParameters clip_parameters = mRapi->GetClipParameters();
+
+    const DrawCallInfo drawInfo = CurrentDrawInfo(is_rect, usedTextures, captureTileModes);
+    const uint32_t textureSrvIndices[2] = {
+        usedTextures[0] ? mRapi->GetTextureSrvIndex(0) : UINT32_MAX,
+        usedTextures[1] ? mRapi->GetTextureSrvIndex(1) : UINT32_MAX,
+    };
+    auto& geometryCapture = Fast::GeometryCapture::Instance();
+    const bool needsMaterialSnapshot = MaterialRegistry::IsEnhancedVisualProfile() || geometryCapture.IsEnabled();
+    if (needsMaterialSnapshot && mBufVboLen > 0 &&
+        (!SameCouchDrawInfo(mBufferedDrawInfo, drawInfo) ||
+         mBufferedTextureSrvIndices[0] != textureSrvIndices[0] ||
+         mBufferedTextureSrvIndices[1] != textureSrvIndices[1] ||
+         memcmp(mBufferedCameraView, mRsp->modelview_matrix_stack[0], sizeof(mBufferedCameraView)) != 0 ||
+         (!is_rect && !mFbActive && geometryCapture.RequiresFlushForTriangle(vtx1_idx, vtx2_idx, vtx3_idx)))) {
+        Flush();
+    }
+    if (mBufVboLen == 0) {
+        mBufferedDrawInfo = drawInfo;
+        mBufferedTextureSrvIndices[0] = textureSrvIndices[0];
+        mBufferedTextureSrvIndices[1] = textureSrvIndices[1];
+        memcpy(mBufferedCameraView, mRsp->modelview_matrix_stack[0], sizeof(mBufferedCameraView));
+    }
+    // Capture exactly the primary albedo coordinates emitted to the VBO,
+    // including texture scaling/generation, ModifyVertex, tile offsets and
+    // shifts, the linear-filter half texel, and texture-size normalization.
+    float captureUv[2][3][2] = {};
 
     for (int i = 0; i < 3; i++) {
         float z = v_arr[i]->z, w = v_arr[i]->w;
@@ -2124,6 +2217,8 @@ void Interpreter::GfxSpTri1(uint8_t vtx1_idx, uint8_t vtx2_idx, uint8_t vtx3_idx
 
             mBufVbo[mBufVboLen++] = u / tex_width[t];
             mBufVbo[mBufVboLen++] = v / tex_height[t];
+            captureUv[t][i][0] = u / tex_width[t];
+            captureUv[t][i][1] = v / tex_height[t];
 
             bool clampS = tm & (1 << 2 * t);
             bool clampT = tm & (1 << 2 * t + 1);
@@ -2230,6 +2325,11 @@ void Interpreter::GfxSpTri1(uint8_t vtx1_idx, uint8_t vtx2_idx, uint8_t vtx3_idx
         // mBufVbo[mBufVboLen++] = color->a / 255.0f;
     }
 
+    // All state-changing Flush calls above finish BEFORE this triangle enters
+    // either batch. Rectangles and offscreen images have no main-scene TLAS.
+    if (!is_rect && !mFbActive && geometryCapture.IsEnabled()) {
+        geometryCapture.RecordTriangle(vtx1_idx, vtx2_idx, vtx3_idx, captureUv);
+    }
     if (++mBufVboNumTris == MAX_TRI_BUFFER) {
         // if (++mBufVbo_num_tris == 1) {
         Flush();
@@ -2442,7 +2542,8 @@ void Interpreter::GfxDpSetTextureImage(uint32_t format, uint32_t size, uint32_t 
                                        uint32_t texFlags, RawTexMetadata rawTexMetdata, const void* addr) {
     // fprintf(stderr, "GfxDpSetTextureImage: %s (width=%d; size=0x%X)\n",
     //         rawTexMetdata.resource ? rawTexMetdata.resource->GetInitData()->Path.c_str() : nullptr, width, size);
-    mRapi->SetTextureResourceIdentity(mCurrentTextureHash);
+    rawTexMetdata.resourceHash = mCurrentTextureHash;
+    rawTexMetdata.resourcePath = mCurrentTexturePath;
     mRdp->texture_to_load.addr = (const uint8_t*)addr;
     mRdp->texture_to_load.siz = size;
     mRdp->texture_to_load.width = width;
@@ -3209,6 +3310,14 @@ bool gfx_invalidate_tex_cache_handler_f3dex2(F3DGfx** cmd) {
     } else {
         gfx->TextureCacheDelete((const uint8_t*)texAddr);
     }
+    return false;
+}
+
+bool gfx_light_owner_handler_otr(F3DGfx** cmd) {
+    Interpreter* gfx = mInstance.lock().get();
+    gfx->Flush();
+    gfx->mLightOwnerId = static_cast<uint32_t>((*cmd)->words.w1);
+    gfx->mLightRole = static_cast<uint32_t>((*cmd)->words.w0) & 0xFFu;
     return false;
 }
 
@@ -4535,6 +4644,7 @@ static constexpr UcodeHandler otrHandlers = {
     { OTR_G_DL_OTR_HASH, { "G_DL_OTR_HASH", gfx_dl_otr_hash_handler_custom } }, // G_DL_OTR_HASH (0x31)
     { OTR_G_VTX_OTR_HASH, { "G_VTX_OTR_HASH", gfx_vtx_hash_handler_custom } },  // G_VTX_OTR_HASH (0x32)
     { OTR_G_MARKER, { "G_MARKER", gfx_marker_handler_otr } },                   // G_MARKER (0X33)
+    { OPCODE(COUCH_G_SET_LIGHT_OWNER), { "G_LIGHT_OWNER", gfx_light_owner_handler_otr } },
     { OTR_G_INVALTEXCACHE, { "G_INVALTEXCACHE", gfx_invalidate_tex_cache_handler_f3dex2 } }, // G_INVALTEXCACHE (0X34)
     { OTR_G_BRANCH_Z_OTR, { "G_BRANCH_Z_OTR", gfx_branch_z_otr_handler_f3dex2 } },           // G_BRANCH_Z_OTR (0x35)
     { OTR_G_MTX_OTR, { "G_MTX_OTR", gfx_mtx_otr_handler_custom } },                          // G_MTX_OTR (0x36)
@@ -4860,6 +4970,8 @@ bool Interpreter::ViewportMatchesRendererResolution() {
 }
 
 void Interpreter::StartFrame() {
+    mLightOwnerId = 0;
+    mLightRole = 0;
     mPostprocessRunThisFrame = false;
     mHasDrawn3DThisFrame = false;
     mDxrCameraMatrixCandidates.clear();
@@ -5043,17 +5155,22 @@ void Interpreter::TriggerScenePostprocess() {
     mPostprocessRunThisFrame = true;
     Flush();
     PublishDxrCamera();
-    mRapi->BeginUiOverlayPass();
-
-    if (MaterialRegistry::IsEnhancedVisualProfile()) {
-        float fogR = 0.40f, fogG = 0.42f, fogB = 0.45f;
-        float fogStrength = 0.02f;
+    const bool enhanced = MaterialRegistry::IsEnhancedVisualProfile();
+    float fogR = 0.40f, fogG = 0.42f, fogB = 0.45f;
+    float fogStrength = 0.02f;
+    if (enhanced) {
         if (mSceneHasFog && (mSceneFogR > 0.01f || mSceneFogG > 0.01f || mSceneFogB > 0.01f)) {
             fogR = mSceneFogR;
             fogG = mSceneFogG;
             fogB = mSceneFogB;
             fogStrength = 0.12f;
         }
+        // Publish the exact display parameters before the DXR hook records
+        // same-frame comparison images. The subsequent normal pass reuses them.
+        mRapi->SetScenePostprocessParameters(fogR, fogG, fogB, fogStrength, mSceneFogStart, mSceneFogRange);
+    }
+    mRapi->BeginUiOverlayPass();
+    if (enhanced) {
         mRapi->RecordFogDiagnosticSource(mSceneHasFog, mFogBlendDrawsThisFrame, mGeometryFogDrawsThisFrame,
                                          mRsp->fog_mul, mRsp->fog_offset,
                                          mRdp->fog_color.r / 255.0f, mRdp->fog_color.g / 255.0f,
@@ -5073,16 +5190,19 @@ void Interpreter::PublishDxrCamera() {
                 return a.projectedPixelArea < b.projectedPixelArea;
             });
         Fast::DxrShadowRenderer::Instance().UpdateCameraMatrices(
-            selected->view, selected->projection, selected->clipXScale);
+            selected->view, selected->projection, selected->clipXScale, selected->viewport);
 
         static uint64_t dxrCameraTraceFrame = 0;
         const char* matrixTrace = getenv("COUCH_DXR_MATRIX_TRACE");
-        if (matrixTrace && strcmp(matrixTrace, "1") == 0 && dxrCameraTraceFrame++ % 600 == 0) {
+        if (matrixTrace && strcmp(matrixTrace, "1") == 0 && dxrCameraTraceFrame++ % 120 == 0) {
             std::string line = "[COUCH-DXR-CAMERA] candidates=" +
                 std::to_string(mDxrCameraMatrixCandidates.size()) +
                 " selectedTriangles=" + std::to_string(selected->triangleCount) +
                 " selectedPixelArea=" + std::to_string(selected->projectedPixelArea) +
-                " clipXScale=" + std::to_string(selected->clipXScale);
+                " clipXScale=" + std::to_string(selected->clipXScale) +
+                " viewport=" + std::to_string(selected->viewport[0]) + "," +
+                std::to_string(selected->viewport[1]) + "," + std::to_string(selected->viewport[2]) + "," +
+                std::to_string(selected->viewport[3]);
             FILE* diagnostics = fopen(couch_diagnostics_path(), "a");
             if (diagnostics) {
                 fprintf(diagnostics, "%s\n", line.c_str());

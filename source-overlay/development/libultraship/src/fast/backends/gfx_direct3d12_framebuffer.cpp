@@ -254,7 +254,9 @@ void GfxRenderingAPIDX12::CopyFramebuffer(int dst, int src, int sx0, int sy0, in
     auto& sourceState = FramebufferColorState(src); auto& destinationState = FramebufferColorState(dst);
     const auto previousSource = sourceState; const auto previousDestination = destinationState;
     // Same-size copies preserve exact pixels and don't disturb raster state.
-    if (!mFramebufferTonemap && sx1-sx0 == dx1-dx0 && sy1-sy0 == dy1-dy0) {
+    if (!mFramebufferTonemap && source->GetDesc().Format == destination->GetDesc().Format &&
+        source->GetDesc().SampleDesc.Count == destination->GetDesc().SampleDesc.Count &&
+        sx1-sx0 == dx1-dx0 && sy1-sy0 == dy1-dy0) {
         TransitionResource(source, sourceState, D3D12_RESOURCE_STATE_COPY_SOURCE);
         TransitionResource(destination, destinationState, D3D12_RESOURCE_STATE_COPY_DEST);
         D3D12_TEXTURE_COPY_LOCATION from{}; from.pResource = source; from.Type = D3D12_TEXTURE_COPY_TYPE_SUBRESOURCE_INDEX;
@@ -533,8 +535,15 @@ GfxRenderingAPIDX12::GetPixelDepth(int id,const std::set<std::pair<float,float>>
     }
     return result;
 }
+void GfxRenderingAPIDX12::SetScenePostprocessParameters(float fogR, float fogG, float fogB, float fogStrength,
+                                                       float fogStart, float fogRange) {
+    mFramebufferFog[0]=fogR; mFramebufferFog[1]=fogG; mFramebufferFog[2]=fogB;
+    mFramebufferFog[3]=std::clamp(fogStrength,0.0f,1.0f);
+    mFramebufferFog[4]=fogStart; mFramebufferFog[5]=fogRange;
+}
+
 void GfxRenderingAPIDX12::RunTonemappingPass(float fogR,float fogG,float fogB,float fogStrength,float fogStart,float fogRange) {
-    if (!mCommandListOpen || !MaterialRegistry::IsEnhancedVisualProfile()) return;
+    if (!mCommandListOpen || (!MaterialRegistry::IsEnhancedVisualProfile() && !mHdrSceneActive)) return;
     const auto consoleVariables = Ship::Context::GetInstance()->GetConsoleVariables();
     const bool tonemappingEnabled = !consoleVariables ||
         consoleVariables->GetInteger("gEnhancements.Graphics.DXR.Tonemapping",1) != 0;
@@ -546,9 +555,7 @@ void GfxRenderingAPIDX12::RunTonemappingPass(float fogR,float fogG,float fogB,fl
     const DXGI_FORMAT rasterSourceFormat = FramebufferColor(target)
         ? FramebufferColor(target)->GetDesc().Format : DXGI_FORMAT_UNKNOWN;
     mFramebufferFogDepthId=target;
-    mFramebufferFog[0]=fogR; mFramebufferFog[1]=fogG; mFramebufferFog[2]=fogB;
-    mFramebufferFog[3]=std::clamp(fogStrength,0.0f,1.0f);
-    mFramebufferFog[4]=fogStart; mFramebufferFog[5]=fogRange;
+    SetScenePostprocessParameters(fogR, fogG, fogB, fogStrength, fogStart, fogRange);
     const uint32_t width=FramebufferWidth(target),height=FramebufferHeight(target);
     if (mPostprocessFramebuffer<0) mPostprocessFramebuffer=CreateFramebuffer();
     UpdateFramebufferParameters(mPostprocessFramebuffer,width,height,1,false,true,false,false);
@@ -570,6 +577,10 @@ void GfxRenderingAPIDX12::RunTonemappingPass(float fogR,float fogG,float fogB,fl
         mFramebufferTonemap=true;
         CopyFramebuffer(target,mPostprocessFramebuffer,0,0,width,height,0,0,width,height);
         mFramebufferTonemap=false;
+        // The game rendered into an SDR offscreen framebuffer. ImGui will
+        // sample that resolved texture into the SDR swapchain; the unused
+        // default HDR target must not remain selected or be resolved later.
+        if (target != 0) mHdrSceneActive=false;
     }
     MaterialRegistry::IncrTonemapPass();
     if (hdrSceneWasActive) {
@@ -610,7 +621,9 @@ void GfxRenderingAPIDX12::RunTonemappingPass(float fogR,float fogG,float fogB,fl
                        << " srgbEncodeCount=0 srgbDecodeCount=0 acesCount=1 exposureCount=0 tonemapCount=1"
                        << " manualSRGBEncode=0 srgbRTVEncode=0 hdrLinearUntilTonemap="
                        << (rasterSourceFormat == DXGI_FORMAT_R16G16B16A16_FLOAT ? 1 : 0)
-                       << " outputTransfer=GAMMA22_APPROX";
+                       << " outputTransfer=GAMMA22_APPROX"
+                       << " colorCounterScope=POSTPROCESS_PASS"
+                       << " colorEvidence=SHADER_CONTRACT_ONLY hdrPixelEncodingMeasured=0";
                 CouchColorLog(record.str());
             }
         }

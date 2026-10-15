@@ -6,6 +6,7 @@
 #include "fast/interpreter.h"
 #include <imgui.h>
 #include "RtxQuality.h"
+#include "fast/backends/DxrPipelinePolicy.h"
 #include <chrono>
 #include <d3d12.h>
 #include <dxgi1_4.h>
@@ -94,6 +95,7 @@ public:
     uint32_t NewTexture() override;
     void SelectTexture(int tile, uint32_t textureId) override;
     void SetTextureResourceIdentity(uint64_t resourceIdentity) override { mCurrentTextureResourceIdentity = resourceIdentity; }
+    uint32_t GetTextureSrvIndex(int tile) const override;
     void UploadTexture(const uint8_t* rgba32Buf, uint32_t width, uint32_t height) override;
     void SetSamplerParameters(int sampler, bool linear_filter, uint32_t cms, uint32_t cmt) override;
     void DeleteTexture(uint32_t texId) override;
@@ -110,6 +112,7 @@ public:
 
     void DrawTriangles(float buf_vbo[], size_t buf_vbo_len, size_t buf_vbo_num_tris) override;
     bool SupportsPhysicalDrawData() const override { return true; }
+    const DxrFrameEvidence& GetDxrFrameEvidence() const { return mDxrFrameEvidence; }
     void DrawTrianglesPhysical(float buf_vbo[], size_t buf_vbo_len, size_t buf_vbo_num_tris,
                                const PhysicalVertexData* physicalVertices, size_t physicalVertexCount,
                                const PhysicalDrawData& physicalDraw) override;
@@ -138,6 +141,8 @@ public:
 
     void RunTonemappingPass(float fogR = 0.45f, float fogG = 0.55f, float fogB = 0.70f, float fogStrength = 0.0f,
                             float fogStart = 0.3f, float fogRange = 0.7f) override;
+    void SetScenePostprocessParameters(float fogR, float fogG, float fogB, float fogStrength,
+                                       float fogStart, float fogRange) override;
     void RecordFogDiagnosticSource(bool sceneFogEnabled, uint64_t fogBlendDraws, uint64_t geometryFogDraws,
                                    float gameFogMul, float gameFogOffset, float gameFogR, float gameFogG,
                                    float gameFogB) override;
@@ -218,6 +223,8 @@ private:
     bool ReadTexturePixels(ID3D12Resource* resource, D3D12_RESOURCE_STATES state,
                            std::vector<uint8_t>& bytes, uint32_t& rowPitch);
     void CaptureFogDepthDiagnostics(int target, uint64_t frame);
+    void CaptureDxrComparisonImage(unsigned index, ID3D12Resource* source,
+                                   D3D12_RESOURCE_STATES sourceState, int frame);
     void WaitForGpu();
     void WaitForFrame(uint32_t frameIndex);
     void MoveToNextFrame();
@@ -288,6 +295,8 @@ private:
     D3D12_RESOURCE_STATES mBackbufferDepthState = D3D12_RESOURCE_STATE_DEPTH_WRITE;
     Microsoft::WRL::ComPtr<ID3D12RootSignature> mFramebufferCopyRoot;
     Microsoft::WRL::ComPtr<ID3D12PipelineState> mFramebufferCopyPso[2];
+    Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> mComparisonRtvHeap;
+    Microsoft::WRL::ComPtr<ID3D12Resource> mComparisonSdr[8];
     Microsoft::WRL::ComPtr<IDXGIAdapter3> mQualityAdapter;
     uint64_t mLastMemorySample=0;
     RtxQualityController mQualityController;
@@ -353,6 +362,8 @@ private:
     uint64_t mInvalidDrawCount;
     bool mCommandListOpen;
     bool mDxrPassesRunThisFrame = false;
+    bool mDxrWorkAttemptedThisFrame = false;
+    DxrFrameEvidence mDxrFrameEvidence{};
     bool mLastFrameHadDxr = false;
     bool mDeviceRemoved;
 

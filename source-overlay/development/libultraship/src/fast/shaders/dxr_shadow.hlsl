@@ -3,6 +3,18 @@
 // RT3: Native DXR Ray-Traced Shadow Shader (HLSL SM 6.3)
 // ============================================================
 
+// The generator exports this marker into bytecode headers; CPU pipelines
+// refuse a header from the older 104-byte payload/1408-byte constant layout.
+#define COUCH_DXR_SHADER_ABI_VERSION 4
+#define MATERIAL_FLAG_NAVI_POINT_PROXY (1u << 8u)
+#define MATERIAL_FLAG_NAVI_POINT_WORLD_RECEIVER (1u << 10u)
+#define DXR_PAYLOAD_FLAG_ALBEDO_RECONSTRUCTED (1u << 9u)
+#define MATERIAL_FLAG_DXR_WINDOW_PORTAL (1u << 5u)
+#define MATERIAL_FLAG_DXR_PRIMARY_RELIGHT (1u << 6u)
+#define MATERIAL_FLAG_SECOND_ALBEDO_TEXTURE_VALID (1u << 7u)
+#define HIT_VERTEX_FLAG_FAST3D_LIT_COLOR (1u << 2u)
+#define DXR_PAYLOAD_FLAG_HYBRID_RELIGHT (1u << 8u)
+
 RaytracingAccelerationStructure gScene : register(t0);
 Texture2D<float> gDepthTexture : register(t1);
 RWTexture2D<float> gShadowMask : register(u0);
@@ -11,6 +23,7 @@ RWTexture2D<float> gEmissiveMask : register(u2);
 RWTexture2D<float4> gIndirectMask : register(u3);
 RWTexture2D<float4> gReflectionColor : register(u4);
 RWStructuredBuffer<uint> gPrimaryGateCounters : register(u5);
+RWTexture2D<float4> gNativePointDirect : register(u6);
 ByteAddressBuffer gHitVertexData : register(t2);
 ByteAddressBuffer gHitIndexData : register(t3);
 ByteAddressBuffer gInstanceMaterialData : register(t4);
@@ -18,6 +31,7 @@ Texture2D<float4> gMaterialTextures[4096] : register(t5);
 Texture2D<float4> gRasterEnvironment : register(t4101);
 Texture2D<float> gRasterSoftShadow : register(t4102);
 SamplerState gMaterialSampler : register(s0);
+SamplerState gMaterialPointSampler : register(s1);
 
 cbuffer FrameConstants : register(b0) {
     float4x4 gInvProjection;
@@ -26,20 +40,39 @@ cbuffer FrameConstants : register(b0) {
     float4 gScreenSize;
     float4 gParams; // pass-specific: bias, maxDist, clipXScale, shadow/composite control
     float4 gQuality; // indirect sample count, reflection enable, relief scale, point-light count
+    float4 gRasterViewport; // normalized left, bottom, width, height (Fast3D bottom origin)
     float4 gSceneLightColor;
     float4 gAmbientLightColor;
-    float4 gFrameInfo; // monotonically changing path sample index
+    float4 gFrameInfo; // sample index, soft-shadow width/height, raster environment is linear
     float4 gDiagnosticInfo; // flags, material-record count, SRV count, view
     float4 gSecondaryLightDir;
     float4 gSecondaryLightColor;
     float4 gPointLightPosition[32]; // view-space xyz, w: authored influence radius
     float4 gPointLightOptics[32];   // x: reserved, yzw: linear RGB color
     float4x4 gProjection;
-    uint4 gDiagnosticBounds; // logical vertex, index, material-record counts, reserved
+    uint4 gDiagnosticBounds; // logical vertex, index, material-record and texture counts
+    float4 gTraceSettings; // reflection/transmission/GI ranges; w: authored reflection strength
+    uint4 gSourceControls; // selected owner, isolated harness, emitter samples, reserved
+    float4 gEmitterSamplePosition[8];
+    float4 gEmitterSampleNormal[8];
+    uint4 gEmitterSampleIdentity[2];
 };
+
+float2 RasterToViewportUV(float2 rasterUv) {
+    float2 topLeft = float2(gRasterViewport.x, 1.0f - gRasterViewport.y - gRasterViewport.w);
+    return (rasterUv - topLeft) / max(gRasterViewport.zw, 1.0e-6f.xx);
+}
+
+float2 ViewportToRasterUV(float2 viewportUv) {
+    float2 topLeft = float2(gRasterViewport.x, 1.0f - gRasterViewport.y - gRasterViewport.w);
+    return topLeft + viewportUv * gRasterViewport.zw;
+}
 
 struct ShadowPayload {
     float visibility;
+    float3 normal;
+    float hitDistance;
+    uint probeMode;
 };
 
 [shader("raygeneration")]
@@ -52,13 +85,18 @@ void RayGenShadow() {
     float depth = gDepthTexture.Load(int3(depthPixel, 0));
 
     // Si la profundidad es 1.0f (plano lejano / fondo / cielo), no hay sombra
-    if (depth >= 1.0f) {
+    if (!isfinite(depth) || depth < 0.0f || depth >= 1.0f) {
         gShadowMask[launchIndex] = 1.0f;
         return;
     }
 
-    // Reconstrucción NDC -> World Space
-    float2 uv = (float2(launchIndex) + 0.5f) / float2(launchDim);
+    // Reconstruct the CENTER of the exact pixel used for the depth load,
+    // in the selected raster viewport rather than the entire framebuffer.
+    float2 uv = RasterToViewportUV((float2(depthPixel) + 0.5f) / gScreenSize.xy);
+    if (any(uv < 0.0f) || any(uv > 1.0f)) {
+        gShadowMask[launchIndex] = 1.0f;
+        return;
+    }
     float clipXScale = gParams.z > 1e-4f ? gParams.z : 1.0f;
     // Fast3D emits clip-space Z in [-w, w]; D3D12 maps it to [0, 1] for
     // the depth buffer. Restore the original NDC range before inverting P.
@@ -66,14 +104,51 @@ void RayGenShadow() {
                             1.0f - uv.y * 2.0f, depth * 2.0f - 1.0f, 1.0f);
     float4 worldPos = mul(gInvProjection, clipPos);
 
-    if (abs(worldPos.w) > 1e-6f) {
-        worldPos.xyz /= worldPos.w;
+    if (any(!isfinite(worldPos)) || abs(worldPos.w) <= 1e-6f) {
+        gShadowMask[launchIndex] = 1.0f;
+        return;
     }
+    worldPos.xyz /= worldPos.w;
 
     float bias = gParams.x > 0.0f ? gParams.x : 0.15f;
     float maxDist = gParams.y > 0.0f ? gParams.y : 10000.0f;
 
     float3 lightDir = normalize(gLightDir.xyz);
+    // Anchor the shadow at the triangle that produced raster depth. Offsets
+    // along the outgoing light alone can leave grazing rays inside the surface.
+    RayDesc primaryRay;
+    float4 nearH = mul(gInvProjection, float4(clipPos.xy, -1.0f, 1.0f));
+    float4 farH = mul(gInvProjection, float4(clipPos.xy, 1.0f, 1.0f));
+    if (any(!isfinite(nearH)) || any(!isfinite(farH)) ||
+        abs(nearH.w) <= 1.0e-6f || abs(farH.w) <= 1.0e-6f) {
+        gShadowMask[launchIndex] = 1.0f;
+        return;
+    }
+    primaryRay.Origin = nearH.xyz / nearH.w;
+    primaryRay.Direction = normalize(farH.xyz / farH.w - primaryRay.Origin);
+    float reconstructedDistance = dot(worldPos.xyz - primaryRay.Origin, primaryRay.Direction);
+    if (!isfinite(reconstructedDistance) || reconstructedDistance < 0.0f) {
+        gShadowMask[launchIndex] = 1.0f;
+        return;
+    }
+    primaryRay.TMin = 0.0f;
+    primaryRay.TMax = reconstructedDistance + max(0.01f, reconstructedDistance * 0.001f);
+    ShadowPayload primary;
+    primary.visibility = 0.0f;
+    primary.normal = 0.0f.xxx;
+    primary.hitDistance = -1.0f;
+    primary.probeMode = 1u;
+    TraceRay(gScene, RAY_FLAG_NONE, 0x03, 0, 1, 0, primaryRay, primary);
+    if (primary.hitDistance <= 0.0f || any(!isfinite(primary.normal)) ||
+        abs(primary.hitDistance - reconstructedDistance) > max(0.25f, reconstructedDistance * 0.003f) ||
+        dot(primary.normal, lightDir) <= 0.0f) {
+        // Blended surfaces and surfaces facing away from the key light retain
+        // their raster lighting; there is no direct-light term to shadow here.
+        gShadowMask[launchIndex] = 1.0f;
+        return;
+    }
+    float3 hitPosition = primaryRay.Origin + primaryRay.Direction * primary.hitDistance;
+    float3 shadowNormal = normalize(primary.normal);
     float3 lTangent = normalize(abs(lightDir.y) < 0.95f ? cross(lightDir, float3(0.0f, 1.0f, 0.0f))
                                                         : cross(lightDir, float3(1.0f, 0.0f, 0.0f)));
     float3 lBitangent = cross(lightDir, lTangent);
@@ -83,7 +158,7 @@ void RayGenShadow() {
     float2 seed = float2(launchIndex);
     float jitter0 = frac(sin(dot(seed, float2(12.9898f, 78.233f))) * 43758.5453f);
     float jitter1 = frac(sin(dot(seed + float2(1.7f, 3.1f), float2(39.346f, 11.135f))) * 23421.631f);
-    float lightRadius = 0.026f;
+    float lightRadius = clamp(gQuality.y, 0.0f, 0.12f);
     float totalVisibility = 0.0f;
 
     uint shadowSamples = min(16u, max(1u, (uint)max(gQuality.x, 1.0f)));
@@ -95,13 +170,16 @@ void RayGenShadow() {
         float3 rayDir = normalize(lightDir + (lTangent * cos(angle) + lBitangent * sin(angle)) * r);
 
         RayDesc ray;
-        ray.Origin = worldPos.xyz + rayDir * bias;
+        ray.Origin = hitPosition + shadowNormal * bias;
         ray.Direction = rayDir;
         ray.TMin = max(bias * 0.1f, 0.001f);
         ray.TMax = maxDist;
 
         ShadowPayload payload;
         payload.visibility = 0.0f;
+        payload.normal = 0.0f.xxx;
+        payload.hitDistance = -1.0f;
+        payload.probeMode = 0u;
 
         // Mask 0x03 cubre STATIC (0x01) y DYNAMIC (0x02), excluyendo UI (0x00)
         TraceRay(
@@ -125,11 +203,6 @@ void MissShadow(inout ShadowPayload payload) {
     payload.visibility = 1.0f;
 }
 
-[shader("closesthit")]
-void ClosestHitShadow(inout ShadowPayload payload, in BuiltInTriangleIntersectionAttributes attribs) {
-    payload.visibility = 0.0f;
-}
-
 // ============================================================
 // RTX SURFACE REFLECTION PROBE
 // ============================================================
@@ -151,6 +224,8 @@ struct ReflectionPayload {
     float4 detail;        // UV, specular, sampled material coverage
     uint diagnosticFlags;
     uint diagnosticError;
+    float4 geometricNormal; // TLAS-space triangle normal; ray origins never use relief/ripple normals
+    float4 naviPointAlbedo; // source-material albedo without prelit Fast3D Shade or fog
 };
 
 struct MaterialRecord {
@@ -171,6 +246,14 @@ struct MaterialRecord {
     float wetness;
     float subsurfaceHint;
     float4 baseColor;
+    uint textureIndex1;
+    uint samplerFlags;
+    uint combineModeLow;
+    uint combineModeHigh;
+    uint primitiveColor;
+    uint environmentColor;
+    uint reserved0;
+    uint otherModeH;
 };
 
 // Keep the enum value synchronized with MaterialType::GENERIC_MATTE. This
@@ -179,6 +262,7 @@ struct MaterialRecord {
 static const uint MATERIAL_TYPE_GENERIC_MATTE = 18u;
 static const uint MATERIAL_TYPE_WATER = 4u;
 static const uint MATERIAL_TYPE_GLASS = 5u;
+static const uint MATERIAL_TYPE_EMISSIVE = 14u;
 static const uint PRIMARY_GATE_COUNTER_SHARDS = 64u;
 // GPU gate counter layout: base counters 0..18, reason counters 19..25,
 // then compact histograms. Keep in sync with DxrSurfaceRenderer.cpp.
@@ -214,6 +298,7 @@ static const uint PG_VERTEX_ALPHA_ZERO = 467u;
 static const uint PG_TEXTURE_ALPHA_ZERO = 468u;
 static const uint PG_RECORD_ALPHA_ZERO = 469u;
 static const uint PG_COMBINED_ALPHA_ZERO = 470u;
+static const uint PG_RASTER_DEPTH_MISMATCH = 488u; // reserved slot before per-record alpha counters
 static const uint PG_COVERAGE_NONZERO = 471u;
 static const uint PG_VERTEX_ALPHA_4BIN_BASE = 472u;
 static const uint PG_TEXTURE_ALPHA_4BIN_BASE = 476u;
@@ -243,6 +328,7 @@ struct HitVertex {
     float3 position;
     float3 normal;
     float2 uv;
+    float2 uv1;
     float4 color;
     uint normalState;
     uint sourceAlpha;
@@ -250,6 +336,7 @@ struct HitVertex {
     uint capturedAlpha;
     uint fogMode;
     uint localAlpha;
+    float3 sourceTint;
 };
 
 void InitializeReflectionPayload(out ReflectionPayload payload, uint mode) {
@@ -264,15 +351,19 @@ void InitializeReflectionPayload(out ReflectionPayload payload, uint mode) {
     payload.detail = 0.0f;
     payload.diagnosticFlags = (mode == 1u && (((uint)gDiagnosticInfo.x & 1u) != 0u)) ? 1u : 0u;
     payload.diagnosticError = 0xFFFFFFFFu;
+    payload.geometricNormal = 0.0f;
+    payload.naviPointAlbedo = 1.0f.xxxx;
 }
 
 MaterialRecord LoadMaterialRecord(uint instanceIndex) {
-    uint address = instanceIndex * 80u;
+    uint address = instanceIndex * 112u;
     uint4 ids = gInstanceMaterialData.Load4(address);
     uint4 counts = gInstanceMaterialData.Load4(address + 16u);
     float4 optics = asfloat(gInstanceMaterialData.Load4(address + 32u));
     float4 secondary = asfloat(gInstanceMaterialData.Load4(address + 48u));
     float4 baseColor = asfloat(gInstanceMaterialData.Load4(address + 64u));
+    uint4 combiner = gInstanceMaterialData.Load4(address + 80u);
+    uint4 inputs = gInstanceMaterialData.Load4(address + 96u);
     MaterialRecord result;
     result.vertexOffset = ids.x;
     result.indexOffset = ids.y;
@@ -291,6 +382,14 @@ MaterialRecord LoadMaterialRecord(uint instanceIndex) {
     result.wetness = secondary.z;
     result.subsurfaceHint = secondary.w;
     result.baseColor = baseColor;
+    result.textureIndex1 = combiner.x;
+    result.samplerFlags = combiner.y;
+    result.combineModeLow = combiner.z;
+    result.combineModeHigh = combiner.w;
+    result.primitiveColor = inputs.x;
+    result.environmentColor = inputs.y;
+    result.reserved0 = inputs.z;
+    result.otherModeH = inputs.w;
     return result;
 }
 
@@ -306,33 +405,38 @@ float SrgbLuminance(float3 encodedColor) {
 }
 
 HitVertex LoadHitVertex(uint vertexIndex) {
-    uint address = vertexIndex * 48u;
-    uint4 packed = gHitVertexData.Load4(address + 32u);
+    uint address = vertexIndex * 56u;
+    uint4 packed = gHitVertexData.Load4(address + 40u);
     HitVertex result;
     result.position = asfloat(gHitVertexData.Load3(address));
     result.normal = asfloat(gHitVertexData.Load3(address + 12u));
     result.uv = asfloat(gHitVertexData.Load2(address + 24u));
+    result.uv1 = asfloat(gHitVertexData.Load2(address + 32u));
     result.color = float4(packed.x & 255u, (packed.x >> 8u) & 255u,
                           (packed.x >> 16u) & 255u, (packed.x >> 24u) & 255u) / 255.0f;
     result.normalState = packed.y;
-    uint forensic = gHitVertexData.Load(address + 40u);
+    uint forensic = packed.z;
     result.sourceAlpha = forensic & 0xFFu;
     result.recordLoadedAlpha = (forensic >> 8u) & 0xFFu;
     result.capturedAlpha = (forensic >> 16u) & 0xFFu;
     result.fogMode = (forensic >> 24u) & 0xFFu;
-    result.localAlpha = gHitVertexData.Load(address + 44u) & 0xFFu;
+    result.localAlpha = packed.w & 0xFFu;
+    result.sourceTint = float3((packed.w >> 8u) & 0xFFu,
+                               (packed.w >> 16u) & 0xFFu,
+                               (packed.w >> 24u) & 0xFFu) / 255.0f;
     return result;
 }
 
-// Diagnostic-only guards run before DecodeMaterialHit can dereference the
-// instance record, triangle indices, or vertex data. Error values are copied
-// to the per-pixel gate map; no index is clamped into a different record.
+// Validate every productive hit before dereferencing material, index or
+// vertex data. Diagnostics report the same guards, without clamping IDs.
 uint ValidatePrimaryHit(uint instanceIndex, uint geometryIndex, uint primitiveIndex,
                         out uint validFlags) {
     validFlags = 0u;
     MaterialRecord material;
     if ((uint)gDiagnosticInfo.y != gDiagnosticBounds.z) return 10u; // CPU metadata disagreement
     if (instanceIndex >= gDiagnosticBounds.z) return 2u; // beyond logical material-record count
+    // These are root SRVs: allocation sizes are checked on CPU in
+    // DxrSurfaceFrameBoundsValid; no GetDimensions on root buffer descriptors.
     if (geometryIndex != 0u) return 3u; // current BLAS bridge has one geometry
     material = LoadMaterialRecord(instanceIndex);
     if (material.materialType > 20u || material.alphaMode > 3u ||
@@ -352,6 +456,7 @@ uint ValidatePrimaryHit(uint instanceIndex, uint geometryIndex, uint primitiveIn
     HitVertex v2 = LoadHitVertex(material.vertexOffset + i2);
     if (any(!isfinite(v0.position)) || any(!isfinite(v1.position)) || any(!isfinite(v2.position)) ||
         any(!isfinite(v0.uv)) || any(!isfinite(v1.uv)) || any(!isfinite(v2.uv)) ||
+        any(!isfinite(v0.uv1)) || any(!isfinite(v1.uv1)) || any(!isfinite(v2.uv1)) ||
         any(!isfinite(v0.normal)) || any(!isfinite(v1.normal)) || any(!isfinite(v2.normal)) ||
         any(!isfinite(v0.color)) || any(!isfinite(v1.color)) || any(!isfinite(v2.color)) ||
         !isfinite(material.roughness) || !isfinite(material.metallic) ||
@@ -365,33 +470,185 @@ uint ValidatePrimaryHit(uint instanceIndex, uint geometryIndex, uint primitiveIn
     const bool forcedGateMode = (((uint)gDiagnosticInfo.x & 2u) != 0u);
     if (!forcedGateMode && (material.flags & 1u) != 0u &&
         (material.textureIndex == 0u || material.textureIndex >= (uint)gDiagnosticInfo.z ||
-         material.textureIndex >= 4096u)) return 8u;
+         material.textureIndex >= gDiagnosticBounds.w || material.textureIndex >= 4096u)) return 8u;
+    if (!forcedGateMode && (material.flags & MATERIAL_FLAG_SECOND_ALBEDO_TEXTURE_VALID) != 0u &&
+        (material.textureIndex1 == 0u || material.textureIndex1 >= (uint)gDiagnosticInfo.z ||
+         material.textureIndex1 >= gDiagnosticBounds.w || material.textureIndex1 >= 4096u)) return 8u;
     return 0u;
 }
 
-float4 SampleMaterialTexture(MaterialRecord material, float2 uv, float mipLevel) {
-    if ((material.flags & 1u) == 0u || material.textureIndex >= 4096u) return 1.0f;
-    Texture2D<float4> albedoTexture = gMaterialTextures[NonUniformResourceIndex(material.textureIndex)];
-    float4 sampleColor = albedoTexture.SampleLevel(gMaterialSampler, uv, mipLevel);
-    // Keep authored alpha coverage stable for cutouts and blended Fast3D art;
-    // only the filtered color channels use the ray-footprint mip.
+uint4 UnpackMaterialColor(uint packedColor) {
+    return uint4(packedColor & 255u, (packedColor >> 8u) & 255u,
+                 (packedColor >> 16u) & 255u, (packedColor >> 24u) & 255u);
+}
+
+float4 DecodePackedMaterialColor(uint packedColor) {
+    return float4(UnpackMaterialColor(packedColor)) / 255.0f;
+}
+
+float AddressFast3DCoordinate(float value, bool clampValue, bool mirrorValue, float halfTexel) {
+    if (clampValue) return clamp(value, halfTexel, 1.0f - halfTexel);
+    if (mirrorValue) return 1.0f - abs(frac(value * 0.5f) * 2.0f - 1.0f);
+    return frac(value);
+}
+
+float4 SampleFast3DTexture(MaterialRecord material, uint tile, float2 uv, float mipLevel) {
+    const bool validTexture = tile == 0u
+        ? ((material.flags & 1u) != 0u && material.textureIndex != 0u)
+        : ((material.flags & MATERIAL_FLAG_SECOND_ALBEDO_TEXTURE_VALID) != 0u && material.textureIndex1 != 0u);
+    const uint textureIndex = tile == 0u ? material.textureIndex : material.textureIndex1;
+    if (!validTexture || textureIndex >= gDiagnosticBounds.w || textureIndex >= 4096u) return 1.0f;
+
+    const uint tileFlags = (material.samplerFlags >> (tile * 5u)) & 31u;
+    Texture2D<float4> albedoTexture = gMaterialTextures[NonUniformResourceIndex(textureIndex)];
+    uint textureWidth, textureHeight, mipCount;
+    albedoTexture.GetDimensions(0u, textureWidth, textureHeight, mipCount);
+    const float2 halfTexel = 0.5f / max(float2(textureWidth, textureHeight), 1.0f.xx);
+    uv.x = AddressFast3DCoordinate(uv.x, (tileFlags & 1u) != 0u, (tileFlags & 2u) != 0u, halfTexel.x);
+    uv.y = AddressFast3DCoordinate(uv.y, (tileFlags & 4u) != 0u, (tileFlags & 8u) != 0u, halfTexel.y);
+    const bool linearFilter = (tileFlags & 16u) != 0u;
+    float4 sampleColor = linearFilter
+        ? albedoTexture.SampleLevel(gMaterialSampler, uv, mipLevel)
+        : albedoTexture.SampleLevel(gMaterialPointSampler, uv, mipLevel);
     if (material.alphaMode != 0u) {
-        sampleColor.a = albedoTexture.SampleLevel(gMaterialSampler, uv, 0.0f).a;
+        sampleColor.a = linearFilter
+            ? albedoTexture.SampleLevel(gMaterialSampler, uv, 0.0f).a
+            : albedoTexture.SampleLevel(gMaterialPointSampler, uv, 0.0f).a;
     }
-    // Fast3D texture SRVs are UNORM rather than UNORM_SRGB. Decode albedo
-    // before the DXR BRDF; alpha stays encoded so cutout coverage is unchanged.
-    sampleColor.rgb = SrgbToLinear(sampleColor.rgb);
     return sampleColor;
+}
+
+uint ReadCombinerBits(MaterialRecord material, uint bitOffset, uint bitCount) {
+    const uint mask = (1u << bitCount) - 1u;
+    if (bitOffset >= 32u) return (material.combineModeHigh >> (bitOffset - 32u)) & mask;
+    if (bitOffset + bitCount <= 32u) return (material.combineModeLow >> bitOffset) & mask;
+    const uint lowPart = material.combineModeLow >> bitOffset;
+    const uint highPart = material.combineModeHigh << (32u - bitOffset);
+    return (lowPart | highPart) & mask;
+}
+
+float4 Fast3DColorMux(uint mux, uint cycle, uint muxKind, float4 combined, float4 texel0, float4 texel1,
+                      float4 primitive, float4 shade, float4 environment, out bool supported) {
+    supported = true;
+    const float4 cycleTexel0 = cycle == 0u ? texel0 : texel1;
+    const float4 cycleTexel1 = cycle == 0u ? texel1 : texel0;
+    if (mux == 31u) return 0.0f;
+    if (mux == 0u) {
+        if (cycle == 0u) supported = false; // cycle zero has no captured prior texel.
+        return combined;
+    }
+    if (mux == 1u) return cycleTexel0;
+    if (mux == 2u) return cycleTexel1;
+    if (mux == 3u) return primitive;
+    if (mux == 4u) return shade;
+    if (mux == 5u) return environment;
+    if (mux == 6u) return 1.0f.xxxx;
+    if (muxKind == 1u && mux == 7u) return combined.a.xxxx;
+    if (muxKind == 1u && mux == 8u) return cycleTexel0.a.xxxx;
+    if (muxKind == 1u && mux == 9u) return cycleTexel1.a.xxxx;
+    if (muxKind == 1u && mux == 10u) return primitive.a.xxxx;
+    if (muxKind == 1u && mux == 11u) return shade.a.xxxx;
+    if (muxKind == 1u && mux == 12u) return environment.a.xxxx;
+    supported = false; // LOD, primitive LOD, K5 and noise need extra RDP state.
+    return 0.0f;
+}
+
+float Fast3DAlphaMux(uint mux, uint cycle, float combined, float4 texel0, float4 texel1,
+                     float4 primitive, float4 shade, float4 environment, out bool supported) {
+    supported = true;
+    if (mux == 0u) {
+        if (cycle == 0u) supported = false;
+        return combined;
+    }
+    if (mux == 1u) return cycle == 0u ? texel0.a : texel1.a;
+    if (mux == 2u) return cycle == 0u ? texel1.a : texel0.a;
+    if (mux == 3u) return primitive.a;
+    if (mux == 4u) return shade.a;
+    if (mux == 5u) return environment.a;
+    if (mux == 6u) return 1.0f;
+    return 0.0f;
+}
+
+bool EvaluateFast3DCombiner(MaterialRecord material, float4 texel0, float4 texel1,
+                            float4 primitive, float4 shade, float4 environment,
+                            out float4 combinedResult) {
+    combinedResult = 1.0f;
+    const uint cycleType = (material.otherModeH >> 20u) & 3u;
+    const uint cycleCount = cycleType == 1u ? 2u : 1u;
+    float4 combined = 1.0f;
+    [unroll] for (uint cycle = 0u; cycle < 2u; ++cycle) {
+        if (cycle >= cycleCount) break;
+        const uint baseBit = cycle * 28u;
+        uint rgbA = ReadCombinerBits(material, baseBit, 4u);
+        uint rgbB = ReadCombinerBits(material, baseBit + 4u, 4u);
+        uint rgbC = ReadCombinerBits(material, baseBit + 8u, 5u);
+        uint rgbD = ReadCombinerBits(material, baseBit + 13u, 3u);
+        uint alphaA = ReadCombinerBits(material, baseBit + 16u, 3u);
+        uint alphaB = ReadCombinerBits(material, baseBit + 19u, 3u);
+        uint alphaC = ReadCombinerBits(material, baseBit + 22u, 3u);
+        uint alphaD = ReadCombinerBits(material, baseBit + 25u, 3u);
+        if (rgbA >= 8u) rgbA = 31u;
+        if (rgbB >= 8u) rgbB = 31u;
+        if (rgbC >= 16u) rgbC = 31u;
+        if (rgbD == 7u) rgbD = 31u;
+
+        float3 rgbValue;
+        if (rgbA == rgbB || rgbC == 31u) {
+            bool supportedD;
+            rgbValue = Fast3DColorMux(rgbD, cycle, 2u, combined, texel0, texel1, primitive, shade, environment,
+                                      supportedD).rgb;
+            if (!supportedD) return false;
+        } else {
+            bool supportedA, supportedB, supportedC, supportedD;
+            const float3 a = Fast3DColorMux(rgbA, cycle, 0u, combined, texel0, texel1, primitive, shade, environment,
+                                            supportedA).rgb;
+            const float3 b = Fast3DColorMux(rgbB, cycle, 0u, combined, texel0, texel1, primitive, shade, environment,
+                                            supportedB).rgb;
+            const float3 c = Fast3DColorMux(rgbC, cycle, 1u, combined, texel0, texel1, primitive, shade, environment,
+                                            supportedC).rgb;
+            const float3 d = Fast3DColorMux(rgbD, cycle, 2u, combined, texel0, texel1, primitive, shade, environment,
+                                            supportedD).rgb;
+            if (!supportedA || !supportedB || !supportedC || !supportedD) return false;
+            rgbValue = saturate((a - b) * c + d);
+        }
+
+        float alphaValue;
+        if (alphaA == alphaB || alphaC == 7u) {
+            bool supportedD;
+            alphaValue = Fast3DAlphaMux(alphaD, cycle, combined.a, texel0, texel1, primitive, shade,
+                                        environment, supportedD);
+            if (!supportedD) return false;
+        } else {
+            // The RDP C selector aliases LOD and primitive-LOD fractions.
+            // Until those live fractional inputs are captured, preserve the
+            // original raster fallback for these specific combiner states.
+            if (alphaC == 0u || alphaC == 6u) return false;
+            bool supportedA, supportedB, supportedC, supportedD;
+            const float a = Fast3DAlphaMux(alphaA, cycle, combined.a, texel0, texel1, primitive, shade,
+                                           environment, supportedA);
+            const float b = Fast3DAlphaMux(alphaB, cycle, combined.a, texel0, texel1, primitive, shade,
+                                           environment, supportedB);
+            const float c = Fast3DAlphaMux(alphaC, cycle, combined.a, texel0, texel1, primitive, shade,
+                                           environment, supportedC);
+            const float d = Fast3DAlphaMux(alphaD, cycle, combined.a, texel0, texel1, primitive, shade,
+                                           environment, supportedD);
+            if (!supportedA || !supportedB || !supportedC || !supportedD) return false;
+            alphaValue = saturate((a - b) * c + d);
+        }
+        combined = float4(rgbValue, alphaValue);
+    }
+    combinedResult = combined;
+    return true;
 }
 
 float3 DecodeMaterialHit(uint instanceIndex, uint primitiveIndex, uint probeMode,
                          BuiltInTriangleIntersectionAttributes attribs,
                          out MaterialRecord material, out float2 uv,
                          out float3 surfaceNormal, out float4 vertexColor,
-                         out float4 baseColor, out float vertexAlpha,
+                         out float4 baseColor, out float3 naviPointAlbedo, out float vertexAlpha,
                          out float sampledTextureAlpha, out float textureLod,
                          out float3 surfaceTangent, out float3 surfaceBitangent,
-                         out bool frontFace) {
+                         out float3 geometricNormal, out bool frontFace) {
     material = LoadMaterialRecord(instanceIndex);
     uint triangleAddress = (material.indexOffset + primitiveIndex * 3u) * 4u;
     uint i0 = material.vertexOffset + gHitIndexData.Load(triangleAddress);
@@ -403,9 +660,25 @@ float3 DecodeMaterialHit(uint instanceIndex, uint primitiveIndex, uint probeMode
     float3 bary = float3(1.0f - attribs.barycentrics.x - attribs.barycentrics.y,
                          attribs.barycentrics.x, attribs.barycentrics.y);
     uv = v0.uv * bary.x + v1.uv * bary.y + v2.uv * bary.z;
+    const float2 uv1 = v0.uv1 * bary.x + v1.uv1 * bary.y + v2.uv1 * bary.z;
     vertexColor = v0.color * bary.x + v1.color * bary.y + v2.color * bary.z;
+    // The published flag is the complete relight contract. Automatic flags
+    // are emitted only after CPU validation of G_LIGHTING and every captured
+    // vertex; source-verified pilot rules may opt in when that RSP provenance
+    // is absent. Requiring fast3dLitColor again here silently left Shade in
+    // the albedo for those exact assets, then multiplied it by new DXR light.
+    const bool requestPrimaryRelight =
+        (material.flags & MATERIAL_FLAG_DXR_PRIMARY_RELIGHT) != 0u;
     vertexAlpha = vertexColor.a;
     const float rawInterpolatedVertexAlpha = vertexAlpha;
+    // The rasterizer reuses vertex alpha for fog. It is not opacity. Recover
+    // the captured RSP alpha only on fog vertices; ordinary vertex alpha and
+    // sampled texture alpha still govern cutout and transparent materials.
+    float3 opacityAlpha = float3(v0.fogMode != 0u ? float(v0.sourceAlpha) / 255.0f : v0.color.a,
+                                v1.fogMode != 0u ? float(v1.sourceAlpha) / 255.0f : v1.color.a,
+                                v2.fogMode != 0u ? float(v2.sourceAlpha) / 255.0f : v2.color.a);
+    vertexAlpha = dot(opacityAlpha, bary);
+    vertexColor.a = vertexAlpha;
     if (probeMode == 1u && (((uint)gDiagnosticInfo.x & 64u) != 0u)) {
         vertexColor.a = 1.0f;
         vertexAlpha = 1.0f;
@@ -417,6 +690,8 @@ float3 DecodeMaterialHit(uint instanceIndex, uint primitiveIndex, uint probeMode
     } else {
         localNormal = cross(v1.position - v0.position, v2.position - v0.position);
     }
+    if (any(!isfinite(localNormal)) || dot(localNormal, localNormal) <= 1.0e-12f)
+        localNormal = cross(v1.position - v0.position, v2.position - v0.position);
     float3x3 normalToView = transpose((float3x3)WorldToObject3x4());
     // DXR classifies the triangle after applying its instance transform,
     // including reflected transforms that can invert a manually transformed
@@ -424,25 +699,35 @@ float3 DecodeMaterialHit(uint instanceIndex, uint primitiveIndex, uint probeMode
     frontFace = HitKind() == HIT_KIND_TRIANGLE_FRONT_FACE;
     surfaceNormal = normalize(mul(normalToView, normalize(localNormal)));
     if (dot(surfaceNormal, -WorldRayDirection()) < 0.0f) surfaceNormal = -surfaceNormal;
+    geometricNormal = normalize(mul(normalToView,
+        cross(v1.position - v0.position, v2.position - v0.position)));
+    if (dot(geometricNormal, -WorldRayDirection()) < 0.0f) geometricNormal = -geometricNormal;
 
     float3 edge1 = v1.position - v0.position;
     float3 edge2 = v2.position - v0.position;
     float2 uvEdge1 = v1.uv - v0.uv;
     float2 uvEdge2 = v2.uv - v0.uv;
+    const bool tile0Valid = (material.flags & 1u) != 0u && material.textureIndex < 4096u;
+    const bool tile1Valid = (material.flags & MATERIAL_FLAG_SECOND_ALBEDO_TEXTURE_VALID) != 0u &&
+                            material.textureIndex1 < 4096u;
+    const float2 selectedUvEdge1 = tile0Valid ? uvEdge1 : v1.uv1 - v0.uv1;
+    const float2 selectedUvEdge2 = tile0Valid ? uvEdge2 : v2.uv1 - v0.uv1;
     textureLod = 0.0f;
-    if ((material.flags & 1u) != 0u && material.textureIndex < 4096u) {
-        Texture2D<float4> albedoTexture = gMaterialTextures[NonUniformResourceIndex(material.textureIndex)];
+    if (tile0Valid || tile1Valid) {
+        const uint lodTextureIndex = tile0Valid ? material.textureIndex : material.textureIndex1;
+        Texture2D<float4> albedoTexture = gMaterialTextures[NonUniformResourceIndex(lodTextureIndex)];
         uint textureWidth, textureHeight, mipCount;
         albedoTexture.GetDimensions(0u, textureWidth, textureHeight, mipCount);
         if (textureWidth > 0u && textureHeight > 0u && mipCount > 1u) {
             float3 worldEdge1 = mul((float3x3)ObjectToWorld3x4(), edge1);
             float3 worldEdge2 = mul((float3x3)ObjectToWorld3x4(), edge2);
-            float density1 = length(uvEdge1 * float2(textureWidth, textureHeight)) /
+            float density1 = length(selectedUvEdge1 * float2(textureWidth, textureHeight)) /
                              max(length(worldEdge1), 1.0e-5f);
-            float density2 = length(uvEdge2 * float2(textureWidth, textureHeight)) /
+            float density2 = length(selectedUvEdge2 * float2(textureWidth, textureHeight)) /
                              max(length(worldEdge2), 1.0e-5f);
-            float pixelsPerWorldUnit = max(abs(gProjection[1][1]) * gScreenSize.y, 1.0f) * 0.5f;
-            float worldFootprint = max(RayTCurrent(), 1.0e-3f) / pixelsPerWorldUnit;
+            float pixelsPerWorldUnit = max(abs(gProjection[1][1]) * gScreenSize.y * gRasterViewport.w, 1.0f) * 0.5f;
+            float3 hitViewPosition = WorldRayOrigin() + WorldRayDirection() * RayTCurrent();
+            float worldFootprint = max(length(hitViewPosition), 1.0e-3f) / pixelsPerWorldUnit;
             float footprintTexels = max(worldFootprint * max(density1, density2), 1.0f);
             textureLod = clamp(log2(footprintTexels), 0.0f, float(mipCount - 1u));
         }
@@ -463,9 +748,64 @@ float3 DecodeMaterialHit(uint instanceIndex, uint primitiveIndex, uint probeMode
             : cross(surfaceNormal, float3(1.0f, 0.0f, 0.0f)));
         surfaceBitangent = normalize(cross(surfaceNormal, surfaceTangent));
     }
-    const float4 sampledMaterialColor = SampleMaterialTexture(material, uv, textureLod);
+    const float4 texel0 = SampleFast3DTexture(material, 0u, uv, textureLod);
+    const float4 texel1 = SampleFast3DTexture(material, 1u, uv1, textureLod);
+    const float3 sourceTint = v0.sourceTint * bary.x + v1.sourceTint * bary.y + v2.sourceTint * bary.z;
+    const float4 sampledMaterialColor = tile0Valid ? texel0 : texel1;
     sampledTextureAlpha = sampledMaterialColor.a;
-    baseColor = saturate(sampledMaterialColor * vertexColor * material.baseColor);
+    float4 shadeColor = vertexColor;
+    const float fogFactor = saturate(dot(float3(v0.localAlpha, v1.localAlpha, v2.localAlpha) / 255.0f, bary));
+    shadeColor.a = probeMode == 1u && (((uint)gDiagnosticInfo.x & 64u) != 0u)
+        ? 1.0f : fogFactor;
+    float4 fast3dCombined;
+    bool combinerSupported = EvaluateFast3DCombiner(
+        material, texel0, texel1, DecodePackedMaterialColor(material.primitiveColor), shadeColor,
+        DecodePackedMaterialColor(material.environmentColor), fast3dCombined);
+    if (combinerSupported && requestPrimaryRelight) {
+        // Re-evaluate with neutral Shade only after proving this combiner can
+        // be reconstructed. Unsupported RDP inputs fall back to captured color
+        // without losing Fast3D lighting or artistic vertex tint.
+        float4 relitShade = shadeColor;
+        relitShade.rgb = 1.0f;
+        float4 relitCombined;
+        if (EvaluateFast3DCombiner(material, texel0, texel1,
+                                   DecodePackedMaterialColor(material.primitiveColor), relitShade,
+                                   DecodePackedMaterialColor(material.environmentColor), relitCombined)) {
+            fast3dCombined = relitCombined;
+        } else {
+            combinerSupported = false;
+        }
+    }
+    if (combinerSupported) {
+        float3 combinedEncoded = fast3dCombined.rgb;
+        if (gSourceControls.y == 0u && (v0.fogMode != 0u || v1.fogMode != 0u || v2.fogMode != 0u)) {
+            combinedEncoded = lerp(combinedEncoded, DecodePackedMaterialColor(material.reserved0).rgb,
+                                   fogFactor);
+        }
+        baseColor = float4(SrgbToLinear(combinedEncoded) * material.baseColor.rgb,
+                           fast3dCombined.a * material.baseColor.a);
+    } else {
+        float4 fallbackAlbedo = tile0Valid ? texel0 : texel1;
+        fallbackAlbedo.rgb = SrgbToLinear(fallbackAlbedo.rgb);
+        baseColor = saturate(fallbackAlbedo * vertexColor * material.baseColor);
+    }
+    baseColor = saturate(baseColor);
+    // Navi's additive direct term needs material albedo, not Fast3D's already
+    // lit vertex Shade. Re-run the same supported combiner with the original
+    // F3D vertex tint (white for normal-based lighting vertices); omit fog,
+    // which is a raster atmospheric blend rather than surface reflectance.
+    naviPointAlbedo = baseColor.rgb;
+    float4 naviPointShade = shadeColor;
+    naviPointShade.rgb = sourceTint;
+    float4 naviPointCombined;
+    if (EvaluateFast3DCombiner(material, texel0, texel1,
+                               DecodePackedMaterialColor(material.primitiveColor), naviPointShade,
+                               DecodePackedMaterialColor(material.environmentColor), naviPointCombined)) {
+        naviPointAlbedo = saturate(SrgbToLinear(naviPointCombined.rgb) * material.baseColor.rgb);
+    } else {
+        float4 sourceAlbedo = tile0Valid ? texel0 : texel1;
+        naviPointAlbedo = saturate(SrgbToLinear(sourceAlbedo.rgb) * sourceTint * material.baseColor.rgb);
+    }
     // One GPU-side first-hit sample per target record; tail of the existing
     // counter UAV/root binding, active only in the explicit forensic sequence.
     if (probeMode == 1u && (((uint)gDiagnosticInfo.x & 32u) != 0u)) {
@@ -540,25 +880,63 @@ float3 ApplyAlbedoRelief(MaterialRecord material, float2 uv, float textureLod, f
 
 [shader("anyhit")]
 void AnyHitShadow(inout ShadowPayload payload, in BuiltInTriangleIntersectionAttributes attribs) {
+    uint validatedFlags;
+    if (ValidatePrimaryHit(InstanceID(), GeometryIndex(), PrimitiveIndex(), validatedFlags) != 0u) {
+        IgnoreHit();
+        return;
+    }
     MaterialRecord material = LoadMaterialRecord(InstanceID());
+    // Probe mode 1 is the camera-to-raster-depth match and must retain the
+    // window surface. Lighting/shadow rays pass through only the exact
+    // source-verified Temple window materials; their real triangles remain
+    // the aperture geometry and surrounding frames/walls still occlude.
+    if (payload.probeMode != 1u && (material.flags & MATERIAL_FLAG_DXR_WINDOW_PORTAL) != 0u) {
+        IgnoreHit();
+        return;
+    }
     if (material.alphaMode == 1u) {
         MaterialRecord sampledMaterial;
         float2 uv;
         float3 normal;
         float3 tangent, bitangent;
+        float3 geometricNormal;
         float4 vertexColor;
         float4 baseColor;
         float vertexAlpha;
         float sampledTextureAlpha;
         float textureLod;
         bool frontFace;
+        float3 unusedNaviPointAlbedo;
         DecodeMaterialHit(InstanceID(), PrimitiveIndex(), 0u, attribs, sampledMaterial,
-                          uv, normal, vertexColor, baseColor, vertexAlpha, sampledTextureAlpha, textureLod,
-                          tangent, bitangent, frontFace);
+                          uv, normal, vertexColor, baseColor, unusedNaviPointAlbedo, vertexAlpha, sampledTextureAlpha, textureLod,
+                          tangent, bitangent, geometricNormal, frontFace);
         if (baseColor.a < 0.5f) IgnoreHit();
     } else if (material.alphaMode == 2u || material.alphaMode == 3u) {
         IgnoreHit();
     }
+}
+
+[shader("closesthit")]
+void ClosestHitShadow(inout ShadowPayload payload, in BuiltInTriangleIntersectionAttributes attribs) {
+    payload.visibility = 0.0f;
+    if (payload.probeMode != 1u) return;
+    uint validatedFlags;
+    if (ValidatePrimaryHit(InstanceID(), GeometryIndex(), PrimitiveIndex(), validatedFlags) != 0u) return;
+    MaterialRecord material;
+    float2 uv;
+    float3 normal, tangent, bitangent, geometricNormal;
+    float4 vertexColor, baseColor;
+    float vertexAlpha, sampledTextureAlpha, textureLod;
+    bool frontFace;
+    float3 unusedNaviPointAlbedo;
+    // Mode zero decodes the same geometry without the surface pass's optional
+    // primary diagnostic UAV, which is absent from the shadow root signature.
+    DecodeMaterialHit(InstanceID(), PrimitiveIndex(), 0u, attribs,
+                      material, uv, normal, vertexColor, baseColor, unusedNaviPointAlbedo,
+                      vertexAlpha, sampledTextureAlpha, textureLod,
+                      tangent, bitangent, geometricNormal, frontFace);
+    payload.normal = geometricNormal;
+    payload.hitDistance = RayTCurrent();
 }
 
 float Luminance(float3 color) {
@@ -582,9 +960,9 @@ float MaterialGeometrySchlickGGX(float nDotX, float roughness) {
     return nDotX / max(nDotX * (1.0f - k) + k, 1.0e-5f);
 }
 
-float3 EvaluateMaterialDirectLight(float3 baseColor, float3 normal, float3 viewDirection,
-                                   float3 lightDirection, float roughness, float metallic,
-                                   float specular) {
+float3 EvaluateMaterialSpecularLight(float3 baseColor, float3 normal, float3 viewDirection,
+                                     float3 lightDirection, float roughness, float metallic,
+                                     float specular) {
     float nDotL = saturate(dot(normal, lightDirection));
     float nDotV = saturate(dot(normal, viewDirection));
     if (nDotL <= 0.0f || nDotV <= 0.0f) return 0.0f;
@@ -599,12 +977,37 @@ float3 EvaluateMaterialDirectLight(float3 baseColor, float3 normal, float3 viewD
                      MaterialGeometrySchlickGGX(nDotL, roughness);
     float3 specularBrdf = distribution * geometry * fresnel /
                           max(4.0f * nDotV * nDotL, 1.0e-4f);
-    float3 diffuseColor = baseColor * (1.0f - saturate(metallic));
-    float3 diffuseBrdf = diffuseColor * (1.0f - fresnel) * (1.0f / 3.14159265f);
-    return (diffuseBrdf + specularBrdf) * nDotL;
+    return specularBrdf * nDotL;
 }
 
-float TraceMaterialVisibility(float3 hitPosition, float3 normal, float3 lightDirection,
+float3 EvaluateMaterialDiffuseLight(float3 baseColor, float3 normal, float3 viewDirection,
+                                    float3 lightDirection, float metallic, float specular) {
+    float nDotL = saturate(dot(normal, lightDirection));
+    if (nDotL <= 0.0f) return 0.0f;
+    float3 f0 = lerp((0.04f * saturate(specular)).xxx, baseColor, saturate(metallic));
+    float3 fresnel = MaterialFresnelSchlick(
+        saturate(dot(viewDirection, normalize(viewDirection + lightDirection))), f0);
+    float3 diffuseBrdf = baseColor * (1.0f - saturate(metallic)) * (1.0f - fresnel) * (1.0f / 3.14159265f);
+    return diffuseBrdf * nDotL;
+}
+
+float3 EvaluateMaterialDirectLight(float3 baseColor, float3 normal, float3 viewDirection,
+                                   float3 lightDirection, float roughness, float metallic,
+                                   float specular) {
+    return EvaluateMaterialDiffuseLight(baseColor, normal, viewDirection, lightDirection,
+                                        metallic, specular) +
+           EvaluateMaterialSpecularLight(baseColor, normal, viewDirection,
+                                         lightDirection, roughness, metallic, specular);
+}
+
+float3 OffsetMaterialRayOrigin(float3 position, float3 geometricNormal, float3 direction, float minimumBias) {
+    float positionMagnitude = max(abs(position.x), max(abs(position.y), abs(position.z)));
+    float bias = max(minimumBias, positionMagnitude * 4.7683716e-7f);
+    float side = dot(geometricNormal, direction) >= 0.0f ? 1.0f : -1.0f;
+    return position + geometricNormal * (side * bias);
+}
+
+float TraceMaterialVisibility(float3 hitPosition, float3 geometricNormal, float3 lightDirection,
                               float maxDistance) {
     ReflectionPayload visibility;
     InitializeReflectionPayload(visibility, 2u);
@@ -613,8 +1016,7 @@ float TraceMaterialVisibility(float3 hitPosition, float3 normal, float3 lightDir
     visibility.surfaceOptics.w = 0.0f;
     RayDesc shadowRay;
     shadowRay.Direction = normalize(lightDirection);
-    float normalSide = dot(normal, shadowRay.Direction) >= 0.0f ? 1.0f : -1.0f;
-    shadowRay.Origin = hitPosition + normal * (normalSide * 0.025f);
+    shadowRay.Origin = OffsetMaterialRayOrigin(hitPosition, geometricNormal, shadowRay.Direction, 0.025f);
     shadowRay.TMin = 0.01f;
     shadowRay.TMax = max(maxDistance, 0.02f);
     TraceRay(gScene,
@@ -623,7 +1025,94 @@ float TraceMaterialVisibility(float3 hitPosition, float3 normal, float3 lightDir
     return saturate(visibility.surfaceOptics.w);
 }
 
-float3 EvaluateMaterialPointLight(float3 baseColor, float3 normal, float3 viewDirection,
+bool NativePointRepresentsEmitter(MaterialRecord material) {
+    if ((material.flags & MATERIAL_FLAG_NAVI_POINT_PROXY) == 0u) return false;
+    uint owner = material.samplerFlags >> 16u;
+    if (owner == 0u) return false;
+    [loop] for (uint i = 0u; i < min(32u, (uint)gQuality.w); ++i) {
+        uint identity = (uint)gPointLightOptics[i].x;
+        if (identity / 8u == owner && identity % 8u == 1u && gPointLightPosition[i].w > 0.0f &&
+            any(gPointLightOptics[i].yzw > 0.0f)) return true;
+    }
+    return false;
+}
+
+// Bounded next-event estimation from the selected fairy's captured emissive mesh.
+// A miss contributes ZERO: the environment and unrelated emissive materials cannot pass C.
+float3 TraceSelectedEmitter(float3 position, float3 geometricNormal, float3 normal,
+                            float3 albedo) {
+    float3 result = 0.0f;
+    [loop] for (uint i = 0u; i < min(8u, gSourceControls.z); ++i) {
+        float3 toEmitter = gEmitterSamplePosition[i].xyz - position;
+        float distanceSquared = dot(toEmitter, toEmitter);
+        if (distanceSquared < 0.01f) continue;
+        float distance = sqrt(distanceSquared);
+        float3 direction = toEmitter / distance;
+        float receiverCosine = saturate(dot(normal, direction));
+        // Fairy sprites are double sided. This is explicit authoring, not an inferred sun.
+        float emitterCosine = abs(dot(gEmitterSampleNormal[i].xyz, -direction));
+        if (receiverCosine <= 0.0f || emitterCosine <= 0.0f) continue;
+        RayDesc ray;
+        ray.Origin = OffsetMaterialRayOrigin(position, geometricNormal, direction, 0.025f);
+        float3 offsetToEmitter = gEmitterSamplePosition[i].xyz - ray.Origin;
+        ray.Direction = normalize(offsetToEmitter);
+        ray.TMin = 0.001f;
+        ray.TMax = length(offsetToEmitter) + 0.02f;
+        ReflectionPayload emitter;
+        InitializeReflectionPayload(emitter, 6u);
+        uint sampleIdentity = gEmitterSampleIdentity[i / 4u][i % 4u];
+        emitter.instanceIndex = sampleIdentity >> 16u;
+        emitter.textureIndex = sampleIdentity & 65535u;
+        TraceRay(gScene, RAY_FLAG_NONE, 0x03, 0, 1, 0, ray, emitter);
+        result += albedo * emitter.radiance.rgb *
+            (receiverCosine * emitterCosine * gEmitterSamplePosition[i].w /
+             max(3.14159265f * distanceSquared, 1.0e-5f));
+    }
+    return result;
+}
+
+// Sparse deterministic first-hit records share the existing forensic UAV. Every
+// value below is written by the GPU from this exact receiver, not inferred from PNGs.
+#define NAVI_SAMPLE_BASE (64u * 2112u + 32u * 3u)
+#define NAVI_SAMPLE_STRIDE 40u
+void RecordNaviReceiver(uint2 pixel, ReflectionPayload receiver, float3 position,
+                         float3 pointRadiance, float3 pointDiffuse, float3 pointSpecular,
+                         float3 mesh, float distance, float radius,
+                         float attenuation, float visibility, float cosine, uint confidence) {
+    uint2 grid = uint2(48u, 27u);
+    uint2 dimensions = uint2(gScreenSize.xy); // full raster dimensions; raygen can be half resolution
+    uint2 dispatchDimensions = DispatchRaysDimensions().xy;
+    uint2 cell = min(pixel * grid / dispatchDimensions, grid - 1u);
+    uint2 samplePixel = min((cell * dispatchDimensions + dispatchDimensions / 2u) / grid,
+                            dispatchDimensions - 1u);
+    if (any(pixel != samplePixel)) return;
+    uint address = NAVI_SAMPLE_BASE + (cell.y * grid.x + cell.x) * NAVI_SAMPLE_STRIDE;
+    gPrimaryGateCounters[address] = 1u;
+    gPrimaryGateCounters[address+1u] = pixel.x;
+    gPrimaryGateCounters[address+2u] = pixel.y;
+    gPrimaryGateCounters[address+3u] = receiver.instanceIndex;
+    gPrimaryGateCounters[address+4u] = (uint)receiver.geometricNormal.w;
+    gPrimaryGateCounters[address+5u] = receiver.materialIndex;
+    gPrimaryGateCounters[address+6u] = confidence;
+    [unroll] for (uint axis=0u; axis<3u; ++axis) {
+        gPrimaryGateCounters[address+7u+axis] = asuint(receiver.baseColorMetallic[axis]);
+        gPrimaryGateCounters[address+10u+axis] = asuint(receiver.normalRoughness[axis]);
+        gPrimaryGateCounters[address+13u+axis] = asuint(position[axis]);
+        gPrimaryGateCounters[address+16u+axis] = asuint(pointRadiance[axis]);
+        gPrimaryGateCounters[address+19u+axis] = asuint(mesh[axis]);
+    }
+    gPrimaryGateCounters[address+22u] = asuint(distance);
+    gPrimaryGateCounters[address+23u] = asuint(radius);
+    gPrimaryGateCounters[address+24u] = asuint(attenuation);
+    gPrimaryGateCounters[address+25u] = asuint(visibility);
+    gPrimaryGateCounters[address+26u] = asuint(cosine);
+    [unroll] for (uint axis=0u; axis<3u; ++axis) {
+        gPrimaryGateCounters[address+27u+axis] = asuint(pointDiffuse[axis]);
+        gPrimaryGateCounters[address+30u+axis] = asuint(pointSpecular[axis]);
+    }
+}
+
+float3 EvaluateMaterialPointLight(float3 baseColor, float3 normal, float3 geometricNormal, float3 viewDirection,
                                   float3 hitPosition, float4 lightPosition,
                                   float4 lightOptics, float roughness,
                                   float metallic, float specular) {
@@ -636,20 +1125,20 @@ float3 EvaluateMaterialPointLight(float3 baseColor, float3 normal, float3 viewDi
     float3 lightDirection = toLight / max(distanceToLight, 1.0e-4f);
     float normalizedDistance = distanceToLight / lightRadius;
     float radialFalloff = saturate(1.0f - normalizedDistance * normalizedDistance);
-    float attenuation = radialFalloff * radialFalloff;
+    float attenuation = radialFalloff; // match Lights_BindPoint's native 1 - (d/r)^2
     // Avoid a visibility ray when the largest possible RGB contribution is
     // already below the scene-linear noise floor. N64 light colors are
     // normalized to [0, 1] when captured, so this bound is conservative.
     if (attenuation * max(lightOptics.y, max(lightOptics.z, lightOptics.w)) <= 1.0e-4f ||
         dot(normal, lightDirection) <= 0.0f) return 0.0f;
-    float visibility = TraceMaterialVisibility(hitPosition, normal, lightDirection,
+    float visibility = TraceMaterialVisibility(hitPosition, geometricNormal, lightDirection,
                                                distanceToLight - 0.025f);
     return EvaluateMaterialDirectLight(baseColor, normal, viewDirection, lightDirection,
                                        roughness, metallic, specular) * lightOptics.yzw *
            (attenuation * visibility);
 }
 
-float3 EvaluateMaterialPointBackscatter(float3 baseColor, float3 normal, float3 hitPosition,
+float3 EvaluateMaterialPointBackscatter(float3 baseColor, float3 normal, float3 geometricNormal, float3 hitPosition,
                                         float4 lightPosition, float4 lightOptics, float amount) {
     if (!any(lightOptics.yzw > 0.0f) || amount <= 0.0f) return 0.0f;
     float3 toLight = lightPosition.xyz - hitPosition;
@@ -660,11 +1149,11 @@ float3 EvaluateMaterialPointBackscatter(float3 baseColor, float3 normal, float3 
     float3 lightDirection = toLight / max(distanceToLight, 1.0e-4f);
     float normalizedDistance = distanceToLight / lightRadius;
     float radialFalloff = saturate(1.0f - normalizedDistance * normalizedDistance);
-    float attenuation = radialFalloff * radialFalloff;
+    float attenuation = radialFalloff;
     if (attenuation * amount * max(lightOptics.y, max(lightOptics.z, lightOptics.w)) <= 1.0e-4f) {
         return 0.0f;
     }
-    float visibility = TraceMaterialVisibility(hitPosition, normal, lightDirection,
+    float visibility = TraceMaterialVisibility(hitPosition, geometricNormal, lightDirection,
                                                distanceToLight - 0.025f);
     float backScatter = pow(saturate(dot(-normal, lightDirection)), 2.0f);
     return baseColor * lightOptics.yzw * (backScatter * attenuation * amount * visibility);
@@ -675,6 +1164,7 @@ void ClearSurfaceSignals(uint2 pixel) {
     gEmissiveMask[pixel] = 0.0f;
     gIndirectMask[pixel] = 0.0f;
     gReflectionColor[pixel] = 0.0f;
+    gNativePointDirect[pixel] = 0.0f;
 }
 
 float3 MaterialDebugColor(uint mode, ReflectionPayload surface) {
@@ -696,13 +1186,15 @@ float3 MaterialDebugColor(uint mode, ReflectionPayload surface) {
 [shader("raygeneration")]
 void RayGenReflection() {
     uint2 launchIndex = DispatchRaysIndex().xy;
+    gNativePointDirect[launchIndex] = 0.0f;
     uint2 launchDim = DispatchRaysDimensions().xy;
     uint2 screenDim = max(uint2(gScreenSize.xy), uint2(1, 1));
     uint2 screenPixel = min(uint2((float2(launchIndex) + 0.5f) * (float2(screenDim) / float2(launchDim))), screenDim - 1);
     const bool gateDiagnostic = (((uint)gDiagnosticInfo.x & 1u) != 0u);
     const bool gateCountersEnabled = (((uint)gDiagnosticInfo.x & 4u) != 0u);
     float depth = gDepthTexture.Load(int3(screenPixel, 0));
-    if (depth >= 1.0f) {
+    if (gateDiagnostic) ClearSurfaceSignals(launchIndex);
+    if (!isfinite(depth) || depth < 0.0f || depth >= 1.0f) {
         if (gateDiagnostic && gateCountersEnabled) IncrementPrimaryGateCounter(PG_RASTER_BACKGROUND, launchIndex);
         ClearSurfaceSignals(launchIndex);
         if (gateDiagnostic) gReflectionColor[launchIndex] = float4(1.0f / 255.0f, 10.0f / 255.0f, 0.0f, 1.0f);
@@ -710,56 +1202,51 @@ void RayGenReflection() {
     }
     if (gateDiagnostic && gateCountersEnabled) IncrementPrimaryGateCounter(PG_RASTER_GEOMETRY, launchIndex);
 
-    float2 uv = (float2(screenPixel) + 0.5f) / float2(screenDim);
+    float2 uv = RasterToViewportUV((float2(screenPixel) + 0.5f) / float2(screenDim));
+    if (any(uv < 0.0f) || any(uv > 1.0f)) {
+        ClearSurfaceSignals(launchIndex);
+        if (gateDiagnostic) gReflectionColor[launchIndex] = float4(1.0f / 255.0f, 10.0f / 255.0f, 0.0f, 1.0f);
+        return;
+    }
     float clipXScale = gParams.z > 1e-4f ? gParams.z : 1.0f;
     uint debugMode = (uint)max(gLightDir.w, 0.0f);
-    // In material-class debug, divide the image into bands to compare ray
-    // origins and transform spaces in one deterministic frame.
-    uint rayVariant = debugMode == 1u ? min(5u, launchIndex.x * 6u / max(launchDim.x, 1u)) : 0u;
+    // Material views observe the same view-space ray as the productive path.
+    // Alternative world/transposed/reversed rays must not masquerade as
+    // material-class diagnostics over a view-space TLAS.
     float ndcX = uv.x * 2.0f - 1.0f;
     float ndcY = 1.0f - uv.y * 2.0f;
     // Match Interpreter::GfxSpTri1, which maps Fast3D clip Z [-w, w] to
     // D3D12's depth range [0, 1] before rasterization.
     float4 clipPos = float4(ndcX / clipXScale, ndcY, depth * 2.0f - 1.0f, 1.0f);
-    float4 viewPosH = rayVariant == 4u || rayVariant == 5u
-        ? mul(clipPos, gInvProjection) : mul(gInvProjection, clipPos);
-    float3 viewPos = abs(viewPosH.w) > 1e-6f ? viewPosH.xyz / viewPosH.w : viewPosH.xyz;
-    float distanceToRaster = length(viewPos);
-    if (distanceToRaster < 1e-4f) {
+    float4 viewPosH = mul(gInvProjection, clipPos);
+    float4 nearPosH = mul(gInvProjection, float4(ndcX / clipXScale, ndcY, -1.0f, 1.0f));
+    float4 farPosH = mul(gInvProjection, float4(ndcX / clipXScale, ndcY, 1.0f, 1.0f));
+    if (any(!isfinite(viewPosH)) || any(!isfinite(nearPosH)) || any(!isfinite(farPosH)) ||
+        abs(viewPosH.w) <= 1.0e-6f || abs(nearPosH.w) <= 1.0e-6f || abs(farPosH.w) <= 1.0e-6f) {
         ClearSurfaceSignals(launchIndex);
         if (gateDiagnostic) gReflectionColor[launchIndex] = float4(1.0f / 255.0f, 9.0f / 255.0f, 0.0f, 1.0f);
         return;
     }
 
-    // The first hit now follows the exact raster camera ray and stops at the
-    // depth-buffer surface. This gives ClosestHit the actual visible triangle,
-    // instead of guessing material from a short inward normal probe.
-    RayDesc primaryRay;
-    primaryRay.Origin = float3(0.0f, 0.0f, 0.0f);
-    primaryRay.Direction = viewPos / distanceToRaster;
-    if (rayVariant == 1u) {
-        float4 originWorldH = mul(gInvView, float4(0.0f, 0.0f, 0.0f, 1.0f));
-        float4 directionWorldH = mul(gInvView, float4(primaryRay.Direction, 0.0f));
-        primaryRay.Origin = abs(originWorldH.w) > 1e-6f
-            ? originWorldH.xyz / originWorldH.w : originWorldH.xyz;
-        primaryRay.Direction = normalize(directionWorldH.xyz);
-    } else if (rayVariant >= 2u) {
-        float4 nearClip = float4(ndcX / clipXScale, ndcY, -1.0f, 1.0f);
-        float4 nearPosH = rayVariant >= 4u
-            ? mul(nearClip, gInvProjection) : mul(gInvProjection, nearClip);
-        float3 nearPos = abs(nearPosH.w) > 1e-6f ? nearPosH.xyz / nearPosH.w : nearPosH.xyz;
-        primaryRay.Direction = normalize(viewPos - nearPos);
-        primaryRay.Origin = nearPos;
-        if (rayVariant == 3u || rayVariant == 5u) {
-            float4 originWorldH = mul(gInvView, float4(nearPos, 1.0f));
-            float4 directionWorldH = mul(gInvView, float4(primaryRay.Direction, 0.0f));
-            primaryRay.Origin = abs(originWorldH.w) > 1e-6f
-                ? originWorldH.xyz / originWorldH.w : originWorldH.xyz;
-            primaryRay.Direction = normalize(directionWorldH.xyz);
-        }
-        if (rayVariant == 5u) primaryRay.Direction = -primaryRay.Direction;
+    float3 viewPos = viewPosH.xyz / viewPosH.w;
+    float3 nearPos = nearPosH.xyz / nearPosH.w;
+    float3 raySpan = farPosH.xyz / farPosH.w - nearPos;
+    float raySpanLength = length(raySpan);
+    if (!isfinite(raySpanLength) || raySpanLength <= 1.0e-6f) {
+        ClearSurfaceSignals(launchIndex);
+        return;
     }
-    primaryRay.TMin = 0.001f;
+    // Start at the raster near plane: geometry clipped before it must not
+    // steal the primary hit. This construction also supports orthographic P.
+    RayDesc primaryRay;
+    primaryRay.Origin = nearPos;
+    primaryRay.Direction = raySpan / raySpanLength;
+    float distanceToRaster = dot(viewPos - nearPos, primaryRay.Direction);
+    if (!isfinite(distanceToRaster) || distanceToRaster < 0.0f) {
+        ClearSurfaceSignals(launchIndex);
+        return;
+    }
+    primaryRay.TMin = 0.0f;
     // Stop at the rasterized surface reconstructed from this pixel's depth.
     // A long diagnostic ray could hit geometry behind that visible surface,
     // assigning the wrong material and leaking hidden geometry into the
@@ -770,6 +1257,18 @@ void RayGenReflection() {
     if (gateCountersEnabled) IncrementPrimaryGateCounter(0u, launchIndex);
     TraceRay(gScene, RAY_FLAG_NONE,
              0x03, 0, 1, 0, primaryRay, surface);
+    // A nearest TLAS hit alone does not establish correspondence with this
+    // raster pixel. Depth-writing hits must match depth before illuminating
+    // it; water/glass without Z_UPD may lie in front of the depth surface.
+    // Error 11 reports raster/DXR distance disagreement.
+    const float depthAgreementTolerance = max(0.05f, distanceToRaster * 0.002f);
+    if (surface.surfaceOptics.w >= 0.5f && (surface.diagnosticFlags & 128u) != 0u &&
+        (!isfinite(surface.surfaceOptics.z) ||
+         abs(surface.surfaceOptics.z - distanceToRaster) > depthAgreementTolerance)) {
+        surface.surfaceOptics.w = 0.0f;
+        surface.diagnosticError = 11u;
+        surface.diagnosticFlags &= ~8u;
+    }
     if (gateDiagnostic) {
         const bool primaryHit = (surface.diagnosticFlags & 2u) != 0u;
         if (gateCountersEnabled) {
@@ -779,11 +1278,13 @@ void RayGenReflection() {
             else IncrementPrimaryGateCounter(1u, launchIndex);
             if ((surface.diagnosticFlags & 4u) != 0u) IncrementPrimaryGateCounter(3u, launchIndex);
             if ((surface.diagnosticFlags & 8u) != 0u) IncrementPrimaryGateCounter(4u, launchIndex);
-            if (surface.diagnosticError >= 2u && surface.diagnosticError <= 10u) {
+            if (surface.diagnosticError >= 2u && surface.diagnosticError <= 11u) {
                 IncrementPrimaryGateCounter(8u, launchIndex);
-                IncrementPrimaryGateCounter(10u + surface.diagnosticError - 2u, launchIndex);
+                if (surface.diagnosticError <= 10u)
+                    IncrementPrimaryGateCounter(10u + surface.diagnosticError - 2u, launchIndex);
             }
             if (surface.diagnosticError == 9u) IncrementPrimaryGateCounter(9u, launchIndex);
+            if (surface.diagnosticError == 11u) IncrementPrimaryGateCounter(PG_RASTER_DEPTH_MISMATCH, launchIndex);
         }
         uint gateFlags = surface.diagnosticFlags | 1u;
         uint gateError = surface.diagnosticError;
@@ -813,6 +1314,9 @@ void RayGenReflection() {
         return;
     }
 
+    // Reflection, transmission and GI rays originate at the confirmed DXR
+    // intersection, rather than at the nearby point estimated from depth.
+    viewPos = primaryRay.Origin + primaryRay.Direction * surface.surfaceOptics.z;
     float4 worldSeedH = mul(gInvView, float4(viewPos, 1.0f));
     float3 worldSeedPosition = abs(worldSeedH.w) > 1.0e-6f
         ? worldSeedH.xyz / worldSeedH.w : worldSeedH.xyz;
@@ -821,12 +1325,26 @@ void RayGenReflection() {
         worldSeedPosition.y + worldSeedPosition.z * 7.0f + float(surface.instanceIndex) * 0.73f);
 
     float3 normal = normalize(surface.normalRoughness.xyz);
+    float3 geometricNormal = surface.geometricNormal.xyz;
+    float geometricLength = length(geometricNormal);
+    if (any(!isfinite(geometricNormal)) || geometricLength <= 1.0e-6f) {
+        ClearSurfaceSignals(launchIndex);
+        return;
+    }
+    geometricNormal /= geometricLength;
     if (surface.materialIndex == 4u) {
         // Organic subtle ripples for water reflection & refraction
         float2 waveCoord = surface.detail.xy * 12.0f;
         float wave = sin(waveCoord.x * 3.14159f + waveCoord.y * 2.0f) * 0.035f +
                      cos(waveCoord.y * 4.0f - waveCoord.x * 2.5f) * 0.035f;
-        normal = normalize(normal + float3(wave, 0.0f, wave * 0.7f));
+        float3 worldNormal = normalize(mul((float3x3)gInvView, normal));
+        float3 worldTangent = normalize(abs(worldNormal.y) < 0.9f
+            ? cross(worldNormal, float3(0.0f, 1.0f, 0.0f))
+            : cross(worldNormal, float3(1.0f, 0.0f, 0.0f)));
+        float3 worldBitangent = cross(worldNormal, worldTangent);
+        float3 waveTangent = normalize(mul(transpose((float3x3)gInvView), worldTangent));
+        float3 waveBitangent = normalize(mul(transpose((float3x3)gInvView), worldBitangent));
+        normal = normalize(normal + waveTangent * wave + waveBitangent * (wave * 0.7f));
     }
     float3 viewDirection = -primaryRay.Direction;
     float roughness = saturate(surface.normalRoughness.w);
@@ -837,19 +1355,61 @@ void RayGenReflection() {
     float3 f0 = lerp(0.04f * surface.detail.z.xxx, baseColor, metallic);
     float fresnelPower = pow(1.0f - saturate(dot(normal, viewDirection)), 5.0f);
     float3 fresnel = f0 + (1.0f - f0) * fresnelPower;
-    float materialCoverage = (surface.materialIndex == 4u || surface.materialIndex == 5u ||
-                              surface.materialIndex == 11u || surface.materialIndex == 14u)
-        ? 1.0f : saturate(surface.detail.w);
-    // Alpha-blended/additive Fast3D geometry has no physically based opacity
-    // model here. Keep the original raster pixel for those effects instead of
-    // replacing it with a solid path-traced hit. ClosestHitReflection encodes
-    // that primary-hit state in surfaceOptics.w (values 3/4); secondary rays
-    // still ignore blended geometry in AnyHitReflection.
+    // detail.w is geometric coverage computed from the material alpha class
+    // in ClosestHit, never raster fog alpha or a material-name whitelist.
+    float materialCoverage = saturate(surface.detail.w);
+    // Alpha-blended/additive Fast3D geometry has no general opacity model in
+    // this hybrid pass. Preserve its raster pixel; exact emissive materials
+    // carry sampled alpha separately for visible emission, and secondary rays
+    // accumulate their energy while continuing through the overlay.
     const bool genericMatte = surface.materialIndex == MATERIAL_TYPE_GENERIC_MATTE;
     if (surface.surfaceOptics.w > 2.5f) {
         materialCoverage = 0.0f;
     }
     const bool forceAnyHitCoverage = gateDiagnostic && (((uint)gDiagnosticInfo.x & 2u) != 0u);
+    if (gSourceControls.y != 0u) {
+        MaterialRecord receiverRecord = LoadMaterialRecord(surface.instanceIndex);
+        const uint confidence = (surface.diagnosticFlags & DXR_PAYLOAD_FLAG_ALBEDO_RECONSTRUCTED) != 0u ? 1u : 0u;
+        // Preserve every fairy's visible sprite and all unsupported/transparent surfaces.
+        // Only a proven opaque/cutout material receives the isolated diagnostic light.
+        if (confidence == 0u || receiverRecord.alphaMode >= 2u ||
+            (receiverRecord.samplerFlags >> 16u) != 0u || materialCoverage <= 0.0f) {
+            ClearSurfaceSignals(launchIndex);
+            return;
+        }
+        float3 pointRadiance = 0.0f;
+        float3 pointDiffuseRadiance = 0.0f;
+        float3 pointSpecularRadiance = 0.0f;
+        float distance = 0.0f, radius = 0.0f, attenuation = 0.0f, visibility = 0.0f, cosine = 0.0f;
+        [loop] for (uint i=0u; i<min(32u,(uint)gQuality.w); ++i) {
+            uint identity = (uint)gPointLightOptics[i].x;
+            if (identity / 8u != gSourceControls.x || identity % 8u != 1u) continue;
+            float3 offset = gPointLightPosition[i].xyz - viewPos;
+            distance = length(offset); radius = gPointLightPosition[i].w;
+            if (distance > 0.0001f && radius > 0.0f && distance < radius) {
+                float3 direction = offset / distance;
+                cosine = saturate(dot(normal, direction));
+                attenuation = saturate(1.0f - distance * distance / (radius * radius));
+                visibility = TraceMaterialVisibility(viewPos, geometricNormal, direction, distance - 0.025f);
+                const float3 lightColor = max(gPointLightOptics[i].yzw, 0.0f.xxx);
+                const float sourceVisibility = attenuation * visibility;
+                pointDiffuseRadiance = EvaluateMaterialDiffuseLight(baseColor, normal, viewDirection,
+                    direction, metallic, surface.detail.z) * lightColor * sourceVisibility;
+                pointSpecularRadiance = EvaluateMaterialSpecularLight(baseColor, normal, viewDirection,
+                    direction, roughness, metallic, surface.detail.z) * lightColor * sourceVisibility;
+                pointRadiance = pointDiffuseRadiance + pointSpecularRadiance;
+            }
+        }
+        float3 mesh = TraceSelectedEmitter(viewPos, geometricNormal, normal, baseColor);
+        gSurfaceMask[launchIndex] = float4(0.0f,0.0f,0.0f,1.0f);
+        gReflectionColor[launchIndex] = float4(pointRadiance, distance);
+        gIndirectMask[launchIndex] = float4(mesh,1.0f);
+        gEmissiveMask[launchIndex] = visibility;
+        RecordNaviReceiver(launchIndex, surface, viewPos, pointRadiance, pointDiffuseRadiance,
+                           pointSpecularRadiance, mesh, distance, radius,
+                           attenuation, visibility, cosine, confidence);
+        return;
+    }
     const bool materialEligible = surface.surfaceOptics.w <= 2.5f;
     if (gateCountersEnabled && gateDiagnostic) {
         IncrementPrimaryGateCounter(PG_ELIGIBILITY_INPUT_VALID, launchIndex);
@@ -860,11 +1420,14 @@ void RayGenReflection() {
         IncrementPrimaryGateCounter(PG_REJECT_COVERAGE, launchIndex);
     if (gateCountersEnabled && gateDiagnostic && materialCoverage > 0.0f)
         IncrementPrimaryGateCounter(PG_COVERAGE_NONZERO, launchIndex);
-    float3 reflectionWeight = saturate(fresnel * reflectivity) * materialCoverage *
+    const bool transmissiveMaterial = surface.materialIndex == MATERIAL_TYPE_WATER ||
+                                      surface.materialIndex == MATERIAL_TYPE_GLASS;
+    // Opaque reflection strength is applied by the compositor. Dielectric
+    // strength belongs in the single Fresnel premix performed here.
+    float reflectionStrength = transmissiveMaterial ? saturate(gTraceSettings.w) : 1.0f;
+    float3 reflectionWeight = saturate(fresnel * reflectivity) * materialCoverage * reflectionStrength *
                               saturate(gQuality.y) * (genericMatte ? 0.0f : 1.0f);
-    float transmissiveFactor = (surface.materialIndex == 4u ? 1.0f :
-                                surface.materialIndex == 5u ? (1.0f - reflectivity) : 0.0f) *
-                               materialCoverage;
+    float transmissiveFactor = transmissiveMaterial ? materialCoverage : 0.0f;
     float reflectionContribution = Luminance(reflectionWeight);
     uint gateFlags = surface.diagnosticFlags | 1u | 2u | 4u | 8u;
     if (surface.surfaceOptics.w <= 2.5f) gateFlags |= 16u;
@@ -902,7 +1465,7 @@ void RayGenReflection() {
         gIndirectMask[launchIndex] = 0.0f;
         return;
     }
-    if (debugMode != 0u) {
+    if (debugMode != 0u && debugMode < 10u) {
         surface.radiance.a = reflectionContribution;
         float3 debugColor = MaterialDebugColor(debugMode, surface);
         gSurfaceMask[launchIndex] = float4(1.0f, 0.0f, 0.0f, 0.0f);
@@ -912,9 +1475,9 @@ void RayGenReflection() {
         return;
     }
 
-    // Alpha-blended/additive hits retain their Fast3D pixels. The generic
-    // matte fallback still receives conservative diffuse path lighting using
-    // its captured albedo, but it does not invent a reflective surface.
+    // Alpha-blended/additive hits retain their Fast3D pixels. Exact emissive
+    // hits contribute through the separate emission signal; the generic matte
+    // fallback remains diffuse-only and does not invent reflective surfaces.
     if (materialCoverage <= 0.0f) {
         ClearSurfaceSignals(launchIndex);
         return;
@@ -945,48 +1508,87 @@ void RayGenReflection() {
             float3 microfacetNormal = normalize(
                 tangent * (sinTheta * cos(phi)) + bitangent * (sinTheta * sin(phi)) + normal * cosTheta);
             float3 reflectionDirection = normalize(reflect(primaryRay.Direction, microfacetNormal));
-            if (dot(reflectionDirection, normal) > 1.0e-4f) {
+            if (dot(reflectionDirection, normal) > 1.0e-4f &&
+                dot(reflectionDirection, geometricNormal) > 1.0e-4f) {
                 RayDesc reflectionRay;
-                reflectionRay.Origin = viewPos + normal * 0.025f;
+                reflectionRay.Origin = OffsetMaterialRayOrigin(viewPos, geometricNormal, reflectionDirection, 0.025f);
                 reflectionRay.Direction = reflectionDirection;
                 reflectionRay.TMin = 0.02f;
-                reflectionRay.TMax = max(gParams.y, 128.0f);
+                reflectionRay.TMax = max(gTraceSettings.x, 1.0f);
                 ReflectionPayload reflected;
                 InitializeReflectionPayload(reflected, 0u);
                 TraceRay(gScene, RAY_FLAG_NONE,
                          0x03, 0, 1, 0, reflectionRay, reflected);
-                reflectedRadiance += reflected.radiance.rgb;
+                // The sampled GGX half-vector has PDF D(H)*N.H/(4*V.H).
+                // Account for the BRDF/PDF ratio; a plain average changes
+                // reflection brightness with roughness and view angle.
+                float nDotV = max(saturate(dot(normal, viewDirection)), 1.0e-4f);
+                float nDotL = saturate(dot(normal, reflectionDirection));
+                float nDotH = max(saturate(dot(normal, microfacetNormal)), 1.0e-4f);
+                float vDotH = saturate(dot(viewDirection, microfacetNormal));
+                float geometry = MaterialGeometrySchlickGGX(nDotV, roughness) *
+                                 MaterialGeometrySchlickGGX(nDotL, roughness);
+                float3 sampleFresnel = MaterialFresnelSchlick(vDotH, f0);
+                float3 relativeFresnel = sampleFresnel / max(fresnel, 1.0e-4f.xxx);
+                reflectedRadiance += reflected.radiance.rgb * relativeFresnel *
+                                     (geometry * vDotH / (nDotV * nDotH));
             }
         }
         reflectedRadiance /= reflectionSamples;
     }
 
     float3 transmittedRadiance = baseColor;
-    if (surface.materialIndex == 4u || surface.materialIndex == 5u) {
+    if (transmissiveMaterial) {
         float eta = surface.materialIndex == 4u ? (1.0f / 1.333f) : (1.0f / 1.45f);
         // The primary side is encoded as 2=front/entering, 1=back/exiting.
         // Snell's ratio reverses at the far interface of water or glass.
         if (surface.surfaceOptics.w < 1.5f) eta = rcp(eta);
         float3 transmittedDirection = refract(primaryRay.Direction, normal, eta);
-        if (dot(transmittedDirection, transmittedDirection) < 1e-4f)
+        bool totalInternalReflection = dot(transmittedDirection, transmittedDirection) < 1e-4f;
+        if (totalInternalReflection)
             transmittedDirection = reflect(primaryRay.Direction, normal);
+        // Keep transmitted rays inside the geometric interface even when a
+        // strongly perturbed shading normal points the lobe across its horizon.
+        if (!totalInternalReflection && dot(transmittedDirection, geometricNormal) >= 0.0f) {
+            transmittedDirection = refract(primaryRay.Direction, geometricNormal, eta);
+            totalInternalReflection = dot(transmittedDirection, transmittedDirection) < 1e-4f;
+            if (totalInternalReflection) transmittedDirection = reflect(primaryRay.Direction, geometricNormal);
+        }
+        if (totalInternalReflection && dot(transmittedDirection, geometricNormal) <= 0.0f)
+            transmittedDirection = reflect(primaryRay.Direction, geometricNormal);
+        if (totalInternalReflection && (reflectionStrength <= 0.0f || gQuality.y <= 0.0f)) {
+            // No transmitted path exists. Preserve the raster interface when
+            // its only valid optical contribution was explicitly disabled.
+            ClearSurfaceSignals(launchIndex);
+            return;
+        }
+        float transmittedLength = length(transmittedDirection);
+        if (any(!isfinite(transmittedDirection)) || transmittedLength <= 1.0e-6f) {
+            ClearSurfaceSignals(launchIndex);
+            return;
+        }
+        float3 transmittedRayDirection = transmittedDirection / transmittedLength;
         RayDesc transmittedRay;
-        transmittedRay.Origin = viewPos - normal * 0.025f;
-        transmittedRay.Direction = normalize(transmittedDirection);
+        transmittedRay.Origin = OffsetMaterialRayOrigin(viewPos, geometricNormal, transmittedRayDirection, 0.025f);
+        transmittedRay.Direction = transmittedRayDirection;
         transmittedRay.TMin = 0.03f;
-        transmittedRay.TMax = max(gParams.y, 128.0f);
+        transmittedRay.TMax = max(gTraceSettings.y, 1.0f);
         ReflectionPayload transmitted;
-        InitializeReflectionPayload(transmitted, 3u);
+        InitializeReflectionPayload(transmitted, totalInternalReflection ? 0u : 3u);
         TraceRay(gScene, RAY_FLAG_NONE,
                  0x03, 0, 1, 0, transmittedRay, transmitted);
         transmittedRadiance = transmitted.radiance.rgb;
-        reflectedRadiance = lerp(transmittedRadiance, reflectedRadiance, saturate(Luminance(reflectionWeight)));
+        // Radiance is premixed once with RGB Fresnel; the surface compositor
+        // applies only the authored transmission strength to this result.
+        float3 interfaceWeight = saturate(fresnel * reflectivity) * reflectionStrength * saturate(gQuality.y);
+        if (totalInternalReflection) {
+            reflectedRadiance = transmittedRadiance;
+        } else {
+            reflectedRadiance = transmittedRadiance * (1.0f - interfaceWeight) +
+                                reflectedRadiance * interfaceWeight;
+        }
     }
 
-    gSurfaceMask[launchIndex] = float4(reflectionContribution, transmissiveFactor,
-                                       materialCoverage, 1.0f);
-    gReflectionColor[launchIndex] = float4(max(0.0f, reflectedRadiance + baseColor * emissiveStrength),
-                                          reflectionContribution);
     float3 indirectRadiance = 0.0f;
     uint samples = min(8u, (uint)max(0.0f, gQuality.x));
     float3 giTangent = normalize(abs(normal.y) < 0.9f ? cross(normal, float3(0,1,0)) : cross(normal, float3(1,0,0)));
@@ -996,36 +1598,143 @@ void RayGenReflection() {
     float giRotation = frac(sin(dot(giSeed, float2(127.1f, 311.7f))) * 43758.5453f + giFrameJitter);
     float giRadialSeed = frac(sin(dot(giSeed + 17.0f, float2(269.5f, 183.3f))) * 24634.6345f +
                               giFrameJitter * 1.324717957f);
+    const uint giDebugMode = (uint)max(gLightDir.w, 0.0f);
+    const bool giProvenanceDebug = giDebugMode >= 14u;
+    float3 giClassHit = 0.0f, giClassEnv = 0.0f, giClassProc = 0.0f;
+    uint giCountHit = 0u, giCountEnv = 0u, giCountProc = 0u;
     for (uint sampleIndex=0u; sampleIndex<samples; ++sampleIndex) {
         float xi = frac(giRadialSeed + sampleIndex * 0.61803398875f);
         float angle = frac(giRotation + sampleIndex * 0.75487766625f) * 6.2831853f;
         float radial = sqrt(xi);
         float hemisphereZ = sqrt(max(0.0f, 1.0f - xi));
         RayDesc bounce;
-        bounce.Origin = viewPos + normal*0.03f;
         bounce.Direction = normalize(normal * hemisphereZ +
                                      (giTangent * cos(angle) + giBitangent * sin(angle)) * radial);
-        bounce.TMin=0.025f; bounce.TMax=256.0f;
+        if (dot(bounce.Direction, geometricNormal) <= 0.0f) continue;
+        bounce.Origin = OffsetMaterialRayOrigin(viewPos, geometricNormal, bounce.Direction, 0.03f);
+        bounce.TMin=0.025f; bounce.TMax=max(gTraceSettings.z, 1.0f);
         ReflectionPayload hit; InitializeReflectionPayload(hit,4u);
         TraceRay(gScene,RAY_FLAG_NONE,0x03,0,1,0,bounce,hit);
         indirectRadiance += max(0.0f, hit.radiance.rgb);
+        if (giProvenanceDebug) {
+            const float3 giSample = max(0.0f, hit.radiance.rgb);
+            if (hit.surfaceOptics.w > 0.5f) { giClassHit += giSample; ++giCountHit; }
+            else if (hit.surfaceOptics.w > -1.5f) { giClassEnv += giSample; ++giCountEnv; }
+            else { giClassProc += giSample; ++giCountProc; }
+        }
     }
     float3 diffuseReflectance = baseColor * (1.0f - metallic);
     float indirectScale = gParams.w > 0.5f ? 1.0f : 0.28f;
     float3 indirectContribution = samples > 0u
         ? (indirectRadiance / samples) * diffuseReflectance * (indirectScale * materialCoverage)
         : 0.0f;
-    if (gParams.w > 0.5f) {
-        gIndirectMask[launchIndex] = float4(
-            max(0.0f, surface.radiance.rgb) + indirectContribution, 2.0f);
+    const float emissionCoverage = surface.materialIndex == MATERIAL_TYPE_EMISSIVE
+        ? materialCoverage : 1.0f;
+    float3 reflectionResult = max(0.0f,
+        reflectedRadiance + baseColor * emissiveStrength * emissionCoverage);
+    float3 pathResult = max(0.0f, surface.radiance.rgb) + indirectContribution;
+    if (any(isnan(reflectionResult)) || any(isinf(reflectionResult)) ||
+        any(isnan(pathResult)) || any(isinf(pathResult))) {
+        ClearSurfaceSignals(launchIndex);
+        return;
+    }
+    // gSurfaceMask.a is only a validity flag: that UAV is bound to an
+    // R8G8B8A8_UNORM target, so any value above one saturates to one and can
+    // never carry the indirect share. The share is published instead in
+    // gIndirectMask.a as (2.0 + giFraction) for the relit class, which is a
+    // float16 target; the compositor reads (alpha - 2.0) as that share, so an
+    // "indirect off" control subtracts exactly the ambient/GI part of a relit
+    // pixel while leaving its direct contribution untouched. The share is a
+    // ratio, not an absolute radiance, so it stays representable in FP16 for
+    // both very dim and very bright pixels.
+    const float pathEnergy = Luminance(pathResult);
+    const float giFraction = pathEnergy > 1.0e-6f
+        ? saturate(Luminance(indirectContribution) / pathEnergy) : 0.0f;
+    const bool hybridPrimaryRelight =
+        (surface.diagnosticFlags & DXR_PAYLOAD_FLAG_HYBRID_RELIGHT) != 0u;
+    float3 nativePointDirectRadiance = 0.0f;
+    // Static G_LIGHTING-off draws retain their raster albedo but do not
+    // evaluate dynamic point lights. Restrict this additive signal to those
+    // proven receivers and Navi's identified main glow; relit/path-traced
+    // receivers already evaluate their point lights in ClosestHit.
+    if (debugMode == 0u && gParams.w <= 0.5f &&
+        (surface.diagnosticFlags & DXR_PAYLOAD_FLAG_ALBEDO_RECONSTRUCTED) != 0u &&
+        materialCoverage > 0.0f) {
+        MaterialRecord receiverRecord = LoadMaterialRecord(surface.instanceIndex);
+        const uint receiverOwner = receiverRecord.samplerFlags >> 16u;
+        if ((receiverRecord.flags & MATERIAL_FLAG_NAVI_POINT_WORLD_RECEIVER) != 0u &&
+            receiverRecord.alphaMode < 2u && receiverOwner == 0u) {
+            [loop] for (uint lightIndex = 0u; lightIndex < min((uint)max(gQuality.w, 0.0f), 32u); ++lightIndex) {
+                const uint identity = (uint)gPointLightOptics[lightIndex].x;
+                const uint lightOwner = identity / 8u;
+                if (lightOwner == 0u || identity % 8u != 1u || lightOwner == receiverOwner) continue;
+                const float3 lightColor = max(gPointLightOptics[lightIndex].yzw, 0.0f.xxx);
+                const float radius = gPointLightPosition[lightIndex].w;
+                if (!any(lightColor > 0.0f) || !isfinite(radius) || radius <= 0.0f) continue;
+                const float3 toLight = gPointLightPosition[lightIndex].xyz - viewPos;
+                const float distanceToLight = length(toLight);
+                if (!isfinite(distanceToLight) || distanceToLight <= 1.0e-4f || distanceToLight >= radius) continue;
+                const float3 lightDirection = toLight / distanceToLight;
+                if (dot(normal, lightDirection) <= 0.0f) continue;
+                const float attenuation = saturate(1.0f - (distanceToLight / radius) * (distanceToLight / radius));
+                const float visibility = TraceMaterialVisibility(viewPos, geometricNormal, lightDirection,
+                                                                 distanceToLight - 0.025f);
+                nativePointDirectRadiance += EvaluateMaterialDirectLight(surface.naviPointAlbedo.rgb, normal, viewDirection,
+                    lightDirection, roughness, metallic, surface.detail.z) * lightColor * attenuation * visibility;
+            }
+        }
+    }
+    gSurfaceMask[launchIndex] =
+        float4(reflectionContribution, transmissiveFactor, materialCoverage, 1.0f);
+    // FP16 has a finite maximum; reject overflow rather than storing infinity.
+    if (any(reflectionResult > 65504.0f) || any(pathResult > 65504.0f) ||
+        any(!isfinite(nativePointDirectRadiance)) || any(nativePointDirectRadiance > 65504.0f)) {
+        ClearSurfaceSignals(launchIndex);
+        return;
+    }
+    if (debugMode < 16u) {
+        gReflectionColor[launchIndex] = float4(reflectionResult, reflectionContribution);
+    }
+    if (gParams.w > 0.5f || hybridPrimaryRelight) {
+        gIndirectMask[launchIndex] = float4(pathResult, 2.0f + giFraction);
     } else {
         gIndirectMask[launchIndex] = float4(indirectContribution, samples > 0u ? 1.0f : 0.0f);
     }
     gEmissiveMask[launchIndex] = max(emissiveStrength, 0.0f) * materialCoverage;
+    gNativePointDirect[launchIndex] = float4(nativePointDirectRadiance, 1.0f);
+    if (debugMode >= 10u && debugMode <= 15u) {
+        float4 lateDebug = float4(Luminance(max(surface.radiance.rgb, 0.0f)),
+                                  Luminance(indirectContribution),
+                                  Luminance(baseColor),
+                                  giFraction);
+        if (debugMode == 11u) {
+            lateDebug = float4(baseColor, giFraction);
+        } else if (debugMode == 12u) {
+            lateDebug = float4(max(surface.radiance.rgb, 0.0f),
+                               Luminance(indirectContribution));
+        } else if (debugMode == 13u) {
+            lateDebug = float4(float3(metallic, metallic, metallic),
+                               Luminance(baseColor));
+        } else if (debugMode == 14u) {
+            const float invSamples = rcp((float)samples);
+            lateDebug = float4(Luminance(giClassHit * invSamples),
+                               Luminance((giClassEnv + giClassProc) * invSamples),
+                               (float)(giCountHit + giCountEnv + giCountProc) * invSamples,
+                               giFraction);
+        } else if (debugMode == 15u) {
+            const float invSamples = rcp((float)samples);
+            lateDebug = float4(Luminance(giClassEnv * invSamples),
+                               Luminance(giClassProc * invSamples),
+                               (float)giCountEnv * invSamples,
+                               (float)giCountProc * invSamples);
+        }
+        gReflectionColor[launchIndex] = lateDebug;
+    }
 }
 
 [shader("miss")]
 void MissReflection(inout ReflectionPayload payload) {
+    if (payload.probeMode == 6u) { payload.radiance = 0.0f; return; }
     if (payload.probeMode == 1u && (((uint)gDiagnosticInfo.x & 1u) != 0u)) {
         payload.diagnosticError = 1u;
     }
@@ -1037,28 +1746,40 @@ void MissReflection(inout ReflectionPayload payload) {
     float4 projectedDirection = mul(gProjection, float4(direction, 0.0f));
     if (projectedDirection.w > 1.0e-5f) {
         float2 ndc = projectedDirection.xy / projectedDirection.w;
-        float2 uv = float2(ndc.x * 0.5f + 0.5f, 0.5f - ndc.y * 0.5f);
-        if (all(uv >= 0.0f) && all(uv <= 1.0f)) {
+        float clipXScale = gParams.z > 1.0e-4f ? gParams.z : 1.0f;
+        float2 viewportUv = float2(ndc.x * clipXScale * 0.5f + 0.5f, 0.5f - ndc.y * 0.5f);
+        float2 uv = ViewportToRasterUV(viewportUv);
+        if (all(viewportUv >= 0.0f) && all(viewportUv <= 1.0f) && all(uv >= 0.0f) && all(uv <= 1.0f) &&
+            gDepthTexture.Load(int3(min(uint2(uv * gScreenSize.xy), uint2(gScreenSize.xy) - 1u), 0)) >= 0.9999f) {
             uv = clamp(uv, gScreenSize.zw * 0.5f, 1.0f - gScreenSize.zw * 0.5f);
             float3 environmentColor = max(gRasterEnvironment.SampleLevel(gMaterialSampler, uv, 0.0f).rgb,
                                           0.0f.xxx);
-            environmentColor = SrgbToLinear(environmentColor);
-            payload.radiance = float4(environmentColor, Luminance(environmentColor));
-            payload.surfaceOptics.w = 0.0f;
+            if (gFrameInfo.w < 0.5f) environmentColor = SrgbToLinear(environmentColor);
+            payload.radiance = float4(payload.radiance.rgb + environmentColor,
+                                      Luminance(payload.radiance.rgb + environmentColor));
+            payload.surfaceOptics.w = payload.probeMode == 4u ? -1.0f : 0.0f;
             return;
         }
     }
     // Rays that leave the rasterized view use a procedural environment tied
     // to the current Fast3D lighting instead of a fixed blue sky. This keeps
     // off-screen reflections and GI responsive to room/time-of-day changes.
-    float3 ambient = max(gAmbientLightColor.rgb, 0.0f.xxx);
-    float3 keyLight = max(gSceneLightColor.rgb, 0.0f.xxx);
-    float3 secondaryLight = max(gSecondaryLightColor.rgb, 0.0f.xxx);
+    // The Fast3D light constants captured from the scene are sRGB-encoded
+    // values; ClosestHitReflection already proves that by evaluating
+    // SrgbToLinear(fast3dShade) with fast3dShade built from these same
+    // constants. A radiance model must receive linear values, so the
+    // conversion happens here too. Skipping it made the virtual sky about
+    // 3.2x brighter than the ambient it proxies, which dominated every
+    // ground-bounce sample at night.
+    float3 ambient = SrgbToLinear(max(gAmbientLightColor.rgb, 0.0f.xxx));
+    float3 keyLight = SrgbToLinear(max(gSceneLightColor.rgb, 0.0f.xxx));
+    float3 secondaryLight = SrgbToLinear(max(gSecondaryLightColor.rgb, 0.0f.xxx));
     float secondaryLightLength = length(gSecondaryLightDir.xyz);
     float3 secondaryDirection = secondaryLightLength > 1.0e-6f
         ? gSecondaryLightDir.xyz / secondaryLightLength : float3(0.0f, 1.0f, 0.0f);
     float daylight = saturate(Luminance(keyLight + secondaryLight));
-    float skyFactor = smoothstep(-0.12f, 0.92f, direction.y);
+    float3 worldEnvironmentDirection = normalize(mul((float3x3)gInvView, direction));
+    float skyFactor = smoothstep(-0.12f, 0.92f, worldEnvironmentDirection.y);
     float3 horizonColor = ambient * 0.55f + float3(0.018f, 0.021f, 0.028f);
     float3 nightZenith = float3(0.006f, 0.010f, 0.026f);
     float3 dayZenith = float3(0.075f, 0.16f, 0.34f);
@@ -1068,8 +1789,9 @@ void MissReflection(inout ReflectionPayload payload) {
     skyColor += keyLight * pow(saturate(dot(direction, normalize(gLightDir.xyz))), 1024.0f) * 2.0f;
     skyColor += secondaryLight * pow(saturate(dot(direction, secondaryDirection)), 20.0f) * 0.12f;
     skyColor += secondaryLight * pow(saturate(dot(direction, secondaryDirection)), 1024.0f) * 2.0f;
-    payload.radiance = float4(skyColor, Luminance(skyColor));
-    payload.surfaceOptics.w = 0.0f;
+    payload.radiance = float4(payload.radiance.rgb + skyColor,
+                              Luminance(payload.radiance.rgb + skyColor));
+    payload.surfaceOptics.w = payload.probeMode == 4u ? -2.0f : 0.0f;
 }
 
 [shader("anyhit")]
@@ -1078,32 +1800,99 @@ void AnyHitReflection(inout ReflectionPayload payload, in BuiltInTriangleInterse
     // every ID before reading the corresponding record/index/vertex buffers.
     // It intentionally bypasses alpha filtering for that one diagnostic ray.
     if (payload.probeMode == 1u && (((uint)gDiagnosticInfo.x & 1u) != 0u)) return;
+    uint validatedFlags;
+    if (ValidatePrimaryHit(InstanceID(), GeometryIndex(), PrimitiveIndex(), validatedFlags) != 0u) {
+        IgnoreHit();
+        return;
+    }
     MaterialRecord material = LoadMaterialRecord(InstanceID());
+    if (payload.probeMode == 2u && NativePointRepresentsEmitter(material)) {
+        IgnoreHit();
+        return;
+    }
+    if (payload.probeMode == 6u && (material.samplerFlags >> 16u) == gSourceControls.x) {
+        // The target's coverage/emission are decoded in ClosestHit, including Fast3D alpha.
+        return;
+    }
+    // Direct-light visibility rays travel from the receiver toward the native
+    // scene light. Treat only the authored Temple glass panes as portal
+    // surfaces; the captured mesh boundaries still define the light opening.
+    if (payload.probeMode == 2u && (material.flags & MATERIAL_FLAG_DXR_WINDOW_PORTAL) != 0u) {
+        IgnoreHit();
+        return;
+    }
     const bool pbrTransmissiveMaterial = material.materialType == MATERIAL_TYPE_WATER ||
                                          material.materialType == MATERIAL_TYPE_GLASS;
     const bool pbrSurfaceRay = payload.probeMode == 0u || payload.probeMode == 1u ||
                                payload.probeMode == 4u || payload.probeMode == 5u;
-    if (material.alphaMode == 1u) {
+    const bool emissiveAlphaBlend = material.materialType == MATERIAL_TYPE_EMISSIVE &&
+        material.emissiveStrength > 0.0f && (material.alphaMode == 2u || material.alphaMode == 3u);
+    // Non-solid translucent god rays / light beam overlays (e.g. Tex_0035C0) must not occlude shadow rays.
+    if (payload.probeMode == 2u && emissiveAlphaBlend) {
+        IgnoreHit();
+        return;
+    }
+    const bool alphaBlendedMaterial = material.alphaMode == 2u || material.alphaMode == 3u;
+    const bool decodeTransmissiveAlpha = pbrSurfaceRay && pbrTransmissiveMaterial && alphaBlendedMaterial;
+    if ((payload.probeMode != 1u && pbrSurfaceRay && emissiveAlphaBlend) ||
+        decodeTransmissiveAlpha) {
         MaterialRecord sampledMaterial;
         float2 uv;
         float3 normal;
         float3 tangent, bitangent;
+        float3 geometricNormal;
         float4 vertexColor;
         float4 baseColor;
         float vertexAlpha;
         float sampledTextureAlpha;
         float textureLod;
         bool frontFace;
+        float3 unusedNaviPointAlbedo;
         DecodeMaterialHit(InstanceID(), PrimitiveIndex(), payload.probeMode, attribs, sampledMaterial,
-                          uv, normal, vertexColor, baseColor, vertexAlpha, sampledTextureAlpha, textureLod,
-                          tangent, bitangent, frontFace);
+                          uv, normal, vertexColor, baseColor, unusedNaviPointAlbedo, vertexAlpha, sampledTextureAlpha, textureLod,
+                          tangent, bitangent, geometricNormal, frontFace);
+        const float emitterCoverage = saturate(baseColor.a);
+        if (emitterCoverage <= 1.0e-4f) {
+            IgnoreHit();
+            return;
+        }
+        if (payload.probeMode != 1u && emissiveAlphaBlend) {
+            float emitterWeight = 1.0f;
+            if (payload.probeMode != 0u && NativePointRepresentsEmitter(sampledMaterial)) {
+                emitterWeight = 0.0f;
+            }
+            payload.radiance.rgb += emitterWeight * max(baseColor.rgb, 0.0f.xxx) *
+                                    max(sampledMaterial.emissiveStrength, 0.0f) * emitterCoverage;
+            payload.radiance.a = Luminance(payload.radiance.rgb);
+            // Beam overlays are additive radiance, not opaque blockers. Preserve
+            // their energy in the payload and continue to the actual hit or sky.
+            IgnoreHit();
+            return;
+        }
+    }
+    if (material.alphaMode == 1u) {
+        MaterialRecord sampledMaterial;
+        float2 uv;
+        float3 normal;
+        float3 tangent, bitangent;
+        float3 geometricNormal;
+        float4 vertexColor;
+        float4 baseColor;
+        float vertexAlpha;
+        float sampledTextureAlpha;
+        float textureLod;
+        bool frontFace;
+        float3 unusedNaviPointAlbedo;
+        DecodeMaterialHit(InstanceID(), PrimitiveIndex(), payload.probeMode, attribs, sampledMaterial,
+                          uv, normal, vertexColor, baseColor, unusedNaviPointAlbedo, vertexAlpha, sampledTextureAlpha, textureLod,
+                          tangent, bitangent, geometricNormal, frontFace);
         float alpha = baseColor.a;
         if (alpha < 0.5f) IgnoreHit();
-    } else if (payload.probeMode != 1u &&
-               (material.alphaMode == 2u || material.alphaMode == 3u) &&
+    } else if (alphaBlendedMaterial && emissiveAlphaBlend == false &&
                (!pbrTransmissiveMaterial || !pbrSurfaceRay)) {
         // Transparent/additive geometry remains visible in the original
-        // Fast3D pass and does not become an opaque blocker in secondary rays.
+        // Fast3D pass. Ignore it in every ray type so it cannot win the
+        // camera-to-raster-depth hit and zero the opaque receiver's DXR mask.
         // Water and glass retain their PBR surface response for reflection and
         // indirect rays even when Fast3D renders them with alpha blending.
         IgnoreHit();
@@ -1112,25 +1901,26 @@ void AnyHitReflection(inout ReflectionPayload payload, in BuiltInTriangleInterse
 
 [shader("closesthit")]
 void ClosestHitReflection(inout ReflectionPayload payload, in BuiltInTriangleIntersectionAttributes attribs) {
+    payload.diagnosticFlags |= 2u;
+    uint validatedFlags = 0u;
+    const uint validationError = ValidatePrimaryHit(InstanceID(), GeometryIndex(), PrimitiveIndex(), validatedFlags);
+    payload.diagnosticFlags |= validatedFlags;
+    if (validationError != 0u) {
+        payload.diagnosticError = validationError;
+        payload.materialIndex = 20u;
+        payload.surfaceOptics.w = 0.0f;
+        return;
+    }
     if (payload.probeMode == 1u && (((uint)gDiagnosticInfo.x & 1u) != 0u)) {
-        payload.diagnosticFlags |= 2u;
-        uint validatedFlags = 0u;
-        const uint validationError = ValidatePrimaryHit(InstanceID(), GeometryIndex(), PrimitiveIndex(),
-                                                        validatedFlags);
-        payload.diagnosticFlags |= validatedFlags;
-        if (validationError != 0u) {
-            payload.diagnosticError = validationError;
-            payload.materialIndex = 20u;
-            payload.surfaceOptics.w = 4.0f;
-            return;
-        }
         MaterialRecord hitMaterial = LoadMaterialRecord(InstanceID());
         const bool gateCountersEnabled = (((uint)gDiagnosticInfo.x & 4u) != 0u);
         if (gateCountersEnabled) {
             IncrementPrimaryGateCounter(PG_RECORD_HIST_BASE + min(InstanceID(), 256u), DispatchRaysIndex().xy);
             IncrementPrimaryGateCounter(PG_ALPHA_MODE_HIST_BASE + min(hitMaterial.alphaMode, 4u), DispatchRaysIndex().xy);
             IncrementPrimaryGateCounter(PG_TYPE_HIST_BASE + min(hitMaterial.materialType, 21u), DispatchRaysIndex().xy);
-            IncrementPrimaryGateCounter(PG_FLAGS_HIST_BASE + min(hitMaterial.flags, 16u), DispatchRaysIndex().xy);
+            // Keep the legacy texture/alpha-policy histogram independent of
+            // the new raster-depth-write bit.
+            IncrementPrimaryGateCounter(PG_FLAGS_HIST_BASE + (hitMaterial.flags & 15u), DispatchRaysIndex().xy);
             const bool textureFlag = (hitMaterial.flags & 1u) != 0u;
             const bool textureIndexValid = hitMaterial.textureIndex < (uint)gDiagnosticInfo.z;
             const uint textureState = textureFlag ? (textureIndexValid ? 1u : 2u) :
@@ -1146,10 +1936,13 @@ void ClosestHitReflection(inout ReflectionPayload payload, in BuiltInTriangleInt
             const bool alphaBlendCandidate = gateAlphaMode == 2u || gateAlphaMode == 3u;
             const bool transmissiveException = hitMaterial.materialType == MATERIAL_TYPE_WATER ||
                                                hitMaterial.materialType == MATERIAL_TYPE_GLASS;
+            const bool emissiveException = hitMaterial.materialType == MATERIAL_TYPE_EMISSIVE &&
+                                           hitMaterial.emissiveStrength > 0.0f;
             if (alphaBlendCandidate) IncrementPrimaryGateCounter(PG_ALPHA_BLEND_CANDIDATE, DispatchRaysIndex().xy);
             if (alphaBlendCandidate && transmissiveException)
                 IncrementPrimaryGateCounter(PG_TRANSMISSIVE_EXCEPTION, DispatchRaysIndex().xy);
-            if (payload.probeMode == 1u && alphaBlendCandidate && !transmissiveException)
+            if (payload.probeMode == 1u && alphaBlendCandidate &&
+                !transmissiveException && !emissiveException)
                 IncrementPrimaryGateCounter(PG_RAW_PRIMARY_RASTER_BLEND, DispatchRaysIndex().xy);
         }
         const bool forcedGateMode = (((uint)gDiagnosticInfo.x & 2u) != 0u);
@@ -1168,19 +1961,38 @@ void ClosestHitReflection(inout ReflectionPayload payload, in BuiltInTriangleInt
             return;
         }
     }
+    const float3 accumulatedTransparentEmission = max(payload.radiance.rgb, 0.0f.xxx);
     MaterialRecord material;
     float2 uv;
     float3 normal;
     float3 tangent, bitangent;
+    float3 geometricNormal;
     float4 vertexColor;
     float4 baseColor;
     float vertexAlpha;
     float sampledTextureAlpha;
     float textureLod;
     bool frontFace;
+    float3 naviPointAlbedo;
     DecodeMaterialHit(InstanceID(), PrimitiveIndex(), payload.probeMode, attribs, material,
-                      uv, normal, vertexColor, baseColor, vertexAlpha, sampledTextureAlpha, textureLod,
-                      tangent, bitangent, frontFace);
+                      uv, normal, vertexColor, baseColor, naviPointAlbedo, vertexAlpha, sampledTextureAlpha, textureLod,
+                      tangent, bitangent, geometricNormal, frontFace);
+    if (payload.probeMode == 6u) {
+        bool selected = (material.samplerFlags >> 16u) == gSourceControls.x &&
+                        InstanceID() == payload.instanceIndex && PrimitiveIndex() == payload.textureIndex &&
+                        material.emissiveStrength > 0.0f;
+        payload.radiance = float4(selected ? max(baseColor.rgb,0.0f) *
+            material.emissiveStrength * saturate(baseColor.a) : 0.0f.xxx, 0.0f);
+        return;
+    }
+    if (any(!isfinite(normal)) || any(!isfinite(geometricNormal)) ||
+        dot(normal, normal) <= 1.0e-6f || dot(geometricNormal, geometricNormal) <= 1.0e-6f) {
+        payload.diagnosticError = 5u;
+        payload.radiance = 0.0f;
+        payload.surfaceOptics = 0.0f;
+        payload.geometricNormal = 0.0f;
+        return;
+    }
     if (payload.probeMode == 1u && (((uint)gDiagnosticInfo.x & 1u) != 0u) &&
         (((uint)gDiagnosticInfo.x & 4u) != 0u)) {
         const uint2 launchIndex = DispatchRaysIndex().xy;
@@ -1201,6 +2013,12 @@ void ClosestHitReflection(inout ReflectionPayload payload, in BuiltInTriangleInt
         IncrementPrimaryGateCounter(recordAlphaBase + 3u + combinedAlphaBin, launchIndex);
     }
     normal = ApplyAlbedoRelief(material, uv, textureLod, normal, tangent, bitangent);
+    if (any(!isfinite(normal)) || dot(normal, normal) <= 1.0e-6f) {
+        payload.diagnosticError = 5u;
+        payload.radiance = 0.0f;
+        payload.surfaceOptics = 0.0f;
+        return;
+    }
     float wetness = saturate(material.wetness);
     float roughness = clamp(material.roughness, 0.04f, 1.0f);
     roughness = lerp(roughness, min(roughness, 0.08f), wetness);
@@ -1209,8 +2027,19 @@ void ClosestHitReflection(inout ReflectionPayload payload, in BuiltInTriangleInt
     payload.materialIndex = material.materialType;
     payload.instanceIndex = InstanceID();
     payload.textureIndex = material.textureIndex;
+    if ((material.flags & 16u) != 0u) payload.diagnosticFlags |= 128u; // raster draw writes depth
     payload.normalRoughness = float4(normal, roughness);
+    payload.geometricNormal = float4(geometricNormal, float(PrimitiveIndex()));
+    float4 reconstructed;
+    if (EvaluateFast3DCombiner(material, 1.0f.xxxx, 1.0f.xxxx,
+        DecodePackedMaterialColor(material.primitiveColor), 1.0f.xxxx,
+        DecodePackedMaterialColor(material.environmentColor), reconstructed) ||
+        any(naviPointAlbedo > 0.001f))
+        payload.diagnosticFlags |= DXR_PAYLOAD_FLAG_ALBEDO_RECONSTRUCTED;
+    if (payload.probeMode != 1u && payload.probeMode != 0u && NativePointRepresentsEmitter(material))
+        material.emissiveStrength = 0.0f;
     payload.baseColorMetallic = float4(baseColor.rgb, material.metallic);
+    payload.naviPointAlbedo = float4(naviPointAlbedo, 1.0f);
     const bool pbrTransmissiveMaterial = material.materialType == MATERIAL_TYPE_WATER ||
                                          material.materialType == MATERIAL_TYPE_GLASS;
     const bool bypassPrimaryRasterBlend = payload.probeMode == 1u &&
@@ -1219,16 +2048,35 @@ void ClosestHitReflection(inout ReflectionPayload payload, in BuiltInTriangleInt
     const bool useCandidateAlphaPolicy = payload.probeMode == 1u &&
         (((uint)gDiagnosticInfo.x & 128u) != 0u);
     const uint policyAlphaMode = useCandidateAlphaPolicy ? candidateAlphaMode : material.alphaMode;
+    const bool emissiveAlphaBlend = material.materialType == MATERIAL_TYPE_EMISSIVE &&
+        material.emissiveStrength > 0.0f && (policyAlphaMode == 2u || policyAlphaMode == 3u);
     const bool rawPrimaryRasterBlend = payload.probeMode == 1u &&
                                     (policyAlphaMode == 2u || policyAlphaMode == 3u) &&
-                                    !pbrTransmissiveMaterial;
+                                    !pbrTransmissiveMaterial && !emissiveAlphaBlend;
     const bool primaryRasterBlend = rawPrimaryRasterBlend && !bypassPrimaryRasterBlend;
     payload.surfaceOptics = float4(reflectivity, material.emissiveStrength, RayTCurrent(),
                                    primaryRasterBlend ? 3.0f : (frontFace ? 2.0f : 1.0f));
-    payload.detail = float4(uv, material.specular, baseColor.a);
+    float coverage = 0.0f;
+    const bool opacityValid = !isnan(baseColor.a) && !isinf(baseColor.a);
+    if (opacityValid && policyAlphaMode == 0u) coverage = 1.0f; // opaque alpha is not opacity
+    else if (opacityValid && policyAlphaMode == 1u) coverage = baseColor.a >= 0.5f ? 1.0f : 0.0f;
+    else if (opacityValid && emissiveAlphaBlend) coverage = max(saturate(baseColor.a), 0.70f);
+    else if (opacityValid && pbrTransmissiveMaterial) coverage = saturate(baseColor.a);
+    payload.detail = float4(uv, material.specular, coverage);
+    if (gSourceControls.y != 0u && payload.probeMode == 1u) {
+        payload.radiance = float4(baseColor.rgb,0.0f);
+        return;
+    }
 
-    if (payload.probeMode == 1u && gParams.w <= 0.5f) {
+    const bool hybridPrimaryRelight = payload.probeMode == 1u && gParams.w <= 0.5f &&
+        (material.flags & MATERIAL_FLAG_DXR_PRIMARY_RELIGHT) != 0u &&
+        (((uint)gDiagnosticInfo.x & 1u) == 0u);
+    if (hybridPrimaryRelight) payload.diagnosticFlags |= DXR_PAYLOAD_FLAG_HYBRID_RELIGHT;
+    if (payload.probeMode == 1u && gParams.w <= 0.5f && !hybridPrimaryRelight) {
         payload.radiance = float4(baseColor.rgb, Luminance(baseColor.rgb));
+        if ((uint)max(gLightDir.w, 0.0f) >= 16u) {
+            gReflectionColor[DispatchRaysIndex().xy] = 0.0f;
+        }
         return;
     }
 
@@ -1238,12 +2086,12 @@ void ClosestHitReflection(inout ReflectionPayload payload, in BuiltInTriangleInt
     float directionalVisibility = 1.0f;
     if (dot(normal, lightDirection) > 0.0f) {
         bool usedRasterSoftShadow = false;
-        if (payload.probeMode == 1u && gSceneLightColor.w > 0.5f) {
+        if (payload.probeMode == 1u && !hybridPrimaryRelight && gSceneLightColor.w > 0.5f) {
             float4 rasterClip = mul(gProjection, float4(hitPosition, 1.0f));
             if (rasterClip.w > 1.0e-5f) {
                 float2 rasterNdc = rasterClip.xy / rasterClip.w;
-                float2 rasterUv = float2(rasterNdc.x * gParams.z * 0.5f + 0.5f,
-                                         0.5f - rasterNdc.y * 0.5f);
+                float2 rasterUv = ViewportToRasterUV(float2(rasterNdc.x * gParams.z * 0.5f + 0.5f,
+                                                           0.5f - rasterNdc.y * 0.5f));
                 if (all(rasterUv >= 0.0f) && all(rasterUv <= 1.0f)) {
                     uint2 shadowSize = max(uint2(gFrameInfo.yz), uint2(1u, 1u));
                     uint2 shadowPixel = min(uint2(rasterUv * float2(shadowSize)), shadowSize - 1u);
@@ -1253,14 +2101,18 @@ void ClosestHitReflection(inout ReflectionPayload payload, in BuiltInTriangleInt
             }
         }
         if (!usedRasterSoftShadow) {
-            directionalVisibility = TraceMaterialVisibility(hitPosition, normal, lightDirection,
+            directionalVisibility = TraceMaterialVisibility(hitPosition, geometricNormal, lightDirection,
                                                             max(gParams.y, 10000.0f));
         }
     }
-    float3 direct = EvaluateMaterialDirectLight(baseColor.rgb, normal, viewDirection,
-                                                lightDirection, roughness,
-                                                material.metallic, material.specular) *
-                    max(gSceneLightColor.rgb, 0.0f.xxx) * directionalVisibility;
+    const float directionalNdotL = saturate(dot(normal, lightDirection));
+    float3 specularDirect = EvaluateMaterialSpecularLight(baseColor.rgb, normal, viewDirection,
+                                                          lightDirection, roughness,
+                                                          material.metallic, material.specular) *
+                            max(gSceneLightColor.rgb, 0.0f.xxx) * directionalVisibility;
+    float3 fast3dShade = max(gAmbientLightColor.rgb, 0.025f.xxx) +
+                         max(gSceneLightColor.rgb, 0.0f.xxx) * (directionalNdotL * directionalVisibility);
+    float3 pointLights = 0.0f;
     float secondaryLightLength = length(gSecondaryLightDir.xyz);
     float3 secondaryLightDirection = secondaryLightLength > 1.0e-6f
         ? gSecondaryLightDir.xyz / secondaryLightLength : float3(0.0f, 1.0f, 0.0f);
@@ -1272,13 +2124,14 @@ void ClosestHitReflection(inout ReflectionPayload payload, in BuiltInTriangleInt
                                (subsurface > 0.0f && dot(-normal, secondaryLightDirection) > 0.0f);
     if (max(secondaryLightColor.r, max(secondaryLightColor.g, secondaryLightColor.b)) > 1.0e-4f &&
         secondaryContributes) {
-        secondaryVisibility = TraceMaterialVisibility(hitPosition, normal, secondaryLightDirection,
+        secondaryVisibility = TraceMaterialVisibility(hitPosition, geometricNormal, secondaryLightDirection,
                                                      max(gParams.y, 10000.0f));
         if (secondaryNdotL > 0.0f) {
-            direct += EvaluateMaterialDirectLight(baseColor.rgb, normal, viewDirection,
-                                                 secondaryLightDirection, roughness,
-                                                 material.metallic, material.specular) *
-                      secondaryLightColor * secondaryVisibility;
+            specularDirect += EvaluateMaterialSpecularLight(baseColor.rgb, normal, viewDirection,
+                                                            secondaryLightDirection, roughness,
+                                                            material.metallic, material.specular) *
+                              secondaryLightColor * secondaryVisibility;
+            fast3dShade += secondaryLightColor * (saturate(secondaryNdotL) * secondaryVisibility);
         }
     }
     // The first GI hit keeps complete point-light shading. At the final
@@ -1286,28 +2139,56 @@ void ClosestHitReflection(inout ReflectionPayload payload, in BuiltInTriangleInt
     // ambient and the shadowed directional light still contribute there.
     uint pointLightCount = payload.probeMode == 5u
         ? 0u : min((uint)max(gQuality.w, 0.0f), 32u);
+    const bool splitNaviPointFromRelight = payload.probeMode == 1u && gParams.w <= 0.5f &&
+        (material.flags & MATERIAL_FLAG_NAVI_POINT_WORLD_RECEIVER) != 0u;
     [loop] for (uint lightIndex = 0u; lightIndex < pointLightCount; ++lightIndex) {
-        direct += EvaluateMaterialPointLight(baseColor.rgb, normal, viewDirection, hitPosition,
+        const uint identity = (uint)gPointLightOptics[lightIndex].x;
+        if (splitNaviPointFromRelight && identity % 8u == 1u) continue;
+        pointLights += EvaluateMaterialPointLight(baseColor.rgb, normal, geometricNormal, viewDirection, hitPosition,
                                              gPointLightPosition[lightIndex], gPointLightOptics[lightIndex],
                                              roughness, material.metallic, material.specular);
     }
     float directionalBackscatter = pow(saturate(dot(-normal, lightDirection)), 2.0f);
-    float3 backscatter = baseColor.rgb * max(gSceneLightColor.rgb, 0.0f.xxx) *
-                         (directionalBackscatter * subsurface * 0.18f * directionalVisibility);
+    fast3dShade += max(gSceneLightColor.rgb, 0.0f.xxx) *
+                   (directionalBackscatter * subsurface * 0.18f * directionalVisibility);
     float secondaryBackscatter = pow(saturate(dot(-normal, secondaryLightDirection)), 2.0f);
-    backscatter += baseColor.rgb * secondaryLightColor *
+    fast3dShade += secondaryLightColor *
                    (secondaryBackscatter * subsurface * 0.18f * secondaryVisibility);
+    float3 backscatter = 0.0f;
     [loop] for (uint lightIndex = 0u; lightIndex < pointLightCount; ++lightIndex) {
-        backscatter += EvaluateMaterialPointBackscatter(baseColor.rgb, normal, hitPosition,
+        const uint identity = (uint)gPointLightOptics[lightIndex].x;
+        if (splitNaviPointFromRelight && identity % 8u == 1u) continue;
+        backscatter += EvaluateMaterialPointBackscatter(baseColor.rgb, normal, geometricNormal, hitPosition,
                                                          gPointLightPosition[lightIndex],
                                                          gPointLightOptics[lightIndex],
                                                          subsurface * 0.18f);
     }
-    float3 ambient = baseColor.rgb * (1.0f - saturate(material.metallic)) *
-                     max(gAmbientLightColor.rgb, 0.025f.xxx);
-    float3 radiance = ambient + direct + backscatter +
-                      baseColor.rgb * max(material.emissiveStrength, 0.0f);
+    float3 diffuseFast3D = baseColor.rgb * (1.0f - saturate(material.metallic)) *
+                           SrgbToLinear(fast3dShade);
+    float3 radiance = accumulatedTransparentEmission + diffuseFast3D + specularDirect + pointLights +
+                      backscatter + baseColor.rgb * max(material.emissiveStrength, 0.0f);
+    const uint dbgMode = (uint)max(gLightDir.w, 0.0f);
+    if (payload.probeMode == 1u && dbgMode >= 16u) {
+        float4 decomposed;
+        if (dbgMode == 18u) {
+            decomposed = float4(pointLights, Luminance(pointLights) > 1.0e-5f ? 1.0f : 0.0f);
+        } else if (dbgMode == 16u) {
+            decomposed = float4(Luminance(diffuseFast3D), Luminance(specularDirect),
+                                Luminance(pointLights),
+                                Luminance(backscatter + accumulatedTransparentEmission +
+                                          baseColor.rgb * max(material.emissiveStrength, 0.0f)));
+        } else {
+            decomposed = float4(Luminance(fast3dShade), directionalVisibility,
+                                Luminance(max(gAmbientLightColor.rgb, 0.0f.xxx)),
+                                Luminance(max(gSceneLightColor.rgb, 0.0f.xxx)));
+        }
+        gReflectionColor[DispatchRaysIndex().xy] = decomposed;
+    }
     if (payload.probeMode == 1u) {
+        if (dbgMode == 18u) {
+            payload.radiance = float4(pointLights, Luminance(pointLights));
+            return;
+        }
         // Experimental path-lighting mode uses the visible primary hit as
         // the replacement radiance for the raster material pixel.
         payload.radiance = float4(radiance, Luminance(radiance));
@@ -1334,10 +2215,14 @@ void ClosestHitReflection(inout ReflectionPayload payload, in BuiltInTriangleInt
             normal * sqrt(max(0.0f, 1.0f - sampleX)) +
             (tangent * cos(angle) + bitangent * sin(angle)) * radius);
         RayDesc bounceRay;
-        bounceRay.Origin = hitPosition + normal * 0.025f;
+        if (dot(bounceDirection, geometricNormal) <= 0.0f) {
+            payload.radiance = float4(radiance, Luminance(radiance));
+            return;
+        }
+        bounceRay.Origin = OffsetMaterialRayOrigin(hitPosition, geometricNormal, bounceDirection, 0.025f);
         bounceRay.Direction = bounceDirection;
         bounceRay.TMin = 0.02f;
-        bounceRay.TMax = 256.0f;
+        bounceRay.TMax = max(gTraceSettings.z, 1.0f);
         ReflectionPayload secondBounce;
         InitializeReflectionPayload(secondBounce, 5u);
         TraceRay(gScene, RAY_FLAG_NONE,

@@ -1,0 +1,387 @@
+{
+  "schemaVersion": 1,
+  "description": "Versioned scene registry. Only mappings backed by a verified entrance, scene, and room are executable.",
+  "categories": [
+    {
+      "id": "KOKIRI_BASELINE",
+      "status": "MAPPED",
+      "scenarioId": "BASELINE_KOKIRI"
+    },
+    {
+      "id": "EXTERIOR_DAY",
+      "status": "MAPPED",
+      "scenarioId": "HYRULE_FIELD_DAY"
+    },
+    {
+      "id": "EXTERIOR_NIGHT",
+      "status": "MAPPED",
+      "scenarioId": "HYRULE_FIELD_NIGHT"
+    },
+    {
+      "id": "INTERIOR_LIT",
+      "status": "MAPPED",
+      "scenarioId": "TEMPLE_INTERIOR"
+    },
+    {
+      "id": "INTERIOR_DARK",
+      "status": "UNMAPPED"
+    },
+    {
+      "id": "WATER",
+      "status": "MAPPED",
+      "scenarioId": "LAKE_HYLIA_DAY"
+    },
+    {
+      "id": "FIRE_LAVA",
+      "status": "UNMAPPED"
+    },
+    {
+      "id": "FOG",
+      "status": "UNMAPPED"
+    },
+    {
+      "id": "TRANSLUCENT_ALPHA",
+      "status": "UNMAPPED"
+    },
+    {
+      "id": "CUTOUT_ALPHA",
+      "status": "UNMAPPED"
+    },
+    {
+      "id": "OPAQUE_MATERIAL",
+      "status": "UNMAPPED"
+    },
+    {
+      "id": "EMISSIVE_MATERIAL",
+      "status": "UNMAPPED"
+    },
+    {
+      "id": "REFLECTIVE_SPECULAR_MATERIAL",
+      "status": "UNMAPPED"
+    },
+    {
+      "id": "POINT_LIGHT",
+      "status": "UNMAPPED"
+    },
+    {
+      "id": "DIRECTIONAL_LIGHT",
+      "status": "UNMAPPED"
+    },
+    {
+      "id": "AMBIENT_LIGHT",
+      "status": "UNMAPPED"
+    },
+    {
+      "id": "GAME_LIGHTING",
+      "status": "UNMAPPED"
+    },
+    {
+      "id": "HIGH_CONTRAST",
+      "status": "UNMAPPED"
+    },
+    {
+      "id": "SHADOWED",
+      "status": "UNMAPPED"
+    },
+    {
+      "id": "OPEN_SKY",
+      "status": "UNMAPPED"
+    },
+    {
+      "id": "ENCLOSED_SPACE",
+      "status": "UNMAPPED"
+    },
+    {
+      "id": "REFLECTION_SURFACE",
+      "status": "UNMAPPED"
+    },
+    {
+      "id": "DYNAMIC_LIGHTING",
+      "status": "UNMAPPED"
+    },
+    {
+      "id": "OTHER_MATERIALLY_DISTINCT",
+      "status": "UNMAPPED"
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "BASELINE_KOKIRI",
+      "category": "KOKIRI_BASELINE",
+      "status": "MAPPED",
+      "entrance": 238,
+      "entranceHex": "0x0EE",
+      "expectedScene": 85,
+      "expectedSceneHex": "0x55",
+      "expectedRoom": 0,
+      "linkAge": 1,
+      "dayTime": 27307,
+      "nightFlag": 0,
+      "mappingEvidenceId": "KOKIRI_ENTR_0EE",
+      "viewId": "VIEW_00_DEFAULT_SPAWN_CAMERA",
+      "freezePlayer": true,
+      "freezeTime": true,
+      "expectDirectionalLight": true,
+      "notes": "ENTR_KOKIRI_FOREST_0 is mapped to scene 0x55, room 0 in this fork. Player and camera use their normal game spawn."
+    },
+    {
+      "id": "LAKE_HYLIA_DAY",
+      "category": "WATER",
+      "status": "MAPPED",
+      "entrance": 258,
+      "entranceHex": "0x102",
+      "expectedScene": 87,
+      "expectedSceneHex": "0x57",
+      "expectedRoom": 0,
+      "linkAge": 1,
+      "dayTime": 27307,
+      "nightFlag": 0,
+      "mappingEvidenceId": "LAKE_ENTR_102",
+      "viewId": "VIEW_LAKE_WATER_OVERVIEW",
+      "freezePlayer": true,
+      "freezeTime": true,
+      "expectDirectionalLight": true,
+      "notes": "Source-verified ENTR_LAKE_HYLIA_NORTH_EXIT; the captured view must still demonstrate visible water before accepting reflection quality."
+    },
+    {
+      "id": "TEMPLE_INTERIOR",
+      "category": "INTERIOR_LIT",
+      "status": "MAPPED",
+      "entrance": 83,
+      "entranceHex": "0x053",
+      "expectedScene": 67,
+      "expectedSceneHex": "0x43",
+      "expectedRoom": 1,
+      "linkAge": 1,
+      "dayTime": 27307,
+      "nightFlag": 0,
+      "mappingEvidenceId": "TEMPLE_ENTR_053",
+      "viewId": "VIEW_00_DEFAULT_SPAWN_CAMERA",
+      "freezePlayer": true,
+      "freezeTime": true,
+      "expectDirectionalLight": true,
+      "lightingContract": {
+        "id": "TEMPLE_WINDOW_MOSAIC_NAVI_V1",
+      "windowLightSource": "native scene directional light traced through the captured Temple window pane triangles; no point emitters are synthesized at window bounds",
+        "targetMaterials": [
+          {
+            "id": "mosaic_floor",
+            "resource": "scenes/shared/tokinoma_scene/tokinoma_sceneTex_011FA0",
+            "geometryEvidence": "tokinoma_room_1DL_002A58; Vtx_002508 spans Y=-40..0",
+            "material": "CERAMIC",
+            "roughness": 0.28,
+            "reflectivity": 0.18
+          },
+          {
+            "id": "window_glass_child",
+            "resource": "objects/object_toki_objects/object_toki_objects_Tex_002DC0",
+            "material": "GLASS"
+          },
+          {
+            "id": "window_beam_overlay",
+            "resource": "objects/object_toki_objects/object_toki_objects_Tex_0035C0",
+            "material": "EMISSIVE",
+            "role": "visible_translucent_beam_only"
+          },
+          {
+            "id": "window_glass_adult",
+            "resource": "objects/object_toki_objects/object_toki_objects_Tex_003DC0",
+            "material": "GLASS"
+          },
+          {
+            "id": "navi_visual_glow",
+            "resource": "objects/gameplay_keep/gFairyWingTex",
+            "material": "EMISSIVE",
+            "worldLight": "LIGHT_POINT_GLOW tinted from current Navi inner/outer colors"
+          }
+        ],
+        "runtimeGates": [
+          { "id": "exact_resources_seen_in_capture", "implementation": "PENDING_RUNTIME", "status": "NOT_RUN" },
+          { "id": "window_to_floor_radiance", "implementation": "NATIVE_DIRECTIONAL_THROUGH_EXACT_WINDOW_PORTAL_TRIANGLES", "status": "NOT_CERTIFIED" },
+          { "id": "floor_reflection_difference", "implementation": "MATERIAL_MAPPED", "status": "NOT_VERIFIED" },
+          { "id": "navi_local_irradiance", "implementation": "PALETTE_TINTED_POINT_LIGHT_AND_EMISSIVE_WINGS", "status": "NOT_VERIFIED" },
+          { "id": "soft_shadow_penumbra", "implementation": "SOURCE_CONTROL_AND_DXIL_BYTECODE_REGENERATED_RUNTIME_PENDING", "status": "NOT_VERIFIED" }
+        ],
+        "requiredComparison": {
+          "sameFrame": true,
+          "ablation": ["comparison_dxr_off", "comparison_dxr_on",
+                     "comparison_relight_off"],
+          "viewers": ["overlay", "difference", "blink"],
+          "humanVisualAcceptanceRequired": true
+        },
+        "passRequiresAllRuntimeGates": true
+      },
+      "notes": "Source entrance 0x053 and scene 0x43; actual room 1 was confirmed by a prior run. The next harness capture must also match the native directional light in the exact capture frame."
+    },
+    {
+      "id": "HYRULE_FIELD_DAY",
+      "category": "EXTERIOR_DAY",
+      "status": "MAPPED",
+      "entrance": 205,
+      "entranceHex": "0x0CD",
+      "expectedScene": 81,
+      "expectedSceneHex": "0x51",
+      "expectedRoom": 0,
+      "linkAge": 1,
+      "dayTime": 27307,
+      "nightFlag": 0,
+      "mappingEvidenceId": "FIELD_ENTR_0CD",
+      "viewId": "VIEW_00_DEFAULT_SPAWN_CAMERA",
+      "freezePlayer": true,
+      "freezeTime": true,
+      "expectDirectionalLight": true,
+      "notes": "Source-verified ENTR_HYRULE_FIELD_PAST_BRIDGE_SPAWN. Default view is checked from the capture; mapping alone does not prove effect quality."
+    },
+    {
+      "id": "HYRULE_FIELD_NIGHT",
+      "category": "EXTERIOR_NIGHT",
+      "status": "MAPPED",
+      "entrance": 205,
+      "entranceHex": "0x0CD",
+      "expectedScene": 81,
+      "expectedSceneHex": "0x51",
+      "expectedRoom": 0,
+      "linkAge": 1,
+      "dayTime": 49152,
+      "nightFlag": 1,
+      "mappingEvidenceId": "FIELD_ENTR_0CD",
+      "viewId": "VIEW_00_DEFAULT_SPAWN_CAMERA",
+      "freezePlayer": true,
+      "freezeTime": true,
+      "expectDirectionalLight": true,
+      "notes": "Source-verified ENTR_HYRULE_FIELD_PAST_BRIDGE_SPAWN. Default view is checked from the capture; mapping alone does not prove effect quality."
+    }
+  ],
+  "verifiedMappings": [
+    {
+      "id": "KOKIRI_ENTR_0EE",
+      "entrance": 238,
+      "scene": 85,
+      "room": 0,
+      "evidence": "soh/include/tables/entrance_table.h defines ENTR_KOKIRI_FOREST_0 at 0x0EE for SCENE_KOKIRI_FOREST; the fork scene table maps Kokiri Forest to 0x55 and entrance room is 0."
+    },
+    {
+      "id": "LAKE_ENTR_102",
+      "entrance": 258,
+      "scene": 87,
+      "room": 0,
+      "evidence": "entrance_table.h: ENTR_LAKE_HYLIA_NORTH_EXIT at 0x102, SCENE_LAKE_HYLIA, spawn 0. scene_table.h maps SCENE_LAKE_HYLIA to 0x57."
+    },
+    {
+      "id": "TEMPLE_ENTR_053",
+      "entrance": 83,
+      "scene": 67,
+      "room": 1,
+      "evidence": "entrance_table.h: ENTR_TEMPLE_OF_TIME_ENTRANCE 0x053, scene_table.h: SCENE_TEMPLE_OF_TIME 0x43. Spawn index 0 is not the room index. Runtime SCENE_READY log in 20261014_112821_098_TEMPLE_INTERIOR_NORMAL records room 1 twice."
+    },
+    {
+      "id": "FIELD_ENTR_0CD",
+      "entrance": 205,
+      "scene": 81,
+      "room": 0,
+      "evidence": "entrance_table.h: 0x0CD defines ENTR_HYRULE_FIELD_PAST_BRIDGE_SPAWN, SCENE_HYRULE_FIELD, spawn 0. scene_table.h maps SCENE_HYRULE_FIELD to 0x51. Actual room is a runtime gate."
+    }
+  ],
+  "views": [
+    {
+      "id": "VIEW_00_DEFAULT_SPAWN_CAMERA",
+      "camera": "GAME_DEFAULT_AT_SCENARIO_SPAWN",
+      "playerPosition": "GAME_DEFAULT_SPAWN",
+      "stableFrames": 30,
+      "timeoutFrames": 1200,
+      "cameraWarmupFrames": 120
+    },
+    {
+      "id": "VIEW_LAKE_WATER_OVERVIEW",
+      "camera": "MANIFEST_FIXED_POSE",
+      "playerPosition": "GAME_DEFAULT_SPAWN",
+      "eye": [
+        -1600,
+        -600,
+        2400
+      ],
+      "at": [
+        0,
+        -1300,
+        4000
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "fovy": 60,
+      "stableFrames": 30,
+      "timeoutFrames": 1200,
+      "cameraWarmupFrames": 120,
+      "notes": "Diagnostic candidate in scene coordinates; visible water must be checked in the actual capture before accepting water evidence."
+    }
+  ],
+  "diagnosticModes": [
+    {
+      "id": "NORMAL",
+      "backendMode": 0
+    },
+    {
+      "id": "HIT_MISS",
+      "backendMode": 1
+    },
+    {
+      "id": "WORLD_NORMAL",
+      "backendMode": 2
+    },
+    {
+      "id": "HIT_DISTANCE",
+      "backendMode": 3
+    },
+    {
+      "id": "INSTANCE_IDS",
+      "backendMode": 4
+    },
+    {
+      "id": "SYNTHETIC_LAMBERT",
+      "backendMode": 5
+    },
+    {
+      "id": "GAME_LIGHT_LAMBERT",
+      "backendMode": 6
+    }
+  ],
+  "captureStages": [
+    "RASTER_HDR",
+    "RASTER_SCENE_COLOR_COPY",
+    "DXR_REFLECTION_RGBA16F",
+    "DXR_INDIRECT_RGBA16F",
+    "COMPOSITE_PRE_TONEMAP",
+    "POST_ACES_PRE_PRESENT",
+    "FINAL_SDR_PRE_PRESENT",
+    "EMISSIVE_MASK"
+  ],
+  "bloom": {
+    "standaloneTarget": "NOT_PRESENT",
+    "capturedInputs": [
+      "DXR_REFLECTION_RGBA16F",
+      "EMISSIVE_MASK"
+    ],
+    "compositeDescription": "The current backend evaluates its bloom contribution inline in the composite; no independent bloom render target exists."
+  },
+  "comparison": {
+    "scope": "DXR_EFFECT_STAGES_ONLY; ENHANCED_RASTER_AND_TONEMAPPING_UNCHANGED",
+    "sameFrame": true,
+    "gpuDisplayControls": [
+      "comparison_dxr_off",
+      "comparison_dxr_on",
+      "comparison_shadows_only",
+      "comparison_optics_off",
+      "comparison_indirect_off",
+      "comparison_relight_off"
+    ],
+    "hud": "EXCLUDED_FROM_PAIR",
+    "viewers": [
+      "split",
+      "overlay",
+      "blink",
+      "difference"
+    ]
+  }
+}

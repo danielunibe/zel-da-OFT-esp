@@ -27,6 +27,7 @@
 #include <filesystem>
 #include <fstream>
 #include <array>
+#include <climits>
 #include <string>
 #include "fast/backends/DxrAccelerationStructureManager.h"
 #include "fast/backends/DxrShadowRenderer.h"
@@ -34,6 +35,8 @@
 #include "fast/backends/GpuProfilerD3D12.h"
 #include "fast/backends/TemporalManager.h"
 #include "fast/backends/TemporalTrace.h"
+#include "fast/backends/DxrPipelinePolicy.h"
+#include "fast/backends/DxrSequencePolicy.h"
 
 // ==== FORENSIC PHASE 2: minimal dependency-free PNG writer (RGBA, stored deflate) ====
 #include <spdlog/spdlog.h>
@@ -128,14 +131,6 @@ static bool DxrTruthV2SequenceEnabled() {
     return enabled;
 }
 
-static bool DxrDiagnosticSequenceEnabled() {
-    static const bool enabled = [] {
-        const char* value = getenv("COUCH_DXR_DIAGNOSTIC_SEQUENCE");
-        return value && strcmp(value, "1") == 0;
-    }();
-    return enabled || DxrTruthV2SequenceEnabled();
-}
-
 static bool DxrGateCounterSequenceEnabled() {
     static const bool enabled = [] {
         const char* value = getenv("COUCH_DXR_GPU_GATE_COUNTERS");
@@ -144,17 +139,34 @@ static bool DxrGateCounterSequenceEnabled() {
     return enabled;
 }
 
-// DXR Truth Mode (V1): COUCH_DXR_TRUTH_SEQUENCE=1 arms the 6-stage automatic
-// OFF -> HIT_MISS -> NORMAL -> DISTANCE -> IDS -> SYNTHETIC_LAMBERT sweep used
-// for V1 evidence. Manual selection (no sequence) uses the TruthMode cvar
-// (0..5, registered by DxrSurfaceRenderer::Init) with COUCH_DXR_TRUTH_MODE as
-// headless fallback; both map to DxrTruthView 10..14 without recompiling.
+// DXR Truth Mode (V1): COUCH_DXR_TRUTH_SEQUENCE=1 alone arms the six-stage
+// OFF -> HIT_MISS -> NORMAL -> DISTANCE -> IDS -> SYNTHETIC_LAMBERT sweep.
+// Manual selection (no sequence) uses the TruthMode cvar and remains unchanged.
 static bool DxrTruthSequenceEnabled() {
     static const bool enabled = [] {
         const char* value = getenv("COUCH_DXR_TRUTH_SEQUENCE");
         return value && strcmp(value, "1") == 0;
     }();
     return enabled;
+}
+
+static bool DxrDiagnosticSwitchEnabled() {
+    static const bool enabled = [] {
+        const char* value = getenv("COUCH_DXR_DIAGNOSTIC_SEQUENCE");
+        return value && strcmp(value, "1") == 0;
+    }();
+    return enabled;
+}
+
+static Fast::DxrSequenceMode DxrSequenceModeFromEnvironment() {
+    return Fast::SelectDxrSequenceMode(DxrDiagnosticSwitchEnabled(),
+                                       DxrTruthSequenceEnabled(),
+                                       DxrTruthV2SequenceEnabled(),
+                                       DxrGateCounterSequenceEnabled());
+}
+
+static bool DxrDiagnosticSequenceEnabled() {
+    return DxrSequenceModeFromEnvironment() != Fast::DxrSequenceMode::None;
 }
 
 static int DxrTruthManualView() {
@@ -196,32 +208,11 @@ static int DxrDiagnosticSequenceStartFrame() {
 }
 
 static int DxrDiagnosticSequenceStage(int frame) {
-    if (!DxrDiagnosticSequenceEnabled()) return -1;
-    // DXR Truth Mode auto-sequence (V1 evidence): when COUCH_DXR_TRUTH_SEQUENCE=1,
-    // stages 100..105 replace the legacy 0..7 chain with OFF + the five Truth
-    // views (600 frames each, captures at each boundary via the existing
-    // ForensicInCaptureWindow). Traversal stays OFF-identical in every stage.
-    if (DxrTruthV2SequenceEnabled()) {
-        // V2 sweep: 200=NORMAL,201=SYNTHETIC,202=GAME_LIGHT,203=OFF.
-        const int v2Elapsed = frame - DxrDiagnosticSequenceStartFrame();
-        if (v2Elapsed < 0 || v2Elapsed >= 2400) return -1;
-        return 200 + v2Elapsed / 600;
-    }
-    if (DxrTruthSequenceEnabled()) {
-        const int truthElapsed = frame - DxrDiagnosticSequenceStartFrame();
-        if (truthElapsed < 0 || truthElapsed >= 3600) return -1;
-        return 100 + truthElapsed / 600; // 100=OFF,101=HIT_MISS,102=NORMAL,103=DIST,104=IDS,105=LAMBERT
-    }
-    const int elapsed = frame - DxrDiagnosticSequenceStartFrame();
-    if (DxrGateCounterSequenceEnabled()) {
-        // Compare the current gate with the Fast3D-state candidate in adjacent
-        // frames. Neither blend bypass nor vertex-alpha bypass is enabled.
-        if (elapsed == 0) return 6;
-        if (elapsed == 1) return 7;
-        return -1;
-    }
-    if (elapsed < 0 || elapsed >= 4800) return -1;
-    return elapsed / 600;
+    const auto mode = DxrSequenceModeFromEnvironment();
+    const int startFrame = DxrDiagnosticSequenceStartFrame();
+    if (startFrame < 0) return -1;
+    const int elapsed = frame - startFrame;
+    return Fast::DxrSequenceStage(mode, elapsed);
 }
 
 // FORENSIC (bisection): COUCH_FORENSIC_CAPTURES=0 disables ALL GPU captures/readbacks
@@ -248,7 +239,8 @@ struct InFrameReadback {
     UINT bytesPerPixel = 0;
     bool wantPng = true;                           // timeline samples log stats only
 };
-static InFrameReadback gInFrame[8]; // raster, composite, shaded source, two SDR checkpoints, reflection, GI, emission
+static constexpr int kInFrameStages = 20;
+static InFrameReadback gInFrame[kInFrameStages]; // required passes, controls, GPU SDR comparisons, Navi radiance and point ON/OFF
 static Microsoft::WRL::ComPtr<ID3D12Fence> gInFrameFence;
 static HANDLE gInFrameEvent = nullptr;
 static UINT64 gInFrameFenceVal = 0;
@@ -264,7 +256,10 @@ static const int kTimelineFirst = 300;
 static const int kTimelineLast = 12000;
 static int gTimelinePngs = 0;
 static uint32_t gHarnessCapturedMask = 0;
+static uint32_t gHarnessCaptureAttemptMask = 0;
 static std::array<std::string, 8> gHarnessCaptureFiles{};
+static std::array<Fast::DxrCaptureEvidence, 8> gHarnessCaptureEvidence{};
+static std::string gHarnessCaptureRequestSnapshot;
 static float ForensicHalfToFloat(uint16_t value) {
     const bool negative = (value & 0x8000u) != 0;
     const uint16_t exponent = (value >> 10) & 0x1Fu;
@@ -338,11 +333,9 @@ static bool ForensicInCaptureWindow(int f) {
         cvars->SetInteger("gEnhancements.Graphics.DXR.CaptureFrame",0);
         requestedFrame=-1;
     }
-    if (DxrDiagnosticSequenceEnabled()) {
-        const int elapsed = f - DxrDiagnosticSequenceStartFrame();
-        const int window = DxrTruthV2SequenceEnabled() ? 2400 : 4800;
-        return elapsed >= 0 && elapsed < window && (elapsed % 600) == 0;
-    }
+    if (DxrDiagnosticSequenceEnabled())
+        return Fast::DxrSequenceCaptureDue(DxrSequenceModeFromEnvironment(),
+                                           f - DxrDiagnosticSequenceStartFrame());
     const char* start=getenv("COUCH_CAPTURE_START_FRAME");
     if (start) { const int frame=atoi(start); return frame>0 && f>=frame && f<frame+4; }
     return (f >= 600 && f < 604) || (f >= 2400 && f < 2404);
@@ -397,16 +390,60 @@ static bool SceneHarnessReadCaptureRequest(std::string& request) {
     return !request.empty();
 }
 
+static bool SceneHarnessNaviIsolation() {
+    const char* isolation = std::getenv("COUCH_DXR_NAVI_ISOLATION");
+    return CouchNaviPilotActive() && (!isolation || std::strcmp(isolation, "0") != 0);
+}
+
 static const char* SceneHarnessStageName(int slot) {
-    static const char* names[] = {"raster_hdr", "composite_pre_tonemap", "dxr_direct_shaded", "post_aces_pre_present",
-                                  "final_sdr", "dxr_reflection", "dxr_indirect", "emissive_mask"};
-    return slot >= 0 && slot < 8 ? names[slot] : "unknown";
+    if (CouchNaviPilotActive() && slot == 17) return "navi_point_direct";
+    if (CouchNaviPilotActive() && slot == 18) return "navi_point_off_sdr";
+    if (CouchNaviPilotActive() && slot == 19) return "navi_point_on_sdr";
+    if (SceneHarnessNaviIsolation()) {
+        switch (slot) {
+            case 8: return "navi_a_hdr";
+            case 9: return "navi_c_hdr";
+            case 15: return "navi_d_hdr";
+            case 11: return "navi_b_sdr";
+            case 13: return "navi_a_sdr";
+            case 14: return "navi_c_sdr";
+            case 16: return "navi_d_sdr";
+        }
+    }
+    static const char* names[] = {"raster_hdr", "composite_pre_tonemap", "raster_scene_color_copy",
+                                  "post_aces_pre_present", "final_sdr_pre_present", "dxr_reflection",
+                                  "dxr_indirect", "emissive_mask", "surface_optics_off", "indirect_off",
+                                  "comparison_dxr_off", "comparison_dxr_on", "comparison_shadows_only",
+                                  "comparison_optics_off", "comparison_indirect_off",
+                                  "relight_off", "comparison_relight_off", "navi_point_direct",
+                                  "comparison_navi_point_off", "comparison_navi_point_on"};
+    return slot >= 0 && slot < kInFrameStages ? names[slot] : "unknown";
+}
+
+// Visual-ablation controls are rendered into HDR targets and re-encoded to SDR
+// by CaptureDxrComparisonImage. Slots 8/9 are the two original HDR controls;
+// relight-off is appended at 15 so every previously published slot number and
+// file name stays stable for the existing capture consumers.
+static int SceneHarnessAblationSlot(int index) {
+    static const int slots[] = {8, 9, 15};
+    return index >= 0 && index < 3 ? slots[index] : -1;
+}
+
+// Comparison index -> slot. The mapping is not 10+index because slot 15 is
+// the relight-off HDR control; comparison_relight_off therefore sits at 16.
+static int SceneHarnessComparisonSlot(int index) {
+    static const int slots[] = {10, 11, 12, 13, 14, 16, 18, 19};
+    return index >= 0 && index < 8 ? slots[index] : -1;
 }
 
 static const char* SceneHarnessStageId(int slot) {
-    static const char* names[] = {"RASTER_HDR", "COMPOSITE_PRE_TONEMAP", "DXR_DIRECT_SHADED", "POST_ACES_PRE_PRESENT",
-                                  "FINAL_SDR", "DXR_REFLECTION_RGBA16F", "DXR_INDIRECT_RGBA16F", "EMISSIVE_MASK"};
-    return slot >= 0 && slot < 8 ? names[slot] : "UNKNOWN";
+    if (SceneHarnessNaviIsolation() && (slot == 8 || slot == 9 || slot == 15))
+        return SceneHarnessStageName(slot);
+    if (slot == 8) return "SURFACE_OPTICS_OFF";
+    if (slot == 9) return "INDIRECT_OFF";
+    if (slot == 15) return "RELIGHT_OFF";
+    if (slot >= 10 && slot < kInFrameStages) return SceneHarnessStageName(slot);
+    return Fast::DxrCaptureStageId(slot);
 }
 
 static bool SceneHarnessWriteMetadata(int slot, int frame, const char* format, int width, int height,
@@ -429,27 +466,195 @@ static bool SceneHarnessWriteMetadata(int slot, int frame, const char* format, i
     return static_cast<bool>(metadata);
 }
 
-static void SceneHarnessMarkCaptured(int slot, const std::string& payloadName) {
-    if (!SceneHarnessActive() || slot < 0 || slot >= 8) return;
-    gHarnessCapturedMask |= 1u << slot;
-    gHarnessCaptureFiles[slot] = payloadName;
-    if (gHarnessCapturedMask != 0xFFu) return;
-
-    const auto root = SceneHarnessRunRoot();
-    std::string request;
-    if (!SceneHarnessReadCaptureRequest(request)) return;
-    std::ofstream ack(root / "capture.ack.json", std::ios::binary | std::ios::trunc);
-    if (!ack) return;
-    ack << "{\"schema_version\":1,\"sequence\":1,\"result\":\"PASS\",\"capture_mask\":255,\"captures\":{";
-    for (int i = 0; i < 8; ++i) {
-        if (i) ack << ',';
-        ack << "\"" << SceneHarnessStageId(i) << "\":\"captures/" << gHarnessCaptureFiles[i] << "\"";
+static bool SceneHarnessExpectedFormat(int slot, DXGI_FORMAT format) {
+    switch (slot) {
+        case 0:
+        case 1:
+        case 2:
+        case 5:
+        case 6: return format == DXGI_FORMAT_R16G16B16A16_FLOAT;
+        case 3:
+        case 4: return format == DXGI_FORMAT_R8G8B8A8_UNORM;
+        case 7: return format == DXGI_FORMAT_R16_FLOAT || format == DXGI_FORMAT_R32_FLOAT;
+        default: return false;
     }
-    ack << "},\"request\":" << request << "}\n";
-    ForensicLog("[SCENE-HARNESS][CAPTURE_ACK] sequence=1 mask=255 result=PASS");
 }
 
-static bool SceneHarnessWriteFloatPayload(int slot, const InFrameReadback& rb, const void* mapped) {
+static uint32_t SceneHarnessReadBigEndian32(std::istream& input, bool& ok) {
+    uint8_t bytes[4]{};
+    input.read(reinterpret_cast<char*>(bytes), sizeof(bytes));
+    ok = static_cast<bool>(input);
+    return (static_cast<uint32_t>(bytes[0]) << 24) | (static_cast<uint32_t>(bytes[1]) << 16) |
+           (static_cast<uint32_t>(bytes[2]) << 8) | static_cast<uint32_t>(bytes[3]);
+}
+
+static bool SceneHarnessValidatePng(const std::filesystem::path& path, int width, int height) {
+    std::ifstream png(path, std::ios::binary);
+    if (!png) return false;
+    uint8_t signature[8]{};
+    png.read(reinterpret_cast<char*>(signature), sizeof(signature));
+    static constexpr uint8_t expectedSignature[8] = {137, 80, 78, 71, 13, 10, 26, 10};
+    if (!png || std::memcmp(signature, expectedSignature, sizeof(signature)) != 0) return false;
+
+    bool sawHeader = false;
+    bool sawData = false;
+    bool sawEnd = false;
+    while (png && !sawEnd) {
+        bool ok = false;
+        const uint32_t length = SceneHarnessReadBigEndian32(png, ok);
+        if (!ok || length > (1u << 30)) return false;
+        char type[4]{};
+        png.read(type, sizeof(type));
+        if (!png) return false;
+        if (std::memcmp(type, "IHDR", 4) == 0) {
+            if (sawHeader || length != 13) return false;
+            const uint32_t pngWidth = SceneHarnessReadBigEndian32(png, ok);
+            if (!ok) return false;
+            const uint32_t pngHeight = SceneHarnessReadBigEndian32(png, ok);
+            if (!ok || pngWidth != static_cast<uint32_t>(width) ||
+                pngHeight != static_cast<uint32_t>(height)) return false;
+            png.seekg(5, std::ios::cur);
+            if (!png) return false;
+            sawHeader = true;
+        } else {
+            if (std::memcmp(type, "IDAT", 4) == 0 && length > 0) sawData = true;
+            if (std::memcmp(type, "IEND", 4) == 0) {
+                if (length != 0) return false;
+                sawEnd = true;
+            }
+            png.seekg(static_cast<std::streamoff>(length), std::ios::cur);
+            if (!png) return false;
+        }
+        png.seekg(4, std::ios::cur); // CRC
+        if (!png) return false;
+    }
+    return sawHeader && sawData && sawEnd;
+}
+
+static bool SceneHarnessValidatePayload(int slot, const std::filesystem::path& path,
+                                        int width, int height, DXGI_FORMAT format) {
+    if (width <= 0 || height <= 0 || !SceneHarnessExpectedFormat(slot, format)) return false;
+    if (format == DXGI_FORMAT_R8G8B8A8_UNORM) return SceneHarnessValidatePng(path, width, height);
+    const UINT bytesPerPixel = ForensicBytesPerPixel(format);
+    if (bytesPerPixel == 0) return false;
+    std::error_code error;
+    const uint64_t actualSize = std::filesystem::file_size(path, error);
+    const uint64_t expectedSize = static_cast<uint64_t>(width) * static_cast<uint64_t>(height) * bytesPerPixel;
+    std::ifstream payload(path, std::ios::binary);
+    return !error && actualSize == expectedSize && payload.good();
+}
+
+static int SceneHarnessRequestSequence(const std::string& request) {
+    const std::string key = "\"sequence\"";
+    const auto keyPosition = request.find(key);
+    if (keyPosition == std::string::npos) return 0;
+    const auto colon = request.find(':', keyPosition + key.size());
+    if (colon == std::string::npos) return 0;
+    char* end = nullptr;
+    const long value = std::strtol(request.c_str() + colon + 1, &end, 10);
+    return end != request.c_str() + colon + 1 && value > 0 && value <= INT_MAX
+        ? static_cast<int>(value) : 0;
+}
+
+static void SceneHarnessMarkCaptured(int slot, const std::string& payloadName, int frame,
+                                     int width, int height, DXGI_FORMAT format,
+                                     bool payloadCompleteAndReadable, bool finiteSignals) {
+    if (!SceneHarnessActive() || slot < 0 || slot >= 8) return;
+    gHarnessCaptureAttemptMask |= 1u << slot;
+    std::string request;
+    const bool requestReadable = SceneHarnessReadCaptureRequest(request);
+    if (gHarnessCaptureRequestSnapshot.empty() && requestReadable) gHarnessCaptureRequestSnapshot = request;
+    const int requestSequence = requestReadable ? SceneHarnessRequestSequence(request) : 0;
+    Fast::DxrCaptureEvidence sample{};
+    sample.frame = frame;
+    sample.requestSequence = requestSequence;
+    sample.dimensionsValid = width > 0 && height > 0;
+    sample.formatValid = SceneHarnessExpectedFormat(slot, format);
+    sample.payloadCompleteAndReadable = payloadCompleteAndReadable &&
+        SceneHarnessValidatePayload(slot, SceneHarnessCaptureRoot() / payloadName, width, height, format);
+    if (format == DXGI_FORMAT_R8G8B8A8_UNORM && sample.payloadCompleteAndReadable) {
+        const std::string rawSuffix = "_raw.png";
+        if (payloadName.size() < rawSuffix.size() ||
+            payloadName.compare(payloadName.size() - rawSuffix.size(), rawSuffix.size(), rawSuffix) != 0) {
+            sample.payloadCompleteAndReadable = false;
+        } else {
+            const std::string previewName = payloadName.substr(0, payloadName.size() - rawSuffix.size()) +
+                                            "_opaque_preview.png";
+            sample.payloadCompleteAndReadable = SceneHarnessValidatePng(
+                SceneHarnessCaptureRoot() / previewName, width, height);
+        }
+    }
+    sample.finiteSignals = finiteSignals;
+    sample.requestMatches = requestReadable && requestSequence == 1 &&
+        request == gHarnessCaptureRequestSnapshot;
+    gHarnessCaptureEvidence[slot] = sample;
+    if (sample.dimensionsValid && sample.formatValid && sample.payloadCompleteAndReadable &&
+        sample.finiteSignals && sample.requestMatches) {
+        gHarnessCapturedMask |= 1u << slot;
+        gHarnessCaptureFiles[slot] = payloadName;
+    } else {
+        gHarnessCaptureFiles[slot].clear();
+        ForensicLog("[SCENE-HARNESS][CAPTURE_REJECTED] stage=" + std::string(SceneHarnessStageId(slot)) +
+                    " frame=" + std::to_string(frame) +
+                    " dimensionsValid=" + std::to_string(sample.dimensionsValid ? 1 : 0) +
+                    " formatValid=" + std::to_string(sample.formatValid ? 1 : 0) +
+                    " payloadValid=" + std::to_string(sample.payloadCompleteAndReadable ? 1 : 0) +
+                    " finiteSignals=" + std::to_string(sample.finiteSignals ? 1 : 0) +
+                    " requestMatches=" + std::to_string(sample.requestMatches ? 1 : 0));
+    }
+    if (gHarnessCaptureAttemptMask != 0xFFu) return;
+
+    const auto root = SceneHarnessRunRoot();
+    const bool captureComplete = Fast::DxrCaptureSetComplete(gHarnessCaptureEvidence);
+    int captureFrame = gHarnessCaptureEvidence[0].frame;
+    const Fast::DxrFrameEvidence dxr = gSelf ? gSelf->GetDxrFrameEvidence() : Fast::DxrFrameEvidence{};
+    const bool dxrFrameMatches = dxr.frame == captureFrame;
+    const bool dxrDispatchExecuted = dxrFrameMatches && dxr.DispatchExecuted();
+    const bool dxrSignalsProduced = dxrFrameMatches && dxr.SignalsProduced();
+    const bool dxrCompositionExecuted = dxrFrameMatches && dxr.CompositionExecuted();
+    const char* dxrExecutionStatus = dxrDispatchExecuted && dxrSignalsProduced ? "PASS"
+        : dxrFrameMatches && dxr.requested ? "PARTIAL" : "NOT_RUN";
+    const char* dxrCompositionStatus = dxrCompositionExecuted ? "PASS"
+        : dxrFrameMatches && dxr.requested ? "PARTIAL" : "NOT_RUN";
+    const bool dxrVisualCertified = Fast::DxrVisualContributionVerified(false, dxr);
+    const char* dxrVisualStatus = dxrVisualCertified ? "DXR_VISUAL_VERIFIED"
+        : dxrFrameMatches && dxr.requested ? "PARTIAL" : "NOT_RUN";
+    std::ofstream ack(root / "capture.ack.json", std::ios::binary | std::ios::trunc);
+    if (!ack) return;
+    ack << "{\"schema_version\":2,\"sequence\":1,\"result\":\""
+        << (captureComplete ? "CAPTURE_COMPLETE" : "PARTIAL") << "\",\"capture_mask\":"
+        << gHarnessCapturedMask << ",\"capture_frame\":" << captureFrame << ",\"captures\":{";
+    for (int i = 0; i < 8; ++i) {
+        if (i) ack << ',';
+        ack << "\"" << SceneHarnessStageId(i) << "\":\"";
+        if (!gHarnessCaptureFiles[i].empty()) ack << "captures/" << gHarnessCaptureFiles[i];
+        ack << "\"";
+    }
+    ack << "},\"dxr_frame\":{\"frame\":" << dxr.frame
+        << ",\"request_matches_capture\":" << (dxrFrameMatches ? "true" : "false")
+        << ",\"requested\":" << (dxr.requested ? "true" : "false")
+        << ",\"adapter_compatible\":" << (dxr.adapterCompatible ? "true" : "false")
+        << ",\"tlas_valid\":" << (dxr.tlasValid ? "true" : "false")
+        << ",\"dispatch_calls\":" << dxr.dispatchCalls
+        << ",\"dispatch_executed\":" << (dxrDispatchExecuted ? "true" : "false")
+        << ",\"signal_outputs_written\":" << dxr.signalOutputsWritten
+        << ",\"signals_produced\":" << (dxrSignalsProduced ? "true" : "false")
+        << ",\"composite_draws\":" << dxr.compositeDraws
+        << ",\"composition_executed\":" << (dxrCompositionExecuted ? "true" : "false")
+        << ",\"execution_status\":\"" << dxrExecutionStatus
+        << "\",\"composition_status\":\"" << dxrCompositionStatus
+        << "\",\"visual_status\":\"" << dxrVisualStatus
+        << "\",\"visual_reason\":\"causal_same_frame_ablation_not_run\"}"
+        << ",\"presentation_status\":\"PRE_PRESENT_CAPTURE\",\"request\":"
+        << (requestReadable ? request : "null") << "}\n";
+    ack.close();
+    ForensicLog("[SCENE-HARNESS][CAPTURE_ACK] sequence=1 mask=" +
+                std::to_string(gHarnessCapturedMask) + " result=" +
+                (captureComplete ? "CAPTURE_COMPLETE" : "PARTIAL"));
+}
+
+static bool SceneHarnessWriteFloatPayload(int slot, const InFrameReadback& rb, const void* mapped,
+                                          std::string& writtenFilename) {
     if (!SceneHarnessActive() || !SceneHarnessCaptureRequested() || !mapped || rb.bytesPerPixel < 2 ||
         (rb.bytesPerPixel % 2) != 0) return false;
     const auto captureRoot = SceneHarnessCaptureRoot();
@@ -469,6 +674,7 @@ static bool SceneHarnessWriteFloatPayload(int slot, const InFrameReadback& rb, c
     char frameSuffix[32]{};
     snprintf(frameSuffix, sizeof(frameSuffix), "_frame%06d", rb.frame);
     const std::string filename = std::string(SceneHarnessStageName(slot)) + frameSuffix + extension;
+    writtenFilename = filename;
     std::ofstream payload(captureRoot / filename, std::ios::binary | std::ios::trunc);
     const auto* source = static_cast<const std::uint8_t*>(mapped);
     const std::size_t rowBytes = static_cast<std::size_t>(rb.W) * rb.bytesPerPixel;
@@ -479,7 +685,6 @@ static bool SceneHarnessWriteFloatPayload(int slot, const InFrameReadback& rb, c
     if (!payload) return false;
     payload.close();
     if (!SceneHarnessWriteMetadata(slot, rb.frame, ForensicFormatName(rb.format), rb.W, rb.H, filename)) return false;
-    SceneHarnessMarkCaptured(slot, filename);
     return true;
 }
 
@@ -538,8 +743,7 @@ static void DxrDiagnosticSceneGateUpdate(int frame, int sceneId) {
     }
     // The policy audit samples NORMAL at +0 and candidate at +1, then
     // completes after the candidate readback window.
-    const int completionFrames =
-        DxrGateCounterSequenceEnabled() ? 3 : (DxrTruthV2SequenceEnabled() ? 2400 : 4800);
+    const int completionFrames = Fast::DxrSequenceDuration(DxrSequenceModeFromEnvironment());
     if (gDxrDiagnosticSequenceStartFrame >= 0 &&
         frame - gDxrDiagnosticSequenceStartFrame >= completionFrames) {
         gDxrDiagnosticSequenceComplete = true;
@@ -643,7 +847,11 @@ static void ForensicResolveInFrameCaptures(ID3D12Device* device, ID3D12CommandQu
         " completed=" + std::to_string(gInFrameFence->GetCompletedValue()));
     static std::vector<uint8_t> rawPairPixels;
     static int rawPairWidth = 0, rawPairHeight = 0, rawPairFrame = -1;
-    for (int i = 0; i < 8; ++i) {
+    // Resolve optional controls before required slot 7 writes capture.ack.
+    // The request must remain open until their payload/metadata is saved.
+    for (int pass = 0; pass < kInFrameStages; ++pass) {
+        const int optionalCount = kInFrameStages - 8;
+        const int i = pass < optionalCount ? 8 + pass : pass - optionalCount;
         InFrameReadback& rb = gInFrame[i];
         if (!rb.pending || !rb.buf) continue;
         D3D12_RANGE mr = { 0, (SIZE_T)rb.buf->GetDesc().Width };
@@ -672,12 +880,12 @@ static void ForensicResolveInFrameCaptures(ID3D12Device* device, ID3D12CommandQu
                         const uint16_t* pixel = row + static_cast<size_t>(x) * 4;
                         double channel[3];
                         bool pixelFinite = true;
-                        for (int c = 0; c < 3; ++c) {
+                        for (int c = 0; c < 4; ++c) {
                             const float value = ForensicHalfToFloat(pixel[c]);
-                            channel[c] = value;
                             if (std::isnan(value)) { ++nanChannels; pixelFinite = false; }
                             else if (std::isinf(value)) { ++infChannels; pixelFinite = false; }
-                            else {
+                            else if (c < 3) {
+                                channel[c] = value;
                                 if (value < 0.0f) ++negativeChannels;
                                 rgbMin[c] = std::min(rgbMin[c], static_cast<double>(value));
                                 rgbMax[c] = std::max(rgbMax[c], static_cast<double>(value));
@@ -726,11 +934,13 @@ static void ForensicResolveInFrameCaptures(ID3D12Device* device, ID3D12CommandQu
                     static_cast<unsigned long long>(static_cast<uint64_t>(pixelCount) - luminance.size()), pixelCount);
                 ForensicLog(stats);
                 if (SceneHarnessActive()) {
-                    SceneHarnessWriteFloatPayload(i, rb, mapped);
+                    std::string floatFilename;
+                    const bool payloadWritten = SceneHarnessWriteFloatPayload(i, rb, mapped, floatFilename);
                     const auto statsPath = SceneHarnessCaptureRoot() /
                         (std::string(SceneHarnessStageName(i)) + "_frame" + std::to_string(rb.frame) + ".stats.json");
                     std::ofstream statsJson(statsPath, std::ios::binary | std::ios::trunc);
                     std::string request;
+                    bool statsWritten = false;
                     if (statsJson && SceneHarnessReadCaptureRequest(request)) {
                         statsJson << "{\"stage\":\"" << SceneHarnessStageId(i) << "\",\"frame\":" << rb.frame
                                   << ",\"format\":\"R16G16B16A16_FLOAT\",\"space\":\"linear\",\"width\":"
@@ -746,8 +956,15 @@ static void ForensicResolveInFrameCaptures(ID3D12Device* device, ID3D12CommandQu
                                   << ",\"pixels_above_4\":" << above4 << ",\"pixels_above_8\":" << above8
                                   << ",\"negative_channels\":" << negativeChannels
                                   << ",\"nan_channels\":" << nanChannels << ",\"inf_channels\":" << infChannels
+                                  << ",\"finite_signals\":" << ((nanChannels == 0 && infChannels == 0) ? "true" : "false")
+                                  << ",\"payload_complete\":" << (payloadWritten ? "true" : "false")
                                   << ",\"request\":" << request << "}\n";
+                        statsJson.flush();
+                        statsWritten = static_cast<bool>(statsJson);
                     }
+                    SceneHarnessMarkCaptured(i, floatFilename, rb.frame, W, H, rb.format,
+                                             payloadWritten && statsWritten,
+                                             nanChannels == 0 && infChannels == 0);
                 }
                 D3D12_RANGE er{ 0, 0 };
                 rb.buf->Unmap(0, &er);
@@ -756,7 +973,8 @@ static void ForensicResolveInFrameCaptures(ID3D12Device* device, ID3D12CommandQu
             }
             if (rb.format != DXGI_FORMAT_R8G8B8A8_UNORM) {
                 if (SceneHarnessActive()) {
-                    SceneHarnessWriteFloatPayload(i, rb, mapped);
+                    std::string floatFilename;
+                    const bool payloadWritten = SceneHarnessWriteFloatPayload(i, rb, mapped, floatFilename);
                     const bool halfPrecision = rb.format == DXGI_FORMAT_R16_FLOAT ||
                         rb.format == DXGI_FORMAT_R16G16_FLOAT;
                     const std::size_t bytesPerChannel = halfPrecision ? sizeof(uint16_t) : sizeof(float);
@@ -781,17 +999,25 @@ static void ForensicResolveInFrameCaptures(ID3D12Device* device, ID3D12CommandQu
                         (std::string(SceneHarnessStageName(i)) + "_frame" + std::to_string(rb.frame) + ".stats.json");
                     std::ofstream statsJson(statsPath, std::ios::binary | std::ios::trunc);
                     std::string request;
+                    bool statsWritten = false;
                     if (statsJson) {
-                        SceneHarnessReadCaptureRequest(request);
+                        const bool requestRead = SceneHarnessReadCaptureRequest(request);
                         statsJson << "{\"stage\":\"" << SceneHarnessStageId(i) << "\",\"frame\":" << rb.frame
                                   << ",\"format\":\"" << ForensicFormatName(rb.format) << "\",\"space\":\"linear\",\"width\":"
                                   << W << ",\"height\":" << H << ",\"min\":" << (finiteCount ? minimum : 0.0)
                                   << ",\"max\":" << (finiteCount ? maximum : 0.0)
                                   << ",\"mean\":" << (finiteCount ? sum / finiteCount : 0.0)
-                                  << ",\"nan_channels\":" << nanCount << ",\"inf_channels\":" << infCount;
-                        if (!request.empty()) statsJson << ",\"request\":" << request;
+                                  << ",\"nan_channels\":" << nanCount << ",\"inf_channels\":" << infCount
+                                  << ",\"finite_signals\":" << ((nanCount == 0 && infCount == 0) ? "true" : "false")
+                                  << ",\"payload_complete\":" << (payloadWritten ? "true" : "false");
+                        if (requestRead) statsJson << ",\"request\":" << request;
                         statsJson << "}\n";
+                        statsJson.flush();
+                        statsWritten = static_cast<bool>(statsJson) && requestRead;
                     }
+                    SceneHarnessMarkCaptured(i, floatFilename, rb.frame, W, H, rb.format,
+                                             payloadWritten && statsWritten,
+                                             nanCount == 0 && infCount == 0);
                 }
                 D3D12_RANGE er{ 0, 0 };
                 rb.buf->Unmap(0, &er);
@@ -857,15 +1083,14 @@ static void ForensicResolveInFrameCaptures(ID3D12Device* device, ID3D12CommandQu
                 const double px = static_cast<double>(W) * H;
                 snprintf(stats, sizeof(stats),
                     "[COUCH-FORENSIC][FINAL_ALPHA] capture=%s frame=%d alpha0=%llu(%.4f%%) alphaPartial=%llu(%.4f%%) alpha255=%llu(%.4f%%) rgba0000=%llu containsTransparent=%s",
-                    i == 3 ? "capture_raw_readback" : "capture_true_present", rb.frame,
+                    i == 3 ? "capture_raw_readback_pre_present" : "capture_backbuffer_pre_present", rb.frame,
                     (unsigned long long)alphaZero, px ? 100.0 * alphaZero / px : 0.0,
                     (unsigned long long)alphaPartial, px ? 100.0 * alphaPartial / px : 0.0,
                     (unsigned long long)alphaFull, px ? 100.0 * alphaFull / px : 0.0,
                     (unsigned long long)zeroRgba, alphaZero ? "YES" : "NO");
                 ForensicLog(stats);
                 if (SceneHarnessActive()) {
-                    // Keep these as separate named checkpoints around Present.
-                    // The image contents can match exactly because the SDR target is copied unchanged.
+                    // These are both command-list checkpoints before the DXGI Present call.
                     rawPairPixels = rgba;
                     rawPairWidth = W; rawPairHeight = H; rawPairFrame = rb.frame;
                 } else if (i == 3) {
@@ -878,15 +1103,17 @@ static void ForensicResolveInFrameCaptures(ID3D12Device* device, ID3D12CommandQu
                     const bool same = rawPairFrame == rb.frame && rawPairWidth == W && rawPairHeight == H && rawPairPixels == rgba;
                     ForensicLog(std::string("[COUCH-FORENSIC][CAPTURE_COMPARE] frame=") + std::to_string(rb.frame) +
                         " pixelWiseEqual=" + (same ? "YES" : "NO") + " rawFrame=" + std::to_string(rawPairFrame));
-                    snprintf(path, sizeof(path), "logs/captures/capture_true_present_frame%06d.png", rb.frame);
+                    snprintf(path, sizeof(path), "logs/captures/capture_backbuffer_pre_present_frame%06d.png", rb.frame);
                 }
             }
             wrote = ForensicWriteCapturePair(path, W, H, rgba);
-            if (SceneHarnessActive() && wrote && (i == 3 || i == 4)) {
+            if (SceneHarnessActive() && (i == 3 || i == 4 || i >= 10)) {
                 const std::string payloadName = std::string(SceneHarnessStageName(i)) + "_frame" +
                                                 std::to_string(rb.frame) + "_raw.png";
-                if (SceneHarnessWriteMetadata(i, rb.frame, ForensicFormatName(rb.format), W, H, payloadName))
-                    SceneHarnessMarkCaptured(i, payloadName);
+                const bool metadataWritten = wrote && SceneHarnessWriteMetadata(
+                    i, rb.frame, ForensicFormatName(rb.format), W, H, payloadName);
+                SceneHarnessMarkCaptured(i, payloadName, rb.frame, W, H, rb.format,
+                                         wrote && metadataWritten, true);
             }
             char sb[256];
             snprintf(sb, sizeof(sb), "[COUCH-FORENSIC][INFRAME] stage=%s frame=%d nonzero=%.2f%% max=%u png=%d",
@@ -903,6 +1130,7 @@ static void ForensicResolveInFrameCaptures(ID3D12Device* device, ID3D12CommandQu
 void ForensicGlobalCompositeCapture(int frame) {
     if (forensic::gSelf) forensic::gSelf->ForensicCompositeCapture(frame);
 }
+
 
 namespace forensic {
 struct Captures {
@@ -957,6 +1185,88 @@ static void LogCouchD3D12(const std::string& line) {
     if (ofs.is_open()) {
         ofs << line << "\n";
     }
+}
+
+void GfxRenderingAPIDX12::CaptureDxrComparisonImage(unsigned index, ID3D12Resource* source,
+                                                  D3D12_RESOURCE_STATES sourceState, int frame) {
+    const char* comparison = std::getenv("COUCH_DXR_VISUAL_ABLATION");
+    const char* mode = std::getenv("COUCH_DXR_MODE");
+    if (index >= 8 || !source || !mCommandListOpen || !forensic::SceneHarnessCaptureRequested() ||
+        !comparison || std::strcmp(comparison, "1") != 0 || !mode || std::strcmp(mode, "NORMAL") != 0) return;
+    const int comparisonSlot = forensic::SceneHarnessComparisonSlot(int(index));
+    if (comparisonSlot < 0) return;
+    const auto sourceDesc = source->GetDesc();
+    if (sourceDesc.Format != DXGI_FORMAT_R16G16B16A16_FLOAT || sourceDesc.SampleDesc.Count != 1 ||
+        !CreateFramebufferCopyPipeline(DXGI_FORMAT_R8G8B8A8_UNORM)) return;
+    if (!mComparisonRtvHeap) {
+        D3D12_DESCRIPTOR_HEAP_DESC heap{};
+        heap.Type = D3D12_DESCRIPTOR_HEAP_TYPE_RTV; heap.NumDescriptors = 8;
+        if (FAILED(mDevice->CreateDescriptorHeap(&heap, IID_PPV_ARGS(&mComparisonRtvHeap)))) return;
+    }
+    auto& output = mComparisonSdr[index];
+    if (!output || output->GetDesc().Width != sourceDesc.Width || output->GetDesc().Height != sourceDesc.Height) {
+        if (output) mFrameContexts[mFrameIndex].stagingBuffers.push_back(output);
+        output.Reset();
+        auto desc = sourceDesc;
+        desc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+        desc.Flags = D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET;
+        D3D12_HEAP_PROPERTIES heap{}; heap.Type = D3D12_HEAP_TYPE_DEFAULT;
+        D3D12_CLEAR_VALUE clear{}; clear.Format = desc.Format; clear.Color[3] = 1;
+        if (FAILED(mDevice->CreateCommittedResource(&heap, D3D12_HEAP_FLAG_NONE, &desc,
+            D3D12_RESOURCE_STATE_RENDER_TARGET, &clear, IID_PPV_ARGS(&output)))) return;
+    }
+    auto rtv = mComparisonRtvHeap->GetCPUDescriptorHandleForHeapStart();
+    rtv.ptr += index * mRtvDescriptorSize;
+    mDevice->CreateRenderTargetView(output.Get(), nullptr, rtv);
+    const auto sourceSrv = AllocateSrvDescriptor();
+    auto cpu = mSrvHeap->GetCPUDescriptorHandleForHeapStart();
+    cpu.ptr += size_t(sourceSrv) * mSrvDescriptorSize;
+    D3D12_SHADER_RESOURCE_VIEW_DESC srv{};
+    srv.Format = sourceDesc.Format; srv.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
+    srv.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING; srv.Texture2D.MipLevels = 1;
+    mDevice->CreateShaderResourceView(source, &srv, cpu);
+    const auto depthSrv = AllocateSrvDescriptor();
+    auto depthCpu = mSrvHeap->GetCPUDescriptorHandleForHeapStart();
+    depthCpu.ptr += size_t(depthSrv) * mSrvDescriptorSize;
+    srv.Format = DXGI_FORMAT_R32_FLOAT;
+    ID3D12Resource* depth = FramebufferDepth(mCurrentFramebuffer);
+    mDevice->CreateShaderResourceView(depth, &srv, depthCpu);
+    auto& depthState = mCurrentFramebuffer == 0 ? mBackbufferDepthState : mFrameBuffers.at(mCurrentFramebuffer).depthState;
+    const auto previousDepth = depthState;
+    if (depth) TransitionResource(depth, previousDepth, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
+    TransitionResource(source, sourceState, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
+    ID3D12DescriptorHeap* heaps[] = {mSrvHeap.Get()};
+    mCommandList->SetDescriptorHeaps(1, heaps);
+    mCommandList->SetGraphicsRootSignature(mFramebufferCopyRoot.Get());
+    mCommandList->SetPipelineState(mFramebufferCopyPso[0].Get());
+    auto gpu = mSrvHeap->GetGPUDescriptorHandleForHeapStart();
+    gpu.ptr += size_t(sourceSrv) * mSrvDescriptorSize;
+    mCommandList->SetGraphicsRootDescriptorTable(0, gpu);
+    gpu = mSrvHeap->GetGPUDescriptorHandleForHeapStart();
+    gpu.ptr += size_t(depthSrv) * mSrvDescriptorSize;
+    mCommandList->SetGraphicsRootDescriptorTable(1, gpu);
+    // Reuse both the production shader and the exact parameters published
+    // before BeginUiOverlayPass: linear FP16 -> ACES -> scene fog -> gamma22.
+    const float constants[] = {0, 0, 1, 1, 1, 1, 0, 0,
+        mFramebufferFog[0], mFramebufferFog[1], mFramebufferFog[2], mFramebufferFog[3],
+        mFramebufferFog[4], mFramebufferFog[5], 0, 0};
+    mCommandList->SetGraphicsRoot32BitConstants(2, 16, constants, 0);
+    mCommandList->OMSetRenderTargets(1, &rtv, FALSE, nullptr);
+    D3D12_VIEWPORT viewport{0, 0, float(sourceDesc.Width), float(sourceDesc.Height), 0, 1};
+    D3D12_RECT scissor{0, 0, LONG(sourceDesc.Width), LONG(sourceDesc.Height)};
+    mCommandList->RSSetViewports(1, &viewport); mCommandList->RSSetScissorRects(1, &scissor);
+    mCommandList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+    mCommandList->DrawInstanced(3, 1, 0, 0);
+    TransitionResource(source, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE, sourceState);
+    if (depth) TransitionResource(depth, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE, previousDepth);
+    mFrameContexts[mFrameIndex].retiredSrvIndices.push_back(sourceSrv);
+    mFrameContexts[mFrameIndex].retiredSrvIndices.push_back(depthSrv);
+    forensic::ForensicEnqueueInFrameCopy(mCommandList.Get(), mDevice.Get(), output.Get(),
+        comparisonSlot, forensic::SceneHarnessStageName(comparisonSlot), frame, D3D12_RESOURCE_STATE_RENDER_TARGET);
+    LogCouchD3D12("[COUCH-DXR-COMPARISON] frame=" + std::to_string(frame) + " stage=" +
+        forensic::SceneHarnessStageName(comparisonSlot) +
+        " source=GPU sameCommandList=1 tone=PRODUCTION_FRAMEBUFFER_ACES_GAMMA22 sameToneParameters=1 hud=EXCLUDED");
+    RestoreRasterState();
 }
 
 static bool DxrVerboseDiagnostics() {
@@ -1974,6 +2284,9 @@ void GfxRenderingAPIDX12::StartFrame() {
     ++forensic::gForensicFrame;
     if (!mInitialized) return;
     mDxrPassesRunThisFrame = false;
+    mDxrWorkAttemptedThisFrame = false;
+    mDxrFrameEvidence = {};
+    mDxrFrameEvidence.frame = forensic::gForensicFrame;
 
     static bool pixelIsoChecked = false;
     if (!pixelIsoChecked) {
@@ -2122,8 +2435,63 @@ void GfxRenderingAPIDX12::StartFrame() {
 }
 
 void GfxRenderingAPIDX12::BeginUiOverlayPass() {
-    if (!mInitialized || !mCommandListOpen || mDxrPassesRunThisFrame ||
-        !MaterialRegistry::IsEnhancedVisualProfile()) return;
+    if (!mInitialized || !mCommandListOpen || mDxrWorkAttemptedThisFrame || mDeviceRemoved) return;
+    // OCZ-RTX-REPAIR REPAIR-01: explicit profile gate. CLASSIC (0) and
+    // ENHANCED (1) never run DXR; HYBRID_RT (2) and PATH_TRACED_EXPERIMENTAL
+    // (3) may run DXR only when the adapter proved compatible. The user
+    // profile is never silently altered here; environment requests that
+    // conflict with the effective profile are reported and ignored.
+    const int effectiveProfile = MaterialRegistry::Instance().GetProfile();
+    const bool profileSupportsHybridRt = DxrProfileSelected(effectiveProfile);
+    if (effectiveProfile == static_cast<int>(VisualProfileId::CLASSIC)) {
+        static bool loggedClassicBypass = false;
+        if (!loggedClassicBypass) {
+            LogCouchD3D12("[COUCH-DXR][PROFILE] DXR bypassed: Classic raster profile active (" +
+                          std::to_string(effectiveProfile) + "); no BLAS/TLAS or DispatchRays issued");
+            loggedClassicBypass = true;
+        }
+        return;
+    }
+    if (effectiveProfile == static_cast<int>(VisualProfileId::ENHANCED)) {
+        static bool loggedEnhancedBypass = false;
+        if (!loggedEnhancedBypass) {
+            LogCouchD3D12("[COUCH-DXR][PROFILE] DXR bypassed: Enhanced raster profile active (" +
+                          std::to_string(effectiveProfile) + "); no BLAS/TLAS or DispatchRays issued");
+            loggedEnhancedBypass = true;
+        }
+        const char* envForce = getenv("COUCH_DXR_SURFACE_COMPOSITE");
+        if (envForce && strcmp(envForce, "1") == 0) {
+            static bool loggedEnvConflict = false;
+            if (!loggedEnvConflict) {
+                LogCouchD3D12("[COUCH-DXR][PROFILE] COUCH_DXR_SURFACE_COMPOSITE=1 ignored: effective profile is '" +
+                              std::string(MaterialRegistry::Instance().GetProfileName()) +
+                              "'; select Hybrid RT to enable DXR");
+                loggedEnvConflict = true;
+            }
+        }
+        return;
+    }
+    if (!profileSupportsHybridRt) {
+        static bool loggedUnsupportedProfile = false;
+        if (!loggedUnsupportedProfile) {
+            LogCouchD3D12("[COUCH-DXR][PROFILE] DXR bypassed: unsupported visual profile id=" +
+                          std::to_string(effectiveProfile));
+            loggedUnsupportedProfile = true;
+        }
+        return;
+    }
+    {
+        // Path-traced experimental shares the hybrid DXR activation path.
+        static int loggedDxrProfile = -1;
+        if (effectiveProfile != loggedDxrProfile) {
+            LogCouchD3D12("[COUCH-DXR][PROFILE] DXR profile active: '" +
+                          std::string(MaterialRegistry::Instance().GetProfileName()) + "' (" +
+                          std::to_string(effectiveProfile) + ")");
+            loggedDxrProfile = effectiveProfile;
+        }
+    }
+    mDxrFrameEvidence.requested = profileSupportsHybridRt;
+    mDxrWorkAttemptedThisFrame = true;
 
     const uint32_t sceneWidth=FramebufferWidth(mCurrentFramebuffer), sceneHeight=FramebufferHeight(mCurrentFramebuffer);
     if (sceneWidth!=mLastDxrWidth || sceneHeight!=mLastDxrHeight) {
@@ -2136,7 +2504,7 @@ void GfxRenderingAPIDX12::BeginUiOverlayPass() {
     // The renderer backend can be selected independently from the visual
     // profile. Only the explicit Hybrid RT profile may build acceleration
     // structures or run ray-traced effects; Enhanced remains raster-only.
-    const bool hybridRtProfile = MaterialRegistry::IsHybridRtProfile();
+    // (IsHybridRtProfile() covers both HYBRID_RT and PATH_TRACED_EXPERIMENTAL.)
     const int currentSceneId = GeometryCapture::Instance().GetCurrentSceneId();
     forensic::DxrDiagnosticSceneGateUpdate(forensic::gForensicFrame, currentSceneId);
     const int diagnosticStage = forensic::DxrDiagnosticSequenceStage(forensic::gForensicFrame);
@@ -2191,7 +2559,16 @@ void GfxRenderingAPIDX12::BeginUiOverlayPass() {
                       std::to_string(diagnosticStage) + " name=" + stageName);
         lastDiagnosticStage = diagnosticStage;
     }
-    const bool dxrAsEnabled = hybridRtProfile && DxrAccelerationStructureManager::Instance().IsEnabled();
+    // OCZ-RTX-REPAIR REPAIR-01: DXR runs only on compatible adapters. The
+    // acceleration-structure manager enforces HARD GATEs (raytracing tier >=
+    // 1.0, ID3D12Device5) at Init; require both support and enable flags here
+    // so no environment variable can force ray dispatches on incompatible
+    // hardware. BLAS/TLAS are always processed before any effect that
+    // consumes them (shadows, surfaces), in this same command list.
+    const auto& asManager = DxrAccelerationStructureManager::Instance();
+    const bool dxrAdapterReady = asManager.IsSupported() && asManager.IsEnabled();
+    mDxrFrameEvidence.adapterCompatible = dxrAdapterReady;
+    const bool dxrAsEnabled = profileSupportsHybridRt && dxrAdapterReady;
     const bool runShadowStage = !diagnosticSequenceWaiting &&
         (!diagnosticSequenceRequested || diagnosticStage == 0 || diagnosticStage == 5 ||
          (diagnosticStage >= 100 && diagnosticStage <= 105) ||
@@ -2200,8 +2577,8 @@ void GfxRenderingAPIDX12::BeginUiOverlayPass() {
         (!diagnosticSequenceRequested || (diagnosticStage >= 1 && diagnosticStage <= 8) ||
          (diagnosticStage >= 100 && diagnosticStage <= 105) ||
          (diagnosticStage >= 200 && diagnosticStage <= 203));
-    const bool dxrShadowEnabled = hybridRtProfile && DxrShadowRenderer::Instance().IsEnabled() && runShadowStage;
-    const bool dxrSurfaceEnabled = hybridRtProfile && DxrSurfaceRenderer::Instance().IsEnabled() && runSurfaceStage;
+    const bool dxrShadowEnabled = profileSupportsHybridRt && DxrShadowRenderer::Instance().IsEnabled() && runShadowStage;
+    const bool dxrSurfaceEnabled = profileSupportsHybridRt && DxrSurfaceRenderer::Instance().IsEnabled() && runSurfaceStage;
     if (!dxrAsEnabled && !dxrShadowEnabled && !dxrSurfaceEnabled) return;
 
     // DXR renderers change the command list's graphics state (heaps, root
@@ -2213,26 +2590,53 @@ void GfxRenderingAPIDX12::BeginUiOverlayPass() {
     // GeometryCapture has ingested every world draw up to this point. Build
     // the frame TLAS now, while the command list still contains only the 3D
     // scene; subsequent Fast3D UI draws are then naturally layered on top.
+    // OCZ-RTX-REPAIR REPAIR-01: every BeginScope below is paired with exactly
+    // one EndScope on every path, and mDxrPassesRunThisFrame is set only when
+    // ray work was actually recorded (a valid TLAS feeding at least one
+    // effect stage). Raster scope pairing is preserved by re-opening
+    // GPU_RASTER after the DXR section so EndFrame keeps its match.
+    bool rasterScopeOpen = true;
     GpuProfilerD3D12::Instance().EndScope(mCommandList.Get(), "GPU_RASTER");
+    rasterScopeOpen = false;
     if (dxrAsEnabled) {
         GpuProfilerD3D12::Instance().BeginScope(mCommandList.Get(), "GPU_BLAS_TLAS");
         DxrAccelerationStructureManager::Instance().ProcessFrame(
             mDevice.Get(), mCommandList.Get(), mFrameIndex, mCurrentFenceValue, mFence->GetCompletedValue());
+        GpuProfilerD3D12::Instance().EndScope(mCommandList.Get(), "GPU_BLAS_TLAS");
     }
-    GpuProfilerD3D12::Instance().EndScope(mCommandList.Get(), "GPU_BLAS_TLAS");
-    mDxrPassesRunThisFrame = true;
 
     if (forensic::ForensicCaptureWindow(forensic::gForensicFrame)) {
         forensic::ForensicEnqueueInFrameCopy(mCommandList.Get(), mDevice.Get(),
             FramebufferColor(mCurrentFramebuffer), 0, "world_raster", forensic::gForensicFrame);
+        CaptureDxrComparisonImage(0, FramebufferColor(mCurrentFramebuffer),
+            FramebufferColorState(mCurrentFramebuffer), forensic::gForensicFrame);
     }
     const uint64_t tlasGpuVA = DxrAccelerationStructureManager::Instance().GetTlasGpuVA();
+    mDxrFrameEvidence.tlasValid = tlasGpuVA != 0;
     if (tlasGpuVA == 0) {
+        // OCZ-RTX-REPAIR REPAIR-01: unavailable resources must not cause
+        // invalid access or device loss. No ray stage can run without a TLAS;
+        // leave the raster image intact and keep profiler pairing exact.
+        static bool loggedTlasUnavailable = false;
+        if (dxrAsEnabled && !loggedTlasUnavailable) {
+            LogCouchD3D12("[COUCH-DXR][TLAS] no valid TLAS this frame; ray stages skipped, raster preserved");
+            loggedTlasUnavailable = true;
+        }
         restoreRasterState();
+        if (!rasterScopeOpen) {
+            GpuProfilerD3D12::Instance().BeginScope(mCommandList.Get(), "GPU_RASTER");
+            rasterScopeOpen = true;
+        }
         return;
     }
 
     D3D12_CPU_DESCRIPTOR_HANDLE rtvHandle = FramebufferRtv(mCurrentFramebuffer);
+    const uint64_t shadowDispatchesBefore = DxrShadowRenderer::Instance().GetStats().dispatchRaysCalls;
+    const uint64_t shadowSignalsBefore = DxrShadowRenderer::Instance().GetStats().signalOutputsProduced;
+    const uint64_t shadowCompositesBefore = DxrShadowRenderer::Instance().GetStats().compositePasses;
+    const uint64_t surfaceDispatchesBefore = DxrSurfaceRenderer::Instance().GetStats().dispatchRaysCalls;
+    const uint64_t surfaceSignalsBefore = DxrSurfaceRenderer::Instance().GetStats().signalOutputsProduced;
+    const uint64_t surfaceCompositesBefore = DxrSurfaceRenderer::Instance().GetStats().compositeExecutions;
 
     if (dxrShadowEnabled) {
         GpuProfilerD3D12::Instance().BeginScope(mCommandList.Get(), "GPU_DXR_SHADOW");
@@ -2249,9 +2653,8 @@ void GfxRenderingAPIDX12::BeginUiOverlayPass() {
             mSrvCpuHeap.Get(), mSrvDescriptorSize,
             diagnosticSequenceActive && diagnosticStage == 0,
             diagnosticSequenceActive && diagnosticStage >= 0 && diagnosticStage <= 4);
+        GpuProfilerD3D12::Instance().EndScope(mCommandList.Get(), "GPU_DXR_SHADOW");
     }
-
-    GpuProfilerD3D12::Instance().EndScope(mCommandList.Get(), "GPU_DXR_SHADOW");
     if (dxrSurfaceEnabled) {
         GpuProfilerD3D12::Instance().BeginScope(mCommandList.Get(), "GPU_DXR_SURFACE");
         const auto& surfaceData = DxrAccelerationStructureManager::Instance().GetSurfaceFrameBuffers(mFrameIndex);
@@ -2275,8 +2678,20 @@ void GfxRenderingAPIDX12::BeginUiOverlayPass() {
             static const int v2Views[] = { 11, 14, 15, 0 };
             surfaceDiagnosticView = v2Views[diagnosticStage - 200];
         }
-        else if (!diagnosticSequenceActive)
+        else if (!diagnosticSequenceActive) {
             surfaceDiagnosticView = forensic::DxrTruthManualView();
+            // Sample the gate only on the harness capture frame. This view
+            // deliberately bypasses AnyHit alpha to report structural hits;
+            // it must never replace the normal-path Truth measurements.
+            const char* harness = getenv("COUCH_DXR_HARNESS");
+            const char* manualGate = getenv("COUCH_DXR_PRIMARY_GATE_COUNTERS");
+            if (surfaceDiagnosticView == 0 && forensic::SceneHarnessCaptureRequested() &&
+                harness && strcmp(harness, "1") == 0 &&
+                manualGate && strcmp(manualGate, "1") == 0 &&
+                forensic::DxrGateCounterSequenceEnabled()) {
+                surfaceDiagnosticView = 5;
+            }
+        }
         DxrSurfaceRenderer::Instance().RenderReflections(
             mDevice.Get(), mCommandList.Get(), FramebufferColor(mCurrentFramebuffer), rtvHandle,
             FramebufferDepth(mCurrentFramebuffer), FramebufferDepthSrv(mCurrentFramebuffer), tlasGpuVA,
@@ -2286,17 +2701,53 @@ void GfxRenderingAPIDX12::BeginUiOverlayPass() {
             forensic::gForensicFrame, currentSceneId,
             GeometryCapture::Instance().GetCurrentRoomId(),
             DxrAccelerationStructureManager::Instance().GetStats().tlasInstanceCount);
+        GpuProfilerD3D12::Instance().EndScope(mCommandList.Get(), "GPU_DXR_SURFACE");
     }
-
-    GpuProfilerD3D12::Instance().EndScope(mCommandList.Get(), "GPU_DXR_SURFACE");
-    ID3D12Resource* surfaceSceneColor = DxrSurfaceRenderer::Instance().GetSceneColorCopyForTrace();
+    const auto& shadowStatsAfter = DxrShadowRenderer::Instance().GetStats();
+    const auto& surfaceStatsAfter = DxrSurfaceRenderer::Instance().GetStats();
+    const uint64_t shadowDispatchDelta = shadowStatsAfter.dispatchRaysCalls >= shadowDispatchesBefore
+        ? shadowStatsAfter.dispatchRaysCalls - shadowDispatchesBefore : 0;
+    const uint64_t surfaceDispatchDelta = surfaceStatsAfter.dispatchRaysCalls >= surfaceDispatchesBefore
+        ? surfaceStatsAfter.dispatchRaysCalls - surfaceDispatchesBefore : 0;
+    const uint64_t shadowSignalDelta = shadowStatsAfter.signalOutputsProduced >= shadowSignalsBefore
+        ? shadowStatsAfter.signalOutputsProduced - shadowSignalsBefore : 0;
+    const uint64_t surfaceSignalDelta = surfaceStatsAfter.signalOutputsProduced >= surfaceSignalsBefore
+        ? surfaceStatsAfter.signalOutputsProduced - surfaceSignalsBefore : 0;
+    const uint64_t shadowCompositeDelta = shadowDispatchDelta > 0 && shadowStatsAfter.compositePasses >= shadowCompositesBefore
+        ? shadowStatsAfter.compositePasses - shadowCompositesBefore : 0;
+    const uint64_t surfaceCompositeDelta = surfaceStatsAfter.compositeExecutions >= surfaceCompositesBefore
+        ? surfaceStatsAfter.compositeExecutions - surfaceCompositesBefore : 0;
+    mDxrFrameEvidence.dispatchCalls = shadowDispatchDelta + surfaceDispatchDelta;
+    mDxrFrameEvidence.signalOutputsWritten = shadowSignalDelta + surfaceSignalDelta;
+    mDxrFrameEvidence.compositeDraws = shadowCompositeDelta + surfaceCompositeDelta;
+    mDxrPassesRunThisFrame = mDxrFrameEvidence.DispatchExecuted();
+    forensic::ForensicLog("[COUCH-DXR-FRAME] frame=" + std::to_string(mDxrFrameEvidence.frame) +
+                " requested=" + std::to_string(mDxrFrameEvidence.requested ? 1 : 0) +
+                " adapterCompatible=" + std::to_string(mDxrFrameEvidence.adapterCompatible ? 1 : 0) +
+                " tlasValid=" + std::to_string(mDxrFrameEvidence.tlasValid ? 1 : 0) +
+                " dispatchCalls=" + std::to_string(mDxrFrameEvidence.dispatchCalls) +
+                " signalOutputsWritten=" + std::to_string(mDxrFrameEvidence.signalOutputsWritten) +
+                " compositeDraws=" + std::to_string(mDxrFrameEvidence.compositeDraws) +
+                " dispatchExecuted=" + std::to_string(mDxrFrameEvidence.DispatchExecuted() ? 1 : 0) +
+                " signalsProduced=" + std::to_string(mDxrFrameEvidence.SignalsProduced() ? 1 : 0) +
+                " compositionExecuted=" + std::to_string(mDxrFrameEvidence.CompositionExecuted() ? 1 : 0));
+    ID3D12Resource* surfaceSceneColor = DxrSurfaceRenderer::Instance().GetRasterSceneColorCopyForCapture();
     if (forensic::ForensicCaptureWindow(forensic::gForensicFrame) && dxrSurfaceEnabled && surfaceSceneColor) {
         forensic::ForensicEnqueueInFrameCopy(mCommandList.Get(), mDevice.Get(),
-            surfaceSceneColor, 2, "surface_scene_copy", forensic::gForensicFrame,
+            surfaceSceneColor, 2, "raster_scene_color_copy", forensic::gForensicFrame,
             static_cast<D3D12_RESOURCE_STATES>(DxrSurfaceRenderer::Instance().GetSceneColorCopyState()));
+        CaptureDxrComparisonImage(2, surfaceSceneColor,
+            static_cast<D3D12_RESOURCE_STATES>(DxrSurfaceRenderer::Instance().GetSceneColorCopyState()), forensic::gForensicFrame);
     }
     if (forensic::ForensicCaptureWindow(forensic::gForensicFrame) && dxrSurfaceEnabled) {
         auto& surfaceRenderer = DxrSurfaceRenderer::Instance();
+        if (!surfaceRenderer.IsNaviPilotDispatch()) {
+            if (ID3D12Resource* direct = surfaceRenderer.GetNativePointDirectForCapture()) {
+                forensic::ForensicEnqueueInFrameCopy(mCommandList.Get(), mDevice.Get(), direct, 17,
+                    "navi_point_direct", forensic::gForensicFrame,
+                    static_cast<D3D12_RESOURCE_STATES>(surfaceRenderer.GetNativePointDirectState()));
+            }
+        }
         if (ID3D12Resource* reflection = surfaceRenderer.GetReflectionColorForCapture()) {
             forensic::ForensicEnqueueInFrameCopy(mCommandList.Get(), mDevice.Get(), reflection, 5,
                 "dxr_reflection_color", forensic::gForensicFrame,
@@ -2312,6 +2763,31 @@ void GfxRenderingAPIDX12::BeginUiOverlayPass() {
                 "emissive_mask", forensic::gForensicFrame,
                 static_cast<D3D12_RESOURCE_STATES>(surfaceRenderer.GetEmissiveMaskState()));
         }
+        const unsigned controlCount = surfaceRenderer.IsNaviPilotDispatch() ? 3u : 4u;
+        for (unsigned i = 0; i < controlCount; ++i) {
+            if (auto* control = surfaceRenderer.GetVisualAblationForCapture(i, forensic::gForensicFrame)) {
+                const int ablationSlot = i == 3 ? forensic::SceneHarnessComparisonSlot(6)
+                                                : forensic::SceneHarnessAblationSlot(int(i));
+                if (ablationSlot < 0) continue;
+                const char* controlName = i == 3 ? "navi_point_off" :
+                    i == 0 ? "surface_optics_off" : (i == 1 ? "indirect_off" : "relight_off");
+                // Slot 18 is the toned production comparison image. Keep its
+                // only readback here; the point-off HDR target remains in the
+                // renderer and must not occupy the same slot ahead of SDR.
+                if (i != 3) {
+                    forensic::ForensicEnqueueInFrameCopy(mCommandList.Get(), mDevice.Get(), control,
+                        ablationSlot, controlName,
+                        forensic::gForensicFrame, D3D12_RESOURCE_STATE_RENDER_TARGET);
+                }
+                CaptureDxrComparisonImage(3 + i, control, D3D12_RESOURCE_STATE_RENDER_TARGET, forensic::gForensicFrame);
+            }
+        }
+        if (!surfaceRenderer.IsNaviPilotDispatch()) {
+            // Capture the normal production compositor output alongside the
+            // same-frame point-off ablation; both use the production ACES path.
+            CaptureDxrComparisonImage(7, FramebufferColor(mCurrentFramebuffer),
+                FramebufferColorState(mCurrentFramebuffer), forensic::gForensicFrame);
+        }
     }
 
     // This hook runs before EndFrame's legacy post-composite readback, whose
@@ -2324,9 +2800,17 @@ void GfxRenderingAPIDX12::BeginUiOverlayPass() {
             FramebufferColor(mCurrentFramebuffer), 1, "after_composite",
             forensic::gForensicFrame);
         ++forensic::gInFrameCompositeCaptures;
+        CaptureDxrComparisonImage(1, FramebufferColor(mCurrentFramebuffer),
+            FramebufferColorState(mCurrentFramebuffer), forensic::gForensicFrame);
     }
 
     restoreRasterState();
+    if (!rasterScopeOpen) {
+        // OCZ-RTX-REPAIR REPAIR-01: re-open the raster scope so EndFrame's
+        // EndScope("GPU_RASTER") keeps its match and HUD/menu draws that
+        // follow this hook stay inside measured raster time.
+        GpuProfilerD3D12::Instance().BeginScope(mCommandList.Get(), "GPU_RASTER");
+    }
 }
 
 void GfxRenderingAPIDX12::EndFrame() {
@@ -2337,7 +2821,8 @@ void GfxRenderingAPIDX12::EndFrame() {
     if (mPixelIsoMode >= 20 || mR7c5A5Enabled) {
         R4bFinalizeStatsQuery(); R4bFrameFlushAndReport();
     }
-    // Final presentation target after scene, compositor, and UI draws.
+    // Final backbuffer checkpoint after scene, compositor, and UI draws. This
+    // copy is recorded before Present and does not prove display scanout.
     if (forensic::ForensicCaptureWindow(forensic::gForensicFrame)) {
         forensic::ForensicEnqueueInFrameCopy(mCommandList.Get(),mDevice.Get(),
             mRenderTargets[mFrameIndex].Get(),3,"capture_raw_readback",forensic::gForensicFrame,
@@ -2363,7 +2848,7 @@ void GfxRenderingAPIDX12::EndFrame() {
     mBackbufferState[mFrameIndex]=D3D12_RESOURCE_STATE_PRESENT;
     if (capturePresentPair) {
         forensic::ForensicEnqueueInFrameCopy(mCommandList.Get(), mDevice.Get(),
-            mRenderTargets[mFrameIndex].Get(), 4, "capture_true_present", forensic::gForensicFrame,
+            mRenderTargets[mFrameIndex].Get(), 4, "capture_backbuffer_pre_present", forensic::gForensicFrame,
             D3D12_RESOURCE_STATE_PRESENT);
         LogCouchD3D12("[COUCH-FORENSIC][FINAL_READBACK_COPY_RECORDED] frame=" + std::to_string(forensic::gForensicFrame) +
             " stage=pre_present stateBefore=PRESENT stateAfter=PRESENT resource=" +
@@ -2953,6 +3438,13 @@ void GfxRenderingAPIDX12::SelectTexture(int tile, uint32_t textureId) {
     }
 }
 
+uint32_t GfxRenderingAPIDX12::GetTextureSrvIndex(int tile) const {
+    if (tile < 0 || tile >= SHADER_MAX_TEXTURES) return UINT32_MAX;
+    const uint32_t textureId = mCurrentTextureIds[tile];
+    if (textureId >= mTextures.size() || !mTextures[textureId].uploaded) return UINT32_MAX;
+    return mTextures[textureId].srvIndex;
+}
+
 void GfxRenderingAPIDX12::UploadTexture(const uint8_t* rgba32Buf, uint32_t width, uint32_t height) {
     uint32_t texId = mCurrentTextureIds[mCurrentTile];
     if (!mInitialized || texId >= mTextures.size()) return;
@@ -3405,19 +3897,45 @@ struct ShaderProgram* GfxRenderingAPIDX12::CreateAndLoadNewShader(uint64_t shade
                                                D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0});
 
         std::string physicalHlsl = "#define PHYSICAL_NORMAL_VALID 2\n" + hlsl;
-        // Enhanced is the normal physical-material path. Keep an explicit
-        // COUCH_MATERIAL_RESPONSE=0 escape hatch for regression diagnosis,
-        // while leaving Classic and UI/protected 2D draws unchanged.
+        // Compile the material variant independently of the selected profile:
+        // shader programs are cached by combiner ID, not by visual profile.
+        // DrawTrianglesPhysical selects this variant only for enhanced draws.
         const char* materialResponseEnv = std::getenv("COUCH_MATERIAL_RESPONSE");
         const bool enhancedPhysicalResponse =
-            Fast::MaterialRegistry::IsEnhancedVisualProfile() &&
             (!materialResponseEnv || strcmp(materialResponseEnv, "0") != 0);
-        LogCouchD3D12("[COUCH-R7C5][MATERIAL_RESPONSE] enabled=" +
+        LogCouchD3D12("[COUCH-R7C5][MATERIAL_RESPONSE] variantRequested=" +
                       std::string(enhancedPhysicalResponse ? "YES" : "NO") +
                       " profile=" + Fast::MaterialRegistry::Instance().GetProfileName() +
                       " env=" + std::string(materialResponseEnv ? materialResponseEnv : "(unset)"));
         if (enhancedPhysicalResponse) {
-            physicalHlsl =
+            // Fast3D's ordinary UNORM combiner output is display encoded.
+            // Decode before lighting, keep HDR radiance linear, and encode
+            // only the SDR variant. The sRGB combiner already uses linear RGB
+            // and has its own fromLinear() output conversion.
+            const std::string physicalTransferHlsl =
+                "float3 CouchSrgbToLinear(float3 color) {\n"
+                "    color = max(color, 0.0.xxx);\n"
+                "    return lerp(pow((color + 0.055) / 1.055, 2.4), color / 12.92,\n"
+                "                1.0 - step(0.04045, color));\n"
+                "}\n"
+                "float3 CouchLinearToSrgb(float3 color) {\n"
+                "    color = max(color, 0.0.xxx);\n"
+                "    return lerp(1.055 * pow(color, 1.0 / 2.4) - 0.055, color * 12.92,\n"
+                "                1.0 - step(0.0031308, color));\n"
+                "}\n"
+                "float3 CouchPhysicalInput(float3 color) {\n" +
+                (mSrgbMode ? std::string("    return color;\n")
+                           : std::string("    return CouchSrgbToLinear(color);\n")) +
+                "}\n"
+                "float3 CouchPhysicalOutput(float3 color) {\n"
+                "#if defined(COUCH_HDR_OUTPUT)\n"
+                "    return color;\n"
+                "#else\n" +
+                (mSrgbMode ? std::string("    return color;\n")
+                           : std::string("    return CouchLinearToSrgb(color);\n")) +
+                "#endif\n"
+                "}\n";
+            physicalHlsl = physicalTransferHlsl +
                 "cbuffer CouchPhysicalCB : register(b2) {\n"
                 "    uint gCouchMaterialIndex;\n"
                 "    uint gCouchDrawFlags;\n"
@@ -3465,12 +3983,16 @@ struct ShaderProgram* GfxRenderingAPIDX12::CreateAndLoadNewShader(uint64_t shade
                 "float3 CouchApplyPhysicalResponse(float3 baseColor, float3 viewNormal, float3 viewPosition, uint materialIndex, uint drawFlags) {\n"
                 // MaterialType values are the shader ABI: 1..18 cover the
                 // authored physical families, 19 is protected UI, and 20 is
-                // unknown. Keep UI and unknown draws byte-for-byte on the
-                // legacy shading path while giving every known 3D family a
-                // deliberate response.
-                "    if ((drawFlags & 16u) != 0u || materialIndex == 0u || materialIndex >= 19u) return baseColor;\n"
-                "    float3 n = normalize(viewNormal);\n"
-                "    if (dot(n, n) < 0.01) return baseColor;\n"
+                // unknown. Preserve their authored color with the required
+                // output transfer while known 3D families receive lighting.
+                "    baseColor = CouchPhysicalInput(baseColor);\n"
+                "    if ((drawFlags & 16u) != 0u || materialIndex == 0u || materialIndex >= 19u) return CouchPhysicalOutput(baseColor);\n"
+                "    float normalLengthSquared = dot(viewNormal, viewNormal);\n"
+                "    if (any(isnan(viewNormal)) || any(isinf(viewNormal)) ||\n"
+                "        any(isnan(viewPosition)) || any(isinf(viewPosition)) ||\n"
+                "        normalLengthSquared <= 1.0e-8 || dot(viewPosition, viewPosition) <= 1.0e-8)\n"
+                "        return CouchPhysicalOutput(baseColor);\n"
+                "    float3 n = viewNormal * rsqrt(normalLengthSquared);\n"
                 // Only authored relief opt-ins derive a micro-normal from albedo.
                 // Screen-space derivatives form a view-space surface gradient;
                 // this avoids fabricating bumps on skin, cloth, glass, and UI.
@@ -3536,7 +4058,8 @@ struct ShaderProgram* GfxRenderingAPIDX12::CreateAndLoadNewShader(uint64_t shade
                 "    result += baseColor * emissive;\n"
                 // Preserve radiance above 1.0 for the FP16 enhanced scene
                 // target; the fullscreen ACES pass maps it to the SDR swapchain.
-                "    return max(result, 0.0.xxx);\n"
+                "    if (any(isnan(result)) || any(isinf(result))) return CouchPhysicalOutput(baseColor);\n"
+                "    return CouchPhysicalOutput(max(result, 0.0.xxx));\n"
                 "}\n" + physicalHlsl;
         }
         const std::string physicalFields =
@@ -3590,31 +4113,42 @@ struct ShaderProgram* GfxRenderingAPIDX12::CreateAndLoadNewShader(uint64_t shade
             psBody = physicalHlsl.find("{", psBody);
             if (psBody != std::string::npos) physicalHlsl.insert(psBody + 1, "\n" + debugCode);
         }
+        bool physicalResponseBeforeFog = false;
         if (enhancedPhysicalResponse && physicalSidebandFieldsInserted && physicalSidebandAssignmentsInserted) {
             const std::string applyResponse =
                 "    texel.rgb = CouchApplyPhysicalResponse(texel.rgb, input.viewNormal, input.viewPosition, "
                 "gCouchMaterialIndex, gCouchDrawFlags);\n";
+            // Light the surface before atmospheric blending. Applying the
+            // material response at PSMain's return also lights the fog color.
+            const std::string fogBlend = cc_features.opt_alpha
+                ? "texel = float4(lerp(texel.rgb, input.fog.rgb, input.fog.a), texel.a);"
+                : "texel = lerp(texel, input.fog.rgb, input.fog.a);";
+            const size_t fogAt = cc_features.opt_fog ? physicalHlsl.find(fogBlend) : std::string::npos;
+            if (fogAt != std::string::npos) {
+                physicalHlsl.insert(fogAt, applyResponse);
+                physicalResponseBeforeFog = true;
+            }
             const std::string returnLinearAlpha = "return fromLinear(texel);";
             const std::string returnLinearRgb = "return fromLinear(float4(texel, 1.0));";
             const std::string returnAlpha = "return texel;";
             const std::string returnRgb = "return float4(texel, 1.0);";
             size_t at = 0;
-            while ((at = physicalHlsl.find(returnLinearAlpha, at)) != std::string::npos) {
+            while (!physicalResponseBeforeFog && (at = physicalHlsl.find(returnLinearAlpha, at)) != std::string::npos) {
                 physicalHlsl.insert(at, applyResponse);
                 at += applyResponse.size() + returnLinearAlpha.size();
             }
             at = 0;
-            while ((at = physicalHlsl.find(returnLinearRgb, at)) != std::string::npos) {
+            while (!physicalResponseBeforeFog && (at = physicalHlsl.find(returnLinearRgb, at)) != std::string::npos) {
                 physicalHlsl.insert(at, applyResponse);
                 at += applyResponse.size() + returnLinearRgb.size();
             }
             at = 0;
-            while ((at = physicalHlsl.find(returnAlpha, at)) != std::string::npos) {
+            while (!physicalResponseBeforeFog && (at = physicalHlsl.find(returnAlpha, at)) != std::string::npos) {
                 physicalHlsl.insert(at, applyResponse);
                 at += applyResponse.size() + returnAlpha.size();
             }
             at = 0;
-            while ((at = physicalHlsl.find(returnRgb, at)) != std::string::npos) {
+            while (!physicalResponseBeforeFog && (at = physicalHlsl.find(returnRgb, at)) != std::string::npos) {
                 physicalHlsl.insert(at, applyResponse);
                 at += applyResponse.size() + returnRgb.size();
             }
@@ -3652,7 +4186,20 @@ struct ShaderProgram* GfxRenderingAPIDX12::CreateAndLoadNewShader(uint64_t shade
                           (physicalPsError ? (" " + std::string(static_cast<const char*>(physicalPsError->GetBufferPointer())))
                                            : std::string()));
         }
-        const std::string physicalHdrHlsl = makeLinearHdrVariant(physicalHlsl, !enhancedPhysicalResponse);
+        std::string physicalHdrHlsl = "#define COUCH_HDR_OUTPUT 1\n" +
+            makeLinearHdrVariant(physicalHlsl, !enhancedPhysicalResponse);
+        if (physicalResponseBeforeFog) {
+            // The HDR material response now precedes fog/grayscale blending,
+            // so those display-authored colors must share its linear space.
+            for (const std::string inputColor : { "input.fog.rgb", "input.grayscale.rgb" }) {
+                const std::string linearColor = "CouchPhysicalInput(" + inputColor + ")";
+                size_t at = 0;
+                while ((at = physicalHdrHlsl.find(inputColor, at)) != std::string::npos) {
+                    physicalHdrHlsl.replace(at, inputColor.size(), linearColor);
+                    at += linearColor.size();
+                }
+            }
+        }
         ComPtr<ID3DBlob> physicalHdrPsError;
         const HRESULT physicalHdrPsHr = mD3dCompile(physicalHdrHlsl.c_str(), physicalHdrHlsl.length(), nullptr,
             nullptr, nullptr, "PSMain", "ps_5_0", 0, 0, &prog.physicalHdrPsBlob, &physicalHdrPsError);
@@ -3663,8 +4210,10 @@ struct ShaderProgram* GfxRenderingAPIDX12::CreateAndLoadNewShader(uint64_t shade
                                     : std::string()));
         }
         LogCouchD3D12("[COUCH-R7C5][PHYSICAL_SHADER] VS=" + std::string(SUCCEEDED(physicalVsHr) ? "PASS" : "FAIL") +
-                      " PS=" + std::string(SUCCEEDED(physicalPsHr) ? "PASS" : "FAIL"));
+                      " PS=" + std::string(SUCCEEDED(physicalPsHr) ? "PASS" : "FAIL") +
+                      " HDR_PS=" + std::string(SUCCEEDED(physicalHdrPsHr) ? "PASS" : "FAIL"));
         prog.physicalShaderValid = SUCCEEDED(physicalVsHr) && SUCCEEDED(physicalPsHr) &&
+                                   SUCCEEDED(physicalHdrPsHr) &&
                                    physicalSidebandFieldsInserted && physicalSidebandParamsInserted &&
                                    physicalSidebandAssignmentsInserted;
         LogCouchD3D12("[COUCH-R7C5][PHYSICAL_CONTRACT] valid=" +

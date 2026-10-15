@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "started_utc": "2026-10-14T17:23:28.246429+00:00",
+  "status": "COMPLETE_WITH_FAILURES",
+  "scenarios": [
+    "BASELINE_KOKIRI",
+    "LAKE_HYLIA_DAY",
+    "TEMPLE_INTERIOR",
+    "HYRULE_FIELD_DAY",
+    "HYRULE_FIELD_NIGHT"
+  ],
+  "current": null,
+  "items": [
+    {
+      "scenario": "BASELINE_KOKIRI",
+      "status": "FAIL_OR_INCOMPLETE",
+      "comparison": null,
+      "rays": null,
+      "failures": [
+        {
+          "mode": "NORMAL",
+          "reason": "NO_RUN_ROOT",
+          "exit_code": 1,
+          "stderr": "C:\\Users\\danie\\Desktop\\Zeldacouch\\zel-da-OFT-esp-main \n(3)\\zel-da-OFT-esp-main\\source\\shipwright\\scripts\\scene-harness\\run-scene.ps1 : El t\ufffdrmino 'Get-FileHash' no se \nreconoce como nombre de un cmdlet, funci\ufffdn, archivo de script o programa ejecutable. Compruebe si escribi\ufffd \ncorrectamente el nombre o, si incluy\ufffd una ruta de acceso, compruebe que dicha ruta es correcta e int\ufffdntelo de nuevo.\n    + CategoryInfo          : ObjectNotFound: (Get-FileHash:String) [run-scene.ps1], CommandNotFoundException\n    + FullyQualifiedErrorId : CommandNotFoundException,run-scene.ps1\n \n"
+        },
+        {
+          "mode": "HIT_MISS",
+          "reason": "NO_RUN_ROOT",
+          "exit_code": 1,
+          "stderr": "C:\\Users\\danie\\Desktop\\Zeldacouch\\zel-da-OFT-esp-main \n(3)\\zel-da-OFT-esp-main\\source\\shipwright\\scripts\\scene-harness\\run-scene.ps1 : El t\ufffdrmino 'Get-FileHash' no se \nreconoce como nombre de un cmdlet, funci\ufffdn, archivo de script o programa ejecutable. Compruebe si escribi\ufffd \ncorrectamente el nombre o, si incluy\ufffd una ruta de acceso, compruebe que dicha ruta es correcta e int\ufffdntelo de nuevo.\n    + CategoryInfo          : ObjectNotFound: (Get-FileHash:String) [run-scene.ps1], CommandNotFoundException\n    + FullyQualifiedErrorId : CommandNotFoundException,run-scene.ps1\n \n"
+        }
+      ]
+    },
+    {
+      "scenario": "LAKE_HYLIA_DAY",
+      "status": "FAIL_OR_INCOMPLETE",
+      "comparison": null,
+      "rays": null,
+      "failures": [
+        {
+          "mode": "NORMAL",
+          "reason": "NO_RUN_ROOT",
+          "exit_code": 1,
+          "stderr": "C:\\Users\\danie\\Desktop\\Zeldacouch\\zel-da-OFT-esp-main \n(3)\\zel-da-OFT-esp-main\\source\\shipwright\\scripts\\scene-harness\\run-scene.ps1 : El t\ufffdrmino 'Get-FileHash' no se \nreconoce como nombre de un cmdlet, funci\ufffdn, archivo de script o programa ejecutable. Compruebe si escribi\ufffd \ncorrectamente el nombre o, si incluy\ufffd una ruta de acceso, compruebe que dicha ruta es correcta e int\ufffdntelo de nuevo.\n    + CategoryInfo          : ObjectNotFound: (Get-FileHash:String) [run-scene.ps1], CommandNotFoundException\n    + FullyQualifiedErrorId : CommandNotFoundException,run-scene.ps1\n \n"
+        },
+        {
+          "mode": "HIT_MISS",
+          "reason": "NO_RUN_ROOT",
+          "exit_code": 1,
+          "stderr": "C:\\Users\\danie\\Desktop\\Zeldacouch\\zel-da-OFT-esp-main \n(3)\\zel-da-OFT-esp-main\\source\\shipwright\\scripts\\scene-harness\\run-scene.ps1 : El t\ufffdrmino 'Get-FileHash' no se \nreconoce como nombre de un cmdlet, funci\ufffdn, archivo de script o programa ejecutable. Compruebe si escribi\ufffd \ncorrectamente el nombre o, si incluy\ufffd una ruta de acceso, compruebe que dicha ruta es correcta e int\ufffdntelo de nuevo.\n    + CategoryInfo          : ObjectNotFound: (Get-FileHash:String) [run-scene.ps1], CommandNotFoundException\n    + FullyQualifiedErrorId : CommandNotFoundException,run-scene.ps1\n \n"
+        }
+      ]
+    },
+    {
+      "scenario": "TEMPLE_INTERIOR",
+      "status": "FAIL_OR_INCOMPLETE",
+      "comparison": null,
+      "rays": null,
+      "failures": [
+        {
+          "mode": "NORMAL",
+          "reason": "NO_RUN_ROOT",
+          "exit_code": 1,
+          "stderr": "C:\\Users\\danie\\Desktop\\Zeldacouch\\zel-da-OFT-esp-main \n(3)\\zel-da-OFT-esp-main\\source\\shipwright\\scripts\\scene-harness\\run-scene.ps1 : El t\ufffdrmino 'Get-FileHash' no se \nreconoce como nombre de un cmdlet, funci\ufffdn, archivo de script o programa ejecutable. Compruebe si escribi\ufffd \ncorrectamente el nombre o, si incluy\ufffd una ruta de acceso, compruebe que dicha ruta es correcta e int\ufffdntelo de nuevo.\n    + CategoryInfo          : ObjectNotFound: (Get-FileHash:String) [run-scene.ps1], CommandNotFoundException\n    + FullyQualifiedErrorId : CommandNotFoundException,run-scene.ps1\n \n"
+        },
+        {
+          "mode": "HIT_MISS",
+          "reason": "NO_RUN_ROOT",
+          "exit_code": 1,
+          "stderr": "C:\\Users\\danie\\Desktop\\Zeldacouch\\zel-da-OFT-esp-main \n(3)\\zel-da-OFT-esp-main\\source\\shipwright\\scripts\\scene-harness\\run-scene.ps1 : El t\ufffdrmino 'Get-FileHash' no se \nreconoce como nombre de un cmdlet, funci\ufffdn, archivo de script o programa ejecutable. Compruebe si escribi\ufffd \ncorrectamente el nombre o, si incluy\ufffd una ruta de acceso, compruebe que dicha ruta es correcta e int\ufffdntelo de nuevo.\n    + CategoryInfo          : ObjectNotFound: (Get-FileHash:String) [run-scene.ps1], CommandNotFoundException\n    + FullyQualifiedErrorId : CommandNotFoundException,run-scene.ps1\n \n"
+        }
+      ]
+    },
+    {
+      "scenario": "HYRULE_FIELD_DAY",
+      "status": "FAIL_OR_INCOMPLETE",
+      "comparison": null,
+      "rays": null,
+      "failures": [
+        {
+          "mode": "NORMAL",
+          "reason": "NO_RUN_ROOT",
+          "exit_code": 1,
+          "stderr": "C:\\Users\\danie\\Desktop\\Zeldacouch\\zel-da-OFT-esp-main \n(3)\\zel-da-OFT-esp-main\\source\\shipwright\\scripts\\scene-harness\\run-scene.ps1 : El t\ufffdrmino 'Get-FileHash' no se \nreconoce como nombre de un cmdlet, funci\ufffdn, archivo de script o programa ejecutable. Compruebe si escribi\ufffd \ncorrectamente el nombre o, si incluy\ufffd una ruta de acceso, compruebe que dicha ruta es correcta e int\ufffdntelo de nuevo.\n    + CategoryInfo          : ObjectNotFound: (Get-FileHash:String) [run-scene.ps1], CommandNotFoundException\n    + FullyQualifiedErrorId : CommandNotFoundException,run-scene.ps1\n \n"
+        },
+        {
+          "mode": "HIT_MISS",
+          "reason": "NO_RUN_ROOT",
+          "exit_code": 1,
+          "stderr": "C:\\Users\\danie\\Desktop\\Zeldacouch\\zel-da-OFT-esp-main \n(3)\\zel-da-OFT-esp-main\\source\\shipwright\\scripts\\scene-harness\\run-scene.ps1 : El t\ufffdrmino 'Get-FileHash' no se \nreconoce como nombre de un cmdlet, funci\ufffdn, archivo de script o programa ejecutable. Compruebe si escribi\ufffd \ncorrectamente el nombre o, si incluy\ufffd una ruta de acceso, compruebe que dicha ruta es correcta e int\ufffdntelo de nuevo.\n    + CategoryInfo          : ObjectNotFound: (Get-FileHash:String) [run-scene.ps1], CommandNotFoundException\n    + FullyQualifiedErrorId : CommandNotFoundException,run-scene.ps1\n \n"
+        }
+      ]
+    },
+    {
+      "scenario": "HYRULE_FIELD_NIGHT",
+      "status": "FAIL_OR_INCOMPLETE",
+      "comparison": null,
+      "rays": null,
+      "failures": [
+        {
+          "mode": "NORMAL",
+          "reason": "NO_RUN_ROOT",
+          "exit_code": 1,
+          "stderr": "C:\\Users\\danie\\Desktop\\Zeldacouch\\zel-da-OFT-esp-main \n(3)\\zel-da-OFT-esp-main\\source\\shipwright\\scripts\\scene-harness\\run-scene.ps1 : El t\ufffdrmino 'Get-FileHash' no se \nreconoce como nombre de un cmdlet, funci\ufffdn, archivo de script o programa ejecutable. Compruebe si escribi\ufffd \ncorrectamente el nombre o, si incluy\ufffd una ruta de acceso, compruebe que dicha ruta es correcta e int\ufffdntelo de nuevo.\n    + CategoryInfo          : ObjectNotFound: (Get-FileHash:String) [run-scene.ps1], CommandNotFoundException\n    + FullyQualifiedErrorId : CommandNotFoundException,run-scene.ps1\n \n"
+        },
+        {
+          "mode": "HIT_MISS",
+          "reason": "NO_RUN_ROOT",
+          "exit_code": 1,
+          "stderr": "C:\\Users\\danie\\Desktop\\Zeldacouch\\zel-da-OFT-esp-main \n(3)\\zel-da-OFT-esp-main\\source\\shipwright\\scripts\\scene-harness\\run-scene.ps1 : El t\ufffdrmino 'Get-FileHash' no se \nreconoce como nombre de un cmdlet, funci\ufffdn, archivo de script o programa ejecutable. Compruebe si escribi\ufffd \ncorrectamente el nombre o, si incluy\ufffd una ruta de acceso, compruebe que dicha ruta es correcta e int\ufffdntelo de nuevo.\n    + CategoryInfo          : ObjectNotFound: (Get-FileHash:String) [run-scene.ps1], CommandNotFoundException\n    + FullyQualifiedErrorId : CommandNotFoundException,run-scene.ps1\n \n"
+        }
+      ]
+    }
+  ],
+  "mode": "HIDDEN_GPU_CAPTURES",
+  "update_scope": "PUBLISHED_AFTER_EACH_CAPTURE; NOT_A_GAME_VIDEO_STREAM",
+  "finished_utc": "2026-10-14T17:23:44.948206+00:00",
+  "global_visual_quality": "NOT_CERTIFIED_BY_NUMERICAL_CHANGE"
+}

@@ -53,7 +53,7 @@ def verify_checkout(root: Path, expected_head: str, label: str) -> None:
 
 
 def changed_paths(root: Path, base: str, exclude_submodule: bool = False) -> tuple[list[str], list[str]]:
-    pathspecs = [".", ":(exclude)libultraship"] if exclude_submodule else ["."]
+    pathspecs = [".", ":(exclude)libultraship", ":(exclude)OTRExporter", ":(exclude)ZAPDTR"] if exclude_submodule else ["."]
     deleted = nul_paths(run_git(root, "diff", "--diff-filter=D", "--name-only", "-z", base, "--", *pathspecs))
     if deleted:
         raise ExportError(
@@ -78,7 +78,7 @@ def changed_paths(root: Path, base: str, exclude_submodule: bool = False) -> tup
 
 
 def patch_for(root: Path, base: str, untracked: list[str], exclude_submodule: bool = False) -> bytes:
-    pathspecs = [".", ":(exclude)libultraship"] if exclude_submodule else ["."]
+    pathspecs = [".", ":(exclude)libultraship", ":(exclude)OTRExporter", ":(exclude)ZAPDTR"] if exclude_submodule else ["."]
     tracked = run_git(root, "diff", "--binary", "--full-index", base, "--", *pathspecs)
     parts = [tracked] if tracked else []
     for relative in sorted(untracked, key=str.casefold):

@@ -27,6 +27,8 @@ struct DxrShadowStats {
     
     uint64_t dispatchRaysCalls = 0;
     uint64_t rayGenInvocations = 0;
+    uint64_t signalOutputsProduced = 0;
+    uint64_t compositePasses = 0;
     bool rayDispatchIssued = false;
 
     bool debugMaskPassRecorded = false;
@@ -43,14 +45,7 @@ struct DxrShadowStats {
     double frameGpuTimeMs = -1.0;
 };
 
-struct DxrShadowFrameConstants {
-    float invProjection[4][4];
-    float invView[4][4]; // Shared shader layout; shadow raygen does not read this field.
-    float lightDir[4];
-    float screenSize[4]; // x: width, y: height, z: 1/width, w: 1/height
-    float params[4];     // x: bias, y: maxDist, z: clipXScale, w: shadowStrength
-    float quality[4];    // x: soft-shadow sample count; aligned with FrameConstants.gQuality
-};
+using DxrShadowFrameConstants = DxrFrameConstants;
 
 class DxrShadowRenderer {
 public:
@@ -59,7 +54,7 @@ public:
     bool Init(ID3D12Device* device);
     bool IsSupported() const { return mSupported; }
     bool IsEnabled() const { return mEnabled; }
-    void SetEnabled(bool enabled) { mEnabled = enabled; }
+    void SetEnabled(bool enabled) { mEnabled = enabled && mInitialized && mSupported; }
 
     // Diagnostic switches (Phase 2): COUCH_DXR_DISPATCH_ENABLE / COUCH_DXR_COMPOSITE_ENABLE
     bool IsDispatchEnabled() const { return mDispatchEnabled; }
@@ -70,7 +65,8 @@ public:
     void InvalidateCameraMatrices();
     void SetQualityScale(float scale) { mQualityScale = scale; }
     void SetQualitySamples(unsigned samples) { mShadowSamples = std::clamp(samples, 1u, 16u); }
-    void UpdateCameraMatrices(const float view[4][4], const float proj[4][4], float clipXScale = 1.0f);
+    void UpdateCameraMatrices(const float view[4][4], const float proj[4][4], float clipXScale = 1.0f,
+                              const float viewport[4] = nullptr);
 
     void RenderShadows(ID3D12Device* device, ID3D12GraphicsCommandList* cmdList,
                        ID3D12Resource* renderTarget, D3D12_CPU_DESCRIPTOR_HANDLE rtvHandle,
@@ -156,6 +152,7 @@ private:
     float mProjMatrix[4][4];
     float mInvProjectionMatrix[4][4];
     float mClipXScale = 1.0f;
+    float mRasterViewport[4] = { 0.0f, 0.0f, 1.0f, 1.0f };
     bool mMatricesValid;
     float mQualityScale = 1.0f;
     unsigned mShadowSamples = 2;

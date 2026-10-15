@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="es">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Comparador DXR · Harness</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#10151d;color:#edf1f8;font:15px system-ui,sans-serif}main{max-width:1500px;margin:auto;padding:24px}h1{font-size:26px;margin:0 0 8px}p{line-height:1.5;color:#b8c2d2}.top{display:flex;gap:24px;align-items:center;justify-content:space-between}.badge{color:#a8daca;background:#17362e;padding:9px 14px;border-radius:30px}.controls{display:flex;flex-wrap:wrap;gap:14px;align-items:end;padding:18px 0}label{display:grid;gap:7px;color:#b8c2d2}select,button{background:#263347;color:#edf1f8;border:0;border-radius:8px;padding:10px 12px;font:inherit}input[type=range]{width:180px;accent-color:#86d9c1}button:hover{background:#354860}button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #b4eaff;outline-offset:3px}button:disabled{opacity:.5}.stage{background:#05070c;border-radius:12px;overflow:hidden;position:relative;min-height:200px}canvas{display:block;width:100%;height:auto}.stage:empty:after{content:'Esperando un par de capturas GPU…';display:block;padding:90px;text-align:center;color:#b8c2d2}.labels{display:flex;justify-content:space-between;margin:10px 0;color:#9bdccc;font-weight:600}.metrics{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0}.metric{background:#1a2432;padding:14px 18px;border-radius:10px;min-width:190px}.metric strong{display:block;font-size:22px;margin-top:5px}.notes{font-size:13px}.status{min-height:22px;color:#bed3ed;margin:8px 0}a{color:#a9d6ff}#samples{color:#b8c2d2}code{font:12px ui-monospace,monospace}.hidden{display:none!important}@media(max-width:700px){main{padding:16px}.top{display:block}.badge{display:inline-block;margin-top:10px}.controls{gap:12px}input[type=range]{width:150px}}
+</style>
+<style>
+.focus-card{margin:18px 0 24px;padding:22px;background:linear-gradient(135deg,#1b2735 0%,#141b26 58%,#192b2b 100%);border:1px solid #2d3e4e;border-radius:16px;box-shadow:0 18px 48px #0003}
+.focus-head{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;margin-bottom:18px}.focus-head h2{font-size:21px;margin:2px 0 7px}.focus-head p{margin:0;max-width:850px}.eyebrow{font-size:11px;letter-spacing:.13em;color:#8fd6c1;font-weight:700}.focus-state{flex:0 0 auto;padding:9px 13px;border-radius:999px;background:#3a3020;color:#ffd38a;font-size:12px;font-weight:700;text-align:center}
+.source-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.source-card{min-height:150px;padding:16px;border-radius:12px;background:#101720;border:1px solid #293646}.source-card .kicker{font-size:10px;letter-spacing:.12em;color:#91a6ba;font-weight:700}.source-card h3{margin:8px 0;font-size:15px}.source-card p{margin:0;font-size:13px;line-height:1.5;overflow-wrap:anywhere;white-space:pre-wrap}.source-card code{color:#b9dcff}
+.gates{margin-top:18px;padding-top:16px;border-top:1px solid #304052}.gates-head{display:flex;justify-content:space-between;gap:12px;align-items:baseline}.gates-head h3{font-size:14px;margin:0 0 12px}.gates-head span{font-size:12px;color:#aab9ca}.gate-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px}.gate{padding:12px;background:#111923;border-radius:10px;min-height:75px}.gate-name{display:block;font-size:12px;line-height:1.35;margin-bottom:8px}.gate-status{font-size:10px;letter-spacing:.05em;color:#ffd38a;font-weight:800}.scope-note{margin:16px 0 0;padding:12px 14px;border-left:3px solid #e0aa55;background:#211e18;border-radius:0 9px 9px 0;font-size:12px;color:#d8c7a6}.scope-note strong{color:#ffe0a4}.contract-error{color:#ffd38a}
+@media(max-width:1000px){.source-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.gate-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:650px){.focus-head{display:block}.focus-state{display:inline-block;margin-top:12px}.source-grid,.gate-grid{grid-template-columns:1fr}.source-card{min-height:0}}
+</style>
+<main>
+<div class="top"><div><h1>Comparador DXR del harness</h1><p>Dos imágenes de la GPU, una cámara y un fotograma. Desliza o superpón para localizar el cambio.</p></div><span class="badge">Capturas en segundo plano</span></div>
+<div class="status" id="status" role="status" aria-live="polite">Conectando con los resultados…</div>
+<section class="focus-card" aria-labelledby="lightingTitle">
+<div class="focus-head"><div><p class="eyebrow">LECTURA DE CÓDIGO · TEMPLO DEL TIEMPO</p><h2 id="lightingTitle">Ventanas, mosaico y luz de Navi</h2><p id="lightingIntro">Cargando el contrato actual de iluminación desde el scene harness…</p></div><span class="focus-state" id="lightingState">LEYENDO FUENTE</span></div>
+<div class="source-grid" id="sourceCards" aria-live="polite"></div>
+<div class="gates"><div class="gates-head"><h3>Estado de evidencia por efecto</h3><span>El código y la captura son estados distintos</span></div><div class="gate-grid" id="runtimeGates"></div></div>
+<p class="scope-note"><strong>Alcance de las imágenes A/B:</strong> muestran capturas GPU guardadas de la misma escena y fotograma; cada resultado conserva el hash del ejecutable y del shader. Una contribución medida sobre un receptor no certifica por sí sola la calidad artística global ni la salida física del monitor.</p>
+</section>
+<div class="controls">
+<label>Zona<select id="scene" aria-label="Zona"><option>Esperando capturas</option></select></label>
+<label id="sourceLabel" class="hidden">Fuente identificada<select id="source" aria-label="Fuente identificada"></select></label>
+<label>Contribución<select id="pair" aria-label="Contribución"><option value="full_dxr">Todas las pasadas DXR</option><option value="shadows">Sombras</option><option value="surface_optics">Reflejos / transmisión</option><option value="indirect">Iluminación indirecta</option></select></label>
+<label>Vista<select id="mode" aria-label="Vista"><option value="split">Deslizador A/B</option><option value="overlay">Superposición A/B</option><option value="blink">Alternar con / sin</option><option value="heat">Overlay de diferencias</option><option value="difference">Diferencia absoluta</option></select></label>
+<label id="amountLabel"><span id="amountCaption">División</span><span id="amountValue">50 %</span><input id="amount" type="range" min="0" max="100" value="50"></label>
+<label id="gainLabel">Ampliación del mapa <span id="gainValue">×4</span><input id="gain" type="range" min="1" max="16" value="4"></label>
+<button id="download" disabled>Guardar comparación</button>
+<label id="roiLabel" class="hidden"><span>Región receptora GPU</span><input id="roi" type="checkbox" checked></label>
+</div>
+<div class="labels"><span id="leftLabel">SIN PASADAS DXR</span><span id="rightLabel">CON DXR</span></div>
+<div class="stage" id="stage"></div>
+<div class="metrics" id="metrics"></div>
+<p id="identity" class="notes"></p>
+<p class="notes" id="comparisonScope">«Sin DXR» conserva el raster mejorado y el tonemapping; retira las pasadas de sombras, óptica y GI. El HUD está excluido de ambas imágenes. Los mapas de diferencias pueden amplificar cambios pequeños y no certifican por sí solos una mejora visual.</p>
+<p class="notes" id="refreshNote">Los controles responden inmediatamente. Los resultados se actualizan cada 2 segundos cuando termina una captura; esta vista no es una transmisión continua del juego.</p>
+<div id="samples" class="notes"></div>
+</main>
+<script>
+'use strict';
+const $=id=>document.getElementById(id);
+const embeddedData = null;
+const sceneNames={BASELINE_KOKIRI:'Bosque Kokiri',LAKE_HYLIA_DAY:'Lago Hylia · agua',TEMPLE_INTERIOR:'Templo del Tiempo · interior',HYRULE_FIELD_DAY:'Campo de Hyrule · día',HYRULE_FIELD_NIGHT:'Campo de Hyrule · noche',NAVI_TRIFORCE_LINK_32X:'Templo · material receptor aislado',NAVI_TRIFORCE_LINK_32X_PRODUCTION:'Templo · compositor normal'};
+const canvas=document.createElement('canvas'),ctx=canvas.getContext('2d');
+let records=[],selected=null,pixels=null,images=null,loadedKey='',loadSerial=0,lastPhase='',blinkState=false;
+let selectedReceiver=null;
+const scratch=document.createElement('canvas'),scratchCtx=scratch.getContext('2d',{willReadFrequently:true});
+const imageURL=(record,stage)=>record.images[stage].embedded||'/asset/'+encodeURIComponent(record.run_id)+'/captures/'+encodeURIComponent(record.images[stage].preview);
+function loadImage(url){return new Promise((resolve,reject)=>{const i=new Image();i.onload=()=>resolve(i);i.onerror=()=>reject(new Error('No se pudo leer la captura'));i.src=url;});}
+function addSourceCard(kicker,title,body){const card=document.createElement('article');card.className='source-card';const label=document.createElement('span');label.className='kicker';label.textContent=kicker;const heading=document.createElement('h3');heading.textContent=title;const copy=document.createElement('p');copy.textContent=body;card.append(label,heading,copy);$('sourceCards').append(card);}
+function renderNaviEvidence(record){
+ const production=record.kind==='NAVI_POINT_PRODUCTION',temple=record.scenario?.startsWith('NAVI_TRIFORCE'),r=production?null:(selectedReceiver||record.representative_receiver),s=record.source,fmt=v=>Array.isArray(v)?v.map(n=>Number(n).toFixed(4)).join(', '):String(v);
+ $('lightingTitle').textContent=production?'Navi → receptor → compositor normal':'Navi → rayo → material receptor';
+ document.querySelector('.focus-head .eyebrow').textContent=production?(temple?'TEMPLO DEL TIEMPO · CONTRIBUCIÓN PUNTUAL EN PRODUCCIÓN':'BOSQUE KOKIRI · CONTRIBUCIÓN PUNTUAL EN PRODUCCIÓN'):(temple?'TEMPLO DEL TIEMPO · MATERIAL RECEPTOR GPU':'PILOTO KOKIRI · FUENTE NATIVA IDENTIFICADA');
+ $('lightingIntro').textContent=production?'Mismo fotograma y escena congelada: compositor normal frente al mismo compositor con solo la contribución puntual nativa de Navi desactivada. Se miden el búfer HDR directo y el cambio en la imagen SDR final.':'Cuatro variantes GPU del mismo estado congelado. La luz puntual y el transporte desde la malla se miden por separado, con las demás contribuciones y bloom excluidos sobre los receptores.';
+ $('lightingState').textContent=production?(record.physical_coherence==='PASS_SCOPED'?'CONTRIBUCIÓN HDR Y DIFERENCIA FINAL MEDIDAS · REVISIÓN VISUAL PENDIENTE':'CAPTURA DE PRODUCCIÓN INCOMPLETA'):(record.physical_coherence==='PASS_SCOPED_POINT_CONTRACT'?'CONTRATO PUNTUAL VERIFICADO · VISUAL PENDIENTE':'PILOTO MEDIDO · CONTRATO INCOMPLETO');
+ $('sourceCards').replaceChildren();
+ addSourceCard('NATIVE · PROPIETARIO / FUNCIÓN','Navi · owner '+s.ownerId+' · source '+s.sourceId,'Actor '+s.actorId+' · params '+s.actorParams+' · role '+s.role+'\nPosición mundo: '+fmt(s.worldPosition)+'\nRadio original: '+s.rawRadius+' · activa: '+s.enabled+'\nGanancia: '+(s.appliedPointGain??1)+'× · '+(s.gainProvenance||'NATIVE')+'\nColor lineal: '+fmt(s.linearColor));
+ if(production){
+  const q=record.production.direct_radiance;
+  addSourceCard('BÚFER DXR · HDR LINEAL','Radiancia directa de Navi','Píxeles con radiancia: '+q.nonzero_rgb_pixels+' / '+(q.width*q.height)+'\nLuminancia media: '+q.mean_linear_luminance.toExponential(4)+'\nLuminancia máxima: '+q.max_linear_luminance.toFixed(5)+'\nEl mapa intermedio solo demuestra energía calculada; la tarjeta siguiente comprueba si llegó a la salida.');
+  addSourceCard('IMAGEN FINAL · MISMO FOTOGRAMA','Cambio del compositor','Píxeles SDR modificados: '+record.production.final_changed_pixels+' / '+record.pairs.navi_point_production.total_pixels+' ('+(100*record.production.final_changed_pixel_fraction).toFixed(2)+' %)\nCambio RGB medio: '+record.pairs.navi_point_production.mean_absolute_rgb_byte_delta.toFixed(4)+' / 255\nLas otras luces permanecen presentes en ambas salidas.');
+  const anchor=record.pose?.receiverAnchor;
+  if(anchor)addSourceCard('POSE CONTROLADA','Link sobre la superficie objetivo','Posición mundo: '+fmt(record.pose.linkPosition)+'\nMaterial ancla: '+anchor.resource+'\nMuestra GPU: '+fmt(anchor.worldPosition)+' · normal '+fmt(anchor.normal)+'\nLa verificación de material está disponible en la variante aislada de esta misma zona.');
+ }else{
+  addSourceCard('INTERSECCIÓN GPU','Receptor real',r?('Instancia '+r.instance+' · triángulo '+r.triangle+' · material '+r.materialId+'\n'+r.resource+'\nColor base: '+fmt(r.baseColorLinear)+'\nNormal mundo: '+fmt(r.normalWorld)+'\nVisibilidad: '+r.visibility+' · distancia: '+r.distance.toFixed(3)):'No se ha demostrado un receptor válido.');
+  addSourceCard('HDR LINEAL · SIN BLOOM','Radiancia sobre el receptor',r?('Puntual B−A: '+fmt(r.pointRadiance)+'\nMalla C−A: '+fmt(r.meshRadiance)+'\nAtenuación: '+r.attenuation.toFixed(5)+' · coseno: '+r.cosine.toFixed(5)+'\nLa malla es transporte directo desde un emisor; no es un rebote GI.'):record.isolation);
+ }
+ addSourceCard('IDENTIDAD DEL ARTEFACTO','Ejecutable y shader','EXE SHA256: '+(record.identity.executable_sha256||'ver manifiesto del lanzador')+'\nShader SHA256: '+record.identity.shader_source_sha256+'\nABI: '+record.identity.shader_abi+' · frame '+record.frame+'\nPose: '+(record.pose.pose||'controlada por el harness'));
+ $('runtimeGates').replaceChildren();
+ for(const [name,value] of Object.entries(record.gates)){const box=document.createElement('div');box.className='gate';const label=document.createElement('span');label.className='gate-name';label.textContent=name.replaceAll('_',' ');const state=document.createElement('span');state.className='gate-status';state.textContent=value;box.append(label,state);$('runtimeGates').append(box);}
+ document.querySelector('.scope-note').textContent=production?'Las imágenes corresponden al mismo fotograma, cámara, tonemapping y escena. La salida apagada elimina únicamente la aportación puntual nativa de Navi; el búfer HDR y la diferencia SDR se informan por separado. El criterio visual final sigue pendiente de revisión humana.':'A es el receptor sin energía de las fuentes ensayadas. B usa la luz puntual; C usa la malla emisiva; D suma ambas solo para diagnosticar doble conteo. El sprite visible se conserva. La pose controlada no describe la colocación natural de Navi. Clic en la imagen para consultar otra intersección GPU.';
+}
+async function loadLightingContract(){
+ try{
+  const response=await fetch('/api/contract',{cache:'no-store'});if(!response.ok)throw new Error('No se pudo leer el contrato de código');
+  const data=await response.json(),contract=data.contract;if(!contract)throw new Error(data.message||'Contrato del Templo no disponible');
+  const materials=contract.targetMaterials||[],find=id=>materials.find(item=>item.id===id)||{},floor=find('mosaic_floor'),child=find('window_glass_child'),adult=find('window_glass_adult'),beam=find('window_beam_overlay'),navi=find('navi_visual_glow');
+  const shortResource=value=>(value||'').split('/').pop();
+  $('lightingIntro').textContent='El código especifica luz direccional nativa pasando por los paneles exactos y asigna materiales al piso, los vidrios, el haz y Navi. Su resultado visible queda pendiente de una captura hecha con esta revisión compilada.';
+  $('lightingState').textContent='MAPEADO EN CÓDIGO · CAPTURA PENDIENTE';$('sourceCards').replaceChildren();
+  addSourceCard('ORIGEN DE LUZ','Direccional + apertura','La visibilidad DXR usa la luz direccional nativa de la escena y permite el paso por los triángulos exactos de los paneles. No inventa lámparas puntuales en los límites de las ventanas.');
+  addSourceCard('VENTANAS','Vidrio como portal DXR',['Niño: '+shortResource(child.resource),'Adulto: '+shortResource(adult.resource),'Los rayos directos pueden cruzar el panel. La profundidad de cámara aún ve el vidrio; marcos, muros y techo siguen bloqueando.'].filter(Boolean).join('\n'));
+  addSourceCard('MATERIAL RECEPTOR','Mosaico del piso',[shortResource(floor.resource),floor.material+' · rugosidad '+floor.roughness+' · reflectividad '+floor.reflectivity,'Geometría: '+floor.geometryEvidence].filter(Boolean).join('\n'));
+  addSourceCard('EFECTO ARTÍSTICO','Haz de ventana',[shortResource(beam.resource),'Capa translúcida emisiva para el haz visible. No se usa como lámpara que ilumina el piso.'].filter(Boolean).join('\n'));
+  addSourceCard('LUZ LOCAL','Navi',[shortResource(navi.resource),'Las alas se asignan como emisivas; la luz puntual local se tiñe con los colores actuales de Navi.'].filter(Boolean).join('\n'));
+  const names={exact_resources_seen_in_capture:'Recursos exactos presentes en captura',window_to_floor_radiance:'Luz de ventana al piso',floor_reflection_difference:'Reflejo del mosaico',navi_local_irradiance:'Iluminación local de Navi',soft_shadow_penumbra:'Penumbra de sombras suaves'};
+  const labels={NOT_RUN:'NO EJECUTADO',NOT_CERTIFIED:'NO CERTIFICADO',NOT_VERIFIED:'NO VERIFICADO',PASS:'VERIFICADO'};
+  $('runtimeGates').replaceChildren();
+  for(const gate of contract.runtimeGates||[]){const box=document.createElement('div');box.className='gate';const name=document.createElement('span');name.className='gate-name';name.textContent=names[gate.id]||gate.id;const status=document.createElement('span');status.className='gate-status';status.textContent=labels[gate.status]||gate.status;box.append(name,status);$('runtimeGates').append(box);}
+ }catch(error){$('lightingState').textContent='CONTRATO NO DISPONIBLE';$('lightingIntro').textContent=error.message;$('lightingIntro').classList.add('contract-error');}
+}
+function draw(){
+ if(!images||!pixels)return;
+ const mode=$('mode').value,amount=+$('amount').value/100,gain=+$('gain').value,w=canvas.width,h=canvas.height;
+ ctx.globalAlpha=1;ctx.drawImage(images.off,0,0);
+ if(mode==='split'){ctx.save();ctx.beginPath();ctx.rect(w*amount,0,w*(1-amount),h);ctx.clip();ctx.drawImage(images.on,0,0);ctx.restore();ctx.fillStyle='#a8ffe2';ctx.fillRect(Math.round(w*amount)-1,0,2,h);}
+ else if(mode==='overlay'){ctx.globalAlpha=amount;ctx.drawImage(images.on,0,0);ctx.globalAlpha=1;}
+ else if(mode==='blink'){if(blinkState)ctx.drawImage(images.on,0,0);}
+ else {
+  const image=ctx.createImageData(w,h);
+  for(let p=0;p<image.data.length;p+=4){
+   const d=[Math.abs(pixels.on[p]-pixels.off[p]),Math.abs(pixels.on[p+1]-pixels.off[p+1]),Math.abs(pixels.on[p+2]-pixels.off[p+2])];
+   if(mode==='difference'){for(let c=0;c<3;c++)image.data[p+c]=Math.min(255,d[c]*gain);}
+   else {const m=Math.max(...d),a=m>2?Math.min(.85,m*gain/255):0;for(let c=0;c<3;c++)image.data[p+c]=pixels.on[p+c]*(1-a)+[255,100,0][c]*a;}
+   image.data[p+3]=255;
+  }ctx.putImageData(image,0,0);
+ }
+ $('amountLabel').classList.toggle('hidden',!['split','overlay'].includes(mode));
+ $('gainLabel').classList.toggle('hidden',!['heat','difference'].includes(mode));
+ $('amountValue').textContent=Math.round(amount*100)+' %';$('gainValue').textContent='×'+gain;
+ $('amountCaption').textContent=mode==='overlay'?'Opacidad':'División';
+ const prefixes={full_dxr:'DXR',shadows:'SOMBRAS',surface_optics:'REFLEJOS / TRANSMISIÓN',indirect:'GI'};
+ const pair=selected?.pairs[$('pair').value],prefix=prefixes[$('pair').value];
+ $('leftLabel').textContent=pair?.labels?.[0]||'SIN '+prefix;$('rightLabel').textContent=(pair?.labels?.[1]||'CON '+prefix)+(mode==='blink'?' · mostrando '+(blinkState?'DERECHA':'IZQUIERDA'):'');
+ if(selectedReceiver&&$('roi').checked&&selected?.kind==='NAVI_CAUSAL_PILOT'){
+  const [x,y]=selectedReceiver.normalizedPixel,rx=x*w,ry=y*h,rw=w/48,rh=h/27;
+  ctx.strokeStyle='#b9ffe7';ctx.lineWidth=2;ctx.strokeRect(rx-rw/2,ry-rh/2,rw,rh);
+  const text='GPU #'+selectedReceiver.instance+' · tri '+selectedReceiver.triangle;ctx.font='14px system-ui';const tw=ctx.measureText(text).width;
+  ctx.fillStyle='#081a20e6';ctx.fillRect(Math.min(rx+8,w-tw-20),Math.max(0,ry-28),tw+14,24);ctx.fillStyle='#e2fff5';ctx.fillText(text,Math.min(rx+15,w-tw-13),Math.max(17,ry-11));
+ }
+}
+async function select(){
+ const record=records.find(r=>r.scenario===$('scene').value);if(!record)return;
+ const oldPair=$('pair').value,keys=Object.keys(record.pairs),labels={full_dxr:'Todas las pasadas DXR',shadows:'Sombras',surface_optics:'Reflejos / transmisión',indirect:'Iluminación indirecta',navi_point:'B frente a A · luz puntual',navi_mesh:'C frente a A · malla emisiva',navi_double:'D frente a B · energía duplicada',navi_point_production:'Compositor normal frente a Navi puntual apagada'};
+ $('pair').replaceChildren();for(const key of keys){const o=document.createElement('option');o.value=key;o.textContent=labels[key]||key;$('pair').append(o);}if(keys.includes(oldPair))$('pair').value=oldPair;
+ const navi=record.kind==='NAVI_CAUSAL_PILOT'||record.kind==='NAVI_POINT_PRODUCTION',production=record.kind==='NAVI_POINT_PRODUCTION';$('sourceLabel').classList.toggle('hidden',!navi);$('roiLabel').classList.toggle('hidden',!navi||production);
+ if(navi){if(selected?.run_id!==record.run_id)selectedReceiver=production?null:record.representative_receiver;$('source').replaceChildren();for(const source of record.sources){const o=document.createElement('option');o.value=source.sourceId;o.textContent='Owner '+source.ownerId+' · función '+source.role+' · radio '+source.rawRadius+(source.sourceId===record.source.sourceId?' · medida':' · solo registrada');o.disabled=source.sourceId!==record.source.sourceId;$('source').append(o);}$('source').value=record.source.sourceId;renderNaviEvidence(record);$('comparisonScope').textContent=production?'Par del compositor normal y su ablación puntual de Navi, capturados en el mismo fotograma y convertidos con la curva de salida de producción. El búfer HDR lineal y la diferencia final se muestran con métricas separadas.':'Diagnóstico de una fuente aislada. Métricas en HDR lineal; las imágenes SDR normales no tienen ganancia. Solo los mapas de diferencias usan la ampliación indicada. El resto de fuentes y bloom están excluidos sobre los receptores. No certifica la calidad artística final.';}
+ else{selectedReceiver=null;$('comparisonScope').textContent='Comparación de pasadas DXR guardada. Sus ejecutables y shaders pueden pertenecer a una revisión anterior; revisar la identidad de cada resultado.';}
+ const pair=record.pairs[$('pair').value],key=record.run_id+':'+$('pair').value;
+ selected=record;if(key===loadedKey){draw();return;}
+ const serial=++loadSerial;$('download').disabled=true;
+ try{
+  const [off,on]=await Promise.all([loadImage(imageURL(record,pair.off)),loadImage(imageURL(record,pair.on))]);
+  if(serial!==loadSerial)return;
+  if(off.naturalWidth!==record.width||off.naturalHeight!==record.height||on.naturalWidth!==record.width||on.naturalHeight!==record.height)throw new Error('Dimensiones de captura inconsistentes');
+  canvas.width=scratch.width=record.width;canvas.height=scratch.height=record.height;
+  scratchCtx.drawImage(off,0,0);const offPixels=scratchCtx.getImageData(0,0,record.width,record.height).data;
+  scratchCtx.drawImage(on,0,0);const onPixels=scratchCtx.getImageData(0,0,record.width,record.height).data;
+  images={off,on};pixels={off:offPixels,on:onPixels};loadedKey=key;
+  if(!canvas.parentNode)$('stage').append(canvas);
+  $('metrics').replaceChildren();
+  const metricValues=production?[['Radiancia media · HDR',pair.hdr_linear.mean_absolute_rgb_delta.toExponential(4)],['Radiancia máxima · HDR',record.production.direct_radiance.max_linear_luminance.toExponential(4)],['Píxeles finales distintos',(100*record.production.final_changed_pixel_fraction).toFixed(2)+' %'],['Fotograma',record.frame]]:navi?[['Δ medio · HDR lineal',pair.hdr_linear.mean_absolute_rgb_delta.toExponential(4)],['Δ máximo · HDR lineal',pair.hdr_linear.max_absolute_rgb_delta.toExponential(4)],['Receptores del material iluminados',record.lit_target_receivers??record.lit_floor_receivers],['Fotograma',record.frame]]:[['Cambio > 2 códigos RGB',(100*pair.pixel_counts_above_byte_delta['2']/pair.total_pixels).toFixed(2)+' %'],['Cambio medio RGB',pair.mean_absolute_rgb_byte_delta.toFixed(3)+' / 255'],['Cambio máximo',pair.max_channel_byte_delta+' / 255'],['Fotograma',record.frame]];
+  for(const [title,value] of metricValues){
+   const box=document.createElement('div');box.className='metric';box.textContent=title;const strong=document.createElement('strong');strong.textContent=value;box.append(strong);$('metrics').append(box);
+  }
+  $('identity').textContent=record.width+' × '+record.height+' · '+record.view+' · mismo fotograma, cámara y tonemapping · HUD excluido';
+  $('download').disabled=false;draw();
+ }catch(error){$('status').textContent=error.message;}
+}
+async function refresh(){
+ try{
+  let data=embeddedData;
+  if(!data){const response=await fetch('/api/status',{cache:'no-store'});if(!response.ok)throw new Error('No se pudo actualizar el resultado');data=await response.json();}
+  const current=data.current,phase=JSON.stringify(current);lastPhase=phase;
+  $('status').textContent=current?'Capturando: '+(sceneNames[current.scenario]||current.scenario)+' · '+current.truth_mode:'Comparaciones A/B guardadas · '+(data.items||[]).length+' zonas';
+  const next=(data.items||[]).filter(item=>item.comparison?.status==='PASS_SCOPED_SAME_FRAME_GPU_COMPARISON'||item.comparison?.kind==='NAVI_CAUSAL_PILOT'||item.comparison?.kind==='NAVI_POINT_PRODUCTION').map(item=>item.comparison);
+  if(JSON.stringify(next.map(r=>r.run_id))!==JSON.stringify(records.map(r=>r.run_id))){
+   const prior=$('scene').value;records=next;$('scene').replaceChildren();
+   for(const record of records){const option=document.createElement('option');option.value=record.scenario;option.textContent=sceneNames[record.scenario]||record.scenario;$('scene').append(option);}
+   if(records.some(r=>r.scenario===prior))$('scene').value=prior;else if(records.some(r=>r.kind==='NAVI_POINT_PRODUCTION'))$('scene').value=records.find(r=>r.kind==='NAVI_POINT_PRODUCTION').scenario;else if(records.some(r=>r.kind==='NAVI_CAUSAL_PILOT'))$('scene').value=records.find(r=>r.kind==='NAVI_CAUSAL_PILOT').scenario;else if(records.some(r=>r.scenario==='TEMPLE_INTERIOR'))$('scene').value='TEMPLE_INTERIOR';
+   if(records.length)await select();else{images=null;pixels=null;selected=null;loadedKey='';$('stage').replaceChildren();$('metrics').replaceChildren();$('identity').textContent='';$('download').disabled=true;}
+  }
+  $('samples').textContent=(data.items||[]).map(item=>(sceneNames[item.scenario]||item.scenario)+': '+(item.status==='PASS_SCOPED_GPU_COMPARISON'?'A/B disponible':item.status)+(item.failures?.length?' ('+item.failures.length+' incidencias)':'')).join(' · ');
+ }catch(error){$('status').textContent=error.message+'; se conserva el último par recibido.';}
+}
+for(const id of ['scene','pair'])$(id).addEventListener('change',select);
+for(const id of ['mode','amount','gain'])$(id).addEventListener('input',draw);
+$('roi').addEventListener('change',draw);
+canvas.addEventListener('click',event=>{if(selected?.kind!=='NAVI_CAUSAL_PILOT')return;const rect=canvas.getBoundingClientRect(),x=(event.clientX-rect.left)/rect.width,y=(event.clientY-rect.top)/rect.height;selectedReceiver=selected.receiver_samples.reduce((best,r)=>!best||Math.hypot(r.normalizedPixel[0]-x,r.normalizedPixel[1]-y)<Math.hypot(best.normalizedPixel[0]-x,best.normalizedPixel[1]-y)?r:best,null);renderNaviEvidence(selected);draw();});
+$('download').addEventListener('click',()=>{if(!selected)return;canvas.toBlob(blob=>{if(!blob)return;const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=selected.scenario+'_frame'+selected.frame+'_'+$('pair').value+'_'+$('mode').value+'.png';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);});});
+setInterval(()=>{if($('mode').value==='blink'){blinkState=!blinkState;draw();}},500);
+loadLightingContract().finally(refresh);if(!embeddedData)setInterval(refresh,2000);else $('refreshNote').textContent='Instantánea autónoma de las zonas capturadas. Los controles responden inmediatamente sobre las capturas guardadas.';
+</script>
+</html>

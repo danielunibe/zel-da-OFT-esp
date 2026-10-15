@@ -14,6 +14,7 @@
 #include "ship/config/ConsoleVariable.h"
 #include "spdlog/spdlog.h"
 #include <d3dcompiler.h>
+#include <d3d12sdklayers.h>
 #include <algorithm>
 #include <cmath>
 #include <cstring>
@@ -25,6 +26,9 @@
 using Microsoft::WRL::ComPtr;
 
 namespace Fast {
+
+static_assert(kDxrShadowBytecodeAbiVersion == kDxrShaderAbiVersion,
+              "Regenerate DXR bytecode with Generate-DxrShadowBytecode.ps1 before building this pipeline");
 
 // Per-frame file logging is useful while diagnosing a GPU regression, but it
 // must never be part of the normal RTX frame budget. Set COUCH_DXR_VERBOSE=1
@@ -262,13 +266,14 @@ bool DxrShadowRenderer::Init(ID3D12Device* device) {
         return false;
     }
 
-    // Crear Constant Buffer para FrameConstants (256 bytes)
+    // Full shared FrameConstants: the alpha-tested hit path also reads the
+    // projection and logical buffer bounds, beyond the old 256-byte slice.
     D3D12_HEAP_PROPERTIES uploadHeap = {};
     uploadHeap.Type = D3D12_HEAP_TYPE_UPLOAD;
 
     D3D12_RESOURCE_DESC cbDesc = {};
     cbDesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
-    cbDesc.Width = 256 * 3;
+    cbDesc.Width = kDxrFrameConstantStride * 3;
     cbDesc.Height = 1;
     cbDesc.DepthOrArraySize = 1;
     cbDesc.MipLevels = 1;
@@ -331,6 +336,7 @@ bool DxrShadowRenderer::Init(ID3D12Device* device) {
         cvars->RegisterFloat("gEnhancements.Graphics.DXR.ShadowBias", 0.15f);
         cvars->RegisterFloat("gEnhancements.Graphics.DXR.ShadowMaxDist", 10000.0f);
         cvars->RegisterFloat("gEnhancements.Graphics.DXR.ShadowIntensity", 0.5f);
+        cvars->RegisterFloat("gEnhancements.Graphics.DXR.ShadowAngularRadius", 0.026f);
     }
     LogCouchDxrShadow("[COUCH-DXR-SHADOW] DxrShadowRenderer initialized successfully.");
     LogCouchDxrShadow("[COUCH-DXR-SHADOW] DIAGNOSTIC: dispatch=" + std::string(mDispatchEnabled ? "ON" : "OFF") +
@@ -412,25 +418,29 @@ bool DxrShadowRenderer::CreateRootSignature(ID3D12Device* device) {
     rootParams[7].DescriptorTable.pDescriptorRanges = &textureRange;
     rootParams[7].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
 
-    D3D12_STATIC_SAMPLER_DESC materialSampler = {};
-    materialSampler.Filter = D3D12_FILTER_MIN_MAG_MIP_LINEAR;
-    materialSampler.AddressU = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
-    materialSampler.AddressV = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
-    materialSampler.AddressW = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
-    materialSampler.MaxAnisotropy = 1;
-    materialSampler.ComparisonFunc = D3D12_COMPARISON_FUNC_ALWAYS;
-    materialSampler.BorderColor = D3D12_STATIC_BORDER_COLOR_TRANSPARENT_BLACK;
-    materialSampler.MinLOD = 0.0f;
-    materialSampler.MaxLOD = D3D12_FLOAT32_MAX;
-    materialSampler.ShaderRegister = 0;
-    materialSampler.RegisterSpace = 0;
-    materialSampler.ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
+    D3D12_STATIC_SAMPLER_DESC materialSamplers[2] = {};
+    for (uint32_t samplerIndex = 0; samplerIndex < 2; ++samplerIndex) {
+        auto& materialSampler = materialSamplers[samplerIndex];
+        materialSampler.Filter = samplerIndex == 0 ? D3D12_FILTER_MIN_MAG_MIP_LINEAR
+                                                    : D3D12_FILTER_MIN_MAG_MIP_POINT;
+        materialSampler.AddressU = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
+        materialSampler.AddressV = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
+        materialSampler.AddressW = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
+        materialSampler.MaxAnisotropy = 1;
+        materialSampler.ComparisonFunc = D3D12_COMPARISON_FUNC_ALWAYS;
+        materialSampler.BorderColor = D3D12_STATIC_BORDER_COLOR_TRANSPARENT_BLACK;
+        materialSampler.MinLOD = 0.0f;
+        materialSampler.MaxLOD = D3D12_FLOAT32_MAX;
+        materialSampler.ShaderRegister = samplerIndex;
+        materialSampler.RegisterSpace = 0;
+        materialSampler.ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
+    }
 
     D3D12_ROOT_SIGNATURE_DESC rootDesc = {};
     rootDesc.NumParameters = 8;
     rootDesc.pParameters = rootParams;
-    rootDesc.NumStaticSamplers = 1;
-    rootDesc.pStaticSamplers = &materialSampler;
+    rootDesc.NumStaticSamplers = 2;
+    rootDesc.pStaticSamplers = materialSamplers;
     rootDesc.Flags = D3D12_ROOT_SIGNATURE_FLAG_NONE;
 
 
@@ -493,10 +503,15 @@ bool DxrShadowRenderer::CreateRaytracingPipelineState(ID3D12Device5* device5) {
 
     // 2: Shader Config
     D3D12_RAYTRACING_SHADER_CONFIG shaderConfig = {};
-    // This state object also carries the surface reflection payload: float4
-    // radiance plus four uint fields. The shared shader config must cover the
-    // largest TraceRay payload, not only the scalar shadow visibility value.
+    // ShadowPayload includes visibility, primary normal, hit distance and
+    // probe mode (24 bytes); primary and occlusion rays share this state object.
     shaderConfig.MaxPayloadSizeInBytes = 32;
+    LogCouchDxrShadow("[COUCH-DXR-SHADOW][BYTECODE] abi=" + std::to_string(kDxrShadowBytecodeAbiVersion) +
+        " sourceSha256=" + kDxrShadowShaderSourceSha256 +
+        " dxilSha256=" + kDxrShadowBytecodeDxilSha256 +
+        " buildId=" + kDxrShadowBytecodeBuildId +
+        " dxc=\"" + kDxrShadowBytecodeDxcVersion + "\" flags=\"" + kDxrShadowBytecodeCompileFlags + "\"" +
+        " frameConstantsBytes=" + std::to_string(sizeof(DxrFrameConstants)));
     shaderConfig.MaxAttributeSizeInBytes = sizeof(float) * 2; // 8 bytes barycentrics
 
     subobjects[2].Type = D3D12_STATE_SUBOBJECT_TYPE_RAYTRACING_SHADER_CONFIG;
@@ -521,8 +536,23 @@ bool DxrShadowRenderer::CreateRaytracingPipelineState(ID3D12Device5* device5) {
     stateDesc.NumSubobjects = 5;
     stateDesc.pSubobjects = subobjects;
 
-    if (FAILED(device5->CreateStateObject(&stateDesc, IID_PPV_ARGS(&mStateObject)))) {
-        SPDLOG_ERROR("[COUCH-DXR-SHADOW] CreateStateObject failed.");
+    ComPtr<ID3D12InfoQueue> debugQueue;
+    device5->QueryInterface(IID_PPV_ARGS(&debugQueue));
+    const UINT64 debugStart = debugQueue ? debugQueue->GetNumStoredMessages() : 0;
+    const HRESULT stateResult = device5->CreateStateObject(&stateDesc, IID_PPV_ARGS(&mStateObject));
+    if (FAILED(stateResult)) {
+        LogCouchDxrShadow("[COUCH-DXR-SHADOW] CreateStateObject failed hr=" + std::to_string(static_cast<unsigned>(stateResult)));
+        if (debugQueue) {
+            for (UINT64 i = debugStart; i < debugQueue->GetNumStoredMessages(); ++i) {
+                SIZE_T size = 0;
+                if (FAILED(debugQueue->GetMessage(i, nullptr, &size))) continue;
+                std::vector<uint8_t> bytes(size);
+                auto* message = reinterpret_cast<D3D12_MESSAGE*>(bytes.data());
+                if (SUCCEEDED(debugQueue->GetMessage(i, message, &size)) && message->pDescription) {
+                    LogCouchDxrShadow(std::string("[COUCH-DXR-SHADOW][DEBUG_LAYER] ") + message->pDescription);
+                }
+            }
+        }
         return false;
     }
 
@@ -870,7 +900,8 @@ void DxrShadowRenderer::InvalidateCameraMatrices() {
     DxrSurfaceRenderer::Instance().InvalidateCameraMatrices();
 }
 
-void DxrShadowRenderer::UpdateCameraMatrices(const float view[4][4], const float proj[4][4], float clipXScale) {
+void DxrShadowRenderer::UpdateCameraMatrices(const float view[4][4], const float proj[4][4], float clipXScale,
+                                           const float viewport[4]) {
     // FORENSIC (phase-2 instrumentation fix): this is called ~258x/frame by the game
     // loop; per-call trace lines blew the trace log up to 3.3GB. Throttle to the
     // first 5 calls and every 600th call.
@@ -883,12 +914,21 @@ void DxrShadowRenderer::UpdateCameraMatrices(const float view[4][4], const float
     memcpy(mViewMatrix, view, sizeof(mViewMatrix));
     memcpy(mProjMatrix, proj, sizeof(mProjMatrix));
     mClipXScale = (std::isfinite(clipXScale) && clipXScale > 1.0e-4f) ? clipXScale : 1.0f;
+    const float fullViewport[4] = { 0.0f, 0.0f, 1.0f, 1.0f };
+    memcpy(mRasterViewport, viewport ? viewport : fullViewport, sizeof(mRasterViewport));
 
     mMatricesValid = false;
     if (InvertMatrix4x4(mProjMatrix, mInvProjectionMatrix)) {
         mMatricesValid = true;
         mStats.inverseProjectionValid = true;
     }
+    for (int axis = 0; axis < 4; ++axis) {
+        mMatricesValid = mMatricesValid && std::isfinite(mRasterViewport[axis]);
+        for (int col = 0; col < 4; ++col)
+            mMatricesValid = mMatricesValid && std::isfinite(mInvProjectionMatrix[axis][col]);
+    }
+    mMatricesValid = mMatricesValid && mRasterViewport[2] > 1.0e-6f && mRasterViewport[3] > 1.0e-6f;
+    mStats.inverseProjectionValid = mMatricesValid;
 
     // RT4-A: Also update temporal manager with current camera matrices
     if (ucmTrace) {
@@ -898,7 +938,7 @@ void DxrShadowRenderer::UpdateCameraMatrices(const float view[4][4], const float
     memcpy(temporalProjection,proj,sizeof(temporalProjection));
     for (int r=0;r<4;++r) temporalProjection[r][0]*=mClipXScale;
     TemporalManager::Instance().UpdateCameraMatrices(view, temporalProjection);
-    DxrSurfaceRenderer::Instance().UpdateCameraMatrices(view, proj, mClipXScale);
+    DxrSurfaceRenderer::Instance().UpdateCameraMatrices(view, proj, mClipXScale, mRasterViewport);
     if (ucmTrace) {
         TEMPORAL_TRACE_EXIT("UpdateCameraMatrices");
     }
@@ -918,7 +958,7 @@ void DxrShadowRenderer::RenderShadows(ID3D12Device* device, ID3D12GraphicsComman
     if (!mInitialized || !mSupported || !mEnabled) return;
     if (!device || !cmdList || !renderTarget || !depthBuffer || tlasGpuVA == 0) return;
     if (width == 0 || height == 0 || !mMatricesValid) return;
-    if (!surfaceData.vertexData || !surfaceData.indexData || !surfaceData.instanceData ||
+    if (!DxrSurfaceFrameBoundsValid(surfaceData) ||
         !rasterSrvHeap || rasterSrvDescriptorSize == 0) return;
 
     mStats.renderWidth = width;
@@ -929,6 +969,7 @@ void DxrShadowRenderer::RenderShadows(ID3D12Device* device, ID3D12GraphicsComman
     float shadowBias = 0.15f;
     float shadowDist = 10000.0f;
     float shadowStrength = 0.85f;
+    float shadowAngularRadius = 0.026f;
     float lightDir[4] = { 0.22f, 0.94f, 0.26f, 0.0f }; // Luz solar cenital (+Y dominante) para sombras naturales bajo estructuras
 
     auto cvars = Ship::Context::GetInstance()->GetConsoleVariables();
@@ -937,6 +978,7 @@ void DxrShadowRenderer::RenderShadows(ID3D12Device* device, ID3D12GraphicsComman
         shadowBias = cvars->GetFloat("gEnhancements.Graphics.DXR.ShadowBias", 0.15f);
         shadowDist = cvars->GetFloat("gEnhancements.Graphics.DXR.ShadowMaxDist", 10000.0f);
         shadowStrength = cvars->GetFloat("gEnhancements.Graphics.DXR.ShadowIntensity", 0.85f);
+        shadowAngularRadius = cvars->GetFloat("gEnhancements.Graphics.DXR.ShadowAngularRadius", 0.026f);
     }
     const SceneLightingSnapshot sceneLighting = MaterialRegistry::Instance().GetSceneLighting();
     if (sceneLighting.capturedFromScene) {
@@ -946,7 +988,20 @@ void DxrShadowRenderer::RenderShadows(ID3D12Device* device, ID3D12GraphicsComman
             // Do not cast a synthetic sun shadow in an ambient-only scene.
             shadowMode = 0;
         }
+        // The legacy raster already contains ambient and secondary lighting.
+        // Only the key-light share can be removed by its visibility mask.
+        auto luminance = [](const float* color) {
+            return std::max(0.0f, color[0] * 0.2126f + color[1] * 0.7152f + color[2] * 0.0722f);
+        };
+        const float keyEnergy = luminance(sceneLighting.directionalColor);
+        const float preservedEnergy = luminance(sceneLighting.ambientColor) +
+                                      luminance(sceneLighting.secondaryDirectionalColor);
+        shadowStrength *= keyEnergy / std::max(keyEnergy + preservedEnergy, 1.0e-6f);
     }
+    shadowStrength = std::clamp(shadowStrength, 0.0f, 1.0f);
+    // Keep the disk angle independent from sample count: quality changes noise,
+    // while this control changes the light source's apparent angular size.
+    shadowAngularRadius = std::clamp(shadowAngularRadius, 0.0f, 0.12f);
     if (forceDebugMask) {
         shadowMode = 1; // Temporary sequence stage A: visualize the raw DXR visibility mask.
     } else if (const char* debugEnv = getenv("COUCH_DXR_SHADOW_DEBUG")) {
@@ -999,6 +1054,14 @@ void DxrShadowRenderer::RenderShadows(ID3D12Device* device, ID3D12GraphicsComman
     if (mConstantBufferMapped) {
         DxrShadowFrameConstants fc = {};
         memcpy(fc.invProjection, mInvProjectionMatrix, sizeof(fc.invProjection));
+        memcpy(fc.projection, mProjMatrix, sizeof(fc.projection));
+        memcpy(fc.rasterViewport, mRasterViewport, sizeof(fc.rasterViewport));
+        fc.diagnosticInfo[1] = static_cast<float>(surfaceData.instanceCount);
+        fc.diagnosticInfo[2] = static_cast<float>(textureCount + 1);
+        fc.diagnosticBounds[0] = surfaceData.vertexCount;
+        fc.diagnosticBounds[1] = surfaceData.indexCount;
+        fc.diagnosticBounds[2] = surfaceData.instanceCount;
+        fc.diagnosticBounds[3] = static_cast<uint32_t>(textureCount + 1);
         // Captured TLAS instances include the Fast3D view transform. Express
         // the fixed world-space key light in that same view space so its
         // direction remains anchored as the camera moves.
@@ -1026,8 +1089,9 @@ void DxrShadowRenderer::RenderShadows(ID3D12Device* device, ID3D12GraphicsComman
         fc.params[2] = mClipXScale;
         fc.params[3] = shadowStrength;
         fc.quality[0] = static_cast<float>(mShadowSamples);
+        fc.quality[1] = shadowAngularRadius;
 
-        memcpy(mConstantBufferMapped + (frameIndex % 3) * 256, &fc, sizeof(fc));
+        memcpy(mConstantBufferMapped + (frameIndex % 3) * kDxrFrameConstantStride, &fc, sizeof(fc));
     }
 
     // Obtener ID3D12GraphicsCommandList4 para DispatchRays
@@ -1087,7 +1151,7 @@ void DxrShadowRenderer::RenderShadows(ID3D12Device* device, ID3D12GraphicsComman
     cmdList4->SetComputeRootDescriptorTable(2, uavGpuHandle);
 
     // Root Param 3: Constant Buffer (b0)
-    cmdList4->SetComputeRootConstantBufferView(3, mConstantBuffer->GetGPUVirtualAddress() + (frameIndex % 3) * 256);
+    cmdList4->SetComputeRootConstantBufferView(3, mConstantBuffer->GetGPUVirtualAddress() + (frameIndex % 3) * kDxrFrameConstantStride);
 
     cmdList4->SetComputeRootShaderResourceView(4, surfaceData.vertexData->GetGPUVirtualAddress());
     cmdList4->SetComputeRootShaderResourceView(5, surfaceData.indexData->GetGPUVirtualAddress());
@@ -1150,6 +1214,7 @@ void DxrShadowRenderer::RenderShadows(ID3D12Device* device, ID3D12GraphicsComman
 
     cmdList->ResourceBarrier(3, midBarriers);
     mMaskTrackedState = (unsigned)D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
+    mStats.signalOutputsProduced += doDispatch ? 1 : 0;
 
     // Temporal denoising must consume this frame's freshly traced mask. The
     // old wiring ran reprojection before DispatchRays, which meant it only
@@ -1220,6 +1285,7 @@ void DxrShadowRenderer::RenderShadows(ID3D12Device* device, ID3D12GraphicsComman
 
     cmdList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
     cmdList->DrawInstanced(3, 1, 0, 0); // Fullscreen Triangle
+    ++mStats.compositePasses;
 
     if (mStats.dispatchRaysCalls == 1) {
         LogCouchDxrShadow("[COUCH-DXR] First DispatchRays SUCCESS! Resolution=" + std::to_string(width) + "x" + std::to_string(height));

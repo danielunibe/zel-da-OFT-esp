@@ -1,6 +1,7 @@
 #include "global.h"
 
 #include <string.h>
+#include "fast/NativeLightContract.h"
 
 #include "objects/gameplay_keep/gameplay_keep.h"
 
@@ -15,6 +16,8 @@
 // them into actor-relative Fast3D direction vectors.
 extern void CouchCaptureNativeLight(s32 type, f32 x, f32 y, f32 z,
                                     u32 gameFrame, f32 red, f32 green, f32 blue, f32 radius);
+extern void CouchBeginNativeLightCapture(u32 gameFrame, f32 ambientRed,
+                                         f32 ambientGreen, f32 ambientBlue);
 extern PlayState* gPlayState;
 
 typedef struct {
@@ -173,15 +176,18 @@ void Lights_BindAll(Lights* lights, LightNode* listHead, Vec3f* vec) {
     // scene list. Capture its original definitions once here instead of
     // re-locking the DXR registry for every actor that binds the same list.
     if (vec == NULL) {
+        CouchBeginNativeLightCapture(gPlayState ? gPlayState->state.frames : 0,
+                                     lights->l.a.l.col[0], lights->l.a.l.col[1],
+                                     lights->l.a.l.col[2]);
         while (captureNode != NULL) {
             info = captureNode->info;
             if (info->type == LIGHT_DIRECTIONAL) {
-                CouchCaptureNativeLight(info->type, info->params.dir.x, info->params.dir.y, info->params.dir.z,
+                CouchCaptureIdentifiedNativeLight(info, info->type, info->params.dir.x, info->params.dir.y, info->params.dir.z,
                                         gPlayState ? gPlayState->state.frames : 0,
                                         info->params.dir.color[0], info->params.dir.color[1],
                                         info->params.dir.color[2], 0.0f);
             } else if (info->type == LIGHT_POINT_NOGLOW || info->type == LIGHT_POINT_GLOW) {
-                CouchCaptureNativeLight(info->type, info->params.point.x, info->params.point.y,
+                CouchCaptureIdentifiedNativeLight(info, info->type, info->params.point.x, info->params.point.y,
                                         info->params.point.z, gPlayState ? gPlayState->state.frames : 0,
                                         info->params.point.color[0],
                                         info->params.point.color[1], info->params.point.color[2],
@@ -299,6 +305,7 @@ LightNode* LightContext_InsertLight(PlayState* play, LightContext* lightCtx, Lig
 
 void LightContext_RemoveLight(PlayState* play, LightContext* lightCtx, LightNode* node) {
     if (node != NULL) {
+        CouchForgetNativeLight(node->info);
         if (node->prev != NULL) {
             node->prev->next = node->next;
         } else {

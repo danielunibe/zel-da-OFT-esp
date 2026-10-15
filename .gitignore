@@ -100,3 +100,8 @@ id_ed25519*
 !NOTICE.md
 !LICENSE
 !THIRD_PARTY_LICENSES.md
+
+# --- 8. ARBOLES LOCALES DE DESARROLLO Y HARNESS LOCAL ---
+source/
+runtime/
+reports/scene_harness/

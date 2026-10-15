@@ -12,6 +12,7 @@
 
 #include "fast/lus_gbi.h"
 #include "fast/types.h"
+#include "fast/MaterialRegistry.h"
 #include "fast/ucodehandlers.h"
 #include "backends/gfx_rendering_api.h"
 
@@ -219,6 +220,8 @@ struct RawTexMetadata {
     float h_byte_scale = 1, v_pixel_scale = 1;
     std::shared_ptr<Fast::Texture> resource;
     Fast::TextureType type;
+    uint64_t resourceHash = 0;
+    std::string resourcePath;
 };
 
 struct ShaderMod {
@@ -517,6 +520,7 @@ class Interpreter {
 
     const std::unordered_map<Mtx*, MtxF>* mCurMtxReplacements;
     bool mMarkerOn; // This was originally a debug feature. Now it seems to control s2dex?
+    uint32_t mLightOwnerId = 0, mLightRole = 0;
     std::vector<std::string> shader_ids;
     int mInterpolationIndex;
     int mInterpolationIndexTarget;
@@ -524,11 +528,16 @@ class Interpreter {
     // V03.1 Master Visual Consolidation: UI Isolation & Dynamic Fog
     uint64_t mCurrentTextureHash = 0;
     std::string mCurrentTexturePath = "";
+    DrawCallInfo mBufferedDrawInfo{};
+    uint32_t mBufferedTextureSrvIndices[2] = { UINT32_MAX, UINT32_MAX };
+    float mBufferedCameraView[4][4] = {};
+    DrawCallInfo CurrentDrawInfo(bool isRect, const bool usedTextures[2], const uint32_t tileModes[2]) const;
     bool mHasDrawn3DThisFrame = false;
     struct DxrCameraMatrixCandidate {
         float view[4][4] = {};
         float projection[4][4] = {};
         float clipXScale = 1.0f;
+        float viewport[4] = { 0.0f, 0.0f, 1.0f, 1.0f }; // normalized bottom-origin rectangle
         uint64_t triangleCount = 0;
         double projectedPixelArea = 0.0;
     };

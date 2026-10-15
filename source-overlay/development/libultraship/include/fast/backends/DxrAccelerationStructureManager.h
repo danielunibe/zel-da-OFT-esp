@@ -4,6 +4,7 @@
 
 #include <d3d12.h>
 #include <array>
+#include <cstddef>
 #include <dxgi1_4.h>
 #include <wrl/client.h>
 #include <vector>
@@ -18,16 +19,57 @@ namespace Fast {
 
 constexpr uint32_t kDxrSurfaceFrameCount = 3;
 constexpr uint32_t kDxrSurfaceTextureDescriptorCount = 4096;
+constexpr uint32_t kDxrFrameConstantStride = 1792; // 256-byte aligned CBV slice
+constexpr uint32_t kDxrShaderAbiVersion = 4; // source identity and explicit emitter quadrature
+
+// One CPU layout for both DXR pipelines. AnyHitShadow also evaluates material
+// data and reads projection/bounds near the END of FrameConstants in HLSL.
+struct DxrFrameConstants {
+    float invProjection[4][4];
+    float invView[4][4];
+    float lightDir[4];
+    float screenSize[4];
+    float params[4];
+    float quality[4];
+    float rasterViewport[4]; // normalized left, bottom, width, height
+    float sceneLightColor[4];
+    float ambientLightColor[4];
+    float frameInfo[4];
+    float diagnosticInfo[4];
+    float secondaryLightDirection[4];
+    float secondaryLightColor[4];
+    float pointLightPosition[32][4];
+    float pointLightOptics[32][4];
+    float projection[4][4];
+    uint32_t diagnosticBounds[4];
+    float traceSettings[4]; // reflection/transmission/GI ranges; w: reflection strength for premixed dielectric optics
+    uint32_t sourceControls[4]; // selected owner, harness isolation, sample count, reserved
+    float emitterSamplePosition[8][4]; // TLAS/view xyz, represented area / sample count
+    float emitterSampleNormal[8][4]; // TLAS/view normal; w reserved
+    uint32_t emitterSampleIdentity[2][4]; // record:16 | primitive:16 for exact sampled-surface visibility
+};
+static_assert(sizeof(DxrFrameConstants) == 1728 && sizeof(DxrFrameConstants) <= kDxrFrameConstantStride,
+              "CPU FrameConstants must match the shared DXR HLSL layout");
+static_assert(offsetof(DxrFrameConstants, rasterViewport) == 192 &&
+              offsetof(DxrFrameConstants, projection) == 1328 &&
+              offsetof(DxrFrameConstants, diagnosticBounds) == 1392 &&
+              offsetof(DxrFrameConstants, traceSettings) == 1408 &&
+              offsetof(DxrFrameConstants, sourceControls) == 1424 &&
+              offsetof(DxrFrameConstants, emitterSamplePosition) == 1440,
+              "DXR constants offsets must match dxr_shadow.hlsl");
 
 struct DxrHitVertex {
     float position[3];
     float normal[3];
     float uv[2];
+    float uv1[2];
     uint32_t color;
     uint32_t normalState;
     uint32_t reserved[2];
 };
-static_assert(sizeof(DxrHitVertex) == 48, "DXR hit vertex layout must remain 48 bytes");
+static_assert(sizeof(DxrHitVertex) == 56 && offsetof(DxrHitVertex, uv1) == 32 &&
+              offsetof(DxrHitVertex, color) == 40 && offsetof(DxrHitVertex, reserved) == 48,
+              "DXR hit vertex layout must match the HLSL 56-byte record");
 
 struct DxrInstanceMaterialData {
     uint32_t vertexOffset;
@@ -47,19 +89,56 @@ struct DxrInstanceMaterialData {
     float wetness;
     float subsurfaceHint;
     float baseColor[4];
+    uint32_t textureIndex1;
+    uint32_t samplerFlags;
+    uint32_t combineModeLow;
+    uint32_t combineModeHigh;
+    uint32_t primitiveColor;
+    uint32_t environmentColor;
+    uint32_t reserved[2];
 };
-static_assert(sizeof(DxrInstanceMaterialData) == 80, "DXR material record layout must remain 80 bytes");
+static_assert(sizeof(DxrInstanceMaterialData) == 112 &&
+              offsetof(DxrInstanceMaterialData, baseColor) == 64 &&
+              offsetof(DxrInstanceMaterialData, textureIndex1) == 80 &&
+              offsetof(DxrInstanceMaterialData, primitiveColor) == 96,
+              "DXR material record layout must match the HLSL 112-byte record");
 
+struct DxrEmitterTriangle {
+    uint32_t ownerId, recordIndex, primitiveIndex;
+    float position[3][3];
+    float area;
+};
+struct DxrSurfaceIdentity {
+    uint64_t instanceId, assetId, materialId;
+    uint32_t geometryMode, ownerId, role;
+    std::string resourcePath;
+};
 struct DxrSurfaceFrameBuffers {
     Microsoft::WRL::ComPtr<ID3D12Resource> vertexData;
     Microsoft::WRL::ComPtr<ID3D12Resource> indexData;
     Microsoft::WRL::ComPtr<ID3D12Resource> instanceData;
     std::vector<uint32_t> textureSrvIndices;
     std::vector<DxrInstanceMaterialData> materialRecords;
+    std::vector<DxrEmitterTriangle> emitters;
+    std::vector<DxrSurfaceIdentity> identities; // same indices as InstanceID/materialRecords
     uint32_t instanceCount = 0;
     uint32_t vertexCount = 0;
     uint32_t indexCount = 0;
 };
+
+inline bool DxrSurfaceFrameBoundsValid(const DxrSurfaceFrameBuffers& frame) {
+    // Root SRVs expose GPU addresses without buffer sizes. Validate physical
+    // allocations on CPU, then publish logical counts for shader index guards.
+    return frame.vertexData && frame.indexData && frame.instanceData &&
+        frame.vertexCount != 0 && frame.indexCount >= 3 && frame.indexCount % 3 == 0 &&
+        frame.instanceCount != 0 && frame.instanceCount == frame.materialRecords.size() &&
+        frame.vertexCount <= UINT32_MAX / sizeof(DxrHitVertex) &&
+        frame.indexCount <= UINT32_MAX / sizeof(uint32_t) &&
+        frame.instanceCount <= UINT32_MAX / sizeof(DxrInstanceMaterialData) &&
+        frame.vertexCount <= frame.vertexData->GetDesc().Width / sizeof(DxrHitVertex) &&
+        frame.indexCount <= frame.indexData->GetDesc().Width / sizeof(uint32_t) &&
+        frame.instanceCount <= frame.instanceData->GetDesc().Width / sizeof(DxrInstanceMaterialData);
+}
 
 enum class GeometryClassification : uint8_t {
     STATIC = 0,
@@ -160,7 +239,7 @@ public:
     bool Init(ID3D12Device* device);
     bool IsSupported() const { return mSupported; }
     bool IsEnabled() const { return mEnabled; }
-    void SetEnabled(bool enabled) { mEnabled = enabled; }
+    void SetEnabled(bool enabled) { mEnabled = enabled && mInitialized && mSupported; }
 
     void ProcessFrame(ID3D12Device* device, ID3D12GraphicsCommandList* cmdList,
                       uint32_t frameIndex, uint64_t fenceValue, uint64_t completedFenceValue);
