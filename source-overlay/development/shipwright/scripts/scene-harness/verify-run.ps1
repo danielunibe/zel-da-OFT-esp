@@ -6,6 +6,7 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
+. (Join-Path $PSScriptRoot 'file-hash.ps1')
 $failures = [System.Collections.Generic.List[string]]::new()
 $verifiedStageCount = 0
 
@@ -360,6 +361,130 @@ function Get-DecodedPngPixels([string]$Path) {
     return [ordered]@{ Width = $width; Height = $height; Bytes = $pixels }
 }
 
+function Write-PngComparisonViews([string]$PathA, [string]$PathB, [string]$OverlayPath,
+    [string]$DifferencePath, [string]$BlinkPath) {
+    $imageA = Get-DecodedPngPixels $PathA
+    $imageB = Get-DecodedPngPixels $PathB
+    if ($imageA.Width -ne $imageB.Width -or $imageA.Height -ne $imageB.Height) {
+        throw 'Same-frame comparison PNG dimensions do not match.'
+    }
+
+    $pixelCount = [long]$imageA.Width * [long]$imageA.Height
+    $byteCount = [int]($pixelCount * 4)
+    $overlayBytes = [byte[]]::new($byteCount)
+    $differenceBytes = [byte[]]::new($byteCount)
+    for ($pixel = 0; $pixel -lt $pixelCount; $pixel++) {
+        $offset = [int]($pixel * 4)
+        $maxDifference = 0
+        for ($channel = 0; $channel -lt 3; $channel++) {
+            $a = [int]$imageA.Bytes[$offset + $channel]
+            $b = [int]$imageB.Bytes[$offset + $channel]
+            $overlayBytes[$offset + $channel] = [byte][math]::Floor(($a + $b) * 0.5)
+            $maxDifference = [math]::Max($maxDifference, [math]::Abs($a - $b))
+        }
+        $overlayBytes[$offset + 3] = 255
+        $amplifiedDifference = [byte][math]::Min(255, $maxDifference * 4)
+        $differenceBytes[$offset] = $amplifiedDifference
+        $differenceBytes[$offset + 1] = $amplifiedDifference
+        $differenceBytes[$offset + 2] = $amplifiedDifference
+        $differenceBytes[$offset + 3] = 255
+    }
+
+    Add-Type -AssemblyName System.Drawing -ErrorAction Stop
+    foreach ($output in @(@{ Path = $OverlayPath; Bytes = $overlayBytes },
+                          @{ Path = $DifferencePath; Bytes = $differenceBytes })) {
+        $bitmap = [System.Drawing.Bitmap]::new($imageA.Width, $imageA.Height,
+            [System.Drawing.Imaging.PixelFormat]::Format32bppArgb)
+        try {
+            $rect = [System.Drawing.Rectangle]::new(0, 0, $imageA.Width, $imageA.Height)
+            $data = $bitmap.LockBits($rect, [System.Drawing.Imaging.ImageLockMode]::WriteOnly,
+                [System.Drawing.Imaging.PixelFormat]::Format32bppArgb)
+            try {
+                $rowBytes = $imageA.Width * 4
+                $stride = [Math]::Abs($data.Stride)
+                for ($y = 0; $y -lt $imageA.Height; $y++) {
+                    $rowPointer = [System.IntPtr]::Add($data.Scan0, $y * $stride)
+                    [System.Runtime.InteropServices.Marshal]::Copy($output.Bytes, $y * $rowBytes,
+                        $rowPointer, $rowBytes)
+                }
+            } finally { $bitmap.UnlockBits($data) }
+            $bitmap.Save($output.Path, [System.Drawing.Imaging.ImageFormat]::Png)
+        } finally { $bitmap.Dispose() }
+    }
+
+    $blinkHtml = @'
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Comparación DXR off/on</title>
+  <style>
+    :root { color-scheme: dark; font-family: Segoe UI, sans-serif; background: #101318; color: #f3f4f6; }
+    body { margin: 0; min-height: 100vh; display: grid; grid-template-rows: auto 1fr auto; }
+    header, footer { padding: 12px 18px; background: #1b2028; }
+    header { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    h1 { margin: 0; font-size: 16px; font-weight: 600; }
+    button { padding: 8px 14px; border: 0; border-radius: 6px; background: #56a8ff; color: #07111d; font-weight: 700; cursor: pointer; }
+    main { display: grid; place-items: center; overflow: auto; padding: 12px; }
+    img { display: block; max-width: 100%; max-height: calc(100vh - 118px); object-fit: contain; image-rendering: auto; }
+    #status { font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>DXR: misma escena y mismo fotograma</h1>
+    <button id="toggle" type="button">Pausar</button>
+  </header>
+  <main><img id="frame" alt="Comparación alternada de DXR desactivado y activado"></main>
+  <footer id="status" aria-live="polite"></footer>
+  <script>
+    const frames = [
+      { src: "__DXR_OFF__", label: "DXR desactivado" },
+      { src: "__DXR_ON__", label: "DXR activado" }
+    ];
+    const image = document.getElementById("frame");
+    const status = document.getElementById("status");
+    const toggle = document.getElementById("toggle");
+    let index = 0;
+    let running = true;
+    function showFrame() {
+      image.src = frames[index].src;
+      status.textContent = frames[index].label + " · alternancia cada 700 ms";
+    }
+    showFrame();
+    window.setInterval(() => {
+      if (!running) return;
+      index = (index + 1) % frames.length;
+      showFrame();
+    }, 700);
+    toggle.addEventListener("click", () => {
+      running = !running;
+      toggle.textContent = running ? "Pausar" : "Reanudar";
+      if (!running) status.textContent = frames[index].label + " · pausado";
+      else showFrame();
+    });
+  </script>
+</body>
+</html>
+'@
+    $offName = [System.Net.WebUtility]::HtmlEncode([System.IO.Path]::GetFileName($PathA))
+    $onName = [System.Net.WebUtility]::HtmlEncode([System.IO.Path]::GetFileName($PathB))
+    $blinkHtml = $blinkHtml.Replace('__DXR_OFF__', $offName).Replace('__DXR_ON__', $onName)
+    Set-Content -LiteralPath $BlinkPath -Value $blinkHtml -Encoding utf8
+
+    return [ordered]@{
+        overlay = [System.IO.Path]::GetFileName($OverlayPath)
+        difference = [System.IO.Path]::GetFileName($DifferencePath)
+        blink = [System.IO.Path]::GetFileName($BlinkPath)
+        blend = '50_PERCENT_DXR_OFF_PLUS_50_PERCENT_DXR_ON'
+        differenceGain = 4
+        blinkIntervalMs = 700
+        width = $imageA.Width
+        height = $imageA.Height
+    }
+}
+
 function Compare-PngStagePair([string]$RunRoot, [string]$StageA, [string]$StageB, $StageMetadata) {
     $label = "$StageA vs $StageB"
     $metrics = [ordered]@{
@@ -450,6 +575,28 @@ function Get-VisualDifference([string]$RunRoot, [string]$RunId, [bool]$SameFrame
     $rasterHdrVsComposite = Compare-Rgba16FStagePair $RunRoot 'RASTER_HDR' 'COMPOSITE_PRE_TONEMAP' $StageMetadata
     $compositeVsRasterCopy = Compare-Rgba16FStagePair $RunRoot 'COMPOSITE_PRE_TONEMAP' 'RASTER_SCENE_COLOR_COPY' $StageMetadata
     $postAcesVsFinalSdr = Compare-PngStagePair $RunRoot 'POST_ACES_PRE_PRESENT' 'FINAL_SDR_PRE_PRESENT' $StageMetadata
+    $dxrOffOn = $null
+    $comparisonViews = $null
+    $isNavi = ($null -ne $StageMetadata -and $null -ne $StageMetadata['navi_a_sdr'])
+    $stageA_name = if ($isNavi) { 'navi_a_sdr' } else { 'comparison_dxr_off' }
+    $stageB_name = if ($isNavi) { 'navi_b_sdr' } else { 'comparison_dxr_on' }
+    $comparisonA = if ($null -ne $StageMetadata) { $StageMetadata[$stageA_name] } else { $null }
+    $comparisonB = if ($null -ne $StageMetadata) { $StageMetadata[$stageB_name] } else { $null }
+    if ($SameFrame -and $null -ne $comparisonA -and $null -ne $comparisonB -and
+        [int]$comparisonA.frame -eq [int]$Frame -and [int]$comparisonB.frame -eq [int]$Frame) {
+        $dxrOffOn = Compare-PngStagePair $RunRoot $stageA_name $stageB_name $StageMetadata
+        try {
+            $pathA = Get-StagePayloadPath $RunRoot $comparisonA
+            $pathB = Get-StagePayloadPath $RunRoot $comparisonB
+            $capturesRoot = Join-Path $RunRoot 'captures'
+            $overlayPath = Join-Path $capturesRoot 'comparison_dxr_off_on_overlay.png'
+            $differencePath = Join-Path $capturesRoot 'comparison_dxr_off_on_difference_x4.png'
+            $blinkPath = Join-Path $capturesRoot 'comparison_dxr_off_on_blink.html'
+            $comparisonViews = Write-PngComparisonViews $pathA $pathB $overlayPath $differencePath $blinkPath
+        } catch {
+            Add-Failure "DXR off/on comparison-view generation failed: $($_.Exception.Message)"
+        }
+    }
     return [ordered]@{
         schemaVersion = 1
         runId = $RunId
@@ -460,9 +607,11 @@ function Get-VisualDifference([string]$RunRoot, [string]$RunId, [bool]$SameFrame
             raster_hdr_vs_composite_pre_tonemap_observation = $rasterHdrVsComposite
             composite_pre_tonemap_vs_raster_scene_color_copy_observation = $compositeVsRasterCopy
             post_aces_vs_final_pre_present_observation = $postAcesVsFinalSdr
+            same_frame_dxr_off_vs_on = $dxrOffOn
         }
+        sameFrameComparisonViews = $comparisonViews
         causalAttribution = 'NOT_ESTABLISHED_BY_PIXEL_DIFFERENCE'
-        dxrVisualVerified = 'PARTIAL'
+        dxrVisualVerified = if ($null -ne $comparisonViews) { 'SAME_FRAME_DIFFERENCE_CAPTURED_VISUAL_REVIEW_REQUIRED' } else { 'PARTIAL' }
     }
 }
 
@@ -486,9 +635,13 @@ $dxrLogPath = Join-Path $resolvedRunRoot 'harness-dxr.log'
 $dxrLog = if (Test-Path -LiteralPath $dxrLogPath -PathType Leaf) { Get-Content -LiteralPath $dxrLogPath -Raw } else { '' }
 $d3d12LogPath = Join-Path $resolvedRunRoot 'harness-d3d12.log'
 $d3d12Log = if (Test-Path -LiteralPath $d3d12LogPath -PathType Leaf) { Get-Content -LiteralPath $d3d12LogPath -Raw } else { '' }
-$latestLightStart = $dxrLog.LastIndexOf('[COUCH-DXR-LIGHT-SYNC]')
-$latestLightEnd = if ($latestLightStart -ge 0) { $dxrLog.IndexOf([char]10, $latestLightStart) } else { -1 }
-$latestLightRecord = if ($latestLightStart -lt 0) { '' } elseif ($latestLightEnd -lt 0) { $dxrLog.Substring($latestLightStart) } else { $dxrLog.Substring($latestLightStart, $latestLightEnd - $latestLightStart) }
+$captureFrame = if ($null -ne $ack -and $null -ne $ack.PSObject.Properties['capture_frame']) { [int]$ack.capture_frame } else { -1 }
+$captureLightPattern = if ($captureFrame -ge 0) {
+    '(?m)^\[COUCH-DXR-LIGHT-SYNC\] frame=' + [regex]::Escape([string]$captureFrame) + ' [^\r\n]*\r?$'
+} else { '' }
+$captureLightMatches = if ($captureLightPattern) { [regex]::Matches($dxrLog, $captureLightPattern) } else { @() }
+$latestLightRecord = if ($captureLightMatches.Count -gt 0) { $captureLightMatches[$captureLightMatches.Count - 1].Value } else { '' }
+$latestLightStart = if ($latestLightRecord) { 0 } else { -1 }
 $productiveGameLight = $latestLightRecord -match 'sameFrame=1' -and $latestLightRecord -match 'match=YES'
 $gameLightSyncClassification = if ($latestLightStart -lt 0) { 'NOT_RECORDED' }
     elseif ($latestLightRecord -match 'sameFrame=0') { 'TEMPORAL_MISMATCH' }
@@ -727,6 +880,51 @@ if ($null -ne $resolvedManifest -and $null -ne $evidence -and $null -ne $request
         Test-RunValue $ack 'capture_frame' $verifiedFrame 'Acknowledgment capture frame'
         Test-RunValue $evidence 'capture_frame' $verifiedFrame 'Evidence capture frame'
     }
+    $comparisonCaptureValid = $false
+    if ($resolvedManifest.visualAblation) {
+        $comparisonFailureBaseline = $failures.Count
+        $hasNaviAblation = Test-Path -LiteralPath (Join-Path (Join-Path $resolvedRunRoot 'captures') 'navi_a_sdr.meta.json')
+        $ablationStages = if ($hasNaviAblation) {
+            @('navi_a_sdr', 'navi_b_sdr', 'navi_c_sdr', 'navi_d_sdr')
+        } else {
+            @('comparison_dxr_off', 'comparison_dxr_on')
+        }
+        foreach ($comparisonStage in $ablationStages) {
+            $metadataPath = Join-Path (Join-Path $resolvedRunRoot 'captures') "$comparisonStage.meta.json"
+            if (-not (Test-Path -LiteralPath $metadataPath -PathType Leaf)) {
+                Add-Failure "Required same-frame comparison metadata $comparisonStage is missing"
+                continue
+            }
+            $comparisonMetadata = Read-JsonFile $metadataPath "$comparisonStage comparison metadata"
+            if ($null -eq $comparisonMetadata) { continue }
+            $stageMetadata[$comparisonStage] = $comparisonMetadata
+            Test-RunValue $comparisonMetadata 'stage' $comparisonStage "$comparisonStage stage id"
+            Test-RunValue $comparisonMetadata 'frame' $verifiedFrame "$comparisonStage capture frame"
+            if ($null -eq $comparisonMetadata.request) {
+                Add-Failure "$comparisonStage metadata is missing its capture request provenance"
+            } else {
+                foreach ($property in @('scenario_id', 'view_id', 'scene', 'room', 'truth_mode',
+                        'view_hash', 'projection_hash', 'player_state_hash')) {
+                    Test-RunValue $comparisonMetadata.request $property $request.$property `
+                        "$comparisonStage request $property"
+                }
+            }
+            if ([int]$comparisonMetadata.width -ne [int]$stageMetadata['FINAL_SDR_PRE_PRESENT'].width -or
+                [int]$comparisonMetadata.height -ne [int]$stageMetadata['FINAL_SDR_PRE_PRESENT'].height) {
+                Add-Failure "$comparisonStage dimensions do not match the final SDR capture"
+            }
+            if ([string]$comparisonMetadata.format -cne 'R8G8B8A8_UNORM') {
+                Add-Failure "$comparisonStage must be an SDR R8G8B8A8_UNORM capture"
+            }
+            $comparisonPayload = Get-StagePayloadPath $resolvedRunRoot $comparisonMetadata
+            if ([string]::IsNullOrWhiteSpace($comparisonPayload) -or
+                -not (Test-Path -LiteralPath $comparisonPayload -PathType Leaf) -or
+                -not (Test-PngReadable $comparisonPayload ([int]$comparisonMetadata.width) ([int]$comparisonMetadata.height))) {
+                Add-Failure "$comparisonStage payload is missing or not a readable PNG"
+            }
+        }
+        $comparisonCaptureValid = $failures.Count -eq $comparisonFailureBaseline
+    }
     $dxrFrame = if ($null -ne $ack.dxr_frame) { $ack.dxr_frame } else { $null }
     $dxrFrameMatches = $null -ne $dxrFrame -and $sameFrame -and
         [int]$dxrFrame.frame -eq [int]$verifiedFrame -and
@@ -770,7 +968,7 @@ if ($null -ne $resolvedManifest) {
             Add-Failure "Original save $saveName is missing"
             continue
         }
-        $actualHash = (Get-FileHash -LiteralPath $savePath -Algorithm SHA256).Hash
+        $actualHash = (Get-HarnessFileHash -LiteralPath $savePath -Algorithm SHA256).Hash
         $expectedHash = [string]$resolvedManifest.originalHashesBefore.$saveName
         if ([string]::IsNullOrWhiteSpace($expectedHash) -or $actualHash -cne $expectedHash) {
             Add-Failure "Original save $saveName hash changed"
@@ -785,6 +983,24 @@ if ($null -ne $saveIntegrity) {
 }
 
 $captureStatus = if ($verifiedStageCount -eq 8 -and $sameFrame) { 'CAPTURE_COMPLETE' } else { 'PARTIAL' }
+$lightingContract = $evidence.lighting_contract
+$lightingContractStatus = 'NOT_APPLICABLE'
+if ($null -ne $lightingContract -and -not [string]::IsNullOrWhiteSpace([string]$lightingContract.id)) {
+    $lightingContractStatus = 'NOT_CERTIFIED'
+    if ($comparisonCaptureValid -and $sameFrame -and $null -ne $visualDifference -and
+        $null -ne $visualDifference.sameFrameComparisonViews) {
+        $lightingContract.comparisonStatus = 'CAPTURED_SAME_FRAME_REQUIRES_VISUAL_REVIEW'
+    }
+    $runtimeGates = @($lightingContract.runtimeGates)
+    $allLightingGatesPassed = $runtimeGates.Count -gt 0
+    foreach ($gate in $runtimeGates) {
+        if ([string]$gate.observedStatus -cne 'PASS') { $allLightingGatesPassed = $false }
+    }
+    if ($allLightingGatesPassed -and [string]$lightingContract.comparisonStatus -ceq 'PASS' -and
+        [string]$lightingContract.visualAcceptance -ceq 'PASS') {
+        $lightingContractStatus = 'PASS'
+    }
+}
 $presentationStatus = 'NOT_RUN'
 $presentationEvidence = $null
 $presentationPath = Join-Path $resolvedRunRoot 'presentation.evidence.jsonl'
@@ -819,6 +1035,8 @@ $result = [ordered]@{
     dxrExecutionStatus = $dxrExecutionStatus
     dxrCompositionStatus = $dxrCompositionStatus
     dxrVisualVerified = $dxrVisualVerified
+    lightingContractStatus = $lightingContractStatus
+    lightingContract = $lightingContract
     compositeExecuted = [bool]$compositeExecuted
     sameFrame = [bool]$sameFrame
     visualDifference = $visualDifference

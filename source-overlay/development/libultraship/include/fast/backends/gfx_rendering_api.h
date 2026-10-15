@@ -90,6 +90,9 @@ class GfxRenderingAPI {
     // Associates the next texture upload with its source OTR material when
     // the backend can expose a GPU descriptor for DXR hit shaders.
     virtual void SetTextureResourceIdentity(uint64_t resourceIdentity) { (void)resourceIdentity; }
+    // Snapshot the actual descriptor bound to this draw, including cache hits
+    // and multiple tile/palette variants of the same source texture.
+    virtual uint32_t GetTextureSrvIndex(int tile) const { (void)tile; return UINT32_MAX; }
     virtual void UploadTexture(const uint8_t* rgba32Buf, uint32_t width, uint32_t height) = 0;
     virtual void SetSamplerParameters(int sampler, bool linear_filter, uint32_t cms, uint32_t cmt) = 0;
     virtual void SetDepthTestAndMask(bool depth_test, bool z_upd) = 0;
@@ -137,6 +140,8 @@ class GfxRenderingAPI {
     virtual ImTextureID GetTextureById(int id) = 0;
     virtual void RunTonemappingPass(float fogR = 0.45f, float fogG = 0.55f, float fogB = 0.70f, float fogStrength = 0.0f,
                                    float fogStart = 0.3f, float fogRange = 0.7f) {}
+    virtual void SetScenePostprocessParameters(float fogR, float fogG, float fogB, float fogStrength,
+                                               float fogStart, float fogRange) {}
     virtual void RecordFogDiagnosticSource(bool sceneFogEnabled, uint64_t fogBlendDraws, uint64_t geometryFogDraws,
                                            float gameFogMul, float gameFogOffset, float gameFogR, float gameFogG,
                                            float gameFogB) {}

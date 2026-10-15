@@ -47,6 +47,10 @@ void GfxRenderingAPIDX12::ShutdownGuiRenderer() {
 void GfxRenderingAPIDX12::RenderGui(ImDrawData* data) {
     if (!mGuiRendererInitialized || !mCommandListOpen) return;
     StartDrawToFramebuffer(0,1);
+    // ImGui's PSO declares R8G8B8A8_UNORM. Resolve any pending FP16 scene
+    // before its draws, including title/2D frames with no world/UI
+    // hook. EndFrame then cannot tonemap over the completed GUI image.
+    if (mHdrSceneActive) RunTonemappingPass(0.40f,0.42f,0.45f,0.0f,0.3f,0.7f);
     ID3D12DescriptorHeap* heap = mSrvHeap.Get();
     mCommandList->SetDescriptorHeaps(1,&heap);
     ImGui_ImplDX12_RenderDrawData(data,mCommandList.Get());

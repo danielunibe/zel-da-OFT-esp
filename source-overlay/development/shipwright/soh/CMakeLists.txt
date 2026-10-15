@@ -102,8 +102,14 @@ set(PROJECT_NAME soh)
 ################################################################################
 # Sources
 ################################################################################
-configure_file( ${CMAKE_CURRENT_SOURCE_DIR}/src/boot/build.c.in ${CMAKE_CURRENT_SOURCE_DIR}/src/boot/build.c @ONLY)
-configure_file( ${CMAKE_CURRENT_SOURCE_DIR}/properties.h.in ${CMAKE_CURRENT_SOURCE_DIR}/properties.h @ONLY)
+set(SOH_GENERATED_SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/generated")
+file(MAKE_DIRECTORY "${SOH_GENERATED_SOURCE_DIR}/src/boot")
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/src/boot/build.c.in
+               "${SOH_GENERATED_SOURCE_DIR}/src/boot/build.c" @ONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/properties.h.in
+               "${SOH_GENERATED_SOURCE_DIR}/properties.h" @ONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Resource.rc
+               "${SOH_GENERATED_SOURCE_DIR}/Resource.rc" COPYONLY)
 
 set(Header_Files "resource.h")
 source_group("headers" FILES ${Header_Files})
@@ -183,7 +189,9 @@ endif()
 file(GLOB_RECURSE src__ RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "src/*.c" "src/*.h")
 set_source_files_properties(${src__} PROPERTIES COMPILE_OPTIONS "${WARNING_OVERRIDE}")
 
-list(APPEND src__ ${CMAKE_CURRENT_SOURCE_DIR}/Resource.rc)
+list(REMOVE_ITEM src__ "src/boot/build.c")
+list(APPEND src__ "${SOH_GENERATED_SOURCE_DIR}/src/boot/build.c"
+                   "${SOH_GENERATED_SOURCE_DIR}/Resource.rc")
 list(FILTER src__ EXCLUDE REGEX "src/dmadata/")
 list(FILTER src__ EXCLUDE REGEX "src/elf_message/")
 list(FILTER src__ EXCLUDE REGEX "src/libultra/io/")
@@ -224,6 +232,7 @@ set(ALL_FILES
 # Target
 ################################################################################
 add_executable(${PROJECT_NAME} ${ALL_FILES})
+target_include_directories(${PROJECT_NAME} BEFORE PRIVATE "${SOH_GENERATED_SOURCE_DIR}")
 
 # DXR TRUTH (V2) harness: configure with -DCOUCH_V2_EXE=ON to link the same
 # sources as soh_truth_v2.exe so V2 can be built/run while the V1 soh.exe

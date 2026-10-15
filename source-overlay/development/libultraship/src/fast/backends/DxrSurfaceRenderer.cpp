@@ -11,8 +11,11 @@
 #include "ship/Context.h"
 #include "ship/config/ConsoleVariable.h"
 #include <d3dcompiler.h>
+#include <d3d12shader.h>
 #include <d3d12sdklayers.h>
+#include <cstddef>
 #include <algorithm>
+#include <array>
 #include <cmath>
 #include <cstdlib>
 #include <cstring>
@@ -20,6 +23,7 @@
 #include <string>
 #include <vector>
 #include <cstdio>
+#include <nlohmann/json.hpp>
 
 #include <spdlog/spdlog.h>
 
@@ -27,7 +31,27 @@ using Microsoft::WRL::ComPtr;
 
 namespace Fast {
 
+static_assert(kDxrShadowBytecodeAbiVersion == kDxrShaderAbiVersion,
+              "Regenerate DXR bytecode with Generate-DxrShadowBytecode.ps1 before building this pipeline");
+
 static void LogCouchDxrSurface(const std::string& line);
+
+// Mirror the HLSL cbuffer's three 16-byte registers, including the gap
+// before float3 gGameLightDir. Root constants do not add this padding.
+struct alignas(16) DxrSurfaceCompositeConstants {
+    float params[4];
+    float sceneHdr;
+    float diagnosticView;
+    float ablationMode;
+    float padding;
+    float gameLightDirection[3];
+    float gameLightValid;
+};
+static_assert(sizeof(DxrSurfaceCompositeConstants) == 48);
+static_assert(offsetof(DxrSurfaceCompositeConstants, ablationMode) == 24);
+static_assert(offsetof(DxrSurfaceCompositeConstants, gameLightDirection) == 32);
+static_assert(offsetof(DxrSurfaceCompositeConstants, gameLightValid) == 44);
+static constexpr UINT kSurfaceCompositeRootDwords = sizeof(DxrSurfaceCompositeConstants) / sizeof(float);
 
 static const char* PrimaryGatePendingMode(bool blendBypass, bool vertexAlphaBypass, bool candidatePolicy = false) {
     if (candidatePolicy) return "CANDIDATE_ALPHA_POLICY";
@@ -36,20 +60,24 @@ static const char* PrimaryGatePendingMode(bool blendBypass, bool vertexAlphaBypa
 }
 
 namespace {
-constexpr uint32_t kSurfaceFrameStride = 1536;
+constexpr uint32_t kSurfaceFrameStride = kDxrFrameConstantStride;
 constexpr uint32_t kPathTemporalFrameStride = 256;
 constexpr uint32_t kPrimaryGateCounterShards = 64;
 constexpr uint32_t kPrimaryGateCounterCount = 2112;
+constexpr uint32_t kPrimaryRasterDepthMismatchCounter = 488; // matches PG_RASTER_DEPTH_MISMATCH
 constexpr uint32_t kPrimaryAlphaSampleBase = kPrimaryGateCounterShards * kPrimaryGateCounterCount;
 constexpr uint32_t kPrimaryAlphaSampleStride = 32;
 constexpr uint32_t kPrimaryAlphaSampleCount = 3;
-constexpr uint32_t kPrimaryGateCounterElements = kPrimaryAlphaSampleBase +
-    kPrimaryAlphaSampleStride * kPrimaryAlphaSampleCount;
+constexpr uint32_t kNaviSampleBase = kPrimaryAlphaSampleBase + kPrimaryAlphaSampleStride * kPrimaryAlphaSampleCount;
+constexpr uint32_t kNaviSampleStride = 40;
+constexpr uint32_t kNaviSampleCount = 48 * 27;
+constexpr uint32_t kPrimaryGateCounterElements = kNaviSampleBase + kNaviSampleStride * kNaviSampleCount;
 constexpr uint64_t kPrimaryGateCounterBytes = kPrimaryGateCounterElements * sizeof(uint32_t);
 constexpr uint32_t kPrimaryGateCounterDescriptor = 5;
-constexpr uint32_t kSurfaceSrvDescriptorBase = 6;
-constexpr uint32_t kSurfaceTextureDescriptorBase = 11;
+constexpr uint32_t kSurfaceSrvDescriptorBase = 7;
+constexpr uint32_t kSurfaceTextureDescriptorBase = 12;
 constexpr uint32_t kSurfaceEnvironmentDescriptorBase = kSurfaceTextureDescriptorBase + kDxrSurfaceTextureDescriptorCount;
+constexpr uint32_t kSurfaceNativePointDirectSrvDescriptor = kSurfaceEnvironmentDescriptorBase + 2;
 static_assert((kPrimaryGateCounterShards & (kPrimaryGateCounterShards - 1)) == 0);
 // Mirrors ReflectionPayload in fast/shaders/dxr_shadow.hlsl. Keep these fields
 // and their order synchronized with HLSL's payload shared by the reflection exports.
@@ -65,9 +93,13 @@ struct ReflectionPayloadLayout {
     float detail[4];
     uint32_t diagnosticFlags;
     uint32_t diagnosticError;
+    float geometricNormal[4];
+    float naviPointAlbedo[4];
 };
 static constexpr UINT kReflectionPayloadSizeBytes = sizeof(ReflectionPayloadLayout);
-static_assert(kReflectionPayloadSizeBytes == 104, "ReflectionPayloadLayout must match the HLSL ReflectionPayload");
+static_assert(kReflectionPayloadSizeBytes == 136, "ReflectionPayloadLayout must match the HLSL ReflectionPayload");
+static_assert(offsetof(ReflectionPayloadLayout, geometricNormal) == 104);
+static_assert(offsetof(ReflectionPayloadLayout, naviPointAlbedo) == 120);
 HRESULT gLastInitHresult = S_OK;
 
 static std::string SurfaceHr(HRESULT hr) {
@@ -78,7 +110,7 @@ static std::string SurfaceHr(HRESULT hr) {
 
 static bool PrimaryGateCountersRequested() {
     const char* value = std::getenv("COUCH_DXR_GPU_GATE_COUNTERS");
-    return value && strcmp(value, "1") == 0;
+    return CouchNaviPilotActive() || (value && strcmp(value, "1") == 0);
 }
 
 static uint64_t SurfaceMatrixHash(const float matrix[4][4]) {
@@ -211,24 +243,7 @@ static bool InvertSurfaceMatrix(const float m[4][4], float inv[4][4]) {
     return true;
 }
 
-struct SurfaceFrameConstants {
-    float invProjection[4][4];
-    float invView[4][4];
-    float reservedLight[4];
-    float screenSize[4];
-    float params[4];
-    float quality[4];
-    float sceneLightColor[4];
-    float ambientLightColor[4];
-    float frameInfo[4];
-    float diagnosticInfo[4];
-    float secondaryLightDirection[4];
-    float secondaryLightColor[4];
-    float pointLightPosition[32][4];
-    float pointLightOptics[32][4];
-    float projection[4][4];
-    uint32_t diagnosticBounds[4];
-};
+using SurfaceFrameConstants = DxrFrameConstants;
 static_assert(sizeof(SurfaceFrameConstants) <= kSurfaceFrameStride,
               "DXR surface frame constants exceed their upload-buffer slice");
 
@@ -430,6 +445,8 @@ bool DxrSurfaceRenderer::Init(ID3D12Device* device) {
         // DxrTruthView diagnosticView for RenderReflections.
         cvars->RegisterInteger("gEnhancements.Graphics.DXR.TruthMode", 0);
         cvars->RegisterFloat("gEnhancements.Graphics.DXR.SurfaceReflection", 1.0f);
+        cvars->RegisterFloat("gEnhancements.Graphics.DXR.SurfaceTraceDistance", 10000.0f);
+        cvars->RegisterFloat("gEnhancements.Graphics.DXR.IndirectTraceDistance", 256.0f);
         cvars->RegisterFloat("gEnhancements.Graphics.DXR.SurfaceTransmission", 0.45f);
     }
 
@@ -470,11 +487,11 @@ bool DxrSurfaceRenderer::CreateRootSignature(ID3D12Device* device) {
 
     ranges[1].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_UAV;
     // The shadow state object owns u0. Surface probes use u1/u2/u3/u4 and the
-    // diagnostic counter buffer at u5 so the
+    // diagnostic counter buffer at u5 and the native-point output at u6 so the
     // reflection/water mask, independent emissive mask, two-bounce indirect
     // lighting, full reflected radiance, and gate counters can be written by
     // the DXIL entry. This extends the existing table and adds no root DWORD.
-    ranges[1].NumDescriptors = 5;
+    ranges[1].NumDescriptors = 6;
     ranges[1].BaseShaderRegister = 1;
     ranges[1].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
     params[2].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
@@ -512,26 +529,30 @@ bool DxrSurfaceRenderer::CreateRootSignature(ID3D12Device* device) {
     params[8].DescriptorTable.pDescriptorRanges = &ranges[3];
     params[8].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
 
-    D3D12_STATIC_SAMPLER_DESC materialSampler = {};
-    materialSampler.Filter = D3D12_FILTER_MIN_MAG_MIP_LINEAR;
-    materialSampler.AddressU = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
-    materialSampler.AddressV = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
-    materialSampler.AddressW = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
-    materialSampler.MipLODBias = 0.0f;
-    materialSampler.MaxAnisotropy = 1;
-    materialSampler.ComparisonFunc = D3D12_COMPARISON_FUNC_ALWAYS;
-    materialSampler.BorderColor = D3D12_STATIC_BORDER_COLOR_TRANSPARENT_BLACK;
-    materialSampler.MinLOD = 0.0f;
-    materialSampler.MaxLOD = D3D12_FLOAT32_MAX;
-    materialSampler.ShaderRegister = 0;
-    materialSampler.RegisterSpace = 0;
-    materialSampler.ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
+    D3D12_STATIC_SAMPLER_DESC materialSamplers[2] = {};
+    for (uint32_t samplerIndex = 0; samplerIndex < 2; ++samplerIndex) {
+        auto& materialSampler = materialSamplers[samplerIndex];
+        materialSampler.Filter = samplerIndex == 0 ? D3D12_FILTER_MIN_MAG_MIP_LINEAR
+                                                    : D3D12_FILTER_MIN_MAG_MIP_POINT;
+        materialSampler.AddressU = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
+        materialSampler.AddressV = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
+        materialSampler.AddressW = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
+        materialSampler.MipLODBias = 0.0f;
+        materialSampler.MaxAnisotropy = 1;
+        materialSampler.ComparisonFunc = D3D12_COMPARISON_FUNC_ALWAYS;
+        materialSampler.BorderColor = D3D12_STATIC_BORDER_COLOR_TRANSPARENT_BLACK;
+        materialSampler.MinLOD = 0.0f;
+        materialSampler.MaxLOD = D3D12_FLOAT32_MAX;
+        materialSampler.ShaderRegister = samplerIndex;
+        materialSampler.RegisterSpace = 0;
+        materialSampler.ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
+    }
 
     D3D12_ROOT_SIGNATURE_DESC desc = {};
     desc.NumParameters = 9;
     desc.pParameters = params;
-    desc.NumStaticSamplers = 1;
-    desc.pStaticSamplers = &materialSampler;
+    desc.NumStaticSamplers = 2;
+    desc.pStaticSamplers = materialSamplers;
     ComPtr<ID3DBlob> blob, error;
     HRESULT hr = SerializeSurfaceRootSignature(&desc, &blob, &error);
     if (FAILED(hr)) {
@@ -575,7 +596,13 @@ bool DxrSurfaceRenderer::CreateRaytracingPipelineState(ID3D12Device5* device5) {
     D3D12_RAYTRACING_SHADER_CONFIG shaderConfig = {};
     // Reflection carries material, normal, albedo, instance, UV and hit data.
     shaderConfig.MaxPayloadSizeInBytes = kReflectionPayloadSizeBytes;
-    LogCouchDxrSurface("[COUCH-DXR-SURFACE][INIT_PAYLOAD] REFLECTION_PAYLOAD_FIELDS=float4 radiance,float4 normalRoughness,float4 baseColorMetallic,uint materialIndex,uint probeMode,uint instanceIndex,uint textureIndex,float4 surfaceOptics,float4 detail,uint diagnosticFlags,uint diagnosticError EXPECTED_PAYLOAD_BYTES=" +
+    LogCouchDxrSurface("[COUCH-DXR-SURFACE][BYTECODE] abi=" + std::to_string(kDxrShadowBytecodeAbiVersion) +
+        " sourceSha256=" + kDxrShadowShaderSourceSha256 +
+        " dxilSha256=" + kDxrShadowBytecodeDxilSha256 +
+        " buildId=" + kDxrShadowBytecodeBuildId +
+        " dxc=\"" + kDxrShadowBytecodeDxcVersion + "\" flags=\"" + kDxrShadowBytecodeCompileFlags + "\"" +
+        " frameConstantsBytes=" + std::to_string(sizeof(DxrFrameConstants)));
+    LogCouchDxrSurface("[COUCH-DXR-SURFACE][INIT_PAYLOAD] REFLECTION_PAYLOAD_FIELDS=float4 radiance,float4 normalRoughness,float4 baseColorMetallic,uint materialIndex,uint probeMode,uint instanceIndex,uint textureIndex,float4 surfaceOptics,float4 detail,uint diagnosticFlags,uint diagnosticError,float4 geometricNormal EXPECTED_PAYLOAD_BYTES=" +
         std::to_string(kReflectionPayloadSizeBytes) + " STATE_OBJECT_DECLARED_PAYLOAD_BYTES=" +
         std::to_string(shaderConfig.MaxPayloadSizeInBytes));
     shaderConfig.MaxAttributeSizeInBytes = sizeof(float) * 2;
@@ -645,7 +672,7 @@ bool DxrSurfaceRenderer::CreateShaderTable(ID3D12Device* device) {
 
 bool DxrSurfaceRenderer::EnsureResources(ID3D12Device* device, uint32_t maskWidth, uint32_t maskHeight,
                                          uint32_t sceneWidth, uint32_t sceneHeight, DXGI_FORMAT sceneFormat) {
-    if (mReflectionMask && mReflectionColor && mEmissiveMask && mIndirectMask && mSceneColorCopy &&
+    if (mReflectionMask && mReflectionColor && mEmissiveMask && mIndirectMask && mNativePointDirect && mSceneColorCopy &&
         mMaskWidth == maskWidth && mMaskHeight == maskHeight &&
         mSceneWidth == sceneWidth && mSceneHeight == sceneHeight && mSceneFormat == sceneFormat && mDescriptorHeap) {
         return EnsurePathTemporalResources(device, maskWidth, maskHeight);
@@ -654,7 +681,12 @@ bool DxrSurfaceRenderer::EnsureResources(ID3D12Device* device, uint32_t maskWidt
     mReflectionColor.Reset();
     mEmissiveMask.Reset();
     mIndirectMask.Reset();
+    mNativePointDirect.Reset();
     mSceneColorCopy.Reset();
+    for (auto& target : mVisualAblationTargets) target.Reset();
+    mVisualAblationRtvs.Reset();
+    mVisualAblationFrame = -1;
+    mVisualAblationCaptured = false;
     mDescriptorHeap.Reset();
     mDescriptorTemplate.Reset();
     for (auto& heap : mDescriptorFrames) heap.Reset();
@@ -707,6 +739,12 @@ bool DxrSurfaceRenderer::EnsureResources(ID3D12Device* device, uint32_t maskWidt
                                                D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE, nullptr,
                                                IID_PPV_ARGS(&mIndirectMask)))) return false;
 
+    D3D12_RESOURCE_DESC nativePointDirectDesc = desc;
+    nativePointDirectDesc.Format = DXGI_FORMAT_R16G16B16A16_FLOAT;
+    if (FAILED(device->CreateCommittedResource(&heap, D3D12_HEAP_FLAG_NONE, &nativePointDirectDesc,
+                                               D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE, nullptr,
+                                               IID_PPV_ARGS(&mNativePointDirect)))) return false;
+
     D3D12_RESOURCE_DESC sceneDesc = desc;
     sceneDesc.Width = sceneWidth;
     sceneDesc.Height = sceneHeight;
@@ -718,11 +756,10 @@ bool DxrSurfaceRenderer::EnsureResources(ID3D12Device* device, uint32_t maskWidt
 
     D3D12_DESCRIPTOR_HEAP_DESC heapDesc = {};
     heapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
-    // 0: depth SRV; 1/2/3/4/5: surface, emissive, indirect-light,
-    // reflected-radiance, and gate-counter UAVs; 6..10: surface, scene-color,
-    // emissive, indirect-light, and reflected-radiance SRVs. The UAVs are
-    // adjacent for the existing DXR output descriptor table (u1..u5).
-    heapDesc.NumDescriptors = 13 + kDxrSurfaceTextureDescriptorCount;
+    // 0: depth SRV; 1..6: DXR UAVs; 7..11: surface, scene-color, emissive,
+    // indirect, and reflected-radiance SRVs. Followed by material textures,
+    // environment, soft-shadow, and the direct-point SRV.
+    heapDesc.NumDescriptors = 15 + kDxrSurfaceTextureDescriptorCount;
     heapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
     if (FAILED(device->CreateDescriptorHeap(&heapDesc, IID_PPV_ARGS(&mDescriptorHeap)))) return false;
     InitializeDxrDescriptorTemplate(device,mDescriptorHeap.Get());
@@ -742,6 +779,7 @@ bool DxrSurfaceRenderer::EnsureResources(ID3D12Device* device, uint32_t maskWidt
     mReflectionColorTrackedState = static_cast<unsigned>(D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
     mEmissiveTrackedState = static_cast<unsigned>(D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
     mIndirectTrackedState = static_cast<unsigned>(D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
+    mNativePointDirectTrackedState = static_cast<unsigned>(D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
     mSceneColorTrackedState = static_cast<unsigned>(D3D12_RESOURCE_STATE_COPY_DEST);
 
     D3D12_UNORDERED_ACCESS_VIEW_DESC uav = {};
@@ -764,6 +802,9 @@ bool DxrSurfaceRenderer::EnsureResources(ID3D12Device* device, uint32_t maskWidt
     indirectUav.Format = DXGI_FORMAT_R16G16B16A16_FLOAT;
     indirectUav.ViewDimension = D3D12_UAV_DIMENSION_TEXTURE2D;
     device->CreateUnorderedAccessView(mIndirectMask.Get(), nullptr, &indirectUav, indirectUavCpu);
+    D3D12_CPU_DESCRIPTOR_HANDLE nativePointDirectUavCpu = mDescriptorHeap->GetCPUDescriptorHandleForHeapStart();
+    nativePointDirectUavCpu.ptr += 6 * mDescriptorSize;
+    device->CreateUnorderedAccessView(mNativePointDirect.Get(), nullptr, &indirectUav, nativePointDirectUavCpu);
 
     D3D12_UNORDERED_ACCESS_VIEW_DESC reflectionColorUav = {};
     reflectionColorUav.Format = DXGI_FORMAT_R16G16B16A16_FLOAT;
@@ -824,6 +865,9 @@ bool DxrSurfaceRenderer::EnsureResources(ID3D12Device* device, uint32_t maskWidt
     D3D12_CPU_DESCRIPTOR_HANDLE reflectionColorSrvCpu = mDescriptorHeap->GetCPUDescriptorHandleForHeapStart();
     reflectionColorSrvCpu.ptr += (kSurfaceSrvDescriptorBase + 4) * mDescriptorSize;
     device->CreateShaderResourceView(mReflectionColor.Get(), &reflectionColorSrv, reflectionColorSrvCpu);
+    D3D12_CPU_DESCRIPTOR_HANDLE nativePointDirectSrvCpu = mDescriptorHeap->GetCPUDescriptorHandleForHeapStart();
+    nativePointDirectSrvCpu.ptr += kSurfaceNativePointDirectSrvDescriptor * mDescriptorSize;
+    device->CreateShaderResourceView(mNativePointDirect.Get(), &reflectionColorSrv, nativePointDirectSrvCpu);
     return EnsurePathTemporalResources(device, maskWidth, maskHeight);
 }
 
@@ -1238,7 +1282,7 @@ bool DxrSurfaceRenderer::DispatchPathTemporal(ID3D12GraphicsCommandList* cmdList
 
 bool DxrSurfaceRenderer::CreateCompositePipeline(ID3D12Device* device, DXGI_FORMAT outputFormat) {
     const size_t outputIndex = outputFormat == DXGI_FORMAT_R16G16B16A16_FLOAT ? 1u : 0u;
-    D3D12_ROOT_PARAMETER params[7] = {};
+    D3D12_ROOT_PARAMETER params[8] = {};
     D3D12_DESCRIPTOR_RANGE sceneRange = {};
     sceneRange.RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
     sceneRange.NumDescriptors = 1;
@@ -1299,14 +1343,22 @@ bool DxrSurfaceRenderer::CreateCompositePipeline(ID3D12Device* device, DXGI_FORM
     params[5].DescriptorTable.pDescriptorRanges = &reflectionRange;
     params[5].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
 
-    // DXR TRUTH (V2): 10 dwords = V1 6 (gParams/gSceneHdr/gDiagnosticView)
-    // + float3 gGameLightDir + float gGameLightValid. OFF/productive path
-    // ignores the extra 4; only truth view 15 reads them. Raytracing root
-    // signature and DXIL are untouched.
+    // float3 gGameLightDir starts at byte 32 in HLSL, not byte 24.
+    // Reserve and upload the complete 48-byte layout, including padding.
     params[6].ParameterType = D3D12_ROOT_PARAMETER_TYPE_32BIT_CONSTANTS;
     params[6].Constants.ShaderRegister = 0;
-    params[6].Constants.Num32BitValues = 10;
+    params[6].Constants.Num32BitValues = kSurfaceCompositeRootDwords;
     params[6].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
+
+    D3D12_DESCRIPTOR_RANGE nativePointDirectRange = {};
+    nativePointDirectRange.RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
+    nativePointDirectRange.NumDescriptors = 1;
+    nativePointDirectRange.BaseShaderRegister = 6;
+    nativePointDirectRange.OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
+    params[7].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
+    params[7].DescriptorTable.NumDescriptorRanges = 1;
+    params[7].DescriptorTable.pDescriptorRanges = &nativePointDirectRange;
+    params[7].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
 
     D3D12_STATIC_SAMPLER_DESC sampler = {};
     sampler.Filter = D3D12_FILTER_MIN_MAG_MIP_LINEAR;
@@ -1317,7 +1369,7 @@ bool DxrSurfaceRenderer::CreateCompositePipeline(ID3D12Device* device, DXGI_FORM
     sampler.ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
 
     D3D12_ROOT_SIGNATURE_DESC rs = {};
-    rs.NumParameters = 7;
+    rs.NumParameters = 8;
     rs.pParameters = params;
     rs.NumStaticSamplers = 1;
     rs.pStaticSamplers = &sampler;
@@ -1327,7 +1379,7 @@ bool DxrSurfaceRenderer::CreateCompositePipeline(ID3D12Device* device, DXGI_FORM
         outputFormat == DXGI_FORMAT_R16G16B16A16_FLOAT ? "R16G16B16A16_FLOAT" : "UNKNOWN";
     if (FAILED(hr)) {
         gLastInitHresult = hr;
-        LogCouchDxrSurface(std::string("[COUCH-DXR-SURFACE][INIT_OP] CompositePipeline SerializeRootSignature format=") + formatName + " params=7 srv=6 constants=10 hr=" + SurfaceHr(hr));
+        LogCouchDxrSurface(std::string("[COUCH-DXR-SURFACE][INIT_OP] CompositePipeline SerializeRootSignature format=") + formatName + " params=7 srv=6 constants=" + std::to_string(kSurfaceCompositeRootDwords) + " hr=" + SurfaceHr(hr));
         if (error && error->GetBufferPointer()) LogCouchDxrSurface(std::string("[COUCH-DXR-SURFACE][INIT_OP] CompositePipeline serializeMessage=") + static_cast<const char*>(error->GetBufferPointer()));
         return false;
     }
@@ -1349,8 +1401,9 @@ bool DxrSurfaceRenderer::CreateCompositePipeline(ID3D12Device* device, DXGI_FORM
         "Texture2D<float> gEmissiveMask : register(t3);\n"
         "Texture2D<float4> gIndirectMask : register(t4);\n"
         "Texture2D<float4> gReflectionColor : register(t5);\n"
+        "Texture2D<float4> gNativePointDirect : register(t6);\n"
         "SamplerState gSampler : register(s0);\n"
-        "cbuffer SurfaceComposite : register(b0) { float4 gParams; float gSceneHdr; float gDiagnosticView; float3 gGameLightDir; float gGameLightValid; };\n"
+        "cbuffer SurfaceComposite : register(b0) { float4 gParams; float gSceneHdr; float gDiagnosticView; float gAblation; float gPadding; float3 gGameLightDir; float gGameLightValid; };\n"
         "float3 CompositeSrgbToLinear(float3 encodedColor) {\n"
         "  float3 color = max(encodedColor, 0.0);\n"
         "  float3 lower = color / 12.92;\n"
@@ -1381,24 +1434,26 @@ bool DxrSurfaceRenderer::CreateCompositePipeline(ID3D12Device* device, DXGI_FORM
         "}\n"
         "void SampleDepthGuided(float2 uv, float centerDepth, float2 fullSize, float2 maskSize,\n"
         "                      out float4 surface, out float emissive,\n"
-        "                      out float4 indirect, out float4 reflection) {\n"
-        "  surface = 0.0; emissive = 0.0; indirect = 0.0; reflection = 0.0;\n"
+         "                      out float4 indirect, out float4 reflection, out float4 nativePointDirect) {\n"
+         "  surface = 0.0; emissive = 0.0; indirect = 0.0; reflection = 0.0; nativePointDirect = 0.0;\n"
         "  if (maskSize.x >= fullSize.x && maskSize.y >= fullSize.y) {\n"
         "    uint2 p = min(uint2(uv * maskSize), uint2(maskSize) - 1);\n"
         "    surface = gSurface.Load(int3(p, 0));\n"
         "    emissive = gEmissiveMask.Load(int3(p, 0));\n"
         "    indirect = gIndirectMask.Load(int3(p, 0));\n"
         "    reflection = gReflectionColor.Load(int3(p, 0));\n"
+         "    nativePointDirect = gNativePointDirect.Load(int3(p, 0));\n"
         "    return;\n"
         "  }\n"
         "  float2 samplePosition = uv * maskSize - 0.5;\n"
         "  int2 basePixel = int2(floor(samplePosition));\n"
         "  float2 fraction = frac(samplePosition);\n"
         "  float4 surfaceSum = 0.0; float emissiveSum = 0.0;\n"
-        "  float4 indirectSum = 0.0; float4 reflectionSum = 0.0; float totalWeight = 0.0;\n"
+         "  float4 indirectSum = 0.0; float4 reflectionSum = 0.0; float4 nativePointDirectSum = 0.0; float totalWeight = 0.0;\n"
         "  float closestDepthDelta = 3.402823466e+38;\n"
         "  float4 fallbackSurface = 0.0; float fallbackEmissive = 0.0;\n"
         "  float4 fallbackIndirect = 0.0; float4 fallbackReflection = 0.0;\n"
+         "  float4 fallbackNativePointDirect = 0.0;\n"
         "  float depthTolerance = max(0.00015, centerDepth * 0.004);\n"
         "  [unroll] for (int y = 0; y < 2; ++y) [unroll] for (int x = 0; x < 2; ++x) {\n"
         "    int2 p = clamp(basePixel + int2(x, y), int2(0, 0), int2(maskSize) - 1);\n"
@@ -1410,11 +1465,13 @@ bool DxrSurfaceRenderer::CreateCompositePipeline(ID3D12Device* device, DXGI_FORM
         "    float sampleEmissive = gEmissiveMask.Load(int3(p, 0));\n"
         "    float4 sampleIndirect = gIndirectMask.Load(int3(p, 0));\n"
         "    float4 sampleReflection = gReflectionColor.Load(int3(p, 0));\n"
+         "    float4 sampleNativePointDirect = gNativePointDirect.Load(int3(p, 0));\n"
         "    float depthDelta = abs(sampleDepth - centerDepth);\n"
         "    if (depthDelta < closestDepthDelta) {\n"
         "      closestDepthDelta = depthDelta; fallbackSurface = sampleSurface;\n"
         "      fallbackEmissive = sampleEmissive; fallbackIndirect = sampleIndirect;\n"
         "      fallbackReflection = sampleReflection;\n"
+         "      fallbackNativePointDirect = sampleNativePointDirect;\n"
         "    }\n"
         "    float depthWeight = exp(-depthDelta / depthTolerance);\n"
         "    float weight = spatialWeight * depthWeight;\n"
@@ -1422,15 +1479,17 @@ bool DxrSurfaceRenderer::CreateCompositePipeline(ID3D12Device* device, DXGI_FORM
         "    emissiveSum += sampleEmissive * weight;\n"
         "    indirectSum += sampleIndirect * weight;\n"
         "    reflectionSum += sampleReflection * weight;\n"
+         "    nativePointDirectSum += sampleNativePointDirect * weight;\n"
         "    totalWeight += weight;\n"
         "  }\n"
         "  if (totalWeight <= 1.0e-6) {\n"
         "    surface = fallbackSurface; emissive = fallbackEmissive;\n"
-        "    indirect = fallbackIndirect; reflection = fallbackReflection;\n"
+         "    indirect = fallbackIndirect; reflection = fallbackReflection; nativePointDirect = fallbackNativePointDirect;\n"
         "  } else {\n"
         "    float inverseWeight = rcp(totalWeight);\n"
         "    surface = surfaceSum * inverseWeight; emissive = emissiveSum * inverseWeight;\n"
-        "    indirect = indirectSum * inverseWeight; reflection = reflectionSum * inverseWeight;\n"
+         "    indirect = indirectSum * inverseWeight; reflection = reflectionSum * inverseWeight;\n"
+         "    nativePointDirect = nativePointDirectSum * inverseWeight;\n"
         "  }\n"
         "}\n"
         "float4 PSMain(float4 position : SV_POSITION) : SV_TARGET {\n"
@@ -1442,12 +1501,21 @@ bool DxrSurfaceRenderer::CreateCompositePipeline(ID3D12Device* device, DXGI_FORM
         // instead of shifting and filtering every raster pixel.
         "  float2 uv = position.xy / fullSize;\n"
         "  uint2 pixel = min(uint2(position.xy), uint2(fullSize) - 1);\n"
-        "  float3 originalEncoded = gSceneColor.Load(int3(pixel, 0)).rgb;\n"
+        "  float4 originalSample = gSceneColor.Load(int3(pixel, 0));\n"
+        "  float3 originalEncoded = originalSample.rgb;\n"
         "  float depth = gDepth.Load(int3(pixel, 0));\n"
         "  float4 surface = 0.0; float emissive = 0.0;\n"
-        "  float4 indirectSample = 0.0; float4 reflectionSample = 0.0;\n"
+         "  float4 indirectSample = 0.0; float4 reflectionSample = 0.0; float4 nativePointDirectSample = 0.0;\n"
+        "  if (gPadding > 0.5) {\n"
+        "    uint2 mp = min(uint2(uv * float2(maskWidth,maskHeight)), uint2(maskWidth,maskHeight)-1);\n"
+        "    if (gSurface.Load(int3(mp,0)).a < 0.5) return originalSample;\n"
+        "    float3 pointRadiance = max(gReflectionColor.Load(int3(mp,0)).rgb,0.0);\n"
+        "    float3 mesh = max(gIndirectMask.Load(int3(mp,0)).rgb,0.0);\n"
+        "    float3 radiance = gAblation < 0.5 ? pointRadiance : gAblation < 1.5 ? 0.0 : gAblation < 2.5 ? mesh : pointRadiance+mesh;\n"
+        "    return float4(gSceneHdr > 0.5 ? radiance : CompositeLinearToSrgb(radiance), originalSample.a);\n"
+        "  }\n"
         "  SampleDepthGuided(uv, depth, fullSize, float2(maskWidth, maskHeight),\n"
-        "                   surface, emissive, indirectSample, reflectionSample);\n"
+         "                   surface, emissive, indirectSample, reflectionSample, nativePointDirectSample);\n"
         // DXR TRUTH MODE (V1) post-process bypass. Every Truth branch below
         // returns BEFORE lighting, reflection/GI compositing, bloom,
         // exposure, ACES/tonemap and color grading, so diagnostic colors can
@@ -1481,7 +1549,7 @@ bool DxrSurfaceRenderer::CreateCompositePipeline(ID3D12Device* device, DXGI_FORM
 //     (unreachable on the grayscale ramp), invalid normal=blue.
 //   GAME_LIGHT_LAMBERT (15, V2): identical math/input as (14) except
 //     L = normalize(gGameLightDir), the real OoT/Fast3D probe direction
-//     (WORLD space, surface->light convention, NO color/intensity/albedo).
+//     (TLAS space, surface->light convention, NO color/intensity/albedo).
 //     gGameLightValid<0.5 (no probe directional in scene) yields a solid
 //     CYAN sentinel (unreachable on the grayscale ramp).
         "  if (gDiagnosticView > 9.5) {\n"
@@ -1491,7 +1559,9 @@ bool DxrSurfaceRenderer::CreateCompositePipeline(ID3D12Device* device, DXGI_FORM
         "    bool truthBad = any(isnan(truth)) || any(isinf(truth));\n"
         "    bool truthBackground = truthDepth >= 0.9999;\n"
         "    bool truthMiss = truth.r > 0.99 && truth.g < 0.01 && truth.b > 0.99;\n"
-        "    bool truthNoHit = truthBackground || truthMiss;\n"
+        // A cleared/aborted raygen pixel has no closest-hit record, even if
+        // its zero RGB is different from the explicit miss sentinel.
+        "    bool truthNoHit = truthBackground || truthMiss || truth.a < 0.5;\n"
         "    if (gDiagnosticView < 10.5) {\n"
         "      if (truthBad) return float4(1.0, 0.0, 1.0, 1.0);\n"
         "      return truthNoHit ? float4(1.0, 0.0, 0.0, 1.0) : float4(0.0, 1.0, 0.0, 1.0);\n"
@@ -1544,6 +1614,7 @@ bool DxrSurfaceRenderer::CreateCompositePipeline(ID3D12Device* device, DXGI_FORM
         "    float4 writtenSurface = gSurface.Load(int3(gatePixel, 0));\n"
         "    uint flags = (uint)round(gate.r * 255.0); uint error = (uint)round(gate.g * 255.0);\n"
         "    if (error == 10u) return float4(0.04, 0.04, 0.04, 1.0);\n"
+        "    if (error == 11u) return float4(0.0, 1.0, 1.0, 1.0);\n"
         "    if (error == 1u) return float4(0.0, 0.0, 0.0, 1.0);\n"
         "    if (error == 2u) return float4(1.0, 0.0, 0.0, 1.0);\n"
         "    if (error == 3u) return float4(0.8, 0.0, 0.0, 1.0);\n"
@@ -1561,57 +1632,103 @@ bool DxrSurfaceRenderer::CreateCompositePipeline(ID3D12Device* device, DXGI_FORM
         "  if (gDiagnosticView > 0.5) {\n"
         "    if (depth >= 0.9999) return float4(0.0, 0.0, 0.0, 1.0);\n"
         "    if (DiagnosticInvalid(surface) || DiagnosticInvalid(indirectSample) ||\n"
-        "        DiagnosticInvalid(reflectionSample) || isnan(emissive) || isinf(emissive))\n"
+         "        DiagnosticInvalid(reflectionSample) || DiagnosticInvalid(nativePointDirectSample) ||\n"
+         "        isnan(emissive) || isinf(emissive))\n"
         "      return float4(1.0, 0.0, 1.0, 1.0);\n"
         "    if (gDiagnosticView < 1.5) return surface.w > 0.5 ? float4(1.0, 0.0, 0.0, 1.0) : float4(0.0, 0.0, 1.0, 1.0);\n"
         "    if (gDiagnosticView < 2.5) return DiagnosticRadiance(reflectionSample);\n"
         "    if (gDiagnosticView < 3.5) return DiagnosticRadiance(indirectSample);\n"
         "    return any(surface > 0.0) ? float4(1.0, 0.0, 0.0, 1.0) : float4(0.0, 0.0, 0.0, 1.0);\n"
         "  }\n"
-        "  if (depth >= 0.9999) return float4(gSceneHdr > 0.5 ? CompositeSrgbToLinear(originalEncoded) : originalEncoded, 1.0);\n"
+        // Untouched pixels retain the exact source encoding and alpha. The
+        // FP16 scene already contains linear RGB, so decoding its sky twice
+        // changes the image even when no DXR signal exists at that pixel.
+        "  if (depth >= 0.9999) return originalSample;\n"
         "  float3 original = gSceneHdr > 0.5 ? originalEncoded : CompositeSrgbToLinear(originalEncoded);\n"
-        // OCZ-RTX-REPAIR REPAIR-03: consistent coverage policy between the
-        // raygen shaders and this compositor. surface.z is the material
-        // coverage (alpha) written per-pixel by RayGenReflection:
-        //   opaque / cutout-covered / water / glass / lava / emissive -> >0,
-        //   transparent or additive blends (surfaceOptics.w 3/4) -> cleared 0,
-        //   misses and background -> cleared 0 (surface.w == 0).
+        // Keep the coverage policy consistent with RayGenReflection.
+        // surface.z is material coverage written per pixel:
+        //   opaque/cutout and transmissive hits follow their material policy;
+        //   exact emissive blends use sampled alpha for emission and bloom;
+        //   other raster blends, misses and background remain zero coverage.
         // surface.w is the validity flag: 1.0 for a normal-path DXR surface,
         // 0.0 for cleared pixels. A non-finite sample must never drive the
         // blend (saturate(NaN) is undefined); invalid signals fall back to
         // the raster pixel. Valid materials keep their full DXR contribution.
         "  float dxrSignalInvalid = (DiagnosticInvalid(surface) || DiagnosticInvalid(indirectSample) ||\n"
         "      DiagnosticInvalid(reflectionSample) || isnan(emissive) || isinf(emissive)) ? 1.0 : 0.0;\n"
-        "  if (dxrSignalInvalid > 0.5) return float4(original, 1.0);\n"
-        // Alpha values above one mark a valid per-pixel DXR path-radiance result.
+        "  if (dxrSignalInvalid > 0.5) return originalSample;\n"
+        // Alpha values above one mark a valid primary relight or path-radiance result.
         "  float pathSignal = step(1.5, indirectSample.a);\n"
         "  float rawCoverage = surface.z;\n"
         "  float coverageFinite = (!isnan(rawCoverage) && !isinf(rawCoverage)) ? 1.0 : 0.0;\n"
         "  float clippedCoverage = coverageFinite > 0.5 ? saturate(rawCoverage) : 0.0;\n"
         "  float surfaceValid = step(0.5, saturate(surface.w));\n"
+        "  if (surfaceValid < 0.5 || clippedCoverage <= 0.0) return originalSample;\n"
         "  float pathTrace = pathSignal;\n"
         "  float pathWeight = pathSignal * clippedCoverage * surfaceValid;\n"
-        "  original = lerp(original, gSceneHdr > 0.5 ? indirectSample.rgb : ToneMapRadiance(indirectSample.rgb), pathWeight);\n"
+        // Ablation controls act on the same frame's signals, so every control
+        // stays same-frame comparable. gAblation: 1 = optics off, 2 = indirect
+        // off, 3 = relight off (the raster pixel stays authoritative).
+        // Mode 3 disables scene relighting; mode 4 isolates Navi's direct
+        // point contribution while keeping scene relighting/shadows unchanged.
+        "  float relightEnabled = (gAblation > 2.5 && gAblation < 3.5) ? 0.0 : 1.0;\n"
+        "  float indirectEnabled = (gAblation > 1.5 && gAblation < 2.5) ? 0.0 : 1.0;\n"
+        "  pathWeight *= relightEnabled;\n"
+        "  float3 traced = max(indirectSample.rgb, 0.0);\n"
+        // surface.w is only a validity flag (its UAV is R8G8B8A8_UNORM, so a
+        // share packed above one saturates). The indirect share of a relit
+        // pixel is published in gIndirectMask.a as (2.0 + share) on a float16
+        // target, and only relit pixels carry direct+GI in one signal; the
+        // other path stores pure indirect radiance and is handled by the
+        // additive term below.
+        "  float giFraction = saturate(indirectSample.a - 2.0) * pathSignal;\n"
+        "  traced = lerp(traced, traced * (1.0 - giFraction), 1.0 - indirectEnabled);\n"
+        // Non-destructive relight. The raster pixel already carries the game's
+        // albedo x illumination; the traced pixel carries albedo x the traced
+        // transport. Replacing one with the other discards every light the scene
+        // has whenever the trace cannot yet match the game's energy, which paints
+        // surfaces black (observed: ~270x darker, 99.8% of relit pixels below
+        // 60% of the raster reference). Let the trace claim only the
+        // illumination it can actually account for: when its energy matches the
+        // raster it takes over in full (correct shadows and GI apply), and while
+        // it cannot, the game's own lighting survives instead of being replaced
+        // by an under-energetic result. This is an energy bound, not a brightness
+        // boost: nothing is ever added, only the sampled relight is limited to
+        // the energy the pixel demonstrably had.
+        "  float tracedLum = dot(traced, float3(0.2126, 0.7152, 0.0722));\n"
+        "  float rasterLum = dot(original, float3(0.2126, 0.7152, 0.0722));\n"
+        "  float credibility = rasterLum > 1.0e-6 ? saturate(tracedLum / rasterLum) : 1.0;\n"
+        "  original = lerp(original, traced, pathWeight * credibility);\n"
         // Keep the R16F DXR radiance intact until the SDR composite shoulder;
         // saturating here discarded bright specular and emissive energy.
-        "  float3 reflectedColor = gSceneHdr > 0.5 ? reflectionSample.rgb : ToneMapRadiance(reflectionSample.rgb);\n"
-        "  float reflectedEnergy = saturate(reflectionSample.a);\n"
-        "  float reflection = saturate(surface.r * gParams.x);\n"
-        "  float water = saturate(surface.g);\n"
+        // RunTonemappingPass owns ACES for both main and offscreen scenes.
+        // Applying it here to individual SDR signals would map them twice.
+        "  float3 reflectedColor = max(reflectionSample.rgb, 0.0);\n"
+        "  float opticsEnabled = gAblation > 0.5 && gAblation < 1.5 ? 0.0 : 1.0;\n"
+        "  float reflection = saturate(surface.r * gParams.x) * opticsEnabled;\n"
+        "  float transmissionCoverage = saturate(surface.g);\n"
         "  float3 indirect = max(indirectSample.rgb, 0.0);\n"
-        "  float waterTransmission = water * saturate(gParams.w);\n"
-        "  float reflectionBlend = saturate(reflection * (0.45 + 0.55 * reflectedEnergy));\n"
-        "  float3 color = lerp(original, reflectedColor, saturate(max(reflectionBlend, waterTransmission)));\n"
+        "  float transmissionBlend = transmissionCoverage * saturate(gParams.w) * opticsEnabled;\n"
+        // surface.r already contains Fresnel and material reflectivity. Apply
+        // it once; reweighting it with reflectionSample.a suppresses the signal.
+        "  float reflectionBlend = transmissionCoverage > 0.0 ? 0.0 : reflection;\n"
+        "  float3 color = lerp(original, reflectedColor, saturate(max(reflectionBlend, transmissionBlend)));\n"
+         "  float3 nativePointDirect = max(nativePointDirectSample.rgb, 0.0);\n"
+         "  float nativePointDirectEnabled = gAblation > 3.5 ? 0.0 : 1.0;\n"
+         "  color += nativePointDirect * relightEnabled * nativePointDirectEnabled;\n"
         "  emissive = max(emissive, 0.0);\n"
-        "  color += (gSceneHdr > 0.5 ? indirect * 0.45 : ToneMapRadiance(indirect * 0.45)) * (1.0 - pathTrace);\n"
-        "  color += (gSceneHdr > 0.5 ? reflectionSample.rgb * 0.60 : ToneMapRadiance(reflectionSample.rgb * 0.60)) * saturate(emissive) * (1.0 - pathTrace);\n"
+        "  color += indirect * 0.45 * (1.0 - pathTrace) * indirectEnabled;\n"
+        // RayGenReflection already includes emission strength in radiance.
+        // Use the emissive mask as eligibility, not a second energy factor.
+        "  color += reflectedColor * 0.60 * step(0.0001, emissive) * (1.0 - pathTrace);\n"
         "  float3 bloom = 0; float bloomWeight = 0;\n"
         "  [unroll] for (int by=-3; by<=3; ++by) [unroll] for (int bx=-3; bx<=3; ++bx) {\n"
         "    float2 buv=uv+float2(bx,by)/float2(maskWidth,maskHeight);\n"
         "    float w=1.0/(1.0+bx*bx+by*by);\n"
-        "    bloom += gReflectionColor.SampleLevel(gSampler,buv,0).rgb * gEmissiveMask.SampleLevel(gSampler,buv,0) * w; bloomWeight+=w;\n"
+        "    float bloomEligible = step(0.0001, gEmissiveMask.SampleLevel(gSampler,buv,0));\n"
+        "    bloom += gReflectionColor.SampleLevel(gSampler,buv,0).rgb * bloomEligible * w; bloomWeight+=w;\n"
         "  }\n"
-        "  color += (gSceneHdr > 0.5 ? bloom * (0.45 / max(1.0,bloomWeight)) : ToneMapRadiance(bloom * (0.45 / max(1.0,bloomWeight))));\n"
+        "  color += bloom * (0.45 / max(1.0,bloomWeight));\n"
         "  return float4(gSceneHdr > 0.5 ? color : saturate(CompositeLinearToSrgb(color)), 1.0);\n"
         "}\n";
     ComPtr<ID3DBlob> vsBlob, psBlob, vsError, psError;
@@ -1637,6 +1754,33 @@ bool DxrSurfaceRenderer::CreateCompositePipeline(ID3D12Device* device, DXGI_FORM
         return false;
     }
 
+    ComPtr<ID3D12ShaderReflection> compositeReflection;
+    hr = D3DReflect(psBlob->GetBufferPointer(), psBlob->GetBufferSize(),
+                    IID_PPV_ARGS(&compositeReflection));
+    D3D12_SHADER_BUFFER_DESC compositeBufferDesc{};
+    D3D12_SHADER_VARIABLE_DESC gameDirectionDesc{}, gameValidDesc{};
+    bool layoutMatches = false;
+    if (SUCCEEDED(hr) && compositeReflection) {
+        auto* constants = compositeReflection->GetConstantBufferByName("SurfaceComposite");
+        layoutMatches = constants && SUCCEEDED(constants->GetDesc(&compositeBufferDesc)) &&
+            SUCCEEDED(constants->GetVariableByName("gGameLightDir")->GetDesc(&gameDirectionDesc)) &&
+            SUCCEEDED(constants->GetVariableByName("gGameLightValid")->GetDesc(&gameValidDesc)) &&
+            compositeBufferDesc.Size == sizeof(DxrSurfaceCompositeConstants) &&
+            gameDirectionDesc.StartOffset == offsetof(DxrSurfaceCompositeConstants, gameLightDirection) &&
+            gameDirectionDesc.Size == sizeof(DxrSurfaceCompositeConstants::gameLightDirection) &&
+            gameValidDesc.StartOffset == offsetof(DxrSurfaceCompositeConstants, gameLightValid);
+    }
+    LogCouchDxrSurface(std::string("[COUCH-DXR-SURFACE][COMPOSITE_CONSTANT_LAYOUT] format=") + formatName +
+        " result=" + (layoutMatches ? "PASS" : "FAIL") +
+        " rootDwords=" + std::to_string(kSurfaceCompositeRootDwords) +
+        " reflectedBytes=" + std::to_string(compositeBufferDesc.Size) +
+        " gameDirOffset=" + std::to_string(gameDirectionDesc.StartOffset) +
+        " gameValidOffset=" + std::to_string(gameValidDesc.StartOffset));
+    if (!layoutMatches) {
+        gLastInitHresult = FAILED(hr) ? hr : E_INVALIDARG;
+        return false;
+    }
+
     D3D12_GRAPHICS_PIPELINE_STATE_DESC pso = {};
     pso.pRootSignature = mCompositeRootSig.Get();
     pso.VS = { vsBlob->GetBufferPointer(), vsBlob->GetBufferSize() };
@@ -1659,13 +1803,22 @@ bool DxrSurfaceRenderer::CreateCompositePipeline(ID3D12Device* device, DXGI_FORM
     return true;
 }
 
-void DxrSurfaceRenderer::UpdateCameraMatrices(const float view[4][4], const float proj[4][4], float clipXScale) {
+void DxrSurfaceRenderer::UpdateCameraMatrices(const float view[4][4], const float proj[4][4], float clipXScale,
+                                            const float viewport[4]) {
     memcpy(mViewMatrix, view, sizeof(mViewMatrix));
     memcpy(mProjMatrix, proj, sizeof(mProjMatrix));
     mClipXScale = (std::isfinite(clipXScale) && clipXScale > 1.0e-4f) ? clipXScale : 1.0f;
+    const float fullViewport[4] = { 0.0f, 0.0f, 1.0f, 1.0f };
+    memcpy(mRasterViewport, viewport ? viewport : fullViewport, sizeof(mRasterViewport));
     // Captured TLAS instances use the Fast3D model-view transform, so both
     // reconstructed points and the camera origin must be in view space.
     mMatricesValid = InvertSurfaceMatrix(proj, mInvProjectionMatrix);
+    for (int axis = 0; axis < 4; ++axis) {
+        mMatricesValid = mMatricesValid && std::isfinite(mRasterViewport[axis]);
+        for (int col = 0; col < 4; ++col)
+            mMatricesValid = mMatricesValid && std::isfinite(mInvProjectionMatrix[axis][col]);
+    }
+    mMatricesValid = mMatricesValid && mRasterViewport[2] > 1.0e-6f && mRasterViewport[3] > 1.0e-6f;
     if (!InvertSurfaceMatrix(view, mInvViewMatrix)) {
         memset(mInvViewMatrix, 0, sizeof(mInvViewMatrix));
         for (int i = 0; i < 4; ++i) mInvViewMatrix[i][i] = 1.0f;
@@ -1677,7 +1830,7 @@ void DxrSurfaceRenderer::UpdateCameraMatrices(const float view[4][4], const floa
 
     static uint64_t cameraMatrixTraceFrame = 0;
     const char* matrixTrace = std::getenv("COUCH_DXR_MATRIX_TRACE");
-    if (matrixTrace && strcmp(matrixTrace, "1") == 0 && cameraMatrixTraceFrame++ % 600 == 0) {
+    if (matrixTrace && strcmp(matrixTrace, "1") == 0 && cameraMatrixTraceFrame++ % 120 == 0) {
         const auto logMatrix = [](const char* name, const float matrix[4][4]) {
             std::string line = std::string("[COUCH-DXR-MATRIX][") + name + "]";
             for (int row = 0; row < 4; ++row) {
@@ -1717,16 +1870,17 @@ void DxrSurfaceRenderer::RenderReflections(ID3D12Device* device, ID3D12GraphicsC
     const bool enhancedProfile = MaterialRegistry::IsEnhancedVisualProfile();
     const bool gateReady = mInitialized && mSupported && mEnabled &&
                            (explicitSurfaceOn || enhancedProfile);
+    const bool dataBoundsValid = DxrSurfaceFrameBoundsValid(surfaceData);
     const bool frameReady = device && cmdList && renderTarget && depthBuffer &&
                             tlasGpuVA != 0 && width != 0 && height != 0 && mMatricesValid &&
-                            surfaceData.vertexData && surfaceData.indexData && surfaceData.instanceData &&
-                            surfaceData.instanceCount != 0;
+                            dataBoundsValid;
     static int sLastGateState = -1;
     const int gateState = (gateReady ? 1 : 0) | (frameReady ? 2 : 0);
     if (gateState != sLastGateState) {
         LogCouchDxrSurface(
             "[COUCH-DXR-SURFACE][GATE] init=" + std::to_string(mInitialized ? 1 : 0) +
             " supported=" + std::to_string(mSupported ? 1 : 0) +
+            " dataBoundsValid=" + std::to_string(dataBoundsValid ? 1 : 0) +
             " enabled=" + std::to_string(mEnabled ? 1 : 0) +
             " explicit=" + std::to_string(explicitSurfaceOn ? 1 : 0) +
             " enhanced=" + std::to_string(enhancedProfile ? 1 : 0) +
@@ -1817,6 +1971,10 @@ void DxrSurfaceRenderer::RenderReflections(ID3D12Device* device, ID3D12GraphicsC
     indirectUav.Format = DXGI_FORMAT_R16G16B16A16_FLOAT;
     indirectUav.ViewDimension = D3D12_UAV_DIMENSION_TEXTURE2D;
     device->CreateUnorderedAccessView(mIndirectMask.Get(), nullptr, &indirectUav, indirectUavCpu);
+    D3D12_CPU_DESCRIPTOR_HANDLE nativePointDirectUavCpu = start;
+    nativePointDirectUavCpu.ptr += 6 * mDescriptorSize;
+    device->CreateUnorderedAccessView(mNativePointDirect.Get(), nullptr, &indirectUav,
+                                      nativePointDirectUavCpu);
     D3D12_CPU_DESCRIPTOR_HANDLE reflectionColorUavCpu = start;
     reflectionColorUavCpu.ptr += 4 * mDescriptorSize;
     D3D12_UNORDERED_ACCESS_VIEW_DESC reflectionColorUav = {};
@@ -1832,15 +1990,25 @@ void DxrSurfaceRenderer::RenderReflections(ID3D12Device* device, ID3D12GraphicsC
     surfaceSrv.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
     surfaceSrv.Texture2D.MipLevels = 1;
     device->CreateShaderResourceView(mReflectionMask.Get(), &surfaceSrv, surfaceSrvCpu);
+    D3D12_CPU_DESCRIPTOR_HANDLE nativePointDirectSrvCpu = start;
+    nativePointDirectSrvCpu.ptr += kSurfaceNativePointDirectSrvDescriptor * mDescriptorSize;
+    D3D12_SHADER_RESOURCE_VIEW_DESC nativePointDirectSrv = {};
+    nativePointDirectSrv.Format = DXGI_FORMAT_R16G16B16A16_FLOAT;
+    nativePointDirectSrv.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
+    nativePointDirectSrv.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+    nativePointDirectSrv.Texture2D.MipLevels = 1;
+    device->CreateShaderResourceView(mNativePointDirect.Get(), &nativePointDirectSrv,
+                                     nativePointDirectSrvCpu);
 
     if (mConstantBufferMapped) {
         SurfaceFrameConstants fc = {};
         memcpy(fc.invProjection, mInvProjectionMatrix, sizeof(fc.invProjection));
+        memcpy(fc.rasterViewport, mRasterViewport, sizeof(fc.rasterViewport));
         memcpy(fc.invView, mInvViewMatrix, sizeof(fc.invView));
         const SceneLightingSnapshot sceneLighting = MaterialRegistry::Instance().GetSceneLighting();
-        // DXR TRUTH MODE (V2) GAME LIGHT PROVENANCE: log the lights DXR
-        // actually consumes/uploads (snapshot) plus the read-only OoT probe
-        // (interpreter). Emitted on change, or once per GAME_LIGHT view entry.
+        // Report the captured native scene light consumed by DXR separately
+        // from the Fast3D per-draw probe. Positional lights can be encoded as
+        // actor-relative vectors in that probe, so it is not the global source.
         {
             const float* probe = sceneLighting.gameProbeWorldDirection;
             const float probeLen = sqrtf(probe[0] * probe[0] + probe[1] * probe[1] +
@@ -1858,9 +2026,9 @@ void DxrSurfaceRenderer::RenderReflections(ID3D12Device* device, ID3D12GraphicsC
             static std::string lastGameLightSig;
             const bool gameViewActive = (diagnosticView == static_cast<int>(DxrTruthView::GameLightLambert));
             static bool gameViewWasActive = false;
-            // V2.5 BEFORE/AFTER + Truth-vs-Productive control: both vectors
-            // are unit WORLD surface->light; delta proves source->snapshot
-            // value correspondence (not just count).
+            // This delta reports whether the diagnostic per-draw observation
+            // agrees with the native scene source. Actor-local lights may
+            // change it, so it is not a correctness gate.
             const float snapDx = probe[0] - sceneLighting.worldDirection[0];
             const float snapDy = probe[1] - sceneLighting.worldDirection[1];
             const float snapDz = probe[2] - sceneLighting.worldDirection[2];
@@ -1870,25 +2038,25 @@ void DxrSurfaceRenderer::RenderReflections(ID3D12Device* device, ID3D12GraphicsC
             if (sig != lastGameLightSig || (gameViewActive && !gameViewWasActive)) {
                 lastGameLightSig = sig;
                 LogCouchDxrSurface(
-                    std::string("[COUCH-DXR-GAME-LIGHT] type=directional index=0 direction=(") +
+                    std::string("[COUCH-DXR-GAME-LIGHT] source=FAST3D_PER_DRAW_PROBE selectedForDXR=false direction=(") +
                     std::to_string(probe[0]) + "," + std::to_string(probe[1]) + "," +
                     std::to_string(probe[2]) + ") space=WORLD color=(" +
                     std::to_string(sceneLighting.gameProbeColor[0]) + "," +
                     std::to_string(sceneLighting.gameProbeColor[1]) + "," +
                     std::to_string(sceneLighting.gameProbeColor[2]) +
-                    ") selectedForDXR=" +
+                    ") probeValid=" +
                     std::string(sceneLighting.gameProbeValid ? "true" : "false") + " " + sig +
-                    " snapshotDir=(" + std::to_string(sceneLighting.worldDirection[0]) + "," +
+                    " nativeSnapshotDir=(" + std::to_string(sceneLighting.worldDirection[0]) + "," +
                     std::to_string(sceneLighting.worldDirection[1]) + "," +
                     std::to_string(sceneLighting.worldDirection[2]) +
-                    ") consumerSpace=WORLD(gGameLightDir)/VIEW(fc.reservedLight,fc.lightDir,"
+                    ") consumerSpace=TLAS(gGameLightDir,fc.reservedLight,fc.lightDir,"
                     "gCouchViewLightDirection) vectorConvention=SURFACE_TO_LIGHT" +
                     " truthDir=(" + std::to_string(probe[0]) + "," +
                     std::to_string(probe[1]) + "," + std::to_string(probe[2]) +
                     ") productiveDir=(" + std::to_string(sceneLighting.worldDirection[0]) + "," +
                     std::to_string(sceneLighting.worldDirection[1]) + "," +
-                    std::to_string(sceneLighting.worldDirection[2]) + ") delta=" +
-                    std::to_string(snapDelta) + " match=" +
+                    std::to_string(sceneLighting.worldDirection[2]) + ") probeToNativeDelta=" +
+                    std::to_string(snapDelta) + " probeMatchesNative=" +
                     std::string(snapMatch ? "YES" : "NO"));
                 if (gameViewActive && !sceneLighting.gameProbeValid) {
                     LogCouchDxrSurface("[COUCH-DXR-GAME-LIGHT] "
@@ -1915,42 +2083,40 @@ void DxrSurfaceRenderer::RenderReflections(ID3D12Device* device, ID3D12GraphicsC
         const float viewLightLength = sqrtf(viewLight[0] * viewLight[0] + viewLight[1] * viewLight[1] +
                                             viewLight[2] * viewLight[2]);
         if (viewLightLength > 1.0e-6f) {
-            fc.reservedLight[0] = viewLight[0] / viewLightLength;
-            fc.reservedLight[1] = viewLight[1] / viewLightLength;
-            fc.reservedLight[2] = viewLight[2] / viewLightLength;
+            fc.lightDir[0] = viewLight[0] / viewLightLength;
+            fc.lightDir[1] = viewLight[1] / viewLightLength;
+            fc.lightDir[2] = viewLight[2] / viewLightLength;
         }
         if (const char* harness = std::getenv("COUCH_DXR_HARNESS"); harness && std::strcmp(harness, "1") == 0) {
-            const float sourceDx = sceneLighting.gameProbeWorldDirection[0] - sceneLighting.worldDirection[0];
-            const float sourceDy = sceneLighting.gameProbeWorldDirection[1] - sceneLighting.worldDirection[1];
-            const float sourceDz = sceneLighting.gameProbeWorldDirection[2] - sceneLighting.worldDirection[2];
-            const float gpuDx = fc.reservedLight[0] - (viewLightLength > 1.0e-6f ? viewLight[0] / viewLightLength : 0.0f);
-            const float gpuDy = fc.reservedLight[1] - (viewLightLength > 1.0e-6f ? viewLight[1] / viewLightLength : 0.0f);
-            const float gpuDz = fc.reservedLight[2] - (viewLightLength > 1.0e-6f ? viewLight[2] / viewLightLength : 0.0f);
+            // The source and productive directions are the same authoritative
+            // native snapshot. The per-draw probe is diagnostic only.
+            const float gpuDx = fc.lightDir[0] - (viewLightLength > 1.0e-6f ? viewLight[0] / viewLightLength : 0.0f);
+            const float gpuDy = fc.lightDir[1] - (viewLightLength > 1.0e-6f ? viewLight[1] / viewLightLength : 0.0f);
+            const float gpuDz = fc.lightDir[2] - (viewLightLength > 1.0e-6f ? viewLight[2] / viewLightLength : 0.0f);
             char syncRecord[1400]{};
             std::snprintf(syncRecord, sizeof(syncRecord),
-                "[COUCH-DXR-LIGHT-SYNC] frame=%d gameFrame=%llu renderFrame=%llu scene=0x%02X room=%d sourceCount=%u snapshotCount=%u sourceDir=(%.6f,%.6f,%.6f) truthDir=(%.6f,%.6f,%.6f) productiveDir=(%.6f,%.6f,%.6f) gpuDir=(%.6f,%.6f,%.6f) gpuDirSpace=VIEW sourceToProductiveDelta=%.6f productiveToGpuDelta=%.6f gpuEvidence=CPU_UPLOAD sameFrame=%d match=%s productiveGameFrame=%llu lightingFrame=%llu sourceRenderFrame=%llu productiveRenderFrame=%llu",
+                "[COUCH-DXR-LIGHT-SYNC] frame=%d gameFrame=%llu renderFrame=%llu scene=0x%02X room=%d sourceCount=%u snapshotCount=%u sourceDir=(%.6f,%.6f,%.6f) truthDir=(%.6f,%.6f,%.6f) productiveDir=(%.6f,%.6f,%.6f) gpuDir=(%.6f,%.6f,%.6f) gpuDirSpace=VIEW sourceToProductiveDelta=%s productiveToGpuDelta=%.6f gpuEvidence=CPU_UPLOAD sameFrame=%d match=%s productiveGameFrame=%llu lightingFrame=%llu sourceRenderFrame=%llu productiveRenderFrame=%llu",
                 diagnosticFrame,
-                static_cast<unsigned long long>(sceneLighting.gameProbeGameFrame),
+                static_cast<unsigned long long>(sceneLighting.productiveGameFrame),
                 static_cast<unsigned long long>(diagnosticFrame),
-                sceneId, roomId, sceneLighting.gameProbeDirectionalCount, sceneLighting.directionalLightCount,
-                sceneLighting.gameProbeWorldDirection[0], sceneLighting.gameProbeWorldDirection[1],
-                sceneLighting.gameProbeWorldDirection[2], sceneLighting.gameProbeWorldDirection[0],
+                sceneId, roomId, sceneLighting.directionalLightCount, sceneLighting.directionalLightCount,
+                sceneLighting.worldDirection[0], sceneLighting.worldDirection[1],
+                sceneLighting.worldDirection[2], sceneLighting.gameProbeWorldDirection[0],
                 sceneLighting.gameProbeWorldDirection[1], sceneLighting.gameProbeWorldDirection[2],
                 sceneLighting.worldDirection[0], sceneLighting.worldDirection[1], sceneLighting.worldDirection[2],
-                fc.reservedLight[0], fc.reservedLight[1], fc.reservedLight[2],
-                std::sqrt(sourceDx * sourceDx + sourceDy * sourceDy + sourceDz * sourceDz),
+                fc.lightDir[0], fc.lightDir[1], fc.lightDir[2],
+                "SAME_NATIVE_SNAPSHOT",
                 std::sqrt(gpuDx * gpuDx + gpuDy * gpuDy + gpuDz * gpuDz),
-                sceneLighting.gameProbeGameFrame == sceneLighting.productiveGameFrame &&
-                        sceneLighting.gameProbeRenderFrame == sceneLighting.productiveRenderFrame ? 1 : 0,
-                sceneLighting.gameProbeGameFrame == sceneLighting.productiveGameFrame &&
-                        sceneLighting.gameProbeRenderFrame == sceneLighting.productiveRenderFrame &&
-                        sceneLighting.gameProbeValid &&
-                        std::sqrt(sourceDx * sourceDx + sourceDy * sourceDy + sourceDz * sourceDz) < 1.0e-3f &&
+                sceneLighting.capturedFromScene &&
+                        sceneLighting.productiveRenderFrame == sceneLighting.renderFrame ? 1 : 0,
+                sceneLighting.capturedFromScene &&
+                        sceneLighting.productiveRenderFrame == sceneLighting.renderFrame &&
+                        sceneLighting.directionalLightCount > 0 && viewLightLength > 1.0e-6f &&
                         std::sqrt(gpuDx * gpuDx + gpuDy * gpuDy + gpuDz * gpuDz) < 1.0e-6f
                     ? "YES" : "NO",
                 static_cast<unsigned long long>(sceneLighting.productiveGameFrame),
                 static_cast<unsigned long long>(sceneLighting.renderFrame),
-                static_cast<unsigned long long>(sceneLighting.gameProbeRenderFrame),
+                static_cast<unsigned long long>(sceneLighting.productiveRenderFrame),
                 static_cast<unsigned long long>(sceneLighting.productiveRenderFrame));
             LogCouchDxrSurface(syncRecord);
         }
@@ -1967,26 +2133,35 @@ void DxrSurfaceRenderer::RenderReflections(ID3D12Device* device, ID3D12GraphicsC
         fc.screenSize[2] = 1.0f / static_cast<float>(width);
         fc.screenSize[3] = 1.0f / static_cast<float>(height);
         fc.params[0] = 0.02f;
-        fc.params[1] = 256.0f;
+        fc.params[1] = kDxrTruthDistanceScale;
         // Fast3D scales clip-space X to retain its native 4:3 framing on wide
         // windows. Undo that scale before inverse projection so camera rays
         // intersect the exact triangles represented by raster depth.
         fc.params[2] = mClipXScale;
-        // DXR shader mode: path tracing replaces raster lighting only in the
-        // explicit experimental profile. Raster UI and unsupported pixels
-        // remain untouched by the depth/material-gated composite.
+        // Full-scene path tracing replaces raster lighting only in the
+        // experimental profile. HYBRID_RT may relight explicitly tagged pilot
+        // surfaces; all other unsupported pixels retain Fast3D output.
         fc.params[3] = MaterialRegistry::IsPathTracedExperimentalProfile() ? 1.0f : 0.0f;
         auto cvars = Ship::Context::GetInstance()->GetConsoleVariables();
+        auto traceDistance = [&](const char* name, float fallback) {
+            const float value = cvars ? cvars->GetFloat(name, fallback) : fallback;
+            return std::isfinite(value) ? std::clamp(value, 1.0f, 100000.0f) : fallback;
+        };
+        fc.traceSettings[0] = traceDistance("gEnhancements.Graphics.DXR.SurfaceTraceDistance", 10000.0f);
+        fc.traceSettings[1] = fc.traceSettings[0];
+        fc.traceSettings[2] = traceDistance("gEnhancements.Graphics.DXR.IndirectTraceDistance", 256.0f);
+        const float reflectionStrength = cvars ? cvars->GetFloat("gEnhancements.Graphics.DXR.SurfaceReflection", 1.0f) : 1.0f;
+        fc.traceSettings[3] = std::isfinite(reflectionStrength) ? std::clamp(reflectionStrength, 0.0f, 1.0f) : 1.0f;
         int materialDebugMode = cvars ? cvars->GetInteger(
             "gEnhancements.Graphics.DXR.MaterialDebugMode", 0) : 0;
         if (const char* debugEnv = getenv("COUCH_DXR_MATERIAL_DEBUG")) {
             char* end = nullptr;
             const long parsed = strtol(debugEnv, &end, 10);
-            if (end != debugEnv && end && *end == '\0' && parsed >= 0 && parsed <= 9) {
+            if (end != debugEnv && end && *end == '\0' && parsed >= 0 && parsed <= 31) {
                 materialDebugMode = static_cast<int>(parsed);
             }
         }
-        fc.reservedLight[3] = static_cast<float>(std::clamp(materialDebugMode, 0, 9));
+        fc.lightDir[3] = static_cast<float>(std::clamp(materialDebugMode, 0, 31));
         // DXR Truth Mode (V1): force the raygen encoding each Truth view
         // decodes in the composite. Traversal, AnyHit filtering, gate flags,
         // counters and blend policy are untouched, so the primary ray behaves
@@ -1996,16 +2171,19 @@ void DxrSurfaceRenderer::RenderReflections(ID3D12Device* device, ID3D12GraphicsC
         const int truthDebugMode = DxrTruthMaterialDebugMode(diagnosticView);
         if (truthDebugMode >= 0) {
             materialDebugMode = truthDebugMode;
-            fc.reservedLight[3] = static_cast<float>(truthDebugMode);
+            fc.lightDir[3] = static_cast<float>(truthDebugMode);
         }
         static int lastLoggedDebugMode = -1;
         if (materialDebugMode != lastLoggedDebugMode) {
             LogCouchDxrSurface("[COUCH-DXR-SURFACE][DEBUG] materialMode=" +
-                               std::to_string(std::clamp(materialDebugMode, 0, 9)) +
+                               std::to_string(std::clamp(materialDebugMode, 0, 17)) +
                                " clipXScale=" + std::to_string(mClipXScale) +
                                " (0=off, 1=class, 2=baseColor, 3=normal, 4=roughness, "
                                "5=metallic, 6=reflectivity, 7=hitDistance, "
-                               "8=reflectionContribution, 9=instanceID)");
+                               "8=reflectionContribution, 9=instanceID, "
+                               "10=radianceLum/giLum/baseLum/giFraction, "
+                               "11=baseColor+giFraction, 12=radianceRGB+giLum, "
+                               "13=metallic+baseLum)");
             lastLoggedDebugMode = materialDebugMode;
         }
         fc.quality[0] = static_cast<float>(mIndirectSamples);
@@ -2023,6 +2201,38 @@ void DxrSurfaceRenderer::RenderReflections(ID3D12Device* device, ID3D12GraphicsC
         fc.frameInfo[0] = static_cast<float>(mSampleFrameIndex++);
         fc.frameInfo[1] = rasterSoftShadowEnabled ? static_cast<float>(rasterSoftShadowWidth) : 0.0f;
         fc.frameInfo[2] = rasterSoftShadowEnabled ? static_cast<float>(rasterSoftShadowHeight) : 0.0f;
+        // MissReflection samples a copy of this same scene: only UNORM
+        // sources need a display-to-linear conversion, never an FP16 source.
+        fc.frameInfo[3] = sceneFormat == DXGI_FORMAT_R16G16B16A16_FLOAT ? 1.0f : 0.0f;
+        // Record the light constants the raygen actually consumes, not just
+        // the direction vectors: a zero directional colour, a missing ambient
+        // term or a disabled soft-shadow mask all produce a relit pixel that
+        // cannot match the raster energy. Emitted only when a value changes so
+        // a scene's constants are logged once and identical frames stay free.
+        if (const char* harness = std::getenv("COUCH_DXR_HARNESS"); harness && std::strcmp(harness, "1") == 0) {
+            static char lastLightConstants[768]{};
+            char lightConstants[768]{};
+            std::snprintf(lightConstants, sizeof(lightConstants),
+                "sceneLight=(%.6f,%.6f,%.6f) softShadowMask=%d ambient=(%.6f,%.6f,%.6f) "
+                "secondary=(%.6f,%.6f,%.6f) viewLightDir=(%.6f,%.6f,%.6f) viewLightLength=%.6f "
+                "directionalCount=%u pointCount=%u pathTracedProfile=%d diagnosticView=%d "
+                "indirectSamples=%u reflections=%u relief=%.3f traceDistance=%.1f indirectDistance=%.1f",
+                fc.sceneLightColor[0], fc.sceneLightColor[1], fc.sceneLightColor[2],
+                rasterSoftShadowEnabled ? 1 : 0,
+                fc.ambientLightColor[0], fc.ambientLightColor[1], fc.ambientLightColor[2],
+                fc.secondaryLightColor[0], fc.secondaryLightColor[1], fc.secondaryLightColor[2],
+                fc.lightDir[0], fc.lightDir[1], fc.lightDir[2], viewLightLength,
+                sceneLighting.directionalLightCount, sceneLighting.pointLightCount,
+                MaterialRegistry::IsPathTracedExperimentalProfile() ? 1 : 0,
+                std::clamp(diagnosticView, 0, 31),
+                static_cast<unsigned>(fc.quality[0]), static_cast<unsigned>(fc.quality[1]),
+                fc.quality[2], fc.traceSettings[0], fc.traceSettings[2]);
+            if (std::strcmp(lightConstants, lastLightConstants) != 0) {
+                LogCouchDxrSurface("[COUCH-DXR-LIGHT-CONSTANTS] frame=" +
+                                   std::to_string(diagnosticFrame) + " " + lightConstants);
+                std::snprintf(lastLightConstants, sizeof(lastLightConstants), "%s", lightConstants);
+            }
+        }
         const bool forceCoverageEnv = [] {
             const char* value = getenv("COUCH_DXR_FORCE_ANY_HIT_COVERAGE");
             return value && strcmp(value, "1") == 0;
@@ -2057,8 +2267,63 @@ void DxrSurfaceRenderer::RenderReflections(ID3D12Device* device, ID3D12GraphicsC
         fc.diagnosticBounds[1] = surfaceData.indexCount;
         fc.diagnosticBounds[2] = surfaceData.instanceCount;
         fc.diagnosticBounds[3] = static_cast<uint32_t>(surfaceData.textureSrvIndices.size() + 1);
+        const bool naviLightEnabled = [] {
+            if (const char* env = getenv("COUCH_DXR_NAVI_POINT_LIGHT")) {
+                return strcmp(env, "0") != 0;
+            }
+            return true;
+        }();
+        const float naviPointGain = [] {
+            if (!CouchNaviPilotActive()) return 1.0f;
+            const char* env = getenv("COUCH_DXR_NAVI_POINT_GAIN");
+            if (!env || !*env) return 1.0f;
+            char* end = nullptr;
+            const float configured = std::strtof(env, &end);
+            if (end == env || *end != '\0' || !std::isfinite(configured)) return 1.0f;
+            return std::clamp(configured, 0.0f, 128.0f);
+        }();
+        const std::array<float, 3> naviPointTint = [] {
+            std::array<float, 3> tint{1.0f, 1.0f, 1.0f};
+            if (!CouchNaviPilotActive()) return tint;
+            const char* env = getenv("COUCH_DXR_NAVI_POINT_TINT");
+            if (!env || !*env) return tint;
+            const char* cursor = env;
+            for (size_t channel = 0; channel < tint.size(); ++channel) {
+                char* end = nullptr;
+                const float value = std::strtof(cursor, &end);
+                if (end == cursor || !std::isfinite(value) || value < 0.0f || value > 1.0f ||
+                    (channel < tint.size() - 1 && *end != ',') ||
+                    (channel == tint.size() - 1 && *end != '\0')) {
+                    return std::array<float, 3>{1.0f, 1.0f, 1.0f};
+                }
+                tint[channel] = value;
+                if (channel < tint.size() - 1) cursor = end + 1;
+            }
+            return tint;
+        }();
+        uint32_t selectedOwner = 0;
+        for (uint32_t i = 0; i < sceneLighting.nativeLightCount; ++i) {
+            const auto& source = sceneLighting.nativeLights[i];
+            if (source.role == COUCH_LIGHT_NAVI_GLOW && source.enabled && source.ownerId != 0) {
+                selectedOwner = source.ownerId;
+                break;
+            }
+        }
         for (uint32_t lightIndex = 0; lightIndex < 32; ++lightIndex) {
             const float* worldPosition = sceneLighting.pointPosition[lightIndex];
+            const float* optics = sceneLighting.pointOptics[lightIndex];
+            const uint32_t packedRole = static_cast<uint32_t>(optics[0]);
+            const uint32_t role = packedRole & 7u;
+            const bool isNaviGlow = (role == 1 /* COUCH_LIGHT_NAVI_GLOW */);
+            const bool isSelectedNaviGlow = isNaviGlow && selectedOwner != 0 && packedRole / 8u == selectedOwner;
+
+            if (isNaviGlow && !naviLightEnabled) {
+                // Control C: Exclusively suppress Navi's point light
+                memset(fc.pointLightPosition[lightIndex], 0, sizeof(fc.pointLightPosition[lightIndex]));
+                memset(fc.pointLightOptics[lightIndex], 0, sizeof(fc.pointLightOptics[lightIndex]));
+                continue;
+            }
+
             fc.pointLightPosition[lightIndex][0] = worldPosition[0] * mViewMatrix[0][0] +
                                                    worldPosition[1] * mViewMatrix[1][0] +
                                                    worldPosition[2] * mViewMatrix[2][0] + mViewMatrix[3][0];
@@ -2071,13 +2336,120 @@ void DxrSurfaceRenderer::RenderReflections(ID3D12Device* device, ID3D12GraphicsC
             fc.pointLightPosition[lightIndex][3] = worldPosition[3]; // authored influence radius
             memcpy(fc.pointLightOptics[lightIndex], sceneLighting.pointOptics[lightIndex],
                    sizeof(fc.pointLightOptics[lightIndex]));
+            // Author only the radiance carried by DXR. The native source
+            // position and radius stay unchanged, and no second emitter is added.
+            if (CouchNaviPilotActive() && isSelectedNaviGlow) {
+                for (uint32_t channel = 1; channel < 4; ++channel) {
+                    fc.pointLightOptics[lightIndex][channel] *= naviPointGain * naviPointTint[channel - 1];
+                }
+            }
+        }
+        const char* naviOutput = std::getenv("COUCH_DXR_OUTPUT");
+        const char* naviIsolation = std::getenv("COUCH_DXR_NAVI_ISOLATION");
+        const bool isolateNaviForCapture = !naviIsolation || std::strcmp(naviIsolation, "0") != 0;
+        const bool captureNaviEvidence = CouchNaviPilotActive() && !mNaviPilotMetadataCaptured && naviOutput &&
+            std::filesystem::exists(std::filesystem::path(naviOutput) / "capture.request.json");
+        mNaviPilotDispatch = captureNaviEvidence && !mNaviPilotCaptured && isolateNaviForCapture;
+        if (captureNaviEvidence) {
+            using Json = nlohmann::json;
+            Json sources = Json::array();
+            for (uint32_t i = 0; i < sceneLighting.nativeLightCount; ++i) {
+                const auto& source = sceneLighting.nativeLights[i];
+                float view[3]{};
+                for (uint32_t a = 0; a < 3; ++a) view[a] = source.position[0]*mViewMatrix[0][a] +
+                    source.position[1]*mViewMatrix[1][a] + source.position[2]*mViewMatrix[2][a] + mViewMatrix[3][a];
+                const bool selectedNavi = source.role == COUCH_LIGHT_NAVI_GLOW && source.ownerId == selectedOwner;
+                const float appliedGain = selectedNavi ? naviPointGain : 1.0f;
+                const float effectiveColor[3] = {source.color[0] * appliedGain * (selectedNavi ? naviPointTint[0] : 1.0f),
+                                                 source.color[1] * appliedGain * (selectedNavi ? naviPointTint[1] : 1.0f),
+                                                 source.color[2] * appliedGain * (selectedNavi ? naviPointTint[2] : 1.0f)};
+                const bool authoredColor = selectedNavi && (naviPointGain != 1.0f ||
+                    naviPointTint[0] != 1.0f || naviPointTint[1] != 1.0f || naviPointTint[2] != 1.0f);
+                sources.push_back({{"sourceId",source.sourceId},{"ownerId",source.ownerId},
+                    {"actorId",source.actorId},{"actorParams",source.actorParams},{"role",source.role},
+                    {"type",source.type},{"enabled",source.enabled},{"rawRadius",source.rawRadius},
+                    {"worldPosition",source.position},{"tracePosition",view},{"linearColor",source.color},
+                    {"effectiveDxrColor",effectiveColor},{"appliedPointGain",appliedGain},
+                    {"authoredPointTint",selectedNavi ? naviPointTint : std::array<float, 3>{1.0f, 1.0f, 1.0f}},
+                    {"gainProvenance",authoredColor ? "AUTHORED_HARNESS" : "NATIVE"},
+                    {"tintProvenance",authoredColor ? "AUTHORED_HARNESS" : "NATIVE"},
+                    {"origin","NATIVE"}});
+            }
+            if (mNaviPilotDispatch) {
+                fc.sourceControls[0] = selectedOwner;
+                fc.sourceControls[1] = 1u;
+            }
+            float totalArea = 0.0f;
+            std::vector<const DxrEmitterTriangle*> triangles;
+            for (const auto& triangle : surfaceData.emitters) {
+                if (triangle.ownerId == selectedOwner && selectedOwner != 0 &&
+                    triangle.recordIndex < 65536 && triangle.primitiveIndex < 65536) {
+                    triangles.push_back(&triangle);
+                    totalArea += triangle.area;
+                }
+            }
+            Json samples = Json::array();
+            if (mNaviPilotDispatch && !triangles.empty() && std::isfinite(totalArea) && totalArea > 0.0f) {
+                fc.sourceControls[2] = 8u;
+                for (uint32_t i = 0; i < 8; ++i) {
+                    const float target = totalArea * (float(i) + 0.5f) / 8.0f;
+                    float cumulative = 0.0f;
+                    const DxrEmitterTriangle* selected = triangles.back();
+                    for (const auto* tri : triangles) {
+                        cumulative += tri->area;
+                        if (cumulative >= target) { selected = tri; break; }
+                    }
+                    const float u = std::sqrt(std::fmod((float(i)+0.5f)*0.61803398875f,1.0f));
+                    const float v = std::fmod((float(i)+0.5f)*0.75487766625f,1.0f);
+                    const float bary[3] = {1.0f-u,u*(1.0f-v),u*v};
+                    float e1[3],e2[3],n[3];
+                    for (uint32_t a=0;a<3;++a) {
+                        for(uint32_t c=0;c<3;++c) fc.emitterSamplePosition[i][a] += selected->position[c][a]*bary[c];
+                        e1[a]=selected->position[1][a]-selected->position[0][a];
+                        e2[a]=selected->position[2][a]-selected->position[0][a];
+                    }
+                    n[0]=e1[1]*e2[2]-e1[2]*e2[1]; n[1]=e1[2]*e2[0]-e1[0]*e2[2]; n[2]=e1[0]*e2[1]-e1[1]*e2[0];
+                    const float length=std::sqrt(n[0]*n[0]+n[1]*n[1]+n[2]*n[2]);
+                    for(uint32_t a=0;a<3;++a) fc.emitterSampleNormal[i][a]=n[a]/length;
+                    fc.emitterSamplePosition[i][3]=totalArea/8.0f;
+                    fc.emitterSampleIdentity[i/4][i%4]=(selected->recordIndex<<16u)|selected->primitiveIndex;
+                    samples.push_back({{"record",selected->recordIndex},{"triangle",selected->primitiveIndex},
+                        {"positionArea",fc.emitterSamplePosition[i]},{"normal",fc.emitterSampleNormal[i]},
+                        {"barycentric",bary}});
+                }
+            }
+            Json evidence = {{"schemaVersion",1},{"frame",diagnosticFrame},{"selectedOwner",selectedOwner},
+                {"sources",sources},{"emitterSamples",samples},{"emitterArea",totalArea},
+                {"authoredNaviPointGain",naviPointGain},
+                {"authoredNaviPointTint",naviPointTint},
+                {"naviPointGainScope","selected native Navi glow only; point radius and position unchanged"},
+                {"naviPointTintScope","selected native Navi glow only; RGB multipliers are diagnostic harness authoring"},
+                {"shaderSourceSha256",kDxrShadowShaderSourceSha256},{"shaderAbi",kDxrShaderAbiVersion},
+                {"viewHash",SurfaceMatrixHash(mViewMatrix)},{"projectionHash",SurfaceMatrixHash(mProjMatrix)},
+                {"viewMatrixRowVector",mViewMatrix},
+                {"captureMode",mNaviPilotDispatch ? "ISOLATED_CAUSAL" : "PRODUCTION_COMPOSITE"},
+                {"isolation",mNaviPilotDispatch ? "DIRECT_SELECTED_SOURCE_ONLY" : "NONE"},
+                {"bloom",mNaviPilotDispatch ? "OFF" : "PRODUCTION_DEFAULT"},
+                {"attenuation","max(0,1-(distance/abs(nativeRadius))^2)"},
+                {"receiverAlbedo","supported Fast3D combiner; native Shade removed only with captured provenance; artist tint retained; fog excluded"},
+                {"variants",mNaviPilotDispatch ? Json{{"A","point=0 mesh=0"},{"B","point=1 mesh=0"},
+                    {"C","point=0 mesh=1"},{"D","point=1 mesh=1 diagnostic double count"}} : Json::array()}};
+            std::ofstream out(std::filesystem::path(naviOutput)/"navi.sources.json", std::ios::binary | std::ios::trunc);
+            if (out) {
+                const std::string text = evidence.dump(2);
+                out.write(text.data(), text.size());
+                out.put('\n');
+                out.flush();
+                out.close();
+                mNaviPilotMetadataCaptured = true;
+            }
         }
         memcpy(fc.projection, mProjMatrix, sizeof(fc.projection));
     memcpy(mConstantBufferMapped + (frameIndex % 3) * kSurfaceFrameStride, &fc, sizeof(fc));
     }
 
     const bool counterSample = mPrimaryGateCountersEnabled &&
-        (diagnosticView == 5 || diagnosticView == 6 || diagnosticView == 7 || diagnosticView == 8);
+        (mNaviPilotDispatch || diagnosticView == 5 || diagnosticView == 6 || diagnosticView == 7 || diagnosticView == 8);
     if (counterSample && mPrimaryGateReadbackPending) {
         LogCouchDxrSurface("[COUCH-DXR-GATE][READBACK_FAILED] reason=previous_sample_still_pending mode=" +
                            std::string(diagnosticView == 5 ? "NORMAL" : diagnosticView == 6 ? "BYPASS_PRIMARY_RASTER_BLEND_ONLY" : diagnosticView == 7 ? "BYPASS_PRIMARY_RASTER_BLEND_PLUS_VERTEX_ALPHA" : "CANDIDATE_ALPHA_POLICY"));
@@ -2087,7 +2459,7 @@ void DxrSurfaceRenderer::RenderReflections(ID3D12Device* device, ID3D12GraphicsC
     ComPtr<ID3D12GraphicsCommandList4> cmdList4;
     if (FAILED(cmdList->QueryInterface(IID_PPV_ARGS(&cmdList4)))) return;
 
-    D3D12_RESOURCE_BARRIER pre[5] = {};
+    D3D12_RESOURCE_BARRIER pre[6] = {};
     pre[0].Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
     pre[0].Transition.pResource = depthBuffer;
     pre[0].Transition.StateBefore = D3D12_RESOURCE_STATE_DEPTH_WRITE;
@@ -2113,11 +2485,17 @@ void DxrSurfaceRenderer::RenderReflections(ID3D12Device* device, ID3D12GraphicsC
     pre[4].Transition.StateBefore = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
     pre[4].Transition.StateAfter = D3D12_RESOURCE_STATE_UNORDERED_ACCESS;
     pre[4].Transition.Subresource = D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES;
-    cmdList->ResourceBarrier(5, pre);
+    pre[5].Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+    pre[5].Transition.pResource = mNativePointDirect.Get();
+    pre[5].Transition.StateBefore = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
+    pre[5].Transition.StateAfter = D3D12_RESOURCE_STATE_UNORDERED_ACCESS;
+    pre[5].Transition.Subresource = D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES;
+    cmdList->ResourceBarrier(6, pre);
     mMaskTrackedState = static_cast<unsigned>(D3D12_RESOURCE_STATE_UNORDERED_ACCESS);
     mReflectionColorTrackedState = static_cast<unsigned>(D3D12_RESOURCE_STATE_UNORDERED_ACCESS);
     mEmissiveTrackedState = static_cast<unsigned>(D3D12_RESOURCE_STATE_UNORDERED_ACCESS);
     mIndirectTrackedState = static_cast<unsigned>(D3D12_RESOURCE_STATE_UNORDERED_ACCESS);
+    mNativePointDirectTrackedState = static_cast<unsigned>(D3D12_RESOURCE_STATE_UNORDERED_ACCESS);
 
     ID3D12DescriptorHeap* heaps[] = { mDescriptorHeap.Get() };
     cmdList4->SetDescriptorHeaps(1, heaps);
@@ -2234,6 +2612,8 @@ void DxrSurfaceRenderer::RenderReflections(ID3D12Device* device, ID3D12GraphicsC
         counterToCopy.Transition.StateAfter = D3D12_RESOURCE_STATE_UNORDERED_ACCESS;
         cmdList->ResourceBarrier(1, &counterToCopy);
         mPrimaryGateReadbackPending = true;
+        mNaviPilotPending = mNaviPilotDispatch;
+        if (mNaviPilotPending) mNaviPendingIdentities = surfaceData.identities;
         mPrimaryGatePendingFrame = diagnosticFrame;
         mPrimaryGatePendingScene = sceneId;
         mPrimaryGatePendingRoom = roomId;
@@ -2282,7 +2662,7 @@ void DxrSurfaceRenderer::RenderReflections(ID3D12Device* device, ID3D12GraphicsC
     mStats.reflectionColorBound = true;
     mStats.dispatchActive = true;
 
-    D3D12_RESOURCE_BARRIER post[9] = {};
+    D3D12_RESOURCE_BARRIER post[10] = {};
     post[0].Type = D3D12_RESOURCE_BARRIER_TYPE_UAV;
     post[0].UAV.pResource = mReflectionMask.Get();
     post[1].Type = D3D12_RESOURCE_BARRIER_TYPE_UAV;
@@ -2291,35 +2671,44 @@ void DxrSurfaceRenderer::RenderReflections(ID3D12Device* device, ID3D12GraphicsC
     post[2].UAV.pResource = mIndirectMask.Get();
     post[3].Type = D3D12_RESOURCE_BARRIER_TYPE_UAV;
     post[3].UAV.pResource = mReflectionColor.Get();
-    post[4].Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
-    post[4].Transition.pResource = mReflectionMask.Get();
-    post[4].Transition.StateBefore = D3D12_RESOURCE_STATE_UNORDERED_ACCESS;
-    post[4].Transition.StateAfter = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
-    post[4].Transition.Subresource = D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES;
+    post[4].Type = D3D12_RESOURCE_BARRIER_TYPE_UAV;
+    post[4].UAV.pResource = mNativePointDirect.Get();
     post[5].Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
-    post[5].Transition.pResource = mEmissiveMask.Get();
+    post[5].Transition.pResource = mReflectionMask.Get();
     post[5].Transition.StateBefore = D3D12_RESOURCE_STATE_UNORDERED_ACCESS;
     post[5].Transition.StateAfter = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
     post[5].Transition.Subresource = D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES;
     post[6].Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
-    post[6].Transition.pResource = mIndirectMask.Get();
+    post[6].Transition.pResource = mEmissiveMask.Get();
     post[6].Transition.StateBefore = D3D12_RESOURCE_STATE_UNORDERED_ACCESS;
     post[6].Transition.StateAfter = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
     post[6].Transition.Subresource = D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES;
     post[7].Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
-    post[7].Transition.pResource = mReflectionColor.Get();
+    post[7].Transition.pResource = mIndirectMask.Get();
     post[7].Transition.StateBefore = D3D12_RESOURCE_STATE_UNORDERED_ACCESS;
     post[7].Transition.StateAfter = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
     post[7].Transition.Subresource = D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES;
-    post[8] = pre[0];
-    post[8].Transition.StateBefore = D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE;
-    post[8].Transition.StateAfter = D3D12_RESOURCE_STATE_DEPTH_WRITE;
-    cmdList->ResourceBarrier(9, post);
+    post[8].Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+    post[8].Transition.pResource = mReflectionColor.Get();
+    post[8].Transition.StateBefore = D3D12_RESOURCE_STATE_UNORDERED_ACCESS;
+    post[8].Transition.StateAfter = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
+    post[8].Transition.Subresource = D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES;
+    post[9].Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+    post[9].Transition.pResource = mNativePointDirect.Get();
+    post[9].Transition.StateBefore = D3D12_RESOURCE_STATE_UNORDERED_ACCESS;
+    post[9].Transition.StateAfter = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
+    post[9].Transition.Subresource = D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES;
+    D3D12_RESOURCE_BARRIER restoreDepth = pre[0];
+    restoreDepth.Transition.StateBefore = D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE;
+    restoreDepth.Transition.StateAfter = D3D12_RESOURCE_STATE_DEPTH_WRITE;
+    cmdList->ResourceBarrier(1, &restoreDepth);
+    cmdList->ResourceBarrier(10, post);
     ++mStats.signalOutputsProduced;
     mMaskTrackedState = static_cast<unsigned>(D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
     mReflectionColorTrackedState = static_cast<unsigned>(D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
     mEmissiveTrackedState = static_cast<unsigned>(D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
     mIndirectTrackedState = static_cast<unsigned>(D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
+    mNativePointDirectTrackedState = static_cast<unsigned>(D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
 
     // Preserve the scene before the water/reflection composite. Reading the
     // swapchain resource while writing it would be an illegal D3D12 alias.
@@ -2426,7 +2815,7 @@ void DxrSurfaceRenderer::RenderReflections(ID3D12Device* device, ID3D12GraphicsC
     }
 
     if (diagnosticView != 0) mPathHistoryValid = false;
-    const bool pathTemporalApplied = diagnosticView == 0 && DispatchPathTemporal(
+    const bool pathTemporalApplied = !mNaviPilotDispatch && diagnosticView == 0 && DispatchPathTemporal(
         cmdList, depthBuffer, depthSrvCpuHandle, launchWidth, launchHeight,
         width, height, frameIndex);
     if (!pathTemporalApplied) {
@@ -2485,12 +2874,15 @@ void DxrSurfaceRenderer::RenderReflections(ID3D12Device* device, ID3D12GraphicsC
     indirectSrvGpu.ptr += (kSurfaceSrvDescriptorBase + 3) * mDescriptorSize;
     D3D12_GPU_DESCRIPTOR_HANDLE reflectionColorSrvGpu = descriptorBase;
     reflectionColorSrvGpu.ptr += (kSurfaceSrvDescriptorBase + 4) * mDescriptorSize;
+    D3D12_GPU_DESCRIPTOR_HANDLE nativePointDirectSrvGpu = descriptorBase;
+    nativePointDirectSrvGpu.ptr += kSurfaceNativePointDirectSrvDescriptor * mDescriptorSize;
     cmdList->SetGraphicsRootDescriptorTable(0, sceneSrvGpu);
     cmdList->SetGraphicsRootDescriptorTable(1, depthSrvGpu);
     cmdList->SetGraphicsRootDescriptorTable(2, surfaceSrvGpu);
     cmdList->SetGraphicsRootDescriptorTable(3, emissiveSrvGpu);
     cmdList->SetGraphicsRootDescriptorTable(4, indirectSrvGpu);
     cmdList->SetGraphicsRootDescriptorTable(5, reflectionColorSrvGpu);
+    cmdList->SetGraphicsRootDescriptorTable(7, nativePointDirectSrvGpu);
     float reflectionScale = 1.0f;
     float transmissionScale = 0.65f;
     auto cvars = Ship::Context::GetInstance()->GetConsoleVariables();
@@ -2500,6 +2892,8 @@ void DxrSurfaceRenderer::RenderReflections(ID3D12Device* device, ID3D12GraphicsC
         transmissionScale = std::clamp(cvars->GetFloat(
             "gEnhancements.Graphics.DXR.SurfaceTransmission", 0.65f), 0.0f, 1.0f);
     }
+    if (!std::isfinite(reflectionScale)) reflectionScale = 1.0f;
+    if (!std::isfinite(transmissionScale)) transmissionScale = 0.65f;
     const bool hdrScene = sceneFormat == DXGI_FORMAT_R16G16B16A16_FLOAT;
     const char* gateDiagnosticEnv = getenv("COUCH_DXR_GATE_DIAGNOSTIC");
     const char* forceCoverageEnv = getenv("COUCH_DXR_FORCE_ANY_HIT_COVERAGE");
@@ -2525,28 +2919,86 @@ void DxrSurfaceRenderer::RenderReflections(ID3D12Device* device, ID3D12GraphicsC
                            " projectionHash=" + std::to_string(SurfaceMatrixHash(mProjMatrix)) +
                            " instances=" + std::to_string(surfaceData.instanceCount) +
                            " tlasInstances=" + std::to_string(tlasInstanceCount) +
-                           " gameDir=(" + std::to_string(viewLight.gameProbeWorldDirection[0]) + "," +
-                           std::to_string(viewLight.gameProbeWorldDirection[1]) + "," +
-                           std::to_string(viewLight.gameProbeWorldDirection[2]) + ") gameValid=" +
-                           std::to_string(viewLight.gameProbeValid ? 1 : 0));
+                           " gameDir=(" + std::to_string(viewLight.worldDirection[0]) + "," +
+                           std::to_string(viewLight.worldDirection[1]) + "," +
+                           std::to_string(viewLight.worldDirection[2]) + ") gameValid=" +
+                           std::to_string(viewLight.capturedFromScene && viewLight.directionalLightCount > 0 ? 1 : 0));
         lastDiagnosticView = boundedDiagnosticView;
     }
-    // DXR TRUTH (V2): game probe passes through UNTRANSFORMED (WORLD space,
-    // surface->light convention) so the GAME_LIGHT view shares N's space.
-    // Productive/OFF path ignores slots 6..9.
+    // Match the same captured transform used by the productive ray lighting.
+    // Fast3D may keep the camera in model-view or fold it into projection.
+    // In either case this light must share the decoded TLAS normal's space.
     const SceneLightingSnapshot compositeLight = MaterialRegistry::Instance().GetSceneLighting();
-    const float compositeParams[10] = { reflectionScale, static_cast<float>(width),
-                                        static_cast<float>(height), transmissionScale,
-                                        hdrScene ? 1.0f : 0.0f,
-                                        static_cast<float>(boundedDiagnosticView),
-                                        compositeLight.gameProbeWorldDirection[0],
-                                        compositeLight.gameProbeWorldDirection[1],
-                                        compositeLight.gameProbeWorldDirection[2],
-                                        compositeLight.gameProbeValid ? 1.0f : 0.0f };
-    cmdList->SetGraphicsRoot32BitConstants(6, 10, compositeParams, 0);
+    const float* nativeWorldLight = compositeLight.worldDirection;
+    DxrSurfaceCompositeConstants compositeParams = {
+        { reflectionScale, static_cast<float>(width), static_cast<float>(height), transmissionScale },
+        hdrScene ? 1.0f : 0.0f, static_cast<float>(boundedDiagnosticView), 0.0f, 0.0f,
+        { nativeWorldLight[0] * mViewMatrix[0][0] + nativeWorldLight[1] * mViewMatrix[1][0] + nativeWorldLight[2] * mViewMatrix[2][0],
+          nativeWorldLight[0] * mViewMatrix[0][1] + nativeWorldLight[1] * mViewMatrix[1][1] + nativeWorldLight[2] * mViewMatrix[2][1],
+          nativeWorldLight[0] * mViewMatrix[0][2] + nativeWorldLight[1] * mViewMatrix[1][2] + nativeWorldLight[2] * mViewMatrix[2][2] },
+        0.0f
+    };
+    compositeParams.padding = mNaviPilotDispatch ? 1.0f : 0.0f;
+    const auto& light = compositeParams.gameLightDirection;
+    const float lightLengthSquared = light[0] * light[0] + light[1] * light[1] + light[2] * light[2];
+    compositeParams.gameLightValid = compositeLight.capturedFromScene && compositeLight.directionalLightCount > 0 &&
+        std::isfinite(lightLengthSquared) && lightLengthSquared > 1.0e-12f ? 1.0f : 0.0f;
+    cmdList->SetGraphicsRoot32BitConstants(6, kSurfaceCompositeRootDwords, &compositeParams, 0);
     cmdList->SetPipelineState(mCompositePso[hdrScene ? 1u : 0u].Get());
     cmdList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
     cmdList->DrawInstanced(3, 1, 0, 0);
+
+    mVisualAblationFrame = -1;
+    const char* ablationEnv = std::getenv("COUCH_DXR_VISUAL_ABLATION");
+    const char* harnessOutput = std::getenv("COUCH_DXR_OUTPUT");
+    const char* harnessActive = std::getenv("COUCH_DXR_HARNESS");
+    if (!mVisualAblationCaptured && boundedDiagnosticView == 0 && !MaterialRegistry::IsPathTracedExperimentalProfile() &&
+        ablationEnv && std::strcmp(ablationEnv, "1") == 0 &&
+        harnessActive && std::strcmp(harnessActive, "1") == 0 && harnessOutput &&
+        std::filesystem::exists(std::filesystem::path(harnessOutput) / "capture.request.json")) {
+        bool ready = true;
+        if (!mVisualAblationRtvs) {
+            D3D12_DESCRIPTOR_HEAP_DESC rtvDesc{};
+            rtvDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_RTV;
+            rtvDesc.NumDescriptors = 4;
+            ready = SUCCEEDED(device->CreateDescriptorHeap(&rtvDesc, IID_PPV_ARGS(&mVisualAblationRtvs)));
+        }
+        if (ready) {
+            auto desc = renderTarget->GetDesc();
+            desc.Flags = D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET;
+            D3D12_HEAP_PROPERTIES heap{};
+            heap.Type = D3D12_HEAP_TYPE_DEFAULT;
+            auto handle = mVisualAblationRtvs->GetCPUDescriptorHandleForHeapStart();
+            const UINT stride = device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
+            const unsigned controlCount = mNaviPilotDispatch ? 3u : 4u;
+            for (unsigned i = 0; i < controlCount; ++i) {
+                if (!mVisualAblationTargets[i]) {
+                    ready = SUCCEEDED(device->CreateCommittedResource(&heap, D3D12_HEAP_FLAG_NONE, &desc,
+                        D3D12_RESOURCE_STATE_RENDER_TARGET, nullptr, IID_PPV_ARGS(&mVisualAblationTargets[i])));
+                    if (!ready) break;
+                    device->CreateRenderTargetView(mVisualAblationTargets[i].Get(), nullptr, handle);
+                }
+                compositeParams.ablationMode = static_cast<float>(i + 1);
+                cmdList->OMSetRenderTargets(1, &handle, FALSE, nullptr);
+                cmdList->SetGraphicsRoot32BitConstants(6, kSurfaceCompositeRootDwords, &compositeParams, 0);
+                cmdList->DrawInstanced(3, 1, 0, 0);
+                handle.ptr += stride;
+            }
+        }
+        if (ready) {
+            mVisualAblationFrame = diagnosticFrame;
+            mVisualAblationCaptured = true;
+            LogCouchDxrSurface("[COUCH-DXR-SURFACE][ABLATION] frame=" + std::to_string(diagnosticFrame) +
+                " sameScene=1 sameSignals=1 sameCommandList=1 controls=" +
+                (mNaviPilotDispatch ? std::string("NAVI_A_NONE,NAVI_C_MESH,NAVI_D_DOUBLE;main=NAVI_B_POINT;isolated=1;bloom=0") :
+                                      std::string("SURFACE_OPTICS_OFF,INDIRECT_OFF,RELIGHT_OFF,NAVI_POINT_OFF")));
+        } else {
+            LogCouchDxrSurface("[COUCH-DXR-SURFACE][ABLATION_FAILED] frame=" + std::to_string(diagnosticFrame));
+        }
+        compositeParams.ablationMode = 0.0f;
+        cmdList->SetGraphicsRoot32BitConstants(6, kSurfaceCompositeRootDwords, &compositeParams, 0);
+        cmdList->OMSetRenderTargets(1, &rtvHandle, FALSE, nullptr);
+    }
 
     D3D12_RESOURCE_BARRIER depthWrite = {};
     depthWrite.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
@@ -2559,11 +3011,10 @@ void DxrSurfaceRenderer::RenderReflections(ID3D12Device* device, ID3D12GraphicsC
     if (mStats.dispatchRaysCalls == 1) {
         LogCouchDxrSurface("[COUCH-DXR-SURFACE] First reflection DispatchRays SUCCESS | resolution=" +
                            std::to_string(launchWidth) + "x" + std::to_string(launchHeight) +
-                           " (half-resolution probe) profile=" +
+                           " profile=" +
                            std::string(MaterialRegistry::Instance().GetProfileName()) +
                            " emissiveMask=" + (mEmissiveFormat == DXGI_FORMAT_R16_FLOAT ? "R16F" : "R32F") +
-                           " bloom=5x5 indirectSamples=" +
-                           std::string(MaterialRegistry::IsPathTracedExperimentalProfile() ? "2" : "1"));
+                           " bloom=7x7 indirectSamples=" + std::to_string(mIndirectSamples));
     }
     // OCZ-RTX-REPAIR REPAIR-02/04: machine-readable proof that the fullscreen
     // composite was recorded into the current framebuffer this frame. The
@@ -2623,6 +3074,59 @@ void DxrSurfaceRenderer::ResolvePrimaryGateCounters(ID3D12CommandQueue* queue) {
         return;
     }
     const auto* mapped = static_cast<const uint32_t*>(mappedData);
+    if (mNaviPilotPending) {
+        using Json = nlohmann::json;
+        Json samples = Json::array();
+        for (uint32_t i=0;i<kNaviSampleCount;++i) {
+            const uint32_t* v=mapped+kNaviSampleBase+i*kNaviSampleStride;
+            if (v[0] == 0) continue;
+            const auto f=[&](uint32_t n) { float value; std::memcpy(&value,v+n,4); return value; };
+            const auto v3=[&](uint32_t n) { return Json::array({f(n),f(n+1),f(n+2)}); };
+            Json receiver={{"pixel",{v[1],v[2]}},{"instance",v[3]},{"triangle",v[4]},
+                {"materialType",v[5]},{"albedoReconstructed",v[6]==1u},
+                {"baseColorLinear",v3(7)},{"normalTrace",v3(10)},{"positionTrace",v3(13)},
+                {"pointRadiance",v3(16)},{"meshRadiance",v3(19)},
+                {"pointDiffuseRadiance",v3(27)},{"pointSpecularRadiance",v3(30)},
+                {"distance",f(22)},
+                {"radius",f(23)},{"attenuation",f(24)},{"visibility",f(25)},{"cosine",f(26)}};
+            if (v[3]<mNaviPendingIdentities.size()) {
+                const auto& id=mNaviPendingIdentities[v[3]];
+                receiver["geometryInstanceId"]=id.instanceId; receiver["assetId"]=id.assetId;
+                receiver["materialId"]=id.materialId; receiver["resource"]=id.resourcePath;
+                receiver["geometryMode"]=id.geometryMode; receiver["ownerId"]=id.ownerId;
+            }
+            if (v[3]<mPrimaryGatePendingMaterialRecords.size()) {
+                const auto& mat=mPrimaryGatePendingMaterialRecords[v[3]];
+                receiver["roughness"]=mat.roughness;receiver["metallic"]=mat.metallic;
+                receiver["specular"]=mat.specular;receiver["alphaMode"]=mat.alphaMode;
+                receiver["materialFlags"]=mat.flags;
+                receiver["combinerLow"]=mat.combineModeLow;receiver["combinerHigh"]=mat.combineModeHigh;
+            }
+            samples.push_back(std::move(receiver));
+        }
+        const char* output=std::getenv("COUCH_DXR_OUTPUT");
+        if (output) {
+            std::ofstream out(std::filesystem::path(output)/"navi.receivers.json", std::ios::binary | std::ios::trunc);
+            if (out) {
+                const std::string text = Json({{"schemaVersion",2},{"frame",mPrimaryGatePendingFrame},
+                    {"dispatchSize",{mPrimaryGatePendingWidth,mPrimaryGatePendingHeight}},
+                    {"viewHash",mPrimaryGatePendingViewHash},{"projectionHash",mPrimaryGatePendingProjectionHash},
+                    {"source","GPU_FIRST_HIT"},{"space","HDR_LINEAR"},{"samples",samples}}).dump(2);
+                out.write(text.data(), text.size());
+                out.put('\n');
+                out.flush();
+                out.close();
+            }
+        }
+        D3D12_RANGE noWrite{0,0};
+        mPrimaryGateReadback->Unmap(0,&noWrite);
+        LogCouchDxrSurface("[COUCH-NAVI-PILOT] GPU_RECEIVERS frame="+std::to_string(mPrimaryGatePendingFrame)+
+            " samples="+std::to_string(samples.size()));
+        mNaviPilotCaptured = true;
+        mNaviPilotPending = false;
+        mPrimaryGateReadbackPending=false;
+        return;
+    }
     uint64_t totals[kPrimaryGateCounterCount] = {};
     for (uint32_t shard = 0; shard < kPrimaryGateCounterShards; ++shard) {
         for (uint32_t counter = 0; counter < kPrimaryGateCounterCount; ++counter) {
@@ -2697,7 +3201,7 @@ void DxrSurfaceRenderer::ResolvePrimaryGateCounters(ID3D12CommandQueue* queue) {
         "index_buffer_bounds", "vertex_buffer_or_triangle_indices", "texture_descriptor",
         "non_finite_record_or_triangle", "material_record_count_metadata_mismatch",
     };
-    uint64_t validationErrorTotal = 0;
+    uint64_t validationErrorTotal = totals[kPrimaryRasterDepthMismatchCounter];
     for (uint32_t i = 0; i < 9; ++i) validationErrorTotal += totals[10 + i];
     bool invariants = (miss + hit == total);
     invariants = invariants && (validationErrorTotal == invalid);
@@ -2730,6 +3234,8 @@ void DxrSurfaceRenderer::ResolvePrimaryGateCounters(ID3D12CommandQueue* queue) {
     LogPrimaryGatePercent("hit", asCount(hit), asCount(total), asCount(hit));
     LogPrimaryGatePercent("idsValid", asCount(ids), asCount(total), asCount(hit));
     LogPrimaryGatePercent("materialValid", asCount(material), asCount(total), asCount(hit));
+    LogPrimaryGatePercent("rasterDepthMismatch", asCount(totals[kPrimaryRasterDepthMismatchCounter]),
+                          asCount(total), asCount(hit));
     LogPrimaryGatePercent("eligible", asCount(eligible), asCount(total), asCount(hit));
     LogPrimaryGatePercent("coverage", asCount(coverage), asCount(total), asCount(hit));
     LogPrimaryGatePercent("surfaceWritten", asCount(surfaceWritten), asCount(total), asCount(hit));
@@ -2922,7 +3428,12 @@ void DxrSurfaceRenderer::OnResize(uint32_t width, uint32_t height) {
     mReflectionColor.Reset();
     mEmissiveMask.Reset();
     mIndirectMask.Reset();
+    mNativePointDirect.Reset();
     mSceneColorCopy.Reset();
+    for (auto& target : mVisualAblationTargets) target.Reset();
+    mVisualAblationRtvs.Reset();
+    mVisualAblationFrame = -1;
+    mVisualAblationCaptured = false;
     mDescriptorHeap.Reset();
     mDescriptorTemplate.Reset();
     for (auto& heap : mDescriptorFrames) heap.Reset();
@@ -2935,6 +3446,7 @@ void DxrSurfaceRenderer::OnResize(uint32_t width, uint32_t height) {
     mReflectionColorTrackedState = static_cast<unsigned>(D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
     mEmissiveTrackedState = static_cast<unsigned>(D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
     mIndirectTrackedState = static_cast<unsigned>(D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
+    mNativePointDirectTrackedState = static_cast<unsigned>(D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
     mPathHistoryValid = false;
     mPathProfileWasActive = false;
 }

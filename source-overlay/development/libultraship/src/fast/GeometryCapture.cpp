@@ -187,8 +187,8 @@ void GeometryCapture::ClearScene() {
 
 void GeometryCapture::RecordLoadedVertex(uint16_t vtxIdx, float objX, float objY, float objZ,
                                          float normX, float normY, float normZ, bool hasNormal,
-                                         float u, float v, uint32_t color,
-                                         uint8_t sourceAlpha, bool fogMode) {
+                                         float u, float v, uint32_t color, uint32_t sourceColor,
+                                         uint8_t sourceAlpha, bool fogMode, const float modelView[4][4]) {
     if (!mEnabled || vtxIdx >= 128) return;
 
     RSPVertexCache& cache = mRspVertices[vtxIdx];
@@ -202,12 +202,26 @@ void GeometryCapture::RecordLoadedVertex(uint16_t vtxIdx, float objX, float objY
     cache.u = u;
     cache.v = v;
     cache.color = color;
+    cache.sourceColor = sourceColor;
     cache.sourceAlpha = sourceAlpha;
     cache.fogMode = fogMode;
+    memcpy(cache.modelView, modelView, sizeof(cache.modelView));
     cache.valid = true;
 }
 
-void GeometryCapture::RecordTriangle(uint16_t idx0, uint16_t idx1, uint16_t idx2) {
+bool GeometryCapture::RequiresFlushForTriangle(uint16_t idx0, uint16_t idx1, uint16_t idx2) const {
+    if (!mEnabled || mPendingIndices.empty() || idx0 >= 128 || idx1 >= 128 || idx2 >= 128) return false;
+    const auto& v0 = mRspVertices[idx0];
+    const auto& v1 = mRspVertices[idx1];
+    const auto& v2 = mRspVertices[idx2];
+    if (!v0.valid || !v1.valid || !v2.valid) return false;
+    const bool mixedTransforms = memcmp(v0.modelView, v1.modelView, sizeof(v0.modelView)) != 0 ||
+                                 memcmp(v0.modelView, v2.modelView, sizeof(v0.modelView)) != 0;
+    return mixedTransforms != mPendingBakedViewSpace ||
+           (!mixedTransforms && memcmp(mPendingTransform, v0.modelView, sizeof(mPendingTransform)) != 0);
+}
+
+void GeometryCapture::RecordTriangle(uint16_t idx0, uint16_t idx1, uint16_t idx2, const float uv[2][3][2]) {
     if (!mEnabled) return;
 
     if (idx0 >= 128 || idx1 >= 128 || idx2 >= 128) return;
@@ -215,29 +229,62 @@ void GeometryCapture::RecordTriangle(uint16_t idx0, uint16_t idx1, uint16_t idx2
     const RSPVertexCache& v1 = mRspVertices[idx1];
     const RSPVertexCache& v2 = mRspVertices[idx2];
     if (!v0.valid || !v1.valid || !v2.valid) return;
+    // A single instance transform cannot represent vertices loaded under
+    // different joint matrices. Bake those triangles into view space; use
+    // an identity instance and derive their normal from the baked positions.
+    const bool mixedTransforms = memcmp(v0.modelView, v1.modelView, sizeof(v0.modelView)) != 0 ||
+                                 memcmp(v0.modelView, v2.modelView, sizeof(v0.modelView)) != 0;
+    if (RequiresFlushForTriangle(idx0, idx1, idx2)) return; // Interpreter must flush both batches first.
+    if (mPendingIndices.empty()) {
+        mPendingBakedViewSpace = mixedTransforms;
+        if (mixedTransforms) {
+            memset(mPendingTransform, 0, sizeof(mPendingTransform));
+            for (int axis = 0; axis < 4; ++axis) mPendingTransform[axis][axis] = 1.0f;
+        } else {
+            memcpy(mPendingTransform, v0.modelView, sizeof(mPendingTransform));
+        }
+    }
 
     uint32_t baseIdx = static_cast<uint32_t>(mPendingVertices.size());
 
     CapturedVertex cv0 = {};
     cv0.posX = v0.objX; cv0.posY = v0.objY; cv0.posZ = v0.objZ;
-    cv0.u = v0.u; cv0.v = v0.v; cv0.color = v0.color;
+    cv0.u = uv[0][0][0]; cv0.v = uv[0][0][1];
+    cv0.u1 = uv[1][0][0]; cv0.v1 = uv[1][0][1]; cv0.color = v0.color; cv0.sourceColor = v0.sourceColor;
     cv0.sourceAlpha = v0.sourceAlpha; cv0.recordLoadedAlpha = static_cast<uint8_t>(v0.color >> 24u);
     cv0.fogMode = v0.fogMode ? 1u : 0u;
 
     CapturedVertex cv1 = {};
     cv1.posX = v1.objX; cv1.posY = v1.objY; cv1.posZ = v1.objZ;
-    cv1.u = v1.u; cv1.v = v1.v; cv1.color = v1.color;
+    cv1.u = uv[0][1][0]; cv1.v = uv[0][1][1];
+    cv1.u1 = uv[1][1][0]; cv1.v1 = uv[1][1][1]; cv1.color = v1.color; cv1.sourceColor = v1.sourceColor;
     cv1.sourceAlpha = v1.sourceAlpha; cv1.recordLoadedAlpha = static_cast<uint8_t>(v1.color >> 24u);
     cv1.fogMode = v1.fogMode ? 1u : 0u;
 
     CapturedVertex cv2 = {};
     cv2.posX = v2.objX; cv2.posY = v2.objY; cv2.posZ = v2.objZ;
-    cv2.u = v2.u; cv2.v = v2.v; cv2.color = v2.color;
+    cv2.u = uv[0][2][0]; cv2.v = uv[0][2][1];
+    cv2.u1 = uv[1][2][0]; cv2.v1 = uv[1][2][1]; cv2.color = v2.color; cv2.sourceColor = v2.sourceColor;
     cv2.sourceAlpha = v2.sourceAlpha; cv2.recordLoadedAlpha = static_cast<uint8_t>(v2.color >> 24u);
     cv2.fogMode = v2.fogMode ? 1u : 0u;
 
+    if (mixedTransforms) {
+        CapturedVertex* captured[3] = { &cv0, &cv1, &cv2 };
+        const RSPVertexCache* loaded[3] = { &v0, &v1, &v2 };
+        for (int vertex = 0; vertex < 3; ++vertex) {
+            const auto& source = *loaded[vertex];
+            const auto& matrix = source.modelView;
+            captured[vertex]->posX = source.objX * matrix[0][0] + source.objY * matrix[1][0] +
+                                     source.objZ * matrix[2][0] + matrix[3][0];
+            captured[vertex]->posY = source.objX * matrix[0][1] + source.objY * matrix[1][1] +
+                                     source.objZ * matrix[2][1] + matrix[3][1];
+            captured[vertex]->posZ = source.objX * matrix[0][2] + source.objY * matrix[1][2] +
+                                     source.objZ * matrix[2][2] + matrix[3][2];
+        }
+    }
+
     // Determinar o derivar normales
-    if (v0.hasNormal && v1.hasNormal && v2.hasNormal) {
+    if (!mixedTransforms && v0.hasNormal && v1.hasNormal && v2.hasNormal) {
         cv0.normX = v0.normX; cv0.normY = v0.normY; cv0.normZ = v0.normZ;
         cv0.normalStatus = NORMAL_SOURCE_AVAILABLE;
 
@@ -275,6 +322,13 @@ void GeometryCapture::RecordTriangle(uint16_t idx0, uint16_t idx1, uint16_t idx2
         mStats.normalDerivedCount += 3;
     }
 
+    // Preserve G_LIGHTING provenance separately from whether the source
+    // normal could be reused. Mixed-transform triangles derive a geometric
+    // normal, but their captured Fast3D vertex RGB is still pre-lit.
+    if (v0.hasNormal) cv0.normalStatus |= NORMAL_FLAG_FAST3D_LIT_COLOR;
+    if (v1.hasNormal) cv1.normalStatus |= NORMAL_FLAG_FAST3D_LIT_COLOR;
+    if (v2.hasNormal) cv2.normalStatus |= NORMAL_FLAG_FAST3D_LIT_COLOR;
+
     mPendingVertices.push_back(cv0);
     mPendingVertices.push_back(cv1);
     mPendingVertices.push_back(cv2);
@@ -293,20 +347,28 @@ uint64_t GeometryCapture::ComputeGeometryHash(uint32_t vtxStart, uint32_t vtxCou
         h = FNV1a64(pos, sizeof(pos), h);
     }
     for (uint32_t i = 0; i < idxCount; ++i) {
-        uint32_t idx = mIndices[idxStart + i];
+        uint32_t idx = mIndices[idxStart + i] - vtxStart;
         h = FNV1a64(&idx, sizeof(idx), h);
     }
     return h;
 }
 
-void GeometryCapture::FlushDraw(const float transform[4][4], uint64_t materialId,
+void GeometryCapture::FlushDraw(uint64_t materialId,
                                const MaterialDefinition& material,
                                uint64_t resourceId, const std::string& resourcePath,
+                               uint32_t textureSrvIndex, uint32_t textureSrvIndex1,
+                               const uint32_t textureTileModes[2],
+                               const uint8_t primitiveColor[4], const uint8_t environmentColor[4],
+                               const uint8_t fogColor[4],
                                uint32_t geometryMode, uint32_t otherModeL, uint32_t otherModeH,
-                               uint64_t combineMode, bool isDepthTest, bool isDecal) {
+                               uint64_t combineMode, bool isDepthTest, bool isDecal,
+                               uint32_t lightOwnerId, uint32_t lightRole) {
     if (!mEnabled || mPendingIndices.empty()) return;
+    const auto& transform = mPendingTransform;
 
     CapturedDraw cd = {};
+    cd.lightOwnerId = lightOwnerId;
+    cd.lightRole = lightRole;
     cd.vertexStart = static_cast<uint32_t>(mVertices.size());
     cd.vertexCount = static_cast<uint32_t>(mPendingVertices.size());
     cd.indexStart = static_cast<uint32_t>(mIndices.size());
@@ -326,6 +388,13 @@ void GeometryCapture::FlushDraw(const float transform[4][4], uint64_t materialId
     cd.material = material;
     cd.resourceId = resourceId;
     cd.resourcePath = resourcePath;
+    cd.textureSrvIndex = textureSrvIndex;
+    cd.textureSrvIndex1 = textureSrvIndex1;
+    cd.textureTileModes[0] = textureTileModes[0];
+    cd.textureTileModes[1] = textureTileModes[1];
+    memcpy(cd.primitiveColor, primitiveColor, sizeof(cd.primitiveColor));
+    memcpy(cd.environmentColor, environmentColor, sizeof(cd.environmentColor));
+    memcpy(cd.fogColor, fogColor, sizeof(cd.fogColor));
     cd.geometryMode = geometryMode;
     cd.otherModeL = otherModeL;
     cd.otherModeH = otherModeH;
@@ -376,7 +445,9 @@ void GeometryCapture::FlushDraw(const float transform[4][4], uint64_t materialId
 
     // Incorporar a los buffers globales
     mVertices.insert(mVertices.end(), mPendingVertices.begin(), mPendingVertices.end());
-    mIndices.insert(mIndices.end(), mPendingIndices.begin(), mPendingIndices.end());
+    // Pending indices are batch-local. The global snapshot must add this
+    // draw's base before PersistentScene converts them back to local indices.
+    for (uint32_t index : mPendingIndices) mIndices.push_back(cd.vertexStart + index);
 
     // Deduplicación e Instancing
     cd.geometryHash = ComputeGeometryHash(cd.vertexStart, cd.vertexCount, cd.indexStart, cd.indexCount);

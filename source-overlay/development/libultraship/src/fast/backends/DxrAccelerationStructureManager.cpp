@@ -2,13 +2,16 @@
 
 #include "fast/backends/DxrAccelerationStructureManager.h"
 #include "fast/Fast3DAlphaPolicy.h"
+#include "fast/GeometryCapture.h"
 #include "fast/VertexAlphaContract.h"
 #include "fast/backends/TemporalManager.h"
 #include "fast/couch_diagnostics.h"
 #include "fast/MaterialRegistry.h"
+#include "fast/lus_gbi.h"
 #include "fast/backends/TemporalManager.h"
 #include <algorithm>
 #include <chrono>
+#include <cmath>
 #include <sstream>
 #include <iomanip>
 #include <fstream>
@@ -174,13 +177,20 @@ bool DxrAccelerationStructureManager::BuildBlasForAsset(ID3D12Device5* device5,
                                                        const GeometryAsset& asset,
                                                        DxrBlasRecord& record,
                                                        uint32_t frameIndex) {
-    if (asset.vertexCount == 0 || asset.indexCount == 0) {
+    if (asset.vertexCount == 0 || asset.indexCount < 3 || asset.indexCount % 3 != 0 ||
+        asset.vertexCount != asset.vertexBuffer.size() || asset.indexCount != asset.indexBuffer.size()) {
         return false;
+    }
+    for (const auto& vertex : asset.vertexBuffer) {
+        if (!std::isfinite(vertex.posX) || !std::isfinite(vertex.posY) || !std::isfinite(vertex.posZ)) return false;
+    }
+    for (uint32_t index : asset.indexBuffer) {
+        if (index >= asset.vertexCount) return false;
     }
 
     auto startT = std::chrono::high_resolution_clock::now();
 
-    record.geometryAssetId = asset.id;
+    record.geometryAssetId = asset.geometryHash; // Shared BLAS key, independent of surface attributes
     record.resourceIdentity = asset.resourceId;
     record.resourcePath = asset.resourcePath;
     record.vertexCount = asset.vertexCount;
@@ -215,10 +225,16 @@ bool DxrAccelerationStructureManager::BuildBlasForAsset(ID3D12Device5* device5,
         hitVertex.normal[2] = v.normZ;
         hitVertex.uv[0] = v.u;
         hitVertex.uv[1] = v.v;
+        hitVertex.uv1[0] = v.u1;
+        hitVertex.uv1[1] = v.v1;
         // Keep the captured/Fast3D raster alpha (including fog) in the asset;
         // only the DXR vertex stream substitutes the original vertex alpha.
         hitVertex.color = PackDxrVertexColor(v.color, v.sourceAlpha);
         hitVertex.normalState = v.normalState;
+        hitVertex.reserved[1] = (v.sourceColor >> 24u) & 0xFFu;
+        hitVertex.reserved[1] |= (v.sourceColor & 0xFFu) << 8u;
+        hitVertex.reserved[1] |= (v.sourceColor & 0xFF00u) << 8u;
+        hitVertex.reserved[1] |= (v.sourceColor & 0xFF0000u) << 8u;
         hitVertices.push_back(hitVertex);
     }
     const size_t vbSize = hitVertices.size() * sizeof(DxrHitVertex);
@@ -420,9 +436,13 @@ bool DxrAccelerationStructureManager::BuildTlas(ID3D12Device5* device5,
     std::vector<uint32_t> surfaceIndices;
     std::vector<DxrInstanceMaterialData> materialRecords;
     static std::unordered_set<std::string> loggedAlphaPolicyStates;
+    static std::unordered_set<std::string> loggedDxrMaterialRecords;
     std::vector<uint32_t> textureSrvIndices;
     std::unordered_map<uint64_t, std::pair<uint32_t, uint32_t>> assetOffsets;
     std::unordered_map<uint32_t, uint32_t> compactTextureIndices;
+    auto& sourceFrame = mSurfaceFrames[frameIndex];
+    sourceFrame.emitters.clear();
+    sourceFrame.identities.clear();
     std::vector<std::string> skyboxCandidateRecords;
     const char* skyboxAuditEnv = std::getenv("COUCH_DXR_SKYBOX_AUDIT");
     const bool skyboxAuditRequested = skyboxAuditEnv && strcmp(skyboxAuditEnv, "1") == 0;
@@ -444,20 +464,38 @@ bool DxrAccelerationStructureManager::BuildTlas(ID3D12Device5* device5,
             continue; // Excluido
         }
 
-        auto it = mBlasCache.find(inst.geometryAssetId);
+        const auto assetIt = assets.find(inst.geometryAssetId);
+        if (assetIt == assets.end()) {
+            ++mStats.danglingBlasReferences;
+            continue;
+        }
+        auto it = mBlasCache.find(assetIt->second.geometryHash);
         if (it == mBlasCache.end() || !it->second.blasBuffer) {
             mStats.danglingBlasReferences++;
             continue;
         }
 
         const auto& blasRec = it->second;
-        const auto assetIt = assets.find(inst.geometryAssetId);
-        if (assetIt == assets.end() || assetIt->second.vertexBuffer.empty() ||
+        if (assetIt->second.vertexBuffer.empty() ||
             assetIt->second.indexBuffer.empty() || instanceDescs.size() >= 0x01000000u) {
             ++mStats.danglingBlasReferences;
             continue;
         }
         const auto& asset = assetIt->second;
+        bool finiteTransform = true;
+        for (int row = 0; row < 4; ++row) {
+            for (int col = 0; col < 4; ++col)
+                finiteTransform = finiteTransform && std::isfinite(inst.worldTransform[row][col]);
+        }
+        const auto& transform = inst.worldTransform;
+        const float determinant =
+            transform[0][0] * (transform[1][1] * transform[2][2] - transform[1][2] * transform[2][1]) -
+            transform[0][1] * (transform[1][0] * transform[2][2] - transform[1][2] * transform[2][0]) +
+            transform[0][2] * (transform[1][0] * transform[2][1] - transform[1][1] * transform[2][0]);
+        if (!finiteTransform || !std::isfinite(determinant) || std::fabs(determinant) <= 1.0e-12f) {
+            ++mStats.danglingBlasReferences;
+            continue;
+        }
 
         auto offsetsIt = assetOffsets.find(asset.id);
         if (offsetsIt == assetOffsets.end()) {
@@ -478,6 +516,8 @@ bool DxrAccelerationStructureManager::BuildTlas(ID3D12Device5* device5,
                 hitVertex.normal[2] = vertex.normZ;
                 hitVertex.uv[0] = vertex.u;
                 hitVertex.uv[1] = vertex.v;
+                hitVertex.uv1[0] = vertex.u1;
+                hitVertex.uv1[1] = vertex.v1;
                 // Raster color.a remains the post-interpreter fog factor under
                 // G_FOG; DXR coverage alpha comes from original F3DVtx.cn[3].
                 hitVertex.color = PackDxrVertexColor(vertex.color, vertex.sourceAlpha);
@@ -487,6 +527,9 @@ bool DxrAccelerationStructureManager::BuildTlas(ID3D12Device5* device5,
                     (static_cast<uint32_t>(vertex.capturedAlpha) << 16u) |
                     (static_cast<uint32_t>(vertex.fogMode) << 24u);
                 hitVertex.reserved[1] = (vertex.color >> 24u) & 0xFFu;
+                hitVertex.reserved[1] |= (vertex.sourceColor & 0xFFu) << 8u;
+                hitVertex.reserved[1] |= (vertex.sourceColor & 0xFF00u) << 8u;
+                hitVertex.reserved[1] |= (vertex.sourceColor & 0xFF0000u) << 8u;
                 surfaceVertices.push_back(hitVertex);
             }
             surfaceIndices.insert(surfaceIndices.end(), asset.indexBuffer.begin(), asset.indexBuffer.end());
@@ -520,18 +563,72 @@ bool DxrAccelerationStructureManager::BuildTlas(ID3D12Device5* device5,
         materialData.normalStrength = material.normalStrength;
         materialData.wetness = material.wetness;
         materialData.subsurfaceHint = material.subsurfaceHint;
-        // Keep the authored height/relief opt-in separate from texture presence.
-        materialData.flags = material.flags & MATERIAL_FLAG_ALBEDO_AS_HEIGHT;
+        // Keep authored shader policies separate from texture presence and
+        // Fast3D alpha-candidate bits. Temple window portals use bit 5 and
+        // the exact mosaic relight opt-in uses bit 6.
+        materialData.flags = material.flags &
+            (MATERIAL_FLAG_ALBEDO_AS_HEIGHT | MATERIAL_FLAG_DXR_WINDOW_PORTAL |
+             MATERIAL_FLAG_DXR_PRIMARY_RELIGHT);
+        const bool allVerticesHaveFast3DLitColor = !asset.vertexBuffer.empty() &&
+            std::all_of(asset.vertexBuffer.begin(), asset.vertexBuffer.end(), [](const LocalVertex& vertex) {
+                return (vertex.normalState & NORMAL_FLAG_FAST3D_LIT_COLOR) != 0u;
+            });
+        if (DxrPrimaryRelightEligible(static_cast<MaterialType>(materialData.materialType), asset.alphaMode,
+                                      (asset.sourceGeometryMode & G_LIGHTING) != 0u,
+                                      allVerticesHaveFast3DLitColor)) {
+            materialData.flags |= MATERIAL_FLAG_DXR_PRIMARY_RELIGHT;
+        }
+        // Static world draws bind scene lighting without an actor position, so
+        // Lights_BindPoint cannot attach Navi's native point to their Fast3D
+        // Shade. Reconstruct that point's albedo from source vertex tint in DXR
+        // while keeping the raster's pre-lit Shade for the existing game image.
+        // The Temple warp-pad top is emitted as an object draw rather than a
+        // room-static draw. Production Navi lighting uses a separate direct
+        // buffer for unlit world receivers, so the isolated receiver probe
+        // could shade this verified opaque/cutout resource while the main
+        // compositor silently skipped it without this exact opt-in.
+        const bool verifiedTriforcePlatformTop =
+            asset.resourcePath == "objects/object_mjin/gWarpPadTopTex";
+        if ((inst.isStatic || verifiedTriforcePlatformTop) && asset.lightOwnerId == 0 &&
+            !unknownMaterial && asset.alphaMode < 2u &&
+            materialData.materialType != static_cast<uint32_t>(MaterialType::EMISSIVE) &&
+            materialData.materialType != static_cast<uint32_t>(MaterialType::WATER) &&
+            materialData.materialType != static_cast<uint32_t>(MaterialType::GLASS) &&
+            materialData.materialType != static_cast<uint32_t>(MaterialType::SKY)) {
+            materialData.flags |= MATERIAL_FLAG_NAVI_POINT_WORLD_RECEIVER;
+        }
         const Fast3DAlphaClass alphaPolicyCandidate =
             ClassifyFast3DAlphaCandidate(asset.sourceOtherModeL, asset.sourceOtherModeH);
         materialData.flags |= static_cast<uint32_t>(alphaPolicyCandidate) << 2u;
+        // Match Z_UPD (0x20) in lus_gbi.h. Transmissive/non-updating draws
+        // legitimately sit in front of the surface stored in raster depth.
+        if ((asset.sourceOtherModeL & 0x20u) != 0u) materialData.flags |= 1u << 4u;
         materialData.baseColor[0] = 1.0f;
         materialData.baseColor[1] = 1.0f;
         materialData.baseColor[2] = 1.0f;
         materialData.baseColor[3] = 1.0f;
+        materialData.textureIndex1 = UINT32_MAX;
+        materialData.samplerFlags = (asset.textureTileModes[0] & 31u) |
+                                    ((asset.textureTileModes[1] & 31u) << 5u) |
+                                    ((asset.lightOwnerId & 0xFFFFu) << 16u);
+        if (asset.lightRole == COUCH_LIGHT_NAVI_GLOW) materialData.flags |= 1u << 8u;
+        materialData.combineModeLow = static_cast<uint32_t>(asset.sourceCombineMode & 0xFFFFFFFFu);
+        materialData.combineModeHigh = static_cast<uint32_t>(asset.sourceCombineMode >> 32u);
+        const auto packColor = [](const uint8_t color[4]) {
+            return static_cast<uint32_t>(color[0]) |
+                   (static_cast<uint32_t>(color[1]) << 8u) |
+                   (static_cast<uint32_t>(color[2]) << 16u) |
+                   (static_cast<uint32_t>(color[3]) << 24u);
+        };
+        materialData.primitiveColor = packColor(asset.primitiveColor);
+        materialData.environmentColor = packColor(asset.environmentColor);
+        materialData.reserved[0] = packColor(asset.fogColor);
+        materialData.reserved[1] = asset.sourceOtherModeH;
 
-        const uint32_t sourceSrvIndex = MaterialRegistry::Instance().GetTextureSrvIndex(asset.resourceId);
-        if (sourceSrvIndex != UINT32_MAX && sourceSrvIndex != 0) {
+        // The same resource hash can name several raster tile/palette variants.
+        // Use the exact descriptor captured with this draw, including cache hits.
+        const auto compactTextureIndex = [&](uint32_t sourceSrvIndex) {
+            if (sourceSrvIndex == UINT32_MAX || sourceSrvIndex == 0) return UINT32_MAX;
             auto textureIt = compactTextureIndices.find(sourceSrvIndex);
             if (textureIt == compactTextureIndices.end() &&
                 textureSrvIndices.size() < kDxrSurfaceTextureDescriptorCount - 1) {
@@ -539,10 +636,15 @@ bool DxrAccelerationStructureManager::BuildTlas(ID3D12Device5* device5,
                 textureSrvIndices.push_back(sourceSrvIndex);
                 textureIt = compactTextureIndices.emplace(sourceSrvIndex, compactIndex).first;
             }
-            if (textureIt != compactTextureIndices.end()) {
-                materialData.textureIndex = textureIt->second;
-                materialData.flags |= MATERIAL_FLAG_ALBEDO_TEXTURE_VALID;
-            }
+            return textureIt == compactTextureIndices.end() ? UINT32_MAX : textureIt->second;
+        };
+        materialData.textureIndex = compactTextureIndex(asset.textureSrvIndex);
+        if (materialData.textureIndex != UINT32_MAX) {
+            materialData.flags |= MATERIAL_FLAG_ALBEDO_TEXTURE_VALID;
+        }
+        materialData.textureIndex1 = compactTextureIndex(asset.textureSrvIndex1);
+        if (materialData.textureIndex1 != UINT32_MAX) {
+            materialData.flags |= MATERIAL_FLAG_SECOND_ALBEDO_TEXTURE_VALID;
         }
 
         D3D12_RAYTRACING_INSTANCE_DESC desc = {};
@@ -571,6 +673,9 @@ bool DxrAccelerationStructureManager::BuildTlas(ID3D12Device5* device5,
         desc.InstanceMask = inst.isStatic ? 0x01 : 0x02;
         desc.InstanceContributionToHitGroupIndex = 0;
         desc.Flags = D3D12_RAYTRACING_INSTANCE_FLAG_NONE;
+        // The owning light's proxy sprite must participate in AnyHit so a
+        // point-visibility ray does not treat its own emitter as a blocker.
+        if (asset.lightOwnerId != 0) desc.Flags = D3D12_RAYTRACING_INSTANCE_FLAG_FORCE_NON_OPAQUE;
         desc.AccelerationStructure = blasRec.blasBuffer->GetGPUVirtualAddress();
 
         if (skyboxAuditRequested && !skyboxAuditLogged) {
@@ -595,11 +700,110 @@ bool DxrAccelerationStructureManager::BuildTlas(ID3D12Device5* device5,
         }
 
         const uint32_t sourceRecordIndex = static_cast<uint32_t>(materialRecords.size());
+        sourceFrame.identities.push_back({ inst.id, asset.id, asset.materialId,
+            asset.sourceGeometryMode, asset.lightOwnerId, asset.lightRole, asset.resourcePath });
+        if (asset.lightOwnerId != 0 && materialData.emissiveStrength > 0.0f &&
+            asset.lightRole == COUCH_LIGHT_NAVI_GLOW) {
+            // Sample the actual captured mesh, with the EXACT affine transform used by TLAS.
+            for (uint32_t tri = 0; tri + 2 < asset.indexBuffer.size(); tri += 3) {
+                DxrEmitterTriangle emitter{};
+                emitter.ownerId = asset.lightOwnerId;
+                emitter.recordIndex = sourceRecordIndex;
+                emitter.primitiveIndex = tri / 3;
+                bool valid = true;
+                for (uint32_t corner = 0; corner < 3; ++corner) {
+                    const uint32_t vi = asset.indexBuffer[tri + corner];
+                    if (vi >= asset.vertexBuffer.size()) { valid = false; break; }
+                    const auto& v = asset.vertexBuffer[vi];
+                    for (uint32_t axis = 0; axis < 3; ++axis)
+                        emitter.position[corner][axis] = v.posX * inst.worldTransform[0][axis] +
+                            v.posY * inst.worldTransform[1][axis] + v.posZ * inst.worldTransform[2][axis] +
+                            inst.worldTransform[3][axis];
+                }
+                if (!valid) continue;
+                float e1[3], e2[3], cross[3];
+                for (int a = 0; a < 3; ++a) {
+                    e1[a] = emitter.position[1][a] - emitter.position[0][a];
+                    e2[a] = emitter.position[2][a] - emitter.position[0][a];
+                }
+                cross[0] = e1[1]*e2[2] - e1[2]*e2[1];
+                cross[1] = e1[2]*e2[0] - e1[0]*e2[2];
+                cross[2] = e1[0]*e2[1] - e1[1]*e2[0];
+                emitter.area = 0.5f * std::sqrt(cross[0]*cross[0]+cross[1]*cross[1]+cross[2]*cross[2]);
+                if (std::isfinite(emitter.area) && emitter.area > 1.0e-6f)
+                    sourceFrame.emitters.push_back(emitter);
+            }
+        }
         const std::string alphaPolicyStateKey = std::to_string(asset.sourceOtherModeL) + ":" +
             std::to_string(asset.sourceOtherModeH) + ":" + std::to_string(asset.sourceCombineMode);
         const bool firstAlphaPolicyState = loggedAlphaPolicyStates.insert(alphaPolicyStateKey).second;
         instanceDescs.push_back(desc);
         materialRecords.push_back(materialData);
+
+        const std::string& sourceMaterialPath = asset.resourcePath.empty()
+            ? blasRec.resourcePath : asset.resourcePath;
+        const bool exactTempleMaterial =
+            sourceMaterialPath.find("tokinoma_sceneTex_011FA0") != std::string::npos ||
+            sourceMaterialPath.find("object_toki_objects_Tex_002DC0") != std::string::npos ||
+            sourceMaterialPath.find("object_toki_objects_Tex_0035C0") != std::string::npos ||
+            sourceMaterialPath.find("object_toki_objects_Tex_003DC0") != std::string::npos ||
+            sourceMaterialPath.find("gFairyWingTex") != std::string::npos;
+        const bool traceMaterialRecord = sourceRecordIndex < 16u || exactTempleMaterial ||
+            (materialData.flags & (MATERIAL_FLAG_DXR_WINDOW_PORTAL |
+                                   MATERIAL_FLAG_DXR_PRIMARY_RELIGHT)) != 0u ||
+            materialData.materialType == static_cast<uint32_t>(MaterialType::EMISSIVE);
+        std::string materialTraceKey = std::to_string(asset.id) + ":" +
+            std::to_string(asset.materialId) + ":" + std::to_string(materialData.materialType) + ":" +
+            std::to_string(materialData.alphaMode) + ":" + std::to_string(materialData.flags) + ":" +
+            std::to_string(asset.sourceCombineMode);
+        if (traceMaterialRecord && loggedDxrMaterialRecords.size() < 128u &&
+            loggedDxrMaterialRecords.insert(materialTraceKey).second) {
+            const uint32_t fast3dLitVertexCount = static_cast<uint32_t>(std::count_if(
+                asset.vertexBuffer.begin(), asset.vertexBuffer.end(), [](const LocalVertex& vertex) {
+                    return (vertex.normalState & NORMAL_FLAG_FAST3D_LIT_COLOR) != 0u;
+                }));
+            std::ostringstream materialLine;
+            materialLine << std::fixed << std::setprecision(4)
+                << "[COUCH-DXR-MATERIAL][SOURCE_RECORD] instanceId=" << inst.id
+                << " dxrInstanceId=" << sourceRecordIndex
+                << " assetId=" << asset.id << " geometryHash=" << asset.geometryHash
+                << " materialId=" << asset.materialId << " resourceId=" << asset.resourceId
+                << " sourcePath=" << (asset.resourcePath.empty() ? "<empty>" : asset.resourcePath)
+                << " blasPath=" << (blasRec.resourcePath.empty() ? "<empty>" : blasRec.resourcePath)
+                << " declaredType=" << static_cast<uint32_t>(material.type)
+                << " effectiveType=" << materialData.materialType
+                << " unknownFallback=" << (unknownMaterial ? 1 : 0)
+                << " alphaMode=" << materialData.alphaMode
+                << " roughness=" << materialData.roughness << " metallic=" << materialData.metallic
+                << " specular=" << materialData.specular << " reflectivity=" << materialData.reflectivity
+                << " emissive=" << materialData.emissiveStrength << " normalStrength=" << materialData.normalStrength
+                << " flags=" << materialData.flags
+                << " G_LIGHTING=" << ((asset.sourceGeometryMode & G_LIGHTING) != 0u ? 1 : 0)
+                << " fast3dLitVertices=" << fast3dLitVertexCount << "/" << asset.vertexBuffer.size()
+                << " geometryMode=0x" << std::hex << asset.sourceGeometryMode
+                << " otherModeL=0x" << asset.sourceOtherModeL << " otherModeH=0x" << asset.sourceOtherModeH
+                << " combineMode=0x" << asset.sourceCombineMode
+                << " textureSrv0=" << std::dec << asset.textureSrvIndex
+                << " textureSrv1=" << asset.textureSrvIndex1
+                << " textureRecord0=" << materialData.textureIndex
+                << " textureRecord1=" << materialData.textureIndex1
+                << " tileModes0=" << asset.textureTileModes[0]
+                << " tileModes1=" << asset.textureTileModes[1]
+                << " primitiveRGBA=" << static_cast<uint32_t>(asset.primitiveColor[0]) << ","
+                << static_cast<uint32_t>(asset.primitiveColor[1]) << ","
+                << static_cast<uint32_t>(asset.primitiveColor[2]) << ","
+                << static_cast<uint32_t>(asset.primitiveColor[3])
+                << " environmentRGBA=" << static_cast<uint32_t>(asset.environmentColor[0]) << ","
+                << static_cast<uint32_t>(asset.environmentColor[1]) << ","
+                << static_cast<uint32_t>(asset.environmentColor[2]) << ","
+                << static_cast<uint32_t>(asset.environmentColor[3])
+                << " fogRGBA=" << static_cast<uint32_t>(asset.fogColor[0]) << ","
+                << static_cast<uint32_t>(asset.fogColor[1]) << ","
+                << static_cast<uint32_t>(asset.fogColor[2]) << ","
+                << static_cast<uint32_t>(asset.fogColor[3])
+                << " vertexCount=" << asset.vertexCount << " indexCount=" << asset.indexCount;
+            LogDxr(materialLine.str());
+        }
 
         if (firstAlphaPolicyState &&
             (sourceRecordIndex < 9u || (sourceRecordIndex >= 54u && sourceRecordIndex <= 57u))) {
@@ -745,33 +949,21 @@ bool DxrAccelerationStructureManager::BuildTlas(ID3D12Device5* device5,
             tlasSignature *= 1099511628211ULL;
         }
     };
-    size_t descIndex = 0;
-    for (const auto& inst : instances) {
-        if (!inst.isStatic && !inst.isDynamic) {
-            continue;
-        }
-        auto instanceRecordIt = mBlasCache.find(inst.geometryAssetId);
-        if (instanceRecordIt == mBlasCache.end() || !instanceRecordIt->second.blasBuffer ||
-            descIndex >= instanceDescs.size()) {
-            continue;
-        }
-        const uint32_t materialRecordIndex = static_cast<uint32_t>(descIndex);
-        const auto& desc = instanceDescs[descIndex++];
-        auto recordIt = mBlasCache.find(inst.geometryAssetId);
-        const D3D12_GPU_VIRTUAL_ADDRESS blasAddress =
-            recordIt != mBlasCache.end() && recordIt->second.blasBuffer
-                ? recordIt->second.blasBuffer->GetGPUVirtualAddress()
-                : 0;
-        const uint8_t classification = static_cast<uint8_t>((inst.isStatic ? 1 : 0) |
-                                                             (inst.isDynamic ? 2 : 0));
-        const uint32_t materialType = materialRecords[materialRecordIndex].materialType;
+    // Hash the emitted descriptors in their actual InstanceID order. Walking
+    // the source list again can drift when a later validation skipped a draw.
+    const uint32_t emittedInstanceCount = static_cast<uint32_t>(instanceDescs.size());
+    mixSignature(&emittedInstanceCount, sizeof(emittedInstanceCount));
+    for (const auto& desc : instanceDescs) {
+        const uint32_t instanceId = desc.InstanceID;
+        const uint32_t hitGroup = desc.InstanceContributionToHitGroupIndex;
+        const uint8_t instanceFlags = static_cast<uint8_t>(desc.Flags);
         const uint8_t instanceMask = static_cast<uint8_t>(desc.InstanceMask);
-        mixSignature(&inst.geometryAssetId, sizeof(inst.geometryAssetId));
-        mixSignature(&classification, sizeof(classification));
-        mixSignature(&materialType, sizeof(materialType));
+        mixSignature(&instanceId, sizeof(instanceId));
+        mixSignature(&hitGroup, sizeof(hitGroup));
+        mixSignature(&instanceFlags, sizeof(instanceFlags));
         mixSignature(desc.Transform, sizeof(desc.Transform));
         mixSignature(&instanceMask, sizeof(instanceMask));
-        mixSignature(&blasAddress, sizeof(blasAddress));
+        mixSignature(&desc.AccelerationStructure, sizeof(desc.AccelerationStructure));
     }
 
     if (mTlasValid && mTlasBuffer && mInstanceDescBuffer &&
@@ -1013,11 +1205,14 @@ void DxrAccelerationStructureManager::ProcessFrame(ID3D12Device* device,
         // Keep the UI exclusion as a hard gate: only geometry eligible for a
         // DXR instance can make an asset active or trigger a BLAS build.
         if (inst.isStatic || inst.isDynamic) {
-            activeAssetIds.insert(inst.geometryAssetId);
+            const auto asset = assets.find(inst.geometryAssetId);
+            if (asset != assets.end()) activeAssetIds.insert(asset->second.geometryHash);
         }
     }
 
     if (assets.empty() && instances.empty()) {
+        mTlasValid = false;
+        mStats.tlasInstanceCount = 0;
         EvictStaleBlas(activeAssetIds, mFrameIndexCounter);
         return;
     }
@@ -1026,22 +1221,22 @@ void DxrAccelerationStructureManager::ProcessFrame(ID3D12Device* device,
     uint32_t blasBuiltThisFrame = 0;
     for (const auto& kv : assets) {
         const auto& asset = kv.second;
-        auto it = mBlasCache.find(asset.id);
+        auto it = mBlasCache.find(asset.geometryHash);
         if (it == mBlasCache.end()) {
             // PersistentScene conserva un inventario histórico de assets. No
             // materializar BLAS para entradas sin instancia activa evita que
             // una evicción válida se convierta en un ciclo rebuild/evict.
-            if (activeAssetIds.find(asset.id) == activeAssetIds.end()) {
+            if (activeAssetIds.find(asset.geometryHash) == activeAssetIds.end()) {
                 continue;
             }
             DxrBlasRecord record = {};
             if (BuildBlasForAsset(mDevice5.Get(), cmdList4.Get(), asset, record, frameIndex)) {
-                mBlasCache[asset.id] = std::move(record);
+                mBlasCache[asset.geometryHash] = std::move(record);
                 mStats.blasCreated++;
                 blasBuiltThisFrame++;
             }
         } else {
-            if (activeAssetIds.find(asset.id) != activeAssetIds.end()) {
+            if (activeAssetIds.find(asset.geometryHash) != activeAssetIds.end()) {
                 it->second.lastUsedFrame = mFrameIndexCounter;
             }
             mStats.blasReused++;

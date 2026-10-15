@@ -9,6 +9,7 @@
 #include <limits>
 #include <cmath>
 #include <cstdlib>
+#include <cstring>
 #include <filesystem>
 #include <nlohmann/json.hpp>
 
@@ -57,11 +58,7 @@ void MaterialRegistry::ResetMetrics() {
 }
 
 uint64_t MaterialRegistry::MakeKey(const DrawCallInfo& info) const {
-    uint64_t key = info.combineMode;
-    key ^= (uint64_t(info.geometryMode) << 32);
-    key ^= (uint64_t(info.otherModeL) << 16);
-    key ^= (uint64_t(info.textureHash) << 48);
-    return key;
+    return Fast3DMaterialStateKey(info);
 }
 
 MaterialType MaterialRegistry::ClassifyFromState(const DrawCallInfo& info) const {
@@ -111,23 +108,9 @@ MaterialType MaterialRegistry::ClassifyFromState(const DrawCallInfo& info) const
     if (has({"skin", "face", "hand", "body_skin", "hada"})) return MaterialType::CHARACTER;
 
     // 2. Fast3D render-state heuristics for anonymous scene/room textures (e.g., spot04_room_0Tex_...)
-    const bool isTranslucent = ((info.otherModeL & 0x00000C00) != 0) || (info.primA < 250) || (info.envA < 250);
-    const bool isBlueTint = (info.primB > info.primR + 20 && info.primB > info.primG) ||
-                            (info.envB > info.envR + 20 && info.envB > info.envG);
-    if (isTranslucent && isBlueTint) {
-        return MaterialType::WATER;
-    }
-
-    const bool isRedFireTint = ((info.primR > 180 && info.primG < 140 && info.primB < 60) ||
-                                (info.envR > 180 && info.envG < 140 && info.envB < 60));
-    if (isRedFireTint) {
-        return isTranslucent ? MaterialType::LAVA : MaterialType::EMISSIVE;
-    }
-
-    // Additive blending for fairy / magic glows
-    if ((info.otherModeL & 0x00000300) == 0x00000200 && isTranslucent) {
-        return MaterialType::MAGIC;
-    }
+    // Tint and blend state alone do not prove water, lava, magic, or emission.
+    // Those guesses turned ordinary colored geometry into false ray blockers,
+    // reflectors, and light sources. Use semantic resources or explicit rules.
 
     // Wooden bridges/walkways: warm brown tone
     if (info.primR > info.primB + 35 && info.primG > info.primB + 10 && info.primR < 210 && info.primG < 180) {
@@ -164,6 +147,23 @@ MaterialDefinition MaterialRegistry::GetMaterial(uint64_t key) const {
         return cacheIt->second;
     }
     return MaterialDefinition{};
+}
+
+MaterialDefinition MaterialRegistry::GetMaterialForDraw(const DrawCallInfo& info) const {
+    std::lock_guard<std::mutex> lock(mMutex);
+    const auto it = mMaterials.find(MakeKey(info));
+    if (it != mMaterials.end()) return it->second;
+    MaterialDefinition fallback;
+    fallback.type = MaterialType::GENERIC_MATTE;
+    fallback.roughness = 0.95f;
+    fallback.specular = 0.04f;
+    fallback.reflectivity = 0.01f;
+    fallback.normalStrength = 0.02f;
+    return fallback;
+}
+
+uint64_t MaterialRegistry::GetMaterialIdForDraw(const DrawCallInfo& info) const {
+    return MakeKey(info);
 }
 
 MaterialDefinition MaterialRegistry::GetMaterialForTexture(uint64_t textureHash) const {
@@ -220,22 +220,27 @@ void MaterialRegistry::RecordDrawCall(const DrawCallInfo& info) {
     mat.type = ClassifyFromState(info);
     const auto authoredRule = mAuthoredOverrides.find(info.resourcePath);
     const auto pilotRule = mStringRules.find(info.resourcePath);
+    const bool forcePilotType = pilotRule != mStringRules.end() &&
+                                (pilotRule->second.flags & MATERIAL_FLAG_EXACT_PILOT_TYPE) != 0;
     bool authoredMaterialApplied = false;
     bool pilotMaterialApplied = false;
     // Explicit user-authored entries override heuristic classification.
-    // Pilot entries remain advisory and must agree with semantic classification.
+    // Pilot entries remain advisory except for their explicit, source-verified
+    // exact-type opt-ins; protected UI is never reclassified by a pilot rule.
     if (authoredRule != mAuthoredOverrides.end() && authoredRule->second.type != MaterialType::PROTECTED_2D) {
         mat = authoredRule->second;
         authoredMaterialApplied = true;
         mRulesActivated++;
     } else if (pilotRule != mStringRules.end() &&
-               (mat.type == MaterialType::UNKNOWN || mat.type == MaterialType::CLASSIC ||
-                pilotRule->second.type == mat.type)) {
+               mat.type != MaterialType::PROTECTED_2D &&
+               (forcePilotType || mat.type == MaterialType::UNKNOWN || mat.type == MaterialType::CLASSIC ||
+                mat.type == MaterialType::GENERIC_MATTE || pilotRule->second.type == mat.type)) {
         // Exact resource rules carry stronger provenance than a generic
-        // render-state fallback. Let them resolve unknown assets; when the
-        // draw state already has a semantic category, require agreement so a
-        // path typo or stale rule cannot silently override the live state.
+        // render-state fallback. Only explicitly source-verified Temple assets
+        // may override a conflicting semantic hint; other pilot rules still
+        // require agreement with the live draw classification.
         mat = pilotRule->second;
+        mat.flags &= ~MATERIAL_FLAG_EXACT_PILOT_TYPE;
         pilotMaterialApplied = true;
         mRulesActivated++;
     }
@@ -244,9 +249,9 @@ void MaterialRegistry::RecordDrawCall(const DrawCallInfo& info) {
     }
     if (pilotMaterialApplied) {
         // Static pilot entries define roughness, metalness, specular response,
-        // and emission. They intentionally inherit only the category's
-        // reflectivity; replacing the whole material here used to erase the
-        // per-resource values from nearly every rule.
+        // emission, and optionally an exact reflectivity. A zero reflectivity
+        // inherits the category default; replacing the whole material here
+        // used to erase the per-resource values from nearly every rule.
         if (mat.reflectivity == 0.0f) {
             switch (mat.type) {
                 case MaterialType::STONE: mat.reflectivity = 0.04f; break;
@@ -487,14 +492,46 @@ void MaterialRegistry::SetProfile(int profile) {
     }
 }
 
-void MaterialRegistry::BeginLightingFrame() {
+void MaterialRegistry::BeginNativeSceneLightingCapture(uint64_t gameFrame, const float ambientColor[3]) {
     std::lock_guard<std::mutex> lock(mMutex);
+    mCurrentGameFrame = gameFrame;
+    mSceneLighting = SceneLightingSnapshot{};
+    std::fill(mSceneLighting.worldDirection, mSceneLighting.worldDirection + 3, 0.0f);
+    std::fill(mSceneLighting.directionalColor, mSceneLighting.directionalColor + 3, 0.0f);
+    std::fill(mSceneLighting.secondaryWorldDirection, mSceneLighting.secondaryWorldDirection + 3, 0.0f);
+    std::fill(mSceneLighting.secondaryDirectionalColor, mSceneLighting.secondaryDirectionalColor + 3, 0.0f);
+    mSceneLighting.directionalLightCount = 0;
+    mSceneLighting.pointLightCount = 0;
+    mSceneLighting.capturedFromScene = true;
+    mSceneLighting.productiveGameFrame = gameFrame;
+    if (ambientColor) {
+        std::copy(ambientColor, ambientColor + 3, mSceneLighting.ambientColor);
+    }
     mSceneLightingCapturedThisFrame = false;
-    mSceneAmbientCapturedThisFrame = false;
+    mSceneAmbientCapturedThisFrame = ambientColor != nullptr;
     mSceneDirectionalCapturedThisFrame = false;
     mSceneSecondaryDirectionalCapturedThisFrame = false;
-    mSceneLighting = SceneLightingSnapshot{};
+}
+
+void MaterialRegistry::BeginLightingFrame() {
+    std::lock_guard<std::mutex> lock(mMutex);
+    // Native lighting is captured while the game builds this frame's command
+    // list, before the renderer begins executing it. Reset only interpreter
+    // observations here; resetting the whole snapshot discarded the original
+    // point positions and directions before DXR could consume them.
+    mSceneLighting.gameProbeWorldDirection[0] = 0.0f;
+    mSceneLighting.gameProbeWorldDirection[1] = 0.0f;
+    mSceneLighting.gameProbeWorldDirection[2] = 0.0f;
+    std::fill(mSceneLighting.gameProbeColor, mSceneLighting.gameProbeColor + 3, 0.0f);
+    mSceneLighting.gameProbeRawLength = 0.0f;
+    mSceneLighting.gameProbeLuminance = 0.0f;
+    mSceneLighting.gameProbeDirectionalCount = 0;
+    mSceneLighting.gameProbePointFlushMax = 0;
+    mSceneLighting.gameProbeValid = false;
     mSceneLighting.renderFrame = ++mLightingRenderFrame;
+    if (mSceneLighting.capturedFromScene) {
+        mSceneLighting.productiveRenderFrame = mSceneLighting.renderFrame;
+    }
 }
 
 void MaterialRegistry::SetCurrentGameFrame(uint64_t gameFrame) {
@@ -699,6 +736,92 @@ void MaterialRegistry::NoteGamePointProbe(uint32_t perFlushPointCount) {
         mSceneLighting.gameProbePointFlushMax = perFlushPointCount;
 }
 
+namespace {
+std::mutex nativeOwnerMutex;
+std::unordered_map<const void*, Fast::NativeLightRecord> nativeOwners;
+std::unordered_map<const void*, uint32_t> nativeActorIds;
+uint32_t nextNativeOwnerId = 1;
+}
+
+extern "C" uint32_t CouchRegisterLightOwner(const void* light, const void* owner, int actorId, int params, int role) {
+    std::lock_guard<std::mutex> lock(nativeOwnerMutex);
+    auto it = nativeActorIds.find(owner);
+    if (it == nativeActorIds.end()) it = nativeActorIds.emplace(owner, nextNativeOwnerId++).first;
+    // Owner is packed in the upper 16 sampler bits on GPU. Never alias it.
+    if (it->second >= 65536u) return 0;
+    Fast::NativeLightRecord record;
+    record.ownerId = it->second;
+    record.sourceId = (uint64_t(record.ownerId) << 8u) | uint32_t(role);
+    record.actorId = actorId; record.actorParams = params; record.role = role;
+    nativeOwners[light] = record;
+    return record.ownerId;
+}
+extern "C" uint32_t CouchGetLightOwnerId(const void* light) {
+    std::lock_guard<std::mutex> lock(nativeOwnerMutex);
+    const auto it = nativeOwners.find(light);
+    return it == nativeOwners.end() ? 0 : it->second.ownerId;
+}
+extern "C" void CouchForgetNativeLight(const void* light) {
+    std::lock_guard<std::mutex> lock(nativeOwnerMutex);
+    nativeOwners.erase(light);
+    // Actor addresses may be reused. Remove owners that have no live lights.
+    for (auto actor = nativeActorIds.begin(); actor != nativeActorIds.end();) {
+        const bool alive = std::any_of(nativeOwners.begin(), nativeOwners.end(), [&](const auto& entry) {
+            return entry.second.ownerId == actor->second;
+        });
+        if (!alive) actor = nativeActorIds.erase(actor); else ++actor;
+    }
+}
+extern "C" int CouchNaviPilotActive(void) {
+    static const bool active = [] {
+        const char* harness = std::getenv("COUCH_DXR_HARNESS");
+        const char* pilot = std::getenv("COUCH_DXR_NAVI_PILOT");
+        return harness && pilot && std::strcmp(harness, "1") == 0 && std::strcmp(pilot, "1") == 0;
+    }();
+    return active ? 1 : 0;
+}
+void MaterialRegistry::CaptureIdentifiedNativePoint(const NativeLightRecord& record) {
+    std::lock_guard<std::mutex> lock(mMutex);
+    for (uint32_t i = 0; i < mSceneLighting.nativeLightCount; ++i)
+        if (mSceneLighting.nativeLights[i].sourceId == record.sourceId) return;
+    if (mSceneLighting.nativeLightCount < 64) mSceneLighting.nativeLights[mSceneLighting.nativeLightCount++] = record;
+    if (!record.enabled || mSceneLighting.pointLightCount >= 32) return;
+    const uint32_t index = mSceneLighting.pointLightCount++;
+    std::copy(record.position, record.position + 3, mSceneLighting.pointPosition[index]);
+    mSceneLighting.pointPosition[index][3] = std::fabs(record.rawRadius);
+    mSceneLighting.pointOptics[index][0] = float(record.ownerId * 8u + uint32_t(record.role));
+    std::copy(record.color, record.color + 3, mSceneLighting.pointOptics[index] + 1);
+    mSceneLighting.pointSourceIds[index] = record.sourceId;
+    mSceneLighting.capturedFromScene = true;
+}
+extern "C" void CouchCaptureIdentifiedNativeLight(const void* light, int type, float x, float y, float z,
+    uint32_t gameFrame, float red, float green, float blue, float radius) {
+    if (type == 1) {
+        const float direction[3] = {x,y,z}, color[3] = {red/255,green/255,blue/255};
+        MaterialRegistry::Instance().SetCurrentGameFrame(gameFrame);
+        MaterialRegistry::Instance().CaptureSceneLighting(direction,color,nullptr,nullptr,nullptr,0,true);
+        return;
+    }
+    if (type != 0 && type != 2) return;
+    NativeLightRecord record;
+    {
+        std::lock_guard<std::mutex> lock(nativeOwnerMutex);
+        auto it = nativeOwners.find(light);
+        if (it == nativeOwners.end()) {
+            record.sourceId = uint64_t(nextNativeOwnerId++) << 8u;
+            it = nativeOwners.emplace(light, record).first;
+        }
+        record = it->second;
+    }
+    record.type = type; record.rawRadius = radius;
+    record.position[0]=x; record.position[1]=y; record.position[2]=z;
+    record.color[0]=red/255; record.color[1]=green/255; record.color[2]=blue/255;
+    record.enabled = NativePointEnabled(record.role,radius) && std::isfinite(x) && std::isfinite(y) &&
+        std::isfinite(z) && std::isfinite(red) && std::isfinite(green) && std::isfinite(blue) &&
+        (red>0 || green>0 || blue>0);
+    MaterialRegistry::Instance().CaptureIdentifiedNativePoint(record);
+}
+
 extern "C" void CouchCaptureNativeLight(int type, float x, float y, float z, uint32_t gameFrame,
                                           float red, float green, float blue, float radius) {
     MaterialRegistry::Instance().SetCurrentGameFrame(gameFrame);
@@ -711,8 +834,8 @@ extern "C" void CouchCaptureNativeLight(int type, float x, float y, float z, uin
     }
     if (type != 0 && type != 2) return;
 
-    const float effectiveRadius = std::fabs(radius);
-    if (!std::isfinite(effectiveRadius) || effectiveRadius <= 0.0f) return;
+    if (!std::isfinite(radius) || radius <= 0.0f) return;
+    const float effectiveRadius = radius;
     const float noDirection[3] = {};
     const float noColor[3] = {};
     float pointPosition[32][4] = {};
@@ -726,6 +849,13 @@ extern "C" void CouchCaptureNativeLight(int type, float x, float y, float z, uin
     pointOptics[0][3] = color[2];
     MaterialRegistry::Instance().CaptureSceneLighting(
         noDirection, noColor, nullptr, pointPosition, pointOptics, 1, false);
+}
+
+extern "C" void CouchBeginNativeLightCapture(uint32_t gameFrame, float ambientRed,
+                                               float ambientGreen, float ambientBlue) {
+    const float ambientColor[3] = { ambientRed / 255.0f, ambientGreen / 255.0f,
+                                    ambientBlue / 255.0f };
+    MaterialRegistry::Instance().BeginNativeSceneLightingCapture(gameFrame, ambientColor);
 }
 
 void MaterialRegistry::LoadRegistry(const std::string& path) {

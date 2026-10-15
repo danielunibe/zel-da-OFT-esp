@@ -535,8 +535,15 @@ GfxRenderingAPIDX12::GetPixelDepth(int id,const std::set<std::pair<float,float>>
     }
     return result;
 }
+void GfxRenderingAPIDX12::SetScenePostprocessParameters(float fogR, float fogG, float fogB, float fogStrength,
+                                                       float fogStart, float fogRange) {
+    mFramebufferFog[0]=fogR; mFramebufferFog[1]=fogG; mFramebufferFog[2]=fogB;
+    mFramebufferFog[3]=std::clamp(fogStrength,0.0f,1.0f);
+    mFramebufferFog[4]=fogStart; mFramebufferFog[5]=fogRange;
+}
+
 void GfxRenderingAPIDX12::RunTonemappingPass(float fogR,float fogG,float fogB,float fogStrength,float fogStart,float fogRange) {
-    if (!mCommandListOpen || !MaterialRegistry::IsEnhancedVisualProfile()) return;
+    if (!mCommandListOpen || (!MaterialRegistry::IsEnhancedVisualProfile() && !mHdrSceneActive)) return;
     const auto consoleVariables = Ship::Context::GetInstance()->GetConsoleVariables();
     const bool tonemappingEnabled = !consoleVariables ||
         consoleVariables->GetInteger("gEnhancements.Graphics.DXR.Tonemapping",1) != 0;
@@ -548,9 +555,7 @@ void GfxRenderingAPIDX12::RunTonemappingPass(float fogR,float fogG,float fogB,fl
     const DXGI_FORMAT rasterSourceFormat = FramebufferColor(target)
         ? FramebufferColor(target)->GetDesc().Format : DXGI_FORMAT_UNKNOWN;
     mFramebufferFogDepthId=target;
-    mFramebufferFog[0]=fogR; mFramebufferFog[1]=fogG; mFramebufferFog[2]=fogB;
-    mFramebufferFog[3]=std::clamp(fogStrength,0.0f,1.0f);
-    mFramebufferFog[4]=fogStart; mFramebufferFog[5]=fogRange;
+    SetScenePostprocessParameters(fogR, fogG, fogB, fogStrength, fogStart, fogRange);
     const uint32_t width=FramebufferWidth(target),height=FramebufferHeight(target);
     if (mPostprocessFramebuffer<0) mPostprocessFramebuffer=CreateFramebuffer();
     UpdateFramebufferParameters(mPostprocessFramebuffer,width,height,1,false,true,false,false);
@@ -572,6 +577,10 @@ void GfxRenderingAPIDX12::RunTonemappingPass(float fogR,float fogG,float fogB,fl
         mFramebufferTonemap=true;
         CopyFramebuffer(target,mPostprocessFramebuffer,0,0,width,height,0,0,width,height);
         mFramebufferTonemap=false;
+        // The game rendered into an SDR offscreen framebuffer. ImGui will
+        // sample that resolved texture into the SDR swapchain; the unused
+        // default HDR target must not remain selected or be resolved later.
+        if (target != 0) mHdrSceneActive=false;
     }
     MaterialRegistry::IncrTonemapPass();
     if (hdrSceneWasActive) {
@@ -612,7 +621,9 @@ void GfxRenderingAPIDX12::RunTonemappingPass(float fogR,float fogG,float fogB,fl
                        << " srgbEncodeCount=0 srgbDecodeCount=0 acesCount=1 exposureCount=0 tonemapCount=1"
                        << " manualSRGBEncode=0 srgbRTVEncode=0 hdrLinearUntilTonemap="
                        << (rasterSourceFormat == DXGI_FORMAT_R16G16B16A16_FLOAT ? 1 : 0)
-                       << " outputTransfer=GAMMA22_APPROX";
+                       << " outputTransfer=GAMMA22_APPROX"
+                       << " colorCounterScope=POSTPROCESS_PASS"
+                       << " colorEvidence=SHADER_CONTRACT_ONLY hdrPixelEncodingMeasured=0";
                 CouchColorLog(record.str());
             }
         }

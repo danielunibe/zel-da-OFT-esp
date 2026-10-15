@@ -3,13 +3,22 @@ param(
     [string]$RunScenario = $env:COUCH_DXR_SCENARIO,
     [string]$TruthMode = $env:COUCH_DXR_MODE,
     [string]$Executable,
+    [string]$RuntimeDirectory,
+    [switch]$Background,
+    [switch]$PrimaryGateCounters,
+    [switch]$TraceDxrMatrices,
     [switch]$EnableD3D12DebugLayer,
+    [switch]$VisualAblation,
+    [switch]$MonitorCapture,
+    [ValidateRange(0, 3)][int]$RtxQuality = 3,
     [int]$PollSeconds = 60,
     [string]$RendererBackend = 'D3D12',
     [int]$VisualProfile = 2
 )
 
 $ErrorActionPreference = 'Stop'
+. (Join-Path $PSScriptRoot 'file-hash.ps1')
+if ($Background -and $MonitorCapture) { throw 'MonitorCapture requires a visible acceptance run.' }
 
 function Stop-WithCode([string]$Code, [string]$Message, [int]$ExitCode) {
     [Console]::Error.WriteLine("$Code : $Message")
@@ -93,9 +102,15 @@ function Stop-ForGpuCapacity([string]$Code, [string]$Message, $GpuLoad) {
 
 if ([string]::IsNullOrWhiteSpace($RunScenario)) { $RunScenario = 'BASELINE_KOKIRI' }
 if ([string]::IsNullOrWhiteSpace($TruthMode)) { $TruthMode = 'NORMAL' }
+if ($VisualAblation -and ($TruthMode -ne 'NORMAL' -or $VisualProfile -ne 2)) {
+    Stop-WithCode 'HARNESS_UNSUPPORTED_ABLATION_CONFIGURATION' 'VisualAblation requires NORMAL mode and HYBRID_RT profile 2.' 22
+}
 
 $validModes = @('NORMAL', 'HIT_MISS', 'WORLD_NORMAL', 'HIT_DISTANCE', 'INSTANCE_IDS', 'SYNTHETIC_LAMBERT', 'GAME_LIGHT_LAMBERT')
 if ($TruthMode -notin $validModes) { Stop-WithCode 'HARNESS_UNKNOWN_TRUTH_MODE' "Unsupported TRUTH_MODE '$TruthMode'." 22 }
+if ($PrimaryGateCounters -and $TruthMode -ne 'NORMAL') {
+    Stop-WithCode 'HARNESS_GATE_REQUIRES_NORMAL_MODE' 'Gate diagnostics bypass AnyHit alpha and cannot be combined with a Truth measurement.' 22
+}
 
 $validRendererBackends = @('D3D12', 'D3D11')
 if ($RendererBackend -cnotin $validRendererBackends) {
@@ -115,6 +130,9 @@ $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
 $workspaceRoot = Split-Path -Parent (Split-Path -Parent $repoRoot)
 $manifestPath = Join-Path $PSScriptRoot 'scenarios\scenarios.v1.json'
 $runtimeRoot = Join-Path $workspaceRoot 'runtime\build-test'
+if (-not [string]::IsNullOrWhiteSpace($RuntimeDirectory)) {
+    $runtimeRoot = [System.IO.Path]::GetFullPath($RuntimeDirectory)
+}
 $defaultExe = Join-Path $repoRoot 'x64\Release\soh.exe'
 if ([string]::IsNullOrWhiteSpace($Executable)) { $Executable = $defaultExe }
 $Executable = (Resolve-Path -LiteralPath $Executable -ErrorAction SilentlyContinue).Path
@@ -127,6 +145,13 @@ if ($manifest.schemaVersion -ne 1) { Stop-WithCode 'HARNESS_MANIFEST_VERSION_UNS
 $scenario = @($manifest.scenarios | Where-Object { $_.id -ceq $RunScenario }) | Select-Object -First 1
 if ($null -eq $scenario) { Stop-WithCode 'HARNESS_SCENARIO_NOT_FOUND' "Scenario '$RunScenario' is absent." 27 }
 if ($scenario.status -cne 'MAPPED') { Stop-WithCode 'HARNESS_SCENARIO_UNMAPPED' "Scenario '$RunScenario' has no verified mapping." 28 }
+if ($null -ne $scenario.lightingContract -and [bool]$scenario.lightingContract.requiredComparison.sameFrame) {
+    if ($TruthMode -ne 'NORMAL' -or $VisualProfile -ne 2) {
+        Stop-WithCode 'HARNESS_LIGHTING_CONTRACT_REQUIRES_NORMAL_HYBRID' `
+            'This lighting contract needs the HYBRID_RT NORMAL capture so the off/on pair shares one scene frame.' 22
+    }
+    $VisualAblation = $true
+}
 $diagnostic = @($manifest.diagnosticModes | Where-Object { $_.id -ceq $TruthMode }) | Select-Object -First 1
 if ($null -eq $diagnostic) { Stop-WithCode 'HARNESS_UNKNOWN_TRUTH_MODE' "Mode '$TruthMode' is not declared in schema v1." 29 }
 if ($scenario.entrance -lt 0 -or $scenario.entrance -gt 65535 -or $scenario.expectedScene -lt 0 -or
@@ -140,15 +165,20 @@ $mapping = @($manifest.verifiedMappings | Where-Object {
 if ($null -eq $mapping) { Stop-WithCode 'HARNESS_INVALID_ENTRANCE' 'Entrance/scene/room tuple is not verified in the manifest.' 30 }
 
 $assetNames = @('es.o2r', 'oot.o2r', 'soh.o2r')
+$executableIdentity = [ordered]@{
+    path = $Executable
+    sizeBytes = (Get-Item -LiteralPath $Executable).Length
+    sha256 = (Get-HarnessFileHash -LiteralPath $Executable -Algorithm SHA256).Hash
+}
 $assetHashes = @{}
 foreach ($assetName in $assetNames) {
     $assetPath = Join-Path $runtimeRoot $assetName
     if (-not (Test-Path -LiteralPath $assetPath -PathType Leaf)) { Stop-WithCode 'HARNESS_OTR_NOT_FOUND' $assetPath 31 }
-    $assetHashes[$assetName] = (Get-FileHash -LiteralPath $assetPath -Algorithm SHA256).Hash
+    $assetHashes[$assetName] = (Get-HarnessFileHash -LiteralPath $assetPath -Algorithm SHA256).Hash
 }
 $allO2rBefore = @{}
 foreach ($assetFile in Get-ChildItem -LiteralPath $runtimeRoot -Filter '*.o2r' -File) {
-    $allO2rBefore[$assetFile.Name] = (Get-FileHash -LiteralPath $assetFile.FullName -Algorithm SHA256).Hash
+    $allO2rBefore[$assetFile.Name] = (Get-HarnessFileHash -LiteralPath $assetFile.FullName -Algorithm SHA256).Hash
 }
 
 $gpuLoad = Get-NvidiaGpuLoad
@@ -179,7 +209,7 @@ if ([string]::Equals($originalSaveCanonical, $sandboxSaveCanonical, [System.Stri
 
 $originalHashesBefore = @{}
 foreach ($saveFile in Get-ChildItem -LiteralPath $originalSaveRoot -Filter '*.sav' -File) {
-    $originalHashesBefore[$saveFile.Name] = (Get-FileHash -LiteralPath $saveFile.FullName -Algorithm SHA256).Hash
+    $originalHashesBefore[$saveFile.Name] = (Get-HarnessFileHash -LiteralPath $saveFile.FullName -Algorithm SHA256).Hash
 }
 
 Copy-Item -LiteralPath $manifestPath -Destination (Join-Path $runRoot 'manifest.input.json')
@@ -190,10 +220,19 @@ $manifestResolvedLauncher = [ordered]@{
     viewId = $scenario.viewId
     truthMode = $TruthMode
     backendTruthMode = [int]$diagnostic.backendMode
+    executableIdentity = $executableIdentity
     rendererBackend = $RendererBackend
     visualProfile = [int]$VisualProfile
     visualProfileName = $visualProfileName
     d3d12DebugLayerRequested = [bool]$EnableD3D12DebugLayer
+    background = [bool]$Background
+    primaryGateCounters = [bool]$PrimaryGateCounters
+    diagnosticAnyHitAlphaBypass = [bool]$PrimaryGateCounters
+    dxrMatrixTrace = [bool]$TraceDxrMatrices
+    visualAblation = [bool]$VisualAblation
+    monitorCapture = [bool]$MonitorCapture
+    rtxQuality = $RtxQuality
+    presentation = if ($Background) { 'SKIPPED_BACKGROUND' } else { 'NORMAL_DXGI' }
     entrance = ('0x{0:X3}' -f [int]$scenario.entrance)
     scene = ('0x{0:X2}' -f [int]$scenario.expectedScene)
     room = [int]$scenario.expectedRoom
@@ -212,10 +251,55 @@ $harnessEnvNames = @('COUCH_DXR_HARNESS', 'COUCH_DXR_CAPTURE_SEQUENCE', 'COUCH_D
     'COUCH_DXR_SAVE_ROOT', 'COUCH_DXR_SCENARIO', 'COUCH_DXR_MODE', 'COUCH_DXR_TRUTH_MODE',
     'COUCH_DXR_TARGET_SCENE', 'COUCH_FORENSIC_CAPTURES', 'COUCH_DXR_TRUTH_SEQUENCE',
     'COUCH_DXR_TRUTH_V2_SEQUENCE', 'COUCH_DXR_DIAGNOSTIC_SEQUENCE', 'COUCH_D3D12_DEBUG',
-    'COUCH_D3D12', 'COUCH_VISUAL_PROFILE')
+    'COUCH_D3D12', 'COUCH_VISUAL_PROFILE', 'COUCH_DXR_BACKGROUND', 'COUCH_DIAGNOSTICS_PATH',
+    'COUCH_DXR_GPU_GATE_COUNTERS', 'COUCH_DXR_PRIMARY_GATE_COUNTERS', 'COUCH_DXR_MATRIX_TRACE',
+    'COUCH_DXR_FORCE_ANY_HIT_COVERAGE', 'COUCH_DXR_GATE_DIAGNOSTIC', 'COUCH_DXR_VISUAL_ABLATION',
+    'COUCH_DXR_MONITOR_CAPTURE', 'COUCH_RTX_QUALITY', 'COUCH_DXR_NAVI_PILOT', 'COUCH_DXR_NAVI_ISOLATION',
+    'COUCH_DXR_NAVI_POINT_GAIN', 'COUCH_DXR_NAVI_POINT_TINT')
 $savedHarnessEnv = @{}
 foreach ($name in $harnessEnvNames) { $savedHarnessEnv[$name] = [Environment]::GetEnvironmentVariable($name, 'Process') }
 $env:COUCH_DXR_HARNESS = '1'
+$env:COUCH_DXR_NAVI_PILOT = if ($scenario.naviPilot) { '1' } else { '0' }
+$env:COUCH_DXR_NAVI_ISOLATION = if ($scenario.naviPilot -and $scenario.naviPilot.isolate -eq $false) { '0' } else { '1' }
+$naviPointGain = 1.0
+if ($scenario.naviPilot -and $null -ne $scenario.naviPilot.pointLightGain) {
+    $naviPointGain = [double]$scenario.naviPilot.pointLightGain
+    if ([double]::IsNaN($naviPointGain) -or [double]::IsInfinity($naviPointGain) -or
+        $naviPointGain -lt 0.0 -or $naviPointGain -gt 128.0) {
+        throw 'naviPilot.pointLightGain must be finite and between 0 and 128.'
+    }
+}
+$env:COUCH_DXR_NAVI_POINT_GAIN = $naviPointGain.ToString('R', [System.Globalization.CultureInfo]::InvariantCulture)
+$naviPointTint = @(1.0, 1.0, 1.0)
+if ($scenario.naviPilot -and $null -ne $scenario.naviPilot.pointLightTint) {
+    $configuredTint = $scenario.naviPilot.pointLightTint
+    if ($configuredTint -isnot [array] -or $configuredTint.Count -ne 3) {
+        throw 'naviPilot.pointLightTint must be an RGB array with three values between 0 and 1.'
+    }
+    $naviPointTint = @($configuredTint | ForEach-Object { [double]$_ })
+    foreach ($channel in $naviPointTint) {
+        if ([double]::IsNaN($channel) -or [double]::IsInfinity($channel) -or
+            $channel -lt 0.0 -or $channel -gt 1.0) {
+            throw 'naviPilot.pointLightTint must be an RGB array with three values between 0 and 1.'
+        }
+    }
+}
+$naviPositionOffset = $null
+if ($scenario.naviPilot -and $null -ne $scenario.naviPilot.positionOffset) {
+    $configuredOffset = $scenario.naviPilot.positionOffset
+    if ($configuredOffset -isnot [array] -or $configuredOffset.Count -ne 3) {
+        throw 'naviPilot.positionOffset must be a finite XYZ array with three values.'
+    }
+    $naviPositionOffset = @($configuredOffset | ForEach-Object { [double]$_ })
+    foreach ($axis in $naviPositionOffset) {
+        if ([double]::IsNaN($axis) -or [double]::IsInfinity($axis)) {
+            throw 'naviPilot.positionOffset must be a finite XYZ array with three values.'
+        }
+    }
+}
+$env:COUCH_DXR_NAVI_POINT_TINT = ($naviPointTint | ForEach-Object {
+    ([double]$_).ToString('R', [System.Globalization.CultureInfo]::InvariantCulture)
+}) -join ','
 $env:COUCH_DXR_CAPTURE_SEQUENCE = '1'
 $env:COUCH_DXR_MANIFEST = $manifestPath
 $env:COUCH_DXR_OUTPUT = $runRoot
@@ -228,15 +312,27 @@ $env:COUCH_FORENSIC_CAPTURES = '1'
 $env:COUCH_DXR_TRUTH_SEQUENCE = '0'
 $env:COUCH_DXR_TRUTH_V2_SEQUENCE = '0'
 $env:COUCH_DXR_DIAGNOSTIC_SEQUENCE = '0'
+$env:COUCH_DXR_GPU_GATE_COUNTERS = if ($PrimaryGateCounters) { '1' } else { '0' }
+$env:COUCH_DXR_PRIMARY_GATE_COUNTERS = if ($PrimaryGateCounters) { '1' } else { '0' }
+$env:COUCH_DXR_MATRIX_TRACE = if ($TraceDxrMatrices) { '1' } else { '0' }
+$env:COUCH_DXR_FORCE_ANY_HIT_COVERAGE = '0'
+$env:COUCH_DXR_GATE_DIAGNOSTIC = '0'
 $env:COUCH_D3D12_DEBUG = if ($EnableD3D12DebugLayer) { '1' } else { '0' }
 $env:COUCH_D3D12 = '1'
 $env:COUCH_VISUAL_PROFILE = [string]$VisualProfile
+$env:COUCH_DXR_BACKGROUND = if ($Background) { '1' } else { '0' }
+$env:COUCH_DIAGNOSTICS_PATH = Join-Path $runRoot 'harness-backend.log'
+$env:COUCH_DXR_VISUAL_ABLATION = if ($VisualAblation) { '1' } else { '0' }
+$env:COUCH_DXR_MONITOR_CAPTURE = if ($MonitorCapture) { '1' } else { '0' }
+$env:COUCH_RTX_QUALITY = [string]$RtxQuality
 
 $stdoutPath = Join-Path $runRoot 'stdout.log'
 $stderrPath = Join-Path $runRoot 'stderr.log'
  $launchFailure = $null
 try {
+    $launchWindowStyle = if ($MonitorCapture) { 'Normal' } else { 'Hidden' }
     $process = Start-Process -FilePath $Executable -WorkingDirectory $runtimeRoot -PassThru `
+        -WindowStyle $launchWindowStyle `
         -RedirectStandardOutput $stdoutPath -RedirectStandardError $stderrPath
 } catch {
     $launchFailure = $_.Exception.Message
@@ -249,21 +345,40 @@ try {
 }
 if ($launchFailure) { Stop-WithCode 'HARNESS_PROCESS_START_FAILED' $launchFailure 36 }
 
+try {
 $started = Get-Date
-$deadline = $started.AddSeconds([Math]::Max(1, [Math]::Min($PollSeconds, 60)))
+$maximumPollSeconds = 300
+$deadline = $started.AddSeconds([Math]::Max(1, [Math]::Min($PollSeconds, $maximumPollSeconds)))
 $startupDeadline = $started.AddSeconds(20)
 $windowReady = $false
 $statusPath = Join-Path $runRoot 'launcher.status.json'
 $d3d12LogPath = Join-Path $runRoot 'harness-d3d12.log'
 $backendDeviceRemoved = $false
 while ((Get-Date) -lt $deadline) {
+    # Present is held before the next game update can create CAPTURE_COMPLETE.
+    # Capture as soon as its evidence exists, then release that same GPU frame.
+    if ($MonitorCapture -and
+        (Test-Path -LiteralPath (Join-Path $runRoot 'presentation.evidence.jsonl')) -and
+        -not (Test-Path -LiteralPath (Join-Path $runRoot 'monitor.capture.complete'))) {
+        & (Join-Path $PSScriptRoot 'capture-client.ps1') -ProcessId $process.Id -RunRoot $runRoot
+    }
     if (-not $windowReady -and (Get-Date) -lt $startupDeadline -and -not $process.HasExited) {
         $process.Refresh()
-        $windowReady = -not [string]::IsNullOrWhiteSpace($process.MainWindowTitle)
+        if ($Background) {
+            $windowReady = (Test-Path -LiteralPath (Join-Path $runRoot 'harness-backend.log') -PathType Leaf) -and
+                [bool](Select-String -LiteralPath (Join-Path $runRoot 'harness-backend.log') -SimpleMatch '[COUCH-HARNESS][WINDOW_HIDDEN] visible=0 foreground=0' -Quiet)
+        } else {
+            $windowReady = -not [string]::IsNullOrWhiteSpace($process.MainWindowTitle)
+        }
     }
     if (Test-Path -LiteralPath (Join-Path $runRoot 'RUN_PASS') -PathType Leaf) { break }
     if (Test-Path -LiteralPath (Join-Path $runRoot 'RUN_FAIL') -PathType Leaf) { break }
-    if (Test-Path -LiteralPath (Join-Path $runRoot 'CAPTURE_COMPLETE') -PathType Leaf) { break }
+    if (Test-Path -LiteralPath (Join-Path $runRoot 'CAPTURE_COMPLETE') -PathType Leaf) {
+        if ($MonitorCapture -and -not (Test-Path -LiteralPath (Join-Path $runRoot 'monitor.capture.complete'))) {
+            & (Join-Path $PSScriptRoot 'capture-client.ps1') -ProcessId $process.Id -RunRoot $runRoot
+        }
+        break
+    }
     if (Test-Path -LiteralPath (Join-Path $runRoot 'CAPTURE_PARTIAL') -PathType Leaf) { break }
     if (-not $windowReady -and (Get-Date) -ge $startupDeadline) {
         Set-Content -LiteralPath (Join-Path $runRoot 'RUN_FAIL') -Value 'HARNESS_STARTUP_TIMEOUT' -Encoding utf8
@@ -300,7 +415,7 @@ if ($backendDeviceRemoved) {
 
 $originalHashesAfter = @{}
 foreach ($saveFile in Get-ChildItem -LiteralPath $originalSaveRoot -Filter '*.sav' -File) {
-    $originalHashesAfter[$saveFile.Name] = (Get-FileHash -LiteralPath $saveFile.FullName -Algorithm SHA256).Hash
+    $originalHashesAfter[$saveFile.Name] = (Get-HarnessFileHash -LiteralPath $saveFile.FullName -Algorithm SHA256).Hash
 }
 $originalUnchanged = $true
 foreach ($saveName in $originalHashesBefore.Keys) {
@@ -338,7 +453,7 @@ if ($EnableD3D12DebugLayer) {
 
 $allO2rAfter = @{}
 foreach ($assetFile in Get-ChildItem -LiteralPath $runtimeRoot -Filter '*.o2r' -File) {
-    $allO2rAfter[$assetFile.Name] = (Get-FileHash -LiteralPath $assetFile.FullName -Algorithm SHA256).Hash
+    $allO2rAfter[$assetFile.Name] = (Get-HarnessFileHash -LiteralPath $assetFile.FullName -Algorithm SHA256).Hash
 }
 $newO2r = @($allO2rAfter.Keys | Where-Object { -not $allO2rBefore.ContainsKey($_) })
 $changedO2r = @($allO2rBefore.Keys | Where-Object {
@@ -395,6 +510,17 @@ $launcherStatus = if (Test-Path -LiteralPath (Join-Path $runRoot 'RUN_PASS')) { 
                   elseif (Test-Path -LiteralPath (Join-Path $runRoot 'CAPTURE_PARTIAL')) { 'PARTIAL' }
                   elseif ($process.HasExited) { 'PROCESS_EXITED' }
                   else { 'POLL_TIMEOUT_PROCESS_LEFT_OPEN' }
+$backgroundCleanup = 'NOT_REQUESTED'
+if ($Background -or $MonitorCapture) {
+    if (-not $process.HasExited) {
+        # This Process object belongs to the executable launched above. Never
+        # enumerate/terminate other renderers or a user's normal game process.
+        $process.Kill()
+        $process.WaitForExit(5000) | Out-Null
+    }
+    $backgroundCleanup = if ($process.HasExited) { 'OWN_TEST_PROCESS_STOPPED' } else { 'STOP_FAILED' }
+    if ($launcherStatus -eq 'POLL_TIMEOUT_PROCESS_LEFT_OPEN') { $launcherStatus = 'POLL_TIMEOUT_BACKGROUND_STOPPED' }
+}
 [ordered]@{
     status = $launcherStatus
     runId = $runId
@@ -403,6 +529,8 @@ $launcherStatus = if (Test-Path -LiteralPath (Join-Path $runRoot 'RUN_PASS')) { 
     workingDirectory = $runtimeRoot
     runRoot = $runRoot
     processExited = $process.HasExited
+    background = [bool]$Background
+    backgroundCleanup = $backgroundCleanup
     backendDeviceRemoved = $backendDeviceRemoved
     evidenceVerification = $evidenceVerification
     originalSaveUnchanged = $originalUnchanged
@@ -416,10 +544,10 @@ Write-Output "RUN_ID=$runId"
 Write-Output "PID=$($process.Id)"
 Write-Output "ORIGINAL_SAVE_UNCHANGED=$($originalUnchanged.ToString().ToUpperInvariant())"
 Write-Output "RUN_ROOT=$runRoot"
-if ($launcherStatus -eq 'POLL_TIMEOUT_PROCESS_LEFT_OPEN') { exit 124 }
+if ($launcherStatus -in @('POLL_TIMEOUT_PROCESS_LEFT_OPEN','POLL_TIMEOUT_BACKGROUND_STOPPED')) { exit 124 }
 if ($launcherStatus -eq 'PROCESS_EXITED') { exit 38 }
 if ($backendDeviceRemoved) {
-    [Console]::Error.WriteLine('HARNESS_D3D12_DEVICE_REMOVED : The D3D12 device was removed or hung; the game process was left untouched.')
+    [Console]::Error.WriteLine('HARNESS_D3D12_DEVICE_REMOVED : The D3D12 device was removed or hung. Background tests close their own process; other game processes are untouched.')
     exit 42
 }
 if ($evidenceVerificationFailed) {
@@ -428,3 +556,11 @@ if ($evidenceVerificationFailed) {
 }
 if ($launcherStatus -eq 'FAIL') { exit 39 }
 exit 0
+} finally {
+    # Verification or file-I/O failures must also close this hidden renderer.
+    # The Process object was returned by this launch; no other PID is queried.
+    if (($Background -or $MonitorCapture) -and $null -ne $process -and -not $process.HasExited) {
+        $process.Kill()
+        $process.WaitForExit(5000) | Out-Null
+    }
+}

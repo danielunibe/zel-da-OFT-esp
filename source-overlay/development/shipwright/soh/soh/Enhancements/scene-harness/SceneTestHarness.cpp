@@ -5,6 +5,7 @@
 extern "C" {
 #include "z64.h"
 #include "overlays/gamestates/ovl_file_choose/file_choose.h"
+#include "overlays/actors/ovl_En_Elf/z_en_elf.h"
 }
 
 #include <nlohmann/json.hpp>
@@ -88,8 +89,15 @@ bool sMainSlotInputInjected = false;
 bool sConfirmInputInjected = false;
 bool sFrozenPlayerTransformCaptured = false;
 std::array<float, 6> sFrozenPlayerTransform{};
+float sFrozenPlayerFloorHeight = 0.0f;
 bool sFrozenPlayerFocusCaptured = false;
 bool sCameraFrozen = false;
+Vec3f sFrozenCameraEye{};
+Vec3f sFrozenCameraAt{};
+Vec3f sFrozenCameraUp{};
+float sFrozenCameraFovy = 60.0f;
+EnElf* sNaviOtherFairy = nullptr;
+Vec3f sNaviOtherFairyPosition{};
 std::array<float, 3> sFrozenPlayerFocusPosition{};
 std::array<s16, 3> sFrozenPlayerFocusRotation{};
 std::uint64_t sLastHeartbeatFrame = 0;
@@ -115,6 +123,26 @@ std::string HexValue(int value) {
     std::ostringstream out;
     out << "0x" << std::uppercase << std::hex << value;
     return out.str();
+}
+
+Json BuildLightingContractEvidence() {
+    Json contract = sConfig.scenario.value("lightingContract", Json::object());
+    if (!contract.is_object() || contract.empty()) return Json::object();
+
+    contract["runtimeStatus"] = "CAPTURED_NO_FEATURE_ASSERTIONS";
+    contract["comparisonStatus"] = "NOT_RUN";
+    contract["visualAcceptance"] = "NOT_RECORDED";
+    if (contract.contains("targetMaterials") && contract["targetMaterials"].is_array()) {
+        for (auto& target : contract["targetMaterials"]) {
+            if (target.is_object()) target["runtimeStatus"] = "NOT_RECORDED";
+        }
+    }
+    if (contract.contains("runtimeGates") && contract["runtimeGates"].is_array()) {
+        for (auto& gate : contract["runtimeGates"]) {
+            if (gate.is_object()) gate["observedStatus"] = "NOT_RUN";
+        }
+    }
+    return contract;
 }
 
 void WriteJson(const std::filesystem::path& path, const Json& data) {
@@ -247,6 +275,26 @@ bool ResolveScenario() {
         sConfig.stableFramesRequired = sConfig.view.value("stableFrames", 30);
         sConfig.cameraWarmupFrames = sConfig.view.value("cameraWarmupFrames", 240);
         sConfig.timeoutFrames = sConfig.view.value("timeoutFrames", 1200);
+        if (sConfig.view.value("camera", "") == "MANIFEST_FIXED_POSE") {
+            const auto eye = sConfig.view.at("eye").get<std::array<float, 3>>();
+            const auto at = sConfig.view.at("at").get<std::array<float, 3>>();
+            const auto up = sConfig.view.at("up").get<std::array<float, 3>>();
+            const float fovy = sConfig.view.at("fovy").get<float>();
+            const std::array<float, 3> direction = {at[0]-eye[0], at[1]-eye[1], at[2]-eye[2]};
+            const std::array<float, 3> cross = {direction[1]*up[2]-direction[2]*up[1],
+                direction[2]*up[0]-direction[0]*up[2], direction[0]*up[1]-direction[1]*up[0]};
+            const auto finite = [](const auto& vector) { return std::all_of(vector.begin(), vector.end(),
+                [](float value) { return std::isfinite(value); }); };
+            if (!finite(eye) || !finite(at) || !finite(up) || !finite(cross) || !std::isfinite(fovy) ||
+                fovy < 10.0f || fovy > 120.0f || cross[0]*cross[0]+cross[1]*cross[1]+cross[2]*cross[2] < 0.0001f) {
+                Fail("HARNESS_INVALID_CAMERA_POSE", "Fixed camera must have a finite, nondegenerate look direction and field of view.");
+                return false;
+            }
+            sFrozenCameraEye = {eye[0], eye[1], eye[2]};
+            sFrozenCameraAt = {at[0], at[1], at[2]};
+            sFrozenCameraUp = {up[0], up[1], up[2]};
+            sFrozenCameraFovy = fovy;
+        }
         if (sConfig.entrance < 0 || sConfig.entrance > 0xFFFF || sConfig.expectedScene < 0 ||
             sConfig.expectedScene > 0xFF || sConfig.expectedRoom < 0 || sConfig.expectedRoom > 0x7F ||
             sConfig.linkAge < 0 || sConfig.linkAge > 1 || sConfig.dayTime < 0 || sConfig.dayTime > 0xFFFF ||
@@ -335,6 +383,26 @@ bool BackendDxrReady() {
         return true;
     }
     return false;
+}
+
+std::string BackendLightSyncStatusForFrame(int captureFrame) {
+    if (captureFrame < 0) return "NOT_RECORDED";
+    std::ifstream input(sConfig.outputRoot / "harness-dxr.log", std::ios::binary);
+    if (!input) return "NOT_RECORDED";
+    const std::string expectedPrefix = "[COUCH-DXR-LIGHT-SYNC] frame=" +
+                                       std::to_string(captureFrame) + " ";
+    std::string line;
+    std::string matchingRecord;
+    while (std::getline(input, line)) {
+        if (line.rfind(expectedPrefix, 0) == 0) matchingRecord = line;
+    }
+    if (matchingRecord.empty()) return "NOT_RECORDED";
+    if (matchingRecord.find("sameFrame=0") != std::string::npos) return "TEMPORAL_MISMATCH";
+    if (matchingRecord.find("sameFrame=1") != std::string::npos &&
+        matchingRecord.find("match=YES") != std::string::npos) {
+        return "PASS";
+    }
+    return "SAME_FRAME_MISMATCH";
 }
 
 bool IsD3D12BackendActive() {
@@ -466,23 +534,106 @@ void OnGameStateMainStart() {
                                   static_cast<float>(player->actor.world.rot.y),
                                   static_cast<float>(player->actor.shape.rot.y),
                                   static_cast<float>(player->actor.shape.rot.x)};
+        sFrozenPlayerFloorHeight = player->actor.floorHeight;
+        const Json fixture = sConfig.scenario.value("naviPilot", Json::object());
+        const Json linkPosition = fixture.value("linkPosition", Json::array());
+        if (linkPosition.is_array() && linkPosition.size() == 3 &&
+            std::all_of(linkPosition.begin(), linkPosition.end(), [](const Json& value) {
+                return value.is_number() && std::isfinite(value.get<float>());
+            })) {
+            sFrozenPlayerTransform[0] = linkPosition[0].get<float>();
+            sFrozenPlayerTransform[1] = linkPosition[1].get<float>();
+            sFrozenPlayerTransform[2] = linkPosition[2].get<float>();
+            sFrozenPlayerFloorHeight = sFrozenPlayerTransform[1];
+        }
         sFrozenPlayerTransformCaptured = true;
         sPlayerFreezeRequested = true;
+        const Json configuredPosition = fixture.value("linkPosition", Json::array());
+        const bool authoredPose = configuredPosition.is_array() && configuredPosition.size() == 3 &&
+            std::all_of(configuredPosition.begin(), configuredPosition.end(), [](const Json& value) {
+                return value.is_number() && std::isfinite(value.get<float>());
+            });
         Log("PLAYER_INPUT_LOCK_ACTIVE", { {"position", Json::array({sFrozenPlayerTransform[0], sFrozenPlayerTransform[1],
-                                                                       sFrozenPlayerTransform[2]})} });
-    } else {
-        player->actor.world.pos.x = sFrozenPlayerTransform[0];
-        player->actor.world.pos.y = sFrozenPlayerTransform[1];
-        player->actor.world.pos.z = sFrozenPlayerTransform[2];
-        player->actor.world.rot.y = static_cast<s16>(sFrozenPlayerTransform[3]);
-        player->actor.shape.rot.y = static_cast<s16>(sFrozenPlayerTransform[4]);
-        player->actor.shape.rot.x = static_cast<s16>(sFrozenPlayerTransform[5]);
-        player->actor.speedXZ = 0.0f;
-        player->actor.velocity.x = 0.0f;
-        player->actor.velocity.y = 0.0f;
-        player->actor.velocity.z = 0.0f;
-        player->linearVelocity = 0.0f;
+                                                                       sFrozenPlayerTransform[2]})},
+                                             {"position_provenance", authoredPose ? "AUTHORED_HARNESS_TEST_POSE"
+                                                                                  : "GAME_DEFAULT_SPAWN"} });
     }
+    player->actor.world.pos.x = sFrozenPlayerTransform[0];
+    player->actor.world.pos.y = sFrozenPlayerTransform[1];
+    player->actor.world.pos.z = sFrozenPlayerTransform[2];
+    player->actor.world.rot.y = static_cast<s16>(sFrozenPlayerTransform[3]);
+    player->actor.shape.rot.y = static_cast<s16>(sFrozenPlayerTransform[4]);
+    player->actor.shape.rot.x = static_cast<s16>(sFrozenPlayerTransform[5]);
+    player->actor.floorHeight = sFrozenPlayerFloorHeight;
+    player->actor.speedXZ = 0.0f;
+    player->actor.velocity.x = 0.0f;
+    player->actor.velocity.y = 0.0f;
+    player->actor.velocity.z = 0.0f;
+    player->linearVelocity = 0.0f;
+}
+
+void RestoreFrozenPlayerPose() {
+    if (!sConfig.freezePlayer || !sFrozenPlayerTransformCaptured || !gPlayState) return;
+    Player* player = GET_PLAYER(gPlayState);
+    if (!player) return;
+    player->actor.world.pos = {sFrozenPlayerTransform[0], sFrozenPlayerTransform[1], sFrozenPlayerTransform[2]};
+    player->actor.world.rot.y = static_cast<s16>(sFrozenPlayerTransform[3]);
+    player->actor.shape.rot.y = static_cast<s16>(sFrozenPlayerTransform[4]);
+    player->actor.shape.rot.x = static_cast<s16>(sFrozenPlayerTransform[5]);
+    player->actor.floorHeight = sFrozenPlayerFloorHeight;
+    player->actor.speedXZ = player->linearVelocity = 0.0f;
+    player->actor.velocity = {0, 0, 0};
+}
+
+void OnPlayDrawBegin() {
+    if (!sSaveLoaded || sState == HarnessState::Disabled || sState == HarnessState::Failed || !gPlayState ||
+        gPlayState->sceneNum != sConfig.expectedScene || gPlayState->roomCtx.curRoom.num != sConfig.expectedRoom) return;
+    // Physics and enemy knockback run after MainStart. Honor freezePlayer again
+    // before geometry is drawn, so nightly actors cannot invalidate the fixture.
+    RestoreFrozenPlayerPose();
+    if (CouchNaviPilotActive() && sNaviOtherFairy && sNaviOtherFairy->actor.update) {
+        auto* other=sNaviOtherFairy;
+        other->actor.world.pos=sNaviOtherFairyPosition;
+        other->actor.scale={0.008f,0.008f,0.008f};
+        other->unk_2A8=0;other->fairyFlags&=~0x28u;
+        Lights_PointGlowSetInfo(&other->lightInfoGlow,sNaviOtherFairyPosition.x,sNaviOtherFairyPosition.y,
+            sNaviOtherFairyPosition.z,255,255,255,100);
+        Lights_PointNoGlowSetInfo(&other->lightInfoNoGlow,sNaviOtherFairyPosition.x,sNaviOtherFairyPosition.y,
+            sNaviOtherFairyPosition.z,255,255,255,-1);
+    }
+    if (!sCameraFrozen && sState == HarnessState::Stabilizing &&
+        sGameFrame - sStateStartFrame >= static_cast<std::uint64_t>(sConfig.cameraWarmupFrames)) {
+        if (sConfig.view.value("camera", "") == "NAVI_RECEIVER_CLOSEUP") {
+            const Player* player = GET_PLAYER(gPlayState);
+            sFrozenCameraEye = {player->actor.world.pos.x+155.0f, player->actor.world.pos.y+105.0f,
+                                player->actor.world.pos.z+165.0f};
+            sFrozenCameraAt = {player->actor.world.pos.x+35.0f, player->actor.world.pos.y+12.0f,
+                               player->actor.world.pos.z+30.0f};
+            sFrozenCameraUp = {0,1,0}; sFrozenCameraFovy=60.0f;
+        } else if (sConfig.view.value("camera", "") != "MANIFEST_FIXED_POSE") {
+            sFrozenCameraEye = gPlayState->view.eye;
+            sFrozenCameraAt = gPlayState->view.lookAt;
+            sFrozenCameraUp = gPlayState->view.up;
+            sFrozenCameraFovy = gPlayState->view.fovy;
+        }
+        sCameraFrozen = true;
+        Log("CAMERA_POSE_FROZEN", {{"camera_eye", Json::array({sFrozenCameraEye.x, sFrozenCameraEye.y, sFrozenCameraEye.z})},
+            {"camera_at", Json::array({sFrozenCameraAt.x, sFrozenCameraAt.y, sFrozenCameraAt.z})},
+            {"pose_source", sConfig.view.value("camera", "GAME_DEFAULT_AT_SCENARIO_SPAWN")},
+            {"warmup_frames", sConfig.cameraWarmupFrames}});
+    }
+    if (!sCameraFrozen) return;
+    // Transition cameras can reactivate themselves after CAM_STAT_CUT. Pin the
+    // actual View before Play_Draw constructs matrices, on every harness frame.
+    if (Camera* camera = GET_ACTIVE_CAM(gPlayState)) {
+        camera->eye = camera->eyeNext = sFrozenCameraEye;
+        camera->at = sFrozenCameraAt;
+        camera->up = sFrozenCameraUp;
+        camera->fov = sFrozenCameraFovy;
+    }
+    func_800AA358(&gPlayState->view, &sFrozenCameraEye, &sFrozenCameraAt, &sFrozenCameraUp);
+    gPlayState->view.fovy = sFrozenCameraFovy;
+    View_SetDistortion(&gPlayState->view, Vec3f{0, 0, 0}, Vec3f{1, 1, 1}, 0.0f);
 }
 
 void OnPlayDrawEnd() {
@@ -494,6 +645,7 @@ void OnPlayDrawEnd() {
 
     Player* player = GET_PLAYER(gPlayState);
     if (!player) return;
+    RestoreFrozenPlayerPose();
 
     // Player_DrawGameplay derives the camera target from the animated head limb. Capture and
     // pin it after world drawing, so we use the real default-spawn target and the next camera
@@ -569,12 +721,21 @@ void OnFrameUpdate() {
                     Fail("HARNESS_CAPTURE_ACK_INVALID", "The renderer did not confirm capture sequence 1.");
                     return;
                 }
+                const int captureFrame = ack.value("capture_frame", -1);
+                const bool expectsDirectionalLight =
+                    sConfig.scenario.value("expectDirectionalLight", false);
+                sGameLightSyncStatus = expectsDirectionalLight
+                    ? BackendLightSyncStatusForFrame(captureFrame) : "NOT_REQUIRED";
+                sGameLightProductive = !expectsDirectionalLight || sGameLightSyncStatus == "PASS";
                 if (captureResult == "PARTIAL") {
                     sState = HarnessState::CaptureComplete;
                     Json evidence = { {"schema_version", 2}, {"result", "PARTIAL"},
                                       {"capture_status", "PARTIAL"}, {"capture_frame", ack.value("capture_frame", -1)},
                                       {"dxr_frame", ack.value("dxr_frame", Json::object())},
+                                      {"game_light_productive", sGameLightProductive},
+                                      {"game_light_sync_status", sGameLightSyncStatus},
                                       {"captures", ack.value("captures", Json::object())},
+                                      {"lighting_contract", BuildLightingContractEvidence()},
                                       {"reason", "One or more capture files failed content validation."} };
                     WriteJson(sConfig.outputRoot / "evidence.json", evidence);
                     std::ofstream partial(sConfig.outputRoot / "CAPTURE_PARTIAL", std::ios::binary | std::ios::trunc);
@@ -630,7 +791,8 @@ void OnFrameUpdate() {
                             {"d3d12_validation", ReadEnv("COUCH_D3D12_DEBUG") == "1"
                                                       ? "DEBUG_LAYER_REQUESTED"
                                                       : "NOT_RUN_DEBUG_LAYER_OFF"},
-                            {"captures", ack.value("captures", Json::object())}};
+                            {"captures", ack.value("captures", Json::object())},
+                            {"lighting_contract", BuildLightingContractEvidence()}};
             WriteJson(sConfig.outputRoot / "evidence.json", evidence);
             std::ofstream complete(sConfig.outputRoot / "CAPTURE_COMPLETE", std::ios::binary | std::ios::trunc);
             complete << "CAPTURE_COMPLETE\n";
@@ -668,21 +830,6 @@ void OnFrameUpdate() {
         sStableFrameCount = 0;
         Log("TARGET_SCENE_ROOM_PASS", {{"scene", HexValue(gPlayState->sceneNum)},
                                        {"room", gPlayState->roomCtx.curRoom.num}});
-    }
-
-    // Let the manifest's real spawn camera run through its initial easing, then cut camera
-    // updates in harness runs only. This preserves the actual spawn view and prevents the
-    // engine's long-tail subpixel camera easing from making matrix hashes perpetually unstable.
-    if (!sCameraFrozen && sGameFrame - sStateStartFrame >= static_cast<std::uint64_t>(sConfig.cameraWarmupFrames)) {
-        Camera* camera = GET_ACTIVE_CAM(gPlayState);
-        if (camera && camera->status != CAM_STAT_CUT) {
-            camera->status = CAM_STAT_CUT;
-            sCameraFrozen = true;
-            Log("CAMERA_POSE_FROZEN", {{"camera_eye", Json::array({camera->eye.x, camera->eye.y, camera->eye.z})},
-                                       {"camera_at", Json::array({camera->at.x, camera->at.y, camera->at.z})},
-                                       {"camera_status", camera->status},
-                                       {"warmup_frames", sConfig.cameraWarmupFrames}});
-        }
     }
 
     Player* player = GET_PLAYER(gPlayState);
@@ -723,7 +870,7 @@ void OnFrameUpdate() {
         sLastProjectionHash = projectionHash;
         sLastPlayerHash = playerHash;
     }
-    if (sStableFrameCount >= sConfig.stableFramesRequired) {
+    if (sCameraFrozen && sStableFrameCount >= sConfig.stableFramesRequired) {
         if (!BackendDxrReady()) {
             if (sGameFrame - sStateStartFrame > static_cast<std::uint64_t>(sConfig.timeoutFrames)) {
                 Fail("HARNESS_DXR_NOT_READY", "DXR initialization, a non-empty TLAS, first DispatchRays, or expected game-light match did not become ready before the frame limit.");
@@ -739,6 +886,7 @@ void OnFrameUpdate() {
                         {"view_hash", std::to_string(viewHash)},
                         {"projection_hash", std::to_string(projectionHash)},
                         {"player_state_hash", std::to_string(playerHash)},
+                        {"lighting_contract", BuildLightingContractEvidence()},
                         {"bloom_only", "NOT_PRESENT"},
                         {"bloom_inputs", Json::array({"DXR_REFLECTION_RGBA16F", "EMISSIVE_MASK"})}};
         WriteJson(sConfig.outputRoot / "capture.request.json", request);
@@ -764,6 +912,7 @@ void RegisterSceneTestHarness() {
     GameInteractor::Instance->RegisterGameHook<GameInteractor::OnFileChooseMain>(OnFileChooseMain);
     GameInteractor::Instance->RegisterGameHook<GameInteractor::OnLoadGame>(OnLoadGame);
     GameInteractor::Instance->RegisterGameHook<GameInteractor::OnGameStateMainStart>(OnGameStateMainStart);
+    GameInteractor::Instance->RegisterGameHook<GameInteractor::OnPlayDrawBegin>(OnPlayDrawBegin);
     GameInteractor::Instance->RegisterGameHook<GameInteractor::OnPlayDrawEnd>(OnPlayDrawEnd);
     GameInteractor::Instance->RegisterGameHook<GameInteractor::OnSceneInit>(OnSceneInit);
     GameInteractor::Instance->RegisterGameHook<GameInteractor::OnTransitionEnd>(OnSceneInit);
@@ -778,3 +927,107 @@ void RegisterSceneTestHarness() {
 
 static RegisterShipInitFunc sSceneTestHarnessInit(RegisterSceneTestHarness);
 } // namespace
+
+// Harness-only actor fixture. It runs before the actor publishes both native
+// LightInfo records; production cannot activate it through a graphics CVar.
+extern "C" void CouchNaviPilotPlace(Actor* actor, PlayState* play) {
+    if (!CouchNaviPilotActive() || !actor || !play || !sSaveLoaded ||
+        (sState != HarnessState::Stabilizing && sState != HarnessState::Capturing) ||
+        play->sceneNum != sConfig.expectedScene || !sCameraFrozen) return;
+    auto* fairy=reinterpret_cast<EnElf*>(actor);
+    static bool captured=false;
+    static Vec3f frozen{}, scale{};
+    static Color_RGBAf inner{},outer{};
+    static std::array<Vec3s,15> joints{};
+    static uint16_t timer=0, flags=0;
+    static int16_t state=0;
+    const Json fixture=sConfig.scenario.value("naviPilot",Json::object());
+    const Json configuredPositionOffset=fixture.value("positionOffset",Json::array());
+    const bool authoredPositionOffset=configuredPositionOffset.is_array() && configuredPositionOffset.size()==3 &&
+        std::all_of(configuredPositionOffset.begin(),configuredPositionOffset.end(),[](const Json& value){
+            return value.is_number() && std::isfinite(value.get<float>());
+        });
+    if (!captured) {
+        const Vec3f natural=actor->world.pos;
+        frozen=natural; scale=actor->scale; inner=fairy->innerColor; outer=fairy->outerColor;
+        timer=fairy->timer; flags=fairy->fairyFlags; state=fairy->unk_2A8;
+        std::copy(std::begin(fairy->jointTable),std::end(fairy->jointTable),joints.begin());
+        const Player* player=GET_PLAYER(play);
+        const std::string poseKind=fixture.value("pose",std::string("NATURAL"));
+        const bool controlled=poseKind=="CONTROLLED";
+        const bool naturalActive=poseKind=="NATURAL_ACTIVE";
+        if (controlled && player) {
+            const float fixtureScale=fixture.value("emitterScale",1.0f)*0.008f;
+            scale={fixtureScale,fixtureScale,fixtureScale}; // explicit visible test pose
+            if (authoredPositionOffset) {
+                frozen={player->actor.world.pos.x+configuredPositionOffset[0].get<float>(),
+                    player->actor.floorHeight+configuredPositionOffset[1].get<float>(),
+                    player->actor.world.pos.z+configuredPositionOffset[2].get<float>()};
+            } else {
+                const float height=fixture.value("height",25.0f);
+                frozen={player->actor.world.pos.x+35.0f,player->actor.floorHeight+height,
+                         player->actor.world.pos.z+30.0f};
+            }
+        }
+        if (controlled || naturalActive) {
+            state=fixture.value("glowEnabled",true)?0:8;
+            if (controlled)
+                flags=uint16_t((flags & ~0x28u) | (fixture.value("auxiliaryEnabled",false)?0x20u:0u));
+        }
+        if (controlled) {
+            if (fixture.value("color","")=="RED") { inner={255,40,40,255};outer={255,40,40,255}; }
+            if (fixture.value("secondFairy",false)) {
+                sNaviOtherFairyPosition={frozen.x-50.0f,frozen.y,frozen.z+20.0f};
+                sNaviOtherFairy=reinterpret_cast<EnElf*>(Actor_Spawn(&play->actorCtx,play,ACTOR_EN_ELF,
+                    sNaviOtherFairyPosition.x,sNaviOtherFairyPosition.y,sNaviOtherFairyPosition.z,
+                    0,0,0,FAIRY_KOKIRI,true));
+                if (sNaviOtherFairy) sNaviOtherFairy->actor.parent=&GET_PLAYER(play)->actor;
+            }
+        }
+        const char* poseLabel=controlled?"CONTROLLED_TEST_POSE":
+                              naturalActive?"NATURAL_POSITION_ACTIVE_LIGHT_TEST":"NATURAL_FROZEN";
+        const float pointLightGain=fixture.value("pointLightGain",1.0f);
+        const Json pointLightTint=fixture.value("pointLightTint",Json::array({1.0f,1.0f,1.0f}));
+        const bool authoredPointColor=pointLightGain!=1.0f ||
+            pointLightTint!=Json::array({1.0f,1.0f,1.0f});
+        const float visibleGeometryScale=fixture.value("emitterScale",1.0f);
+        const Json configuredLinkPosition=fixture.value("linkPosition",Json::array());
+        const bool authoredLinkPosition=configuredLinkPosition.is_array() && configuredLinkPosition.size()==3 &&
+            std::all_of(configuredLinkPosition.begin(),configuredLinkPosition.end(),[](const Json& value){
+                return value.is_number() && std::isfinite(value.get<float>());
+            });
+        Json pose={{"pose",poseLabel},
+            {"naturalPosition",{natural.x,natural.y,natural.z}},
+            {"testPosition",{frozen.x,frozen.y,frozen.z}},
+            {"linkPosition",player?Json::array({player->actor.world.pos.x,player->actor.world.pos.y,
+                                                  player->actor.world.pos.z}):Json(nullptr)},
+            {"linkPositionProvenance",authoredLinkPosition?"AUTHORED_HARNESS_TEST_POSE":"GAME_DEFAULT_SPAWN"},
+            {"receiverAnchor",fixture.value("receiverAnchor",Json::object())},
+            {"state",state},{"flags",flags},{"ownerId",CouchGetLightOwnerId(&fairy->lightInfoGlow)},
+            {"emitterScale",visibleGeometryScale},
+            {"visibleGeometryScale",visibleGeometryScale},
+            {"positionOffset",authoredPositionOffset?configuredPositionOffset:Json::array({35.0f,fixture.value("height",25.0f),30.0f})},
+            {"positionOffsetProvenance",controlled?"AUTHORED_HARNESS_TEST_POSE":"NATIVE_ACTOR_POSITION"},
+            {"pointLightGain",pointLightGain},
+            {"pointLightTint",pointLightTint},
+            {"pointLightGainProvenance",authoredPointColor?"AUTHORED_HARNESS_ONLY":"NATIVE"},
+            {"pointLightTintProvenance",authoredPointColor?"AUTHORED_HARNESS_ONLY":"NATIVE"},
+            {"secondFairySpawned",sNaviOtherFairy!=nullptr},
+            {"playerFloorHeight",player?Json(player->actor.floorHeight):Json(nullptr)},
+            {"receiver","must be identified from GPU intersection; no synthetic floor"}};
+        std::ofstream out(sConfig.outputRoot/"navi.pose.json", std::ios::binary | std::ios::trunc);
+        if (out) {
+            const std::string text = pose.dump(2);
+            out.write(text.data(), text.size());
+            out.put('\n');
+            out.flush();
+            out.close();
+        }
+        Log("NAVI_POSE_FROZEN",pose);
+        captured=true;
+    }
+    actor->world.pos=frozen; actor->scale=scale; actor->velocity={0,0,0}; actor->speedXZ=0;
+    fairy->innerColor=inner;fairy->outerColor=outer;fairy->timer=timer;
+    fairy->fairyFlags=flags;fairy->unk_2A8=state;
+    std::copy(joints.begin(),joints.end(),std::begin(fairy->jointTable));
+}

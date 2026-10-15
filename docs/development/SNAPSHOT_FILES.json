@@ -17,29 +17,44 @@
         "sha256": "cc19816478d7e8c2d3972ada968f0493e335c90d9ba7047644c8ee05a0f07b26"
       },
       {
+        "path": "CMake/DefaultCXX.cmake",
+        "size_bytes": 1209,
+        "sha256": "3194facbe9edd492038a568ba6af1361ecbb4b71f031fd7a897f65438839b149"
+      },
+      {
         "path": "CMakeLists.txt",
-        "size_bytes": 14582,
-        "sha256": "54cd2364b3fc7fa32a7e67f77a26bd5614f0f9229fab08742dffc48f9f21ade7"
+        "size_bytes": 14957,
+        "sha256": "5db271fccba549fca5546b1d1e4cf6bf4c600da4677b253480c9dedd5a1ce663"
       },
       {
         "path": "scripts/Generate-DxrShadowBytecode.ps1",
-        "size_bytes": 2414,
-        "sha256": "fefdbbb54299a4155f78d63c559839cfd1391633bc55ac8be594e41dc62b3da3"
+        "size_bytes": 12004,
+        "sha256": "06a97d7bc5193bad6eaaa947c35186787bfc22887bb29d6ef9f0e3940c32935b"
+      },
+      {
+        "path": "scripts/scene-harness/capture-client.ps1",
+        "size_bytes": 8735,
+        "sha256": "d7592d7e7de21e0f5fa544beaaae03bfecaad4fdcc3f85c44ccecf41b0db03aa"
+      },
+      {
+        "path": "scripts/scene-harness/file-hash.ps1",
+        "size_bytes": 785,
+        "sha256": "8a71d5f522fa705b803ba4d78ac380c17bfad8eea0ce029c5f36465a44b1a02c"
       },
       {
         "path": "scripts/scene-harness/run-scene.ps1",
-        "size_bytes": 23858,
-        "sha256": "5556f83cb86a3396e74a12d7a4542e85fd27abb25876a81947ff4ac36f5f551e"
+        "size_bytes": 31422,
+        "sha256": "cb5cf633a22ce49647a3eaa7fb6c0ef5bea2cae747131727b85b90c2d53910a4"
       },
       {
         "path": "scripts/scene-harness/scenarios/scenarios.v1.json",
-        "size_bytes": 4122,
-        "sha256": "5244dffdc9670583c9b2f529a416c27fb0045c103fced5973278d8a1cf849026"
+        "size_bytes": 31356,
+        "sha256": "9a04e41f42a6ab32f0fe9c8ac05156a3fe4358aaed69f5ab3d0f37576ed00fa2"
       },
       {
         "path": "scripts/scene-harness/verify-run.ps1",
-        "size_bytes": 41210,
-        "sha256": "5dfc0a9954b4bf2a95bf884d2a8a4700fc7ed60c344a7eb982e1236ab083186f"
+        "size_bytes": 52652,
+        "sha256": "6b0457c8b89844b374bb4d6f7791ebfc910f065aa7af1e9e6e78ad4681015ace"
       },
       {
         "path": "soh/assets/custom/textures/buttons/LTBtn.i4.png",
@@ -47,9 +62,14 @@
         "sha256": "74d32bef7ce11a52075d41c169d6c3ef121d7206548666fe10a91588d8241298"
       },
       {
+        "path": "soh/CMake/DefaultCXX.cmake",
+        "size_bytes": 1059,
+        "sha256": "6dfe7f89a353af3d85268fefd151108d698a2e4091d9aee0c04a86ec6d82da98"
+      },
+      {
         "path": "soh/CMakeLists.txt",
-        "size_bytes": 27687,
-        "sha256": "5bb9ca006df77ae4da89745d7db4671854522df155297fb591c7e3193f667ac6"
+        "size_bytes": 28171,
+        "sha256": "97bdb0cb62ad0f2705f391a1962c93a5e1a864ae2c50b4e5079084fb7ea9508e"
       },
       {
         "path": "soh/include/glyph_resolver.h",
@@ -103,8 +123,8 @@
       },
       {
         "path": "soh/soh/Enhancements/scene-harness/SceneTestHarness.cpp",
-        "size_bytes": 40936,
-        "sha256": "f0f0e5a1730897b11d313b631ecde9a8095c9b408ec85027da662e1f4c78e7fd"
+        "size_bytes": 56159,
+        "sha256": "33349c9da7df3b22de67273e7e32c792dc1879c3028427324ec436b0c00fbf29"
       },
       {
         "path": "soh/soh/OTRGlobals.cpp",
@@ -178,8 +198,8 @@
       },
       {
         "path": "soh/src/code/z_lights.c",
-        "size_bytes": 14889,
-        "sha256": "a9bf1a2bff9ee26a746698f4d3bd97bb3c94bc92e08b85c04ee19bdb335e642a"
+        "size_bytes": 15373,
+        "sha256": "4c09c1e0430f85bc93f33ecc40836075b116c1a5553af07e85cbeb27ea352dfc"
       },
       {
         "path": "soh/src/code/z_message_PAL.c",
@@ -195,6 +215,11 @@
         "path": "soh/src/code/z_play.c",
         "size_bytes": 85420,
         "sha256": "fbf800a3b3675135caf4d5ef48edd7999bde56022ab847161d0307743de9f400"
+      },
+      {
+        "path": "soh/src/overlays/actors/ovl_En_Elf/z_en_elf.c",
+        "size_bytes": 53623,
+        "sha256": "ea3cdeff6f9d6ddaf316ac9486dec9b493ebbad46397373f2c50c49503fd9c26"
       },
       {
         "path": "soh/src/overlays/actors/ovl_En_Mag/z_en_mag.c",
@@ -224,19 +249,24 @@
     ],
     "libultraship": [
       {
+        "path": "cmake/DefaultCXX.cmake",
+        "size_bytes": 1055,
+        "sha256": "037e876affd9061b9c3f9670474427597606edb8f3ed3ef43f79f5564fd6bc9f"
+      },
+      {
         "path": "cmake/dependencies/windows.cmake",
         "size_bytes": 413,
         "sha256": "175a75d6338cee39af0cff49c4823b5d0a886ae7057f7101e55094af6c43c5ca"
       },
       {
         "path": "include/fast/backends/dxr_shadow_cso.h",
-        "size_bytes": 339691,
-        "sha256": "5ba70d523de0f731276e82f31147a79a5fcc7c4f7b253ba94189f87bdd138faf"
+        "size_bytes": 814043,
+        "sha256": "c4420af0fa7c5dd58539af01f721d674a581ef9d7097b29dd3f27c5015a242e3"
       },
       {
         "path": "include/fast/backends/DxrAccelerationStructureManager.h",
-        "size_bytes": 8344,
-        "sha256": "42f7d60f24de9b3c00edf974d70b8f0e798634ed3b1c95fa19d6d7b4e86fc128"
+        "size_bytes": 12409,
+        "sha256": "185819fc56c65d14d718749e09b7bc904cb9676178f3974f32af0fc9fa4fce8f"
       },
       {
         "path": "include/fast/backends/DxrDescriptorRing.h",
@@ -255,18 +285,18 @@
       },
       {
         "path": "include/fast/backends/DxrShadowRenderer.h",
-        "size_bytes": 6486,
-        "sha256": "05888489617d3d6d6b400ec71d831ee69aed2692f7b7e0e6eab655d075e495f4"
+        "size_bytes": 6232,
+        "sha256": "b55903d3ca7b2df2a04b46d149a1bd4219dc89f01c25b978d356d8278e1cdded"
       },
       {
         "path": "include/fast/backends/DxrSurfaceRenderer.h",
-        "size_bytes": 14095,
-        "sha256": "36ba48b17c99dad67783f5986dcc85521abaf3bc2f0f7e51b23e1afa02491153"
+        "size_bytes": 15586,
+        "sha256": "53c828182fbb17d1e315b484983263b8f265879c218febae3b540a88b181d53e"
       },
       {
         "path": "include/fast/backends/gfx_direct3d12.h",
-        "size_bytes": 18727,
-        "sha256": "8aa50d267eff4e9e18395c18227656740957d542452fbddcb630402d33f7497f"
+        "size_bytes": 19248,
+        "sha256": "4b288f0e9b5c9112c63328b9fe39f68f94760707886b05a17da92a48f398d932"
       },
       {
         "path": "include/fast/backends/gfx_direct3d_common.h",
@@ -275,13 +305,13 @@
       },
       {
         "path": "include/fast/backends/gfx_dxgi.h",
-        "size_bytes": 5368,
-        "sha256": "ff2e93e0905bdce0da1f997cd95f6b68f06d406ce6d5766eb9c10c3b74ef62a7"
+        "size_bytes": 5405,
+        "sha256": "e4ada0d48e8c276bb809f9b608fabeea39f00dbdf52f27c9b9c7087192029ed6"
       },
       {
         "path": "include/fast/backends/gfx_rendering_api.h",
-        "size_bytes": 7487,
-        "sha256": "8c0c7a71af3addc2fe7bd92a17bb9ba4add5ea8b6cc1959e75c0f512b2b0f76d"
+        "size_bytes": 7911,
+        "sha256": "96a2070ea9255a29313b5df1737731285cebbe55e5a21c8b45fc7849bd16916d"
       },
       {
         "path": "include/fast/backends/GpuProfilerD3D12.h",
@@ -314,34 +344,44 @@
         "sha256": "8ef46872c9a8a8be6df407c5c8a04ad07799880ca38210126e2f0cae4b104bc7"
       },
       {
+        "path": "include/fast/Fast3DCombinerReference.h",
+        "size_bytes": 6045,
+        "sha256": "438fdef0897e1a2f707131aade0c71a53d544239cafbe2febf8e40fca81f4762"
+      },
+      {
         "path": "include/fast/Fast3dWindow.h",
         "size_bytes": 2699,
         "sha256": "fb0daee51d0825d4d2dbc6603ce67510fa88e6679e71d8f4dc1d5e00ad81eab5"
       },
       {
         "path": "include/fast/GeometryCapture.h",
-        "size_bytes": 6096,
-        "sha256": "b43a4eff6a6f99e01ad7a126fcb2d4cf2e70d87f31a34255096bc80c8aeafad7"
+        "size_bytes": 7618,
+        "sha256": "1c3c387ad25cf51952a306c417fbddca850173c7b67e225c43f4179dcc5aaa9a"
       },
       {
         "path": "include/fast/interpreter.h",
-        "size_bytes": 18950,
-        "sha256": "97d40f0893b53e47ad44cd48d3f4afb65c45dfcc9b32e0d798c81ca9c2b79dca"
+        "size_bytes": 19451,
+        "sha256": "d3a5c9ef809dad576e27405d97ac1d67283cdcb8db7cdf766528bdaf422d7fdc"
       },
       {
         "path": "include/fast/MaterialRegistry.h",
-        "size_bytes": 8814,
-        "sha256": "6eeb655f99f04da0afb0df963bf88748acbacbea49dd8f787b194564f21ebe1d"
+        "size_bytes": 14297,
+        "sha256": "4ff21bdb09470991c1ecaee085f4600ab1588dcded58a397c854b7be6ecf699a"
       },
       {
         "path": "include/fast/MaterialRulesPilot.h",
-        "size_bytes": 147732,
-        "sha256": "e77696f10729e42307ded0657f5987e32ad4d11bec68fa316f2b6777761d70fd"
+        "size_bytes": 149940,
+        "sha256": "20881806321a28dd91c748885ae80a133930cbe36fbba02e4eefc44f442aed3d"
+      },
+      {
+        "path": "include/fast/NativeLightContract.h",
+        "size_bytes": 1668,
+        "sha256": "7475fe9c44255fe2b969cb529ac0e16f38fbb358fa13b51293f661367ea79f3a"
       },
       {
         "path": "include/fast/PersistentScene.h",
-        "size_bytes": 7329,
-        "sha256": "031cc236a9241fc92793b649fa9750a54c780f331e1de21313d6673204be80aa"
+        "size_bytes": 7922,
+        "sha256": "704b0e81c1d22038780e745b2974a8fe8488d324b1cc4086e43f18c45cf662da"
       },
       {
         "path": "include/fast/VertexAlphaContract.h",
@@ -360,18 +400,18 @@
       },
       {
         "path": "src/fast/backends/DxrAccelerationStructureManager.cpp",
-        "size_bytes": 57602,
-        "sha256": "51347ec79e9ca4cd9ff452f7647917a0c19d0428fd38c4d8717b08cc1fd0e38c"
+        "size_bytes": 70914,
+        "sha256": "1f4dc06ece150fce1bca267014c33c2a4f18e6c4713e234e563e4c7d2a754ce2"
       },
       {
         "path": "src/fast/backends/DxrShadowRenderer.cpp",
-        "size_bytes": 58003,
-        "sha256": "8de698f02098fcce7f3f5cbccd69db5a751b4c4e706477172b8c1dcd61f3f72c"
+        "size_bytes": 62314,
+        "sha256": "e7a54450d064c83c9edd59fcd6185e9bb8db2b15db550661f3c40ca036ed7774"
       },
       {
         "path": "src/fast/backends/DxrSurfaceRenderer.cpp",
-        "size_bytes": 181687,
-        "sha256": "10c973c14e20a64d569ca6acaad099dd17877e2ec08d190ae19300f29b4abd7a"
+        "size_bytes": 216307,
+        "sha256": "b6f69e6d4a6811fdd493ba52c4b15c16d3ecab5fd0abbe0f20a0f1b96abad379"
       },
       {
         "path": "src/fast/backends/gfx_direct3d11.cpp",
@@ -380,23 +420,23 @@
       },
       {
         "path": "src/fast/backends/gfx_direct3d12.cpp",
-        "size_bytes": 236697,
-        "sha256": "8618635b0791a30dc51ae2594401223db9567ad5a292ba722e85c5eb473deaca"
+        "size_bytes": 252357,
+        "sha256": "0951d7c203d6c4ee081064e2cadf3c0be589cd3a1be8c6b07fd146b095c743a5"
       },
       {
         "path": "src/fast/backends/gfx_direct3d12_framebuffer.cpp",
-        "size_bytes": 40882,
-        "sha256": "bdf18a77cedac8d846f1471e8964ef448fe2440cb31cd670d7cd5332245dd800"
+        "size_bytes": 41623,
+        "sha256": "7e466cb88b173b49346919418fc6335eb060534c3b0e7998c234114f44240d6c"
       },
       {
         "path": "src/fast/backends/gfx_direct3d12_gui.cpp",
-        "size_bytes": 8623,
-        "sha256": "1f65713a2becf6cf401bb89abe4f031f71738fd78af432e3387644f13272e4fb"
+        "size_bytes": 8917,
+        "sha256": "36b703e350cb0011a72b507bb9309bba3889d2fd7309512b0da7c3388f1ca6eb"
       },
       {
         "path": "src/fast/backends/gfx_dxgi.cpp",
-        "size_bytes": 45847,
-        "sha256": "949e31af16659f9f3a97d51984db5b4346c2352584ea0c3c1794e21979ff9d17"
+        "size_bytes": 51060,
+        "sha256": "4a8166c3e6d67d1104fa214d5a90bbc4bde597a7a099a8700eb39223a9992ff0"
       },
       {
         "path": "src/fast/backends/GpuProfilerD3D12.cpp",
@@ -420,28 +460,28 @@
       },
       {
         "path": "src/fast/GeometryCapture.cpp",
-        "size_bytes": 20317,
-        "sha256": "405598cdde5040bc9e31800d302cb1141ff867c25ac03467db009415dfe2b2eb"
+        "size_bytes": 24769,
+        "sha256": "c6dbfc3c3a551f51ff9cad814bd2dd711ed90d4682b2388a5d670086f80475c9"
       },
       {
         "path": "src/fast/interpreter.cpp",
-        "size_bytes": 216877,
-        "sha256": "9a3901c67c0943c3d550f7c8cc41143e55be125fe57c940ade6f1c090aab28e3"
+        "size_bytes": 223414,
+        "sha256": "7c0bf6bbac91a8fcb4a5e06e6281139fbee3cada8217a49133fb4a2d9e5c20a7"
       },
       {
         "path": "src/fast/MaterialRegistry.cpp",
-        "size_bytes": 40111,
-        "sha256": "27244b6289e17fa97800950d6b14d630e5f2bddbbe7c2f9a06db04a0ca205a93"
+        "size_bytes": 47024,
+        "sha256": "7a035fbdee4d2f1d32bddb3288d1fad0636dc42e70110d43e9aa306bb2fea345"
       },
       {
         "path": "src/fast/PersistentScene.cpp",
-        "size_bytes": 18879,
-        "sha256": "32387ec4c3b7ebec7bada04a175d1169fd1e9b0453145101bed3755cb2e053e7"
+        "size_bytes": 22640,
+        "sha256": "5399bfa70ec69c0dd31fcade37473fa912d779a5872b3532b30570f66cafa0a2"
       },
       {
         "path": "src/fast/shaders/dxr_shadow.hlsl",
-        "size_bytes": 75227,
-        "sha256": "d8e63643a1e0fc5e536db4a229314077bac24dd5e10075751fff761ad481dd21"
+        "size_bytes": 124568,
+        "sha256": "75c9632cfb2554989bb548e8f915021b33a560b18bc852b958f66119c4b8654c"
       },
       {
         "path": "src/ship/audio/Audio.cpp",
@@ -507,19 +547,29 @@
         "path": "src/ship/window/gui/StatsWindow.cpp",
         "size_bytes": 902,
         "sha256": "a24fabf96ae8afb55a7f9fc34a7ba4eba2e13db76fff324320f22fbd49f3ba97"
+      },
+      {
+        "path": "tests/CMakeLists.txt",
+        "size_bytes": 468,
+        "sha256": "62f9889f11e58728e4c39438177212eb1cee08a8ae8c04035a9c44ba16262e79"
+      },
+      {
+        "path": "tests/native_light_contract_test.cpp",
+        "size_bytes": 1737,
+        "sha256": "be0f0931d87970bdb0805f2d35757ddeb90959a8bed53af6bfa4d6baccb153fa"
       }
     ]
   },
   "patches": {
     "shipwright": {
       "path": "patches/development/shipwright_9_1_1_development.patch",
-      "size_bytes": 372060,
-      "sha256": "fc1678423acb8dd7992845764489cfeaa7093ea22bc06210040559ca3191004e"
+      "size_bytes": 465370,
+      "sha256": "ccafcff62d3addde1381308ba40811d3ec76ba371a2e5d27bd2123cddedd7f8b"
     },
     "libultraship": {
       "path": "patches/development/libultraship_1_3_1_development.patch",
-      "size_bytes": 1604336,
-      "sha256": "ee21fd14dad57c446b86215e45ac31fc3d436c16dbb50d81bd0d8da466633c0d"
+      "size_bytes": 2267956,
+      "sha256": "e28a3caedff8dbe9a028ec6dbdccd47eab04d7e9eeea99f6a38064894c9518cd"
     }
   }
 }

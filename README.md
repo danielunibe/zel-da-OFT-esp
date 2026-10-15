@@ -11,7 +11,7 @@
 Este repositorio constituye el **respaldo maestro completo, auditable y reproducible** de todo el desarrollo propio del proyecto: arquitectura visual Direct3D 11 con mapeo de tonos fílmico ACES, niebla atmosférica F3DEX2, dataset de inteligencia de materiales (1.407 reglas compiladas), aislamiento de interfaz, localización completa al español latinoamericano (ES-419) con glifos auténticos, herramientas de compilación con guardián de procesos y suites de validación automatizadas de tiempo de ejecución.
 
 
-> **Estado canónico (12 de octubre de 2026):** V03.1.1 continúa siendo el último runtime estable. El árbol de desarrollo más reciente se conserva aparte en [source-overlay/development](source-overlay/development/) y [patches/development](patches/development/). Su trabajo D3D12/DXR y el harness siguen siendo experimentales; no certifican RTX visible ni una nueva release. Consulta [la integración actual](docs/development/CURRENT_CANONICAL_SNAPSHOT.md).
+> **Estado canónico (15 de octubre de 2026):** V03.1.1 continúa siendo el último runtime estable. El árbol de desarrollo más reciente se conserva aparte en [source-overlay/development](source-overlay/development/) y [patches/development](patches/development/). Su trabajo D3D12/DXR y el harness siguen siendo experimentales; no certifican RTX visible ni una nueva release. Consulta [la integración actual](docs/development/CURRENT_CANONICAL_SNAPSHOT.md).
 
 ---
 

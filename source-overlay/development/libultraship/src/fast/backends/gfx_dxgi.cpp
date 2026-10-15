@@ -147,6 +147,7 @@ static bool GetMonitorAtCoords(std::vector<std::tuple<HMONITOR, RECT, BOOL>> Mon
 }
 
 void GfxWindowBackendDXGI::ToggleBorderlessWindowFullScreen(bool enable, bool call_callback) {
+    if (mBackgroundHarness) return;
     // Windows 7 + flip mode + waitable object can't go to exclusive fullscreen,
     // so do borderless instead. If DWM is enabled, this means we get one monitor
     // sync interval of latency extra. On Win 10 however (maybe Win 8 too), due to
@@ -416,8 +417,13 @@ static LRESULT CALLBACK gfx_dxgi_wnd_proc(HWND h_wnd, UINT message, WPARAM w_par
                          prcNewWindow->bottom - prcNewWindow->top, SWP_NOZORDER | SWP_NOACTIVATE);
             self->mPosX = prcNewWindow->left;
             self->mPosY = prcNewWindow->top;
-            self->current_width = prcNewWindow->right - prcNewWindow->left;
-            self->current_height = prcNewWindow->bottom - prcNewWindow->top;
+            // WM_DPICHANGED supplies outer bounds. WM_SIZE publishes client
+            // bounds during SetWindowPos; never replace them with border sizes.
+            RECT client{};
+            if (GetClientRect(h_wnd, &client) && client.right > 0 && client.bottom > 0) {
+                self->current_width = client.right - client.left;
+                self->current_height = client.bottom - client.top;
+            }
             break;
         }
         case WM_ENDSESSION:
@@ -543,6 +549,18 @@ GfxWindowBackendDXGI::~GfxWindowBackendDXGI() {
 
 void GfxWindowBackendDXGI::Init(const char* game_name, const char* gfx_api_name, bool start_in_fullscreen,
                                 uint32_t width, uint32_t height, int32_t posX, int32_t posY) {
+    const char* harness = std::getenv("COUCH_DXR_HARNESS");
+    const char* background = std::getenv("COUCH_DXR_BACKGROUND");
+    mBackgroundHarness = harness && strcmp(harness, "1") == 0 &&
+                         background && strcmp(background, "1") == 0;
+    if (mBackgroundHarness) {
+        // Keep the isolated runtime's configured client resolution. Hidden
+        // acceptance runs must exercise the same raster/DXR viewport as Present.
+        start_in_fullscreen = false;
+        mFullScreen = false;
+        mIsMouseCaptured = false;
+        mInFocus = false;
+    }
     LARGE_INTEGER lqpc_init, lqpc_freq;
     QueryPerformanceCounter(&lqpc_init);
     QueryPerformanceFrequency(&lqpc_freq);
@@ -601,13 +619,34 @@ void GfxWindowBackendDXGI::Init(const char* game_name, const char* gfx_api_name,
         posY = 100;
     }
 
-    h_wnd = CreateWindowW(WINCLASS_NAME, w_title, WS_OVERLAPPEDWINDOW, posX + wr.left, posY + wr.top, current_width,
+    h_wnd = CreateWindowExW(mBackgroundHarness ? WS_EX_NOACTIVATE | WS_EX_TOOLWINDOW : 0,
+                          WINCLASS_NAME, w_title, WS_OVERLAPPEDWINDOW, posX + wr.left, posY + wr.top, current_width,
                           current_height, nullptr, nullptr, nullptr, this);
+
+    // GetDimensions is a render/client size, not the outer window rectangle.
+    // A hidden window never reaches ShowWindow's WM_SIZE notification, so
+    // relying on that notification leaves border pixels in the camera aspect
+    // and viewport while the swap chain uses the smaller client rectangle.
+    RECT clientRect{};
+    if (GetClientRect(h_wnd, &clientRect) && clientRect.right > 0 && clientRect.bottom > 0) {
+        current_width = static_cast<uint32_t>(clientRect.right);
+        current_height = static_cast<uint32_t>(clientRect.bottom);
+    }
 
     LoadDxgi();
 
-    ShowWindow(h_wnd, SW_SHOW);
-    UpdateWindow(h_wnd);
+    if (!mBackgroundHarness) {
+        ShowWindow(h_wnd, SW_SHOW);
+        UpdateWindow(h_wnd);
+    } else {
+        FILE* log = fopen(couch_diagnostics_path(), "a");
+        if (log) {
+            fprintf(log, "[COUCH-HARNESS][WINDOW_HIDDEN] visible=%d foreground=%d client=%ux%u input=DISABLED present=SKIPPED_BACKGROUND\n",
+                    IsWindowVisible(h_wnd) ? 1 : 0, GetForegroundWindow() == h_wnd ? 1 : 0,
+                    current_width, current_height);
+            fclose(log);
+        }
+    }
 
     // Get refresh rate
     GetMonitorHzPeriod(mMonitor, mDetectedHz, mDisplayPeriod);
@@ -616,6 +655,7 @@ void GfxWindowBackendDXGI::Init(const char* game_name, const char* gfx_api_name,
         ToggleBorderlessWindowFullScreen(true, false);
     }
 
+    if (mBackgroundHarness) return; // No global raw-input registration in background tests.
     DragAcceptFiles(h_wnd, TRUE);
 
     // Mouse init
@@ -631,6 +671,7 @@ void GfxWindowBackendDXGI::SetFullscreenChangedCallback(void (*mOnFullscreenChan
 }
 
 void GfxWindowBackendDXGI::SetCursorVisibility(bool visible) {
+    if (mBackgroundHarness) return;
     // https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showcursor
     // https://devblogs.microsoft.com/oldnewthing/20091217-00/?p=15643
     // ShowCursor uses a counter, not a boolean value, and increments or decrements that value when called
@@ -657,6 +698,7 @@ void GfxWindowBackendDXGI::SetCursorVisibility(bool visible) {
 }
 
 void GfxWindowBackendDXGI::SetMousePos(int32_t x, int32_t y) {
+    if (mBackgroundHarness) return;
     SetCursorPos(x, y);
 }
 
@@ -699,6 +741,7 @@ bool GfxWindowBackendDXGI::GetMouseState(uint32_t btn) {
 }
 
 void GfxWindowBackendDXGI::SetMouseCapture(bool capture) {
+    if (mBackgroundHarness) return;
     mIsMouseCaptured = capture;
     if (capture) {
         ApplyMouseCaptureClip();
@@ -765,6 +808,7 @@ static uint64_t qpc_to_100ns(uint64_t qpc) {
 }
 
 bool GfxWindowBackendDXGI::IsFrameReady() {
+    if (mBackgroundHarness) return true;
     DXGI_FRAME_STATISTICS stats;
     if (swap_chain->GetFrameStatistics(&stats) == S_OK &&
         (stats.SyncRefreshCount != 0 || stats.SyncQPCTime.QuadPart != 0ULL)) {
@@ -895,6 +939,31 @@ void GfxWindowBackendDXGI::ReleaseSwapChainForInitFallback() {
 }
 
 void GfxWindowBackendDXGI::SwapBuffersBegin() {
+    if (mBackgroundHarness) {
+        // EndFrame has already submitted real GPU work and readbacks. No
+        // swap-chain Present or monitor latency wait is needed for this test.
+        Sleep(33);
+        mDroppedFrame = false;
+        if (IsWindowVisible(h_wnd) || GetForegroundWindow() == h_wnd) {
+            fprintf(stderr, "HARNESS_BACKGROUND_VISIBILITY_FAILURE\n");
+            mIsRunning = false;
+        }
+        if (mD3D12ForensicCapture && mD3D12ForensicFrame >= 0) {
+            const char* outputRoot = std::getenv("COUCH_DXR_OUTPUT");
+            if (outputRoot && *outputRoot) {
+                std::ofstream evidence(std::filesystem::path(outputRoot) / "presentation.evidence.jsonl",
+                                       std::ios::binary | std::ios::app);
+                evidence << "{\"forensic_frame\":" << mD3D12ForensicFrame
+                         << ",\"present_frame\":" << mD3D12Frame
+                         << ",\"hresult\":null,\"dxgi_present_call\":\"SKIPPED_BACKGROUND\","
+                            "\"physical_scanout\":\"NOT_RUN\",\"window_visible\":"
+                         << (IsWindowVisible(h_wnd) ? "true" : "false")
+                         << ",\"window_foreground\":" << (GetForegroundWindow() == h_wnd ? "true" : "false")
+                         << "}\n";
+            }
+        }
+        return;
+    }
     if (mD3D12Resource && Ship::Context::GetInstance()->GetConsoleVariables()->GetInteger(
         "gEnhancements.Graphics.DXR.AutoQuality",1)) {
         uint32_t hz=60; GetActiveWindowRefreshRate(&hz); mTargetFps=std::max(1,std::min(60,int(hz)));
@@ -968,8 +1037,29 @@ void GfxWindowBackendDXGI::SwapBuffersBegin() {
                          << ",\"hresult\":\"0x" << std::hex << std::uppercase
                          << static_cast<unsigned long>(hr) << std::dec
                          << "\",\"dxgi_present_call\":\"" << presentStatus
-                         << "\",\"physical_scanout\":\"NOT_VERIFIABLE\"}\n";
+                         << "\",\"physical_scanout\":\"NOT_VERIFIABLE\",\"window_visible\":"
+                         << (IsWindowVisible(h_wnd) ? "true" : "false")
+                         << ",\"window_foreground\":" << (GetForegroundWindow() == h_wnd ? "true" : "false") << "}\n";
             }
+        }
+    }
+    // Hold the exact presented frame for an explicitly requested acceptance
+    // screenshot. Ordinary gameplay and hidden tests never enter this wait.
+    const char* monitorCapture = std::getenv("COUCH_DXR_MONITOR_CAPTURE");
+    const char* monitorOutput = std::getenv("COUCH_DXR_OUTPUT");
+    if (mD3D12ForensicCapture && hr == S_OK && monitorCapture &&
+        std::strcmp(monitorCapture, "1") == 0 && monitorOutput && *monitorOutput) {
+        const auto acknowledgement = std::filesystem::path(monitorOutput) / "monitor.capture.complete";
+        const ULONGLONG deadline = GetTickCount64() + 15000;
+        while (GetTickCount64() < deadline && IsWindow(h_wnd) &&
+               !std::filesystem::exists(acknowledgement)) {
+            MSG message{};
+            while (PeekMessage(&message, nullptr, 0, 0, PM_REMOVE)) {
+                if (message.message == WM_QUIT) { PostQuitMessage(static_cast<int>(message.wParam)); break; }
+                TranslateMessage(&message);
+                DispatchMessage(&message);
+            }
+            Sleep(25);
         }
     }
     const auto presentedAt=std::chrono::steady_clock::now();
@@ -1017,6 +1107,7 @@ void GfxWindowBackendDXGI::SwapBuffersBegin() {
 }
 
 void GfxWindowBackendDXGI::SwapBuffersEnd() {
+    if (mBackgroundHarness) return;
     LARGE_INTEGER t0, t1, t2;
     QueryPerformanceCounter(&t0);
     QueryPerformanceCounter(&t1);
@@ -1206,7 +1297,12 @@ void ThrowIfFailed(HRESULT res, HWND h_wnd, const char* message) {
     if (FAILED(res)) {
         char full_message[256];
         sprintf(full_message, "%s\n\nHRESULT: 0x%08X", message, res);
-        MessageBoxA(h_wnd, full_message, "Error", MB_OK | MB_ICONERROR);
+        const char* background = std::getenv("COUCH_DXR_BACKGROUND");
+        const char* harness = std::getenv("COUCH_DXR_HARNESS");
+        if (background && strcmp(background, "1") == 0 && harness && strcmp(harness, "1") == 0)
+            fprintf(stderr, "%s\n", full_message);
+        else
+            MessageBoxA(h_wnd, full_message, "Error", MB_OK | MB_ICONERROR);
         throw res;
     }
 }

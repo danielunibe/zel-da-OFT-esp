@@ -87,8 +87,11 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
     set(VCPKG_TRIPLET x64-windows-static)
     set(VCPKG_TARGET_TRIPLET x64-windows-static)
 
-    vcpkg_bootstrap()
-    vcpkg_install_packages(zlib bzip2 libzip libpng sdl2 sdl2-net glew glfw3 nlohmann-json tinyxml2 spdlog libogg libvorbis opus opusfile)
+    option(SKIP_AUTOMATE_VCPKG "Use the already configured vcpkg toolchain without updating its checkout" OFF)
+    if(NOT SKIP_AUTOMATE_VCPKG)
+        vcpkg_bootstrap()
+        vcpkg_install_packages(zlib bzip2 libzip libpng sdl2 sdl2-net glew glfw3 nlohmann-json tinyxml2 spdlog libogg libvorbis opus opusfile)
+    endif()
     if (CMAKE_C_COMPILER_LAUNCHER MATCHES "ccache|sccache")
         set(CMAKE_MSVC_DEBUG_INFORMATION_FORMAT Embedded)
     endif()
@@ -183,12 +186,16 @@ if(WIN32)
     file(GLOB COUCH_DXC_HINTS "$ENV{LOCALAPPDATA}/Microsoft/WinGet/Packages/Microsoft.DirectX.ShaderCompiler*/bin/x64")
     find_program(COUCH_DXC NAMES dxc.exe dxc HINTS ${COUCH_DXC_HINTS} REQUIRED)
     set(COUCH_DXR_HEADER "${CMAKE_BINARY_DIR}/generated/fast/backends/dxr_shadow_cso.h")
+    set(COUCH_DXR_TARGET_PROFILE "lib_6_5")
+    set(COUCH_DXR_HLSL_VERSION "2021")
     add_custom_command(OUTPUT "${COUCH_DXR_HEADER}"
         COMMAND powershell -NoProfile -ExecutionPolicy Bypass -File
             "${CMAKE_SOURCE_DIR}/scripts/Generate-DxrShadowBytecode.ps1"
             -DxcPath "${COUCH_DXC}" -OutputPath "${COUCH_DXR_HEADER}"
+            -TargetProfile "${COUCH_DXR_TARGET_PROFILE}" -HlslVersion "${COUCH_DXR_HLSL_VERSION}"
         DEPENDS "${CMAKE_SOURCE_DIR}/libultraship/src/fast/shaders/dxr_shadow.hlsl"
                 "${CMAKE_SOURCE_DIR}/scripts/Generate-DxrShadowBytecode.ps1"
+                "${COUCH_DXC}"
         VERBATIM)
     add_custom_target(couch_dxr_bytecode DEPENDS "${COUCH_DXR_HEADER}")
     target_link_libraries(libultraship PUBLIC d3d12 dxgi)

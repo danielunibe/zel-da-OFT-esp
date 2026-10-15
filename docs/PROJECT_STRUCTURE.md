@@ -13,7 +13,7 @@ Este documento detalla la taxonomía y propósito de cada directorio dentro del 
 
 ---
 
-## Autoridad vigente al 12 de octubre de 2026
+## Autoridad vigente al 15 de octubre de 2026
 
 - V03.1.1 y su overlay permanecen como el último runtime estable documentado.
 - El checkout de desarrollo más reciente se preserva bajo `source-overlay/development/` y `patches/development/`, contra los mismos commits upstream fijados.

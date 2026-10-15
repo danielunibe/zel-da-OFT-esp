@@ -99,7 +99,8 @@ public:
 
     void InvalidateCameraMatrices() { mMatricesValid = false; }
     void SetQuality(float scale, unsigned samples) { mQualityScale = scale; mIndirectSamples = samples; }
-    void UpdateCameraMatrices(const float view[4][4], const float proj[4][4], float clipXScale = 1.0f);
+    void UpdateCameraMatrices(const float view[4][4], const float proj[4][4], float clipXScale = 1.0f,
+                              const float viewport[4] = nullptr);
 
     void RenderReflections(ID3D12Device* device, ID3D12GraphicsCommandList* cmdList,
                            ID3D12Resource* renderTarget, D3D12_CPU_DESCRIPTOR_HANDLE rtvHandle,
@@ -127,11 +128,17 @@ public:
     ID3D12Resource* GetReflectionColorForCapture() const { return mReflectionColor.Get(); }
     ID3D12Resource* GetEmissiveMaskForCapture() const { return mEmissiveMask.Get(); }
     ID3D12Resource* GetIndirectMaskForCapture() const { return mIndirectMask.Get(); }
+    ID3D12Resource* GetNativePointDirectForCapture() const { return mNativePointDirect.Get(); }
+    bool IsNaviPilotDispatch() const { return mNaviPilotDispatch; }
     ID3D12Resource* GetRasterSceneColorCopyForCapture() const { return mSceneColorCopy.Get(); }
+    ID3D12Resource* GetVisualAblationForCapture(unsigned index, int frame) const {
+        return index < 4 && frame == mVisualAblationFrame ? mVisualAblationTargets[index].Get() : nullptr;
+    }
     unsigned GetReflectionMaskState() const { return mMaskTrackedState; }
     unsigned GetReflectionColorState() const { return mReflectionColorTrackedState; }
     unsigned GetEmissiveMaskState() const { return mEmissiveTrackedState; }
     unsigned GetIndirectMaskState() const { return mIndirectTrackedState; }
+    unsigned GetNativePointDirectState() const { return mNativePointDirectTrackedState; }
     unsigned GetSceneColorCopyState() const { return mSceneColorTrackedState; }
 
 private:
@@ -177,6 +184,11 @@ private:
     HANDLE mPrimaryGateFenceEvent = nullptr;
     uint64_t mPrimaryGateFenceValue = 0;
     bool mPrimaryGateReadbackPending = false;
+    bool mNaviPilotDispatch = false;
+    bool mNaviPilotCaptured = false;
+    bool mNaviPilotMetadataCaptured = false;
+    bool mNaviPilotPending = false;
+    std::vector<DxrSurfaceIdentity> mNaviPendingIdentities;
     int mPrimaryGatePendingFrame = -1;
     int mPrimaryGatePendingScene = -1;
     int mPrimaryGatePendingRoom = -1;
@@ -206,10 +218,19 @@ private:
     // surface. It is kept scalar and low bandwidth so it cannot replace the
     // original texture or direct-light response.
     Microsoft::WRL::ComPtr<ID3D12Resource> mIndirectMask;
+    // Direct Navi light for static receivers whose captured Fast3D draw proves
+    // G_LIGHTING did not already put that source into Shade.
+    Microsoft::WRL::ComPtr<ID3D12Resource> mNativePointDirect;
     // Copy of the already-rendered scene used by the fullscreen surface
     // composite. Keeping this separate avoids read/write aliasing when the
     // water refraction path samples the scene while writing the backbuffer.
     Microsoft::WRL::ComPtr<ID3D12Resource> mSceneColorCopy;
+    // Harness-only controls share the exact same scene, signals and command
+    // list as production. They are never bound to the displayed framebuffer.
+    std::array<Microsoft::WRL::ComPtr<ID3D12Resource>, 4> mVisualAblationTargets;
+    Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> mVisualAblationRtvs;
+    int mVisualAblationFrame = -1;
+    bool mVisualAblationCaptured = false;
     Microsoft::WRL::ComPtr<ID3D12Resource> mPathHistory[2];
     Microsoft::WRL::ComPtr<ID3D12Resource> mPathTemporalOutput;
     Microsoft::WRL::ComPtr<ID3D12Resource> mReflectionHistory[2];
@@ -253,6 +274,7 @@ private:
     unsigned mReflectionColorTrackedState = static_cast<unsigned>(D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
     unsigned mEmissiveTrackedState = static_cast<unsigned>(D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
     unsigned mIndirectTrackedState = static_cast<unsigned>(D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
+    unsigned mNativePointDirectTrackedState = static_cast<unsigned>(D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
     unsigned mSceneColorTrackedState = static_cast<unsigned>(D3D12_RESOURCE_STATE_COPY_DEST);
 
     Microsoft::WRL::ComPtr<ID3D12RootSignature> mCompositeRootSig;
@@ -264,6 +286,7 @@ private:
     float mInvViewMatrix[4][4] = {};
     float mCameraPosition[4] = { 0, 0, 0, 1 };
     float mClipXScale = 1.0f;
+    float mRasterViewport[4] = { 0.0f, 0.0f, 1.0f, 1.0f };
     bool mMatricesValid = false;
     float mQualityScale = 0.5f;
     unsigned mIndirectSamples = 1;

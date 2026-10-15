@@ -239,7 +239,8 @@ struct InFrameReadback {
     UINT bytesPerPixel = 0;
     bool wantPng = true;                           // timeline samples log stats only
 };
-static InFrameReadback gInFrame[8]; // raster, composite, shaded source, two SDR checkpoints, reflection, GI, emission
+static constexpr int kInFrameStages = 20;
+static InFrameReadback gInFrame[kInFrameStages]; // required passes, controls, GPU SDR comparisons, Navi radiance and point ON/OFF
 static Microsoft::WRL::ComPtr<ID3D12Fence> gInFrameFence;
 static HANDLE gInFrameEvent = nullptr;
 static UINT64 gInFrameFenceVal = 0;
@@ -389,14 +390,59 @@ static bool SceneHarnessReadCaptureRequest(std::string& request) {
     return !request.empty();
 }
 
+static bool SceneHarnessNaviIsolation() {
+    const char* isolation = std::getenv("COUCH_DXR_NAVI_ISOLATION");
+    return CouchNaviPilotActive() && (!isolation || std::strcmp(isolation, "0") != 0);
+}
+
 static const char* SceneHarnessStageName(int slot) {
+    if (CouchNaviPilotActive() && slot == 17) return "navi_point_direct";
+    if (CouchNaviPilotActive() && slot == 18) return "navi_point_off_sdr";
+    if (CouchNaviPilotActive() && slot == 19) return "navi_point_on_sdr";
+    if (SceneHarnessNaviIsolation()) {
+        switch (slot) {
+            case 8: return "navi_a_hdr";
+            case 9: return "navi_c_hdr";
+            case 15: return "navi_d_hdr";
+            case 11: return "navi_b_sdr";
+            case 13: return "navi_a_sdr";
+            case 14: return "navi_c_sdr";
+            case 16: return "navi_d_sdr";
+        }
+    }
     static const char* names[] = {"raster_hdr", "composite_pre_tonemap", "raster_scene_color_copy",
                                   "post_aces_pre_present", "final_sdr_pre_present", "dxr_reflection",
-                                  "dxr_indirect", "emissive_mask"};
-    return slot >= 0 && slot < 8 ? names[slot] : "unknown";
+                                  "dxr_indirect", "emissive_mask", "surface_optics_off", "indirect_off",
+                                  "comparison_dxr_off", "comparison_dxr_on", "comparison_shadows_only",
+                                  "comparison_optics_off", "comparison_indirect_off",
+                                  "relight_off", "comparison_relight_off", "navi_point_direct",
+                                  "comparison_navi_point_off", "comparison_navi_point_on"};
+    return slot >= 0 && slot < kInFrameStages ? names[slot] : "unknown";
+}
+
+// Visual-ablation controls are rendered into HDR targets and re-encoded to SDR
+// by CaptureDxrComparisonImage. Slots 8/9 are the two original HDR controls;
+// relight-off is appended at 15 so every previously published slot number and
+// file name stays stable for the existing capture consumers.
+static int SceneHarnessAblationSlot(int index) {
+    static const int slots[] = {8, 9, 15};
+    return index >= 0 && index < 3 ? slots[index] : -1;
+}
+
+// Comparison index -> slot. The mapping is not 10+index because slot 15 is
+// the relight-off HDR control; comparison_relight_off therefore sits at 16.
+static int SceneHarnessComparisonSlot(int index) {
+    static const int slots[] = {10, 11, 12, 13, 14, 16, 18, 19};
+    return index >= 0 && index < 8 ? slots[index] : -1;
 }
 
 static const char* SceneHarnessStageId(int slot) {
+    if (SceneHarnessNaviIsolation() && (slot == 8 || slot == 9 || slot == 15))
+        return SceneHarnessStageName(slot);
+    if (slot == 8) return "SURFACE_OPTICS_OFF";
+    if (slot == 9) return "INDIRECT_OFF";
+    if (slot == 15) return "RELIGHT_OFF";
+    if (slot >= 10 && slot < kInFrameStages) return SceneHarnessStageName(slot);
     return Fast::DxrCaptureStageId(slot);
 }
 
@@ -801,7 +847,11 @@ static void ForensicResolveInFrameCaptures(ID3D12Device* device, ID3D12CommandQu
         " completed=" + std::to_string(gInFrameFence->GetCompletedValue()));
     static std::vector<uint8_t> rawPairPixels;
     static int rawPairWidth = 0, rawPairHeight = 0, rawPairFrame = -1;
-    for (int i = 0; i < 8; ++i) {
+    // Resolve optional controls before required slot 7 writes capture.ack.
+    // The request must remain open until their payload/metadata is saved.
+    for (int pass = 0; pass < kInFrameStages; ++pass) {
+        const int optionalCount = kInFrameStages - 8;
+        const int i = pass < optionalCount ? 8 + pass : pass - optionalCount;
         InFrameReadback& rb = gInFrame[i];
         if (!rb.pending || !rb.buf) continue;
         D3D12_RANGE mr = { 0, (SIZE_T)rb.buf->GetDesc().Width };
@@ -1057,7 +1107,7 @@ static void ForensicResolveInFrameCaptures(ID3D12Device* device, ID3D12CommandQu
                 }
             }
             wrote = ForensicWriteCapturePair(path, W, H, rgba);
-            if (SceneHarnessActive() && (i == 3 || i == 4)) {
+            if (SceneHarnessActive() && (i == 3 || i == 4 || i >= 10)) {
                 const std::string payloadName = std::string(SceneHarnessStageName(i)) + "_frame" +
                                                 std::to_string(rb.frame) + "_raw.png";
                 const bool metadataWritten = wrote && SceneHarnessWriteMetadata(
@@ -1080,6 +1130,7 @@ static void ForensicResolveInFrameCaptures(ID3D12Device* device, ID3D12CommandQu
 void ForensicGlobalCompositeCapture(int frame) {
     if (forensic::gSelf) forensic::gSelf->ForensicCompositeCapture(frame);
 }
+
 
 namespace forensic {
 struct Captures {
@@ -1134,6 +1185,88 @@ static void LogCouchD3D12(const std::string& line) {
     if (ofs.is_open()) {
         ofs << line << "\n";
     }
+}
+
+void GfxRenderingAPIDX12::CaptureDxrComparisonImage(unsigned index, ID3D12Resource* source,
+                                                  D3D12_RESOURCE_STATES sourceState, int frame) {
+    const char* comparison = std::getenv("COUCH_DXR_VISUAL_ABLATION");
+    const char* mode = std::getenv("COUCH_DXR_MODE");
+    if (index >= 8 || !source || !mCommandListOpen || !forensic::SceneHarnessCaptureRequested() ||
+        !comparison || std::strcmp(comparison, "1") != 0 || !mode || std::strcmp(mode, "NORMAL") != 0) return;
+    const int comparisonSlot = forensic::SceneHarnessComparisonSlot(int(index));
+    if (comparisonSlot < 0) return;
+    const auto sourceDesc = source->GetDesc();
+    if (sourceDesc.Format != DXGI_FORMAT_R16G16B16A16_FLOAT || sourceDesc.SampleDesc.Count != 1 ||
+        !CreateFramebufferCopyPipeline(DXGI_FORMAT_R8G8B8A8_UNORM)) return;
+    if (!mComparisonRtvHeap) {
+        D3D12_DESCRIPTOR_HEAP_DESC heap{};
+        heap.Type = D3D12_DESCRIPTOR_HEAP_TYPE_RTV; heap.NumDescriptors = 8;
+        if (FAILED(mDevice->CreateDescriptorHeap(&heap, IID_PPV_ARGS(&mComparisonRtvHeap)))) return;
+    }
+    auto& output = mComparisonSdr[index];
+    if (!output || output->GetDesc().Width != sourceDesc.Width || output->GetDesc().Height != sourceDesc.Height) {
+        if (output) mFrameContexts[mFrameIndex].stagingBuffers.push_back(output);
+        output.Reset();
+        auto desc = sourceDesc;
+        desc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+        desc.Flags = D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET;
+        D3D12_HEAP_PROPERTIES heap{}; heap.Type = D3D12_HEAP_TYPE_DEFAULT;
+        D3D12_CLEAR_VALUE clear{}; clear.Format = desc.Format; clear.Color[3] = 1;
+        if (FAILED(mDevice->CreateCommittedResource(&heap, D3D12_HEAP_FLAG_NONE, &desc,
+            D3D12_RESOURCE_STATE_RENDER_TARGET, &clear, IID_PPV_ARGS(&output)))) return;
+    }
+    auto rtv = mComparisonRtvHeap->GetCPUDescriptorHandleForHeapStart();
+    rtv.ptr += index * mRtvDescriptorSize;
+    mDevice->CreateRenderTargetView(output.Get(), nullptr, rtv);
+    const auto sourceSrv = AllocateSrvDescriptor();
+    auto cpu = mSrvHeap->GetCPUDescriptorHandleForHeapStart();
+    cpu.ptr += size_t(sourceSrv) * mSrvDescriptorSize;
+    D3D12_SHADER_RESOURCE_VIEW_DESC srv{};
+    srv.Format = sourceDesc.Format; srv.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
+    srv.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING; srv.Texture2D.MipLevels = 1;
+    mDevice->CreateShaderResourceView(source, &srv, cpu);
+    const auto depthSrv = AllocateSrvDescriptor();
+    auto depthCpu = mSrvHeap->GetCPUDescriptorHandleForHeapStart();
+    depthCpu.ptr += size_t(depthSrv) * mSrvDescriptorSize;
+    srv.Format = DXGI_FORMAT_R32_FLOAT;
+    ID3D12Resource* depth = FramebufferDepth(mCurrentFramebuffer);
+    mDevice->CreateShaderResourceView(depth, &srv, depthCpu);
+    auto& depthState = mCurrentFramebuffer == 0 ? mBackbufferDepthState : mFrameBuffers.at(mCurrentFramebuffer).depthState;
+    const auto previousDepth = depthState;
+    if (depth) TransitionResource(depth, previousDepth, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
+    TransitionResource(source, sourceState, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
+    ID3D12DescriptorHeap* heaps[] = {mSrvHeap.Get()};
+    mCommandList->SetDescriptorHeaps(1, heaps);
+    mCommandList->SetGraphicsRootSignature(mFramebufferCopyRoot.Get());
+    mCommandList->SetPipelineState(mFramebufferCopyPso[0].Get());
+    auto gpu = mSrvHeap->GetGPUDescriptorHandleForHeapStart();
+    gpu.ptr += size_t(sourceSrv) * mSrvDescriptorSize;
+    mCommandList->SetGraphicsRootDescriptorTable(0, gpu);
+    gpu = mSrvHeap->GetGPUDescriptorHandleForHeapStart();
+    gpu.ptr += size_t(depthSrv) * mSrvDescriptorSize;
+    mCommandList->SetGraphicsRootDescriptorTable(1, gpu);
+    // Reuse both the production shader and the exact parameters published
+    // before BeginUiOverlayPass: linear FP16 -> ACES -> scene fog -> gamma22.
+    const float constants[] = {0, 0, 1, 1, 1, 1, 0, 0,
+        mFramebufferFog[0], mFramebufferFog[1], mFramebufferFog[2], mFramebufferFog[3],
+        mFramebufferFog[4], mFramebufferFog[5], 0, 0};
+    mCommandList->SetGraphicsRoot32BitConstants(2, 16, constants, 0);
+    mCommandList->OMSetRenderTargets(1, &rtv, FALSE, nullptr);
+    D3D12_VIEWPORT viewport{0, 0, float(sourceDesc.Width), float(sourceDesc.Height), 0, 1};
+    D3D12_RECT scissor{0, 0, LONG(sourceDesc.Width), LONG(sourceDesc.Height)};
+    mCommandList->RSSetViewports(1, &viewport); mCommandList->RSSetScissorRects(1, &scissor);
+    mCommandList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+    mCommandList->DrawInstanced(3, 1, 0, 0);
+    TransitionResource(source, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE, sourceState);
+    if (depth) TransitionResource(depth, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE, previousDepth);
+    mFrameContexts[mFrameIndex].retiredSrvIndices.push_back(sourceSrv);
+    mFrameContexts[mFrameIndex].retiredSrvIndices.push_back(depthSrv);
+    forensic::ForensicEnqueueInFrameCopy(mCommandList.Get(), mDevice.Get(), output.Get(),
+        comparisonSlot, forensic::SceneHarnessStageName(comparisonSlot), frame, D3D12_RESOURCE_STATE_RENDER_TARGET);
+    LogCouchD3D12("[COUCH-DXR-COMPARISON] frame=" + std::to_string(frame) + " stage=" +
+        forensic::SceneHarnessStageName(comparisonSlot) +
+        " source=GPU sameCommandList=1 tone=PRODUCTION_FRAMEBUFFER_ACES_GAMMA22 sameToneParameters=1 hud=EXCLUDED");
+    RestoreRasterState();
 }
 
 static bool DxrVerboseDiagnostics() {
@@ -2475,6 +2608,8 @@ void GfxRenderingAPIDX12::BeginUiOverlayPass() {
     if (forensic::ForensicCaptureWindow(forensic::gForensicFrame)) {
         forensic::ForensicEnqueueInFrameCopy(mCommandList.Get(), mDevice.Get(),
             FramebufferColor(mCurrentFramebuffer), 0, "world_raster", forensic::gForensicFrame);
+        CaptureDxrComparisonImage(0, FramebufferColor(mCurrentFramebuffer),
+            FramebufferColorState(mCurrentFramebuffer), forensic::gForensicFrame);
     }
     const uint64_t tlasGpuVA = DxrAccelerationStructureManager::Instance().GetTlasGpuVA();
     mDxrFrameEvidence.tlasValid = tlasGpuVA != 0;
@@ -2543,8 +2678,20 @@ void GfxRenderingAPIDX12::BeginUiOverlayPass() {
             static const int v2Views[] = { 11, 14, 15, 0 };
             surfaceDiagnosticView = v2Views[diagnosticStage - 200];
         }
-        else if (!diagnosticSequenceActive)
+        else if (!diagnosticSequenceActive) {
             surfaceDiagnosticView = forensic::DxrTruthManualView();
+            // Sample the gate only on the harness capture frame. This view
+            // deliberately bypasses AnyHit alpha to report structural hits;
+            // it must never replace the normal-path Truth measurements.
+            const char* harness = getenv("COUCH_DXR_HARNESS");
+            const char* manualGate = getenv("COUCH_DXR_PRIMARY_GATE_COUNTERS");
+            if (surfaceDiagnosticView == 0 && forensic::SceneHarnessCaptureRequested() &&
+                harness && strcmp(harness, "1") == 0 &&
+                manualGate && strcmp(manualGate, "1") == 0 &&
+                forensic::DxrGateCounterSequenceEnabled()) {
+                surfaceDiagnosticView = 5;
+            }
+        }
         DxrSurfaceRenderer::Instance().RenderReflections(
             mDevice.Get(), mCommandList.Get(), FramebufferColor(mCurrentFramebuffer), rtvHandle,
             FramebufferDepth(mCurrentFramebuffer), FramebufferDepthSrv(mCurrentFramebuffer), tlasGpuVA,
@@ -2589,9 +2736,18 @@ void GfxRenderingAPIDX12::BeginUiOverlayPass() {
         forensic::ForensicEnqueueInFrameCopy(mCommandList.Get(), mDevice.Get(),
             surfaceSceneColor, 2, "raster_scene_color_copy", forensic::gForensicFrame,
             static_cast<D3D12_RESOURCE_STATES>(DxrSurfaceRenderer::Instance().GetSceneColorCopyState()));
+        CaptureDxrComparisonImage(2, surfaceSceneColor,
+            static_cast<D3D12_RESOURCE_STATES>(DxrSurfaceRenderer::Instance().GetSceneColorCopyState()), forensic::gForensicFrame);
     }
     if (forensic::ForensicCaptureWindow(forensic::gForensicFrame) && dxrSurfaceEnabled) {
         auto& surfaceRenderer = DxrSurfaceRenderer::Instance();
+        if (!surfaceRenderer.IsNaviPilotDispatch()) {
+            if (ID3D12Resource* direct = surfaceRenderer.GetNativePointDirectForCapture()) {
+                forensic::ForensicEnqueueInFrameCopy(mCommandList.Get(), mDevice.Get(), direct, 17,
+                    "navi_point_direct", forensic::gForensicFrame,
+                    static_cast<D3D12_RESOURCE_STATES>(surfaceRenderer.GetNativePointDirectState()));
+            }
+        }
         if (ID3D12Resource* reflection = surfaceRenderer.GetReflectionColorForCapture()) {
             forensic::ForensicEnqueueInFrameCopy(mCommandList.Get(), mDevice.Get(), reflection, 5,
                 "dxr_reflection_color", forensic::gForensicFrame,
@@ -2607,6 +2763,31 @@ void GfxRenderingAPIDX12::BeginUiOverlayPass() {
                 "emissive_mask", forensic::gForensicFrame,
                 static_cast<D3D12_RESOURCE_STATES>(surfaceRenderer.GetEmissiveMaskState()));
         }
+        const unsigned controlCount = surfaceRenderer.IsNaviPilotDispatch() ? 3u : 4u;
+        for (unsigned i = 0; i < controlCount; ++i) {
+            if (auto* control = surfaceRenderer.GetVisualAblationForCapture(i, forensic::gForensicFrame)) {
+                const int ablationSlot = i == 3 ? forensic::SceneHarnessComparisonSlot(6)
+                                                : forensic::SceneHarnessAblationSlot(int(i));
+                if (ablationSlot < 0) continue;
+                const char* controlName = i == 3 ? "navi_point_off" :
+                    i == 0 ? "surface_optics_off" : (i == 1 ? "indirect_off" : "relight_off");
+                // Slot 18 is the toned production comparison image. Keep its
+                // only readback here; the point-off HDR target remains in the
+                // renderer and must not occupy the same slot ahead of SDR.
+                if (i != 3) {
+                    forensic::ForensicEnqueueInFrameCopy(mCommandList.Get(), mDevice.Get(), control,
+                        ablationSlot, controlName,
+                        forensic::gForensicFrame, D3D12_RESOURCE_STATE_RENDER_TARGET);
+                }
+                CaptureDxrComparisonImage(3 + i, control, D3D12_RESOURCE_STATE_RENDER_TARGET, forensic::gForensicFrame);
+            }
+        }
+        if (!surfaceRenderer.IsNaviPilotDispatch()) {
+            // Capture the normal production compositor output alongside the
+            // same-frame point-off ablation; both use the production ACES path.
+            CaptureDxrComparisonImage(7, FramebufferColor(mCurrentFramebuffer),
+                FramebufferColorState(mCurrentFramebuffer), forensic::gForensicFrame);
+        }
     }
 
     // This hook runs before EndFrame's legacy post-composite readback, whose
@@ -2619,6 +2800,8 @@ void GfxRenderingAPIDX12::BeginUiOverlayPass() {
             FramebufferColor(mCurrentFramebuffer), 1, "after_composite",
             forensic::gForensicFrame);
         ++forensic::gInFrameCompositeCaptures;
+        CaptureDxrComparisonImage(1, FramebufferColor(mCurrentFramebuffer),
+            FramebufferColorState(mCurrentFramebuffer), forensic::gForensicFrame);
     }
 
     restoreRasterState();
@@ -3255,6 +3438,13 @@ void GfxRenderingAPIDX12::SelectTexture(int tile, uint32_t textureId) {
     }
 }
 
+uint32_t GfxRenderingAPIDX12::GetTextureSrvIndex(int tile) const {
+    if (tile < 0 || tile >= SHADER_MAX_TEXTURES) return UINT32_MAX;
+    const uint32_t textureId = mCurrentTextureIds[tile];
+    if (textureId >= mTextures.size() || !mTextures[textureId].uploaded) return UINT32_MAX;
+    return mTextures[textureId].srvIndex;
+}
+
 void GfxRenderingAPIDX12::UploadTexture(const uint8_t* rgba32Buf, uint32_t width, uint32_t height) {
     uint32_t texId = mCurrentTextureIds[mCurrentTile];
     if (!mInitialized || texId >= mTextures.size()) return;
@@ -3707,19 +3897,45 @@ struct ShaderProgram* GfxRenderingAPIDX12::CreateAndLoadNewShader(uint64_t shade
                                                D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0});
 
         std::string physicalHlsl = "#define PHYSICAL_NORMAL_VALID 2\n" + hlsl;
-        // Enhanced is the normal physical-material path. Keep an explicit
-        // COUCH_MATERIAL_RESPONSE=0 escape hatch for regression diagnosis,
-        // while leaving Classic and UI/protected 2D draws unchanged.
+        // Compile the material variant independently of the selected profile:
+        // shader programs are cached by combiner ID, not by visual profile.
+        // DrawTrianglesPhysical selects this variant only for enhanced draws.
         const char* materialResponseEnv = std::getenv("COUCH_MATERIAL_RESPONSE");
         const bool enhancedPhysicalResponse =
-            Fast::MaterialRegistry::IsEnhancedVisualProfile() &&
             (!materialResponseEnv || strcmp(materialResponseEnv, "0") != 0);
-        LogCouchD3D12("[COUCH-R7C5][MATERIAL_RESPONSE] enabled=" +
+        LogCouchD3D12("[COUCH-R7C5][MATERIAL_RESPONSE] variantRequested=" +
                       std::string(enhancedPhysicalResponse ? "YES" : "NO") +
                       " profile=" + Fast::MaterialRegistry::Instance().GetProfileName() +
                       " env=" + std::string(materialResponseEnv ? materialResponseEnv : "(unset)"));
         if (enhancedPhysicalResponse) {
-            physicalHlsl =
+            // Fast3D's ordinary UNORM combiner output is display encoded.
+            // Decode before lighting, keep HDR radiance linear, and encode
+            // only the SDR variant. The sRGB combiner already uses linear RGB
+            // and has its own fromLinear() output conversion.
+            const std::string physicalTransferHlsl =
+                "float3 CouchSrgbToLinear(float3 color) {\n"
+                "    color = max(color, 0.0.xxx);\n"
+                "    return lerp(pow((color + 0.055) / 1.055, 2.4), color / 12.92,\n"
+                "                1.0 - step(0.04045, color));\n"
+                "}\n"
+                "float3 CouchLinearToSrgb(float3 color) {\n"
+                "    color = max(color, 0.0.xxx);\n"
+                "    return lerp(1.055 * pow(color, 1.0 / 2.4) - 0.055, color * 12.92,\n"
+                "                1.0 - step(0.0031308, color));\n"
+                "}\n"
+                "float3 CouchPhysicalInput(float3 color) {\n" +
+                (mSrgbMode ? std::string("    return color;\n")
+                           : std::string("    return CouchSrgbToLinear(color);\n")) +
+                "}\n"
+                "float3 CouchPhysicalOutput(float3 color) {\n"
+                "#if defined(COUCH_HDR_OUTPUT)\n"
+                "    return color;\n"
+                "#else\n" +
+                (mSrgbMode ? std::string("    return color;\n")
+                           : std::string("    return CouchLinearToSrgb(color);\n")) +
+                "#endif\n"
+                "}\n";
+            physicalHlsl = physicalTransferHlsl +
                 "cbuffer CouchPhysicalCB : register(b2) {\n"
                 "    uint gCouchMaterialIndex;\n"
                 "    uint gCouchDrawFlags;\n"
@@ -3767,12 +3983,16 @@ struct ShaderProgram* GfxRenderingAPIDX12::CreateAndLoadNewShader(uint64_t shade
                 "float3 CouchApplyPhysicalResponse(float3 baseColor, float3 viewNormal, float3 viewPosition, uint materialIndex, uint drawFlags) {\n"
                 // MaterialType values are the shader ABI: 1..18 cover the
                 // authored physical families, 19 is protected UI, and 20 is
-                // unknown. Keep UI and unknown draws byte-for-byte on the
-                // legacy shading path while giving every known 3D family a
-                // deliberate response.
-                "    if ((drawFlags & 16u) != 0u || materialIndex == 0u || materialIndex >= 19u) return baseColor;\n"
-                "    float3 n = normalize(viewNormal);\n"
-                "    if (dot(n, n) < 0.01) return baseColor;\n"
+                // unknown. Preserve their authored color with the required
+                // output transfer while known 3D families receive lighting.
+                "    baseColor = CouchPhysicalInput(baseColor);\n"
+                "    if ((drawFlags & 16u) != 0u || materialIndex == 0u || materialIndex >= 19u) return CouchPhysicalOutput(baseColor);\n"
+                "    float normalLengthSquared = dot(viewNormal, viewNormal);\n"
+                "    if (any(isnan(viewNormal)) || any(isinf(viewNormal)) ||\n"
+                "        any(isnan(viewPosition)) || any(isinf(viewPosition)) ||\n"
+                "        normalLengthSquared <= 1.0e-8 || dot(viewPosition, viewPosition) <= 1.0e-8)\n"
+                "        return CouchPhysicalOutput(baseColor);\n"
+                "    float3 n = viewNormal * rsqrt(normalLengthSquared);\n"
                 // Only authored relief opt-ins derive a micro-normal from albedo.
                 // Screen-space derivatives form a view-space surface gradient;
                 // this avoids fabricating bumps on skin, cloth, glass, and UI.
@@ -3838,7 +4058,8 @@ struct ShaderProgram* GfxRenderingAPIDX12::CreateAndLoadNewShader(uint64_t shade
                 "    result += baseColor * emissive;\n"
                 // Preserve radiance above 1.0 for the FP16 enhanced scene
                 // target; the fullscreen ACES pass maps it to the SDR swapchain.
-                "    return max(result, 0.0.xxx);\n"
+                "    if (any(isnan(result)) || any(isinf(result))) return CouchPhysicalOutput(baseColor);\n"
+                "    return CouchPhysicalOutput(max(result, 0.0.xxx));\n"
                 "}\n" + physicalHlsl;
         }
         const std::string physicalFields =
@@ -3892,31 +4113,42 @@ struct ShaderProgram* GfxRenderingAPIDX12::CreateAndLoadNewShader(uint64_t shade
             psBody = physicalHlsl.find("{", psBody);
             if (psBody != std::string::npos) physicalHlsl.insert(psBody + 1, "\n" + debugCode);
         }
+        bool physicalResponseBeforeFog = false;
         if (enhancedPhysicalResponse && physicalSidebandFieldsInserted && physicalSidebandAssignmentsInserted) {
             const std::string applyResponse =
                 "    texel.rgb = CouchApplyPhysicalResponse(texel.rgb, input.viewNormal, input.viewPosition, "
                 "gCouchMaterialIndex, gCouchDrawFlags);\n";
+            // Light the surface before atmospheric blending. Applying the
+            // material response at PSMain's return also lights the fog color.
+            const std::string fogBlend = cc_features.opt_alpha
+                ? "texel = float4(lerp(texel.rgb, input.fog.rgb, input.fog.a), texel.a);"
+                : "texel = lerp(texel, input.fog.rgb, input.fog.a);";
+            const size_t fogAt = cc_features.opt_fog ? physicalHlsl.find(fogBlend) : std::string::npos;
+            if (fogAt != std::string::npos) {
+                physicalHlsl.insert(fogAt, applyResponse);
+                physicalResponseBeforeFog = true;
+            }
             const std::string returnLinearAlpha = "return fromLinear(texel);";
             const std::string returnLinearRgb = "return fromLinear(float4(texel, 1.0));";
             const std::string returnAlpha = "return texel;";
             const std::string returnRgb = "return float4(texel, 1.0);";
             size_t at = 0;
-            while ((at = physicalHlsl.find(returnLinearAlpha, at)) != std::string::npos) {
+            while (!physicalResponseBeforeFog && (at = physicalHlsl.find(returnLinearAlpha, at)) != std::string::npos) {
                 physicalHlsl.insert(at, applyResponse);
                 at += applyResponse.size() + returnLinearAlpha.size();
             }
             at = 0;
-            while ((at = physicalHlsl.find(returnLinearRgb, at)) != std::string::npos) {
+            while (!physicalResponseBeforeFog && (at = physicalHlsl.find(returnLinearRgb, at)) != std::string::npos) {
                 physicalHlsl.insert(at, applyResponse);
                 at += applyResponse.size() + returnLinearRgb.size();
             }
             at = 0;
-            while ((at = physicalHlsl.find(returnAlpha, at)) != std::string::npos) {
+            while (!physicalResponseBeforeFog && (at = physicalHlsl.find(returnAlpha, at)) != std::string::npos) {
                 physicalHlsl.insert(at, applyResponse);
                 at += applyResponse.size() + returnAlpha.size();
             }
             at = 0;
-            while ((at = physicalHlsl.find(returnRgb, at)) != std::string::npos) {
+            while (!physicalResponseBeforeFog && (at = physicalHlsl.find(returnRgb, at)) != std::string::npos) {
                 physicalHlsl.insert(at, applyResponse);
                 at += applyResponse.size() + returnRgb.size();
             }
@@ -3954,7 +4186,20 @@ struct ShaderProgram* GfxRenderingAPIDX12::CreateAndLoadNewShader(uint64_t shade
                           (physicalPsError ? (" " + std::string(static_cast<const char*>(physicalPsError->GetBufferPointer())))
                                            : std::string()));
         }
-        const std::string physicalHdrHlsl = makeLinearHdrVariant(physicalHlsl, !enhancedPhysicalResponse);
+        std::string physicalHdrHlsl = "#define COUCH_HDR_OUTPUT 1\n" +
+            makeLinearHdrVariant(physicalHlsl, !enhancedPhysicalResponse);
+        if (physicalResponseBeforeFog) {
+            // The HDR material response now precedes fog/grayscale blending,
+            // so those display-authored colors must share its linear space.
+            for (const std::string inputColor : { "input.fog.rgb", "input.grayscale.rgb" }) {
+                const std::string linearColor = "CouchPhysicalInput(" + inputColor + ")";
+                size_t at = 0;
+                while ((at = physicalHdrHlsl.find(inputColor, at)) != std::string::npos) {
+                    physicalHdrHlsl.replace(at, inputColor.size(), linearColor);
+                    at += linearColor.size();
+                }
+            }
+        }
         ComPtr<ID3DBlob> physicalHdrPsError;
         const HRESULT physicalHdrPsHr = mD3dCompile(physicalHdrHlsl.c_str(), physicalHdrHlsl.length(), nullptr,
             nullptr, nullptr, "PSMain", "ps_5_0", 0, 0, &prog.physicalHdrPsBlob, &physicalHdrPsError);
@@ -3965,8 +4210,10 @@ struct ShaderProgram* GfxRenderingAPIDX12::CreateAndLoadNewShader(uint64_t shade
                                     : std::string()));
         }
         LogCouchD3D12("[COUCH-R7C5][PHYSICAL_SHADER] VS=" + std::string(SUCCEEDED(physicalVsHr) ? "PASS" : "FAIL") +
-                      " PS=" + std::string(SUCCEEDED(physicalPsHr) ? "PASS" : "FAIL"));
+                      " PS=" + std::string(SUCCEEDED(physicalPsHr) ? "PASS" : "FAIL") +
+                      " HDR_PS=" + std::string(SUCCEEDED(physicalHdrPsHr) ? "PASS" : "FAIL"));
         prog.physicalShaderValid = SUCCEEDED(physicalVsHr) && SUCCEEDED(physicalPsHr) &&
+                                   SUCCEEDED(physicalHdrPsHr) &&
                                    physicalSidebandFieldsInserted && physicalSidebandParamsInserted &&
                                    physicalSidebandAssignmentsInserted;
         LogCouchD3D12("[COUCH-R7C5][PHYSICAL_CONTRACT] valid=" +

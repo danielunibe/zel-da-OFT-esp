@@ -31,8 +31,35 @@ index 2b7352d950b23e99441fc1dd10d96011bf043ac3..16007faa2b26f1ba9ab9168991a3bd84
  *.sav
  shipofharkinian.ini
  shipofharkinian.json
+diff --git a/CMake/DefaultCXX.cmake b/CMake/DefaultCXX.cmake
+index 6ed89d9e07374f8fdde277b6adf62244206d7290..ffc19fd9e8017ba02e2b3b90c5879d0c250c802a 100644
+--- a/CMake/DefaultCXX.cmake
++++ b/CMake/DefaultCXX.cmake
+@@ -1,6 +1,14 @@
+ include("${CMAKE_CURRENT_LIST_DIR}/Default.cmake")
+ 
+-set_config_specific_property("OUTPUT_DIRECTORY" "${CMAKE_SOURCE_DIR}$<$<NOT:$<STREQUAL:${CMAKE_VS_PLATFORM_NAME},Win32>>:/${CMAKE_VS_PLATFORM_NAME}>/${PROPS_CONFIG}")
++if(DEFINED OCZ_BUILD_OUTPUT_ROOT AND NOT OCZ_BUILD_OUTPUT_ROOT STREQUAL "")
++    # Keep experimental builds and their copied assets under their own CMake
++    # binary tree instead of overwriting the shared x64/Release install.
++    set(OCZ_CONFIG_OUTPUT_DIRECTORY "${OCZ_BUILD_OUTPUT_ROOT}/${PROPS_CONFIG}")
++else()
++    set(OCZ_CONFIG_OUTPUT_DIRECTORY
++        "${CMAKE_SOURCE_DIR}$<$<NOT:$<STREQUAL:${CMAKE_VS_PLATFORM_NAME},Win32>>:/${CMAKE_VS_PLATFORM_NAME}>/${PROPS_CONFIG}")
++endif()
++set_config_specific_property("OUTPUT_DIRECTORY" "${OCZ_CONFIG_OUTPUT_DIRECTORY}")
+ 
+ if(MSVC)
+     create_property_reader("DEFAULT_CXX_EXCEPTION_HANDLING")
+@@ -13,4 +21,4 @@ if(MSVC)
+     else()
+         set_config_specific_property("DEFAULT_CXX_DEBUG_INFORMATION_FORMAT" "/Zi")
+     endif()
+-endif()
+\ No newline at end of file
++endif()
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 9608da56fc7563fe281da120dac36e60eb0060dd..72662fe517a320ca4d25ae267adf9e94747d4d68 100644
+index 9608da56fc7563fe281da120dac36e60eb0060dd..e64dc9be37fce0023e450b5c3eeed712f38ec978 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -11,6 +11,10 @@ include(CMake/soh-cvars.cmake)
@@ -46,7 +73,21 @@ index 9608da56fc7563fe281da120dac36e60eb0060dd..72662fe517a320ca4d25ae267adf9e94
  option(SUPPRESS_WARNINGS "Suppress warnings in LUS and src (decomp)" ON)
  if(SUPPRESS_WARNINGS)
      MESSAGE("Suppressing warnings in LUS and src")
-@@ -174,6 +178,25 @@ add_subdirectory(ZAPDTR/ZAPD ${CMAKE_BINARY_DIR}/ZAPD)
+@@ -83,8 +87,11 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
+     set(VCPKG_TRIPLET x64-windows-static)
+     set(VCPKG_TARGET_TRIPLET x64-windows-static)
+ 
+-    vcpkg_bootstrap()
+-    vcpkg_install_packages(zlib bzip2 libzip libpng sdl2 sdl2-net glew glfw3 nlohmann-json tinyxml2 spdlog libogg libvorbis opus opusfile)
++    option(SKIP_AUTOMATE_VCPKG "Use the already configured vcpkg toolchain without updating its checkout" OFF)
++    if(NOT SKIP_AUTOMATE_VCPKG)
++        vcpkg_bootstrap()
++        vcpkg_install_packages(zlib bzip2 libzip libpng sdl2 sdl2-net glew glfw3 nlohmann-json tinyxml2 spdlog libogg libvorbis opus opusfile)
++    endif()
+     if (CMAKE_C_COMPILER_LAUNCHER MATCHES "ccache|sccache")
+         set(CMAKE_MSVC_DEBUG_INFORMATION_FORMAT Embedded)
+     endif()
+@@ -174,6 +181,29 @@ add_subdirectory(ZAPDTR/ZAPD ${CMAKE_BINARY_DIR}/ZAPD)
  add_subdirectory(OTRExporter)
  add_subdirectory(soh)
  
@@ -55,12 +96,16 @@ index 9608da56fc7563fe281da120dac36e60eb0060dd..72662fe517a320ca4d25ae267adf9e94
 +    file(GLOB COUCH_DXC_HINTS "$ENV{LOCALAPPDATA}/Microsoft/WinGet/Packages/Microsoft.DirectX.ShaderCompiler*/bin/x64")
 +    find_program(COUCH_DXC NAMES dxc.exe dxc HINTS ${COUCH_DXC_HINTS} REQUIRED)
 +    set(COUCH_DXR_HEADER "${CMAKE_BINARY_DIR}/generated/fast/backends/dxr_shadow_cso.h")
++    set(COUCH_DXR_TARGET_PROFILE "lib_6_5")
++    set(COUCH_DXR_HLSL_VERSION "2021")
 +    add_custom_command(OUTPUT "${COUCH_DXR_HEADER}"
 +        COMMAND powershell -NoProfile -ExecutionPolicy Bypass -File
 +            "${CMAKE_SOURCE_DIR}/scripts/Generate-DxrShadowBytecode.ps1"
 +            -DxcPath "${COUCH_DXC}" -OutputPath "${COUCH_DXR_HEADER}"
++            -TargetProfile "${COUCH_DXR_TARGET_PROFILE}" -HlslVersion "${COUCH_DXR_HLSL_VERSION}"
 +        DEPENDS "${CMAKE_SOURCE_DIR}/libultraship/src/fast/shaders/dxr_shadow.hlsl"
 +                "${CMAKE_SOURCE_DIR}/scripts/Generate-DxrShadowBytecode.ps1"
++                "${COUCH_DXC}"
 +        VERBATIM)
 +    add_custom_target(couch_dxr_bytecode DEPENDS "${COUCH_DXR_HEADER}")
 +    target_link_libraries(libultraship PUBLIC d3d12 dxgi)
@@ -72,14 +117,70 @@ index 9608da56fc7563fe281da120dac36e60eb0060dd..72662fe517a320ca4d25ae267adf9e94
  set_property(TARGET soh PROPERTY APPIMAGE_DESKTOP_FILE_TERMINAL YES)
  set_property(TARGET soh PROPERTY APPIMAGE_DESKTOP_FILE "${CMAKE_SOURCE_DIR}/scripts/linux/appimage/soh.desktop")
  set_property(TARGET soh PROPERTY APPIMAGE_ICON_FILE "${CMAKE_BINARY_DIR}/sohIcon.png")
+diff --git a/soh/CMake/DefaultCXX.cmake b/soh/CMake/DefaultCXX.cmake
+index 032326a13f30b02f50c416645ac545bd9591783c..5efb4e5b00c530828eda12e8dbde4dd7ba14ea98 100644
+--- a/soh/CMake/DefaultCXX.cmake
++++ b/soh/CMake/DefaultCXX.cmake
+@@ -1,6 +1,12 @@
+ include("${CMAKE_CURRENT_LIST_DIR}/Default.cmake")
+ 
+-set_config_specific_property("OUTPUT_DIRECTORY" "${CMAKE_SOURCE_DIR}$<$<NOT:$<STREQUAL:${CMAKE_VS_PLATFORM_NAME},Win32>>:/${CMAKE_VS_PLATFORM_NAME}>/${PROPS_CONFIG}")
++if(DEFINED OCZ_BUILD_OUTPUT_ROOT AND NOT OCZ_BUILD_OUTPUT_ROOT STREQUAL "")
++    set(OCZ_CONFIG_OUTPUT_DIRECTORY "${OCZ_BUILD_OUTPUT_ROOT}/${PROPS_CONFIG}")
++else()
++    set(OCZ_CONFIG_OUTPUT_DIRECTORY
++        "${CMAKE_SOURCE_DIR}$<$<NOT:$<STREQUAL:${CMAKE_VS_PLATFORM_NAME},Win32>>:/${CMAKE_VS_PLATFORM_NAME}>/${PROPS_CONFIG}")
++endif()
++set_config_specific_property("OUTPUT_DIRECTORY" "${OCZ_CONFIG_OUTPUT_DIRECTORY}")
+ 
+ if(MSVC)
+     create_property_reader("DEFAULT_CXX_EXCEPTION_HANDLING")
+@@ -13,4 +19,4 @@ if(MSVC)
+     else()
+         set_config_specific_property("DEFAULT_CXX_DEBUG_INFORMATION_FORMAT" "/Zi")
+     endif()
+-endif()
+\ No newline at end of file
++endif()
 diff --git a/soh/CMakeLists.txt b/soh/CMakeLists.txt
-index 711dd8cb2cf254d5e762ed4436c7895d599f8707..6008d1741e860fa119f24ade8a09c67c2c8906d1 100644
+index 711dd8cb2cf254d5e762ed4436c7895d599f8707..2abd7ce1f12f76c44d7e42e1d82432808a38cca0 100644
 --- a/soh/CMakeLists.txt
 +++ b/soh/CMakeLists.txt
-@@ -225,9 +225,26 @@ set(ALL_FILES
+@@ -102,8 +102,14 @@ set(PROJECT_NAME soh)
+ ################################################################################
+ # Sources
+ ################################################################################
+-configure_file( ${CMAKE_CURRENT_SOURCE_DIR}/src/boot/build.c.in ${CMAKE_CURRENT_SOURCE_DIR}/src/boot/build.c @ONLY)
+-configure_file( ${CMAKE_CURRENT_SOURCE_DIR}/properties.h.in ${CMAKE_CURRENT_SOURCE_DIR}/properties.h @ONLY)
++set(SOH_GENERATED_SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/generated")
++file(MAKE_DIRECTORY "${SOH_GENERATED_SOURCE_DIR}/src/boot")
++configure_file(${CMAKE_CURRENT_SOURCE_DIR}/src/boot/build.c.in
++               "${SOH_GENERATED_SOURCE_DIR}/src/boot/build.c" @ONLY)
++configure_file(${CMAKE_CURRENT_SOURCE_DIR}/properties.h.in
++               "${SOH_GENERATED_SOURCE_DIR}/properties.h" @ONLY)
++configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Resource.rc
++               "${SOH_GENERATED_SOURCE_DIR}/Resource.rc" COPYONLY)
+ 
+ set(Header_Files "resource.h")
+ source_group("headers" FILES ${Header_Files})
+@@ -183,7 +189,9 @@ endif()
+ file(GLOB_RECURSE src__ RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "src/*.c" "src/*.h")
+ set_source_files_properties(${src__} PROPERTIES COMPILE_OPTIONS "${WARNING_OVERRIDE}")
+ 
+-list(APPEND src__ ${CMAKE_CURRENT_SOURCE_DIR}/Resource.rc)
++list(REMOVE_ITEM src__ "src/boot/build.c")
++list(APPEND src__ "${SOH_GENERATED_SOURCE_DIR}/src/boot/build.c"
++                   "${SOH_GENERATED_SOURCE_DIR}/Resource.rc")
+ list(FILTER src__ EXCLUDE REGEX "src/dmadata/")
+ list(FILTER src__ EXCLUDE REGEX "src/elf_message/")
+ list(FILTER src__ EXCLUDE REGEX "src/libultra/io/")
+@@ -224,10 +232,28 @@ set(ALL_FILES
+ # Target
  ################################################################################
  add_executable(${PROJECT_NAME} ${ALL_FILES})
- 
+-
++target_include_directories(${PROJECT_NAME} BEFORE PRIVATE "${SOH_GENERATED_SOURCE_DIR}")
++
 +# DXR TRUTH (V2) harness: configure with -DCOUCH_V2_EXE=ON to link the same
 +# sources as soh_truth_v2.exe so V2 can be built/run while the V1 soh.exe
 +# image stays locked/untouched. Inert (OFF) otherwise.
@@ -2796,10 +2897,18 @@ index 7c85204da7195ce60e4bb63151795118f842f190..daa8f416ba8e4dda84d13ae9415048a4
  
  /**
 diff --git a/soh/src/code/z_lights.c b/soh/src/code/z_lights.c
-index 96fa863058b03ab045f0c75a1703bfcb3ce2bf28..1e3eb8814f1895523f4f2e5fcda85de2ad8f31d5 100644
+index 96fa863058b03ab045f0c75a1703bfcb3ce2bf28..b41de534121305cac61563aed9e71d3238467695 100644
 --- a/soh/src/code/z_lights.c
 +++ b/soh/src/code/z_lights.c
-@@ -10,6 +10,13 @@
+@@ -1,6 +1,7 @@
+ #include "global.h"
+ 
+ #include <string.h>
++#include "fast/NativeLightContract.h"
+ 
+ #include "objects/gameplay_keep/gameplay_keep.h"
+ 
+@@ -10,6 +11,15 @@
  #define LIGHTS_BUFFER_SIZE 32
  //#define LIGHTS_BUFFER_SIZE 1024 // Kill me
  
@@ -2808,12 +2917,14 @@ index 96fa863058b03ab045f0c75a1703bfcb3ce2bf28..1e3eb8814f1895523f4f2e5fcda85de2
 +// them into actor-relative Fast3D direction vectors.
 +extern void CouchCaptureNativeLight(s32 type, f32 x, f32 y, f32 z,
 +                                    u32 gameFrame, f32 red, f32 green, f32 blue, f32 radius);
++extern void CouchBeginNativeLightCapture(u32 gameFrame, f32 ambientRed,
++                                         f32 ambientGreen, f32 ambientBlue);
 +extern PlayState* gPlayState;
 +
  typedef struct {
      /* 0x000 */ s32 numOccupied;
      /* 0x004 */ s32 searchIndex;
-@@ -160,6 +167,29 @@ void Lights_BindDirectional(Lights* lights, LightParams* params, Vec3f* vec) {
+@@ -160,6 +170,32 @@ void Lights_BindDirectional(Lights* lights, LightParams* params, Vec3f* vec) {
  void Lights_BindAll(Lights* lights, LightNode* listHead, Vec3f* vec) {
      LightsBindFunc bindFuncs[] = { Lights_BindPoint, Lights_BindDirectional, Lights_BindPoint };
      LightInfo* info;
@@ -2823,15 +2934,18 @@ index 96fa863058b03ab045f0c75a1703bfcb3ce2bf28..1e3eb8814f1895523f4f2e5fcda85de2
 +    // scene list. Capture its original definitions once here instead of
 +    // re-locking the DXR registry for every actor that binds the same list.
 +    if (vec == NULL) {
++        CouchBeginNativeLightCapture(gPlayState ? gPlayState->state.frames : 0,
++                                     lights->l.a.l.col[0], lights->l.a.l.col[1],
++                                     lights->l.a.l.col[2]);
 +        while (captureNode != NULL) {
 +            info = captureNode->info;
 +            if (info->type == LIGHT_DIRECTIONAL) {
-+                CouchCaptureNativeLight(info->type, info->params.dir.x, info->params.dir.y, info->params.dir.z,
++                CouchCaptureIdentifiedNativeLight(info, info->type, info->params.dir.x, info->params.dir.y, info->params.dir.z,
 +                                        gPlayState ? gPlayState->state.frames : 0,
 +                                        info->params.dir.color[0], info->params.dir.color[1],
 +                                        info->params.dir.color[2], 0.0f);
 +            } else if (info->type == LIGHT_POINT_NOGLOW || info->type == LIGHT_POINT_GLOW) {
-+                CouchCaptureNativeLight(info->type, info->params.point.x, info->params.point.y,
++                CouchCaptureIdentifiedNativeLight(info, info->type, info->params.point.x, info->params.point.y,
 +                                        info->params.point.z, gPlayState ? gPlayState->state.frames : 0,
 +                                        info->params.point.color[0],
 +                                        info->params.point.color[1], info->params.point.color[2],
@@ -2843,6 +2957,14 @@ index 96fa863058b03ab045f0c75a1703bfcb3ce2bf28..1e3eb8814f1895523f4f2e5fcda85de2
  
      while (listHead != NULL) {
          info = listHead->info;
+@@ -269,6 +305,7 @@ LightNode* LightContext_InsertLight(PlayState* play, LightContext* lightCtx, Lig
+ 
+ void LightContext_RemoveLight(PlayState* play, LightContext* lightCtx, LightNode* node) {
+     if (node != NULL) {
++        CouchForgetNativeLight(node->info);
+         if (node->prev != NULL) {
+             node->prev->next = node->next;
+         } else {
 diff --git a/soh/src/code/z_message_PAL.c b/soh/src/code/z_message_PAL.c
 index 6c357c612fbe168f5f6be7ff44ce9c5bd389873f..c06fc140115ecdf7de3ca5e2201bf1a753f8de2b 100644
 --- a/soh/src/code/z_message_PAL.c
@@ -3033,6 +3155,99 @@ index b1a714dcb22207c04530e0cfcbdbc29d949d75c7..629e54d95ae935e888daedd088372601
      Play_Draw(play);
      FrameInterpolation_StopRecord();
  
+diff --git a/soh/src/overlays/actors/ovl_En_Elf/z_en_elf.c b/soh/src/overlays/actors/ovl_En_Elf/z_en_elf.c
+index 96a9297b969d36d42fc81b8f2f76bc0410e3e669..8860f6c0e12293e5d51e89aaf1d3c6fc1251a481 100644
+--- a/soh/src/overlays/actors/ovl_En_Elf/z_en_elf.c
++++ b/soh/src/overlays/actors/ovl_En_Elf/z_en_elf.c
+@@ -5,6 +5,8 @@
+  */
+ 
+ #include "z_en_elf.h"
++#include "fast/NativeLightContract.h"
++extern void CouchNaviPilotPlace(Actor* actor, PlayState* play);
+ #include "objects/gameplay_keep/gameplay_keep.h"
+ #include <assert.h>
+ #include "soh/Enhancements/game-interactor/GameInteractor_Hooks.h"
+@@ -334,6 +336,10 @@ void EnElf_Init(Actor* thisx, PlayState* play) {
+     Lights_PointNoGlowSetInfo(&this->lightInfoNoGlow, thisx->world.pos.x, thisx->world.pos.y, thisx->world.pos.z, 255,
+                               255, 255, 0);
+     this->lightNodeNoGlow = LightContext_InsertLight(play, &play->lightCtx, &this->lightInfoNoGlow);
++    CouchRegisterLightOwner(&this->lightInfoGlow, this, thisx->id, thisx->params,
++        thisx->params == FAIRY_NAVI ? COUCH_LIGHT_NAVI_GLOW : COUCH_LIGHT_FAIRY_GLOW);
++    CouchRegisterLightOwner(&this->lightInfoNoGlow, this, thisx->id, thisx->params,
++        thisx->params == FAIRY_NAVI ? COUCH_LIGHT_NAVI_AUX : COUCH_LIGHT_FAIRY_AUX);
+ 
+     this->fairyFlags = 0;
+     this->disappearTimer = 600;
+@@ -442,6 +448,8 @@ void EnElf_Destroy(Actor* thisx, PlayState* play) {
+ 
+     LightContext_RemoveLight(play, &play->lightCtx, this->lightNodeGlow);
+     LightContext_RemoveLight(play, &play->lightCtx, this->lightNodeNoGlow);
++    CouchForgetNativeLight(&this->lightInfoGlow);
++    CouchForgetNativeLight(&this->lightInfoNoGlow);
+ 
+     ResourceMgr_UnregisterSkeleton(&this->skelAnime);
+ }
+@@ -813,11 +821,29 @@ void func_80A03AB0(EnElf* this, PlayState* play) {
+     this->func_2C8(this, play);
+ }
+ 
++extern void CouchNaviPilotPlace(Actor* actor, PlayState* play);
++
+ void EnElf_UpdateLights(EnElf* this, PlayState* play) {
+     s16 glowLightRadius;
++    u8 glowR;
++    u8 glowG;
++    u8 glowB;
+     Player* player;
+ 
++    if (this->actor.params == FAIRY_NAVI && CouchNaviPilotActive()) CouchNaviPilotPlace(&this->actor, play);
+     glowLightRadius = 100;
++    glowR = 255;
++    glowG = 255;
++    glowB = 255;
++
++    // Navi's rendered core and shell use the current target colors. Carry the
++    // same palette into her world point light so DXR surfaces near her receive
++    // a cyan/blue contribution instead of the unrelated white default.
++    if (this->actor.params == FAIRY_NAVI) {
++        glowR = (u8)((this->innerColor.r + this->outerColor.r) * 0.5f);
++        glowG = (u8)((this->innerColor.g + this->outerColor.g) * 0.5f);
++        glowB = (u8)((this->innerColor.b + this->outerColor.b) * 0.5f);
++    }
+ 
+     if (this->unk_2A8 == 8) {
+         glowLightRadius = 0;
+@@ -834,7 +860,7 @@ void EnElf_UpdateLights(EnElf* this, PlayState* play) {
+     }
+ 
+     Lights_PointGlowSetInfo(&this->lightInfoGlow, this->actor.world.pos.x, this->actor.world.pos.y,
+-                            this->actor.world.pos.z, 255, 255, 255, glowLightRadius);
++                            this->actor.world.pos.z, glowR, glowG, glowB, glowLightRadius);
+ 
+     this->unk_2BC = Math_Atan2S(this->actor.velocity.z, this->actor.velocity.x);
+ 
+@@ -1513,6 +1539,10 @@ void EnElf_Draw(Actor* thisx, PlayState* play) {
+             OPEN_DISPS(play->state.gfxCtx);
+ 
+             Gfx_SetupDL_27Xlu(play->state.gfxCtx);
++            Gfx* lightOwnerBegin = POLY_XLU_DISP++;
++            lightOwnerBegin->words.w0 = (COUCH_G_SET_LIGHT_OWNER << 24) |
++                (thisx->params == FAIRY_NAVI ? COUCH_LIGHT_NAVI_GLOW : COUCH_LIGHT_FAIRY_GLOW);
++            lightOwnerBegin->words.w1 = CouchGetLightOwnerId(&this->lightInfoGlow);
+ 
+             envAlpha = (this->timer * 50) & 0x1FF;
+             envAlpha = (envAlpha > 255) ? 511 - envAlpha : envAlpha;
+@@ -1535,6 +1565,9 @@ void EnElf_Draw(Actor* thisx, PlayState* play) {
+                            (u8)(envAlpha * alphaScale));
+             POLY_XLU_DISP =
+                 SkelAnime_DrawSkeleton2(play, &this->skelAnime, EnElf_OverrideLimbDraw, NULL, this, POLY_XLU_DISP);
++            Gfx* lightOwnerEnd = POLY_XLU_DISP++;
++            lightOwnerEnd->words.w0 = COUCH_G_SET_LIGHT_OWNER << 24;
++            lightOwnerEnd->words.w1 = 0;
+ 
+             CLOSE_DISPS(play->state.gfxCtx);
+         }
 diff --git a/soh/src/overlays/actors/ovl_En_Mag/z_en_mag.c b/soh/src/overlays/actors/ovl_En_Mag/z_en_mag.c
 index 6290d65bee7b04e7ffb45f8316724809e716633b..06f924fb2bbd451d1c31e2a3b4cb856271af75e3 100644
 --- a/soh/src/overlays/actors/ovl_En_Mag/z_en_mag.c
@@ -3811,27 +4026,39 @@ index 14f749d43daa4d451496ea2ff0d858e2e7da81d6..cbb36fe07996624c619472425281ede9
  // OTRTODO - player on pause
 diff --git a/scripts/Generate-DxrShadowBytecode.ps1 b/scripts/Generate-DxrShadowBytecode.ps1
 new file mode 100644
-index 0000000000000000000000000000000000000000..26549048246a9fe33836149ffce3801ba1eb6cc1
+index 0000000000000000000000000000000000000000..00a4afc1d50dee15585f80470441ee7d3d60faa6
 --- /dev/null
 +++ b/scripts/Generate-DxrShadowBytecode.ps1
-@@ -0,0 +1,65 @@
+@@ -0,0 +1,192 @@
 +param(
 +    [string]$DxcPath = $env:DXC,
-+    [string]$OutputPath = ""
++    [string]$OutputPath = "",
++    [string]$TargetProfile = "lib_6_5",
++    [string]$HlslVersion = "2021"
 +)
 +
 +$ErrorActionPreference = 'Stop'
 +
++function Get-Sha256Bytes([byte[]]$Bytes) {
++    $hasher = [System.Security.Cryptography.SHA256]::Create()
++    try {
++        return [System.BitConverter]::ToString($hasher.ComputeHash($Bytes)).Replace('-', '').ToLowerInvariant()
++    } finally { $hasher.Dispose() }
++}
++
++function Get-Sha256File([string]$Path) {
++    return Get-Sha256Bytes ([System.IO.File]::ReadAllBytes($Path))
++}
++
 +$repoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 +$shaderPath = Join-Path $repoRoot 'libultraship\src\fast\shaders\dxr_shadow.hlsl'
 +$headerPath = if ($OutputPath) { $OutputPath } else { Join-Path $repoRoot 'libultraship\include\fast\backends\dxr_shadow_cso.h' }
-+[System.IO.Directory]::CreateDirectory([System.IO.Path]::GetDirectoryName($headerPath)) | Out-Null
++$headerDirectory = [System.IO.Path]::GetDirectoryName($headerPath)
++[System.IO.Directory]::CreateDirectory($headerDirectory) | Out-Null
 +
 +if (-not $DxcPath) {
 +    $dxcCommand = Get-Command dxc.exe -ErrorAction SilentlyContinue
-+    if ($dxcCommand) {
-+        $DxcPath = $dxcCommand.Source
-+    }
++    if ($dxcCommand) { $DxcPath = $dxcCommand.Source }
 +}
 +
 +if (-not $DxcPath) {
@@ -3840,29 +4067,141 @@ index 0000000000000000000000000000000000000000..26549048246a9fe33836149ffce3801b
 +        Select-Object -First 1
 +    if ($dxcPackage) {
 +        $candidate = Join-Path $dxcPackage.FullName 'bin\x64\dxc.exe'
-+        if (Test-Path -LiteralPath $candidate) {
-+            $DxcPath = $candidate
-+        }
++        if (Test-Path -LiteralPath $candidate) { $DxcPath = $candidate }
 +    }
 +}
 +
 +if (-not $DxcPath -or -not (Test-Path -LiteralPath $DxcPath)) {
 +    throw 'Could not locate dxc.exe. Set DXC or pass -DxcPath.'
 +}
-+if (-not (Test-Path -LiteralPath $shaderPath)) {
-+    throw "DXR shader source not found: $shaderPath"
++if (-not (Test-Path -LiteralPath $shaderPath)) { throw "DXR shader source not found: $shaderPath" }
++
++$shaderBytes = [System.IO.File]::ReadAllBytes($shaderPath)
++$shaderSource = [System.Text.Encoding]::UTF8.GetString($shaderBytes)
++$shaderHashBefore = Get-Sha256Bytes $shaderBytes
++$libRoot = Join-Path $repoRoot 'libultraship'
++$layoutPath = Join-Path $libRoot 'include\fast\backends\DxrAccelerationStructureManager.h'
++$shadowRendererPath = Join-Path $libRoot 'src\fast\backends\DxrShadowRenderer.cpp'
++$surfaceRendererPath = Join-Path $libRoot 'src\fast\backends\DxrSurfaceRenderer.cpp'
++$layoutSource = [System.IO.File]::ReadAllText($layoutPath)
++$shadowRendererSource = [System.IO.File]::ReadAllText($shadowRendererPath)
++$surfaceRendererSource = [System.IO.File]::ReadAllText($surfaceRendererPath)
++$abiMarker = [regex]::Match($shaderSource, '(?m)^\s*#define\s+COUCH_DXR_SHADER_ABI_VERSION\s+(\d+)\s*$')
++if (-not $abiMarker.Success) { throw 'The DXR shader is missing its CPU/GPU ABI version marker.' }
++$shaderAbiVersion = [uint32]$abiMarker.Groups[1].Value
++$cpuAbiMarker = [regex]::Match($layoutSource, '(?m)kDxrShaderAbiVersion\s*=\s*(\d+)')
++if (-not $cpuAbiMarker.Success -or [uint32]$cpuAbiMarker.Groups[1].Value -ne $shaderAbiVersion) {
++    throw 'The DXR HLSL ABI marker does not match the CPU ABI declaration.'
++}
++if ($layoutSource -notmatch 'sizeof\(DxrHitVertex\)\s*==\s*56' -or
++    $layoutSource -notmatch 'sizeof\(DxrInstanceMaterialData\)\s*==\s*112' -or
++    $layoutSource -notmatch 'offsetof\(DxrInstanceMaterialData,\s*textureIndex1\)\s*==\s*80' -or
++    $layoutSource -notmatch 'offsetof\(DxrInstanceMaterialData,\s*primitiveColor\)\s*==\s*96' -or
++    $shaderSource -notmatch 'instanceIndex\s*\*\s*112u' -or
++    $shaderSource -notmatch 'vertexIndex\s*\*\s*56u' -or
++    $shaderSource -notmatch 'Load4\(address\s*\+\s*80u\)' -or
++    $shaderSource -notmatch 'Load4\(address\s*\+\s*96u\)') {
++    throw 'CPU and HLSL hit-vertex/material record strides do not match ABI v3.'
 +}
 +
++$requiredExports = @('RayGenShadow', 'ClosestHitShadow', 'AnyHitShadow',
++                     'RayGenReflection', 'ClosestHitReflection', 'AnyHitReflection')
++foreach ($exportName in $requiredExports) {
++    if ($shaderSource -notmatch ("(?s)\b" + [regex]::Escape($exportName) + "\s*\(")) {
++        throw "The DXR library is missing required export source: $exportName"
++    }
++}
++
++$versionLines = & $DxcPath --version 2>&1
++if ($LASTEXITCODE -ne 0) { throw "Unable to query DXC version (exit $LASTEXITCODE)." }
++$dxcVersion = ($versionLines | ForEach-Object { [string]$_ }) -join ' '
++$dxcVersion = $dxcVersion.Trim()
++if ([string]::IsNullOrWhiteSpace($dxcVersion)) { throw 'DXC returned an empty version string.' }
++$compileFlags = "-T $TargetProfile -HV $HlslVersion"
++
 +$tempDxil = Join-Path $env:TEMP ("dxr-shadow-{0}.dxil" -f [guid]::NewGuid().ToString('N'))
++$tempHeader = Join-Path $headerDirectory (([System.IO.Path]::GetFileName($headerPath)) + ".{0}.tmp" -f [guid]::NewGuid().ToString('N'))
 +try {
-+    & $DxcPath -T lib_6_5 -HV 2021 -Fo $tempDxil $shaderPath
-+    if ($LASTEXITCODE -ne 0) {
-+        throw "dxc.exe failed with exit code $LASTEXITCODE"
++    & $DxcPath -T $TargetProfile -HV $HlslVersion -Fo $tempDxil $shaderPath
++    if ($LASTEXITCODE -ne 0) { throw "dxc.exe failed with exit code $LASTEXITCODE" }
++    if ((Get-Sha256File $shaderPath) -cne $shaderHashBefore) {
++        throw 'The DXR shader changed during compilation; no bytecode header was published.'
 +    }
 +
 +    $bytecode = [System.IO.File]::ReadAllBytes($tempDxil)
++    if ($bytecode.Length -lt 32) { throw 'DXC produced an empty or truncated DXIL container.' }
++    $containerMagic = [System.Text.Encoding]::ASCII.GetString($bytecode, 0, 4)
++    if ($containerMagic -ne 'DXBC') { throw "DXC output is not a DXIL container (magic=$containerMagic)." }
++
++    # Verify the compiled library, not only its HLSL source text. DXR global
++    # root signatures are created in C++; check their register contract here
++    # because this library intentionally does not embed a root signature blob.
++    $reflectionLines = & $DxcPath -dumpbin $tempDxil 2>&1
++    if ($LASTEXITCODE -ne 0) { throw "DXC reflection failed with exit code $LASTEXITCODE." }
++    $reflection = ($reflectionLines | ForEach-Object { [string]$_ }) -join "`n"
++    foreach ($exportName in $requiredExports) {
++        if ($reflection -notmatch ("(?m)^define\s+void\s+.*\?" + [regex]::Escape($exportName) + "@@")) {
++            throw "Compiled DXIL is missing required export: $exportName"
++        }
++    }
++
++    $requiredBindings = @(
++        @{ Name = 'FrameConstants'; Pattern = '(?m)^;\s*FrameConstants\s+cbuffer\s+.*\bcb0\s+1\s*$' },
++        @{ Name = 'gScene'; Pattern = '(?m)^;\s*gScene\s+texture\s+.*\bT0\s+t0\s+1\s*$' },
++        @{ Name = 'gDepthTexture'; Pattern = '(?m)^;\s*gDepthTexture\s+texture\s+.*\bT1\s+t1\s+1\s*$' },
++        @{ Name = 'gHitVertexData'; Pattern = '(?m)^;\s*gHitVertexData\s+texture\s+.*\bT2\s+t2\s+1\s*$' },
++        @{ Name = 'gHitIndexData'; Pattern = '(?m)^;\s*gHitIndexData\s+texture\s+.*\bT3\s+t3\s+1\s*$' },
++        @{ Name = 'gInstanceMaterialData'; Pattern = '(?m)^;\s*gInstanceMaterialData\s+texture\s+.*\bT4\s+t4\s+1\s*$' },
++        @{ Name = 'gMaterialTextures'; Pattern = '(?m)^;\s*gMaterialTextures\s+texture\s+.*\bT5\s+t5\s+4096\s*$' },
++        @{ Name = 'gRasterEnvironment'; Pattern = '(?m)^;\s*gRasterEnvironment\s+texture\s+.*\bT6\s+t4101\s+1\s*$' },
++        @{ Name = 'gRasterSoftShadow'; Pattern = '(?m)^;\s*gRasterSoftShadow\s+texture\s+.*\bT7\s+t4102\s+1\s*$' },
++        @{ Name = 'gShadowMask'; Pattern = '(?m)^;\s*gShadowMask\s+UAV\s+.*\bU0\s+u0\s+1\s*$' },
++        @{ Name = 'gSurfaceMask'; Pattern = '(?m)^;\s*gSurfaceMask\s+UAV\s+.*\bU1\s+u1\s+1\s*$' },
++        @{ Name = 'gEmissiveMask'; Pattern = '(?m)^;\s*gEmissiveMask\s+UAV\s+.*\bU2\s+u2\s+1\s*$' },
++        @{ Name = 'gIndirectMask'; Pattern = '(?m)^;\s*gIndirectMask\s+UAV\s+.*\bU3\s+u3\s+1\s*$' },
++        @{ Name = 'gReflectionColor'; Pattern = '(?m)^;\s*gReflectionColor\s+UAV\s+.*\bU4\s+u4\s+1\s*$' },
++        @{ Name = 'gPrimaryGateCounters'; Pattern = '(?m)^;\s*gPrimaryGateCounters\s+UAV\s+.*\bU5\s+u5\s+1\s*$' },
++        @{ Name = 'gMaterialSampler'; Pattern = '(?m)^;\s*gMaterialSampler\s+sampler\s+.*\bS0\s+s0\s+1\s*$' },
++        @{ Name = 'gMaterialPointSampler'; Pattern = '(?m)^;\s*gMaterialPointSampler\s+sampler\s+.*\bS1\s+s1\s+1\s*$' }
++    )
++    foreach ($binding in $requiredBindings) {
++        if ($reflection -notmatch $binding.Pattern) {
++            throw "Compiled DXIL resource/register contract is missing or changed: $($binding.Name)"
++        }
++    }
++
++    $rootSignatureChecks = @(
++        @{ Name = 'shadow t1 depth table'; Source = $shadowRendererSource; Pattern = 'srvRange\.BaseShaderRegister\s*=\s*1\s*;' },
++        @{ Name = 'shadow u0 output table'; Source = $shadowRendererSource; Pattern = 'uavRange\.BaseShaderRegister\s*=\s*0\s*;' },
++        @{ Name = 'shadow t2-t4 root SRVs'; Source = $shadowRendererSource; Pattern = 'ShaderRegister\s*=\s*2\s*\+\s*i\s*;' },
++        @{ Name = 'shadow t5 texture table'; Source = $shadowRendererSource; Pattern = 'textureRange\.BaseShaderRegister\s*=\s*5\s*;' },
++        @{ Name = 'surface t1 depth table'; Source = $surfaceRendererSource; Pattern = 'ranges\[0\]\.BaseShaderRegister\s*=\s*1\s*;' },
++        @{ Name = 'surface u1-u5 output table'; Source = $surfaceRendererSource; Pattern = 'ranges\[1\]\.BaseShaderRegister\s*=\s*1\s*;' },
++        @{ Name = 'surface t2-t4 root SRVs'; Source = $surfaceRendererSource; Pattern = 'ShaderRegister\s*=\s*parameter\s*-\s*1\s*;' },
++        @{ Name = 'surface t5 texture table'; Source = $surfaceRendererSource; Pattern = 'ranges\[2\]\.BaseShaderRegister\s*=\s*5\s*;' },
++        @{ Name = 'surface t4101-t4102 auxiliary textures'; Source = $surfaceRendererSource; Pattern = 'ranges\[3\]\.BaseShaderRegister\s*=\s*4101\s*;' },
++        @{ Name = 'root signatures s0-s1 static samplers'; Source = ($shadowRendererSource + "`n" + $surfaceRendererSource); Pattern = 'ShaderRegister\s*=\s*samplerIndex\s*;' }
++    )
++    foreach ($check in $rootSignatureChecks) {
++        if ($check.Source -notmatch $check.Pattern) {
++            throw "C++ DXR root-signature contract is missing or changed: $($check.Name)"
++        }
++    }
++
++    $dxilHash = Get-Sha256Bytes $bytecode
++    $buildIdentityInput = @($shaderHashBefore, $dxilHash, $dxcVersion, $compileFlags, $shaderAbiVersion) -join '|'
++    $buildIdentity = Get-Sha256Bytes ([System.Text.Encoding]::UTF8.GetBytes($buildIdentityInput))
++    $escapedDxcVersion = $dxcVersion.Replace('\', '\\').Replace('"', '\"').Replace("`r", ' ').Replace("`n", ' ')
++
 +    $lines = [System.Collections.Generic.List[string]]::new()
 +    $lines.Add('#pragma once')
++    $lines.Add('')
++    $lines.Add(('static constexpr unsigned int kDxrShadowBytecodeAbiVersion = {0}u;' -f $shaderAbiVersion))
++    $lines.Add(('static constexpr char kDxrShadowShaderSourceSha256[] = "{0}";' -f $shaderHashBefore))
++    $lines.Add(('static constexpr char kDxrShadowBytecodeDxilSha256[] = "{0}";' -f $dxilHash))
++    $lines.Add(('static constexpr char kDxrShadowBytecodeBuildId[] = "{0}";' -f $buildIdentity))
++    $lines.Add(('static constexpr char kDxrShadowBytecodeDxcVersion[] = "{0}";' -f $escapedDxcVersion))
++    $lines.Add(('static constexpr char kDxrShadowBytecodeCompileFlags[] = "{0}";' -f $compileFlags))
 +    $lines.Add('')
 +    $lines.Add('static const unsigned char g_pDxrShadowBytecode[] = {')
 +    for ($offset = 0; $offset -lt $bytecode.Length; $offset += 16) {
@@ -3872,32 +4211,220 @@ index 0000000000000000000000000000000000000000..26549048246a9fe33836149ffce3801b
 +    }
 +    $lines.Add('};')
 +
-+    [System.IO.File]::WriteAllLines($headerPath, $lines, [System.Text.Encoding]::ASCII)
-+    Write-Output "Generated $headerPath ($($bytecode.Length) bytes)"
++    [System.IO.File]::WriteAllLines($tempHeader, $lines, [System.Text.Encoding]::ASCII)
++    Move-Item -LiteralPath $tempHeader -Destination $headerPath -Force
++    Write-Output "Generated $headerPath"
++    Write-Output "ABI=$shaderAbiVersion sourceSha256=$shaderHashBefore dxilSha256=$dxilHash buildId=$buildIdentity"
++    Write-Output "DXC=$dxcVersion flags=$compileFlags bytes=$($bytecode.Length)"
++    Write-Output "Verified exports=$($requiredExports.Count) bindings=$($requiredBindings.Count) rootSignatureContracts=$($rootSignatureChecks.Count)"
 +}
 +finally {
-+    if (Test-Path -LiteralPath $tempDxil) {
-+        Remove-Item -LiteralPath $tempDxil -Force
++    if (Test-Path -LiteralPath $tempDxil) { Remove-Item -LiteralPath $tempDxil -Force }
++    if (Test-Path -LiteralPath $tempHeader) { Remove-Item -LiteralPath $tempHeader -Force }
++}
+diff --git a/scripts/scene-harness/capture-client.ps1 b/scripts/scene-harness/capture-client.ps1
+new file mode 100644
+index 0000000000000000000000000000000000000000..dd46b5ca11995899b176f973e405e8cbfa4a3570
+--- /dev/null
++++ b/scripts/scene-harness/capture-client.ps1
+@@ -0,0 +1,145 @@
++[CmdletBinding()]
++param([Parameter(Mandatory)][int]$ProcessId, [Parameter(Mandatory)][string]$RunRoot)
++$ErrorActionPreference = 'Stop'
++Add-Type -AssemblyName System.Drawing
++Add-Type -ReferencedAssemblies System.Drawing -TypeDefinition @'
++using System;
++using System.Drawing;
++using System.Drawing.Imaging;
++using System.Runtime.InteropServices;
++public static class CouchMonitorCapture {
++    [StructLayout(LayoutKind.Sequential)] public struct Rect { public int Left, Top, Right, Bottom; }
++    [StructLayout(LayoutKind.Sequential)] public struct Point { public int X, Y; }
++    public delegate bool WindowCallback(IntPtr window, IntPtr argument);
++    [DllImport("user32.dll")] public static extern bool EnumWindows(WindowCallback callback, IntPtr argument);
++    [DllImport("user32.dll")] public static extern uint GetWindowThreadProcessId(IntPtr window, out uint process);
++    [DllImport("user32.dll")] public static extern bool IsWindowVisible(IntPtr window);
++    [DllImport("user32.dll")] public static extern bool GetClientRect(IntPtr window, out Rect rect);
++    [DllImport("user32.dll")] public static extern bool ClientToScreen(IntPtr window, ref Point point);
++    [DllImport("user32.dll")] public static extern IntPtr GetForegroundWindow();
++    [DllImport("user32.dll")] public static extern bool SetForegroundWindow(IntPtr window);
++    [DllImport("user32.dll", SetLastError=true)] public static extern IntPtr SetThreadDpiAwarenessContext(IntPtr context);
++    [DllImport("user32.dll")] public static extern IntPtr GetWindowDpiAwarenessContext(IntPtr window);
++    [DllImport("user32.dll")] public static extern uint GetDpiForWindow(IntPtr window);
++    [DllImport("user32.dll")] public static extern bool LogicalToPhysicalPointForPerMonitorDPI(IntPtr window, ref Point point);
++    [DllImport("user32.dll")] public static extern int GetSystemMetrics(int index);
++    [DllImport("dwmapi.dll")] public static extern int DwmFlush();
++    public sealed class CaptureResult {
++        public int X, Y, Width, Height, LogicalWidth, LogicalHeight, DwmResult;
++        public uint Dpi;
++        public bool ForegroundAfter;
++    }
++    public static IntPtr Find(int process) {
++        IntPtr selected = IntPtr.Zero;
++        long largest = 0;
++        EnumWindows(delegate(IntPtr window, IntPtr unused) {
++            uint owner; GetWindowThreadProcessId(window, out owner);
++            Rect client;
++            if (owner == process && IsWindowVisible(window) && GetClientRect(window, out client)) {
++                long area = (long)(client.Right-client.Left)*(client.Bottom-client.Top);
++                if (area > largest) { selected = window; largest = area; }
++            }
++            return true;
++        }, IntPtr.Zero);
++        return selected;
++    }
++    public static CaptureResult Capture(IntPtr window, string output) {
++        // All DPI transitions and dependent API calls stay on this one native
++        // thread. A PowerShell command boundary must not split this operation.
++        IntPtr previous = SetThreadDpiAwarenessContext(GetWindowDpiAwarenessContext(window));
++        if (previous == IntPtr.Zero) throw new InvalidOperationException("Cannot enter the game's DPI context.");
++        Point origin = new Point();
++        Point end = new Point();
++        CaptureResult result = new CaptureResult();
++        try {
++            Rect client;
++            if (!GetClientRect(window, out client)) throw new InvalidOperationException("Client rectangle unavailable.");
++            result.LogicalWidth = client.Right-client.Left;
++            result.LogicalHeight = client.Bottom-client.Top;
++            if (result.LogicalWidth <= 0 || result.LogicalHeight <= 0) throw new InvalidOperationException("Empty client rectangle.");
++            origin.X=client.Left; origin.Y=client.Top;
++            end.X=client.Right; end.Y=client.Bottom;
++            if (!ClientToScreen(window, ref origin) || !ClientToScreen(window, ref end) ||
++                !LogicalToPhysicalPointForPerMonitorDPI(window, ref origin) ||
++                !LogicalToPhysicalPointForPerMonitorDPI(window, ref end)) {
++                throw new InvalidOperationException("Cannot convert both client corners to physical desktop pixels.");
++            }
++            result.Dpi=GetDpiForWindow(window);
++        } finally { SetThreadDpiAwarenessContext(previous); }
++
++        previous=SetThreadDpiAwarenessContext(new IntPtr(-4));
++        if (previous == IntPtr.Zero) throw new InvalidOperationException("Cannot enter physical desktop DPI context.");
++        try {
++            result.X=origin.X; result.Y=origin.Y;
++            result.Width=end.X-origin.X; result.Height=end.Y-origin.Y;
++            int left=GetSystemMetrics(76), top=GetSystemMetrics(77);
++            int width=GetSystemMetrics(78), height=GetSystemMetrics(79);
++            if (result.Width <= 0 || result.Height <= 0 || origin.X < left || origin.Y < top ||
++                end.X > left+width || end.Y > top+height) throw new InvalidOperationException("Client area is outside the physical desktop.");
++            if (!IsWindowVisible(window) || GetForegroundWindow() != window) throw new InvalidOperationException("The test window is not visible in the foreground.");
++            result.DwmResult=DwmFlush();
++            if (result.DwmResult < 0) throw new InvalidOperationException("DWM did not complete its presentation flush.");
++            using (Bitmap bitmap=new Bitmap(result.Width, result.Height)) {
++                using (Graphics graphics=Graphics.FromImage(bitmap)) {
++                    graphics.CopyFromScreen(origin.X, origin.Y, 0, 0, bitmap.Size, CopyPixelOperation.SourceCopy);
++                }
++                bitmap.Save(output, ImageFormat.Png);
++            }
++            result.ForegroundAfter=GetForegroundWindow() == window;
++            return result;
++        } finally { SetThreadDpiAwarenessContext(previous); }
++    }
++}
++'@
++
++$proofPath = Join-Path $RunRoot 'monitor.capture.json'
++$releasePath = Join-Path $RunRoot 'monitor.capture.complete'
++try {
++    $presentPath = Join-Path $RunRoot 'presentation.evidence.jsonl'
++    $deadline = (Get-Date).AddSeconds(10)
++    $presentation = $null
++    while ((Get-Date) -lt $deadline) {
++        if (Test-Path -LiteralPath $presentPath) {
++            $records = @(Get-Content -LiteralPath $presentPath | ForEach-Object { $_ | ConvertFrom-Json })
++            $presentation = $records | Where-Object { $_.dxgi_present_call -eq 'ACCEPTED_BY_DXGI' } | Select-Object -Last 1
++            if ($presentation) { break }
++        }
++        Start-Sleep -Milliseconds 50
++    }
++    if (-not $presentation) { throw 'No accepted Present record for the captured frame.' }
++    $window = [CouchMonitorCapture]::Find($ProcessId)
++    if ($window -eq [IntPtr]::Zero) { throw 'The test process has no visible client window.' }
++    [CouchMonitorCapture]::SetForegroundWindow($window) | Out-Null
++    Start-Sleep -Milliseconds 150
++    if ([CouchMonitorCapture]::GetForegroundWindow() -ne $window) { throw 'The test window is not in the foreground.' }
++    $output = Join-Path $RunRoot 'desktop_client_presented.png'
++    $capture = [CouchMonitorCapture]::Capture($window, $output)
++    $foregroundAfter = $capture.ForegroundAfter
++    [ordered]@{
++        status = if ($foregroundAfter) { 'CAPTURED_WINDOWS_DESKTOP_CLIENT' } else { 'FAIL_FOREGROUND_CHANGED' }
++        processId = $ProcessId
++        hwnd = $window.ToInt64()
++        windowVisible = [CouchMonitorCapture]::IsWindowVisible($window)
++        foregroundBefore = $true
++        foregroundAfter = $foregroundAfter
++        source = 'GDI_COPY_FROM_WINDOWS_DESKTOP_CLIENT_RECT_AFTER_DWM_FLUSH'
++        physicalPanelMeasurement = 'NOT_AVAILABLE'
++        frame = $presentation.forensic_frame
++        present = $presentation.dxgi_present_call
++        presentHresult = $presentation.hresult
++        dwmFlushHresult = $capture.DwmResult
++        clientRect = @{x=$capture.X; y=$capture.Y; width=$capture.Width; height=$capture.Height}
++        logicalClientSize = @{width=$capture.LogicalWidth; height=$capture.LogicalHeight}
++        windowDpi = $capture.Dpi
++        coordinateSpace = 'PHYSICAL_DESKTOP_PIXELS_BOTH_CORNERS_CONVERTED_IN_ONE_NATIVE_CALL'
++        capturedAtUtc = (Get-Date).ToUniversalTime().ToString('o')
++        png = 'desktop_client_presented.png'
++        sha256 = (Get-FileHash -LiteralPath $output -Algorithm SHA256).Hash
++    } | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath $proofPath -Encoding utf8
++} catch {
++    [ordered]@{ status='FAIL'; reason=$_.Exception.Message; processId=$ProcessId } |
++        ConvertTo-Json | Set-Content -LiteralPath $proofPath -Encoding utf8
++    Write-Warning $_.Exception.Message
++} finally {
++    Set-Content -LiteralPath $releasePath -Value 'SCREEN_CAPTURE_ATTEMPT_COMPLETE' -Encoding utf8
++}
+diff --git a/scripts/scene-harness/file-hash.ps1 b/scripts/scene-harness/file-hash.ps1
+new file mode 100644
+index 0000000000000000000000000000000000000000..a80e6351be33db86a80d4483bd884a895321dffa
+--- /dev/null
++++ b/scripts/scene-harness/file-hash.ps1
+@@ -0,0 +1,19 @@
++function Get-HarnessFileHash {
++    [CmdletBinding()]
++    param(
++        [Parameter(Mandatory = $true)][string]$LiteralPath,
++        [ValidateSet('SHA256')][string]$Algorithm = 'SHA256'
++    )
++    # Windows PowerShell spawned by Python/MSBuild may lack Get-FileHash's
++    # script module. Keep integrity checks independent of module autoloading.
++    $hasher = [System.Security.Cryptography.SHA256]::Create()
++    $stream = $null
++    try {
++        $stream = [System.IO.File]::OpenRead($LiteralPath)
++        $hash = [System.BitConverter]::ToString($hasher.ComputeHash($stream)).Replace('-', '')
++        return [pscustomobject]@{ Algorithm = 'SHA256'; Hash = $hash; Path = $LiteralPath }
++    } finally {
++        if ($null -ne $stream) { $stream.Dispose() }
++        $hasher.Dispose()
 +    }
 +}
 diff --git a/scripts/scene-harness/run-scene.ps1 b/scripts/scene-harness/run-scene.ps1
 new file mode 100644
-index 0000000000000000000000000000000000000000..22dc8c77599771eed2b903e993ed4149f5465e18
+index 0000000000000000000000000000000000000000..6cd50773cb32faf10434450b69849fafeab95560
 --- /dev/null
 +++ b/scripts/scene-harness/run-scene.ps1
-@@ -0,0 +1,430 @@
+@@ -0,0 +1,566 @@
 +﻿[CmdletBinding()]
 +param(
 +    [string]$RunScenario = $env:COUCH_DXR_SCENARIO,
 +    [string]$TruthMode = $env:COUCH_DXR_MODE,
 +    [string]$Executable,
++    [string]$RuntimeDirectory,
++    [switch]$Background,
++    [switch]$PrimaryGateCounters,
++    [switch]$TraceDxrMatrices,
 +    [switch]$EnableD3D12DebugLayer,
++    [switch]$VisualAblation,
++    [switch]$MonitorCapture,
++    [ValidateRange(0, 3)][int]$RtxQuality = 3,
 +    [int]$PollSeconds = 60,
 +    [string]$RendererBackend = 'D3D12',
 +    [int]$VisualProfile = 2
 +)
 +
 +$ErrorActionPreference = 'Stop'
++. (Join-Path $PSScriptRoot 'file-hash.ps1')
++if ($Background -and $MonitorCapture) { throw 'MonitorCapture requires a visible acceptance run.' }
 +
 +function Stop-WithCode([string]$Code, [string]$Message, [int]$ExitCode) {
 +    [Console]::Error.WriteLine("$Code : $Message")
@@ -3981,9 +4508,15 @@ index 0000000000000000000000000000000000000000..22dc8c77599771eed2b903e993ed4149
 +
 +if ([string]::IsNullOrWhiteSpace($RunScenario)) { $RunScenario = 'BASELINE_KOKIRI' }
 +if ([string]::IsNullOrWhiteSpace($TruthMode)) { $TruthMode = 'NORMAL' }
++if ($VisualAblation -and ($TruthMode -ne 'NORMAL' -or $VisualProfile -ne 2)) {
++    Stop-WithCode 'HARNESS_UNSUPPORTED_ABLATION_CONFIGURATION' 'VisualAblation requires NORMAL mode and HYBRID_RT profile 2.' 22
++}
 +
 +$validModes = @('NORMAL', 'HIT_MISS', 'WORLD_NORMAL', 'HIT_DISTANCE', 'INSTANCE_IDS', 'SYNTHETIC_LAMBERT', 'GAME_LIGHT_LAMBERT')
 +if ($TruthMode -notin $validModes) { Stop-WithCode 'HARNESS_UNKNOWN_TRUTH_MODE' "Unsupported TRUTH_MODE '$TruthMode'." 22 }
++if ($PrimaryGateCounters -and $TruthMode -ne 'NORMAL') {
++    Stop-WithCode 'HARNESS_GATE_REQUIRES_NORMAL_MODE' 'Gate diagnostics bypass AnyHit alpha and cannot be combined with a Truth measurement.' 22
++}
 +
 +$validRendererBackends = @('D3D12', 'D3D11')
 +if ($RendererBackend -cnotin $validRendererBackends) {
@@ -4003,6 +4536,9 @@ index 0000000000000000000000000000000000000000..22dc8c77599771eed2b903e993ed4149
 +$workspaceRoot = Split-Path -Parent (Split-Path -Parent $repoRoot)
 +$manifestPath = Join-Path $PSScriptRoot 'scenarios\scenarios.v1.json'
 +$runtimeRoot = Join-Path $workspaceRoot 'runtime\build-test'
++if (-not [string]::IsNullOrWhiteSpace($RuntimeDirectory)) {
++    $runtimeRoot = [System.IO.Path]::GetFullPath($RuntimeDirectory)
++}
 +$defaultExe = Join-Path $repoRoot 'x64\Release\soh.exe'
 +if ([string]::IsNullOrWhiteSpace($Executable)) { $Executable = $defaultExe }
 +$Executable = (Resolve-Path -LiteralPath $Executable -ErrorAction SilentlyContinue).Path
@@ -4015,6 +4551,13 @@ index 0000000000000000000000000000000000000000..22dc8c77599771eed2b903e993ed4149
 +$scenario = @($manifest.scenarios | Where-Object { $_.id -ceq $RunScenario }) | Select-Object -First 1
 +if ($null -eq $scenario) { Stop-WithCode 'HARNESS_SCENARIO_NOT_FOUND' "Scenario '$RunScenario' is absent." 27 }
 +if ($scenario.status -cne 'MAPPED') { Stop-WithCode 'HARNESS_SCENARIO_UNMAPPED' "Scenario '$RunScenario' has no verified mapping." 28 }
++if ($null -ne $scenario.lightingContract -and [bool]$scenario.lightingContract.requiredComparison.sameFrame) {
++    if ($TruthMode -ne 'NORMAL' -or $VisualProfile -ne 2) {
++        Stop-WithCode 'HARNESS_LIGHTING_CONTRACT_REQUIRES_NORMAL_HYBRID' `
++            'This lighting contract needs the HYBRID_RT NORMAL capture so the off/on pair shares one scene frame.' 22
++    }
++    $VisualAblation = $true
++}
 +$diagnostic = @($manifest.diagnosticModes | Where-Object { $_.id -ceq $TruthMode }) | Select-Object -First 1
 +if ($null -eq $diagnostic) { Stop-WithCode 'HARNESS_UNKNOWN_TRUTH_MODE' "Mode '$TruthMode' is not declared in schema v1." 29 }
 +if ($scenario.entrance -lt 0 -or $scenario.entrance -gt 65535 -or $scenario.expectedScene -lt 0 -or
@@ -4028,15 +4571,20 @@ index 0000000000000000000000000000000000000000..22dc8c77599771eed2b903e993ed4149
 +if ($null -eq $mapping) { Stop-WithCode 'HARNESS_INVALID_ENTRANCE' 'Entrance/scene/room tuple is not verified in the manifest.' 30 }
 +
 +$assetNames = @('es.o2r', 'oot.o2r', 'soh.o2r')
++$executableIdentity = [ordered]@{
++    path = $Executable
++    sizeBytes = (Get-Item -LiteralPath $Executable).Length
++    sha256 = (Get-HarnessFileHash -LiteralPath $Executable -Algorithm SHA256).Hash
++}
 +$assetHashes = @{}
 +foreach ($assetName in $assetNames) {
 +    $assetPath = Join-Path $runtimeRoot $assetName
 +    if (-not (Test-Path -LiteralPath $assetPath -PathType Leaf)) { Stop-WithCode 'HARNESS_OTR_NOT_FOUND' $assetPath 31 }
-+    $assetHashes[$assetName] = (Get-FileHash -LiteralPath $assetPath -Algorithm SHA256).Hash
++    $assetHashes[$assetName] = (Get-HarnessFileHash -LiteralPath $assetPath -Algorithm SHA256).Hash
 +}
 +$allO2rBefore = @{}
 +foreach ($assetFile in Get-ChildItem -LiteralPath $runtimeRoot -Filter '*.o2r' -File) {
-+    $allO2rBefore[$assetFile.Name] = (Get-FileHash -LiteralPath $assetFile.FullName -Algorithm SHA256).Hash
++    $allO2rBefore[$assetFile.Name] = (Get-HarnessFileHash -LiteralPath $assetFile.FullName -Algorithm SHA256).Hash
 +}
 +
 +$gpuLoad = Get-NvidiaGpuLoad
@@ -4067,7 +4615,7 @@ index 0000000000000000000000000000000000000000..22dc8c77599771eed2b903e993ed4149
 +
 +$originalHashesBefore = @{}
 +foreach ($saveFile in Get-ChildItem -LiteralPath $originalSaveRoot -Filter '*.sav' -File) {
-+    $originalHashesBefore[$saveFile.Name] = (Get-FileHash -LiteralPath $saveFile.FullName -Algorithm SHA256).Hash
++    $originalHashesBefore[$saveFile.Name] = (Get-HarnessFileHash -LiteralPath $saveFile.FullName -Algorithm SHA256).Hash
 +}
 +
 +Copy-Item -LiteralPath $manifestPath -Destination (Join-Path $runRoot 'manifest.input.json')
@@ -4078,10 +4626,19 @@ index 0000000000000000000000000000000000000000..22dc8c77599771eed2b903e993ed4149
 +    viewId = $scenario.viewId
 +    truthMode = $TruthMode
 +    backendTruthMode = [int]$diagnostic.backendMode
++    executableIdentity = $executableIdentity
 +    rendererBackend = $RendererBackend
 +    visualProfile = [int]$VisualProfile
 +    visualProfileName = $visualProfileName
 +    d3d12DebugLayerRequested = [bool]$EnableD3D12DebugLayer
++    background = [bool]$Background
++    primaryGateCounters = [bool]$PrimaryGateCounters
++    diagnosticAnyHitAlphaBypass = [bool]$PrimaryGateCounters
++    dxrMatrixTrace = [bool]$TraceDxrMatrices
++    visualAblation = [bool]$VisualAblation
++    monitorCapture = [bool]$MonitorCapture
++    rtxQuality = $RtxQuality
++    presentation = if ($Background) { 'SKIPPED_BACKGROUND' } else { 'NORMAL_DXGI' }
 +    entrance = ('0x{0:X3}' -f [int]$scenario.entrance)
 +    scene = ('0x{0:X2}' -f [int]$scenario.expectedScene)
 +    room = [int]$scenario.expectedRoom
@@ -4100,10 +4657,55 @@ index 0000000000000000000000000000000000000000..22dc8c77599771eed2b903e993ed4149
 +    'COUCH_DXR_SAVE_ROOT', 'COUCH_DXR_SCENARIO', 'COUCH_DXR_MODE', 'COUCH_DXR_TRUTH_MODE',
 +    'COUCH_DXR_TARGET_SCENE', 'COUCH_FORENSIC_CAPTURES', 'COUCH_DXR_TRUTH_SEQUENCE',
 +    'COUCH_DXR_TRUTH_V2_SEQUENCE', 'COUCH_DXR_DIAGNOSTIC_SEQUENCE', 'COUCH_D3D12_DEBUG',
-+    'COUCH_D3D12', 'COUCH_VISUAL_PROFILE')
++    'COUCH_D3D12', 'COUCH_VISUAL_PROFILE', 'COUCH_DXR_BACKGROUND', 'COUCH_DIAGNOSTICS_PATH',
++    'COUCH_DXR_GPU_GATE_COUNTERS', 'COUCH_DXR_PRIMARY_GATE_COUNTERS', 'COUCH_DXR_MATRIX_TRACE',
++    'COUCH_DXR_FORCE_ANY_HIT_COVERAGE', 'COUCH_DXR_GATE_DIAGNOSTIC', 'COUCH_DXR_VISUAL_ABLATION',
++    'COUCH_DXR_MONITOR_CAPTURE', 'COUCH_RTX_QUALITY', 'COUCH_DXR_NAVI_PILOT', 'COUCH_DXR_NAVI_ISOLATION',
++    'COUCH_DXR_NAVI_POINT_GAIN', 'COUCH_DXR_NAVI_POINT_TINT')
 +$savedHarnessEnv = @{}
 +foreach ($name in $harnessEnvNames) { $savedHarnessEnv[$name] = [Environment]::GetEnvironmentVariable($name, 'Process') }
 +$env:COUCH_DXR_HARNESS = '1'
++$env:COUCH_DXR_NAVI_PILOT = if ($scenario.naviPilot) { '1' } else { '0' }
++$env:COUCH_DXR_NAVI_ISOLATION = if ($scenario.naviPilot -and $scenario.naviPilot.isolate -eq $false) { '0' } else { '1' }
++$naviPointGain = 1.0
++if ($scenario.naviPilot -and $null -ne $scenario.naviPilot.pointLightGain) {
++    $naviPointGain = [double]$scenario.naviPilot.pointLightGain
++    if ([double]::IsNaN($naviPointGain) -or [double]::IsInfinity($naviPointGain) -or
++        $naviPointGain -lt 0.0 -or $naviPointGain -gt 128.0) {
++        throw 'naviPilot.pointLightGain must be finite and between 0 and 128.'
++    }
++}
++$env:COUCH_DXR_NAVI_POINT_GAIN = $naviPointGain.ToString('R', [System.Globalization.CultureInfo]::InvariantCulture)
++$naviPointTint = @(1.0, 1.0, 1.0)
++if ($scenario.naviPilot -and $null -ne $scenario.naviPilot.pointLightTint) {
++    $configuredTint = $scenario.naviPilot.pointLightTint
++    if ($configuredTint -isnot [array] -or $configuredTint.Count -ne 3) {
++        throw 'naviPilot.pointLightTint must be an RGB array with three values between 0 and 1.'
++    }
++    $naviPointTint = @($configuredTint | ForEach-Object { [double]$_ })
++    foreach ($channel in $naviPointTint) {
++        if ([double]::IsNaN($channel) -or [double]::IsInfinity($channel) -or
++            $channel -lt 0.0 -or $channel -gt 1.0) {
++            throw 'naviPilot.pointLightTint must be an RGB array with three values between 0 and 1.'
++        }
++    }
++}
++$naviPositionOffset = $null
++if ($scenario.naviPilot -and $null -ne $scenario.naviPilot.positionOffset) {
++    $configuredOffset = $scenario.naviPilot.positionOffset
++    if ($configuredOffset -isnot [array] -or $configuredOffset.Count -ne 3) {
++        throw 'naviPilot.positionOffset must be a finite XYZ array with three values.'
++    }
++    $naviPositionOffset = @($configuredOffset | ForEach-Object { [double]$_ })
++    foreach ($axis in $naviPositionOffset) {
++        if ([double]::IsNaN($axis) -or [double]::IsInfinity($axis)) {
++            throw 'naviPilot.positionOffset must be a finite XYZ array with three values.'
++        }
++    }
++}
++$env:COUCH_DXR_NAVI_POINT_TINT = ($naviPointTint | ForEach-Object {
++    ([double]$_).ToString('R', [System.Globalization.CultureInfo]::InvariantCulture)
++}) -join ','
 +$env:COUCH_DXR_CAPTURE_SEQUENCE = '1'
 +$env:COUCH_DXR_MANIFEST = $manifestPath
 +$env:COUCH_DXR_OUTPUT = $runRoot
@@ -4116,15 +4718,27 @@ index 0000000000000000000000000000000000000000..22dc8c77599771eed2b903e993ed4149
 +$env:COUCH_DXR_TRUTH_SEQUENCE = '0'
 +$env:COUCH_DXR_TRUTH_V2_SEQUENCE = '0'
 +$env:COUCH_DXR_DIAGNOSTIC_SEQUENCE = '0'
++$env:COUCH_DXR_GPU_GATE_COUNTERS = if ($PrimaryGateCounters) { '1' } else { '0' }
++$env:COUCH_DXR_PRIMARY_GATE_COUNTERS = if ($PrimaryGateCounters) { '1' } else { '0' }
++$env:COUCH_DXR_MATRIX_TRACE = if ($TraceDxrMatrices) { '1' } else { '0' }
++$env:COUCH_DXR_FORCE_ANY_HIT_COVERAGE = '0'
++$env:COUCH_DXR_GATE_DIAGNOSTIC = '0'
 +$env:COUCH_D3D12_DEBUG = if ($EnableD3D12DebugLayer) { '1' } else { '0' }
 +$env:COUCH_D3D12 = '1'
 +$env:COUCH_VISUAL_PROFILE = [string]$VisualProfile
++$env:COUCH_DXR_BACKGROUND = if ($Background) { '1' } else { '0' }
++$env:COUCH_DIAGNOSTICS_PATH = Join-Path $runRoot 'harness-backend.log'
++$env:COUCH_DXR_VISUAL_ABLATION = if ($VisualAblation) { '1' } else { '0' }
++$env:COUCH_DXR_MONITOR_CAPTURE = if ($MonitorCapture) { '1' } else { '0' }
++$env:COUCH_RTX_QUALITY = [string]$RtxQuality
 +
 +$stdoutPath = Join-Path $runRoot 'stdout.log'
 +$stderrPath = Join-Path $runRoot 'stderr.log'
 + $launchFailure = $null
 +try {
++    $launchWindowStyle = if ($MonitorCapture) { 'Normal' } else { 'Hidden' }
 +    $process = Start-Process -FilePath $Executable -WorkingDirectory $runtimeRoot -PassThru `
++        -WindowStyle $launchWindowStyle `
 +        -RedirectStandardOutput $stdoutPath -RedirectStandardError $stderrPath
 +} catch {
 +    $launchFailure = $_.Exception.Message
@@ -4137,21 +4751,40 @@ index 0000000000000000000000000000000000000000..22dc8c77599771eed2b903e993ed4149
 +}
 +if ($launchFailure) { Stop-WithCode 'HARNESS_PROCESS_START_FAILED' $launchFailure 36 }
 +
++try {
 +$started = Get-Date
-+$deadline = $started.AddSeconds([Math]::Max(1, [Math]::Min($PollSeconds, 60)))
++$maximumPollSeconds = 300
++$deadline = $started.AddSeconds([Math]::Max(1, [Math]::Min($PollSeconds, $maximumPollSeconds)))
 +$startupDeadline = $started.AddSeconds(20)
 +$windowReady = $false
 +$statusPath = Join-Path $runRoot 'launcher.status.json'
 +$d3d12LogPath = Join-Path $runRoot 'harness-d3d12.log'
 +$backendDeviceRemoved = $false
 +while ((Get-Date) -lt $deadline) {
++    # Present is held before the next game update can create CAPTURE_COMPLETE.
++    # Capture as soon as its evidence exists, then release that same GPU frame.
++    if ($MonitorCapture -and
++        (Test-Path -LiteralPath (Join-Path $runRoot 'presentation.evidence.jsonl')) -and
++        -not (Test-Path -LiteralPath (Join-Path $runRoot 'monitor.capture.complete'))) {
++        & (Join-Path $PSScriptRoot 'capture-client.ps1') -ProcessId $process.Id -RunRoot $runRoot
++    }
 +    if (-not $windowReady -and (Get-Date) -lt $startupDeadline -and -not $process.HasExited) {
 +        $process.Refresh()
-+        $windowReady = -not [string]::IsNullOrWhiteSpace($process.MainWindowTitle)
++        if ($Background) {
++            $windowReady = (Test-Path -LiteralPath (Join-Path $runRoot 'harness-backend.log') -PathType Leaf) -and
++                [bool](Select-String -LiteralPath (Join-Path $runRoot 'harness-backend.log') -SimpleMatch '[COUCH-HARNESS][WINDOW_HIDDEN] visible=0 foreground=0' -Quiet)
++        } else {
++            $windowReady = -not [string]::IsNullOrWhiteSpace($process.MainWindowTitle)
++        }
 +    }
 +    if (Test-Path -LiteralPath (Join-Path $runRoot 'RUN_PASS') -PathType Leaf) { break }
 +    if (Test-Path -LiteralPath (Join-Path $runRoot 'RUN_FAIL') -PathType Leaf) { break }
-+    if (Test-Path -LiteralPath (Join-Path $runRoot 'CAPTURE_COMPLETE') -PathType Leaf) { break }
++    if (Test-Path -LiteralPath (Join-Path $runRoot 'CAPTURE_COMPLETE') -PathType Leaf) {
++        if ($MonitorCapture -and -not (Test-Path -LiteralPath (Join-Path $runRoot 'monitor.capture.complete'))) {
++            & (Join-Path $PSScriptRoot 'capture-client.ps1') -ProcessId $process.Id -RunRoot $runRoot
++        }
++        break
++    }
 +    if (Test-Path -LiteralPath (Join-Path $runRoot 'CAPTURE_PARTIAL') -PathType Leaf) { break }
 +    if (-not $windowReady -and (Get-Date) -ge $startupDeadline) {
 +        Set-Content -LiteralPath (Join-Path $runRoot 'RUN_FAIL') -Value 'HARNESS_STARTUP_TIMEOUT' -Encoding utf8
@@ -4188,7 +4821,7 @@ index 0000000000000000000000000000000000000000..22dc8c77599771eed2b903e993ed4149
 +
 +$originalHashesAfter = @{}
 +foreach ($saveFile in Get-ChildItem -LiteralPath $originalSaveRoot -Filter '*.sav' -File) {
-+    $originalHashesAfter[$saveFile.Name] = (Get-FileHash -LiteralPath $saveFile.FullName -Algorithm SHA256).Hash
++    $originalHashesAfter[$saveFile.Name] = (Get-HarnessFileHash -LiteralPath $saveFile.FullName -Algorithm SHA256).Hash
 +}
 +$originalUnchanged = $true
 +foreach ($saveName in $originalHashesBefore.Keys) {
@@ -4226,7 +4859,7 @@ index 0000000000000000000000000000000000000000..22dc8c77599771eed2b903e993ed4149
 +
 +$allO2rAfter = @{}
 +foreach ($assetFile in Get-ChildItem -LiteralPath $runtimeRoot -Filter '*.o2r' -File) {
-+    $allO2rAfter[$assetFile.Name] = (Get-FileHash -LiteralPath $assetFile.FullName -Algorithm SHA256).Hash
++    $allO2rAfter[$assetFile.Name] = (Get-HarnessFileHash -LiteralPath $assetFile.FullName -Algorithm SHA256).Hash
 +}
 +$newO2r = @($allO2rAfter.Keys | Where-Object { -not $allO2rBefore.ContainsKey($_) })
 +$changedO2r = @($allO2rBefore.Keys | Where-Object {
@@ -4283,6 +4916,17 @@ index 0000000000000000000000000000000000000000..22dc8c77599771eed2b903e993ed4149
 +                  elseif (Test-Path -LiteralPath (Join-Path $runRoot 'CAPTURE_PARTIAL')) { 'PARTIAL' }
 +                  elseif ($process.HasExited) { 'PROCESS_EXITED' }
 +                  else { 'POLL_TIMEOUT_PROCESS_LEFT_OPEN' }
++$backgroundCleanup = 'NOT_REQUESTED'
++if ($Background -or $MonitorCapture) {
++    if (-not $process.HasExited) {
++        # This Process object belongs to the executable launched above. Never
++        # enumerate/terminate other renderers or a user's normal game process.
++        $process.Kill()
++        $process.WaitForExit(5000) | Out-Null
++    }
++    $backgroundCleanup = if ($process.HasExited) { 'OWN_TEST_PROCESS_STOPPED' } else { 'STOP_FAILED' }
++    if ($launcherStatus -eq 'POLL_TIMEOUT_PROCESS_LEFT_OPEN') { $launcherStatus = 'POLL_TIMEOUT_BACKGROUND_STOPPED' }
++}
 +[ordered]@{
 +    status = $launcherStatus
 +    runId = $runId
@@ -4291,6 +4935,8 @@ index 0000000000000000000000000000000000000000..22dc8c77599771eed2b903e993ed4149
 +    workingDirectory = $runtimeRoot
 +    runRoot = $runRoot
 +    processExited = $process.HasExited
++    background = [bool]$Background
++    backgroundCleanup = $backgroundCleanup
 +    backendDeviceRemoved = $backendDeviceRemoved
 +    evidenceVerification = $evidenceVerification
 +    originalSaveUnchanged = $originalUnchanged
@@ -4304,10 +4950,10 @@ index 0000000000000000000000000000000000000000..22dc8c77599771eed2b903e993ed4149
 +Write-Output "PID=$($process.Id)"
 +Write-Output "ORIGINAL_SAVE_UNCHANGED=$($originalUnchanged.ToString().ToUpperInvariant())"
 +Write-Output "RUN_ROOT=$runRoot"
-+if ($launcherStatus -eq 'POLL_TIMEOUT_PROCESS_LEFT_OPEN') { exit 124 }
++if ($launcherStatus -in @('POLL_TIMEOUT_PROCESS_LEFT_OPEN','POLL_TIMEOUT_BACKGROUND_STOPPED')) { exit 124 }
 +if ($launcherStatus -eq 'PROCESS_EXITED') { exit 38 }
 +if ($backendDeviceRemoved) {
-+    [Console]::Error.WriteLine('HARNESS_D3D12_DEVICE_REMOVED : The D3D12 device was removed or hung; the game process was left untouched.')
++    [Console]::Error.WriteLine('HARNESS_D3D12_DEVICE_REMOVED : The D3D12 device was removed or hung. Background tests close their own process; other game processes are untouched.')
 +    exit 42
 +}
 +if ($evidenceVerificationFailed) {
@@ -4316,12 +4962,20 @@ index 0000000000000000000000000000000000000000..22dc8c77599771eed2b903e993ed4149
 +}
 +if ($launcherStatus -eq 'FAIL') { exit 39 }
 +exit 0
++} finally {
++    # Verification or file-I/O failures must also close this hidden renderer.
++    # The Process object was returned by this launch; no other PID is queried.
++    if (($Background -or $MonitorCapture) -and $null -ne $process -and -not $process.HasExited) {
++        $process.Kill()
++        $process.WaitForExit(5000) | Out-Null
++    }
++}
 diff --git a/scripts/scene-harness/scenarios/scenarios.v1.json b/scripts/scene-harness/scenarios/scenarios.v1.json
 new file mode 100644
-index 0000000000000000000000000000000000000000..0585b4cbcf46a5320c24294f9a6f19e0c75fee5b
+index 0000000000000000000000000000000000000000..1338b89b0ac4e083931189b57dae2f47fafa590a
 --- /dev/null
 +++ b/scripts/scene-harness/scenarios/scenarios.v1.json
-@@ -0,0 +1,191 @@
+@@ -0,0 +1,995 @@
 +{
 +  "schemaVersion": 1,
 +  "description": "Versioned scene registry. Only mappings backed by a verified entrance, scene, and room are executable.",
@@ -4329,19 +4983,22 @@ index 0000000000000000000000000000000000000000..0585b4cbcf46a5320c24294f9a6f19e0
 +    {
 +      "id": "KOKIRI_BASELINE",
 +      "status": "MAPPED",
-+      "scenarioId": "SCENARIO_00_BASELINE"
++      "scenarioId": "BASELINE_KOKIRI"
 +    },
 +    {
 +      "id": "EXTERIOR_DAY",
-+      "status": "UNMAPPED"
++      "status": "MAPPED",
++      "scenarioId": "HYRULE_FIELD_DAY"
 +    },
 +    {
 +      "id": "EXTERIOR_NIGHT",
-+      "status": "UNMAPPED"
++      "status": "MAPPED",
++      "scenarioId": "HYRULE_FIELD_NIGHT"
 +    },
 +    {
 +      "id": "INTERIOR_LIT",
-+      "status": "UNMAPPED"
++      "status": "MAPPED",
++      "scenarioId": "TEMPLE_INTERIOR"
 +    },
 +    {
 +      "id": "INTERIOR_DARK",
@@ -4349,7 +5006,8 @@ index 0000000000000000000000000000000000000000..0585b4cbcf46a5320c24294f9a6f19e0
 +    },
 +    {
 +      "id": "WATER",
-+      "status": "UNMAPPED"
++      "status": "MAPPED",
++      "scenarioId": "LAKE_HYLIA_DAY"
 +    },
 +    {
 +      "id": "FIRE_LAVA",
@@ -4443,6 +5101,733 @@ index 0000000000000000000000000000000000000000..0585b4cbcf46a5320c24294f9a6f19e0
 +      "freezeTime": true,
 +      "expectDirectionalLight": true,
 +      "notes": "ENTR_KOKIRI_FOREST_0 is mapped to scene 0x55, room 0 in this fork. Player and camera use their normal game spawn."
++    },
++    {
++      "id": "LAKE_HYLIA_DAY",
++      "category": "WATER",
++      "status": "MAPPED",
++      "entrance": 258,
++      "entranceHex": "0x102",
++      "expectedScene": 87,
++      "expectedSceneHex": "0x57",
++      "expectedRoom": 0,
++      "linkAge": 1,
++      "dayTime": 27307,
++      "nightFlag": 0,
++      "mappingEvidenceId": "LAKE_ENTR_102",
++      "viewId": "VIEW_LAKE_WATER_OVERVIEW",
++      "freezePlayer": true,
++      "freezeTime": true,
++      "expectDirectionalLight": true,
++      "notes": "Source-verified ENTR_LAKE_HYLIA_NORTH_EXIT; the captured view must still demonstrate visible water before accepting reflection quality."
++    },
++    {
++      "id": "TEMPLE_INTERIOR",
++      "category": "INTERIOR_LIT",
++      "status": "MAPPED",
++      "entrance": 83,
++      "entranceHex": "0x053",
++      "expectedScene": 67,
++      "expectedSceneHex": "0x43",
++      "expectedRoom": 1,
++      "linkAge": 1,
++      "dayTime": 27307,
++      "nightFlag": 0,
++      "mappingEvidenceId": "TEMPLE_ENTR_053",
++      "viewId": "VIEW_00_DEFAULT_SPAWN_CAMERA",
++      "freezePlayer": true,
++      "freezeTime": true,
++      "expectDirectionalLight": true,
++      "lightingContract": {
++        "id": "TEMPLE_WINDOW_MOSAIC_NAVI_V1",
++        "windowLightSource": "native scene directional light traced through the captured Temple window pane triangles; no point emitters are synthesized at window bounds",
++        "targetMaterials": [
++          {
++            "id": "mosaic_floor",
++            "resource": "scenes/shared/tokinoma_scene/tokinoma_sceneTex_011FA0",
++            "geometryEvidence": "tokinoma_room_1DL_002A58; Vtx_002508 spans Y=-40..0",
++            "material": "CERAMIC",
++            "roughness": 0.28,
++            "reflectivity": 0.18
++          },
++          {
++            "id": "window_glass_child",
++            "resource": "objects/object_toki_objects/object_toki_objects_Tex_002DC0",
++            "material": "GLASS"
++          },
++          {
++            "id": "window_beam_overlay",
++            "resource": "objects/object_toki_objects/object_toki_objects_Tex_0035C0",
++            "material": "EMISSIVE",
++            "role": "visible_translucent_beam_only"
++          },
++          {
++            "id": "window_glass_adult",
++            "resource": "objects/object_toki_objects/object_toki_objects_Tex_003DC0",
++            "material": "GLASS"
++          },
++          {
++            "id": "navi_visual_glow",
++            "resource": "objects/gameplay_keep/gFairyWingTex",
++            "material": "EMISSIVE",
++            "worldLight": "LIGHT_POINT_GLOW tinted from current Navi inner/outer colors"
++          }
++        ],
++        "runtimeGates": [
++          {
++            "id": "exact_resources_seen_in_capture",
++            "implementation": "PENDING_RUNTIME",
++            "status": "NOT_RUN"
++          },
++          {
++            "id": "window_to_floor_radiance",
++            "implementation": "NATIVE_DIRECTIONAL_THROUGH_EXACT_WINDOW_PORTAL_TRIANGLES",
++            "status": "NOT_CERTIFIED"
++          },
++          {
++            "id": "floor_reflection_difference",
++            "implementation": "MATERIAL_MAPPED",
++            "status": "NOT_VERIFIED"
++          },
++          {
++            "id": "navi_local_irradiance",
++            "implementation": "PALETTE_TINTED_POINT_LIGHT_AND_EMISSIVE_WINGS",
++            "status": "NOT_VERIFIED"
++          },
++          {
++            "id": "soft_shadow_penumbra",
++            "implementation": "SOURCE_CONTROL_AND_DXIL_BYTECODE_REGENERATED_RUNTIME_PENDING",
++            "status": "NOT_VERIFIED"
++          }
++        ],
++        "requiredComparison": {
++          "sameFrame": true,
++          "ablation": [
++            "comparison_dxr_off",
++            "comparison_dxr_on",
++            "comparison_relight_off"
++          ],
++          "viewers": [
++            "overlay",
++            "difference",
++            "blink"
++          ],
++          "humanVisualAcceptanceRequired": true
++        },
++        "passRequiresAllRuntimeGates": true
++      },
++      "notes": "Source entrance 0x053 and scene 0x43; actual room 1 was confirmed by a prior run. The next harness capture must also match the native directional light in the exact capture frame."
++    },
++    {
++      "id": "HYRULE_FIELD_DAY",
++      "category": "EXTERIOR_DAY",
++      "status": "MAPPED",
++      "entrance": 205,
++      "entranceHex": "0x0CD",
++      "expectedScene": 81,
++      "expectedSceneHex": "0x51",
++      "expectedRoom": 0,
++      "linkAge": 1,
++      "dayTime": 27307,
++      "nightFlag": 0,
++      "mappingEvidenceId": "FIELD_ENTR_0CD",
++      "viewId": "VIEW_00_DEFAULT_SPAWN_CAMERA",
++      "freezePlayer": true,
++      "freezeTime": true,
++      "expectDirectionalLight": true,
++      "notes": "Source-verified ENTR_HYRULE_FIELD_PAST_BRIDGE_SPAWN. Default view is checked from the capture; mapping alone does not prove effect quality."
++    },
++    {
++      "id": "HYRULE_FIELD_NIGHT",
++      "category": "EXTERIOR_NIGHT",
++      "status": "MAPPED",
++      "entrance": 205,
++      "entranceHex": "0x0CD",
++      "expectedScene": 81,
++      "expectedSceneHex": "0x51",
++      "expectedRoom": 0,
++      "linkAge": 1,
++      "dayTime": 49152,
++      "nightFlag": 1,
++      "mappingEvidenceId": "FIELD_ENTR_0CD",
++      "viewId": "VIEW_00_DEFAULT_SPAWN_CAMERA",
++      "freezePlayer": true,
++      "freezeTime": true,
++      "expectDirectionalLight": true,
++      "notes": "Source-verified ENTR_HYRULE_FIELD_PAST_BRIDGE_SPAWN. Default view is checked from the capture; mapping alone does not prove effect quality."
++    },
++    {
++      "id": "NAVI_KOKIRI_NATURAL",
++      "category": "POINT_LIGHT",
++      "status": "MAPPED",
++      "entrance": 238,
++      "entranceHex": "0x0EE",
++      "expectedScene": 85,
++      "expectedSceneHex": "0x55",
++      "expectedRoom": 0,
++      "linkAge": 1,
++      "dayTime": 27307,
++      "nightFlag": 0,
++      "mappingEvidenceId": "KOKIRI_ENTR_0EE",
++      "viewId": "VIEW_NAVI_RECEIVER",
++      "freezePlayer": true,
++      "freezeTime": true,
++      "expectDirectionalLight": true,
++      "notes": "Harness-only Navi pilot: native source identity, real receiver, fixed camera; four same-frame linear light ablations. Controlled poses are test authoring.",
++      "naviPilot": {
++        "pose": "NATURAL"
++      }
++    },
++    {
++      "id": "NAVI_KOKIRI_POINT",
++      "category": "POINT_LIGHT",
++      "status": "MAPPED",
++      "entrance": 238,
++      "entranceHex": "0x0EE",
++      "expectedScene": 85,
++      "expectedSceneHex": "0x55",
++      "expectedRoom": 0,
++      "linkAge": 1,
++      "dayTime": 27307,
++      "nightFlag": 0,
++      "mappingEvidenceId": "KOKIRI_ENTR_0EE",
++      "viewId": "VIEW_NAVI_RECEIVER",
++      "freezePlayer": true,
++      "freezeTime": true,
++      "expectDirectionalLight": true,
++      "notes": "Harness-only Navi pilot: native source identity, real receiver, fixed camera; four same-frame linear light ablations. Controlled poses are test authoring.",
++      "naviPilot": {
++        "pose": "CONTROLLED",
++        "height": 25
++      }
++    },
++    {
++      "id": "NAVI_KOKIRI_DIRECT_PRODUCTION",
++      "category": "POINT_LIGHT",
++      "status": "MAPPED",
++      "entrance": 238,
++      "entranceHex": "0x0EE",
++      "expectedScene": 85,
++      "expectedSceneHex": "0x55",
++      "expectedRoom": 0,
++      "linkAge": 1,
++      "dayTime": 27307,
++      "nightFlag": 0,
++      "mappingEvidenceId": "KOKIRI_ENTR_0EE",
++      "viewId": "VIEW_NAVI_RECEIVER",
++      "freezePlayer": true,
++      "freezeTime": true,
++      "expectDirectionalLight": true,
++      "notes": "Same controlled receiver pose as NAVI_KOKIRI_POINT; captures the production Navi direct-light buffer and a same-frame Navi-point-off composite.",
++      "naviPilot": {
++        "pose": "CONTROLLED",
++        "height": 25,
++        "isolate": false
++      }
++    },
++    {
++      "id": "NAVI_KOKIRI_DIRECT_PRODUCTION_NATURAL",
++      "category": "POINT_LIGHT",
++      "status": "MAPPED",
++      "entrance": 238,
++      "entranceHex": "0x0EE",
++      "expectedScene": 85,
++      "expectedSceneHex": "0x55",
++      "expectedRoom": 0,
++      "linkAge": 1,
++      "dayTime": 27307,
++      "nightFlag": 0,
++      "mappingEvidenceId": "KOKIRI_ENTR_0EE",
++      "viewId": "VIEW_NAVI_RECEIVER",
++      "freezePlayer": true,
++      "freezeTime": true,
++      "expectDirectionalLight": true,
++      "notes": "Native Navi position; captures the production point-light buffer and same-frame Navi-point-off composite without repositioning the fairy.",
++      "naviPilot": {
++        "pose": "NATURAL",
++        "isolate": false
++      }
++    },
++    {
++      "id": "NAVI_KOKIRI_DIRECT_PRODUCTION_NATURAL_ACTIVE",
++      "category": "POINT_LIGHT",
++      "status": "MAPPED",
++      "entrance": 238,
++      "entranceHex": "0x0EE",
++      "expectedScene": 85,
++      "expectedSceneHex": "0x55",
++      "expectedRoom": 0,
++      "linkAge": 1,
++      "dayTime": 27307,
++      "nightFlag": 0,
++      "mappingEvidenceId": "KOKIRI_ENTR_0EE",
++      "viewId": "VIEW_NAVI_RECEIVER",
++      "freezePlayer": true,
++      "freezeTime": true,
++      "expectDirectionalLight": true,
++      "notes": "Keeps Navi at her native position while the harness alone selects the active point-light state; captures production direct radiance and the same-frame Navi-point-off composite.",
++      "naviPilot": {
++        "pose": "NATURAL_ACTIVE",
++        "isolate": false
++      }
++    },
++    {
++      "id": "NAVI_KOKIRI_FAR",
++      "category": "POINT_LIGHT",
++      "status": "MAPPED",
++      "entrance": 238,
++      "entranceHex": "0x0EE",
++      "expectedScene": 85,
++      "expectedSceneHex": "0x55",
++      "expectedRoom": 0,
++      "linkAge": 1,
++      "dayTime": 27307,
++      "nightFlag": 0,
++      "mappingEvidenceId": "KOKIRI_ENTR_0EE",
++      "viewId": "VIEW_NAVI_RECEIVER",
++      "freezePlayer": true,
++      "freezeTime": true,
++      "expectDirectionalLight": true,
++      "notes": "Harness-only Navi pilot: native source identity, real receiver, fixed camera; four same-frame linear light ablations. Controlled poses are test authoring.",
++      "naviPilot": {
++        "pose": "CONTROLLED",
++        "height": 55
++      }
++    },
++    {
++      "id": "NAVI_KOKIRI_OUTSIDE_RADIUS",
++      "category": "POINT_LIGHT",
++      "status": "MAPPED",
++      "entrance": 238,
++      "entranceHex": "0x0EE",
++      "expectedScene": 85,
++      "expectedSceneHex": "0x55",
++      "expectedRoom": 0,
++      "linkAge": 1,
++      "dayTime": 27307,
++      "nightFlag": 0,
++      "mappingEvidenceId": "KOKIRI_ENTR_0EE",
++      "viewId": "VIEW_NAVI_RECEIVER",
++      "freezePlayer": true,
++      "freezeTime": true,
++      "expectDirectionalLight": true,
++      "notes": "Harness-only Navi pilot: native source identity, real receiver, fixed camera; four same-frame linear light ablations. Controlled poses are test authoring.",
++      "naviPilot": {
++        "pose": "CONTROLLED",
++        "height": 125
++      }
++    },
++    {
++      "id": "NAVI_KOKIRI_RED",
++      "category": "POINT_LIGHT",
++      "status": "MAPPED",
++      "entrance": 238,
++      "entranceHex": "0x0EE",
++      "expectedScene": 85,
++      "expectedSceneHex": "0x55",
++      "expectedRoom": 0,
++      "linkAge": 1,
++      "dayTime": 27307,
++      "nightFlag": 0,
++      "mappingEvidenceId": "KOKIRI_ENTR_0EE",
++      "viewId": "VIEW_NAVI_RECEIVER",
++      "freezePlayer": true,
++      "freezeTime": true,
++      "expectDirectionalLight": true,
++      "notes": "Harness-only Navi pilot: native source identity, real receiver, fixed camera; four same-frame linear light ablations. Controlled poses are test authoring.",
++      "naviPilot": {
++        "pose": "CONTROLLED",
++        "height": 25,
++        "color": "RED"
++      }
++    },
++    {
++      "id": "NAVI_KOKIRI_DISABLED",
++      "category": "POINT_LIGHT",
++      "status": "MAPPED",
++      "entrance": 238,
++      "entranceHex": "0x0EE",
++      "expectedScene": 85,
++      "expectedSceneHex": "0x55",
++      "expectedRoom": 0,
++      "linkAge": 1,
++      "dayTime": 27307,
++      "nightFlag": 0,
++      "mappingEvidenceId": "KOKIRI_ENTR_0EE",
++      "viewId": "VIEW_NAVI_RECEIVER",
++      "freezePlayer": true,
++      "freezeTime": true,
++      "expectDirectionalLight": true,
++      "notes": "Harness-only Navi pilot: native source identity, real receiver, fixed camera; four same-frame linear light ablations. Controlled poses are test authoring.",
++      "naviPilot": {
++        "pose": "CONTROLLED",
++        "height": 25,
++        "glowEnabled": false
++      }
++    },
++    {
++      "id": "NAVI_KOKIRI_AUXILIARY",
++      "category": "POINT_LIGHT",
++      "status": "MAPPED",
++      "entrance": 238,
++      "entranceHex": "0x0EE",
++      "expectedScene": 85,
++      "expectedSceneHex": "0x55",
++      "expectedRoom": 0,
++      "linkAge": 1,
++      "dayTime": 27307,
++      "nightFlag": 0,
++      "mappingEvidenceId": "KOKIRI_ENTR_0EE",
++      "viewId": "VIEW_NAVI_RECEIVER",
++      "freezePlayer": true,
++      "freezeTime": true,
++      "expectDirectionalLight": true,
++      "notes": "Harness-only Navi pilot: native source identity, real receiver, fixed camera; four same-frame linear light ablations. Controlled poses are test authoring.",
++      "naviPilot": {
++        "pose": "CONTROLLED",
++        "height": 25,
++        "auxiliaryEnabled": true
++      }
++    },
++    {
++      "id": "NAVI_KOKIRI_TWO_FAIRIES",
++      "category": "POINT_LIGHT",
++      "status": "MAPPED",
++      "entrance": 238,
++      "entranceHex": "0x0EE",
++      "expectedScene": 85,
++      "expectedSceneHex": "0x55",
++      "expectedRoom": 0,
++      "linkAge": 1,
++      "dayTime": 27307,
++      "nightFlag": 0,
++      "mappingEvidenceId": "KOKIRI_ENTR_0EE",
++      "viewId": "VIEW_NAVI_RECEIVER",
++      "freezePlayer": true,
++      "freezeTime": true,
++      "expectDirectionalLight": true,
++      "notes": "Harness-only Navi pilot: native source identity, real receiver, fixed camera; four same-frame linear light ablations. Controlled poses are test authoring.",
++      "naviPilot": {
++        "pose": "CONTROLLED",
++        "height": 25,
++        "secondFairy": true
++      }
++    },
++    {
++      "id": "NAVI_KOKIRI_SURFACE",
++      "category": "POINT_LIGHT",
++      "status": "MAPPED",
++      "entrance": 238,
++      "entranceHex": "0x0EE",
++      "expectedScene": 85,
++      "expectedSceneHex": "0x55",
++      "expectedRoom": 0,
++      "linkAge": 1,
++      "dayTime": 27307,
++      "nightFlag": 0,
++      "mappingEvidenceId": "KOKIRI_ENTR_0EE",
++      "viewId": "VIEW_NAVI_RECEIVER",
++      "freezePlayer": true,
++      "freezeTime": true,
++      "expectDirectionalLight": true,
++      "notes": "Harness-only Navi pilot: native source identity, real receiver, fixed camera; four same-frame linear light ablations. Controlled poses are test authoring.",
++      "naviPilot": {
++        "pose": "CONTROLLED",
++        "height": 25,
++        "emitterScale": 8.0
++      }
++    },
++    {
++      "id": "NAVI_TEMPLE_LINK_NATIVE",
++      "category": "POINT_LIGHT",
++      "status": "MAPPED",
++      "entrance": 83,
++      "entranceHex": "0x053",
++      "expectedScene": 67,
++      "expectedSceneHex": "0x43",
++      "expectedRoom": 1,
++      "linkAge": 1,
++      "dayTime": 27307,
++      "nightFlag": 0,
++      "mappingEvidenceId": "TEMPLE_ENTR_053",
++      "viewId": "VIEW_NAVI_RECEIVER",
++      "freezePlayer": true,
++      "freezeTime": true,
++      "expectDirectionalLight": true,
++      "notes": "Temple controlled Navi pose at native point intensity; source-only same-frame A/B. Placement is a diagnostic pose, not natural actor motion.",
++      "naviPilot": {
++        "pose": "CONTROLLED",
++        "height": 25,
++        "emitterScale": 1.0,
++        "pointLightGain": 1.0
++      }
++    },
++    {
++      "id": "NAVI_TEMPLE_LINK_8X",
++      "category": "POINT_LIGHT",
++      "status": "MAPPED",
++      "entrance": 83,
++      "entranceHex": "0x053",
++      "expectedScene": 67,
++      "expectedSceneHex": "0x43",
++      "expectedRoom": 1,
++      "linkAge": 1,
++      "dayTime": 27307,
++      "nightFlag": 0,
++      "mappingEvidenceId": "TEMPLE_ENTR_053",
++      "viewId": "VIEW_NAVI_RECEIVER",
++      "freezePlayer": true,
++      "freezeTime": true,
++      "expectDirectionalLight": true,
++      "notes": "Same controlled Temple fixture as NAVI_TEMPLE_LINK_NATIVE. Eight-fold authored DXR point-radiance variant; Navi size, native radius and pose stay fixed. Diagnostic intensity does not claim native OoT energy.",
++      "naviPilot": {
++        "pose": "CONTROLLED",
++        "height": 25,
++        "emitterScale": 1.0,
++        "pointLightGain": 8.0
++      }
++    },
++    {
++      "id": "NAVI_TEMPLE_LINK_32X",
++      "category": "POINT_LIGHT",
++      "status": "MAPPED",
++      "entrance": 83,
++      "entranceHex": "0x053",
++      "expectedScene": 67,
++      "expectedSceneHex": "0x43",
++      "expectedRoom": 1,
++      "linkAge": 1,
++      "dayTime": 27307,
++      "nightFlag": 0,
++      "mappingEvidenceId": "TEMPLE_ENTR_053",
++      "viewId": "VIEW_NAVI_RECEIVER",
++      "freezePlayer": true,
++      "freezeTime": true,
++      "expectDirectionalLight": true,
++      "notes": "Same isolated Temple receiver fixture as NAVI_TEMPLE_LINK_8X. 32-fold authored Navi point-radiance diagnostic; native radius and pose stay fixed.",
++      "naviPilot": {
++        "pose": "CONTROLLED",
++        "height": 25,
++        "emitterScale": 1.0,
++        "pointLightGain": 32.0
++      }
++    },
++    {
++      "id": "NAVI_TEMPLE_LINK_NATIVE_PRODUCTION",
++      "category": "POINT_LIGHT",
++      "status": "MAPPED",
++      "entrance": 83,
++      "entranceHex": "0x053",
++      "expectedScene": 67,
++      "expectedSceneHex": "0x43",
++      "expectedRoom": 1,
++      "linkAge": 1,
++      "dayTime": 27307,
++      "nightFlag": 0,
++      "mappingEvidenceId": "TEMPLE_ENTR_053",
++      "viewId": "VIEW_NAVI_RECEIVER",
++      "freezePlayer": true,
++      "freezeTime": true,
++      "expectDirectionalLight": true,
++      "notes": "Full Temple composite at native Navi point intensity; same camera and controlled pose as the isolated source runs.",
++      "naviPilot": {
++        "pose": "CONTROLLED",
++        "height": 25,
++        "emitterScale": 1.0,
++        "pointLightGain": 1.0,
++        "isolate": false
++      }
++    },
++    {
++      "id": "NAVI_TEMPLE_LINK_8X_PRODUCTION",
++      "category": "POINT_LIGHT",
++      "status": "MAPPED",
++      "entrance": 83,
++      "entranceHex": "0x053",
++      "expectedScene": 67,
++      "expectedSceneHex": "0x43",
++      "expectedRoom": 1,
++      "linkAge": 1,
++      "dayTime": 27307,
++      "nightFlag": 0,
++      "mappingEvidenceId": "TEMPLE_ENTR_053",
++      "viewId": "VIEW_NAVI_RECEIVER",
++      "freezePlayer": true,
++      "freezeTime": true,
++      "expectDirectionalLight": true,
++      "notes": "Full Temple composite with an eight-fold authored DXR Navi point-radiance boost; same pose, radius, camera and room as native-intensity control.",
++      "naviPilot": {
++        "pose": "CONTROLLED",
++        "height": 25,
++        "emitterScale": 1.0,
++        "pointLightGain": 8.0,
++        "isolate": false
++      }
++    },
++    {
++      "id": "NAVI_TEMPLE_LINK_32X_PRODUCTION",
++      "category": "POINT_LIGHT",
++      "status": "MAPPED",
++      "entrance": 83,
++      "entranceHex": "0x053",
++      "expectedScene": 67,
++      "expectedSceneHex": "0x43",
++      "expectedRoom": 1,
++      "linkAge": 1,
++      "dayTime": 27307,
++      "nightFlag": 0,
++      "mappingEvidenceId": "TEMPLE_ENTR_053",
++      "viewId": "VIEW_NAVI_RECEIVER",
++      "freezePlayer": true,
++      "freezeTime": true,
++      "expectDirectionalLight": true,
++      "notes": "Full Temple composite with a 32-fold authored DXR Navi point-radiance diagnostic; same pose, radius, camera and room as native control. Harness-only calibration, not native OoT lighting.",
++      "naviPilot": {
++        "pose": "CONTROLLED",
++        "height": 25,
++        "emitterScale": 1.0,
++        "pointLightGain": 32.0,
++        "isolate": false
++      }
++    },
++    {
++      "id": "NAVI_TRIFORCE_LINK_32X",
++      "category": "POINT_LIGHT",
++      "status": "MAPPED",
++      "entrance": 83,
++      "entranceHex": "0x053",
++      "expectedScene": 67,
++      "expectedSceneHex": "0x43",
++      "expectedRoom": 1,
++      "linkAge": 1,
++      "dayTime": 27307,
++      "nightFlag": 0,
++      "mappingEvidenceId": "TEMPLE_ENTR_053",
++      "viewId": "VIEW_NAVI_RECEIVER",
++      "freezePlayer": true,
++      "freezeTime": true,
++      "expectDirectionalLight": true,
++      "notes": "Isolated 32x Navi-light fixture with Link authored on a measured GPU-hit sample of the Triforce platform top. Camera follows the test pose; image acceptance remains pending.",
++      "naviPilot": {
++        "pose": "CONTROLLED",
++        "height": 25,
++        "emitterScale": 1.0,
++        "pointLightGain": 32.0,
++        "linkPosition": [31.68, -20.0, 2086.86],
++        "receiverAnchor": {
++          "resource": "objects/object_mjin/gWarpPadTopTex",
++          "worldPosition": [31.68, -20.0, 2086.86],
++          "pixel": [500, 133],
++          "normal": [0.0, 1.0, 0.0],
++          "evidence": "GPU first-hit receiver sample on the raised platform top, within the visible Triforce emblem region."
++        }
++      }
++    },
++    {
++      "id": "NAVI_TRIFORCE_LINK_32X_PRODUCTION",
++      "category": "POINT_LIGHT",
++      "status": "MAPPED",
++      "entrance": 83,
++      "entranceHex": "0x053",
++      "expectedScene": 67,
++      "expectedSceneHex": "0x43",
++      "expectedRoom": 1,
++      "linkAge": 1,
++      "dayTime": 27307,
++      "nightFlag": 0,
++      "mappingEvidenceId": "TEMPLE_ENTR_053",
++      "viewId": "VIEW_NAVI_RECEIVER",
++      "freezePlayer": true,
++      "freezeTime": true,
++      "expectDirectionalLight": true,
++      "notes": "Full Temple compositor with Navi 32x authored harness diagnostic and Link on a measured GPU-hit sample of the Triforce platform top. The placement is a controlled test pose, not a gameplay spawn; image acceptance remains pending.",
++      "naviPilot": {
++        "pose": "CONTROLLED",
++        "height": 25,
++        "emitterScale": 1.0,
++        "pointLightGain": 32.0,
++        "isolate": false,
++        "linkPosition": [31.68, -20.0, 2086.86],
++        "receiverAnchor": {
++          "resource": "objects/object_mjin/gWarpPadTopTex",
++          "worldPosition": [31.68, -20.0, 2086.86],
++          "pixel": [500, 133],
++          "normal": [0.0, 1.0, 0.0],
++          "evidence": "GPU first-hit receiver sample on the raised platform top, within the visible Triforce emblem region."
++        }
++      }
++    },
++    {
++      "id": "NAVI_TRIFORCE_LINK_BLUE_SPILL",
++      "category": "POINT_LIGHT",
++      "status": "MAPPED",
++      "entrance": 83,
++      "entranceHex": "0x053",
++      "expectedScene": 67,
++      "expectedSceneHex": "0x43",
++      "expectedRoom": 1,
++      "linkAge": 1,
++      "dayTime": 27307,
++      "nightFlag": 0,
++      "mappingEvidenceId": "TEMPLE_ENTR_053",
++      "viewId": "VIEW_NAVI_RECEIVER",
++      "freezePlayer": true,
++      "freezeTime": true,
++      "expectDirectionalLight": true,
++      "notes": "Isolated authored 128x blue-channel Navi point-light diagnostic. Navi is placed directly above the Triforce receiver and toward the camera side of Link to expose direct response on both receivers. Red/green are attenuated to preserve blue chroma through ACES; not native OoT light color or production material calibration.",
++      "naviPilot": {
++        "pose": "CONTROLLED",
++        "height": 25,
++        "emitterScale": 1.0,
++        "positionOffset": [35.0, 55.0, 25.0],
++        "pointLightGain": 128.0,
++        "pointLightTint": [0.0125, 0.04, 1.0],
++        "isolate": true,
++        "linkPosition": [31.68, -20.0, 2086.86],
++        "receiverAnchor": {
++          "resource": "objects/object_mjin/gWarpPadTopTex",
++          "worldPosition": [66.6334, -20.0, 2111.8521],
++          "pixel": [326, 257],
++          "normal": [0.0, 1.0, 0.0],
++          "evidence": "GPU first-hit sample from the same frozen receiver view, on the raised Triforce platform top."
++        }
++      }
++    },
++    {
++      "id": "NAVI_TRIFORCE_LINK_BLUE_SPILL_PRODUCTION",
++      "category": "POINT_LIGHT",
++      "status": "MAPPED",
++      "entrance": 83,
++      "entranceHex": "0x053",
++      "expectedScene": 67,
++      "expectedSceneHex": "0x43",
++      "expectedRoom": 1,
++      "linkAge": 1,
++      "dayTime": 27307,
++      "nightFlag": 0,
++      "mappingEvidenceId": "TEMPLE_ENTR_053",
++      "viewId": "VIEW_NAVI_RECEIVER",
++      "freezePlayer": true,
++      "freezeTime": true,
++      "expectDirectionalLight": true,
++      "notes": "Production-composite view of the same authored 128x blue-channel Navi point-light diagnostic above the Triforce receiver and toward the camera side of Link. It tests the receiver response through the real compositor; it is not native-light calibration.",
++      "naviPilot": {
++        "pose": "CONTROLLED",
++        "height": 25,
++        "emitterScale": 1.0,
++        "positionOffset": [35.0, 55.0, 25.0],
++        "pointLightGain": 128.0,
++        "pointLightTint": [0.0125, 0.04, 1.0],
++        "isolate": false,
++        "linkPosition": [31.68, -20.0, 2086.86],
++        "receiverAnchor": {
++          "resource": "objects/object_mjin/gWarpPadTopTex",
++          "worldPosition": [66.6334, -20.0, 2111.8521],
++          "pixel": [326, 257],
++          "normal": [0.0, 1.0, 0.0],
++          "evidence": "GPU first-hit sample from the same frozen receiver view, on the raised Triforce platform top."
++        }
++      }
 +    }
 +  ],
 +  "verifiedMappings": [
@@ -4452,12 +5837,66 @@ index 0000000000000000000000000000000000000000..0585b4cbcf46a5320c24294f9a6f19e0
 +      "scene": 85,
 +      "room": 0,
 +      "evidence": "soh/include/tables/entrance_table.h defines ENTR_KOKIRI_FOREST_0 at 0x0EE for SCENE_KOKIRI_FOREST; the fork scene table maps Kokiri Forest to 0x55 and entrance room is 0."
++    },
++    {
++      "id": "LAKE_ENTR_102",
++      "entrance": 258,
++      "scene": 87,
++      "room": 0,
++      "evidence": "entrance_table.h: ENTR_LAKE_HYLIA_NORTH_EXIT at 0x102, SCENE_LAKE_HYLIA, spawn 0. scene_table.h maps SCENE_LAKE_HYLIA to 0x57."
++    },
++    {
++      "id": "TEMPLE_ENTR_053",
++      "entrance": 83,
++      "scene": 67,
++      "room": 1,
++      "evidence": "entrance_table.h: ENTR_TEMPLE_OF_TIME_ENTRANCE 0x053, scene_table.h: SCENE_TEMPLE_OF_TIME 0x43. Spawn index 0 is not the room index. Runtime SCENE_READY log in 20261014_112821_098_TEMPLE_INTERIOR_NORMAL records room 1 twice."
++    },
++    {
++      "id": "FIELD_ENTR_0CD",
++      "entrance": 205,
++      "scene": 81,
++      "room": 0,
++      "evidence": "entrance_table.h: 0x0CD defines ENTR_HYRULE_FIELD_PAST_BRIDGE_SPAWN, SCENE_HYRULE_FIELD, spawn 0. scene_table.h maps SCENE_HYRULE_FIELD to 0x51. Actual room is a runtime gate."
 +    }
 +  ],
 +  "views": [
 +    {
 +      "id": "VIEW_00_DEFAULT_SPAWN_CAMERA",
 +      "camera": "GAME_DEFAULT_AT_SCENARIO_SPAWN",
++      "playerPosition": "GAME_DEFAULT_SPAWN",
++      "stableFrames": 30,
++      "timeoutFrames": 1200,
++      "cameraWarmupFrames": 120
++    },
++    {
++      "id": "VIEW_LAKE_WATER_OVERVIEW",
++      "camera": "MANIFEST_FIXED_POSE",
++      "playerPosition": "GAME_DEFAULT_SPAWN",
++      "eye": [
++        -1600,
++        -600,
++        2400
++      ],
++      "at": [
++        0,
++        -1300,
++        4000
++      ],
++      "up": [
++        0,
++        1,
++        0
++      ],
++      "fovy": 60,
++      "stableFrames": 30,
++      "timeoutFrames": 1200,
++      "cameraWarmupFrames": 120,
++      "notes": "Diagnostic candidate in scene coordinates; visible water must be checked in the actual capture before accepting water evidence."
++    },
++    {
++      "id": "VIEW_NAVI_RECEIVER",
++      "camera": "NAVI_RECEIVER_CLOSEUP",
 +      "playerPosition": "GAME_DEFAULT_SPAWN",
 +      "stableFrames": 30,
 +      "timeoutFrames": 1200,
@@ -4511,14 +5950,33 @@ index 0000000000000000000000000000000000000000..0585b4cbcf46a5320c24294f9a6f19e0
 +      "EMISSIVE_MASK"
 +    ],
 +    "compositeDescription": "The current backend evaluates its bloom contribution inline in the composite; no independent bloom render target exists."
++  },
++  "comparison": {
++    "scope": "DXR_EFFECT_STAGES_ONLY; ENHANCED_RASTER_AND_TONEMAPPING_UNCHANGED",
++    "sameFrame": true,
++    "gpuDisplayControls": [
++      "comparison_dxr_off",
++      "comparison_dxr_on",
++      "comparison_shadows_only",
++      "comparison_optics_off",
++      "comparison_indirect_off",
++      "comparison_relight_off"
++    ],
++    "hud": "EXCLUDED_FROM_PAIR",
++    "viewers": [
++      "split",
++      "overlay",
++      "blink",
++      "difference"
++    ]
 +  }
 +}
 diff --git a/scripts/scene-harness/verify-run.ps1 b/scripts/scene-harness/verify-run.ps1
 new file mode 100644
-index 0000000000000000000000000000000000000000..2716b3ca29349d2fa63883d3517cad950d1dd27d
+index 0000000000000000000000000000000000000000..38a92e17a34a13b11bbb40a18924f436ac0687bf
 --- /dev/null
 +++ b/scripts/scene-harness/verify-run.ps1
-@@ -0,0 +1,839 @@
+@@ -0,0 +1,1057 @@
 +[CmdletBinding()]
 +param(
 +    [Parameter(Mandatory = $true)][string]$RunRoot,
@@ -4527,6 +5985,7 @@ index 0000000000000000000000000000000000000000..2716b3ca29349d2fa63883d3517cad95
 +)
 +
 +$ErrorActionPreference = 'Stop'
++. (Join-Path $PSScriptRoot 'file-hash.ps1')
 +$failures = [System.Collections.Generic.List[string]]::new()
 +$verifiedStageCount = 0
 +
@@ -4881,6 +6340,130 @@ index 0000000000000000000000000000000000000000..2716b3ca29349d2fa63883d3517cad95
 +    return [ordered]@{ Width = $width; Height = $height; Bytes = $pixels }
 +}
 +
++function Write-PngComparisonViews([string]$PathA, [string]$PathB, [string]$OverlayPath,
++    [string]$DifferencePath, [string]$BlinkPath) {
++    $imageA = Get-DecodedPngPixels $PathA
++    $imageB = Get-DecodedPngPixels $PathB
++    if ($imageA.Width -ne $imageB.Width -or $imageA.Height -ne $imageB.Height) {
++        throw 'Same-frame comparison PNG dimensions do not match.'
++    }
++
++    $pixelCount = [long]$imageA.Width * [long]$imageA.Height
++    $byteCount = [int]($pixelCount * 4)
++    $overlayBytes = [byte[]]::new($byteCount)
++    $differenceBytes = [byte[]]::new($byteCount)
++    for ($pixel = 0; $pixel -lt $pixelCount; $pixel++) {
++        $offset = [int]($pixel * 4)
++        $maxDifference = 0
++        for ($channel = 0; $channel -lt 3; $channel++) {
++            $a = [int]$imageA.Bytes[$offset + $channel]
++            $b = [int]$imageB.Bytes[$offset + $channel]
++            $overlayBytes[$offset + $channel] = [byte][math]::Floor(($a + $b) * 0.5)
++            $maxDifference = [math]::Max($maxDifference, [math]::Abs($a - $b))
++        }
++        $overlayBytes[$offset + 3] = 255
++        $amplifiedDifference = [byte][math]::Min(255, $maxDifference * 4)
++        $differenceBytes[$offset] = $amplifiedDifference
++        $differenceBytes[$offset + 1] = $amplifiedDifference
++        $differenceBytes[$offset + 2] = $amplifiedDifference
++        $differenceBytes[$offset + 3] = 255
++    }
++
++    Add-Type -AssemblyName System.Drawing -ErrorAction Stop
++    foreach ($output in @(@{ Path = $OverlayPath; Bytes = $overlayBytes },
++                          @{ Path = $DifferencePath; Bytes = $differenceBytes })) {
++        $bitmap = [System.Drawing.Bitmap]::new($imageA.Width, $imageA.Height,
++            [System.Drawing.Imaging.PixelFormat]::Format32bppArgb)
++        try {
++            $rect = [System.Drawing.Rectangle]::new(0, 0, $imageA.Width, $imageA.Height)
++            $data = $bitmap.LockBits($rect, [System.Drawing.Imaging.ImageLockMode]::WriteOnly,
++                [System.Drawing.Imaging.PixelFormat]::Format32bppArgb)
++            try {
++                $rowBytes = $imageA.Width * 4
++                $stride = [Math]::Abs($data.Stride)
++                for ($y = 0; $y -lt $imageA.Height; $y++) {
++                    $rowPointer = [System.IntPtr]::Add($data.Scan0, $y * $stride)
++                    [System.Runtime.InteropServices.Marshal]::Copy($output.Bytes, $y * $rowBytes,
++                        $rowPointer, $rowBytes)
++                }
++            } finally { $bitmap.UnlockBits($data) }
++            $bitmap.Save($output.Path, [System.Drawing.Imaging.ImageFormat]::Png)
++        } finally { $bitmap.Dispose() }
++    }
++
++    $blinkHtml = @'
++<!doctype html>
++<html lang="es">
++<head>
++  <meta charset="utf-8">
++  <meta name="viewport" content="width=device-width, initial-scale=1">
++  <title>Comparación DXR off/on</title>
++  <style>
++    :root { color-scheme: dark; font-family: Segoe UI, sans-serif; background: #101318; color: #f3f4f6; }
++    body { margin: 0; min-height: 100vh; display: grid; grid-template-rows: auto 1fr auto; }
++    header, footer { padding: 12px 18px; background: #1b2028; }
++    header { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
++    h1 { margin: 0; font-size: 16px; font-weight: 600; }
++    button { padding: 8px 14px; border: 0; border-radius: 6px; background: #56a8ff; color: #07111d; font-weight: 700; cursor: pointer; }
++    main { display: grid; place-items: center; overflow: auto; padding: 12px; }
++    img { display: block; max-width: 100%; max-height: calc(100vh - 118px); object-fit: contain; image-rendering: auto; }
++    #status { font-variant-numeric: tabular-nums; }
++  </style>
++</head>
++<body>
++  <header>
++    <h1>DXR: misma escena y mismo fotograma</h1>
++    <button id="toggle" type="button">Pausar</button>
++  </header>
++  <main><img id="frame" alt="Comparación alternada de DXR desactivado y activado"></main>
++  <footer id="status" aria-live="polite"></footer>
++  <script>
++    const frames = [
++      { src: "__DXR_OFF__", label: "DXR desactivado" },
++      { src: "__DXR_ON__", label: "DXR activado" }
++    ];
++    const image = document.getElementById("frame");
++    const status = document.getElementById("status");
++    const toggle = document.getElementById("toggle");
++    let index = 0;
++    let running = true;
++    function showFrame() {
++      image.src = frames[index].src;
++      status.textContent = frames[index].label + " · alternancia cada 700 ms";
++    }
++    showFrame();
++    window.setInterval(() => {
++      if (!running) return;
++      index = (index + 1) % frames.length;
++      showFrame();
++    }, 700);
++    toggle.addEventListener("click", () => {
++      running = !running;
++      toggle.textContent = running ? "Pausar" : "Reanudar";
++      if (!running) status.textContent = frames[index].label + " · pausado";
++      else showFrame();
++    });
++  </script>
++</body>
++</html>
++'@
++    $offName = [System.Net.WebUtility]::HtmlEncode([System.IO.Path]::GetFileName($PathA))
++    $onName = [System.Net.WebUtility]::HtmlEncode([System.IO.Path]::GetFileName($PathB))
++    $blinkHtml = $blinkHtml.Replace('__DXR_OFF__', $offName).Replace('__DXR_ON__', $onName)
++    Set-Content -LiteralPath $BlinkPath -Value $blinkHtml -Encoding utf8
++
++    return [ordered]@{
++        overlay = [System.IO.Path]::GetFileName($OverlayPath)
++        difference = [System.IO.Path]::GetFileName($DifferencePath)
++        blink = [System.IO.Path]::GetFileName($BlinkPath)
++        blend = '50_PERCENT_DXR_OFF_PLUS_50_PERCENT_DXR_ON'
++        differenceGain = 4
++        blinkIntervalMs = 700
++        width = $imageA.Width
++        height = $imageA.Height
++    }
++}
++
 +function Compare-PngStagePair([string]$RunRoot, [string]$StageA, [string]$StageB, $StageMetadata) {
 +    $label = "$StageA vs $StageB"
 +    $metrics = [ordered]@{
@@ -4971,6 +6554,28 @@ index 0000000000000000000000000000000000000000..2716b3ca29349d2fa63883d3517cad95
 +    $rasterHdrVsComposite = Compare-Rgba16FStagePair $RunRoot 'RASTER_HDR' 'COMPOSITE_PRE_TONEMAP' $StageMetadata
 +    $compositeVsRasterCopy = Compare-Rgba16FStagePair $RunRoot 'COMPOSITE_PRE_TONEMAP' 'RASTER_SCENE_COLOR_COPY' $StageMetadata
 +    $postAcesVsFinalSdr = Compare-PngStagePair $RunRoot 'POST_ACES_PRE_PRESENT' 'FINAL_SDR_PRE_PRESENT' $StageMetadata
++    $dxrOffOn = $null
++    $comparisonViews = $null
++    $isNavi = ($null -ne $StageMetadata -and $null -ne $StageMetadata['navi_a_sdr'])
++    $stageA_name = if ($isNavi) { 'navi_a_sdr' } else { 'comparison_dxr_off' }
++    $stageB_name = if ($isNavi) { 'navi_b_sdr' } else { 'comparison_dxr_on' }
++    $comparisonA = if ($null -ne $StageMetadata) { $StageMetadata[$stageA_name] } else { $null }
++    $comparisonB = if ($null -ne $StageMetadata) { $StageMetadata[$stageB_name] } else { $null }
++    if ($SameFrame -and $null -ne $comparisonA -and $null -ne $comparisonB -and
++        [int]$comparisonA.frame -eq [int]$Frame -and [int]$comparisonB.frame -eq [int]$Frame) {
++        $dxrOffOn = Compare-PngStagePair $RunRoot $stageA_name $stageB_name $StageMetadata
++        try {
++            $pathA = Get-StagePayloadPath $RunRoot $comparisonA
++            $pathB = Get-StagePayloadPath $RunRoot $comparisonB
++            $capturesRoot = Join-Path $RunRoot 'captures'
++            $overlayPath = Join-Path $capturesRoot 'comparison_dxr_off_on_overlay.png'
++            $differencePath = Join-Path $capturesRoot 'comparison_dxr_off_on_difference_x4.png'
++            $blinkPath = Join-Path $capturesRoot 'comparison_dxr_off_on_blink.html'
++            $comparisonViews = Write-PngComparisonViews $pathA $pathB $overlayPath $differencePath $blinkPath
++        } catch {
++            Add-Failure "DXR off/on comparison-view generation failed: $($_.Exception.Message)"
++        }
++    }
 +    return [ordered]@{
 +        schemaVersion = 1
 +        runId = $RunId
@@ -4981,9 +6586,11 @@ index 0000000000000000000000000000000000000000..2716b3ca29349d2fa63883d3517cad95
 +            raster_hdr_vs_composite_pre_tonemap_observation = $rasterHdrVsComposite
 +            composite_pre_tonemap_vs_raster_scene_color_copy_observation = $compositeVsRasterCopy
 +            post_aces_vs_final_pre_present_observation = $postAcesVsFinalSdr
++            same_frame_dxr_off_vs_on = $dxrOffOn
 +        }
++        sameFrameComparisonViews = $comparisonViews
 +        causalAttribution = 'NOT_ESTABLISHED_BY_PIXEL_DIFFERENCE'
-+        dxrVisualVerified = 'PARTIAL'
++        dxrVisualVerified = if ($null -ne $comparisonViews) { 'SAME_FRAME_DIFFERENCE_CAPTURED_VISUAL_REVIEW_REQUIRED' } else { 'PARTIAL' }
 +    }
 +}
 +
@@ -5007,9 +6614,13 @@ index 0000000000000000000000000000000000000000..2716b3ca29349d2fa63883d3517cad95
 +$dxrLog = if (Test-Path -LiteralPath $dxrLogPath -PathType Leaf) { Get-Content -LiteralPath $dxrLogPath -Raw } else { '' }
 +$d3d12LogPath = Join-Path $resolvedRunRoot 'harness-d3d12.log'
 +$d3d12Log = if (Test-Path -LiteralPath $d3d12LogPath -PathType Leaf) { Get-Content -LiteralPath $d3d12LogPath -Raw } else { '' }
-+$latestLightStart = $dxrLog.LastIndexOf('[COUCH-DXR-LIGHT-SYNC]')
-+$latestLightEnd = if ($latestLightStart -ge 0) { $dxrLog.IndexOf([char]10, $latestLightStart) } else { -1 }
-+$latestLightRecord = if ($latestLightStart -lt 0) { '' } elseif ($latestLightEnd -lt 0) { $dxrLog.Substring($latestLightStart) } else { $dxrLog.Substring($latestLightStart, $latestLightEnd - $latestLightStart) }
++$captureFrame = if ($null -ne $ack -and $null -ne $ack.PSObject.Properties['capture_frame']) { [int]$ack.capture_frame } else { -1 }
++$captureLightPattern = if ($captureFrame -ge 0) {
++    '(?m)^\[COUCH-DXR-LIGHT-SYNC\] frame=' + [regex]::Escape([string]$captureFrame) + ' [^\r\n]*\r?$'
++} else { '' }
++$captureLightMatches = if ($captureLightPattern) { [regex]::Matches($dxrLog, $captureLightPattern) } else { @() }
++$latestLightRecord = if ($captureLightMatches.Count -gt 0) { $captureLightMatches[$captureLightMatches.Count - 1].Value } else { '' }
++$latestLightStart = if ($latestLightRecord) { 0 } else { -1 }
 +$productiveGameLight = $latestLightRecord -match 'sameFrame=1' -and $latestLightRecord -match 'match=YES'
 +$gameLightSyncClassification = if ($latestLightStart -lt 0) { 'NOT_RECORDED' }
 +    elseif ($latestLightRecord -match 'sameFrame=0') { 'TEMPORAL_MISMATCH' }
@@ -5248,6 +6859,51 @@ index 0000000000000000000000000000000000000000..2716b3ca29349d2fa63883d3517cad95
 +        Test-RunValue $ack 'capture_frame' $verifiedFrame 'Acknowledgment capture frame'
 +        Test-RunValue $evidence 'capture_frame' $verifiedFrame 'Evidence capture frame'
 +    }
++    $comparisonCaptureValid = $false
++    if ($resolvedManifest.visualAblation) {
++        $comparisonFailureBaseline = $failures.Count
++        $hasNaviAblation = Test-Path -LiteralPath (Join-Path (Join-Path $resolvedRunRoot 'captures') 'navi_a_sdr.meta.json')
++        $ablationStages = if ($hasNaviAblation) {
++            @('navi_a_sdr', 'navi_b_sdr', 'navi_c_sdr', 'navi_d_sdr')
++        } else {
++            @('comparison_dxr_off', 'comparison_dxr_on')
++        }
++        foreach ($comparisonStage in $ablationStages) {
++            $metadataPath = Join-Path (Join-Path $resolvedRunRoot 'captures') "$comparisonStage.meta.json"
++            if (-not (Test-Path -LiteralPath $metadataPath -PathType Leaf)) {
++                Add-Failure "Required same-frame comparison metadata $comparisonStage is missing"
++                continue
++            }
++            $comparisonMetadata = Read-JsonFile $metadataPath "$comparisonStage comparison metadata"
++            if ($null -eq $comparisonMetadata) { continue }
++            $stageMetadata[$comparisonStage] = $comparisonMetadata
++            Test-RunValue $comparisonMetadata 'stage' $comparisonStage "$comparisonStage stage id"
++            Test-RunValue $comparisonMetadata 'frame' $verifiedFrame "$comparisonStage capture frame"
++            if ($null -eq $comparisonMetadata.request) {
++                Add-Failure "$comparisonStage metadata is missing its capture request provenance"
++            } else {
++                foreach ($property in @('scenario_id', 'view_id', 'scene', 'room', 'truth_mode',
++                        'view_hash', 'projection_hash', 'player_state_hash')) {
++                    Test-RunValue $comparisonMetadata.request $property $request.$property `
++                        "$comparisonStage request $property"
++                }
++            }
++            if ([int]$comparisonMetadata.width -ne [int]$stageMetadata['FINAL_SDR_PRE_PRESENT'].width -or
++                [int]$comparisonMetadata.height -ne [int]$stageMetadata['FINAL_SDR_PRE_PRESENT'].height) {
++                Add-Failure "$comparisonStage dimensions do not match the final SDR capture"
++            }
++            if ([string]$comparisonMetadata.format -cne 'R8G8B8A8_UNORM') {
++                Add-Failure "$comparisonStage must be an SDR R8G8B8A8_UNORM capture"
++            }
++            $comparisonPayload = Get-StagePayloadPath $resolvedRunRoot $comparisonMetadata
++            if ([string]::IsNullOrWhiteSpace($comparisonPayload) -or
++                -not (Test-Path -LiteralPath $comparisonPayload -PathType Leaf) -or
++                -not (Test-PngReadable $comparisonPayload ([int]$comparisonMetadata.width) ([int]$comparisonMetadata.height))) {
++                Add-Failure "$comparisonStage payload is missing or not a readable PNG"
++            }
++        }
++        $comparisonCaptureValid = $failures.Count -eq $comparisonFailureBaseline
++    }
 +    $dxrFrame = if ($null -ne $ack.dxr_frame) { $ack.dxr_frame } else { $null }
 +    $dxrFrameMatches = $null -ne $dxrFrame -and $sameFrame -and
 +        [int]$dxrFrame.frame -eq [int]$verifiedFrame -and
@@ -5291,7 +6947,7 @@ index 0000000000000000000000000000000000000000..2716b3ca29349d2fa63883d3517cad95
 +            Add-Failure "Original save $saveName is missing"
 +            continue
 +        }
-+        $actualHash = (Get-FileHash -LiteralPath $savePath -Algorithm SHA256).Hash
++        $actualHash = (Get-HarnessFileHash -LiteralPath $savePath -Algorithm SHA256).Hash
 +        $expectedHash = [string]$resolvedManifest.originalHashesBefore.$saveName
 +        if ([string]::IsNullOrWhiteSpace($expectedHash) -or $actualHash -cne $expectedHash) {
 +            Add-Failure "Original save $saveName hash changed"
@@ -5306,6 +6962,24 @@ index 0000000000000000000000000000000000000000..2716b3ca29349d2fa63883d3517cad95
 +}
 +
 +$captureStatus = if ($verifiedStageCount -eq 8 -and $sameFrame) { 'CAPTURE_COMPLETE' } else { 'PARTIAL' }
++$lightingContract = $evidence.lighting_contract
++$lightingContractStatus = 'NOT_APPLICABLE'
++if ($null -ne $lightingContract -and -not [string]::IsNullOrWhiteSpace([string]$lightingContract.id)) {
++    $lightingContractStatus = 'NOT_CERTIFIED'
++    if ($comparisonCaptureValid -and $sameFrame -and $null -ne $visualDifference -and
++        $null -ne $visualDifference.sameFrameComparisonViews) {
++        $lightingContract.comparisonStatus = 'CAPTURED_SAME_FRAME_REQUIRES_VISUAL_REVIEW'
++    }
++    $runtimeGates = @($lightingContract.runtimeGates)
++    $allLightingGatesPassed = $runtimeGates.Count -gt 0
++    foreach ($gate in $runtimeGates) {
++        if ([string]$gate.observedStatus -cne 'PASS') { $allLightingGatesPassed = $false }
++    }
++    if ($allLightingGatesPassed -and [string]$lightingContract.comparisonStatus -ceq 'PASS' -and
++        [string]$lightingContract.visualAcceptance -ceq 'PASS') {
++        $lightingContractStatus = 'PASS'
++    }
++}
 +$presentationStatus = 'NOT_RUN'
 +$presentationEvidence = $null
 +$presentationPath = Join-Path $resolvedRunRoot 'presentation.evidence.jsonl'
@@ -5340,6 +7014,8 @@ index 0000000000000000000000000000000000000000..2716b3ca29349d2fa63883d3517cad95
 +    dxrExecutionStatus = $dxrExecutionStatus
 +    dxrCompositionStatus = $dxrCompositionStatus
 +    dxrVisualVerified = $dxrVisualVerified
++    lightingContractStatus = $lightingContractStatus
++    lightingContract = $lightingContract
 +    compositeExecuted = [bool]$compositeExecuted
 +    sameFrame = [bool]$sameFrame
 +    visualDifference = $visualDifference
@@ -5419,10 +7095,10 @@ index 0000000000000000000000000000000000000000..92096fcf419db9bde1a5dcd04a8cea90
 +}
 diff --git a/soh/soh/Enhancements/scene-harness/SceneTestHarness.cpp b/soh/soh/Enhancements/scene-harness/SceneTestHarness.cpp
 new file mode 100644
-index 0000000000000000000000000000000000000000..256158218e5e524866e6a5afe83bf5e8bf97116b
+index 0000000000000000000000000000000000000000..067d21c7097e98ae1f14a6184aeccacd85f73032
 --- /dev/null
 +++ b/soh/soh/Enhancements/scene-harness/SceneTestHarness.cpp
-@@ -0,0 +1,780 @@
+@@ -0,0 +1,1033 @@
 +#include "soh/Enhancements/game-interactor/GameInteractor.h"
 +#include "soh/ShipInit.hpp"
 +#include "functions.h"
@@ -5430,6 +7106,7 @@ index 0000000000000000000000000000000000000000..256158218e5e524866e6a5afe83bf5e8
 +extern "C" {
 +#include "z64.h"
 +#include "overlays/gamestates/ovl_file_choose/file_choose.h"
++#include "overlays/actors/ovl_En_Elf/z_en_elf.h"
 +}
 +
 +#include <nlohmann/json.hpp>
@@ -5513,8 +7190,15 @@ index 0000000000000000000000000000000000000000..256158218e5e524866e6a5afe83bf5e8
 +bool sConfirmInputInjected = false;
 +bool sFrozenPlayerTransformCaptured = false;
 +std::array<float, 6> sFrozenPlayerTransform{};
++float sFrozenPlayerFloorHeight = 0.0f;
 +bool sFrozenPlayerFocusCaptured = false;
 +bool sCameraFrozen = false;
++Vec3f sFrozenCameraEye{};
++Vec3f sFrozenCameraAt{};
++Vec3f sFrozenCameraUp{};
++float sFrozenCameraFovy = 60.0f;
++EnElf* sNaviOtherFairy = nullptr;
++Vec3f sNaviOtherFairyPosition{};
 +std::array<float, 3> sFrozenPlayerFocusPosition{};
 +std::array<s16, 3> sFrozenPlayerFocusRotation{};
 +std::uint64_t sLastHeartbeatFrame = 0;
@@ -5540,6 +7224,26 @@ index 0000000000000000000000000000000000000000..256158218e5e524866e6a5afe83bf5e8
 +    std::ostringstream out;
 +    out << "0x" << std::uppercase << std::hex << value;
 +    return out.str();
++}
++
++Json BuildLightingContractEvidence() {
++    Json contract = sConfig.scenario.value("lightingContract", Json::object());
++    if (!contract.is_object() || contract.empty()) return Json::object();
++
++    contract["runtimeStatus"] = "CAPTURED_NO_FEATURE_ASSERTIONS";
++    contract["comparisonStatus"] = "NOT_RUN";
++    contract["visualAcceptance"] = "NOT_RECORDED";
++    if (contract.contains("targetMaterials") && contract["targetMaterials"].is_array()) {
++        for (auto& target : contract["targetMaterials"]) {
++            if (target.is_object()) target["runtimeStatus"] = "NOT_RECORDED";
++        }
++    }
++    if (contract.contains("runtimeGates") && contract["runtimeGates"].is_array()) {
++        for (auto& gate : contract["runtimeGates"]) {
++            if (gate.is_object()) gate["observedStatus"] = "NOT_RUN";
++        }
++    }
++    return contract;
 +}
 +
 +void WriteJson(const std::filesystem::path& path, const Json& data) {
@@ -5672,6 +7376,26 @@ index 0000000000000000000000000000000000000000..256158218e5e524866e6a5afe83bf5e8
 +        sConfig.stableFramesRequired = sConfig.view.value("stableFrames", 30);
 +        sConfig.cameraWarmupFrames = sConfig.view.value("cameraWarmupFrames", 240);
 +        sConfig.timeoutFrames = sConfig.view.value("timeoutFrames", 1200);
++        if (sConfig.view.value("camera", "") == "MANIFEST_FIXED_POSE") {
++            const auto eye = sConfig.view.at("eye").get<std::array<float, 3>>();
++            const auto at = sConfig.view.at("at").get<std::array<float, 3>>();
++            const auto up = sConfig.view.at("up").get<std::array<float, 3>>();
++            const float fovy = sConfig.view.at("fovy").get<float>();
++            const std::array<float, 3> direction = {at[0]-eye[0], at[1]-eye[1], at[2]-eye[2]};
++            const std::array<float, 3> cross = {direction[1]*up[2]-direction[2]*up[1],
++                direction[2]*up[0]-direction[0]*up[2], direction[0]*up[1]-direction[1]*up[0]};
++            const auto finite = [](const auto& vector) { return std::all_of(vector.begin(), vector.end(),
++                [](float value) { return std::isfinite(value); }); };
++            if (!finite(eye) || !finite(at) || !finite(up) || !finite(cross) || !std::isfinite(fovy) ||
++                fovy < 10.0f || fovy > 120.0f || cross[0]*cross[0]+cross[1]*cross[1]+cross[2]*cross[2] < 0.0001f) {
++                Fail("HARNESS_INVALID_CAMERA_POSE", "Fixed camera must have a finite, nondegenerate look direction and field of view.");
++                return false;
++            }
++            sFrozenCameraEye = {eye[0], eye[1], eye[2]};
++            sFrozenCameraAt = {at[0], at[1], at[2]};
++            sFrozenCameraUp = {up[0], up[1], up[2]};
++            sFrozenCameraFovy = fovy;
++        }
 +        if (sConfig.entrance < 0 || sConfig.entrance > 0xFFFF || sConfig.expectedScene < 0 ||
 +            sConfig.expectedScene > 0xFF || sConfig.expectedRoom < 0 || sConfig.expectedRoom > 0x7F ||
 +            sConfig.linkAge < 0 || sConfig.linkAge > 1 || sConfig.dayTime < 0 || sConfig.dayTime > 0xFFFF ||
@@ -5760,6 +7484,26 @@ index 0000000000000000000000000000000000000000..256158218e5e524866e6a5afe83bf5e8
 +        return true;
 +    }
 +    return false;
++}
++
++std::string BackendLightSyncStatusForFrame(int captureFrame) {
++    if (captureFrame < 0) return "NOT_RECORDED";
++    std::ifstream input(sConfig.outputRoot / "harness-dxr.log", std::ios::binary);
++    if (!input) return "NOT_RECORDED";
++    const std::string expectedPrefix = "[COUCH-DXR-LIGHT-SYNC] frame=" +
++                                       std::to_string(captureFrame) + " ";
++    std::string line;
++    std::string matchingRecord;
++    while (std::getline(input, line)) {
++        if (line.rfind(expectedPrefix, 0) == 0) matchingRecord = line;
++    }
++    if (matchingRecord.empty()) return "NOT_RECORDED";
++    if (matchingRecord.find("sameFrame=0") != std::string::npos) return "TEMPORAL_MISMATCH";
++    if (matchingRecord.find("sameFrame=1") != std::string::npos &&
++        matchingRecord.find("match=YES") != std::string::npos) {
++        return "PASS";
++    }
++    return "SAME_FRAME_MISMATCH";
 +}
 +
 +bool IsD3D12BackendActive() {
@@ -5891,23 +7635,106 @@ index 0000000000000000000000000000000000000000..256158218e5e524866e6a5afe83bf5e8
 +                                  static_cast<float>(player->actor.world.rot.y),
 +                                  static_cast<float>(player->actor.shape.rot.y),
 +                                  static_cast<float>(player->actor.shape.rot.x)};
++        sFrozenPlayerFloorHeight = player->actor.floorHeight;
++        const Json fixture = sConfig.scenario.value("naviPilot", Json::object());
++        const Json linkPosition = fixture.value("linkPosition", Json::array());
++        if (linkPosition.is_array() && linkPosition.size() == 3 &&
++            std::all_of(linkPosition.begin(), linkPosition.end(), [](const Json& value) {
++                return value.is_number() && std::isfinite(value.get<float>());
++            })) {
++            sFrozenPlayerTransform[0] = linkPosition[0].get<float>();
++            sFrozenPlayerTransform[1] = linkPosition[1].get<float>();
++            sFrozenPlayerTransform[2] = linkPosition[2].get<float>();
++            sFrozenPlayerFloorHeight = sFrozenPlayerTransform[1];
++        }
 +        sFrozenPlayerTransformCaptured = true;
 +        sPlayerFreezeRequested = true;
++        const Json configuredPosition = fixture.value("linkPosition", Json::array());
++        const bool authoredPose = configuredPosition.is_array() && configuredPosition.size() == 3 &&
++            std::all_of(configuredPosition.begin(), configuredPosition.end(), [](const Json& value) {
++                return value.is_number() && std::isfinite(value.get<float>());
++            });
 +        Log("PLAYER_INPUT_LOCK_ACTIVE", { {"position", Json::array({sFrozenPlayerTransform[0], sFrozenPlayerTransform[1],
-+                                                                       sFrozenPlayerTransform[2]})} });
-+    } else {
-+        player->actor.world.pos.x = sFrozenPlayerTransform[0];
-+        player->actor.world.pos.y = sFrozenPlayerTransform[1];
-+        player->actor.world.pos.z = sFrozenPlayerTransform[2];
-+        player->actor.world.rot.y = static_cast<s16>(sFrozenPlayerTransform[3]);
-+        player->actor.shape.rot.y = static_cast<s16>(sFrozenPlayerTransform[4]);
-+        player->actor.shape.rot.x = static_cast<s16>(sFrozenPlayerTransform[5]);
-+        player->actor.speedXZ = 0.0f;
-+        player->actor.velocity.x = 0.0f;
-+        player->actor.velocity.y = 0.0f;
-+        player->actor.velocity.z = 0.0f;
-+        player->linearVelocity = 0.0f;
++                                                                       sFrozenPlayerTransform[2]})},
++                                             {"position_provenance", authoredPose ? "AUTHORED_HARNESS_TEST_POSE"
++                                                                                  : "GAME_DEFAULT_SPAWN"} });
 +    }
++    player->actor.world.pos.x = sFrozenPlayerTransform[0];
++    player->actor.world.pos.y = sFrozenPlayerTransform[1];
++    player->actor.world.pos.z = sFrozenPlayerTransform[2];
++    player->actor.world.rot.y = static_cast<s16>(sFrozenPlayerTransform[3]);
++    player->actor.shape.rot.y = static_cast<s16>(sFrozenPlayerTransform[4]);
++    player->actor.shape.rot.x = static_cast<s16>(sFrozenPlayerTransform[5]);
++    player->actor.floorHeight = sFrozenPlayerFloorHeight;
++    player->actor.speedXZ = 0.0f;
++    player->actor.velocity.x = 0.0f;
++    player->actor.velocity.y = 0.0f;
++    player->actor.velocity.z = 0.0f;
++    player->linearVelocity = 0.0f;
++}
++
++void RestoreFrozenPlayerPose() {
++    if (!sConfig.freezePlayer || !sFrozenPlayerTransformCaptured || !gPlayState) return;
++    Player* player = GET_PLAYER(gPlayState);
++    if (!player) return;
++    player->actor.world.pos = {sFrozenPlayerTransform[0], sFrozenPlayerTransform[1], sFrozenPlayerTransform[2]};
++    player->actor.world.rot.y = static_cast<s16>(sFrozenPlayerTransform[3]);
++    player->actor.shape.rot.y = static_cast<s16>(sFrozenPlayerTransform[4]);
++    player->actor.shape.rot.x = static_cast<s16>(sFrozenPlayerTransform[5]);
++    player->actor.floorHeight = sFrozenPlayerFloorHeight;
++    player->actor.speedXZ = player->linearVelocity = 0.0f;
++    player->actor.velocity = {0, 0, 0};
++}
++
++void OnPlayDrawBegin() {
++    if (!sSaveLoaded || sState == HarnessState::Disabled || sState == HarnessState::Failed || !gPlayState ||
++        gPlayState->sceneNum != sConfig.expectedScene || gPlayState->roomCtx.curRoom.num != sConfig.expectedRoom) return;
++    // Physics and enemy knockback run after MainStart. Honor freezePlayer again
++    // before geometry is drawn, so nightly actors cannot invalidate the fixture.
++    RestoreFrozenPlayerPose();
++    if (CouchNaviPilotActive() && sNaviOtherFairy && sNaviOtherFairy->actor.update) {
++        auto* other=sNaviOtherFairy;
++        other->actor.world.pos=sNaviOtherFairyPosition;
++        other->actor.scale={0.008f,0.008f,0.008f};
++        other->unk_2A8=0;other->fairyFlags&=~0x28u;
++        Lights_PointGlowSetInfo(&other->lightInfoGlow,sNaviOtherFairyPosition.x,sNaviOtherFairyPosition.y,
++            sNaviOtherFairyPosition.z,255,255,255,100);
++        Lights_PointNoGlowSetInfo(&other->lightInfoNoGlow,sNaviOtherFairyPosition.x,sNaviOtherFairyPosition.y,
++            sNaviOtherFairyPosition.z,255,255,255,-1);
++    }
++    if (!sCameraFrozen && sState == HarnessState::Stabilizing &&
++        sGameFrame - sStateStartFrame >= static_cast<std::uint64_t>(sConfig.cameraWarmupFrames)) {
++        if (sConfig.view.value("camera", "") == "NAVI_RECEIVER_CLOSEUP") {
++            const Player* player = GET_PLAYER(gPlayState);
++            sFrozenCameraEye = {player->actor.world.pos.x+155.0f, player->actor.world.pos.y+105.0f,
++                                player->actor.world.pos.z+165.0f};
++            sFrozenCameraAt = {player->actor.world.pos.x+35.0f, player->actor.world.pos.y+12.0f,
++                               player->actor.world.pos.z+30.0f};
++            sFrozenCameraUp = {0,1,0}; sFrozenCameraFovy=60.0f;
++        } else if (sConfig.view.value("camera", "") != "MANIFEST_FIXED_POSE") {
++            sFrozenCameraEye = gPlayState->view.eye;
++            sFrozenCameraAt = gPlayState->view.lookAt;
++            sFrozenCameraUp = gPlayState->view.up;
++            sFrozenCameraFovy = gPlayState->view.fovy;
++        }
++        sCameraFrozen = true;
++        Log("CAMERA_POSE_FROZEN", {{"camera_eye", Json::array({sFrozenCameraEye.x, sFrozenCameraEye.y, sFrozenCameraEye.z})},
++            {"camera_at", Json::array({sFrozenCameraAt.x, sFrozenCameraAt.y, sFrozenCameraAt.z})},
++            {"pose_source", sConfig.view.value("camera", "GAME_DEFAULT_AT_SCENARIO_SPAWN")},
++            {"warmup_frames", sConfig.cameraWarmupFrames}});
++    }
++    if (!sCameraFrozen) return;
++    // Transition cameras can reactivate themselves after CAM_STAT_CUT. Pin the
++    // actual View before Play_Draw constructs matrices, on every harness frame.
++    if (Camera* camera = GET_ACTIVE_CAM(gPlayState)) {
++        camera->eye = camera->eyeNext = sFrozenCameraEye;
++        camera->at = sFrozenCameraAt;
++        camera->up = sFrozenCameraUp;
++        camera->fov = sFrozenCameraFovy;
++    }
++    func_800AA358(&gPlayState->view, &sFrozenCameraEye, &sFrozenCameraAt, &sFrozenCameraUp);
++    gPlayState->view.fovy = sFrozenCameraFovy;
++    View_SetDistortion(&gPlayState->view, Vec3f{0, 0, 0}, Vec3f{1, 1, 1}, 0.0f);
 +}
 +
 +void OnPlayDrawEnd() {
@@ -5919,6 +7746,7 @@ index 0000000000000000000000000000000000000000..256158218e5e524866e6a5afe83bf5e8
 +
 +    Player* player = GET_PLAYER(gPlayState);
 +    if (!player) return;
++    RestoreFrozenPlayerPose();
 +
 +    // Player_DrawGameplay derives the camera target from the animated head limb. Capture and
 +    // pin it after world drawing, so we use the real default-spawn target and the next camera
@@ -5994,12 +7822,21 @@ index 0000000000000000000000000000000000000000..256158218e5e524866e6a5afe83bf5e8
 +                    Fail("HARNESS_CAPTURE_ACK_INVALID", "The renderer did not confirm capture sequence 1.");
 +                    return;
 +                }
++                const int captureFrame = ack.value("capture_frame", -1);
++                const bool expectsDirectionalLight =
++                    sConfig.scenario.value("expectDirectionalLight", false);
++                sGameLightSyncStatus = expectsDirectionalLight
++                    ? BackendLightSyncStatusForFrame(captureFrame) : "NOT_REQUIRED";
++                sGameLightProductive = !expectsDirectionalLight || sGameLightSyncStatus == "PASS";
 +                if (captureResult == "PARTIAL") {
 +                    sState = HarnessState::CaptureComplete;
 +                    Json evidence = { {"schema_version", 2}, {"result", "PARTIAL"},
 +                                      {"capture_status", "PARTIAL"}, {"capture_frame", ack.value("capture_frame", -1)},
 +                                      {"dxr_frame", ack.value("dxr_frame", Json::object())},
++                                      {"game_light_productive", sGameLightProductive},
++                                      {"game_light_sync_status", sGameLightSyncStatus},
 +                                      {"captures", ack.value("captures", Json::object())},
++                                      {"lighting_contract", BuildLightingContractEvidence()},
 +                                      {"reason", "One or more capture files failed content validation."} };
 +                    WriteJson(sConfig.outputRoot / "evidence.json", evidence);
 +                    std::ofstream partial(sConfig.outputRoot / "CAPTURE_PARTIAL", std::ios::binary | std::ios::trunc);
@@ -6055,7 +7892,8 @@ index 0000000000000000000000000000000000000000..256158218e5e524866e6a5afe83bf5e8
 +                            {"d3d12_validation", ReadEnv("COUCH_D3D12_DEBUG") == "1"
 +                                                      ? "DEBUG_LAYER_REQUESTED"
 +                                                      : "NOT_RUN_DEBUG_LAYER_OFF"},
-+                            {"captures", ack.value("captures", Json::object())}};
++                            {"captures", ack.value("captures", Json::object())},
++                            {"lighting_contract", BuildLightingContractEvidence()}};
 +            WriteJson(sConfig.outputRoot / "evidence.json", evidence);
 +            std::ofstream complete(sConfig.outputRoot / "CAPTURE_COMPLETE", std::ios::binary | std::ios::trunc);
 +            complete << "CAPTURE_COMPLETE\n";
@@ -6093,21 +7931,6 @@ index 0000000000000000000000000000000000000000..256158218e5e524866e6a5afe83bf5e8
 +        sStableFrameCount = 0;
 +        Log("TARGET_SCENE_ROOM_PASS", {{"scene", HexValue(gPlayState->sceneNum)},
 +                                       {"room", gPlayState->roomCtx.curRoom.num}});
-+    }
-+
-+    // Let the manifest's real spawn camera run through its initial easing, then cut camera
-+    // updates in harness runs only. This preserves the actual spawn view and prevents the
-+    // engine's long-tail subpixel camera easing from making matrix hashes perpetually unstable.
-+    if (!sCameraFrozen && sGameFrame - sStateStartFrame >= static_cast<std::uint64_t>(sConfig.cameraWarmupFrames)) {
-+        Camera* camera = GET_ACTIVE_CAM(gPlayState);
-+        if (camera && camera->status != CAM_STAT_CUT) {
-+            camera->status = CAM_STAT_CUT;
-+            sCameraFrozen = true;
-+            Log("CAMERA_POSE_FROZEN", {{"camera_eye", Json::array({camera->eye.x, camera->eye.y, camera->eye.z})},
-+                                       {"camera_at", Json::array({camera->at.x, camera->at.y, camera->at.z})},
-+                                       {"camera_status", camera->status},
-+                                       {"warmup_frames", sConfig.cameraWarmupFrames}});
-+        }
 +    }
 +
 +    Player* player = GET_PLAYER(gPlayState);
@@ -6148,7 +7971,7 @@ index 0000000000000000000000000000000000000000..256158218e5e524866e6a5afe83bf5e8
 +        sLastProjectionHash = projectionHash;
 +        sLastPlayerHash = playerHash;
 +    }
-+    if (sStableFrameCount >= sConfig.stableFramesRequired) {
++    if (sCameraFrozen && sStableFrameCount >= sConfig.stableFramesRequired) {
 +        if (!BackendDxrReady()) {
 +            if (sGameFrame - sStateStartFrame > static_cast<std::uint64_t>(sConfig.timeoutFrames)) {
 +                Fail("HARNESS_DXR_NOT_READY", "DXR initialization, a non-empty TLAS, first DispatchRays, or expected game-light match did not become ready before the frame limit.");
@@ -6164,6 +7987,7 @@ index 0000000000000000000000000000000000000000..256158218e5e524866e6a5afe83bf5e8
 +                        {"view_hash", std::to_string(viewHash)},
 +                        {"projection_hash", std::to_string(projectionHash)},
 +                        {"player_state_hash", std::to_string(playerHash)},
++                        {"lighting_contract", BuildLightingContractEvidence()},
 +                        {"bloom_only", "NOT_PRESENT"},
 +                        {"bloom_inputs", Json::array({"DXR_REFLECTION_RGBA16F", "EMISSIVE_MASK"})}};
 +        WriteJson(sConfig.outputRoot / "capture.request.json", request);
@@ -6189,6 +8013,7 @@ index 0000000000000000000000000000000000000000..256158218e5e524866e6a5afe83bf5e8
 +    GameInteractor::Instance->RegisterGameHook<GameInteractor::OnFileChooseMain>(OnFileChooseMain);
 +    GameInteractor::Instance->RegisterGameHook<GameInteractor::OnLoadGame>(OnLoadGame);
 +    GameInteractor::Instance->RegisterGameHook<GameInteractor::OnGameStateMainStart>(OnGameStateMainStart);
++    GameInteractor::Instance->RegisterGameHook<GameInteractor::OnPlayDrawBegin>(OnPlayDrawBegin);
 +    GameInteractor::Instance->RegisterGameHook<GameInteractor::OnPlayDrawEnd>(OnPlayDrawEnd);
 +    GameInteractor::Instance->RegisterGameHook<GameInteractor::OnSceneInit>(OnSceneInit);
 +    GameInteractor::Instance->RegisterGameHook<GameInteractor::OnTransitionEnd>(OnSceneInit);
@@ -6203,3 +8028,107 @@ index 0000000000000000000000000000000000000000..256158218e5e524866e6a5afe83bf5e8
 +
 +static RegisterShipInitFunc sSceneTestHarnessInit(RegisterSceneTestHarness);
 +} // namespace
++
++// Harness-only actor fixture. It runs before the actor publishes both native
++// LightInfo records; production cannot activate it through a graphics CVar.
++extern "C" void CouchNaviPilotPlace(Actor* actor, PlayState* play) {
++    if (!CouchNaviPilotActive() || !actor || !play || !sSaveLoaded ||
++        (sState != HarnessState::Stabilizing && sState != HarnessState::Capturing) ||
++        play->sceneNum != sConfig.expectedScene || !sCameraFrozen) return;
++    auto* fairy=reinterpret_cast<EnElf*>(actor);
++    static bool captured=false;
++    static Vec3f frozen{}, scale{};
++    static Color_RGBAf inner{},outer{};
++    static std::array<Vec3s,15> joints{};
++    static uint16_t timer=0, flags=0;
++    static int16_t state=0;
++    const Json fixture=sConfig.scenario.value("naviPilot",Json::object());
++    const Json configuredPositionOffset=fixture.value("positionOffset",Json::array());
++    const bool authoredPositionOffset=configuredPositionOffset.is_array() && configuredPositionOffset.size()==3 &&
++        std::all_of(configuredPositionOffset.begin(),configuredPositionOffset.end(),[](const Json& value){
++            return value.is_number() && std::isfinite(value.get<float>());
++        });
++    if (!captured) {
++        const Vec3f natural=actor->world.pos;
++        frozen=natural; scale=actor->scale; inner=fairy->innerColor; outer=fairy->outerColor;
++        timer=fairy->timer; flags=fairy->fairyFlags; state=fairy->unk_2A8;
++        std::copy(std::begin(fairy->jointTable),std::end(fairy->jointTable),joints.begin());
++        const Player* player=GET_PLAYER(play);
++        const std::string poseKind=fixture.value("pose",std::string("NATURAL"));
++        const bool controlled=poseKind=="CONTROLLED";
++        const bool naturalActive=poseKind=="NATURAL_ACTIVE";
++        if (controlled && player) {
++            const float fixtureScale=fixture.value("emitterScale",1.0f)*0.008f;
++            scale={fixtureScale,fixtureScale,fixtureScale}; // explicit visible test pose
++            if (authoredPositionOffset) {
++                frozen={player->actor.world.pos.x+configuredPositionOffset[0].get<float>(),
++                    player->actor.floorHeight+configuredPositionOffset[1].get<float>(),
++                    player->actor.world.pos.z+configuredPositionOffset[2].get<float>()};
++            } else {
++                const float height=fixture.value("height",25.0f);
++                frozen={player->actor.world.pos.x+35.0f,player->actor.floorHeight+height,
++                         player->actor.world.pos.z+30.0f};
++            }
++        }
++        if (controlled || naturalActive) {
++            state=fixture.value("glowEnabled",true)?0:8;
++            if (controlled)
++                flags=uint16_t((flags & ~0x28u) | (fixture.value("auxiliaryEnabled",false)?0x20u:0u));
++        }
++        if (controlled) {
++            if (fixture.value("color","")=="RED") { inner={255,40,40,255};outer={255,40,40,255}; }
++            if (fixture.value("secondFairy",false)) {
++                sNaviOtherFairyPosition={frozen.x-50.0f,frozen.y,frozen.z+20.0f};
++                sNaviOtherFairy=reinterpret_cast<EnElf*>(Actor_Spawn(&play->actorCtx,play,ACTOR_EN_ELF,
++                    sNaviOtherFairyPosition.x,sNaviOtherFairyPosition.y,sNaviOtherFairyPosition.z,
++                    0,0,0,FAIRY_KOKIRI,true));
++                if (sNaviOtherFairy) sNaviOtherFairy->actor.parent=&GET_PLAYER(play)->actor;
++            }
++        }
++        const char* poseLabel=controlled?"CONTROLLED_TEST_POSE":
++                              naturalActive?"NATURAL_POSITION_ACTIVE_LIGHT_TEST":"NATURAL_FROZEN";
++        const float pointLightGain=fixture.value("pointLightGain",1.0f);
++        const Json pointLightTint=fixture.value("pointLightTint",Json::array({1.0f,1.0f,1.0f}));
++        const bool authoredPointColor=pointLightGain!=1.0f ||
++            pointLightTint!=Json::array({1.0f,1.0f,1.0f});
++        const float visibleGeometryScale=fixture.value("emitterScale",1.0f);
++        const Json configuredLinkPosition=fixture.value("linkPosition",Json::array());
++        const bool authoredLinkPosition=configuredLinkPosition.is_array() && configuredLinkPosition.size()==3 &&
++            std::all_of(configuredLinkPosition.begin(),configuredLinkPosition.end(),[](const Json& value){
++                return value.is_number() && std::isfinite(value.get<float>());
++            });
++        Json pose={{"pose",poseLabel},
++            {"naturalPosition",{natural.x,natural.y,natural.z}},
++            {"testPosition",{frozen.x,frozen.y,frozen.z}},
++            {"linkPosition",player?Json::array({player->actor.world.pos.x,player->actor.world.pos.y,
++                                                  player->actor.world.pos.z}):Json(nullptr)},
++            {"linkPositionProvenance",authoredLinkPosition?"AUTHORED_HARNESS_TEST_POSE":"GAME_DEFAULT_SPAWN"},
++            {"receiverAnchor",fixture.value("receiverAnchor",Json::object())},
++            {"state",state},{"flags",flags},{"ownerId",CouchGetLightOwnerId(&fairy->lightInfoGlow)},
++            {"emitterScale",visibleGeometryScale},
++            {"visibleGeometryScale",visibleGeometryScale},
++            {"positionOffset",authoredPositionOffset?configuredPositionOffset:Json::array({35.0f,fixture.value("height",25.0f),30.0f})},
++            {"positionOffsetProvenance",controlled?"AUTHORED_HARNESS_TEST_POSE":"NATIVE_ACTOR_POSITION"},
++            {"pointLightGain",pointLightGain},
++            {"pointLightTint",pointLightTint},
++            {"pointLightGainProvenance",authoredPointColor?"AUTHORED_HARNESS_ONLY":"NATIVE"},
++            {"pointLightTintProvenance",authoredPointColor?"AUTHORED_HARNESS_ONLY":"NATIVE"},
++            {"secondFairySpawned",sNaviOtherFairy!=nullptr},
++            {"playerFloorHeight",player?Json(player->actor.floorHeight):Json(nullptr)},
++            {"receiver","must be identified from GPU intersection; no synthetic floor"}};
++        std::ofstream out(sConfig.outputRoot/"navi.pose.json", std::ios::binary | std::ios::trunc);
++        if (out) {
++            const std::string text = pose.dump(2);
++            out.write(text.data(), text.size());
++            out.put('\n');
++            out.flush();
++            out.close();
++        }
++        Log("NAVI_POSE_FROZEN",pose);
++        captured=true;
++    }
++    actor->world.pos=frozen; actor->scale=scale; actor->velocity={0,0,0}; actor->speedXZ=0;
++    fairy->innerColor=inner;fairy->outerColor=outer;fairy->timer=timer;
++    fairy->fairyFlags=flags;fairy->unk_2A8=state;
++    std::copy(joints.begin(),joints.end(),std::begin(fairy->jointTable));
++}

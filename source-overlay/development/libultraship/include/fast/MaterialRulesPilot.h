@@ -21,6 +21,18 @@ struct StaticMaterialRule {
     float specular;
     float emissiveStrength;
     bool albedoAsHeight = false;
+    // Zero keeps the category's existing reflectivity; positive values make
+    // authored polished surfaces explicit without classifying them as metal.
+    float reflectivity = 0.0f;
+    // Exact texture assets below were checked against the Temple resource
+    // table. Their physical type must survive a conflicting generic draw hint.
+    bool forceMaterialType = false;
+    // Only source-verified Temple window panes let direct-light rays continue
+    // through their captured triangles to the actual exterior openings.
+    bool dxrWindowPortal = false;
+    // Exact source-verified fallback for surfaces that need DXR relighting
+    // even when captured RSP state does not identify their vertex RGB as lit.
+    bool dxrHybridRelight = false;
 };
 
 static const StaticMaterialRule gMaterialRulesPilot[] = {
@@ -67,6 +79,8 @@ static const StaticMaterialRule gMaterialRulesPilot[] = {
     { "objects/gameplay_keep/gCircleGlowRTex", MaterialType::EMISSIVE, 0.35f, 0.0f, 0.2f, 1.2f },
     { "objects/gameplay_keep/gCircleGlowSLTex", MaterialType::EMISSIVE, 0.35f, 0.0f, 0.2f, 1.2f },
     { "objects/gameplay_keep/gCircleGlowSRTex", MaterialType::EMISSIVE, 0.35f, 0.0f, 0.2f, 1.2f },
+    { "objects/gameplay_keep/gFairyWingTex", MaterialType::EMISSIVE, 0.48f, 0.0f, 0.25f, 0.45f,
+      false, 0.0f, true },
     { "objects/gameplay_keep/gControlStickTex", MaterialType::WOOD, 0.75f, 0.0f, 0.15f, 0.0f },
     { "objects/gameplay_keep/gCuttableShrubLeafTFragmentTex", MaterialType::FOLIAGE, 0.8f, 0.0f, 0.1f, 0.0f },
     { "objects/gameplay_keep/gCuttableShrubTex", MaterialType::FOLIAGE, 0.8f, 0.0f, 0.1f, 0.0f },
@@ -1432,6 +1446,20 @@ static const StaticMaterialRule gMaterialRulesPilot[] = {
     { "overlays/ovl_Boss_Ganon2/gGanonZeldaMagicTex", MaterialType::MAGIC, 0.4f, 0.0f, 0.3f, 0.5f },
     { "overlays/ovl_En_Ganon_Organ/sRoomColumnFriezeAndCanopyTex", MaterialType::EMISSIVE, 0.5f, 0.0f, 0.1f, 0.8f },
     { "overlays/ovl_En_Ganon_Organ/sRoomColumnMetalEdgingTex", MaterialType::EMISSIVE, 0.5f, 0.0f, 0.1f, 0.8f },
+    // Source-resolved Temple of Time targets. The floor texture is the sole
+    // texture in DL_002A58, whose vertices lie at Y=-40..0. It is ceramic
+    // mosaic, not a metal mirror. The window textures are used by the authored
+    // child/adult window lists; the beam texture is their separate translucent
+    // overlay and is not the physical window source. It can still contribute
+    // emissive energy to nearby surfaces through secondary paths.
+    { "scenes/shared/tokinoma_scene/tokinoma_sceneTex_011FA0", MaterialType::CERAMIC, 0.28f, 0.0f, 0.90f, 0.0f,
+      false, 0.18f, true, false, true },
+    { "objects/object_toki_objects/object_toki_objects_Tex_002DC0", MaterialType::GLASS, 0.16f, 0.0f, 0.72f, 0.0f,
+      false, 0.70f, true, true },
+    { "objects/object_toki_objects/object_toki_objects_Tex_0035C0", MaterialType::EMISSIVE, 0.42f, 0.0f, 0.25f, 1.25f,
+      false, 0.0f, true },
+    { "objects/object_toki_objects/object_toki_objects_Tex_003DC0", MaterialType::GLASS, 0.16f, 0.0f, 0.72f, 0.0f,
+      false, 0.70f, true, true },
 };
 
 static constexpr size_t gMaterialRulesPilotCount = sizeof(gMaterialRulesPilot) / sizeof(gMaterialRulesPilot[0]);
@@ -1447,7 +1475,11 @@ inline void PopulateMaterialRulesTable(std::unordered_map<uint64_t, MaterialDefi
         def.metallic = r.metallic;
         def.specular = r.specular;
         def.emissiveStrength = r.emissiveStrength;
+        def.reflectivity = r.reflectivity;
         if (r.albedoAsHeight) def.flags |= MATERIAL_FLAG_ALBEDO_AS_HEIGHT;
+        if (r.dxrWindowPortal) def.flags |= MATERIAL_FLAG_DXR_WINDOW_PORTAL;
+        if (r.dxrHybridRelight) def.flags |= MATERIAL_FLAG_DXR_PRIMARY_RELIGHT;
+        if (r.forceMaterialType) def.flags |= MATERIAL_FLAG_EXACT_PILOT_TYPE;
         uint64_t hash = CRC64(r.path);
         outRules[hash] = def;
         outStringRules[r.path] = def;

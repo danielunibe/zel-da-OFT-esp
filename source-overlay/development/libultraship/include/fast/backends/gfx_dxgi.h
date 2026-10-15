@@ -83,6 +83,7 @@ class GfxWindowBackendDXGI final : public GfxWindowBackend {
     bool mHasMousePosition;
 
   private:
+    bool mBackgroundHarness = false;
     uint64_t mD3D12Frame=0, mD3D12Fence=0;
     int mD3D12ForensicFrame=-1;
     bool mD3D12ForensicCapture=false;

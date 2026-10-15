@@ -10,6 +10,7 @@
 #include <fstream>
 #include <sstream>
 #include <iomanip>
+#include <unordered_set>
 
 namespace Fast {
 
@@ -124,6 +125,25 @@ void PersistentScene::BeginFrame() {
 void PersistentScene::EndFrame() {
     if (!mEnabled) return;
 
+    // Animated color/UV/alpha snapshots may change without changing a BLAS.
+    // Keep all variants used THIS frame, then retire older CPU snapshots of
+    // that topology. GPU frame buffers own their copied data independently.
+    std::unordered_set<uint64_t> activeGeometry;
+    for (const auto& inst : mInstances) {
+        const auto asset = mAssets.find(inst.geometryAssetId);
+        if (asset != mAssets.end()) activeGeometry.insert(asset->second.geometryHash);
+    }
+    for (auto asset = mAssets.begin(); asset != mAssets.end();) {
+        if (asset->second.lastSeenFrame != mFrameCounter &&
+            activeGeometry.find(asset->second.geometryHash) != activeGeometry.end()) {
+            mChangeSet.removedAssets.push_back(asset->first);
+            asset = mAssets.erase(asset);
+        } else {
+            ++asset;
+        }
+    }
+    mStats.totalAssets = static_cast<uint32_t>(mAssets.size());
+
     // Calcular consumo real de memoria
     size_t mem = sizeof(PersistentScene);
     for (const auto& kv : mAssets) {
@@ -229,9 +249,11 @@ void PersistentScene::IngestCapturedDraw(const CapturedDraw& draw,
     }
 
     // HARD GATE: Detección de punteros o rangos inválidos de búfer efímero
-    if (draw.vertexStart + draw.vertexCount > globalVertices.size() ||
-        draw.indexStart + draw.indexCount > globalIndices.size() ||
-        draw.vertexCount == 0 || draw.indexCount == 0) {
+    if (draw.vertexStart > globalVertices.size() ||
+        draw.vertexCount > globalVertices.size() - draw.vertexStart ||
+        draw.indexStart > globalIndices.size() ||
+        draw.indexCount > globalIndices.size() - draw.indexStart ||
+        draw.vertexCount == 0 || draw.indexCount < 3 || draw.indexCount % 3 != 0) {
         mStats.danglingBufferReferences++;
         return;
     }
@@ -254,7 +276,10 @@ void PersistentScene::IngestCapturedDraw(const CapturedDraw& draw,
         lv.normZ = gv.normZ;
         lv.u = gv.u;
         lv.v = gv.v;
+        lv.u1 = gv.u1;
+        lv.v1 = gv.v1;
         lv.color = gv.color;
+        lv.sourceColor = gv.sourceColor;
         lv.normalState = gv.normalStatus;
         lv.sourceAlpha = gv.sourceAlpha;
         lv.recordLoadedAlpha = gv.recordLoadedAlpha;
@@ -268,14 +293,44 @@ void PersistentScene::IngestCapturedDraw(const CapturedDraw& draw,
     localIndices.resize(draw.indexCount);
     for (uint32_t i = 0; i < draw.indexCount; ++i) {
         uint32_t globalIdx = globalIndices[draw.indexStart + i];
-        localIndices[i] = (globalIdx >= draw.vertexStart) ? (globalIdx - draw.vertexStart) : 0;
+        // Invalid references must fail visibly; replacing them with vertex 0
+        // silently creates degenerate BLAS triangles while reporting success.
+        if (globalIdx < draw.vertexStart || globalIdx - draw.vertexStart >= draw.vertexCount) {
+            ++mStats.danglingBufferReferences;
+            return;
+        }
+        localIndices[i] = globalIdx - draw.vertexStart;
     }
 
-    // HASH ESTABLE: Basado en topología local, índices y material (SIN world
-    // transform).  The material is part of the BLAS instance identity: using
-    // only geometry caused the first draw's material to leak into later draws
-    // that reused the same mesh with a different surface classification.
-    uint64_t assetHash = ComputeAssetHash(localVerts, localIndices);
+    // Surface identity includes every captured attribute and render policy.
+    // BLAS identity stays independent of shading snapshots and camera poses.
+    uint64_t geometryHash = ComputeAssetHash(localVerts, localIndices);
+    // Alpha class controls the BLAS OPAQUE flag. Shade, UV, material and
+    // texture descriptor changes only affect the per-frame hit data.
+    geometryHash = FNV1a64Local(&draw.alphaMode, sizeof(draw.alphaMode), geometryHash);
+    uint64_t assetHash = geometryHash;
+    for (const auto& vertex : localVerts) {
+        const float normal[3] = { vertex.normX, vertex.normY, vertex.normZ };
+        const float uv[2] = { vertex.u, vertex.v };
+        assetHash = FNV1a64Local(normal, sizeof(normal), assetHash);
+        assetHash = FNV1a64Local(uv, sizeof(uv), assetHash);
+        const float uv1[2] = { vertex.u1, vertex.v1 };
+        assetHash = FNV1a64Local(uv1, sizeof(uv1), assetHash);
+        assetHash = FNV1a64Local(&vertex.color, sizeof(vertex.color), assetHash);
+        const uint8_t state[5] = { vertex.normalState, vertex.sourceAlpha, vertex.recordLoadedAlpha,
+                                   vertex.capturedAlpha, vertex.fogMode };
+        assetHash = FNV1a64Local(state, sizeof(state), assetHash);
+    }
+    assetHash = FNV1a64Local(&draw.geometryMode, sizeof(draw.geometryMode), assetHash);
+    assetHash = FNV1a64Local(&draw.otherModeL, sizeof(draw.otherModeL), assetHash);
+    assetHash = FNV1a64Local(&draw.otherModeH, sizeof(draw.otherModeH), assetHash);
+    assetHash = FNV1a64Local(&draw.combineMode, sizeof(draw.combineMode), assetHash);
+    assetHash = FNV1a64Local(&draw.textureSrvIndex, sizeof(draw.textureSrvIndex), assetHash);
+    assetHash = FNV1a64Local(&draw.textureSrvIndex1, sizeof(draw.textureSrvIndex1), assetHash);
+    assetHash = FNV1a64Local(draw.textureTileModes, sizeof(draw.textureTileModes), assetHash);
+    assetHash = FNV1a64Local(draw.primitiveColor, sizeof(draw.primitiveColor), assetHash);
+    assetHash = FNV1a64Local(draw.environmentColor, sizeof(draw.environmentColor), assetHash);
+    assetHash = FNV1a64Local(draw.fogColor, sizeof(draw.fogColor), assetHash);
     assetHash = FNV1a64Local(&draw.materialId, sizeof(draw.materialId), assetHash);
     assetHash = FNV1a64Local(&draw.resourceId, sizeof(draw.resourceId), assetHash);
     // Material class alone is not enough to identify an asset: authored rules
@@ -297,7 +352,7 @@ void PersistentScene::IngestCapturedDraw(const CapturedDraw& draw,
     if (isNewAsset) {
         GeometryAsset asset = {};
         asset.id = assetHash;
-        asset.geometryHash = assetHash;
+        asset.geometryHash = geometryHash;
         asset.vertexBuffer = std::move(localVerts);
         asset.indexBuffer = std::move(localIndices);
         asset.vertexCount = draw.vertexCount;
@@ -306,7 +361,15 @@ void PersistentScene::IngestCapturedDraw(const CapturedDraw& draw,
         asset.resourceId = draw.resourceId;
         asset.resourcePath = draw.resourcePath;
         asset.materialId = draw.materialId;
+        asset.lightOwnerId = draw.lightOwnerId;
+        asset.lightRole = draw.lightRole;
         asset.material = draw.material;
+        asset.textureSrvIndex = draw.textureSrvIndex;
+        asset.textureSrvIndex1 = draw.textureSrvIndex1;
+        memcpy(asset.textureTileModes, draw.textureTileModes, sizeof(asset.textureTileModes));
+        memcpy(asset.primitiveColor, draw.primitiveColor, sizeof(asset.primitiveColor));
+        memcpy(asset.environmentColor, draw.environmentColor, sizeof(asset.environmentColor));
+        memcpy(asset.fogColor, draw.fogColor, sizeof(asset.fogColor));
         asset.alphaMode = draw.alphaMode;
         asset.sourceGeometryMode = draw.geometryMode;
         asset.sourceOtherModeL = draw.otherModeL;
