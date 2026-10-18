@@ -478,6 +478,20 @@ void MaterialRegistry::RecordDrawCall(const DrawCallInfo& info) {
             if (mat.specular <= 0.0f) mat.specular = 0.51f;
             mat.normalStrength = 0.0f; // normals come from WaterMaterial.hlsli
             mat.emissiveStrength = 0.0f;
+        } else {
+            // A WATER-typed draw whose aquatic classifier rejected it (medallion
+            // platforms, ice ramps, masonry, unproven 3D props) must not keep the
+            // WATER identity: the shader's legacy water path would still apply a
+            // ripple normal and the inventory would claim a liquid surface.
+            // Demote to the opaque matte fallback so the original Fast3D pixels
+            // and a non-liquid DXR path are used instead.
+            mat.type = MaterialType::GENERIC_MATTE;
+            mat.roughness = 0.95f;
+            mat.metallic = 0.0f;
+            mat.specular = 0.04f;
+            mat.reflectivity = 0.01f;
+            mat.normalStrength = 0.02f;
+            mat.emissiveStrength = 0.0f;
         }
     }
 
@@ -519,6 +533,20 @@ void MaterialRegistry::RecordDrawCall(const DrawCallInfo& info) {
             // Thermal emission is computed in LavaMaterial.hlsli from the heat
             // field, so the flat per-material strength stays off to avoid
             // double-counting the same energy twice.
+            mat.emissiveStrength = 0.0f;
+        } else {
+            // A LAVA-typed draw whose molten classifier rejected it (torch
+            // flame, fireball, 2D billboard, translucent effect, water, ice)
+            // must not keep the LAVA identity: the shader would still mark it
+            // as a melt surface and the inventory would claim emission.
+            // Demote to the opaque matte fallback so the original Fast3D
+            // pixels are preserved and no thermal model is applied.
+            mat.type = MaterialType::GENERIC_MATTE;
+            mat.roughness = 0.95f;
+            mat.metallic = 0.0f;
+            mat.specular = 0.04f;
+            mat.reflectivity = 0.01f;
+            mat.normalStrength = 0.02f;
             mat.emissiveStrength = 0.0f;
         }
     }

@@ -52,8 +52,12 @@ struct WaterProfile {
 
 // Schlick Fresnel for the air/water interface. cosTheta is the absolute
 // cosine between the shading normal and the direction toward the observer.
+// A non-finite cosine resolves to F0 (normal incidence) instead of leaking
+// NaN into the radiance buffer, matching LavaThermalChroma's guard.
 inline float WaterFresnelSchlick(float cosTheta, float f0 = kWaterF0) {
-    const float c = cosTheta < 0.0f ? 0.0f : (cosTheta > 1.0f ? 1.0f : cosTheta);
+    const float c = (cosTheta == cosTheta)
+        ? (cosTheta < 0.0f ? 0.0f : (cosTheta > 1.0f ? 1.0f : cosTheta))
+        : 1.0f;
     const float m = 1.0f - c;
     const float m2 = m * m;
     return f0 + (1.0f - f0) * (m2 * m2 * m);

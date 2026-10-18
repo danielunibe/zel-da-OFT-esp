@@ -86,9 +86,11 @@ float WaterLuminance(float3 color) {
     return dot(max(color, 0.0.xxx), float3(0.2126f, 0.7152f, 0.0722f));
 }
 
-// Schlick Fresnel for the air/water interface.
+// Schlick Fresnel for the air/water interface. Non-finite cosTheta resolves
+// to F0 (normal incidence) instead of leaking NaN, matching the C++ guard in
+// WaterMaterialContract.h.
 float WaterFresnelSchlick(float cosTheta, float f0) {
-    float c = saturate(cosTheta);
+    float c = (cosTheta == cosTheta) ? saturate(cosTheta) : 1.0f;
     float m = 1.0f - c;
     float m2 = m * m;
     return f0 + (1.0f - f0) * (m2 * m2 * m);
