@@ -1,0 +1,22 @@
+{
+  "project_name": "OCZ_LightLab_UE58",
+  "uproject_path": "C:\\Users\\danie\\Documents\\Unreal Projects\\OCZ_LightLab_UE58\\OCZ_LightLab_UE58.uproject",
+  "project_dir": "C:\\Users\\danie\\Documents\\Unreal Projects\\OCZ_LightLab_UE58",
+  "content_dir": "C:\\Users\\danie\\Documents\\Unreal Projects\\OCZ_LightLab_UE58\\Content",
+  "engine_version": "5.8",
+  "initial_map": "/Game/OCZ/Tests/LV_OCZ_PhysicalReference",
+  "categories": [
+    "/Game/OCZ/Scenes",
+    "/Game/OCZ/Materials",
+    "/Game/OCZ/Textures",
+    "/Game/OCZ/Lights",
+    "/Game/OCZ/Cameras",
+    "/Game/OCZ/Tests"
+  ],
+  "plugins": [
+    "PythonScriptPlugin",
+    "EditorScriptingUtilities",
+    "USDImporter",
+    "USDCore"
+  ]
+}

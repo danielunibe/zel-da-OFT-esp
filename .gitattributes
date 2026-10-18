@@ -36,3 +36,16 @@
 *.o2r binary
 *.zip binary
 *.tar.gz binary
+*.rgba16f binary
+*.r16f binary
+
+# ============================================================
+# GitHub Linguist Overrides (Exclusión de estadísticas sin borrar archivos)
+# ============================================================
+reports/** linguist-generated=true
+reports/dxr_comparison/comparison-snapshot.html linguist-generated=true
+*.html linguist-generated=true
+visual/** linguist-generated=true
+runtime/** linguist-generated=true
+localization/**/prestate/** linguist-generated=true
+build/** linguist-generated=true

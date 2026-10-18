@@ -1,6 +1,7 @@
 #include "fast/MaterialRegistry.h"
 #include "fast/couch_diagnostics.h"
 #include "fast/MaterialRulesPilot.h"
+#include "fast/Fast3DAlphaPolicy.h"
 #include <fstream>
 #include <sstream>
 #include <algorithm>
@@ -78,10 +79,13 @@ MaterialType MaterialRegistry::ClassifyFromState(const DrawCallInfo& info) const
     };
 
     // 1. Semantic keyword matching (English & Japanese romanized asset names)
-    if (has({"water", "river", "lake", "pond", "ocean", "liquid", "mizu", "stream", "aqua", "sea", "taki", "kawa", "umi", "wave", "ripple", "splash", "fountain"})) {
+    if (has({"water", "river", "lake", "pond", "ocean", "liquid", "mizu", "stream", "aqua", "sea", "taki", "kawa", "umi", "wave", "ripple", "splash", "fountain", "oasis", "well", "aquarium", "pool", "cascade", "current"})) {
         return MaterialType::WATER;
     }
-    if (has({"lava", "magma", "hono", "kazan"})) return MaterialType::LAVA;
+    if (has({"lava", "magma", "hono", "kazan"}) ||
+        LavaClassFromExactRules(path) != LavaClass::NONE) {
+        return MaterialType::LAVA;
+    }
     if (has({"magic", "spell", "energy", "fairy", "glow", "hikari"})) return MaterialType::MAGIC;
     if (has({"emissive", "emission", "light_source", "lantern", "lamp", "torch", "candle", "beacon", "flame", "fire"})) {
         return MaterialType::EMISSIVE;
@@ -107,7 +111,35 @@ MaterialType MaterialRegistry::ClassifyFromState(const DrawCallInfo& info) const
     }
     if (has({"skin", "face", "hand", "body_skin", "hada"})) return MaterialType::CHARACTER;
 
-    // 2. Fast3D render-state heuristics for anonymous scene/room textures (e.g., spot04_room_0Tex_...)
+    // 2. Scene domain matching for authentic Zelda 64 environments:
+    // Caverns, dungeons, and sacred temples are carved stone and architectural masonry.
+    if (path.find("spot18_scene") != std::string::npos || path.find("spot18_room") != std::string::npos ||
+        path.find("tokinoma_scene") != std::string::npos || path.find("tokinoma_room") != std::string::npos ||
+        path.find("ddan_scene") != std::string::npos || path.find("ddan_boss") != std::string::npos ||
+        path.find("hidan_scene") != std::string::npos || path.find("mizusin_scene") != std::string::npos ||
+        path.find("jyasinzou_scene") != std::string::npos || path.find("hakasita_scene") != std::string::npos) {
+        return MaterialType::STONE;
+    }
+
+    // Kokiri Forest domain (wood, foliage cutouts, grass ground)
+    if (path.find("spot04_scene") != std::string::npos || path.find("spot04_room") != std::string::npos) {
+        const Fast3DAlphaClass alphaCandidate =
+            ClassifyFast3DAlphaCandidate(info.otherModeL, info.otherModeH);
+        if (alphaCandidate == Fast3DAlphaClass::Cutout) {
+            return MaterialType::FOLIAGE;
+        }
+        if (has({"wood", "board", "plank", "log", "hashi", "moku", "fence", "bridge"})) {
+            return MaterialType::WOOD;
+        }
+        return MaterialType::GRASS;
+    }
+
+    // Hyrule Field domain (earthen slopes, stone perimeter walls)
+    if (path.find("spot00_scene") != std::string::npos || path.find("spot00_room") != std::string::npos) {
+        return MaterialType::STONE;
+    }
+
+    // 3. Fast3D render-state heuristics for remaining anonymous scene/room textures
     // Tint and blend state alone do not prove water, lava, magic, or emission.
     // Those guesses turned ordinary colored geometry into false ray blockers,
     // reflectors, and light sources. Use semantic resources or explicit rules.
@@ -257,7 +289,7 @@ void MaterialRegistry::RecordDrawCall(const DrawCallInfo& info) {
                 case MaterialType::STONE: mat.reflectivity = 0.04f; break;
                 case MaterialType::WOOD: mat.reflectivity = 0.05f; break;
                 case MaterialType::METAL: mat.reflectivity = 0.88f; break;
-                case MaterialType::WATER: mat.reflectivity = 0.88f; break;
+                case MaterialType::WATER: mat.reflectivity = 1.0f; break; // Physical dielectric Fresnel
                 case MaterialType::LAVA: mat.reflectivity = 0.08f; break;
                 case MaterialType::EMISSIVE: mat.reflectivity = 0.08f; break;
                 case MaterialType::GRASS: mat.reflectivity = 0.008f; break;
@@ -269,7 +301,7 @@ void MaterialRegistry::RecordDrawCall(const DrawCallInfo& info) {
                 case MaterialType::MAGIC: mat.reflectivity = 0.18f; break;
                 case MaterialType::FABRIC: mat.reflectivity = 0.012f; break;
                 case MaterialType::CHARACTER: mat.reflectivity = 0.025f; break;
-                case MaterialType::CERAMIC: mat.reflectivity = 0.10f; break;
+                case MaterialType::CERAMIC: mat.reflectivity = 1.0f; break; // Physical dielectric Fresnel
                 case MaterialType::GENERIC_MATTE: mat.reflectivity = 0.01f; break;
                 case MaterialType::PROTECTED_2D: mat.reflectivity = 0.0f; break;
                 default: mat.reflectivity = 0.005f; break;
@@ -313,10 +345,10 @@ void MaterialRegistry::RecordDrawCall(const DrawCallInfo& info) {
                 mat.reflectivity = 0.88f;
                 break;
             case MaterialType::WATER:
-                mat.roughness = 0.02f;
+                mat.roughness = 0.04f;
                 mat.metallic = 0.0f;
-                mat.specular = 0.95f;
-                mat.reflectivity = 0.88f;
+                mat.specular = 0.51f; // F0 = 0.04 * 0.51 = 0.0204 (exact for IOR 1.333)
+                mat.reflectivity = 1.0f;
                 break;
             case MaterialType::LAVA:
                 mat.roughness = 0.25f;
@@ -394,10 +426,10 @@ void MaterialRegistry::RecordDrawCall(const DrawCallInfo& info) {
                 mat.normalStrength = 0.012f;
                 break;
             case MaterialType::CERAMIC:
-                mat.roughness = 0.48f;
+                mat.roughness = 0.28f;
                 mat.metallic = 0.0f;
-                mat.specular = 0.25f;
-                mat.reflectivity = 0.10f;
+                mat.specular = 0.90f; // F0 = 0.04 * 0.90 = 0.036 (glazed ceramic)
+                mat.reflectivity = 1.0f;
                 mat.normalStrength = 0.04f;
                 break;
             case MaterialType::GENERIC_MATTE:
@@ -420,6 +452,74 @@ void MaterialRegistry::RecordDrawCall(const DrawCallInfo& info) {
                 mat.reflectivity = 0.005f;
                 mat.normalStrength = 0.015f;
                 break;
+        }
+    }
+
+    // OCZ-WATER-01: resolve the global aquatic identity for every draw whose
+    // material type is WATER. A name token alone is not enough, and a pilot
+    // rule alone is not enough either; the classifier re-checks exclusions,
+    // render state and aquatic tokens so ice ramps, masonry, sky and effect
+    // props never inherit the hyperreal liquid model.
+    if (mat.type == MaterialType::WATER) {
+        std::string waterPath = info.resourcePath;
+        std::transform(waterPath.begin(), waterPath.end(), waterPath.begin(), [](unsigned char c) {
+            return static_cast<char>(std::tolower(c));
+        });
+        const WaterProfile waterProfile =
+            ClassifyWaterDraw(waterPath, info.is2D, info.isRect,
+                              static_cast<uint32_t>(ClassifyFast3DAlphaCandidate(info.otherModeL, info.otherModeH)));
+        mat.SetWaterProfile(waterProfile);
+        if (waterProfile.cls != WaterClass::NONE) {
+            mat.roughness = waterProfile.roughness;
+            mat.metallic = 0.0f;
+            mat.reflectivity = 1.0f;
+            // 0.04 * 0.51 = 0.0204: the authored specular slot already encodes
+            // the air/water normal-incidence reflectance for IOR 1.333.
+            if (mat.specular <= 0.0f) mat.specular = 0.51f;
+            mat.normalStrength = 0.0f; // normals come from WaterMaterial.hlsli
+            mat.emissiveStrength = 0.0f;
+        }
+    }
+
+    // OCZ-LAVA-01: resolve the molten identity for every draw whose material
+    // type is LAVA. A name token alone is not enough, and a pilot rule alone
+    // is not enough either: the classifier re-checks exclusions (torch flame,
+    // fireballs, 2D billboards, translucent effects, water, ice), the render
+    // state and volcanic tokens so a torch never inherits the magma model.
+    if (mat.type == MaterialType::LAVA) {
+        std::string lavaPath = info.resourcePath;
+        std::transform(lavaPath.begin(), lavaPath.end(), lavaPath.begin(), [](unsigned char c) {
+            return static_cast<char>(std::tolower(c));
+        });
+        const auto toUnit = [](uint8_t v) { return static_cast<float>(v) * (1.0f / 255.0f); };
+        LavaStateEvidence lavaState;
+        lavaState.is2D = info.is2D;
+        lavaState.isRect = info.isRect;
+        // Same alpha classifier the geometry capture uses: Opaque=0,
+        // Cutout=1, Blended=2. Blended (translucent/additive) draws are
+        // effect sheets over the melt, never the melt itself.
+        lavaState.alphaMode =
+            static_cast<uint32_t>(ClassifyFast3DAlphaCandidate(info.otherModeL, info.otherModeH));
+        lavaState.primColor[0] = toUnit(info.primR);
+        lavaState.primColor[1] = toUnit(info.primG);
+        lavaState.primColor[2] = toUnit(info.primB);
+        lavaState.envColor[0] = toUnit(info.envR);
+        lavaState.envColor[1] = toUnit(info.envG);
+        lavaState.envColor[2] = toUnit(info.envB);
+        const LavaProfile lavaProfile = ClassifyLavaDraw(lavaPath, lavaState);
+        mat.SetLavaProfile(lavaProfile);
+        if (lavaProfile.cls != LavaClass::NONE) {
+            mat.roughness = lavaProfile.roughness;
+            mat.metallic = 0.0f;
+            // Melt is a rough dielectric with a faint specular sheen on the
+            // open (non-crust) surface; it is never a mirror.
+            mat.reflectivity = 0.08f;
+            if (mat.specular <= 0.0f) mat.specular = 0.045f;
+            mat.normalStrength = 0.0f; // normals come from LavaMaterial.hlsli
+            // Thermal emission is computed in LavaMaterial.hlsli from the heat
+            // field, so the flat per-material strength stays off to avoid
+            // double-counting the same energy twice.
+            mat.emissiveStrength = 0.0f;
         }
     }
 
@@ -456,6 +556,53 @@ void MaterialRegistry::RecordDrawCall(const DrawCallInfo& info) {
         mat.normalStrength = std::clamp(cvars->GetFloat((prefix + "NormalStrength").c_str(), mat.normalStrength),
                                         0.0f, 1.0f);
     }
+    if (cvars && mat.type == MaterialType::WATER && mat.GetWaterClass() != WaterClass::NONE) {
+        // Water quality knobs ride on the existing console-variable system so
+        // no new settings UI or ABI is introduced. A zero scale keeps the
+        // classified default untouched.
+        WaterProfile waterProfile = mat.GetWaterProfile();
+        const float waveScale =
+            cvars->GetFloat("gEnhancements.Graphics.DXR.Water.WaveScale", waterProfile.waveScale);
+        const float flowSpeed =
+            cvars->GetFloat("gEnhancements.Graphics.DXR.Water.FlowSpeed", waterProfile.flowSpeed);
+        const float absorption =
+            cvars->GetFloat("gEnhancements.Graphics.DXR.Water.Absorption", waterProfile.absorption);
+        const float artWeight =
+            cvars->GetFloat("gEnhancements.Graphics.DXR.Water.ArtWeight", waterProfile.artWeight);
+        const float opticsBlend =
+            cvars->GetFloat("gEnhancements.Graphics.DXR.Water.OpticsBlend", waterProfile.opticsBlend);
+        waterProfile.waveScale = std::clamp(waveScale, 0.0f, 4.0f);
+        waterProfile.flowSpeed = std::clamp(flowSpeed, 0.0f, 8.0f);
+        waterProfile.absorption = std::clamp(absorption, 0.0f, 4.0f);
+        waterProfile.artWeight = std::clamp(artWeight, 0.0f, 1.0f);
+        waterProfile.opticsBlend = std::clamp(opticsBlend, 0.0f, 1.0f);
+        mat.SetWaterProfile(waterProfile);
+    }
+    if (cvars && mat.type == MaterialType::LAVA && mat.GetLavaClass() != LavaClass::NONE) {
+        // Magma quality knobs ride on the existing console-variable system so
+        // no new settings UI or ABI is introduced. A zero scale keeps the
+        // classified default untouched.
+        LavaProfile lavaProfile = mat.GetLavaProfile();
+        const float flowSpeed =
+            cvars->GetFloat("gEnhancements.Graphics.DXR.Lava.FlowSpeed", lavaProfile.flowSpeed);
+        const float viscosity =
+            cvars->GetFloat("gEnhancements.Graphics.DXR.Lava.Viscosity", lavaProfile.viscosity);
+        const float crustAmount =
+            cvars->GetFloat("gEnhancements.Graphics.DXR.Lava.CrustAmount", lavaProfile.crustAmount);
+        const float emissionGain =
+            cvars->GetFloat("gEnhancements.Graphics.DXR.Lava.EmissionGain", lavaProfile.emissionGain);
+        const float artWeight =
+            cvars->GetFloat("gEnhancements.Graphics.DXR.Lava.ArtWeight", lavaProfile.artWeight);
+        const float opticsBlend =
+            cvars->GetFloat("gEnhancements.Graphics.DXR.Lava.OpticsBlend", lavaProfile.opticsBlend);
+        lavaProfile.flowSpeed = std::clamp(flowSpeed, 0.0f, 8.0f);
+        lavaProfile.viscosity = std::clamp(viscosity, 0.0f, 1.0f);
+        lavaProfile.crustAmount = std::clamp(crustAmount, 0.0f, 1.0f);
+        lavaProfile.emissionGain = std::clamp(emissionGain, 0.0f, 4.0f);
+        lavaProfile.artWeight = std::clamp(artWeight, 0.0f, 1.0f);
+        lavaProfile.opticsBlend = std::clamp(opticsBlend, 0.0f, 1.0f);
+        mat.SetLavaProfile(lavaProfile);
+    }
 
     if (texHash != 0) {
         mMaterialCache[texHash] = mat;
@@ -467,6 +614,12 @@ void MaterialRegistry::RecordDrawCall(const DrawCallInfo& info) {
 
 void MaterialRegistry::FlushFrame() {
     std::lock_guard<std::mutex> lock(mMutex);
+    // Move, do not clear: WriteDrawCallInventory() runs after the frame has
+    // flushed (the harness dumps at capture complete), so the last frame's
+    // draws must survive here or the inventory would always be empty.
+    mLastFrameDrawCalls = std::move(mFrameDrawCalls);
+    mLastFrameClassifications = std::move(mFrameClassifications);
+    mLastFrameCount = mFrameCount;
     mFrameDrawCalls.clear();
     mFrameClassifications.clear();
     mFrameCount++;
@@ -762,14 +915,26 @@ extern "C" uint32_t CouchGetLightOwnerId(const void* light) {
     return it == nativeOwners.end() ? 0 : it->second.ownerId;
 }
 extern "C" void CouchForgetNativeLight(const void* light) {
-    std::lock_guard<std::mutex> lock(nativeOwnerMutex);
-    nativeOwners.erase(light);
-    // Actor addresses may be reused. Remove owners that have no live lights.
-    for (auto actor = nativeActorIds.begin(); actor != nativeActorIds.end();) {
-        const bool alive = std::any_of(nativeOwners.begin(), nativeOwners.end(), [&](const auto& entry) {
-            return entry.second.ownerId == actor->second;
-        });
-        if (!alive) actor = nativeActorIds.erase(actor); else ++actor;
+    uint32_t ownerId = 0;
+    uint64_t sourceId = 0;
+    {
+        std::lock_guard<std::mutex> lock(nativeOwnerMutex);
+        auto it = nativeOwners.find(light);
+        if (it != nativeOwners.end()) {
+            ownerId = it->second.ownerId;
+            sourceId = it->second.sourceId;
+            nativeOwners.erase(it);
+        }
+        // Actor addresses may be reused. Remove owners that have no live lights.
+        for (auto actor = nativeActorIds.begin(); actor != nativeActorIds.end();) {
+            const bool alive = std::any_of(nativeOwners.begin(), nativeOwners.end(), [&](const auto& entry) {
+                return entry.second.ownerId == actor->second;
+            });
+            if (!alive) actor = nativeActorIds.erase(actor); else ++actor;
+        }
+    }
+    if (ownerId != 0) {
+        MaterialRegistry::Instance().ForgetNativeLight(ownerId, sourceId);
     }
 }
 extern "C" int CouchNaviPilotActive(void) {
@@ -780,19 +945,206 @@ extern "C" int CouchNaviPilotActive(void) {
     }();
     return active ? 1 : 0;
 }
+void MaterialRegistry::ForgetNativeLight(uint32_t ownerId, uint64_t sourceId) {
+    if (ownerId == 0) return;
+    std::lock_guard<std::mutex> lock(mMutex);
+    for (uint32_t p = 0; p < mSceneLighting.pointLightCount; ++p) {
+        if (sourceId != 0) {
+            if (mSceneLighting.pointSourceIds[p] == sourceId) {
+                mSceneLighting.pointPosition[p][3] = 0.0f;
+                std::fill(mSceneLighting.pointOptics[p], mSceneLighting.pointOptics[p] + 4, 0.0f);
+                mSceneLighting.pointSourceIds[p] = 0;
+            }
+        } else {
+            const uint32_t packedRole = static_cast<uint32_t>(mSceneLighting.pointOptics[p][0]);
+            if (packedRole / 8u == ownerId) {
+                mSceneLighting.pointPosition[p][3] = 0.0f;
+                std::fill(mSceneLighting.pointOptics[p], mSceneLighting.pointOptics[p] + 4, 0.0f);
+                mSceneLighting.pointSourceIds[p] = 0;
+            }
+        }
+    }
+    for (uint32_t i = 0; i < mSceneLighting.nativeLightCount; ++i) {
+        if (sourceId != 0) {
+            if (mSceneLighting.nativeLights[i].sourceId == sourceId) {
+                mSceneLighting.nativeLights[i].enabled = false;
+                mSceneLighting.nativeLights[i].rawRadius = 0.0f;
+                std::fill(mSceneLighting.nativeLights[i].color, mSceneLighting.nativeLights[i].color + 3, 0.0f);
+            }
+        } else {
+            if (mSceneLighting.nativeLights[i].ownerId == ownerId) {
+                mSceneLighting.nativeLights[i].enabled = false;
+                mSceneLighting.nativeLights[i].rawRadius = 0.0f;
+                std::fill(mSceneLighting.nativeLights[i].color, mSceneLighting.nativeLights[i].color + 3, 0.0f);
+            }
+        }
+    }
+}
+
+void MaterialRegistry::ClearLightsOnRoomChange(bool isNewScene) {
+    {
+        std::lock_guard<std::mutex> lock(nativeOwnerMutex);
+        if (isNewScene) {
+            // Keep only persistent companion lights across scenes to avoid pointer reuse / ABA aliasing
+            for (auto it = nativeOwners.begin(); it != nativeOwners.end();) {
+                const int role = it->second.role;
+                if (role != 1 && role != 2) {
+                    it = nativeOwners.erase(it);
+                } else {
+                    ++it;
+                }
+            }
+            for (auto it = nativeActorIds.begin(); it != nativeActorIds.end();) {
+                const bool alive = std::any_of(nativeOwners.begin(), nativeOwners.end(), [&](const auto& entry) {
+                    return entry.second.ownerId == it->second;
+                });
+                if (!alive) {
+                    it = nativeActorIds.erase(it);
+                } else {
+                    ++it;
+                }
+            }
+            if (nativeOwners.empty()) {
+                nextNativeOwnerId = 1;
+            }
+        }
+    }
+    std::lock_guard<std::mutex> lock(mMutex);
+    // Purge lights belonging to the old room. Preserve persistent companion/player lights
+    // (such as Navi) across room transitions; on a scene change, purge all scene lights.
+    uint32_t writeIndex = 0;
+    for (uint32_t p = 0; p < mSceneLighting.pointLightCount; ++p) {
+        const uint32_t packedRole = static_cast<uint32_t>(mSceneLighting.pointOptics[p][0]);
+        const uint32_t role = packedRole & 7u;
+        const bool isPersistentCompanion = (role == 1 /* COUCH_LIGHT_NAVI_GLOW */ || role == 2 /* COUCH_LIGHT_NAVI_AUX */);
+        if (isPersistentCompanion && !isNewScene) {
+            if (writeIndex != p) {
+                std::copy(mSceneLighting.pointPosition[p], mSceneLighting.pointPosition[p] + 4, mSceneLighting.pointPosition[writeIndex]);
+                std::copy(mSceneLighting.pointOptics[p], mSceneLighting.pointOptics[p] + 4, mSceneLighting.pointOptics[writeIndex]);
+                mSceneLighting.pointSourceIds[writeIndex] = mSceneLighting.pointSourceIds[p];
+            }
+            writeIndex++;
+        }
+    }
+    for (uint32_t p = writeIndex; p < 32; ++p) {
+        mSceneLighting.pointPosition[p][3] = 0.0f;
+        std::fill(mSceneLighting.pointOptics[p], mSceneLighting.pointOptics[p] + 4, 0.0f);
+        mSceneLighting.pointSourceIds[p] = 0;
+    }
+    mSceneLighting.pointLightCount = writeIndex;
+
+    uint32_t nativeWrite = 0;
+    for (uint32_t i = 0; i < mSceneLighting.nativeLightCount; ++i) {
+        const auto& rec = mSceneLighting.nativeLights[i];
+        const bool isPersistentCompanion = (rec.role == 1 || rec.role == 2);
+        if (isPersistentCompanion && !isNewScene) {
+            if (nativeWrite != i) {
+                mSceneLighting.nativeLights[nativeWrite] = rec;
+            }
+            nativeWrite++;
+        }
+    }
+    mSceneLighting.nativeLightCount = nativeWrite;
+}
+
 void MaterialRegistry::CaptureIdentifiedNativePoint(const NativeLightRecord& record) {
     std::lock_guard<std::mutex> lock(mMutex);
-    for (uint32_t i = 0; i < mSceneLighting.nativeLightCount; ++i)
-        if (mSceneLighting.nativeLights[i].sourceId == record.sourceId) return;
-    if (mSceneLighting.nativeLightCount < 64) mSceneLighting.nativeLights[mSceneLighting.nativeLightCount++] = record;
-    if (!record.enabled || mSceneLighting.pointLightCount >= 32) return;
-    const uint32_t index = mSceneLighting.pointLightCount++;
-    std::copy(record.position, record.position + 3, mSceneLighting.pointPosition[index]);
-    mSceneLighting.pointPosition[index][3] = std::fabs(record.rawRadius);
-    mSceneLighting.pointOptics[index][0] = float(record.ownerId * 8u + uint32_t(record.role));
-    std::copy(record.color, record.color + 3, mSceneLighting.pointOptics[index] + 1);
-    mSceneLighting.pointSourceIds[index] = record.sourceId;
-    mSceneLighting.capturedFromScene = true;
+    for (uint32_t i = 0; i < mSceneLighting.nativeLightCount; ++i) {
+        if (mSceneLighting.nativeLights[i].sourceId == record.sourceId) {
+            mSceneLighting.nativeLights[i] = record;
+            for (uint32_t p = 0; p < mSceneLighting.pointLightCount; ++p) {
+                if (mSceneLighting.pointSourceIds[p] == record.sourceId) {
+                    if (record.enabled) {
+                        std::copy(record.position, record.position + 3, mSceneLighting.pointPosition[p]);
+                        mSceneLighting.pointPosition[p][3] = std::fabs(record.rawRadius);
+                        mSceneLighting.pointOptics[p][0] = float(record.ownerId * 8u + uint32_t(record.role));
+                        std::copy(record.color, record.color + 3, mSceneLighting.pointOptics[p] + 1);
+                    } else {
+                        mSceneLighting.pointPosition[p][3] = 0.0f;
+                        std::fill(mSceneLighting.pointOptics[p], mSceneLighting.pointOptics[p] + 4, 0.0f);
+                        mSceneLighting.pointSourceIds[p] = 0;
+                    }
+                    return;
+                }
+            }
+            if (!record.enabled) return;
+            break;
+        }
+    }
+    if (mSceneLighting.nativeLightCount < 64) {
+        bool alreadyInNative = false;
+        for (uint32_t i = 0; i < mSceneLighting.nativeLightCount; ++i) {
+            if (mSceneLighting.nativeLights[i].sourceId == record.sourceId) {
+                alreadyInNative = true;
+                break;
+            }
+        }
+        if (!alreadyInNative) {
+            mSceneLighting.nativeLights[mSceneLighting.nativeLightCount++] = record;
+        }
+    }
+    if (!record.enabled) return;
+
+    // Check if an existing inactive/zeroed slot can be reused before incrementing count
+    uint32_t targetSlot = 32;
+    for (uint32_t p = 0; p < mSceneLighting.pointLightCount; ++p) {
+        if (mSceneLighting.pointSourceIds[p] == 0 || mSceneLighting.pointPosition[p][3] <= 0.0f) {
+            targetSlot = p;
+            break;
+        }
+    }
+    if (targetSlot < 32) {
+        std::copy(record.position, record.position + 3, mSceneLighting.pointPosition[targetSlot]);
+        mSceneLighting.pointPosition[targetSlot][3] = std::fabs(record.rawRadius);
+        mSceneLighting.pointOptics[targetSlot][0] = float(record.ownerId * 8u + uint32_t(record.role));
+        std::copy(record.color, record.color + 3, mSceneLighting.pointOptics[targetSlot] + 1);
+        mSceneLighting.pointSourceIds[targetSlot] = record.sourceId;
+        mSceneLighting.capturedFromScene = true;
+    } else if (mSceneLighting.pointLightCount < 32) {
+        const uint32_t index = mSceneLighting.pointLightCount++;
+        std::copy(record.position, record.position + 3, mSceneLighting.pointPosition[index]);
+        mSceneLighting.pointPosition[index][3] = std::fabs(record.rawRadius);
+        mSceneLighting.pointOptics[index][0] = float(record.ownerId * 8u + uint32_t(record.role));
+        std::copy(record.color, record.color + 3, mSceneLighting.pointOptics[index] + 1);
+        mSceneLighting.pointSourceIds[index] = record.sourceId;
+        mSceneLighting.capturedFromScene = true;
+    } else {
+        const float newPower = (record.color[0] + record.color[1] + record.color[2]) *
+                               (record.rawRadius * record.rawRadius);
+        const bool incomingIsCompanion = (record.role == 1 || record.role == 2);
+        uint32_t lowestIndex = 0;
+        float lowestPower = std::numeric_limits<float>::max();
+        for (uint32_t p = 0; p < 32; ++p) {
+            const uint32_t packedRole = static_cast<uint32_t>(mSceneLighting.pointOptics[p][0]);
+            const uint32_t slotRole = packedRole & 7u;
+            const bool slotIsCompanion = (slotRole == 1 || slotRole == 2);
+            // Protect persistent companion lights from eviction by normal scene/torch lights
+            if (slotIsCompanion && !incomingIsCompanion) {
+                continue;
+            }
+            const float r = mSceneLighting.pointOptics[p][1];
+            const float g = mSceneLighting.pointOptics[p][2];
+            const float b = mSceneLighting.pointOptics[p][3];
+            const float rad = mSceneLighting.pointPosition[p][3];
+            const float power = (r + g + b) * (rad * rad);
+            if (power < lowestPower) {
+                lowestPower = power;
+                lowestIndex = p;
+            }
+        }
+        // Temporal hysteresis: an existing valid light slot requires at least 15%
+        // greater optical power to be evicted, preventing frame-to-frame flicker
+        // between equipotent torches or room lights. Empty/disabled slots evict at 0 threshold.
+        const float evictionThreshold = (lowestPower <= 0.0f || incomingIsCompanion) ? 0.0f : (lowestPower * 1.15f);
+        if (newPower > evictionThreshold && lowestPower < std::numeric_limits<float>::max()) {
+            std::copy(record.position, record.position + 3, mSceneLighting.pointPosition[lowestIndex]);
+            mSceneLighting.pointPosition[lowestIndex][3] = std::fabs(record.rawRadius);
+            mSceneLighting.pointOptics[lowestIndex][0] = float(record.ownerId * 8u + uint32_t(record.role));
+            std::copy(record.color, record.color + 3, mSceneLighting.pointOptics[lowestIndex] + 1);
+            mSceneLighting.pointSourceIds[lowestIndex] = record.sourceId;
+            mSceneLighting.capturedFromScene = true;
+        }
+    }
 }
 extern "C" void CouchCaptureIdentifiedNativeLight(const void* light, int type, float x, float y, float z,
     uint32_t gameFrame, float red, float green, float blue, float radius) {
@@ -808,7 +1160,8 @@ extern "C" void CouchCaptureIdentifiedNativeLight(const void* light, int type, f
         std::lock_guard<std::mutex> lock(nativeOwnerMutex);
         auto it = nativeOwners.find(light);
         if (it == nativeOwners.end()) {
-            record.sourceId = uint64_t(nextNativeOwnerId++) << 8u;
+            record.ownerId = nextNativeOwnerId++;
+            record.sourceId = (uint64_t(record.ownerId) << 8u) | uint32_t(record.role);
             it = nativeOwners.emplace(light, record).first;
         }
         record = it->second;
@@ -948,13 +1301,16 @@ void MaterialRegistry::WriteDrawCallInventory(const std::string& path) const {
     std::ofstream file(path);
     if (!file.is_open()) return;
 
-    file << "frame,draw_index,texture_hash,combine_mode,geometry_mode,other_mode_l,other_mode_h,"
+    file << "frame,draw_index,texture_hash,resource_path,combine_mode,geometry_mode,other_mode_l,other_mode_h,"
          << "prim_r,prim_g,prim_b,prim_a,env_r,env_g,env_b,env_a,fog_mul,fog_offset,"
          << "is_rect,is_2d,classification\n";
 
     size_t index = 0;
-    for (const auto& dc : mFrameDrawCalls) {
-        MaterialType matType = (index < mFrameClassifications.size()) ? mFrameClassifications[index] : MaterialType::UNKNOWN;
+    // Read the last completed frame, not the live vectors: FlushFrame() runs
+    // at end-of-frame and the scene harness dumps after that.
+    for (const auto& dc : mLastFrameDrawCalls) {
+        MaterialType matType =
+            (index < mLastFrameClassifications.size()) ? mLastFrameClassifications[index] : MaterialType::UNKNOWN;
         const char* typeName = "UNKNOWN";
         switch (matType) {
             case MaterialType::CLASSIC: typeName = "CLASSIC"; break;
@@ -978,8 +1334,17 @@ void MaterialRegistry::WriteDrawCallInventory(const std::string& path) const {
             default: typeName = "UNKNOWN"; break;
         }
 
-        file << mFrameCount << "," << index << ","
-             << dc.textureHash << "," << dc.combineMode << ","
+        // Quote the path: a resource name may contain a comma, and an
+        // unquoted comma would shift every later column in the inventory.
+        std::string quotedPath = "\"";
+        for (char c : dc.resourcePath) {
+            if (c == '"') quotedPath += "\"\"";
+            else quotedPath += c;
+        }
+        quotedPath += "\"";
+
+        file << mLastFrameCount << "," << index << ","
+             << dc.textureHash << "," << quotedPath << "," << dc.combineMode << ","
              << dc.geometryMode << "," << dc.otherModeL << "," << dc.otherModeH << ","
              << int(dc.primR) << "," << int(dc.primG) << "," << int(dc.primB) << "," << int(dc.primA) << ","
              << int(dc.envR) << "," << int(dc.envG) << "," << int(dc.envB) << "," << int(dc.envA) << ","

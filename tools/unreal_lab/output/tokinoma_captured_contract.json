@@ -1,0 +1,615 @@
+{
+  "schema_version": "1.0.0",
+  "contract_id": "OCZ_CONTRACT_TOKINOMA_ROOM_0_AUTHENTIC_CAPTURE",
+  "provenance": "GAME_GEOMETRY_CAPTURE",
+  "metadata": {
+    "source_engine": "Ocarina Couch Edition RTX (D3D12/DXR)",
+    "target_engine": "Unreal Engine 5.8.3",
+    "scene_id": "TOKINOMA_TEMPLE_OF_TIME",
+    "room_id": 0,
+    "scene_number": 67,
+    "source_archive": "oot.o2r",
+    "extraction_method": "Fast3D_DisplayList_Interpreter_Direct_Extraction",
+    "total_submeshes": 21,
+    "total_vertices": 1914,
+    "total_triangles": 638
+  },
+  "coordinate_system": {
+    "source_space": "Fast3D_OoT (Right-handed, Y-up)",
+    "target_space": "Unreal_Engine_5 (Left-handed, Z-up, cm)",
+    "scale_factor": 1.0,
+    "determinant": -1.0,
+    "winding_correction": "SWAP_INDEX_1_AND_2 (Preserves CCW FrontFace)",
+    "axis_mapping": {
+      "X_ue": "-Z_oot",
+      "Y_ue": "+X_oot",
+      "Z_ue": "+Y_oot"
+    }
+  },
+  "geometry_manifest": {
+    "usd_file": "tokinoma_captured_scene.usda",
+    "meshes": [
+      {
+        "mesh_id": "tokinoma_room_0DL_000910",
+        "resource_path": "scenes/shared/tokinoma_scene/tokinoma_room_0DL_000910",
+        "material_id": "MAT_TEMPLE_WALL_MAIN",
+        "material_type": "STONE",
+        "is_static": true,
+        "vertex_count": 24,
+        "index_count": 24,
+        "triangle_count": 8,
+        "bounding_box_ue": {
+          "min": [
+            -720.0,
+            -720.0,
+            1600.0
+          ],
+          "max": [
+            720.0,
+            720.0,
+            2000.0
+          ]
+        }
+      },
+      {
+        "mesh_id": "tokinoma_room_0DL_0010F0",
+        "resource_path": "scenes/shared/tokinoma_scene/tokinoma_room_0DL_0010F0",
+        "material_id": "MAT_TEMPLE_WALL_MAIN",
+        "material_type": "STONE",
+        "is_static": true,
+        "vertex_count": 162,
+        "index_count": 162,
+        "triangle_count": 54,
+        "bounding_box_ue": {
+          "min": [
+            -1120.0,
+            -720.0,
+            0.0
+          ],
+          "max": [
+            720.0,
+            720.0,
+            1600.0
+          ]
+        }
+      },
+      {
+        "mesh_id": "tokinoma_room_0DL_001818",
+        "resource_path": "scenes/shared/tokinoma_scene/tokinoma_room_0DL_001818",
+        "material_id": "MAT_TEMPLE_WALL_MAIN",
+        "material_type": "STONE",
+        "is_static": true,
+        "vertex_count": 108,
+        "index_count": 108,
+        "triangle_count": 36,
+        "bounding_box_ue": {
+          "min": [
+            10.0,
+            21.0,
+            0.0
+          ],
+          "max": [
+            720.0,
+            720.0,
+            1942.0
+          ]
+        }
+      },
+      {
+        "mesh_id": "tokinoma_room_0DL_001E68",
+        "resource_path": "scenes/shared/tokinoma_scene/tokinoma_room_0DL_001E68",
+        "material_id": "MAT_TEMPLE_WALL_MAIN",
+        "material_type": "STONE",
+        "is_static": true,
+        "vertex_count": 108,
+        "index_count": 108,
+        "triangle_count": 36,
+        "bounding_box_ue": {
+          "min": [
+            -720.0,
+            10.0,
+            0.0
+          ],
+          "max": [
+            -20.0,
+            720.0,
+            1942.0
+          ]
+        }
+      },
+      {
+        "mesh_id": "tokinoma_room_0DL_0024B8",
+        "resource_path": "scenes/shared/tokinoma_scene/tokinoma_room_0DL_0024B8",
+        "material_id": "MAT_TEMPLE_WALL_MAIN",
+        "material_type": "STONE",
+        "is_static": true,
+        "vertex_count": 108,
+        "index_count": 108,
+        "triangle_count": 36,
+        "bounding_box_ue": {
+          "min": [
+            -720.0,
+            -720.0,
+            0.0
+          ],
+          "max": [
+            -10.0,
+            -21.0,
+            1942.0
+          ]
+        }
+      },
+      {
+        "mesh_id": "tokinoma_room_0DL_002AF8",
+        "resource_path": "scenes/shared/tokinoma_scene/tokinoma_room_0DL_002AF8",
+        "material_id": "MAT_TEMPLE_WALL_MAIN",
+        "material_type": "STONE",
+        "is_static": true,
+        "vertex_count": 108,
+        "index_count": 108,
+        "triangle_count": 36,
+        "bounding_box_ue": {
+          "min": [
+            20.0,
+            -720.0,
+            0.0
+          ],
+          "max": [
+            720.0,
+            -10.0,
+            1942.0
+          ]
+        }
+      },
+      {
+        "mesh_id": "tokinoma_room_0DL_003668",
+        "resource_path": "scenes/shared/tokinoma_scene/tokinoma_room_0DL_003668",
+        "material_id": "MAT_TEMPLE_WALL_MAIN",
+        "material_type": "STONE",
+        "is_static": true,
+        "vertex_count": 264,
+        "index_count": 264,
+        "triangle_count": 88,
+        "bounding_box_ue": {
+          "min": [
+            -720.0,
+            -720.0,
+            636.0
+          ],
+          "max": [
+            768.0,
+            720.0,
+            1600.0
+          ]
+        }
+      },
+      {
+        "mesh_id": "tokinoma_room_0DL_003988",
+        "resource_path": "scenes/shared/tokinoma_scene/tokinoma_room_0DL_003988",
+        "material_id": "MAT_TEMPLE_WOOD_DOOR",
+        "material_type": "WOOD",
+        "is_static": true,
+        "vertex_count": 9,
+        "index_count": 9,
+        "triangle_count": 3,
+        "bounding_box_ue": {
+          "min": [
+            768.0,
+            -106.0,
+            960.0
+          ],
+          "max": [
+            768.0,
+            86.0,
+            1600.0
+          ]
+        }
+      },
+      {
+        "mesh_id": "tokinoma_room_0DL_004228",
+        "resource_path": "scenes/shared/tokinoma_scene/tokinoma_room_0DL_004228",
+        "material_id": "MAT_TEMPLE_WOOD_DOOR",
+        "material_type": "WOOD",
+        "is_static": true,
+        "vertex_count": 192,
+        "index_count": 192,
+        "triangle_count": 64,
+        "bounding_box_ue": {
+          "min": [
+            -2400.0,
+            -520.0,
+            -40.0
+          ],
+          "max": [
+            -720.0,
+            520.0,
+            638.0
+          ]
+        }
+      },
+      {
+        "mesh_id": "tokinoma_room_0DL_004848",
+        "resource_path": "scenes/shared/tokinoma_scene/tokinoma_room_0DL_004848",
+        "material_id": "MAT_TEMPLE_CARPET_RUNNER",
+        "material_type": "STONE",
+        "is_static": true,
+        "vertex_count": 39,
+        "index_count": 39,
+        "triangle_count": 13,
+        "bounding_box_ue": {
+          "min": [
+            -60.0,
+            -105.0,
+            70.0
+          ],
+          "max": [
+            58.0,
+            37.0,
+            70.0
+          ]
+        }
+      },
+      {
+        "mesh_id": "tokinoma_room_0DL_004B58",
+        "resource_path": "scenes/shared/tokinoma_scene/tokinoma_room_0DL_004B58",
+        "material_id": "MAT_TEMPLE_CARPET_RUNNER",
+        "material_type": "STONE",
+        "is_static": true,
+        "vertex_count": 27,
+        "index_count": 27,
+        "triangle_count": 9,
+        "bounding_box_ue": {
+          "min": [
+            -60.0,
+            -37.0,
+            70.0
+          ],
+          "max": [
+            120.0,
+            103.0,
+            70.0
+          ]
+        }
+      },
+      {
+        "mesh_id": "tokinoma_room_0DL_005D68",
+        "resource_path": "scenes/shared/tokinoma_scene/tokinoma_room_0DL_005D68",
+        "material_id": "MAT_TEMPLE_GLASS_STAINED",
+        "material_type": "GLASS",
+        "is_static": true,
+        "vertex_count": 408,
+        "index_count": 408,
+        "triangle_count": 136,
+        "bounding_box_ue": {
+          "min": [
+            -349.0,
+            -283.0,
+            0.0
+          ],
+          "max": [
+            326.0,
+            282.0,
+            80.0
+          ]
+        }
+      },
+      {
+        "mesh_id": "tokinoma_room_0DL_006748",
+        "resource_path": "scenes/shared/tokinoma_scene/tokinoma_room_0DL_006748",
+        "material_id": "MAT_TEMPLE_GLASS_STAINED",
+        "material_type": "GLASS",
+        "is_static": true,
+        "vertex_count": 141,
+        "index_count": 141,
+        "triangle_count": 47,
+        "bounding_box_ue": {
+          "min": [
+            -349.0,
+            -283.0,
+            10.0
+          ],
+          "max": [
+            326.0,
+            282.0,
+            60.0
+          ]
+        }
+      },
+      {
+        "mesh_id": "tokinoma_room_0DL_006AF8",
+        "resource_path": "scenes/shared/tokinoma_scene/tokinoma_room_0DL_006AF8",
+        "material_id": "MAT_TEMPLE_WINDOW_BEAM",
+        "material_type": "EMISSIVE",
+        "is_static": true,
+        "vertex_count": 33,
+        "index_count": 33,
+        "triangle_count": 11,
+        "bounding_box_ue": {
+          "min": [
+            -120.0,
+            -105.0,
+            70.0
+          ],
+          "max": [
+            58.0,
+            30.0,
+            80.0
+          ]
+        }
+      },
+      {
+        "mesh_id": "tokinoma_room_0DL_006D50",
+        "resource_path": "scenes/shared/tokinoma_scene/tokinoma_room_0DL_006D50",
+        "material_id": "MAT_TEMPLE_WINDOW_BEAM",
+        "material_type": "EMISSIVE",
+        "is_static": true,
+        "vertex_count": 15,
+        "index_count": 15,
+        "triangle_count": 5,
+        "bounding_box_ue": {
+          "min": [
+            -104.0,
+            -105.0,
+            70.0
+          ],
+          "max": [
+            120.0,
+            103.0,
+            70.0
+          ]
+        }
+      },
+      {
+        "mesh_id": "tokinoma_room_0DL_006F80",
+        "resource_path": "scenes/shared/tokinoma_scene/tokinoma_room_0DL_006F80",
+        "material_id": "MAT_TEMPLE_GLASS_CLEAR",
+        "material_type": "GLASS",
+        "is_static": true,
+        "vertex_count": 15,
+        "index_count": 15,
+        "triangle_count": 5,
+        "bounding_box_ue": {
+          "min": [
+            -60.0,
+            -53.0,
+            70.0
+          ],
+          "max": [
+            30.0,
+            36.0,
+            70.0
+          ]
+        }
+      },
+      {
+        "mesh_id": "tokinoma_room_0DL_007160",
+        "resource_path": "scenes/shared/tokinoma_scene/tokinoma_room_0DL_007160",
+        "material_id": "MAT_TEMPLE_GLASS_CLEAR",
+        "material_type": "GLASS",
+        "is_static": true,
+        "vertex_count": 6,
+        "index_count": 6,
+        "triangle_count": 2,
+        "bounding_box_ue": {
+          "min": [
+            -0.0,
+            34.0,
+            70.0
+          ],
+          "max": [
+            30.0,
+            51.0,
+            70.0
+          ]
+        }
+      },
+      {
+        "mesh_id": "tokinoma_room_0DL_007310",
+        "resource_path": "scenes/shared/tokinoma_scene/tokinoma_room_0DL_007310",
+        "material_id": "MAT_TEMPLE_METAL_GATE",
+        "material_type": "METAL",
+        "is_static": true,
+        "vertex_count": 6,
+        "index_count": 6,
+        "triangle_count": 2,
+        "bounding_box_ue": {
+          "min": [
+            -384.0,
+            -144.0,
+            0.0
+          ],
+          "max": [
+            -245.0,
+            -13.0,
+            0.0
+          ]
+        }
+      },
+      {
+        "mesh_id": "tokinoma_room_0DL_0075B0",
+        "resource_path": "scenes/shared/tokinoma_scene/tokinoma_room_0DL_0075B0",
+        "material_id": "MAT_TEMPLE_METAL_GATE",
+        "material_type": "METAL",
+        "is_static": true,
+        "vertex_count": 51,
+        "index_count": 51,
+        "triangle_count": 17,
+        "bounding_box_ue": {
+          "min": [
+            -720.0,
+            -720.0,
+            0.0
+          ],
+          "max": [
+            720.0,
+            720.0,
+            0.0
+          ]
+        }
+      },
+      {
+        "mesh_id": "tokinoma_room_0DL_007A70",
+        "resource_path": "scenes/shared/tokinoma_scene/tokinoma_room_0DL_007A70",
+        "material_id": "MAT_TEMPLE_WALL_MAIN",
+        "material_type": "STONE",
+        "is_static": true,
+        "vertex_count": 75,
+        "index_count": 75,
+        "triangle_count": 25,
+        "bounding_box_ue": {
+          "min": [
+            -251.0,
+            -228.0,
+            40.0
+          ],
+          "max": [
+            238.0,
+            227.0,
+            40.0
+          ]
+        }
+      },
+      {
+        "mesh_id": "tokinoma_room_0DL_007FD0",
+        "resource_path": "scenes/shared/tokinoma_scene/tokinoma_room_0DL_007FD0",
+        "material_id": "MAT_TEMPLE_WALL_MAIN",
+        "material_type": "STONE",
+        "is_static": true,
+        "vertex_count": 15,
+        "index_count": 15,
+        "triangle_count": 5,
+        "bounding_box_ue": {
+          "min": [
+            -252.0,
+            -134.0,
+            40.0
+          ],
+          "max": [
+            -81.0,
+            23.0,
+            40.0
+          ]
+        }
+      }
+    ]
+  },
+  "materials": {
+    "MAT_TEMPLE_WALL_MAIN": {
+      "material_id": "MAT_TEMPLE_WALL_MAIN",
+      "material_type": "STONE",
+      "roughness": 0.85,
+      "f0": 0.01,
+      "confidence": "GAME_RESOURCE_MAPPED"
+    },
+    "MAT_TEMPLE_WOOD_DOOR": {
+      "material_id": "MAT_TEMPLE_WOOD_DOOR",
+      "material_type": "WOOD",
+      "roughness": 0.85,
+      "f0": 0.01,
+      "confidence": "GAME_RESOURCE_MAPPED"
+    },
+    "MAT_TEMPLE_CARPET_RUNNER": {
+      "material_id": "MAT_TEMPLE_CARPET_RUNNER",
+      "material_type": "STONE",
+      "roughness": 0.85,
+      "f0": 0.01,
+      "confidence": "GAME_RESOURCE_MAPPED"
+    },
+    "MAT_TEMPLE_GLASS_STAINED": {
+      "material_id": "MAT_TEMPLE_GLASS_STAINED",
+      "material_type": "GLASS",
+      "roughness": 0.05,
+      "f0": 0.04,
+      "confidence": "GAME_RESOURCE_MAPPED"
+    },
+    "MAT_TEMPLE_WINDOW_BEAM": {
+      "material_id": "MAT_TEMPLE_WINDOW_BEAM",
+      "material_type": "EMISSIVE",
+      "roughness": 0.85,
+      "f0": 0.01,
+      "confidence": "GAME_RESOURCE_MAPPED"
+    },
+    "MAT_TEMPLE_GLASS_CLEAR": {
+      "material_id": "MAT_TEMPLE_GLASS_CLEAR",
+      "material_type": "GLASS",
+      "roughness": 0.05,
+      "f0": 0.04,
+      "confidence": "GAME_RESOURCE_MAPPED"
+    },
+    "MAT_TEMPLE_METAL_GATE": {
+      "material_id": "MAT_TEMPLE_METAL_GATE",
+      "material_type": "METAL",
+      "roughness": 0.85,
+      "f0": 0.01,
+      "confidence": "GAME_RESOURCE_MAPPED"
+    }
+  },
+  "lights": [
+    {
+      "light_id": "Tokinoma_Sunlight_Authentic",
+      "type": "DIRECTIONAL",
+      "source_name": "Temple_Exterior_Sun",
+      "color_rgb": [
+        1.0,
+        0.96,
+        0.88
+      ],
+      "intensity": 15000.0,
+      "direction_ue": [
+        0.25,
+        -0.65,
+        -0.71
+      ],
+      "confidence": "CALIBRATED_NATURAL_SOURCE"
+    },
+    {
+      "light_id": "Navi_Point_Light_Authentic",
+      "type": "POINT",
+      "source_name": "Navi_Actor",
+      "color_rgb": [
+        0.15,
+        0.55,
+        1.0
+      ],
+      "intensity": 2500.0,
+      "attenuation_radius": 350.0,
+      "position_oot": [
+        0.0,
+        90.0,
+        -80.0
+      ],
+      "position_ue": [
+        80.0,
+        0.0,
+        90.0
+      ],
+      "confidence": "PHYSICAL_VERIFIED"
+    }
+  ],
+  "cameras": [
+    {
+      "camera_id": "Cam_Tokinoma_Spawn",
+      "fov_degrees": 60.0,
+      "position_oot": [
+        0.0,
+        120.0,
+        300.0
+      ],
+      "position_ue": [
+        -300.0,
+        0.0,
+        120.0
+      ],
+      "target_oot": [
+        0.0,
+        40.0,
+        -150.0
+      ],
+      "target_ue": [
+        150.0,
+        0.0,
+        40.0
+      ]
+    }
+  ]
+}

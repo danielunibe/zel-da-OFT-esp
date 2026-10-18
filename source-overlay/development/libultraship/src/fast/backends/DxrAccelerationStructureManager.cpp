@@ -568,7 +568,7 @@ bool DxrAccelerationStructureManager::BuildTlas(ID3D12Device5* device5,
         // the exact mosaic relight opt-in uses bit 6.
         materialData.flags = material.flags &
             (MATERIAL_FLAG_ALBEDO_AS_HEIGHT | MATERIAL_FLAG_DXR_WINDOW_PORTAL |
-             MATERIAL_FLAG_DXR_PRIMARY_RELIGHT);
+             MATERIAL_FLAG_DXR_PRIMARY_RELIGHT | MATERIAL_FLAG_DECORATIVE_BEAM);
         const bool allVerticesHaveFast3DLitColor = !asset.vertexBuffer.empty() &&
             std::all_of(asset.vertexBuffer.begin(), asset.vertexBuffer.end(), [](const LocalVertex& vertex) {
                 return (vertex.normalState & NORMAL_FLAG_FAST3D_LIT_COLOR) != 0u;
@@ -578,26 +578,17 @@ bool DxrAccelerationStructureManager::BuildTlas(ID3D12Device5* device5,
                                       allVerticesHaveFast3DLitColor)) {
             materialData.flags |= MATERIAL_FLAG_DXR_PRIMARY_RELIGHT;
         }
-        // Static world draws bind scene lighting without an actor position, so
-        // Lights_BindPoint cannot attach Navi's native point to their Fast3D
-        // Shade. Reconstruct that point's albedo from source vertex tint in DXR
-        // while keeping the raster's pre-lit Shade for the existing game image.
-        // The Temple warp-pad top is emitted as an object draw rather than a
-        // room-static draw. Production Navi lighting uses a separate direct
-        // buffer for unlit world receivers, so the isolated receiver probe
-        // could shade this verified opaque/cutout resource while the main
-        // compositor silently skipped it without this exact opt-in.
-        const bool verifiedTriforcePlatformTop =
-            asset.resourcePath == "objects/object_mjin/gWarpPadTopTex";
-        const bool isEligiblePointReceiver = (inst.isStatic || inst.isDynamic || verifiedTriforcePlatformTop);
-        if (isEligiblePointReceiver && asset.lightOwnerId == 0 &&
-            !unknownMaterial && asset.alphaMode < 2u &&
-            materialData.materialType != static_cast<uint32_t>(MaterialType::EMISSIVE) &&
-            materialData.materialType != static_cast<uint32_t>(MaterialType::WATER) &&
-            materialData.materialType != static_cast<uint32_t>(MaterialType::GLASS) &&
-            materialData.materialType != static_cast<uint32_t>(MaterialType::SKY) &&
-            materialData.materialType != static_cast<uint32_t>(MaterialType::PROTECTED_2D)) {
-            materialData.flags |= MATERIAL_FLAG_NAVI_POINT_WORLD_RECEIVER;
+        // Static world and dynamic actor draws bind scene lighting without a baked
+        // point light attached to their Fast3D Shade. Reconstruct the surface albedo
+        // in DXR from original source tint and textures while keeping the raster's
+        // pre-lit Shade intact. Physical surface eligibility is evaluated by
+        // DxrNativeLightReceiverEligible, separating physical opaque/cutout surfaces
+        // from emitters, water, glass, sky, decorative beams, and 2D UI.
+        if ((inst.isStatic || inst.isDynamic) &&
+            DxrNativeLightReceiverEligible(static_cast<MaterialType>(materialData.materialType),
+                                           asset.alphaMode, materialData.flags, asset.lightOwnerId,
+                                           asset.lightRole, materialData.emissiveStrength)) {
+            materialData.flags |= MATERIAL_FLAG_NATIVE_LIGHT_RECEIVER;
         }
         const Fast3DAlphaClass alphaPolicyCandidate =
             ClassifyFast3DAlphaCandidate(asset.sourceOtherModeL, asset.sourceOtherModeH);
@@ -626,6 +617,45 @@ bool DxrAccelerationStructureManager::BuildTlas(ID3D12Device5* device5,
         materialData.environmentColor = packColor(asset.environmentColor);
         materialData.reserved[0] = packColor(asset.fogColor);
         materialData.reserved[1] = asset.sourceOtherModeH;
+        // OCZ-WATER-01: publish the classified aquatic optics as the final
+        // float4 of the 128-byte record (ABI v5). x is the WaterClass ordinal
+        // so the shader can key motion/blend defaults; y/z/w carry the
+        // per-instance wave scale, flow speed and absorption the classifier
+        // and console variables resolved. Non-water instances stay zero and
+        // the shader keeps the legacy optical path.
+        materialData.waterOptics[0] = 0.0f;
+        materialData.waterOptics[1] = 0.0f;
+        materialData.waterOptics[2] = 0.0f;
+        materialData.waterOptics[3] = 0.0f;
+        if (materialData.materialType == static_cast<uint32_t>(MaterialType::WATER)) {
+            const WaterProfile waterProfile = material.GetWaterProfile();
+            materialData.waterOptics[0] = static_cast<float>(WaterClassOrdinal(waterProfile.cls));
+            materialData.waterOptics[1] = waterProfile.waveScale;
+            materialData.waterOptics[2] = waterProfile.flowSpeed;
+            materialData.waterOptics[3] = waterProfile.absorption;
+            if (waterProfile.cls != WaterClass::NONE) {
+                // The record roughness is the classified microfacet value; it
+                // must reach the shader even when a material cvar overrode the
+                // registry default after classification.
+                materialData.roughness = waterProfile.roughness;
+            }
+        }
+        // OCZ-LAVA-01: molten optics reuse the same float4 slot the water
+        // profile uses, keyed by material type, so no record resize and no
+        // ABI bump are required. x is the LavaClass ordinal; y/z/w carry the
+        // per-instance flow speed, viscosity and crust amount. Non-lava
+        // instances are already zero from the block above, so water and lava
+        // can never both claim the slot on one record.
+        if (materialData.materialType == static_cast<uint32_t>(MaterialType::LAVA)) {
+            const LavaProfile lavaProfile = material.GetLavaProfile();
+            materialData.waterOptics[0] = static_cast<float>(LavaClassOrdinal(lavaProfile.cls));
+            materialData.waterOptics[1] = lavaProfile.flowSpeed;
+            materialData.waterOptics[2] = lavaProfile.viscosity;
+            materialData.waterOptics[3] = lavaProfile.crustAmount;
+            if (lavaProfile.cls != LavaClass::NONE) {
+                materialData.roughness = lavaProfile.roughness;
+            }
+        }
 
         // The same resource hash can name several raster tile/palette variants.
         // Use the exact descriptor captured with this draw, including cache hits.
@@ -704,12 +734,28 @@ bool DxrAccelerationStructureManager::BuildTlas(ID3D12Device5* device5,
         const uint32_t sourceRecordIndex = static_cast<uint32_t>(materialRecords.size());
         sourceFrame.identities.push_back({ inst.id, asset.id, asset.materialId,
             asset.sourceGeometryMode, asset.lightOwnerId, asset.lightRole, asset.resourcePath });
+        // OCZ-LAVA-02: real LAVA-classified geometry also becomes an emitter
+        // triangle set so the lighting pass can sample actual melt surfaces.
+        // The sentinel owner keeps these triangles out of the Navi pilot path.
+        uint32_t emitterCaptureOwner = 0u;
         if (asset.lightOwnerId != 0 && materialData.emissiveStrength > 0.0f &&
             asset.lightRole == COUCH_LIGHT_NAVI_GLOW) {
+            emitterCaptureOwner = asset.lightOwnerId;
+        } else if (materialData.materialType == static_cast<uint32_t>(MaterialType::LAVA) &&
+                   std::isfinite(materialData.waterOptics[0]) && materialData.waterOptics[0] > 0.0f) {
+            emitterCaptureOwner = kDxrLavaEmitterOwnerId;
+        }
+        if (emitterCaptureOwner != 0u) {
             // Sample the actual captured mesh, with the EXACT affine transform used by TLAS.
+            // Lava pools can be large; a soft cap bounds TLAS-build cost while the
+            // area-weighted sampler still represents the whole pool fairly.
+            constexpr uint32_t kMaxLavaEmittersPerFrame = 4096u;
+            uint32_t capturedLavaThisFrame = 0u;
             for (uint32_t tri = 0; tri + 2 < asset.indexBuffer.size(); tri += 3) {
+                if (emitterCaptureOwner == kDxrLavaEmitterOwnerId &&
+                    capturedLavaThisFrame >= kMaxLavaEmittersPerFrame) break;
                 DxrEmitterTriangle emitter{};
-                emitter.ownerId = asset.lightOwnerId;
+                emitter.ownerId = emitterCaptureOwner;
                 emitter.recordIndex = sourceRecordIndex;
                 emitter.primitiveIndex = tri / 3;
                 bool valid = true;
@@ -732,8 +778,10 @@ bool DxrAccelerationStructureManager::BuildTlas(ID3D12Device5* device5,
                 cross[1] = e1[2]*e2[0] - e1[0]*e2[2];
                 cross[2] = e1[0]*e2[1] - e1[1]*e2[0];
                 emitter.area = 0.5f * std::sqrt(cross[0]*cross[0]+cross[1]*cross[1]+cross[2]*cross[2]);
-                if (std::isfinite(emitter.area) && emitter.area > 1.0e-6f)
+                if (std::isfinite(emitter.area) && emitter.area > 1.0e-6f) {
                     sourceFrame.emitters.push_back(emitter);
+                    if (emitterCaptureOwner == kDxrLavaEmitterOwnerId) ++capturedLavaThisFrame;
+                }
             }
         }
         const std::string alphaPolicyStateKey = std::to_string(asset.sourceOtherModeL) + ":" +

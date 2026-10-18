@@ -6,6 +6,9 @@
 #include <vector>
 #include <mutex>
 #include "fast/NativeLightContract.h"
+#include "fast/SemanticReconstructionContract.h"
+#include "fast/WaterMaterialContract.h"
+#include "fast/LavaMaterialContract.h"
 
 namespace Fast {
 
@@ -59,6 +62,43 @@ inline constexpr bool DxrPrimaryRelightEligible(MaterialType type, uint32_t alph
     }
 }
 
+// Eligible physical surfaces (opaque/cutout architecture, terrain, props, characters)
+// can receive direct native point lighting without pre-baked Fast3D Shade interference.
+// Excludes non-physical surfaces: emitters (self-lighting), translucent materials,
+// water, glass, sky, decorative light beams, and 2D UI.
+inline constexpr bool DxrNativeLightReceiverEligible(MaterialType type, uint32_t alphaMode,
+                                                     uint32_t flags, uint32_t lightOwnerId = 0,
+                                                     uint32_t lightRole = 0, float emissiveStrength = 0.0f) {
+    if (alphaMode >= 2u) return false;
+    if ((flags & (1u << 11)) != 0) return false; // MATERIAL_FLAG_DECORATIVE_BEAM
+
+    // Exclude primary light emitters (e.g. fairy glow billboard, torch flame)
+    // from being treated as standard diffuse/specular receivers of point lights
+    const bool isEmitter = (emissiveStrength > 0.0f) ||
+                           (lightRole == 1 /* COUCH_LIGHT_NAVI_GLOW */) ||
+                           (lightRole == 3 /* COUCH_LIGHT_FAIRY_GLOW */);
+    if (isEmitter) return false;
+
+    switch (type) {
+        case MaterialType::STONE:
+        case MaterialType::WOOD:
+        case MaterialType::METAL:
+        case MaterialType::FABRIC:
+        case MaterialType::EARTH:
+        case MaterialType::GRASS:
+        case MaterialType::FOLIAGE:
+        case MaterialType::SAND:
+        case MaterialType::ICE:
+        case MaterialType::CHARACTER:
+        case MaterialType::CERAMIC:
+        case MaterialType::CLASSIC:
+        case MaterialType::GENERIC_MATTE:
+            return true;
+        default:
+            return false;
+    }
+}
+
 // Classic and Enhanced preserve the original presentation. The two RTX tiers
 // require a supported DXR adapter; path lighting is an opt-in experimental
 // profile exposed in the graphics settings.
@@ -80,6 +120,76 @@ struct MaterialDefinition {
     float wetness = 0.0f;
     float subsurfaceHint = 0.0f;
     uint32_t flags = 0;
+    // OCZ-WATER-01. Only meaningful when type == WATER. Appended at the end so
+    // every existing aggregate initializer in MaterialRulesPilot.h keeps its
+    // positional meaning. cls == WaterClass::NONE keeps the legacy optical
+    // path and never replaces the original Fast3D water pixels.
+    uint8_t waterClass = 0;
+    float waterWaveScale = 0.0f;
+    float waterFlowSpeed = 0.0f;
+    float waterAbsorption = 0.0f;
+    float waterArtWeight = 0.0f;
+    float waterOpticsBlend = 0.0f;
+    float waterRoughness = 0.0f;
+
+    // OCZ-LAVA-01. Only meaningful when type == LAVA. Appended after the water
+    // block so every existing aggregate initializer in MaterialRulesPilot.h
+    // keeps its positional meaning. cls == LavaClass::NONE keeps the legacy
+    // optical path and never replaces the original Fast3D lava pixels.
+    uint8_t lavaClass = 0;
+    float lavaFlowSpeed = 0.0f;
+    float lavaViscosity = 0.0f;
+    float lavaCrustAmount = 0.0f;
+    float lavaEmissionGain = 0.0f;
+    float lavaArtWeight = 0.0f;
+    float lavaOpticsBlend = 0.0f;
+    float lavaRoughness = 0.0f;
+
+    WaterClass GetWaterClass() const { return static_cast<WaterClass>(waterClass); }
+    WaterProfile GetWaterProfile() const {
+        WaterProfile profile;
+        profile.cls = GetWaterClass();
+        profile.waveScale = waterWaveScale;
+        profile.flowSpeed = waterFlowSpeed;
+        profile.absorption = waterAbsorption;
+        profile.artWeight = waterArtWeight;
+        profile.opticsBlend = waterOpticsBlend;
+        profile.roughness = waterRoughness;
+        return profile;
+    }
+    void SetWaterProfile(const WaterProfile& profile) {
+        waterClass = static_cast<uint8_t>(profile.cls);
+        waterWaveScale = profile.waveScale;
+        waterFlowSpeed = profile.flowSpeed;
+        waterAbsorption = profile.absorption;
+        waterArtWeight = profile.artWeight;
+        waterOpticsBlend = profile.opticsBlend;
+        waterRoughness = profile.roughness;
+    }
+
+    LavaClass GetLavaClass() const { return static_cast<LavaClass>(lavaClass); }
+    LavaProfile GetLavaProfile() const {
+        LavaProfile profile;
+        profile.cls = GetLavaClass();
+        profile.flowSpeed = lavaFlowSpeed;
+        profile.viscosity = lavaViscosity;
+        profile.crustAmount = lavaCrustAmount;
+        profile.emissionGain = lavaEmissionGain;
+        profile.artWeight = lavaArtWeight;
+        profile.opticsBlend = lavaOpticsBlend;
+        profile.roughness = lavaRoughness;
+        return profile;
+    }
+    void SetLavaProfile(const LavaProfile& profile) {
+        lavaClass = static_cast<uint8_t>(profile.cls);
+        lavaFlowSpeed = profile.flowSpeed;
+        lavaViscosity = profile.viscosity;
+        lavaCrustAmount = profile.crustAmount;
+        lavaEmissionGain = profile.emissionGain;
+        lavaArtWeight = profile.artWeight;
+        lavaOpticsBlend = profile.opticsBlend;
+        lavaRoughness = profile.roughness;
+    }
 };
 
 inline constexpr uint32_t MATERIAL_FLAG_ALBEDO_TEXTURE_VALID = 1u << 0;
@@ -93,10 +203,14 @@ inline constexpr uint32_t MATERIAL_FLAG_DXR_WINDOW_PORTAL = 1u << 5;
 // with the captured scene-light solution in HYBRID_RT when their combiner is
 // supported and the vertex records confirm G_LIGHTING provenance.
 inline constexpr uint32_t MATERIAL_FLAG_DXR_PRIMARY_RELIGHT = 1u << 6;
-// Static world receiver whose source albedo can be reconstructed without the
+// Physical world receiver whose source albedo can be reconstructed without the
 // native vertex lighting already baked into Fast3D Shade.
-inline constexpr uint32_t MATERIAL_FLAG_NAVI_POINT_WORLD_RECEIVER = 1u << 10;
+inline constexpr uint32_t MATERIAL_FLAG_NATIVE_LIGHT_RECEIVER = 1u << 10;
+inline constexpr uint32_t MATERIAL_FLAG_NAVI_POINT_WORLD_RECEIVER = MATERIAL_FLAG_NATIVE_LIGHT_RECEIVER;
 inline constexpr uint32_t MATERIAL_FLAG_SECOND_ALBEDO_TEXTURE_VALID = 1u << 7;
+// N64 additive clerestory window sunbeams / decorative beams. Must not occlude
+// direct light, must not cast solid shadows, and must not render as opaque white blocks.
+inline constexpr uint32_t MATERIAL_FLAG_DECORATIVE_BEAM = 1u << 11;
 // Internal classification hint for source-verified exact pilot entries. It is
 // removed before material data is published to DXR.
 inline constexpr uint32_t MATERIAL_FLAG_EXACT_PILOT_TYPE = 1u << 2;
@@ -232,6 +346,8 @@ public:
     void BeginLightingFrame();
     void SetCurrentGameFrame(uint64_t gameFrame);
     void CaptureIdentifiedNativePoint(const NativeLightRecord& record);
+    void ForgetNativeLight(uint32_t ownerId, uint64_t sourceId = 0);
+    void ClearLightsOnRoomChange(bool isNewScene);
     void CaptureSceneLighting(const float worldDirection[3], const float directionalColor[3],
                               const float ambientColor[3], const float pointPosition[32][4],
                               const float pointOptics[32][4], uint32_t pointLightCount,
@@ -322,6 +438,14 @@ private:
     std::unordered_map<uint64_t, uint32_t> mTextureSrvIndices;
     std::vector<DrawCallInfo> mFrameDrawCalls;
     std::vector<MaterialType> mFrameClassifications;
+    // OCZ-LAVA-01: FlushFrame() clears the live vectors at end-of-frame, so a
+    // dump issued after the frame (as the scene harness does at capture
+    // complete) would always read an empty list. FlushFrame() moves the live
+    // vectors here instead of discarding them, and WriteDrawCallInventory()
+    // reads this snapshot.
+    std::vector<DrawCallInfo> mLastFrameDrawCalls;
+    std::vector<MaterialType> mLastFrameClassifications;
+    uint64_t mLastFrameCount = 0;
     uint64_t mFrameCount = 0;
 
     // Running metrics

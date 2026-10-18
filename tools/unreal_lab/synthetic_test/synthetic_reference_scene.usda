@@ -1,0 +1,151 @@
+#usda 1.0
+(
+    defaultPrim = "OCZ_PhysicalReference"
+    metersPerUnit = 0.01
+    upAxis = "Z"
+)
+
+def Xform "OCZ_PhysicalReference" (
+    kind = "assembly"
+)
+{
+    def Scope "Materials"
+    {
+        def Material "Mat_GroundStoneMatte"
+        {
+            token outputs:surface.connect = </OCZ_PhysicalReference/Materials/Mat_GroundStoneMatte/PBRShader.outputs:surface>
+            def Shader "PBRShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.45, 0.45, 0.42)
+                float inputs:roughness = 0.85
+                float inputs:metallic = 0.0
+                float inputs:specular = 0.25
+                token outputs:surface
+            }
+        }
+
+        def Material "Mat_BlockCeramic"
+        {
+            token outputs:surface.connect = </OCZ_PhysicalReference/Materials/Mat_BlockCeramic/PBRShader.outputs:surface>
+            def Shader "PBRShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.15, 0.55, 0.85)
+                float inputs:roughness = 0.28
+                float inputs:metallic = 0.0
+                float inputs:specular = 0.90
+                token outputs:surface
+            }
+        }
+    }
+
+    def Scope "Geometry"
+    {
+        def Mesh "GroundPlane" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </OCZ_PhysicalReference/Materials/Mat_GroundStoneMatte>
+            int[] faceVertexCounts = [3, 3]
+            int[] faceVertexIndices = [0, 1, 2, 0, 2, 3]
+            point3f[] points = [
+                (-200, -200, 0),
+                (-200, 200, 0),
+                (200, 200, 0),
+                (200, -200, 0)
+            ]
+            normal3f[] normals = [
+                (0, 0, 1),
+                (0, 0, 1),
+                (0, 0, 1),
+                (0, 0, 1)
+            ] (
+                interpolation = "vertex"
+            )
+            texCoord2f[] primvars:st = [
+                (0, 0),
+                (1, 0),
+                (1, 1),
+                (0, 1)
+            ] (
+                interpolation = "vertex"
+            )
+        }
+
+        def Mesh "CeramicBlock" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </OCZ_PhysicalReference/Materials/Mat_BlockCeramic>
+            int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+            int[] faceVertexIndices = [
+                0, 1, 2, 3,     # Top (+Z)
+                4, 5, 6, 7,     # Bottom (-Z)
+                8, 9, 10, 11,   # Front (+X)
+                12, 13, 14, 15, # Back (-X)
+                16, 17, 18, 19, # Right (+Y)
+                20, 21, 22, 23  # Left (-Y)
+            ]
+            point3f[] points = [
+                # Top (+Z)
+                (50.0, -30.0, 60.0), (110.0, -30.0, 60.0), (110.0, 30.0, 60.0), (50.0, 30.0, 60.0),
+                # Bottom (-Z)
+                (50.0, 30.0, 0.0), (110.0, 30.0, 0.0), (110.0, -30.0, 0.0), (50.0, -30.0, 0.0),
+                # Front (+X)
+                (110.0, -30.0, 0.0), (110.0, 30.0, 0.0), (110.0, 30.0, 60.0), (110.0, -30.0, 60.0),
+                # Back (-X)
+                (50.0, 30.0, 0.0), (50.0, -30.0, 0.0), (50.0, -30.0, 60.0), (50.0, 30.0, 60.0),
+                # Right (+Y)
+                (50.0, 30.0, 0.0), (110.0, 30.0, 0.0), (110.0, 30.0, 60.0), (50.0, 30.0, 60.0),
+                # Left (-Y)
+                (110.0, -30.0, 0.0), (50.0, -30.0, 0.0), (50.0, -30.0, 60.0), (110.0, -30.0, 60.0)
+            ]
+            normal3f[] normals = [
+                (0, 0, 1), (0, 0, 1), (0, 0, 1), (0, 0, 1),
+                (0, 0, -1), (0, 0, -1), (0, 0, -1), (0, 0, -1),
+                (1, 0, 0), (1, 0, 0), (1, 0, 0), (1, 0, 0),
+                (-1, 0, 0), (-1, 0, 0), (-1, 0, 0), (-1, 0, 0),
+                (0, 1, 0), (0, 1, 0), (0, 1, 0), (0, 1, 0),
+                (0, -1, 0), (0, -1, 0), (0, -1, 0), (0, -1, 0)
+            ] (
+                interpolation = "vertex"
+            )
+        }
+    }
+
+    def Scope "Lights"
+    {
+        def SphereLight "NaviPointLight"
+        {
+            float inputs:intensity = 2500.0
+            float inputs:radius = 15.0
+            color3f inputs:color = (0.15, 0.55, 1.0)
+            double3 xformOp:translate = (80.0, 0.0, 90.0)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def DistantLight "SunDirectionalLight"
+        {
+            float inputs:intensity = 10000.0
+            color3f inputs:color = (1.0, 0.98, 0.90)
+            float inputs:angle = 0.53
+            float3 xformOp:rotateXYZ = (-45.0, 0.0, 0.0)
+            uniform token[] xformOpOrder = ["xformOp:rotateXYZ"]
+        }
+    }
+
+    def Scope "Cameras"
+    {
+        def Camera "ReferenceCamera"
+        {
+            float focalLength = 35.0
+            float horizontalAperture = 36.0
+            float verticalAperture = 24.0
+            float2 clippingRange = (10.0, 12800.0)
+            double3 xformOp:translate = (-150.0, 0.0, 100.0)
+            float3 xformOp:rotateXYZ = (-15.0, 0.0, 0.0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ"]
+        }
+    }
+}

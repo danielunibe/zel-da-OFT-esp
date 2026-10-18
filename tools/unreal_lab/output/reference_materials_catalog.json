@@ -1,0 +1,138 @@
+{
+  "MM_OCZ_Stone": {
+    "type": "STONE",
+    "description": "Piedra mate de muros y columnas del Templo del Tiempo",
+    "base_color": [
+      0.45,
+      0.45,
+      0.42
+    ],
+    "roughness": 0.85,
+    "metallic": 0.0,
+    "f0": 0.01,
+    "specular_ue": 0.125,
+    "ior": 1.0,
+    "emissive": 0.0,
+    "blend_mode": "BLEND_Opaque",
+    "confidence": "PHYSICAL_VERIFIED"
+  },
+  "MM_OCZ_Ceramic": {
+    "type": "CERAMIC",
+    "description": "Mosaico pulido / suelo esmaltado del Templo del Tiempo",
+    "base_color": [
+      0.15,
+      0.55,
+      0.85
+    ],
+    "roughness": 0.28,
+    "metallic": 0.0,
+    "f0": 0.036,
+    "specular_ue": 0.44999999999999996,
+    "ior": 1.48,
+    "emissive": 0.0,
+    "blend_mode": "BLEND_Opaque",
+    "confidence": "PHYSICAL_VERIFIED"
+  },
+  "MM_OCZ_Wood": {
+    "type": "WOOD",
+    "description": "Madera de puertas, vigas y soportes",
+    "base_color": [
+      0.35,
+      0.22,
+      0.12
+    ],
+    "roughness": 0.65,
+    "metallic": 0.0,
+    "f0": 0.02,
+    "specular_ue": 0.25,
+    "ior": 1.0,
+    "emissive": 0.0,
+    "blend_mode": "BLEND_Opaque",
+    "confidence": "PHYSICAL_VERIFIED"
+  },
+  "MM_OCZ_Metal": {
+    "type": "METAL",
+    "description": "Hierro / Bronce / Espada Maestra",
+    "base_color": [
+      0.75,
+      0.75,
+      0.78
+    ],
+    "roughness": 0.22,
+    "metallic": 1.0,
+    "f0": 0.7,
+    "specular_ue": 1.0,
+    "ior": 2.5,
+    "emissive": 0.0,
+    "blend_mode": "BLEND_Opaque",
+    "confidence": "PHYSICAL_VERIFIED"
+  },
+  "MM_OCZ_Water": {
+    "type": "WATER",
+    "description": "Agua de manantiales y Lago Hylia",
+    "base_color": [
+      0.08,
+      0.25,
+      0.45
+    ],
+    "roughness": 0.03,
+    "metallic": 0.0,
+    "f0": 0.02,
+    "specular_ue": 0.25,
+    "ior": 1.333,
+    "emissive": 0.0,
+    "blend_mode": "BLEND_Translucent",
+    "confidence": "PHYSICAL_VERIFIED"
+  },
+  "MM_OCZ_Glass": {
+    "type": "GLASS",
+    "description": "Vidrieras y cristal transparente",
+    "base_color": [
+      0.95,
+      0.95,
+      0.98
+    ],
+    "roughness": 0.05,
+    "metallic": 0.0,
+    "f0": 0.04,
+    "specular_ue": 0.5,
+    "ior": 1.52,
+    "emissive": 0.0,
+    "blend_mode": "BLEND_Translucent",
+    "confidence": "PHYSICAL_VERIFIED"
+  },
+  "MM_OCZ_Emissive": {
+    "type": "EMISSIVE",
+    "description": "Aura de Navi / Fuego / Gemas luminosas",
+    "base_color": [
+      0.15,
+      0.55,
+      1.0
+    ],
+    "roughness": 0.5,
+    "metallic": 0.0,
+    "f0": 0.04,
+    "specular_ue": 0.5,
+    "ior": 1.0,
+    "emissive": 2500.0,
+    "blend_mode": "BLEND_Additive",
+    "confidence": "PHYSICAL_VERIFIED"
+  },
+  "MM_OCZ_Generic_PBR": {
+    "type": "GENERIC_PBR",
+    "description": "Material configurable por contrato",
+    "base_color": [
+      0.5,
+      0.5,
+      0.5
+    ],
+    "roughness": 0.5,
+    "metallic": 0.0,
+    "f0": 0.04,
+    "specular_ue": 0.5,
+    "ior": 1.0,
+    "emissive": 0.0,
+    "blend_mode": "BLEND_Opaque",
+    "confidence": "INFERRED"
+  }
+}

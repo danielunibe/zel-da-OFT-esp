@@ -1547,16 +1547,9 @@ void EnElf_Draw(Actor* thisx, PlayState* play) {
             envAlpha = (this->timer * 50) & 0x1FF;
             envAlpha = (envAlpha > 255) ? 511 - envAlpha : envAlpha;
 
-            if (thisx->params == FAIRY_NAVI) {
-                // Ensure Navi's characteristic spherical glow aura never vanishes
-                if (envAlpha < 140) {
-                    envAlpha = 140;
-                }
-            }
-
             alphaScale = this->disappearTimer < 0 ? (this->disappearTimer * (7.0f / 6000.0f)) + 1.0f : 1.0f;
-            if (thisx->params == FAIRY_NAVI && alphaScale < 1.0f) {
-                alphaScale = 1.0f;
+            if (alphaScale < 0.0f) {
+                alphaScale = 0.0f;
             }
 
             gSPSegment(POLY_XLU_DISP++, 0x08, dListHead);

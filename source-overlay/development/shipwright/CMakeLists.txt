@@ -194,6 +194,7 @@ if(WIN32)
             -DxcPath "${COUCH_DXC}" -OutputPath "${COUCH_DXR_HEADER}"
             -TargetProfile "${COUCH_DXR_TARGET_PROFILE}" -HlslVersion "${COUCH_DXR_HLSL_VERSION}"
         DEPENDS "${CMAKE_SOURCE_DIR}/libultraship/src/fast/shaders/dxr_shadow.hlsl"
+                "${CMAKE_SOURCE_DIR}/libultraship/src/fast/shaders/WaterMaterial.hlsli"
                 "${CMAKE_SOURCE_DIR}/scripts/Generate-DxrShadowBytecode.ps1"
                 "${COUCH_DXC}"
         VERBATIM)

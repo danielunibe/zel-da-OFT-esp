@@ -317,6 +317,7 @@ void PersistentScene::IngestCapturedDraw(const CapturedDraw& draw,
         const float uv1[2] = { vertex.u1, vertex.v1 };
         assetHash = FNV1a64Local(uv1, sizeof(uv1), assetHash);
         assetHash = FNV1a64Local(&vertex.color, sizeof(vertex.color), assetHash);
+        assetHash = FNV1a64Local(&vertex.sourceColor, sizeof(vertex.sourceColor), assetHash);
         const uint8_t state[5] = { vertex.normalState, vertex.sourceAlpha, vertex.recordLoadedAlpha,
                                    vertex.capturedAlpha, vertex.fogMode };
         assetHash = FNV1a64Local(state, sizeof(state), assetHash);

@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "runId": "20261016_104412_598_GORON_CITY_DARUNIA_TORCHES_NORMAL",
+  "scenarioId": "GORON_CITY_DARUNIA_TORCHES",
+  "viewId": "VIEW_00_DEFAULT_SPAWN_CAMERA",
+  "truthMode": "NORMAL",
+  "backendTruthMode": 0,
+  "executableIdentity": {
+    "path": "C:\\Users\\danie\\Desktop\\Zeldacouch\\zel-da-OFT-esp-main (3)\\zel-da-OFT-esp-main\\build\\OCZ_RTX_16_VERIFIED_RC2\\soh.exe",
+    "sizeBytes": 34512896,
+    "sha256": "B7F834532C44593F22E71B39108D54E070AFBDE55CCC6A44E30987A94D624BE6"
+  },
+  "rendererBackend": "D3D12",
+  "visualProfile": 2,
+  "visualProfileName": "HYBRID_RT",
+  "d3d12DebugLayerRequested": false,
+  "background": false,
+  "primaryGateCounters": false,
+  "diagnosticAnyHitAlphaBypass": false,
+  "dxrMatrixTrace": false,
+  "visualAblation": false,
+  "monitorCapture": false,
+  "rtxQuality": 3,
+  "presentation": "NORMAL_DXGI",
+  "entrance": "0x1C1",
+  "scene": "0x62",
+  "room": 1,
+  "audioOutput": "MUTED_NULL_BACKEND",
+  "originalSaveRoot": "C:\\Users\\danie\\Desktop\\Zeldacouch\\zel-da-OFT-esp-main (3)\\zel-da-OFT-esp-main\\runtime\\build-test\\Save",
+  "sandboxSaveRoot": "C:\\Users\\danie\\Desktop\\Zeldacouch\\zel-da-OFT-esp-main (3)\\zel-da-OFT-esp-main\\source-overlay\\reports\\scene_harness\\20261016_104412_598_GORON_CITY_DARUNIA_TORCHES_NORMAL\\sandbox\\Save",
+  "originalHashesBefore": {},
+  "saveMode": "TEMP_DEBUG_SAVE",
+  "assetHashes": {
+    "es.o2r": "D9037A8A4086D0073F90CC297FCBFE558A78AC3758F27B11A250537883FD990D",
+    "oot.o2r": "6FC0211FD1EA450FC41AA0991C0ABFD73FF61B81DB39039033EDFDB2653D9E4B",
+    "soh.o2r": "CBF3227F7C52A595C211B60D4937C6A0CE0DF691511FEC526E4AD509E9A5EB17"
+  },
+  "gpuLoadAtLaunch": {
+    "Installed": true,
+    "Available": true,
+    "Error": null,
+    "MemoryTotalMiB": 8192,
+    "MemoryUsedMiB": 1901,
+    "UtilizationPercent": 22
+  },
+  "newOtrGenerated": false
+}

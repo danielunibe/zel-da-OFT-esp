@@ -46,7 +46,30 @@ if (-not (Test-Path -LiteralPath $shaderPath)) { throw "DXR shader source not fo
 
 $shaderBytes = [System.IO.File]::ReadAllBytes($shaderPath)
 $shaderSource = [System.Text.Encoding]::UTF8.GetString($shaderBytes)
-$shaderHashBefore = Get-Sha256Bytes $shaderBytes
+# The library #includes the per-material models. Hash them together with the
+# main source so an edit to WaterMaterial.hlsli or LavaMaterial.hlsli also
+# invalidates the baked bytecode instead of shipping a stale DXIL.
+$shaderIncludeNames = @('WaterMaterial.hlsli', 'LavaMaterial.hlsli')
+$shaderDirectory = Split-Path -Parent $shaderPath
+function Get-DxrShaderSourceHash {
+    $parts = [System.Collections.Generic.List[string]]::new()
+    $parts.Add([System.Convert]::ToBase64String([System.IO.File]::ReadAllBytes($shaderPath)))
+    foreach ($includeName in $script:shaderIncludeNames) {
+        $includePath = Join-Path $script:shaderDirectory $includeName
+        $parts.Add([System.Convert]::ToBase64String([System.IO.File]::ReadAllBytes($includePath)))
+    }
+    return Get-Sha256Bytes ([System.Text.Encoding]::UTF8.GetBytes(($parts -join '|')))
+}
+foreach ($includeName in $shaderIncludeNames) {
+    $includePath = Join-Path $shaderDirectory $includeName
+    if (-not (Test-Path -LiteralPath $includePath)) {
+        throw "The DXR library is missing required include: $includeName"
+    }
+    if ($shaderSource -notmatch [regex]::Escape("#include `"$includeName`"")) {
+        throw "dxr_shadow.hlsl does not include $includeName."
+    }
+}
+$shaderHashBefore = Get-DxrShaderSourceHash
 $libRoot = Join-Path $repoRoot 'libultraship'
 $layoutPath = Join-Path $libRoot 'include\fast\backends\DxrAccelerationStructureManager.h'
 $shadowRendererPath = Join-Path $libRoot 'src\fast\backends\DxrShadowRenderer.cpp'
@@ -62,14 +85,16 @@ if (-not $cpuAbiMarker.Success -or [uint32]$cpuAbiMarker.Groups[1].Value -ne $sh
     throw 'The DXR HLSL ABI marker does not match the CPU ABI declaration.'
 }
 if ($layoutSource -notmatch 'sizeof\(DxrHitVertex\)\s*==\s*56' -or
-    $layoutSource -notmatch 'sizeof\(DxrInstanceMaterialData\)\s*==\s*112' -or
+    $layoutSource -notmatch 'sizeof\(DxrInstanceMaterialData\)\s*==\s*128' -or
     $layoutSource -notmatch 'offsetof\(DxrInstanceMaterialData,\s*textureIndex1\)\s*==\s*80' -or
     $layoutSource -notmatch 'offsetof\(DxrInstanceMaterialData,\s*primitiveColor\)\s*==\s*96' -or
-    $shaderSource -notmatch 'instanceIndex\s*\*\s*112u' -or
+    $layoutSource -notmatch 'offsetof\(DxrInstanceMaterialData,\s*waterOptics\)\s*==\s*112' -or
+    $shaderSource -notmatch 'instanceIndex\s*\*\s*128u' -or
     $shaderSource -notmatch 'vertexIndex\s*\*\s*56u' -or
     $shaderSource -notmatch 'Load4\(address\s*\+\s*80u\)' -or
-    $shaderSource -notmatch 'Load4\(address\s*\+\s*96u\)') {
-    throw 'CPU and HLSL hit-vertex/material record strides do not match ABI v3.'
+    $shaderSource -notmatch 'Load4\(address\s*\+\s*96u\)' -or
+    $shaderSource -notmatch 'Load4\(address\s*\+\s*112u\)') {
+    throw 'CPU and HLSL hit-vertex/material record strides do not match ABI v5.'
 }
 
 $requiredExports = @('RayGenShadow', 'ClosestHitShadow', 'AnyHitShadow',
@@ -92,7 +117,7 @@ $tempHeader = Join-Path $headerDirectory (([System.IO.Path]::GetFileName($header
 try {
     & $DxcPath -T $TargetProfile -HV $HlslVersion -Fo $tempDxil $shaderPath
     if ($LASTEXITCODE -ne 0) { throw "dxc.exe failed with exit code $LASTEXITCODE" }
-    if ((Get-Sha256File $shaderPath) -cne $shaderHashBefore) {
+    if ((Get-DxrShaderSourceHash) -cne $shaderHashBefore) {
         throw 'The DXR shader changed during compilation; no bytecode header was published.'
     }
 

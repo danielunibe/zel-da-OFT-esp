@@ -492,8 +492,13 @@ function Compare-PngStagePair([string]$RunRoot, [string]$StageA, [string]$StageB
         stageB = $StageB
         pngDecode = 'system-drawing'
         mae = $null
+        rgbMae = $null
+        alphaMae = $null
+        rgbaMae = $null
         differingPixels = $null
         differingPixelsPercent = $null
+        differingPixelsRgb = $null
+        differingPixelsRgbPercent = $null
         totalPixels = $null
     }
     $metaA = if ($null -ne $StageMetadata -and $null -ne $StageMetadata[$StageA]) { $StageMetadata[$StageA] } else { $null }
@@ -539,24 +544,42 @@ function Compare-PngStagePair([string]$RunRoot, [string]$StageA, [string]$StageB
         Add-Failure "${label}: payload sizes do not match"
         return $metrics
     }
-    $sum = 0.0
-    for ($i = 0; $i -lt $bytesA.Length; $i++) {
-        $sum += [Math]::Abs([int]$bytesA[$i] - [int]$bytesB[$i])
-    }
-    if ($bytesA.Length -gt 0) { $metrics.mae = $sum / $bytesA.Length } else { $metrics.mae = 0.0 }
     if ($null -ne $metrics.totalPixels) {
         $pixelCount = [long]$metrics.totalPixels
+        $sumRgb = 0.0
+        $sumAlpha = 0.0
+        $sumRgba = 0.0
         $differing = 0
+        $differingRgb = 0
         for ($pixel = 0; $pixel -lt $pixelCount; $pixel++) {
             $offset = [int]($pixel * 4)
-            $pixelDiffers = $false
-            for ($channel = 0; $channel -lt 4; $channel++) {
-                if ($bytesA[$offset + $channel] -ne $bytesB[$offset + $channel]) { $pixelDiffers = $true; break }
+            $diffRgb = $false
+            for ($channel = 0; $channel -lt 3; $channel++) {
+                $delta = [Math]::Abs([int]$bytesA[$offset + $channel] - [int]$bytesB[$offset + $channel])
+                $sumRgb += $delta
+                $sumRgba += $delta
+                if ($delta -gt 0) { $diffRgb = $true }
             }
-            if ($pixelDiffers) { $differing++ }
+            $deltaAlpha = [Math]::Abs([int]$bytesA[$offset + 3] - [int]$bytesB[$offset + 3])
+            $sumAlpha += $deltaAlpha
+            $sumRgba += $deltaAlpha
+            if ($diffRgb) { $differingRgb++ }
+            if ($diffRgb -or $deltaAlpha -gt 0) { $differing++ }
         }
+        $metrics.rgbMae = if ($pixelCount -gt 0) { $sumRgb / ($pixelCount * 3.0) } else { 0.0 }
+        $metrics.alphaMae = if ($pixelCount -gt 0) { $sumAlpha / $pixelCount } else { 0.0 }
+        $metrics.rgbaMae = if ($pixelCount -gt 0) { $sumRgba / ($pixelCount * 4.0) } else { 0.0 }
+        $metrics.mae = $metrics.rgbMae
         $metrics.differingPixels = $differing
-        if ($pixelCount -gt 0) { $metrics.differingPixelsPercent = [math]::Round(100.0 * $differing / $pixelCount, 6) }
+        $metrics.differingPixelsPercent = if ($pixelCount -gt 0) { [math]::Round(100.0 * $differing / $pixelCount, 6) } else { 0.0 }
+        $metrics.differingPixelsRgb = $differingRgb
+        $metrics.differingPixelsRgbPercent = if ($pixelCount -gt 0) { [math]::Round(100.0 * $differingRgb / $pixelCount, 6) } else { 0.0 }
+    } else {
+        $sum = 0.0
+        for ($i = 0; $i -lt $bytesA.Length; $i++) {
+            $sum += [Math]::Abs([int]$bytesA[$i] - [int]$bytesB[$i])
+        }
+        $metrics.mae = if ($bytesA.Length -gt 0) { $sum / $bytesA.Length } else { 0.0 }
     }
     return $metrics
 }

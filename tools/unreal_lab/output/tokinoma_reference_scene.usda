@@ -1,0 +1,231 @@
+#usda 1.0
+(
+    defaultPrim = "Tokinoma_TempleOfTime"
+    metersPerUnit = 0.01
+    upAxis = "Z"
+)
+
+def Xform "Tokinoma_TempleOfTime" (
+    kind = "assembly"
+)
+{
+    def Scope "Materials"
+    {
+        def Material "MAT_TEMPLE_MOSAIC_CERAMIC"
+        {
+            token outputs:surface.connect = </Tokinoma_TempleOfTime/Materials/MAT_TEMPLE_MOSAIC_CERAMIC/PBRShader.outputs:surface>
+            def Shader "PBRShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.20, 0.45, 0.70)
+                float inputs:roughness = 0.28
+                float inputs:metallic = 0.0
+                float inputs:specular = 0.90
+                token outputs:surface
+            }
+        }
+        def Material "MAT_TEMPLE_STONE_PILLAR"
+        {
+            token outputs:surface.connect = </Tokinoma_TempleOfTime/Materials/MAT_TEMPLE_STONE_PILLAR/PBRShader.outputs:surface>
+            def Shader "PBRShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.48, 0.46, 0.42)
+                float inputs:roughness = 0.85
+                float inputs:metallic = 0.0
+                float inputs:specular = 0.25
+                token outputs:surface
+            }
+        }
+        def Material "MAT_TEMPLE_WALL_STONE"
+        {
+            token outputs:surface.connect = </Tokinoma_TempleOfTime/Materials/MAT_TEMPLE_WALL_STONE/PBRShader.outputs:surface>
+            def Shader "PBRShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.42, 0.40, 0.38)
+                float inputs:roughness = 0.88
+                float inputs:metallic = 0.0
+                float inputs:specular = 0.20
+                token outputs:surface
+            }
+        }
+        def Material "MAT_TEMPLE_PEDESTAL_STONE"
+        {
+            token outputs:surface.connect = </Tokinoma_TempleOfTime/Materials/MAT_TEMPLE_PEDESTAL_STONE/PBRShader.outputs:surface>
+            def Shader "PBRShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.35, 0.35, 0.37)
+                float inputs:roughness = 0.75
+                float inputs:metallic = 0.0
+                float inputs:specular = 0.30
+                token outputs:surface
+            }
+        }
+        def Material "MAT_TEMPLE_WINDOW_GLASS"
+        {
+            token outputs:surface.connect = </Tokinoma_TempleOfTime/Materials/MAT_TEMPLE_WINDOW_GLASS/PBRShader.outputs:surface>
+            def Shader "PBRShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.90, 0.95, 1.00)
+                float inputs:roughness = 0.05
+                float inputs:metallic = 0.0
+                float inputs:specular = 0.50
+                token outputs:surface
+            }
+        }
+    }
+
+    def Scope "Geometry"
+    {
+        def Xform "Floor_Mosaic_Central"
+        {
+            double3 xformOp:translate = (100.0, 0.0, 0.0)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+            def Mesh "MeshComponent"
+            {
+                rel material:binding = </Tokinoma_TempleOfTime/Materials/MAT_TEMPLE_MOSAIC_CERAMIC>
+                int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+                int[] faceVertexIndices = [0,1,2,3, 4,5,6,7, 8,9,10,11, 12,13,14,15, 16,17,18,19, 20,21,22,23]
+                point3f[] points = [
+                    (-50,-50,50), (50,-50,50), (50,50,50), (-50,50,50),
+                    (-50,50,-50), (50,50,-50), (50,-50,-50), (-50,-50,-50),
+                    (50,-50,-50), (50,50,-50), (50,50,50), (50,-50,50),
+                    (-50,50,-50), (-50,-50,-50), (-50,-50,50), (-50,50,50),
+                    (-50,50,-50), (50,50,-50), (50,50,50), (-50,50,50),
+                    (50,-50,-50), (-50,-50,-50), (-50,-50,50), (50,-50,50)
+                ]
+            }
+        }
+        def Xform "Pillars_Stone_Left"
+        {
+            double3 xformOp:translate = (150.0, -250.0, 150.0)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+            def Mesh "MeshComponent"
+            {
+                rel material:binding = </Tokinoma_TempleOfTime/Materials/MAT_TEMPLE_STONE_PILLAR>
+                int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+                int[] faceVertexIndices = [0,1,2,3, 4,5,6,7, 8,9,10,11, 12,13,14,15, 16,17,18,19, 20,21,22,23]
+                point3f[] points = [
+                    (-50,-50,50), (50,-50,50), (50,50,50), (-50,50,50),
+                    (-50,50,-50), (50,50,-50), (50,-50,-50), (-50,-50,-50),
+                    (50,-50,-50), (50,50,-50), (50,50,50), (50,-50,50),
+                    (-50,50,-50), (-50,-50,-50), (-50,-50,50), (-50,50,50),
+                    (-50,50,-50), (50,50,-50), (50,50,50), (-50,50,50),
+                    (50,-50,-50), (-50,-50,-50), (-50,-50,50), (50,-50,50)
+                ]
+            }
+        }
+        def Xform "Pillars_Stone_Right"
+        {
+            double3 xformOp:translate = (150.0, 250.0, 150.0)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+            def Mesh "MeshComponent"
+            {
+                rel material:binding = </Tokinoma_TempleOfTime/Materials/MAT_TEMPLE_STONE_PILLAR>
+                int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+                int[] faceVertexIndices = [0,1,2,3, 4,5,6,7, 8,9,10,11, 12,13,14,15, 16,17,18,19, 20,21,22,23]
+                point3f[] points = [
+                    (-50,-50,50), (50,-50,50), (50,50,50), (-50,50,50),
+                    (-50,50,-50), (50,50,-50), (50,-50,-50), (-50,-50,-50),
+                    (50,-50,-50), (50,50,-50), (50,50,50), (50,-50,50),
+                    (-50,50,-50), (-50,-50,-50), (-50,-50,50), (-50,50,50),
+                    (-50,50,-50), (50,50,-50), (50,50,50), (-50,50,50),
+                    (50,-50,-50), (-50,-50,-50), (-50,-50,50), (50,-50,50)
+                ]
+            }
+        }
+        def Xform "Pedestal_Master_Sword"
+        {
+            double3 xformOp:translate = (320.0, 0.0, 20.0)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+            def Mesh "MeshComponent"
+            {
+                rel material:binding = </Tokinoma_TempleOfTime/Materials/MAT_TEMPLE_PEDESTAL_STONE>
+                int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+                int[] faceVertexIndices = [0,1,2,3, 4,5,6,7, 8,9,10,11, 12,13,14,15, 16,17,18,19, 20,21,22,23]
+                point3f[] points = [
+                    (-50,-50,50), (50,-50,50), (50,50,50), (-50,50,50),
+                    (-50,50,-50), (50,50,-50), (50,-50,-50), (-50,-50,-50),
+                    (50,-50,-50), (50,50,-50), (50,50,50), (50,-50,50),
+                    (-50,50,-50), (-50,-50,-50), (-50,-50,50), (-50,50,50),
+                    (-50,50,-50), (50,50,-50), (50,50,50), (-50,50,50),
+                    (50,-50,-50), (-50,-50,-50), (-50,-50,50), (50,-50,50)
+                ]
+            }
+        }
+        def Xform "Walls_Perimeter"
+        {
+            double3 xformOp:translate = (200.0, 0.0, 200.0)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+            def Mesh "MeshComponent"
+            {
+                rel material:binding = </Tokinoma_TempleOfTime/Materials/MAT_TEMPLE_WALL_STONE>
+                int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+                int[] faceVertexIndices = [0,1,2,3, 4,5,6,7, 8,9,10,11, 12,13,14,15, 16,17,18,19, 20,21,22,23]
+                point3f[] points = [
+                    (-50,-50,50), (50,-50,50), (50,50,50), (-50,50,50),
+                    (-50,50,-50), (50,50,-50), (50,-50,-50), (-50,-50,-50),
+                    (50,-50,-50), (50,50,-50), (50,50,50), (50,-50,50),
+                    (-50,50,-50), (-50,-50,-50), (-50,-50,50), (-50,50,50),
+                    (-50,50,-50), (50,50,-50), (50,50,50), (-50,50,50),
+                    (50,-50,-50), (-50,-50,-50), (-50,-50,50), (50,-50,50)
+                ]
+            }
+        }
+        def Xform "Windows_Upper_Clerestory"
+        {
+            double3 xformOp:translate = (100.0, 0.0, 450.0)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+            def Mesh "MeshComponent"
+            {
+                rel material:binding = </Tokinoma_TempleOfTime/Materials/MAT_TEMPLE_WINDOW_GLASS>
+                int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+                int[] faceVertexIndices = [0,1,2,3, 4,5,6,7, 8,9,10,11, 12,13,14,15, 16,17,18,19, 20,21,22,23]
+                point3f[] points = [
+                    (-50,-50,50), (50,-50,50), (50,50,50), (-50,50,50),
+                    (-50,50,-50), (50,50,-50), (50,-50,-50), (-50,-50,-50),
+                    (50,-50,-50), (50,50,-50), (50,50,50), (50,-50,50),
+                    (-50,50,-50), (-50,-50,-50), (-50,-50,50), (-50,50,50),
+                    (-50,50,-50), (50,50,-50), (50,50,50), (-50,50,50),
+                    (50,-50,-50), (-50,-50,-50), (-50,-50,50), (50,-50,50)
+                ]
+            }
+        }
+    }
+
+    def Scope "Lights"
+    {
+        def DistantLight "Temple_Sunlight_Clerestory"
+        {
+            float inputs:intensity = 25000.0
+            color3f inputs:color = (1.00, 0.96, 0.88)
+            float inputs:angle = 0.53
+            float3 xformOp:rotateXYZ = (-45.0, 20.0, 0.0)
+            uniform token[] xformOpOrder = ["xformOp:rotateXYZ"]
+        }
+        def SphereLight "Navi_Point_Light"
+        {
+            float inputs:intensity = 2500.0
+            float inputs:radius = 15.0
+            color3f inputs:color = (0.15, 0.55, 1.00)
+            double3 xformOp:translate = (80.0, 0.0, 90.0)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+    }
+
+    def Scope "Cameras"
+    {
+        def Camera "Tokinoma_Main_Perspective"
+        {
+            float focalLength = 35.0
+            float horizontalAperture = 36.0
+            float verticalAperture = 24.0
+            float2 clippingRange = (10.0, 15000.0)
+            double3 xformOp:translate = (-140.0, 0.0, 110.0)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+    }
+}

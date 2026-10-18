@@ -675,7 +675,9 @@ static bool SceneHarnessWriteFloatPayload(int slot, const InFrameReadback& rb, c
     snprintf(frameSuffix, sizeof(frameSuffix), "_frame%06d", rb.frame);
     const std::string filename = std::string(SceneHarnessStageName(slot)) + frameSuffix + extension;
     writtenFilename = filename;
-    std::ofstream payload(captureRoot / filename, std::ios::binary | std::ios::trunc);
+    const auto finalPath = captureRoot / filename;
+    const auto tmpPath = captureRoot / (filename + ".tmp");
+    std::ofstream payload(tmpPath, std::ios::binary | std::ios::trunc);
     const auto* source = static_cast<const std::uint8_t*>(mapped);
     const std::size_t rowBytes = static_cast<std::size_t>(rb.W) * rb.bytesPerPixel;
     for (int y = 0; y < rb.H && payload; ++y) {
@@ -683,7 +685,24 @@ static bool SceneHarnessWriteFloatPayload(int slot, const InFrameReadback& rb, c
                       static_cast<std::streamsize>(rowBytes));
     }
     if (!payload) return false;
+    payload.flush();
     payload.close();
+
+    std::error_code ec;
+    const auto writtenBytes = std::filesystem::file_size(tmpPath, ec);
+    const std::size_t expectedBytes = rowBytes * static_cast<std::size_t>(rb.H);
+    if (ec || writtenBytes != expectedBytes) {
+        ForensicLog("[SCENE-HARNESS][CAPTURE_WRITE_SIZE_MISMATCH] stage=" + std::string(SceneHarnessStageId(slot)) +
+                    " written=" + std::to_string(writtenBytes) + " expected=" + std::to_string(expectedBytes));
+        std::filesystem::remove(tmpPath, ec);
+        return false;
+    }
+    std::filesystem::rename(tmpPath, finalPath, ec);
+    if (ec) {
+        ForensicLog("[SCENE-HARNESS][CAPTURE_RENAME_FAILED] stage=" + std::string(SceneHarnessStageId(slot)) +
+                    " error=" + ec.message());
+        return false;
+    }
     if (!SceneHarnessWriteMetadata(slot, rb.frame, ForensicFormatName(rb.format), rb.W, rb.H, filename)) return false;
     return true;
 }
@@ -695,10 +714,21 @@ static bool ForensicWriteCapturePair(const char* requestedPath, int width, int h
     if (extension != std::string::npos) base.resize(extension);
     const std::string rawPath = base + "_raw.png";
     const std::string previewPath = base + "_opaque_preview.png";
-    const bool rawWritten = pngw::WritePng(rawPath.c_str(), width, height, rgba.data());
+    const std::string rawTmp = rawPath + ".tmp";
+    const std::string previewTmp = previewPath + ".tmp";
+    const bool rawWritten = pngw::WritePng(rawTmp.c_str(), width, height, rgba.data());
     std::vector<uint8_t> preview = rgba;
     for (size_t pixel = 3; pixel < preview.size(); pixel += 4) preview[pixel] = 255;
-    const bool previewWritten = pngw::WritePng(previewPath.c_str(), width, height, preview.data());
+    const bool previewWritten = pngw::WritePng(previewTmp.c_str(), width, height, preview.data());
+    if (rawWritten && previewWritten) {
+        std::error_code ec;
+        std::filesystem::rename(rawTmp, rawPath, ec);
+        std::filesystem::rename(previewTmp, previewPath, ec);
+    } else {
+        std::error_code ec;
+        std::filesystem::remove(rawTmp, ec);
+        std::filesystem::remove(previewTmp, ec);
+    }
     ForensicLog("[COUCH-FORENSIC][CAPTURE_PAIR_WRITTEN] raw=" + rawPath + " opaquePreview=" + previewPath +
         " rawOK=" + std::to_string(rawWritten ? 1 : 0) + " previewOK=" + std::to_string(previewWritten ? 1 : 0));
     return rawWritten && previewWritten;

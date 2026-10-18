@@ -1709,11 +1709,11 @@ bool DxrSurfaceRenderer::CreateCompositePipeline(ID3D12Device* device, DXGI_FORM
         "  float reflection = saturate(surface.r * gParams.x) * opticsEnabled;\n"
         "  float transmissionCoverage = saturate(surface.g);\n"
         "  float3 indirect = max(indirectSample.rgb, 0.0);\n"
-        "  float transmissionBlend = transmissionCoverage * saturate(gParams.w) * opticsEnabled;\n"
-        // surface.r already contains Fresnel and material reflectivity. Apply
-        // it once; reweighting it with reflectionSample.a suppresses the signal.
-        "  float reflectionBlend = transmissionCoverage > 0.0 ? 0.0 : reflection;\n"
-        "  float3 color = lerp(original, reflectedColor, saturate(max(reflectionBlend, transmissionBlend)));\n"
+        // surface.r contains the physical Fresnel reflection weight.
+        // For dielectrics (ceramic, water), blend physical reflection over original raster;
+        // preserves native water foam/transparency at steep angles and mirrors at grazing angles.
+        "  float reflectionBlend = reflection;\n"
+        "  float3 color = lerp(original, reflectedColor, reflectionBlend);\n"
          "  float3 nativePointDirect = max(nativePointDirectSample.rgb, 0.0);\n"
          "  float nativePointDirectEnabled = gAblation > 3.5 ? 0.0 : 1.0;\n"
          "  color += nativePointDirect * relightEnabled * nativePointDirectEnabled;\n"
@@ -2465,6 +2465,115 @@ void DxrSurfaceRenderer::RenderReflections(ID3D12Device* device, ID3D12GraphicsC
                 out.flush();
                 out.close();
                 mNaviPilotMetadataCaptured = true;
+            }
+        }
+        // OCZ-LAVA-02: publish material-derived magma light samples and the
+        // A/B causality controls. sourceControls.w bits: 1 = lava direct
+        // lighting (NEE from the samples below), 2 = lava visual emission
+        // (the surface's own thermal glow). Isolating bit 2 while keeping
+        // bit 1 gives the mission's causality pair: same scene/camera/state,
+        // only the magma lighting contribution differs.
+        {
+            int lavaLightingEnabled = cvars
+                ? cvars->GetInteger("gEnhancements.Graphics.DXR.Lava.EnableLighting", 1) : 1;
+            int lavaVisualEmissionEnabled = cvars
+                ? cvars->GetInteger("gEnhancements.Graphics.DXR.Lava.EnableVisualEmission", 1) : 1;
+            float lavaLightGain = cvars
+                ? cvars->GetFloat("gEnhancements.Graphics.DXR.Lava.LightGain", 2.5f) : 2.5f;
+            // Harness A/B causality controls (mirror the COUCH_DXR_NAVI_* pattern):
+            // COUCH_DXR_LAVA_LIGHTING=0 isolates emission-only; COUCH_DXR_LAVA_EMISSION=0
+            // isolates lighting-only; COUCH_DXR_LAVA_LIGHT_GAIN scales direct contribution.
+            // Env wins over cvars so run-scene.ps1 can drive the pair without cvar files.
+            if (const char* env = std::getenv("COUCH_DXR_LAVA_LIGHTING")) {
+                lavaLightingEnabled = std::strcmp(env, "0") != 0 ? 1 : 0;
+            }
+            if (const char* env = std::getenv("COUCH_DXR_LAVA_EMISSION")) {
+                lavaVisualEmissionEnabled = std::strcmp(env, "0") != 0 ? 1 : 0;
+            }
+            if (const char* env = std::getenv("COUCH_DXR_LAVA_LIGHT_GAIN")) {
+                char* end = nullptr;
+                const float configured = std::strtof(env, &end);
+                if (end != env && end && *end == '\0' && std::isfinite(configured)) {
+                    lavaLightGain = configured;
+                }
+            }
+            if (!std::isfinite(lavaLightGain)) lavaLightGain = 2.5f;
+            lavaLightGain = std::clamp(lavaLightGain, 0.0f, 16.0f);
+            fc.sourceControls[3] = (lavaLightingEnabled ? 1u : 0u) |
+                                   (lavaVisualEmissionEnabled ? 2u : 0u);
+            // The isolated Navi pilot capture owns the 8 sample slots for its
+            // one-shot causality dispatch; production lava lighting fills them
+            // every frame otherwise. Priority: Navi pilot > lava (never both).
+            float lavaTotalArea = 0.0f;
+            uint32_t lavaSampleCount = 0u;
+            if (lavaLightingEnabled && !mNaviPilotDispatch) {
+                std::vector<const DxrEmitterTriangle*> lavaTriangles;
+                for (const auto& triangle : surfaceData.emitters) {
+                    if (triangle.ownerId == kDxrLavaEmitterOwnerId &&
+                        triangle.recordIndex < 65536 && triangle.primitiveIndex < 65536) {
+                        lavaTriangles.push_back(&triangle);
+                        lavaTotalArea += triangle.area;
+                    }
+                }
+                if (!lavaTriangles.empty() && std::isfinite(lavaTotalArea) && lavaTotalArea > 0.0f) {
+                    lavaSampleCount = std::min<uint32_t>(8u, static_cast<uint32_t>(lavaTriangles.size()));
+                    for (uint32_t i = 0; i < lavaSampleCount; ++i) {
+                        // Deterministic area-stratified selection with golden-ratio
+                        // barycentrics: stable across frames, fair across the pool.
+                        const float target = lavaTotalArea * (float(i) + 0.5f) / float(lavaSampleCount);
+                        float cumulative = 0.0f;
+                        const DxrEmitterTriangle* selected = lavaTriangles.back();
+                        for (const auto* tri : lavaTriangles) {
+                            cumulative += tri->area;
+                            if (cumulative >= target) { selected = tri; break; }
+                        }
+                        const float u = std::sqrt(std::fmod((float(i) + 0.5f) * 0.61803398875f, 1.0f));
+                        const float v = std::fmod((float(i) + 0.5f) * 0.75487766625f, 1.0f);
+                        const float bary[3] = {1.0f - u, u * (1.0f - v), u * v};
+                        float e1[3], e2[3], n[3];
+                        for (uint32_t a = 0; a < 3; ++a) {
+                            fc.emitterSamplePosition[i][a] = 0.0f;
+                            for (uint32_t c = 0; c < 3; ++c)
+                                fc.emitterSamplePosition[i][a] += selected->position[c][a] * bary[c];
+                            e1[a] = selected->position[1][a] - selected->position[0][a];
+                            e2[a] = selected->position[2][a] - selected->position[0][a];
+                        }
+                        n[0] = e1[1] * e2[2] - e1[2] * e2[1];
+                        n[1] = e1[2] * e2[0] - e1[0] * e2[2];
+                        n[2] = e1[0] * e2[1] - e1[1] * e2[0];
+                        const float normalLength =
+                            std::sqrt(n[0] * n[0] + n[1] * n[1] + n[2] * n[2]);
+                        if (normalLength > 1.0e-6f) {
+                            for (uint32_t a = 0; a < 3; ++a)
+                                fc.emitterSampleNormal[i][a] = n[a] / normalLength;
+                        } else {
+                            fc.emitterSampleNormal[i][1] = 1.0f;
+                        }
+                        // Per-sample represented area (same contract as the Navi path)
+                        // plus the intensity gain in the reserved normal.w channel.
+                        fc.emitterSamplePosition[i][3] =
+                            lavaTotalArea / float(lavaSampleCount);
+                        fc.emitterSampleNormal[i][3] = lavaLightGain;
+                        fc.emitterSampleIdentity[i / 4][i % 4] =
+                            (selected->recordIndex << 16u) | selected->primitiveIndex;
+                    }
+                }
+                fc.sourceControls[2] = lavaSampleCount;
+            }
+            static uint32_t lastLoggedLavaSampleCount = 0xFFFFFFFFu;
+            static int lastLoggedLavaLighting = -1;
+            static int lastLoggedLavaEmission = -1;
+            if (lavaSampleCount != lastLoggedLavaSampleCount ||
+                lavaLightingEnabled != lastLoggedLavaLighting ||
+                lavaVisualEmissionEnabled != lastLoggedLavaEmission) {
+                lastLoggedLavaSampleCount = lavaSampleCount;
+                lastLoggedLavaLighting = lavaLightingEnabled;
+                lastLoggedLavaEmission = lavaVisualEmissionEnabled;
+                LogCouchDxrSurface("[COUCH-DXR-LAVA] samples=" + std::to_string(lavaSampleCount) +
+                                  " lighting=" + std::to_string(lavaLightingEnabled) +
+                                  " emission=" + std::to_string(lavaVisualEmissionEnabled) +
+                                  " gain=" + std::to_string(lavaLightGain) +
+                                  " area=" + std::to_string(lavaTotalArea));
             }
         }
         memcpy(fc.projection, mProjMatrix, sizeof(fc.projection));

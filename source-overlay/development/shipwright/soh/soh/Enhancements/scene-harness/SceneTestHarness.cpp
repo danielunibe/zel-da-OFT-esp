@@ -147,8 +147,14 @@ Json BuildLightingContractEvidence() {
 
 void WriteJson(const std::filesystem::path& path, const Json& data) {
     std::filesystem::create_directories(path.parent_path());
-    std::ofstream output(path, std::ios::binary | std::ios::trunc);
-    output << std::setw(2) << data << '\n';
+    const auto tmpPath = path.string() + ".tmp";
+    {
+        std::ofstream output(tmpPath, std::ios::binary | std::ios::trunc);
+        output << std::setw(2) << data << '\n';
+        output.flush();
+    }
+    std::error_code ec;
+    std::filesystem::rename(tmpPath, path, ec);
 }
 
 void Log(const std::string& event, const Json& fields = Json::object()) {
@@ -179,10 +185,20 @@ void Fail(const std::string& code, const std::string& message) {
     }
     if (!sConfig.outputRoot.empty()) {
         WriteJson(sConfig.outputRoot / "evidence.json", evidence);
-        std::ofstream marker(sConfig.outputRoot / "RUN_FAIL", std::ios::binary | std::ios::trunc);
-        marker << code << '\n';
+        const auto failTmp = sConfig.outputRoot / "RUN_FAIL.tmp";
+        const auto failFinal = sConfig.outputRoot / "RUN_FAIL";
+        {
+            std::ofstream marker(failTmp, std::ios::binary | std::ios::trunc);
+            marker << code << '\n';
+            marker.flush();
+        }
+        std::error_code ec;
+        std::filesystem::rename(failTmp, failFinal, ec);
     }
     Log("FAIL", {{"blocker", code}, {"message", message}});
+    if (Ship::Context::GetInstance() && Ship::Context::GetInstance()->GetWindow()) {
+        Ship::Context::GetInstance()->GetWindow()->Close();
+    }
 }
 
 bool ParseTruthMode(const std::string& mode, int& backendValue) {
@@ -756,9 +772,20 @@ void OnFrameUpdate() {
                                       {"lighting_contract", BuildLightingContractEvidence()},
                                       {"reason", "One or more capture files failed content validation."} };
                     WriteJson(sConfig.outputRoot / "evidence.json", evidence);
-                    std::ofstream partial(sConfig.outputRoot / "CAPTURE_PARTIAL", std::ios::binary | std::ios::trunc);
-                    partial << "CAPTURE_PARTIAL\n";
+                    {
+                        const auto partialTmp = sConfig.outputRoot / "CAPTURE_PARTIAL.tmp";
+                        const auto partialFinal = sConfig.outputRoot / "CAPTURE_PARTIAL";
+                        std::ofstream partial(partialTmp, std::ios::binary | std::ios::trunc);
+                        partial << "CAPTURE_PARTIAL\n";
+                        partial.flush();
+                        partial.close();
+                        std::error_code ec;
+                        std::filesystem::rename(partialTmp, partialFinal, ec);
+                    }
                     Log("CAPTURE_PARTIAL", evidence);
+                    if (Ship::Context::GetInstance() && Ship::Context::GetInstance()->GetWindow()) {
+                        Ship::Context::GetInstance()->GetWindow()->Close();
+                    }
                     return;
                 }
                 if (ack.value("capture_mask", 0) != 255 || ack.value("capture_frame", -1) < 0) {
@@ -812,9 +839,26 @@ void OnFrameUpdate() {
                             {"captures", ack.value("captures", Json::object())},
                             {"lighting_contract", BuildLightingContractEvidence()}};
             WriteJson(sConfig.outputRoot / "evidence.json", evidence);
-            std::ofstream complete(sConfig.outputRoot / "CAPTURE_COMPLETE", std::ios::binary | std::ios::trunc);
-            complete << "CAPTURE_COMPLETE\n";
+            // OCZ-LAVA-01: dump this scene's draw inventory so the lava
+            // classifier's exact-rule table can be filled from authentic
+            // volcanic-scene evidence (HIDAN and spot17 lava textures carry
+            // no semantic names, so a path token alone cannot claim them).
+            Fast::MaterialRegistry::Instance().WriteDrawCallInventory(
+                (sConfig.outputRoot / "draw_call_inventory.csv").string());
+            {
+                const auto completeTmp = sConfig.outputRoot / "CAPTURE_COMPLETE.tmp";
+                const auto completeFinal = sConfig.outputRoot / "CAPTURE_COMPLETE";
+                std::ofstream complete(completeTmp, std::ios::binary | std::ios::trunc);
+                complete << "CAPTURE_COMPLETE\n";
+                complete.flush();
+                complete.close();
+                std::error_code ec;
+                std::filesystem::rename(completeTmp, completeFinal, ec);
+            }
             Log("CAPTURE_COMPLETE", evidence);
+            if (Ship::Context::GetInstance() && Ship::Context::GetInstance()->GetWindow()) {
+                Ship::Context::GetInstance()->GetWindow()->Close();
+            }
             return;
         }
         if (sGameFrame - sStateStartFrame > static_cast<std::uint64_t>(sConfig.timeoutFrames)) {

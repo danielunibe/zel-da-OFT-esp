@@ -1,0 +1,117 @@
+{
+  "validation_id": "OCZ_VAL_IMPORT_UE58",
+  "contract_file": "tools/unreal_lab/synthetic_test/synthetic_reference_contract.json",
+  "telemetry_file": "tools/unreal_lab/synthetic_test/import_telemetry_SYNTHETIC_TEST.json",
+  "checks": {
+    "contract_schema": {
+      "status": "PASS",
+      "scene_id": "SYNTHETIC_TEST",
+      "schema_version": "1.0.0"
+    },
+    "geometry": {
+      "status": "PASS",
+      "mesh_count": 2,
+      "details": [
+        {
+          "mesh_id": "GroundPlane",
+          "vertex_count": 4,
+          "index_count": 6,
+          "position_invariant_pass": true,
+          "material_id": "MAT_GROUND_STONE_MATTE"
+        },
+        {
+          "mesh_id": "CeramicBlock",
+          "vertex_count": 24,
+          "index_count": 36,
+          "position_invariant_pass": true,
+          "material_id": "MAT_BLOCK_CERAMIC"
+        }
+      ]
+    },
+    "materials": {
+      "status": "PASS",
+      "material_count": 2,
+      "details": {
+        "MAT_GROUND_STONE_MATTE": {
+          "type": "STONE",
+          "roughness": 0.85,
+          "f0": 0.01,
+          "confidence": "PHYSICAL_VERIFIED",
+          "physically_valid": true
+        },
+        "MAT_BLOCK_CERAMIC": {
+          "type": "CERAMIC",
+          "roughness": 0.28,
+          "f0": 0.036,
+          "confidence": "PHYSICAL_VERIFIED",
+          "physically_valid": true
+        }
+      }
+    },
+    "lights": {
+      "status": "PASS",
+      "light_count": 2,
+      "details": [
+        {
+          "light_id": "SunDirectionalLight",
+          "type": "DIRECTIONAL",
+          "color_rgb": [
+            1.0,
+            0.98,
+            0.9
+          ],
+          "intensity": 10000.0,
+          "position_invariant_pass": true
+        },
+        {
+          "light_id": "NaviPointLight",
+          "type": "POINT",
+          "color_rgb": [
+            0.15,
+            0.55,
+            1.0
+          ],
+          "intensity": 2500.0,
+          "position_invariant_pass": true
+        }
+      ]
+    },
+    "cameras": {
+      "status": "PASS",
+      "camera_count": 1,
+      "details": [
+        {
+          "camera_id": "ReferenceCamera",
+          "fov": 60.0,
+          "position_invariant_pass": true,
+          "target_invariant_pass": true
+        }
+      ]
+    },
+    "provenance_and_winding": {
+      "status": "PASS",
+      "provenance": "UNKNOWN",
+      "determinant": 1.0,
+      "winding_correction": ""
+    },
+    "ue_import_telemetry": {
+      "status": "PASS",
+      "actors_imported_count": 4,
+      "level_path": "/Game/OCZ/Tests/LV_OCZ_PhysicalReference"
+    },
+    "gpu_physical_render": {
+      "status": "PASS",
+      "render_mode": "GPU_HARDWARE_RAYTRACING_LUMEN",
+      "gpu_device": "NVIDIA GeForce RTX 3070 Ti (8 GB VRAM)",
+      "rhi": "Direct3D 12 (SM6)",
+      "resolution": {
+        "width": 1280,
+        "height": 720
+      },
+      "passes_count": 7,
+      "passes_files_exist": true
+    }
+  },
+  "summary": {},
+  "status": "PASS"
+}

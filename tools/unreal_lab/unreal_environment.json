@@ -1,0 +1,68 @@
+{
+  "timestamp": "2026-10-15T21:31:30",
+  "unreal_engine": {
+    "status": "READY",
+    "installed": true,
+    "is_complete": true,
+    "engine_root": "C:\\Program Files\\Epic Games\\UE_5.8",
+    "build_version": {
+      "MajorVersion": 5,
+      "MinorVersion": 8,
+      "PatchVersion": 3,
+      "Changelist": 58210709,
+      "CompatibleChangelist": 55116800,
+      "IsLicenseeVersion": 0,
+      "IsPromotedBuild": 1,
+      "BranchName": "++UE5+Release-5.8"
+    },
+    "version_string": "5.8.3",
+    "changelist": 58210709,
+    "branch": "++UE5+Release-5.8",
+    "editor_exe": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Binaries\\Win64\\UnrealEditor.exe",
+    "editor_cmd_exe": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Binaries\\Win64\\UnrealEditor-Cmd.exe",
+    "embedded_python_exe": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Binaries\\ThirdParty\\Python3\\Win64\\python.exe",
+    "embedded_python_version": "Python 3.11.8",
+    "plugins": {
+      "USDImporter": {
+        "available": true,
+        "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Plugins\\Importers\\USDImporter\\USDImporter.uplugin",
+        "version": "1.0",
+        "friendlyName": "USD Importer",
+        "enabledByDefault": false
+      },
+      "USDCore": {
+        "available": true,
+        "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Plugins\\Runtime\\USDCore\\USDCore.uplugin",
+        "version": "1.0",
+        "friendlyName": "USD Core",
+        "enabledByDefault": false
+      },
+      "PythonScriptPlugin": {
+        "available": true,
+        "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Plugins\\Experimental\\PythonScriptPlugin\\PythonScriptPlugin.uplugin",
+        "version": "1.0",
+        "friendlyName": "Python Editor Script Plugin",
+        "enabledByDefault": false
+      },
+      "EditorScriptingUtilities": {
+        "available": true,
+        "path": "C:\\Program Files\\Epic Games\\UE_5.8\\Engine\\Plugins\\Editor\\EditorScriptingUtilities\\EditorScriptingUtilities.uplugin",
+        "version": "1.0",
+        "friendlyName": "Editor Scripting Utilities",
+        "enabledByDefault": false
+      }
+    }
+  },
+  "system_hardware": {
+    "ram_total_gb": 63.69,
+    "ram_avail_gb": 17.8,
+    "disk_c_total_gb": 933.64,
+    "disk_c_free_gb": 175.02,
+    "gpu": {
+      "available": true,
+      "name": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+      "memory_total": "8192 MiB",
+      "driver_version": "616.92"
+    }
+  }
+}

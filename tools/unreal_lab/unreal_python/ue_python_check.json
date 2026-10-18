@@ -1,0 +1,30 @@
+{
+  "engine_version": "5.8.3-58210709+++UE5+Release-5.8",
+  "python_version": "3.11.8 (tags/v3.11.8:db85d51, Feb  6 2024, 22:03:32) [MSC v.1937 64 bit (AMD64)]",
+  "has_editor_level_lib": true,
+  "has_asset_tools": true,
+  "has_editor_asset_lib": true,
+  "usd_classes_sample": [
+    "AnimSequenceExporterUSD",
+    "AnimSequenceExporterUSDOptions",
+    "GeometryCacheExporterUSD",
+    "GeometryCacheExporterUSDOptions",
+    "GeometryCacheTrackUsd",
+    "GeometryCacheUsdComponent",
+    "InterchangeUsdPrimvar",
+    "LevelExporterUSD",
+    "LevelExporterUSDOptions",
+    "LevelExporterUSDOptionsInner",
+    "LevelSequenceExporterUsd",
+    "LevelSequenceExporterUsdOptions",
+    "MaterialExporterUSDOptions",
+    "MaterialExporterUsd",
+    "MaterialExpressionShaderStageSwitch",
+    "NiagaraSimStageExecutionLoopEditorData",
+    "NiagaraSimulationStageBase",
+    "OptimusDataDomain",
+    "OptimusDataDomainType",
+    "OptimusDataTypeRef"
+  ],
+  "status": "PASS"
+}

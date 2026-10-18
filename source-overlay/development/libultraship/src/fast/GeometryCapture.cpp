@@ -166,8 +166,10 @@ void GeometryCapture::BeginFrame() {
 
 void GeometryCapture::SetCurrentScene(int sceneId, int roomId) {
     if (sceneId != mCurrentSceneId || roomId != mCurrentRoomId) {
-        // Transición de escena o cuarto: limpiar escena persistente
+        const bool isNewScene = (sceneId != mCurrentSceneId);
+        // Transición de escena o cuarto: limpiar escena persistente y luces residuales del cuarto anterior
         ClearScene();
+        MaterialRegistry::Instance().ClearLightsOnRoomChange(isNewScene);
         mCurrentSceneId = sceneId;
         mCurrentRoomId = roomId;
     }

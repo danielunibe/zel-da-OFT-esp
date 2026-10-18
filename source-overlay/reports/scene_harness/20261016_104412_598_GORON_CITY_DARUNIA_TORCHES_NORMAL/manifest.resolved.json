@@ -1,0 +1,1530 @@
+{
+  "bloom": {
+    "capturedInputs": [
+      "DXR_REFLECTION_RGBA16F",
+      "EMISSIVE_MASK"
+    ],
+    "compositeDescription": "The current backend evaluates its bloom contribution inline in the composite; no independent bloom render target exists.",
+    "standaloneTarget": "NOT_PRESENT"
+  },
+  "captureStages": [
+    "RASTER_HDR",
+    "RASTER_SCENE_COLOR_COPY",
+    "DXR_REFLECTION_RGBA16F",
+    "DXR_INDIRECT_RGBA16F",
+    "COMPOSITE_PRE_TONEMAP",
+    "POST_ACES_PRE_PRESENT",
+    "FINAL_SDR_PRE_PRESENT",
+    "EMISSIVE_MASK"
+  ],
+  "categories": [
+    {
+      "id": "KOKIRI_BASELINE",
+      "scenarioId": "BASELINE_KOKIRI",
+      "status": "MAPPED"
+    },
+    {
+      "id": "EXTERIOR_DAY",
+      "scenarioId": "HYRULE_FIELD_DAY",
+      "status": "MAPPED"
+    },
+    {
+      "id": "EXTERIOR_NIGHT",
+      "scenarioId": "HYRULE_FIELD_NIGHT",
+      "status": "MAPPED"
+    },
+    {
+      "id": "INTERIOR_LIT",
+      "scenarioId": "TEMPLE_INTERIOR",
+      "status": "MAPPED"
+    },
+    {
+      "id": "INTERIOR_DARK",
+      "status": "UNMAPPED"
+    },
+    {
+      "id": "WATER",
+      "scenarioId": "LAKE_HYLIA_DAY",
+      "status": "MAPPED"
+    },
+    {
+      "id": "FIRE_LAVA",
+      "status": "UNMAPPED"
+    },
+    {
+      "id": "FOG",
+      "status": "UNMAPPED"
+    },
+    {
+      "id": "TRANSLUCENT_ALPHA",
+      "status": "UNMAPPED"
+    },
+    {
+      "id": "CUTOUT_ALPHA",
+      "status": "UNMAPPED"
+    },
+    {
+      "id": "OPAQUE_MATERIAL",
+      "status": "UNMAPPED"
+    },
+    {
+      "id": "EMISSIVE_MATERIAL",
+      "status": "UNMAPPED"
+    },
+    {
+      "id": "REFLECTIVE_SPECULAR_MATERIAL",
+      "status": "UNMAPPED"
+    },
+    {
+      "id": "POINT_LIGHT",
+      "scenarioId": "GORON_CITY_DARUNIA_TORCHES",
+      "status": "MAPPED"
+    },
+    {
+      "id": "DIRECTIONAL_LIGHT",
+      "status": "UNMAPPED"
+    },
+    {
+      "id": "AMBIENT_LIGHT",
+      "status": "UNMAPPED"
+    },
+    {
+      "id": "GAME_LIGHTING",
+      "status": "UNMAPPED"
+    },
+    {
+      "id": "HIGH_CONTRAST",
+      "status": "UNMAPPED"
+    },
+    {
+      "id": "SHADOWED",
+      "status": "UNMAPPED"
+    },
+    {
+      "id": "OPEN_SKY",
+      "status": "UNMAPPED"
+    },
+    {
+      "id": "ENCLOSED_SPACE",
+      "status": "UNMAPPED"
+    },
+    {
+      "id": "REFLECTION_SURFACE",
+      "scenarioId": "NAVI_TEMPLE_REFLECTIVE_FLOOR",
+      "status": "MAPPED"
+    },
+    {
+      "id": "DYNAMIC_LIGHTING",
+      "status": "UNMAPPED"
+    },
+    {
+      "id": "OTHER_MATERIALLY_DISTINCT",
+      "status": "UNMAPPED"
+    }
+  ],
+  "comparison": {
+    "gpuDisplayControls": [
+      "comparison_dxr_off",
+      "comparison_dxr_on",
+      "comparison_shadows_only",
+      "comparison_optics_off",
+      "comparison_indirect_off",
+      "comparison_relight_off"
+    ],
+    "hud": "EXCLUDED_FROM_PAIR",
+    "sameFrame": true,
+    "scope": "DXR_EFFECT_STAGES_ONLY; ENHANCED_RASTER_AND_TONEMAPPING_UNCHANGED",
+    "viewers": [
+      "split",
+      "overlay",
+      "blink",
+      "difference"
+    ]
+  },
+  "description": "Versioned scene registry. Only mappings backed by a verified entrance, scene, and room are executable.",
+  "diagnosticModes": [
+    {
+      "backendMode": 0,
+      "id": "NORMAL"
+    },
+    {
+      "backendMode": 1,
+      "id": "HIT_MISS"
+    },
+    {
+      "backendMode": 2,
+      "id": "WORLD_NORMAL"
+    },
+    {
+      "backendMode": 3,
+      "id": "HIT_DISTANCE"
+    },
+    {
+      "backendMode": 4,
+      "id": "INSTANCE_IDS"
+    },
+    {
+      "backendMode": 5,
+      "id": "SYNTHETIC_LAMBERT"
+    },
+    {
+      "backendMode": 6,
+      "id": "GAME_LIGHT_LAMBERT"
+    }
+  ],
+  "resolvedRun": {
+    "audioOutput": "MUTED_NULL_BACKEND",
+    "backendTruthMode": 0,
+    "bloomOnly": "NOT_PRESENT",
+    "d3d12Validation": "NOT_RUN_DEBUG_LAYER_OFF",
+    "dayTime": 27307,
+    "entrance": "0x1C1",
+    "expectedRoom": 1,
+    "expectedScene": "0x62",
+    "linkAge": 1,
+    "nightFlag": 0,
+    "saveMode": "TEMP_DEBUG_SAVE",
+    "scenarioId": "GORON_CITY_DARUNIA_TORCHES",
+    "truthMode": "NORMAL",
+    "viewId": "VIEW_00_DEFAULT_SPAWN_CAMERA"
+  },
+  "scenarios": [
+    {
+      "category": "KOKIRI_BASELINE",
+      "dayTime": 27307,
+      "entrance": 238,
+      "entranceHex": "0x0EE",
+      "expectDirectionalLight": true,
+      "expectedRoom": 0,
+      "expectedScene": 85,
+      "expectedSceneHex": "0x55",
+      "freezePlayer": true,
+      "freezeTime": true,
+      "id": "BASELINE_KOKIRI",
+      "linkAge": 1,
+      "mappingEvidenceId": "KOKIRI_ENTR_0EE",
+      "nightFlag": 0,
+      "notes": "ENTR_KOKIRI_FOREST_0 is mapped to scene 0x55, room 0 in this fork. Player and camera use their normal game spawn.",
+      "status": "MAPPED",
+      "viewId": "VIEW_00_DEFAULT_SPAWN_CAMERA"
+    },
+    {
+      "category": "POINT_LIGHT",
+      "dayTime": 27307,
+      "entrance": 449,
+      "entranceHex": "0x1C1",
+      "expectDirectionalLight": false,
+      "expectedRoom": 1,
+      "expectedScene": 98,
+      "expectedSceneHex": "0x62",
+      "freezePlayer": true,
+      "freezeTime": true,
+      "id": "GORON_CITY_DARUNIA_TORCHES",
+      "linkAge": 1,
+      "mappingEvidenceId": "GORON_CITY_ENTR_1C1",
+      "nightFlag": 0,
+      "notes": "Goron City Room 1 (Darunia's Room) entered via ENTR_GORON_CITY_DARUNIA_ROOM_EXIT (0x01C1, spawn 1). Authentic interior scene with two lit Obj_Syokudai torches (params 0x2400) at (-52, 40, -1473) and (222, 40, -1473) providing primary illumination with TLAS shadow occlusion, quadratic distance attenuation, and BRDF specular/diffuse response.",
+      "status": "MAPPED",
+      "viewId": "VIEW_00_DEFAULT_SPAWN_CAMERA"
+    },
+    {
+      "category": "WATER",
+      "dayTime": 27307,
+      "entrance": 258,
+      "entranceHex": "0x102",
+      "expectDirectionalLight": true,
+      "expectedRoom": 0,
+      "expectedScene": 87,
+      "expectedSceneHex": "0x57",
+      "freezePlayer": true,
+      "freezeTime": true,
+      "id": "LAKE_HYLIA_DAY",
+      "linkAge": 1,
+      "mappingEvidenceId": "LAKE_ENTR_102",
+      "nightFlag": 0,
+      "notes": "Source-verified ENTR_LAKE_HYLIA_NORTH_EXIT; the captured view must still demonstrate visible water before accepting reflection quality.",
+      "status": "MAPPED",
+      "viewId": "VIEW_LAKE_WATER_OVERVIEW"
+    },
+    {
+      "category": "INTERIOR_LIT",
+      "dayTime": 27307,
+      "entrance": 83,
+      "entranceHex": "0x053",
+      "expectDirectionalLight": true,
+      "expectedRoom": 1,
+      "expectedScene": 67,
+      "expectedSceneHex": "0x43",
+      "freezePlayer": true,
+      "freezeTime": true,
+      "id": "TEMPLE_INTERIOR",
+      "lightingContract": {
+        "id": "TEMPLE_WINDOW_MOSAIC_NAVI_V1",
+        "passRequiresAllRuntimeGates": true,
+        "requiredComparison": {
+          "ablation": [
+            "comparison_dxr_off",
+            "comparison_dxr_on",
+            "comparison_relight_off"
+          ],
+          "humanVisualAcceptanceRequired": true,
+          "sameFrame": true,
+          "viewers": [
+            "overlay",
+            "difference",
+            "blink"
+          ]
+        },
+        "runtimeGates": [
+          {
+            "id": "exact_resources_seen_in_capture",
+            "implementation": "PENDING_RUNTIME",
+            "status": "NOT_RUN"
+          },
+          {
+            "id": "window_to_floor_radiance",
+            "implementation": "NATIVE_DIRECTIONAL_THROUGH_EXACT_WINDOW_PORTAL_TRIANGLES",
+            "status": "NOT_CERTIFIED"
+          },
+          {
+            "id": "floor_reflection_difference",
+            "implementation": "MATERIAL_MAPPED",
+            "status": "NOT_VERIFIED"
+          },
+          {
+            "id": "navi_local_irradiance",
+            "implementation": "PALETTE_TINTED_POINT_LIGHT_AND_EMISSIVE_WINGS",
+            "status": "NOT_VERIFIED"
+          },
+          {
+            "id": "soft_shadow_penumbra",
+            "implementation": "SOURCE_CONTROL_AND_DXIL_BYTECODE_REGENERATED_RUNTIME_PENDING",
+            "status": "NOT_VERIFIED"
+          }
+        ],
+        "targetMaterials": [
+          {
+            "geometryEvidence": "tokinoma_room_1DL_002A58; Vtx_002508 spans Y=-40..0",
+            "id": "mosaic_floor",
+            "material": "CERAMIC",
+            "reflectivity": 0.18,
+            "resource": "scenes/shared/tokinoma_scene/tokinoma_sceneTex_011FA0",
+            "roughness": 0.28
+          },
+          {
+            "id": "window_glass_child",
+            "material": "GLASS",
+            "resource": "objects/object_toki_objects/object_toki_objects_Tex_002DC0"
+          },
+          {
+            "id": "window_beam_overlay",
+            "material": "EMISSIVE",
+            "resource": "objects/object_toki_objects/object_toki_objects_Tex_0035C0",
+            "role": "visible_translucent_beam_only"
+          },
+          {
+            "id": "window_glass_adult",
+            "material": "GLASS",
+            "resource": "objects/object_toki_objects/object_toki_objects_Tex_003DC0"
+          },
+          {
+            "id": "navi_visual_glow",
+            "material": "EMISSIVE",
+            "resource": "objects/gameplay_keep/gFairyWingTex",
+            "worldLight": "LIGHT_POINT_GLOW tinted from current Navi inner/outer colors"
+          }
+        ],
+        "windowLightSource": "native scene directional light traced through the captured Temple window pane triangles; no point emitters are synthesized at window bounds"
+      },
+      "linkAge": 1,
+      "mappingEvidenceId": "TEMPLE_ENTR_053",
+      "nightFlag": 0,
+      "notes": "Source entrance 0x053 and scene 0x43; actual room 1 was confirmed by a prior run. The next harness capture must also match the native directional light in the exact capture frame.",
+      "status": "MAPPED",
+      "viewId": "VIEW_00_DEFAULT_SPAWN_CAMERA"
+    },
+    {
+      "category": "EXTERIOR_DAY",
+      "dayTime": 27307,
+      "entrance": 205,
+      "entranceHex": "0x0CD",
+      "expectDirectionalLight": true,
+      "expectedRoom": 0,
+      "expectedScene": 81,
+      "expectedSceneHex": "0x51",
+      "freezePlayer": true,
+      "freezeTime": true,
+      "id": "HYRULE_FIELD_DAY",
+      "linkAge": 1,
+      "mappingEvidenceId": "FIELD_ENTR_0CD",
+      "nightFlag": 0,
+      "notes": "Source-verified ENTR_HYRULE_FIELD_PAST_BRIDGE_SPAWN. Default view is checked from the capture; mapping alone does not prove effect quality.",
+      "status": "MAPPED",
+      "viewId": "VIEW_00_DEFAULT_SPAWN_CAMERA"
+    },
+    {
+      "category": "EXTERIOR_NIGHT",
+      "dayTime": 49152,
+      "entrance": 205,
+      "entranceHex": "0x0CD",
+      "expectDirectionalLight": true,
+      "expectedRoom": 0,
+      "expectedScene": 81,
+      "expectedSceneHex": "0x51",
+      "freezePlayer": true,
+      "freezeTime": true,
+      "id": "HYRULE_FIELD_NIGHT",
+      "linkAge": 1,
+      "mappingEvidenceId": "FIELD_ENTR_0CD",
+      "nightFlag": 1,
+      "notes": "Source-verified ENTR_HYRULE_FIELD_PAST_BRIDGE_SPAWN. Default view is checked from the capture; mapping alone does not prove effect quality.",
+      "status": "MAPPED",
+      "viewId": "VIEW_00_DEFAULT_SPAWN_CAMERA"
+    },
+    {
+      "category": "POINT_LIGHT",
+      "dayTime": 27307,
+      "entrance": 238,
+      "entranceHex": "0x0EE",
+      "expectDirectionalLight": true,
+      "expectedRoom": 0,
+      "expectedScene": 85,
+      "expectedSceneHex": "0x55",
+      "freezePlayer": true,
+      "freezeTime": true,
+      "id": "NAVI_KOKIRI_NATURAL",
+      "linkAge": 1,
+      "mappingEvidenceId": "KOKIRI_ENTR_0EE",
+      "naviPilot": {
+        "pose": "NATURAL"
+      },
+      "nightFlag": 0,
+      "notes": "Harness-only Navi pilot: native source identity, real receiver, fixed camera; four same-frame linear light ablations. Controlled poses are test authoring.",
+      "status": "MAPPED",
+      "viewId": "VIEW_NAVI_RECEIVER"
+    },
+    {
+      "category": "POINT_LIGHT",
+      "dayTime": 27307,
+      "entrance": 238,
+      "entranceHex": "0x0EE",
+      "expectDirectionalLight": true,
+      "expectedRoom": 0,
+      "expectedScene": 85,
+      "expectedSceneHex": "0x55",
+      "freezePlayer": true,
+      "freezeTime": true,
+      "id": "NAVI_KOKIRI_POINT",
+      "linkAge": 1,
+      "mappingEvidenceId": "KOKIRI_ENTR_0EE",
+      "naviPilot": {
+        "height": 25,
+        "pose": "CONTROLLED"
+      },
+      "nightFlag": 0,
+      "notes": "Harness-only Navi pilot: native source identity, real receiver, fixed camera; four same-frame linear light ablations. Controlled poses are test authoring.",
+      "status": "MAPPED",
+      "viewId": "VIEW_NAVI_RECEIVER"
+    },
+    {
+      "category": "POINT_LIGHT",
+      "dayTime": 27307,
+      "entrance": 238,
+      "entranceHex": "0x0EE",
+      "expectDirectionalLight": true,
+      "expectedRoom": 0,
+      "expectedScene": 85,
+      "expectedSceneHex": "0x55",
+      "freezePlayer": true,
+      "freezeTime": true,
+      "id": "NAVI_KOKIRI_DIRECT_PRODUCTION",
+      "linkAge": 1,
+      "mappingEvidenceId": "KOKIRI_ENTR_0EE",
+      "naviPilot": {
+        "height": 25,
+        "isolate": false,
+        "pose": "CONTROLLED"
+      },
+      "nightFlag": 0,
+      "notes": "Same controlled receiver pose as NAVI_KOKIRI_POINT; captures the production Navi direct-light buffer and a same-frame Navi-point-off composite.",
+      "status": "MAPPED",
+      "viewId": "VIEW_NAVI_RECEIVER"
+    },
+    {
+      "category": "POINT_LIGHT",
+      "dayTime": 27307,
+      "entrance": 238,
+      "entranceHex": "0x0EE",
+      "expectDirectionalLight": true,
+      "expectedRoom": 0,
+      "expectedScene": 85,
+      "expectedSceneHex": "0x55",
+      "freezePlayer": true,
+      "freezeTime": true,
+      "id": "NAVI_KOKIRI_DIRECT_PRODUCTION_NATURAL",
+      "linkAge": 1,
+      "mappingEvidenceId": "KOKIRI_ENTR_0EE",
+      "naviPilot": {
+        "isolate": false,
+        "pose": "NATURAL"
+      },
+      "nightFlag": 0,
+      "notes": "Native Navi position; captures the production point-light buffer and same-frame Navi-point-off composite without repositioning the fairy.",
+      "status": "MAPPED",
+      "viewId": "VIEW_NAVI_RECEIVER"
+    },
+    {
+      "category": "POINT_LIGHT",
+      "dayTime": 27307,
+      "entrance": 238,
+      "entranceHex": "0x0EE",
+      "expectDirectionalLight": true,
+      "expectedRoom": 0,
+      "expectedScene": 85,
+      "expectedSceneHex": "0x55",
+      "freezePlayer": true,
+      "freezeTime": true,
+      "id": "NAVI_KOKIRI_DIRECT_PRODUCTION_NATURAL_ACTIVE",
+      "linkAge": 1,
+      "mappingEvidenceId": "KOKIRI_ENTR_0EE",
+      "naviPilot": {
+        "isolate": false,
+        "pose": "NATURAL_ACTIVE"
+      },
+      "nightFlag": 0,
+      "notes": "Keeps Navi at her native position while the harness alone selects the active point-light state; captures production direct radiance and the same-frame Navi-point-off composite.",
+      "status": "MAPPED",
+      "viewId": "VIEW_NAVI_RECEIVER"
+    },
+    {
+      "category": "POINT_LIGHT",
+      "dayTime": 27307,
+      "entrance": 238,
+      "entranceHex": "0x0EE",
+      "expectDirectionalLight": true,
+      "expectedRoom": 0,
+      "expectedScene": 85,
+      "expectedSceneHex": "0x55",
+      "freezePlayer": true,
+      "freezeTime": true,
+      "id": "NAVI_KOKIRI_FAR",
+      "linkAge": 1,
+      "mappingEvidenceId": "KOKIRI_ENTR_0EE",
+      "naviPilot": {
+        "height": 55,
+        "pose": "CONTROLLED"
+      },
+      "nightFlag": 0,
+      "notes": "Harness-only Navi pilot: native source identity, real receiver, fixed camera; four same-frame linear light ablations. Controlled poses are test authoring.",
+      "status": "MAPPED",
+      "viewId": "VIEW_NAVI_RECEIVER"
+    },
+    {
+      "category": "POINT_LIGHT",
+      "dayTime": 27307,
+      "entrance": 238,
+      "entranceHex": "0x0EE",
+      "expectDirectionalLight": true,
+      "expectedRoom": 0,
+      "expectedScene": 85,
+      "expectedSceneHex": "0x55",
+      "freezePlayer": true,
+      "freezeTime": true,
+      "id": "NAVI_KOKIRI_OUTSIDE_RADIUS",
+      "linkAge": 1,
+      "mappingEvidenceId": "KOKIRI_ENTR_0EE",
+      "naviPilot": {
+        "height": 125,
+        "pose": "CONTROLLED"
+      },
+      "nightFlag": 0,
+      "notes": "Harness-only Navi pilot: native source identity, real receiver, fixed camera; four same-frame linear light ablations. Controlled poses are test authoring.",
+      "status": "MAPPED",
+      "viewId": "VIEW_NAVI_RECEIVER"
+    },
+    {
+      "category": "POINT_LIGHT",
+      "dayTime": 27307,
+      "entrance": 238,
+      "entranceHex": "0x0EE",
+      "expectDirectionalLight": true,
+      "expectedRoom": 0,
+      "expectedScene": 85,
+      "expectedSceneHex": "0x55",
+      "freezePlayer": true,
+      "freezeTime": true,
+      "id": "NAVI_KOKIRI_RED",
+      "linkAge": 1,
+      "mappingEvidenceId": "KOKIRI_ENTR_0EE",
+      "naviPilot": {
+        "color": "RED",
+        "height": 25,
+        "pose": "CONTROLLED"
+      },
+      "nightFlag": 0,
+      "notes": "Harness-only Navi pilot: native source identity, real receiver, fixed camera; four same-frame linear light ablations. Controlled poses are test authoring.",
+      "status": "MAPPED",
+      "viewId": "VIEW_NAVI_RECEIVER"
+    },
+    {
+      "category": "POINT_LIGHT",
+      "dayTime": 27307,
+      "entrance": 238,
+      "entranceHex": "0x0EE",
+      "expectDirectionalLight": true,
+      "expectedRoom": 0,
+      "expectedScene": 85,
+      "expectedSceneHex": "0x55",
+      "freezePlayer": true,
+      "freezeTime": true,
+      "id": "NAVI_KOKIRI_DISABLED",
+      "linkAge": 1,
+      "mappingEvidenceId": "KOKIRI_ENTR_0EE",
+      "naviPilot": {
+        "glowEnabled": false,
+        "height": 25,
+        "pose": "CONTROLLED"
+      },
+      "nightFlag": 0,
+      "notes": "Harness-only Navi pilot: native source identity, real receiver, fixed camera; four same-frame linear light ablations. Controlled poses are test authoring.",
+      "status": "MAPPED",
+      "viewId": "VIEW_NAVI_RECEIVER"
+    },
+    {
+      "category": "POINT_LIGHT",
+      "dayTime": 27307,
+      "entrance": 238,
+      "entranceHex": "0x0EE",
+      "expectDirectionalLight": true,
+      "expectedRoom": 0,
+      "expectedScene": 85,
+      "expectedSceneHex": "0x55",
+      "freezePlayer": true,
+      "freezeTime": true,
+      "id": "NAVI_KOKIRI_AUXILIARY",
+      "linkAge": 1,
+      "mappingEvidenceId": "KOKIRI_ENTR_0EE",
+      "naviPilot": {
+        "auxiliaryEnabled": true,
+        "height": 25,
+        "pose": "CONTROLLED"
+      },
+      "nightFlag": 0,
+      "notes": "Harness-only Navi pilot: native source identity, real receiver, fixed camera; four same-frame linear light ablations. Controlled poses are test authoring.",
+      "status": "MAPPED",
+      "viewId": "VIEW_NAVI_RECEIVER"
+    },
+    {
+      "category": "POINT_LIGHT",
+      "dayTime": 27307,
+      "entrance": 238,
+      "entranceHex": "0x0EE",
+      "expectDirectionalLight": true,
+      "expectedRoom": 0,
+      "expectedScene": 85,
+      "expectedSceneHex": "0x55",
+      "freezePlayer": true,
+      "freezeTime": true,
+      "id": "NAVI_KOKIRI_TWO_FAIRIES",
+      "linkAge": 1,
+      "mappingEvidenceId": "KOKIRI_ENTR_0EE",
+      "naviPilot": {
+        "height": 25,
+        "pose": "CONTROLLED",
+        "secondFairy": true
+      },
+      "nightFlag": 0,
+      "notes": "Harness-only Navi pilot: native source identity, real receiver, fixed camera; four same-frame linear light ablations. Controlled poses are test authoring.",
+      "status": "MAPPED",
+      "viewId": "VIEW_NAVI_RECEIVER"
+    },
+    {
+      "category": "POINT_LIGHT",
+      "dayTime": 27307,
+      "entrance": 238,
+      "entranceHex": "0x0EE",
+      "expectDirectionalLight": true,
+      "expectedRoom": 0,
+      "expectedScene": 85,
+      "expectedSceneHex": "0x55",
+      "freezePlayer": true,
+      "freezeTime": true,
+      "id": "NAVI_KOKIRI_SURFACE",
+      "linkAge": 1,
+      "mappingEvidenceId": "KOKIRI_ENTR_0EE",
+      "naviPilot": {
+        "emitterScale": 8.0,
+        "height": 25,
+        "pose": "CONTROLLED"
+      },
+      "nightFlag": 0,
+      "notes": "Harness-only Navi pilot: native source identity, real receiver, fixed camera; four same-frame linear light ablations. Controlled poses are test authoring.",
+      "status": "MAPPED",
+      "viewId": "VIEW_NAVI_RECEIVER"
+    },
+    {
+      "category": "POINT_LIGHT",
+      "dayTime": 27307,
+      "entrance": 83,
+      "entranceHex": "0x053",
+      "expectDirectionalLight": true,
+      "expectedRoom": 1,
+      "expectedScene": 67,
+      "expectedSceneHex": "0x43",
+      "freezePlayer": true,
+      "freezeTime": true,
+      "id": "NAVI_TEMPLE_LINK_NATIVE",
+      "linkAge": 1,
+      "mappingEvidenceId": "TEMPLE_ENTR_053",
+      "naviPilot": {
+        "emitterScale": 1.0,
+        "height": 25,
+        "pointLightGain": 1.0,
+        "pose": "CONTROLLED"
+      },
+      "nightFlag": 0,
+      "notes": "Temple controlled Navi pose at native point intensity; source-only same-frame A/B. Placement is a diagnostic pose, not natural actor motion.",
+      "status": "MAPPED",
+      "viewId": "VIEW_NAVI_RECEIVER"
+    },
+    {
+      "category": "POINT_LIGHT",
+      "dayTime": 27307,
+      "entrance": 83,
+      "entranceHex": "0x053",
+      "expectDirectionalLight": true,
+      "expectedRoom": 1,
+      "expectedScene": 67,
+      "expectedSceneHex": "0x43",
+      "freezePlayer": true,
+      "freezeTime": true,
+      "id": "NAVI_TEMPLE_LINK_8X",
+      "linkAge": 1,
+      "mappingEvidenceId": "TEMPLE_ENTR_053",
+      "naviPilot": {
+        "emitterScale": 1.0,
+        "height": 25,
+        "pointLightGain": 8.0,
+        "pose": "CONTROLLED"
+      },
+      "nightFlag": 0,
+      "notes": "Same controlled Temple fixture as NAVI_TEMPLE_LINK_NATIVE. Eight-fold authored DXR point-radiance variant; Navi size, native radius and pose stay fixed. Diagnostic intensity does not claim native OoT energy.",
+      "status": "MAPPED",
+      "viewId": "VIEW_NAVI_RECEIVER"
+    },
+    {
+      "category": "POINT_LIGHT",
+      "dayTime": 27307,
+      "entrance": 83,
+      "entranceHex": "0x053",
+      "expectDirectionalLight": true,
+      "expectedRoom": 1,
+      "expectedScene": 67,
+      "expectedSceneHex": "0x43",
+      "freezePlayer": true,
+      "freezeTime": true,
+      "id": "NAVI_TEMPLE_LINK_32X",
+      "linkAge": 1,
+      "mappingEvidenceId": "TEMPLE_ENTR_053",
+      "naviPilot": {
+        "emitterScale": 1.0,
+        "height": 25,
+        "pointLightGain": 32.0,
+        "pose": "CONTROLLED"
+      },
+      "nightFlag": 0,
+      "notes": "Same isolated Temple receiver fixture as NAVI_TEMPLE_LINK_8X. 32-fold authored Navi point-radiance diagnostic; native radius and pose stay fixed.",
+      "status": "MAPPED",
+      "viewId": "VIEW_NAVI_RECEIVER"
+    },
+    {
+      "category": "POINT_LIGHT",
+      "dayTime": 27307,
+      "entrance": 83,
+      "entranceHex": "0x053",
+      "expectDirectionalLight": true,
+      "expectedRoom": 1,
+      "expectedScene": 67,
+      "expectedSceneHex": "0x43",
+      "freezePlayer": true,
+      "freezeTime": true,
+      "id": "NAVI_TEMPLE_LINK_NATIVE_PRODUCTION",
+      "linkAge": 1,
+      "mappingEvidenceId": "TEMPLE_ENTR_053",
+      "naviPilot": {
+        "emitterScale": 1.0,
+        "height": 25,
+        "isolate": false,
+        "pointLightGain": 1.0,
+        "pose": "CONTROLLED"
+      },
+      "nightFlag": 0,
+      "notes": "Full Temple composite at native Navi point intensity; same camera and controlled pose as the isolated source runs.",
+      "status": "MAPPED",
+      "viewId": "VIEW_NAVI_RECEIVER"
+    },
+    {
+      "category": "POINT_LIGHT",
+      "dayTime": 27307,
+      "entrance": 83,
+      "entranceHex": "0x053",
+      "expectDirectionalLight": true,
+      "expectedRoom": 1,
+      "expectedScene": 67,
+      "expectedSceneHex": "0x43",
+      "freezePlayer": true,
+      "freezeTime": true,
+      "id": "NAVI_TEMPLE_LINK_8X_PRODUCTION",
+      "linkAge": 1,
+      "mappingEvidenceId": "TEMPLE_ENTR_053",
+      "naviPilot": {
+        "emitterScale": 1.0,
+        "height": 25,
+        "isolate": false,
+        "pointLightGain": 8.0,
+        "pose": "CONTROLLED"
+      },
+      "nightFlag": 0,
+      "notes": "Full Temple composite with an eight-fold authored DXR Navi point-radiance boost; same pose, radius, camera and room as native-intensity control.",
+      "status": "MAPPED",
+      "viewId": "VIEW_NAVI_RECEIVER"
+    },
+    {
+      "category": "POINT_LIGHT",
+      "dayTime": 27307,
+      "entrance": 83,
+      "entranceHex": "0x053",
+      "expectDirectionalLight": true,
+      "expectedRoom": 1,
+      "expectedScene": 67,
+      "expectedSceneHex": "0x43",
+      "freezePlayer": true,
+      "freezeTime": true,
+      "id": "NAVI_TEMPLE_LINK_32X_PRODUCTION",
+      "linkAge": 1,
+      "mappingEvidenceId": "TEMPLE_ENTR_053",
+      "naviPilot": {
+        "emitterScale": 1.0,
+        "height": 25,
+        "isolate": false,
+        "pointLightGain": 32.0,
+        "pose": "CONTROLLED"
+      },
+      "nightFlag": 0,
+      "notes": "Full Temple composite with a 32-fold authored DXR Navi point-radiance diagnostic; same pose, radius, camera and room as native control. Harness-only calibration, not native OoT lighting.",
+      "status": "MAPPED",
+      "viewId": "VIEW_NAVI_RECEIVER"
+    },
+    {
+      "category": "POINT_LIGHT",
+      "dayTime": 27307,
+      "entrance": 83,
+      "entranceHex": "0x053",
+      "expectDirectionalLight": true,
+      "expectedRoom": 1,
+      "expectedScene": 67,
+      "expectedSceneHex": "0x43",
+      "freezePlayer": true,
+      "freezeTime": true,
+      "id": "NAVI_TRIFORCE_LINK_32X",
+      "linkAge": 1,
+      "mappingEvidenceId": "TEMPLE_ENTR_053",
+      "naviPilot": {
+        "emitterScale": 1.0,
+        "height": 25,
+        "linkPosition": [
+          31.68,
+          -20.0,
+          2086.86
+        ],
+        "pointLightGain": 32.0,
+        "pose": "CONTROLLED",
+        "receiverAnchor": {
+          "evidence": "GPU first-hit receiver sample on the raised platform top, within the visible Triforce emblem region.",
+          "normal": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "pixel": [
+            500,
+            133
+          ],
+          "resource": "objects/object_mjin/gWarpPadTopTex",
+          "worldPosition": [
+            31.68,
+            -20.0,
+            2086.86
+          ]
+        }
+      },
+      "nightFlag": 0,
+      "notes": "Isolated 32x Navi-light fixture with Link authored on a measured GPU-hit sample of the Triforce platform top. Camera follows the test pose; image acceptance remains pending.",
+      "status": "MAPPED",
+      "viewId": "VIEW_NAVI_RECEIVER"
+    },
+    {
+      "category": "POINT_LIGHT",
+      "dayTime": 27307,
+      "entrance": 83,
+      "entranceHex": "0x053",
+      "expectDirectionalLight": true,
+      "expectedRoom": 1,
+      "expectedScene": 67,
+      "expectedSceneHex": "0x43",
+      "freezePlayer": true,
+      "freezeTime": true,
+      "id": "NAVI_TRIFORCE_LINK_32X_PRODUCTION",
+      "linkAge": 1,
+      "mappingEvidenceId": "TEMPLE_ENTR_053",
+      "naviPilot": {
+        "emitterScale": 1.0,
+        "height": 25,
+        "isolate": false,
+        "linkPosition": [
+          31.68,
+          -20.0,
+          2086.86
+        ],
+        "pointLightGain": 32.0,
+        "pose": "CONTROLLED",
+        "receiverAnchor": {
+          "evidence": "GPU first-hit receiver sample on the raised platform top, within the visible Triforce emblem region.",
+          "normal": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "pixel": [
+            500,
+            133
+          ],
+          "resource": "objects/object_mjin/gWarpPadTopTex",
+          "worldPosition": [
+            31.68,
+            -20.0,
+            2086.86
+          ]
+        }
+      },
+      "nightFlag": 0,
+      "notes": "Full Temple compositor with Navi 32x authored harness diagnostic and Link on a measured GPU-hit sample of the Triforce platform top. The placement is a controlled test pose, not a gameplay spawn; image acceptance remains pending.",
+      "status": "MAPPED",
+      "viewId": "VIEW_NAVI_RECEIVER"
+    },
+    {
+      "category": "POINT_LIGHT",
+      "dayTime": 27307,
+      "entrance": 83,
+      "entranceHex": "0x053",
+      "expectDirectionalLight": true,
+      "expectedRoom": 1,
+      "expectedScene": 67,
+      "expectedSceneHex": "0x43",
+      "freezePlayer": true,
+      "freezeTime": true,
+      "id": "NAVI_TRIFORCE_LINK_BLUE_SPILL",
+      "linkAge": 1,
+      "mappingEvidenceId": "TEMPLE_ENTR_053",
+      "naviPilot": {
+        "emitterScale": 1.0,
+        "height": 25,
+        "isolate": true,
+        "linkPosition": [
+          31.68,
+          -20.0,
+          2086.86
+        ],
+        "pointLightGain": 128.0,
+        "pointLightTint": [
+          0.0125,
+          0.04,
+          1.0
+        ],
+        "pose": "CONTROLLED",
+        "positionOffset": [
+          35.0,
+          55.0,
+          25.0
+        ],
+        "receiverAnchor": {
+          "evidence": "GPU first-hit sample from the same frozen receiver view, on the raised Triforce platform top.",
+          "normal": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "pixel": [
+            326,
+            257
+          ],
+          "resource": "objects/object_mjin/gWarpPadTopTex",
+          "worldPosition": [
+            66.6334,
+            -20.0,
+            2111.8521
+          ]
+        }
+      },
+      "nightFlag": 0,
+      "notes": "Isolated authored 128x blue-channel Navi point-light diagnostic. Navi is placed directly above the Triforce receiver and toward the camera side of Link to expose direct response on both receivers. Red/green are attenuated to preserve blue chroma through ACES; not native OoT light color or production material calibration.",
+      "status": "MAPPED",
+      "viewId": "VIEW_NAVI_RECEIVER"
+    },
+    {
+      "category": "POINT_LIGHT",
+      "dayTime": 27307,
+      "entrance": 83,
+      "entranceHex": "0x053",
+      "expectDirectionalLight": true,
+      "expectedRoom": 1,
+      "expectedScene": 67,
+      "expectedSceneHex": "0x43",
+      "freezePlayer": true,
+      "freezeTime": true,
+      "id": "NAVI_TRIFORCE_LINK_BLUE_SPILL_PRODUCTION",
+      "linkAge": 1,
+      "mappingEvidenceId": "TEMPLE_ENTR_053",
+      "naviPilot": {
+        "emitterScale": 1.0,
+        "height": 25,
+        "isolate": false,
+        "linkPosition": [
+          31.68,
+          -20.0,
+          2086.86
+        ],
+        "pointLightGain": 128.0,
+        "pointLightTint": [
+          0.0125,
+          0.04,
+          1.0
+        ],
+        "pose": "CONTROLLED",
+        "positionOffset": [
+          35.0,
+          55.0,
+          25.0
+        ],
+        "receiverAnchor": {
+          "evidence": "GPU first-hit sample from the same frozen receiver view, on the raised Triforce platform top.",
+          "normal": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "pixel": [
+            326,
+            257
+          ],
+          "resource": "objects/object_mjin/gWarpPadTopTex",
+          "worldPosition": [
+            66.6334,
+            -20.0,
+            2111.8521
+          ]
+        }
+      },
+      "nightFlag": 0,
+      "notes": "Production-composite view of the same authored 128x blue-channel Navi point-light diagnostic above the Triforce receiver and toward the camera side of Link. It tests the receiver response through the real compositor; it is not native-light calibration.",
+      "status": "MAPPED",
+      "viewId": "VIEW_NAVI_RECEIVER"
+    },
+    {
+      "category": "REFLECTION_SURFACE",
+      "dayTime": 27307,
+      "entrance": 83,
+      "entranceHex": "0x053",
+      "expectDirectionalLight": true,
+      "expectedRoom": 1,
+      "expectedScene": 67,
+      "expectedSceneHex": "0x43",
+      "freezePlayer": true,
+      "freezeTime": true,
+      "id": "NAVI_TEMPLE_REFLECTIVE_FLOOR",
+      "linkAge": 1,
+      "mappingEvidenceId": "TEMPLE_ENTR_053",
+      "naviPilot": {
+        "emitterScale": 1.0,
+        "height": 25,
+        "isolate": false,
+        "linkPosition": [
+          31.68,
+          -20.0,
+          2086.86
+        ],
+        "pointLightGain": 1.0,
+        "pointLightTint": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "pose": "CONTROLLED",
+        "positionOffset": [
+          30.0,
+          45.0,
+          20.0
+        ],
+        "receiverAnchor": {
+          "evidence": "Temple ceramic mosaic floor with roughness 0.28, specular 0.90, reflectivity 0.18.",
+          "normal": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "pixel": [
+            320,
+            360
+          ],
+          "resource": "scenes/shared/tokinoma_scene/tokinoma_sceneTex_011FA0",
+          "worldPosition": [
+            0.0,
+            -40.0,
+            1800.0
+          ]
+        }
+      },
+      "nightFlag": 0,
+      "notes": "Temple of Time ceramic mosaic floor (tokinoma_sceneTex_011FA0) BRDF response and specular reflection of Navi under production physical lighting.",
+      "status": "MAPPED",
+      "viewId": "VIEW_NAVI_RECEIVER"
+    },
+    {
+      "category": "REFLECTION_SURFACE",
+      "dayTime": 27307,
+      "entrance": 83,
+      "entranceHex": "0x053",
+      "expectDirectionalLight": true,
+      "expectedRoom": 1,
+      "expectedScene": 67,
+      "expectedSceneHex": "0x43",
+      "freezePlayer": true,
+      "freezeTime": true,
+      "id": "NAVI_TEMPLE_ELECTRIC_BLUE",
+      "linkAge": 1,
+      "mappingEvidenceId": "TEMPLE_ENTR_053",
+      "naviPilot": {
+        "color": "ELECTRIC_BLUE",
+        "emitterScale": 2.0,
+        "height": 25,
+        "isolate": false,
+        "linkPosition": [
+          31.68,
+          -20.0,
+          2086.86
+        ],
+        "pointLightGain": 8.0,
+        "pointLightTint": [
+          0.15,
+          0.55,
+          1.0
+        ],
+        "pose": "CONTROLLED",
+        "positionOffset": [
+          30.0,
+          45.0,
+          20.0
+        ],
+        "receiverAnchor": {
+          "evidence": "Temple ceramic mosaic floor under vibrant electric blue point light.",
+          "normal": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "pixel": [
+            320,
+            360
+          ],
+          "resource": "scenes/shared/tokinoma_scene/tokinoma_sceneTex_011FA0",
+          "worldPosition": [
+            0.0,
+            -40.0,
+            1800.0
+          ]
+        }
+      },
+      "nightFlag": 0,
+      "notes": "Temple of Time with Navi emitting vivid electric blue light ([0.15, 0.55, 1.0]) illuminating Link and generating specular reflection on the ceramic mosaic floor.",
+      "status": "MAPPED",
+      "viewId": "VIEW_NAVI_RECEIVER"
+    },
+    {
+      "category": "POINT_LIGHT",
+      "dayTime": 27307,
+      "entrance": 238,
+      "entranceHex": "0x0EE",
+      "expectDirectionalLight": true,
+      "expectedRoom": 0,
+      "expectedScene": 85,
+      "expectedSceneHex": "0x55",
+      "freezePlayer": true,
+      "freezeTime": true,
+      "id": "NAVI_KOKIRI_ELECTRIC_BLUE",
+      "linkAge": 1,
+      "mappingEvidenceId": "KOKIRI_ENTR_0EE",
+      "naviPilot": {
+        "color": "ELECTRIC_BLUE",
+        "emitterScale": 2.0,
+        "height": 25,
+        "isolate": false,
+        "pointLightGain": 8.0,
+        "pointLightTint": [
+          0.15,
+          0.55,
+          1.0
+        ],
+        "pose": "CONTROLLED",
+        "positionOffset": [
+          35.0,
+          45.0,
+          30.0
+        ],
+        "receiverAnchor": {
+          "evidence": "Kokiri Forest ground under electric blue Navi light.",
+          "normal": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "pixel": [
+            320,
+            360
+          ],
+          "resource": "scenes/shared/spot04_scene/spot04_sceneTex_00A1C0",
+          "worldPosition": [
+            -160.0,
+            0.0,
+            1400.0
+          ]
+        }
+      },
+      "nightFlag": 0,
+      "notes": "Kokiri Forest with Navi emitting electric blue light ([0.15, 0.55, 1.0]) casting vibrant blue direct and bounce light onto the grass, ground, and Link.",
+      "status": "MAPPED",
+      "viewId": "VIEW_NAVI_RECEIVER"
+    },
+    {
+      "category": "REFLECTION_SURFACE",
+      "dayTime": 49152,
+      "entrance": 83,
+      "entranceHex": "0x053",
+      "expectDirectionalLight": false,
+      "expectedRoom": 1,
+      "expectedScene": 67,
+      "expectedSceneHex": "0x43",
+      "freezePlayer": true,
+      "freezeTime": true,
+      "id": "NAVI_TEMPLE_NIGHT_SOLE_LIGHT",
+      "linkAge": 1,
+      "mappingEvidenceId": "TEMPLE_ENTR_053",
+      "naviPilot": {
+        "color": "ELECTRIC_BLUE",
+        "emitterScale": 2.0,
+        "height": 25,
+        "isolate": false,
+        "linkPosition": [
+          31.68,
+          -20.0,
+          2086.86
+        ],
+        "pointLightGain": 12.0,
+        "pointLightTint": [
+          0.15,
+          0.55,
+          1.0
+        ],
+        "pose": "CONTROLLED",
+        "positionOffset": [
+          30.0,
+          45.0,
+          20.0
+        ],
+        "receiverAnchor": {
+          "evidence": "Temple ceramic mosaic floor illuminated exclusively by electric blue Navi point light and reflections.",
+          "normal": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "pixel": [
+            320,
+            360
+          ],
+          "resource": "scenes/shared/tokinoma_scene/tokinoma_sceneTex_011FA0",
+          "worldPosition": [
+            0.0,
+            -40.0,
+            1800.0
+          ]
+        }
+      },
+      "naviSoleLight": true,
+      "nightFlag": 1,
+      "nightMode": true,
+      "notes": "Temple of Time nocturnal diagnostic mode where Navi is the SOLE light source (electric blue [0.15, 0.55, 1.0]), casting direct illumination, specular reflection on ceramic mosaic floor, and bounce GI in darkness.",
+      "status": "MAPPED",
+      "viewId": "VIEW_NAVI_RECEIVER"
+    },
+    {
+      "category": "POINT_LIGHT",
+      "dayTime": 49152,
+      "entrance": 238,
+      "entranceHex": "0x0EE",
+      "expectDirectionalLight": false,
+      "expectedRoom": 0,
+      "expectedScene": 85,
+      "expectedSceneHex": "0x55",
+      "freezePlayer": true,
+      "freezeTime": true,
+      "id": "NAVI_KOKIRI_NIGHT_SOLE_LIGHT",
+      "linkAge": 1,
+      "mappingEvidenceId": "KOKIRI_ENTR_0EE",
+      "naviPilot": {
+        "color": "ELECTRIC_BLUE",
+        "emitterScale": 2.0,
+        "height": 25,
+        "isolate": false,
+        "pointLightGain": 12.0,
+        "pointLightTint": [
+          0.15,
+          0.55,
+          1.0
+        ],
+        "pose": "CONTROLLED",
+        "positionOffset": [
+          35.0,
+          45.0,
+          30.0
+        ],
+        "receiverAnchor": {
+          "evidence": "Kokiri Forest ground illuminated exclusively by electric blue Navi point light.",
+          "normal": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "pixel": [
+            320,
+            360
+          ],
+          "resource": "scenes/shared/spot04_scene/spot04_sceneTex_00A1C0",
+          "worldPosition": [
+            -160.0,
+            0.0,
+            1400.0
+          ]
+        }
+      },
+      "naviSoleLight": true,
+      "nightFlag": 1,
+      "nightMode": true,
+      "notes": "Kokiri Forest nocturnal diagnostic mode where Navi is the SOLE light source (electric blue [0.15, 0.55, 1.0]), casting direct illumination on ground/grass and Link in complete darkness.",
+      "status": "MAPPED",
+      "viewId": "VIEW_NAVI_RECEIVER"
+    },
+    {
+      "category": "WATER",
+      "dayTime": 27307,
+      "entrance": 258,
+      "entranceHex": "0x102",
+      "expectDirectionalLight": true,
+      "expectedRoom": 0,
+      "expectedScene": 87,
+      "expectedSceneHex": "0x57",
+      "freezePlayer": true,
+      "freezeTime": true,
+      "id": "NAVI_LAKE_WATER_FEET",
+      "linkAge": 1,
+      "mappingEvidenceId": "LAKE_ENTR_102",
+      "naviPilot": {
+        "color": "ELECTRIC_BLUE",
+        "emitterScale": 2.0,
+        "height": 25,
+        "isolate": false,
+        "linkPosition": [
+          -1150.0,
+          -1318.0,
+          3850.0
+        ],
+        "pointLightGain": 12.0,
+        "pointLightTint": [
+          0.15,
+          0.55,
+          1.0
+        ],
+        "pose": "CONTROLLED",
+        "positionOffset": [
+          30.0,
+          45.0,
+          20.0
+        ],
+        "receiverAnchor": {
+          "evidence": "Lake Hylia water surface reflecting Link, Navi and environment.",
+          "normal": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "pixel": [
+            320,
+            360
+          ],
+          "resource": "scenes/shared/spot06_scene/spot06_sceneTex_00DCB8",
+          "worldPosition": [
+            -1150.0,
+            -1313.0,
+            3850.0
+          ]
+        }
+      },
+      "nightFlag": 0,
+      "notes": "Link standing in shallow water with water at his feet in Lake Hylia, accompanied by Navi emitting electric blue light to test water specular reflections and refraction.",
+      "status": "MAPPED",
+      "viewId": "VIEW_NAVI_RECEIVER"
+    },
+    {
+      "category": "WATER",
+      "dayTime": 49152,
+      "entrance": 258,
+      "entranceHex": "0x102",
+      "expectDirectionalLight": false,
+      "expectedRoom": 0,
+      "expectedScene": 87,
+      "expectedSceneHex": "0x57",
+      "freezePlayer": true,
+      "freezeTime": true,
+      "id": "NAVI_LAKE_NIGHT_WATER_FEET",
+      "linkAge": 1,
+      "mappingEvidenceId": "LAKE_ENTR_102",
+      "naviPilot": {
+        "color": "ELECTRIC_BLUE",
+        "emitterScale": 2.0,
+        "height": 25,
+        "isolate": false,
+        "linkPosition": [
+          -1150.0,
+          -1318.0,
+          3850.0
+        ],
+        "pointLightGain": 12.0,
+        "pointLightTint": [
+          0.15,
+          0.55,
+          1.0
+        ],
+        "pose": "CONTROLLED",
+        "positionOffset": [
+          30.0,
+          45.0,
+          20.0
+        ],
+        "receiverAnchor": {
+          "evidence": "Lake Hylia nocturnal water surface reflecting electric blue Navi light and Link.",
+          "normal": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "pixel": [
+            320,
+            360
+          ],
+          "resource": "scenes/shared/spot06_scene/spot06_sceneTex_00DCB8",
+          "worldPosition": [
+            -1150.0,
+            -1313.0,
+            3850.0
+          ]
+        }
+      },
+      "naviSoleLight": false,
+      "nightFlag": 1,
+      "nightMode": true,
+      "notes": "Nighttime in Lake Hylia with Link in shallow water with water at his feet, illuminated by electric blue Navi point light reflected on the lake water surface.",
+      "status": "MAPPED",
+      "viewId": "VIEW_NAVI_RECEIVER"
+    }
+  ],
+  "schemaVersion": 1,
+  "verifiedMappings": [
+    {
+      "entrance": 238,
+      "evidence": "soh/include/tables/entrance_table.h defines ENTR_KOKIRI_FOREST_0 at 0x0EE for SCENE_KOKIRI_FOREST; the fork scene table maps Kokiri Forest to 0x55 and entrance room is 0.",
+      "id": "KOKIRI_ENTR_0EE",
+      "room": 0,
+      "scene": 85
+    },
+    {
+      "entrance": 258,
+      "evidence": "entrance_table.h: ENTR_LAKE_HYLIA_NORTH_EXIT at 0x102, SCENE_LAKE_HYLIA, spawn 0. scene_table.h maps SCENE_LAKE_HYLIA to 0x57.",
+      "id": "LAKE_ENTR_102",
+      "room": 0,
+      "scene": 87
+    },
+    {
+      "entrance": 83,
+      "evidence": "entrance_table.h: ENTR_TEMPLE_OF_TIME_ENTRANCE 0x053, scene_table.h: SCENE_TEMPLE_OF_TIME 0x43. Spawn index 0 is not the room index. Runtime SCENE_READY log in 20261014_112821_098_TEMPLE_INTERIOR_NORMAL records room 1 twice.",
+      "id": "TEMPLE_ENTR_053",
+      "room": 1,
+      "scene": 67
+    },
+    {
+      "entrance": 205,
+      "evidence": "entrance_table.h: 0x0CD defines ENTR_HYRULE_FIELD_PAST_BRIDGE_SPAWN, SCENE_HYRULE_FIELD, spawn 0. scene_table.h maps SCENE_HYRULE_FIELD to 0x51. Actual room is a runtime gate.",
+      "id": "FIELD_ENTR_0CD",
+      "room": 0,
+      "scene": 81
+    },
+    {
+      "entrance": 449,
+      "evidence": "entrance_table.h: ENTR_GORON_CITY_DARUNIA_ROOM_EXIT 0x1C1, scene_table.h: SCENE_GORON_CITY 0x62, spawn 1 loads room 1. spot18_room_1 contains two authentic lit Obj_Syokudai torches at (-52, 40, -1473) and (222, 40, -1473).",
+      "id": "GORON_CITY_ENTR_1C1",
+      "room": 1,
+      "scene": 98
+    }
+  ],
+  "views": [
+    {
+      "camera": "GAME_DEFAULT_AT_SCENARIO_SPAWN",
+      "cameraWarmupFrames": 120,
+      "id": "VIEW_00_DEFAULT_SPAWN_CAMERA",
+      "playerPosition": "GAME_DEFAULT_SPAWN",
+      "stableFrames": 30,
+      "timeoutFrames": 1200
+    },
+    {
+      "at": [
+        0,
+        -1300,
+        4000
+      ],
+      "camera": "MANIFEST_FIXED_POSE",
+      "cameraWarmupFrames": 120,
+      "eye": [
+        -1600,
+        -600,
+        2400
+      ],
+      "fovy": 60,
+      "id": "VIEW_LAKE_WATER_OVERVIEW",
+      "notes": "Diagnostic candidate in scene coordinates; visible water must be checked in the actual capture before accepting water evidence.",
+      "playerPosition": "GAME_DEFAULT_SPAWN",
+      "stableFrames": 30,
+      "timeoutFrames": 1200,
+      "up": [
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "camera": "NAVI_RECEIVER_CLOSEUP",
+      "cameraWarmupFrames": 120,
+      "id": "VIEW_NAVI_RECEIVER",
+      "playerPosition": "GAME_DEFAULT_SPAWN",
+      "stableFrames": 30,
+      "timeoutFrames": 1200
+    }
+  ]
+}

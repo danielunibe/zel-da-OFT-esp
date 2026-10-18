@@ -1,0 +1,17 @@
+{
+  "status": "FAIL",
+  "runId": "20261016_104412_598_GORON_CITY_DARUNIA_TORCHES_NORMAL",
+  "pid": 33252,
+  "executable": "C:\\Users\\danie\\Desktop\\Zeldacouch\\zel-da-OFT-esp-main (3)\\zel-da-OFT-esp-main\\build\\OCZ_RTX_16_VERIFIED_RC2\\soh.exe",
+  "workingDirectory": "C:\\Users\\danie\\Desktop\\Zeldacouch\\zel-da-OFT-esp-main (3)\\zel-da-OFT-esp-main\\runtime\\build-test",
+  "runRoot": "C:\\Users\\danie\\Desktop\\Zeldacouch\\zel-da-OFT-esp-main (3)\\zel-da-OFT-esp-main\\source-overlay\\reports\\scene_harness\\20261016_104412_598_GORON_CITY_DARUNIA_TORCHES_NORMAL",
+  "processExited": false,
+  "background": false,
+  "backgroundCleanup": "NOT_REQUESTED",
+  "backendDeviceRemoved": false,
+  "evidenceVerification": "NOT_RUN_CAPTURE_INCOMPLETE",
+  "originalSaveUnchanged": true,
+  "originalHashesBefore": {},
+  "originalHashesAfter": {},
+  "newOtrGenerated": false
+}

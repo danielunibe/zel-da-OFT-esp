@@ -20,7 +20,7 @@ namespace Fast {
 constexpr uint32_t kDxrSurfaceFrameCount = 3;
 constexpr uint32_t kDxrSurfaceTextureDescriptorCount = 4096;
 constexpr uint32_t kDxrFrameConstantStride = 1792; // 256-byte aligned CBV slice
-constexpr uint32_t kDxrShaderAbiVersion = 4; // source identity and explicit emitter quadrature
+constexpr uint32_t kDxrShaderAbiVersion = 5; // + waterOptics float4 in the 128-byte material record
 
 // One CPU layout for both DXR pipelines. AnyHitShadow also evaluates material
 // data and reads projection/bounds near the END of FrameConstants in HLSL.
@@ -96,18 +96,29 @@ struct DxrInstanceMaterialData {
     uint32_t primitiveColor;
     uint32_t environmentColor;
     uint32_t reserved[2];
+    // OCZ-WATER-01 (ABI v5): per-instance aquatic optics. Only meaningful
+    // when materialType == MaterialType::WATER. x: WaterClass ordinal,
+    // y: wave scale, z: flow speed, w: absorption scale. artWeight and
+    // opticsBlend are derived from the class in WaterMaterial.hlsli so the
+    // class remains the single semantic identity published per instance.
+    float waterOptics[4];
 };
-static_assert(sizeof(DxrInstanceMaterialData) == 112 &&
+static_assert(sizeof(DxrInstanceMaterialData) == 128 &&
               offsetof(DxrInstanceMaterialData, baseColor) == 64 &&
               offsetof(DxrInstanceMaterialData, textureIndex1) == 80 &&
-              offsetof(DxrInstanceMaterialData, primitiveColor) == 96,
-              "DXR material record layout must match the HLSL 112-byte record");
+              offsetof(DxrInstanceMaterialData, primitiveColor) == 96 &&
+              offsetof(DxrInstanceMaterialData, waterOptics) == 112,
+              "DXR material record layout must match the HLSL 128-byte record");
 
 struct DxrEmitterTriangle {
     uint32_t ownerId, recordIndex, primitiveIndex;
     float position[3][3];
     float area;
 };
+// OCZ-LAVA-02: sentinel owner for emitter triangles captured from real
+// LAVA-classified geometry. Never collides with a native light owner id, so
+// the Navi pilot selection can never pick magma samples and vice versa.
+constexpr uint32_t kDxrLavaEmitterOwnerId = 0xFFFFFFFEu;
 struct DxrSurfaceIdentity {
     uint64_t instanceId, assetId, materialId;
     uint32_t geometryMode, ownerId, role;

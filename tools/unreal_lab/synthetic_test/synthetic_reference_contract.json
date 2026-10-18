@@ -1,0 +1,238 @@
+{
+  "schema_version": "1.0.0",
+  "contract_id": "OCZ_CONTRACT_SYNTHETIC_TEST_R0_F1",
+  "metadata": {
+    "source_engine": "Ocarina Couch Edition RTX (D3D12/DXR)",
+    "target_engine": "Unreal Engine 5.8.3",
+    "scene_id": "SYNTHETIC_TEST",
+    "room_id": 0,
+    "frame_id": 1,
+    "timestamp": null
+  },
+  "coordinate_system": {
+    "source_space": "Fast3D_OoT (Right-handed, Y-up)",
+    "target_space": "Unreal_Engine_5 (Left-handed, Z-up, cm)",
+    "scale_factor": 1.0,
+    "axis_mapping": {
+      "X_ue": "-Z_oot",
+      "Y_ue": "+X_oot",
+      "Z_ue": "+Y_oot"
+    }
+  },
+  "geometry_manifest": {
+    "usd_file": "synthetic_reference_scene.usda",
+    "meshes": [
+      {
+        "mesh_id": "GroundPlane",
+        "resource_path": "synthetic/ground_plane",
+        "material_id": "MAT_GROUND_STONE_MATTE",
+        "is_static": true,
+        "vertex_count": 4,
+        "index_count": 6,
+        "transform_oot": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation_deg": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "transform_ue": {
+          "position": [
+            -0.0,
+            0.0,
+            0.0
+          ],
+          "rotation_deg": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      },
+      {
+        "mesh_id": "CeramicBlock",
+        "resource_path": "synthetic/ceramic_block",
+        "material_id": "MAT_BLOCK_CERAMIC",
+        "is_static": true,
+        "vertex_count": 24,
+        "index_count": 36,
+        "transform_oot": {
+          "position": [
+            0.0,
+            30.0,
+            -80.0
+          ],
+          "rotation_deg": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "transform_ue": {
+          "position": [
+            80.0,
+            0.0,
+            30.0
+          ],
+          "rotation_deg": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      }
+    ]
+  },
+  "materials": {
+    "MAT_GROUND_STONE_MATTE": {
+      "material_id": "MAT_GROUND_STONE_MATTE",
+      "material_type": "STONE",
+      "base_color": [
+        0.45,
+        0.45,
+        0.42
+      ],
+      "texture_path": null,
+      "roughness": 0.85,
+      "specular": 0.25,
+      "f0": 0.01,
+      "reflectivity": 1.0,
+      "emissive_strength": 0.0,
+      "ior": 1.0,
+      "alpha_mode": 0,
+      "confidence": "PHYSICAL_VERIFIED",
+      "optical_model": "Fresnel_Schlick_GGX"
+    },
+    "MAT_BLOCK_CERAMIC": {
+      "material_id": "MAT_BLOCK_CERAMIC",
+      "material_type": "CERAMIC",
+      "base_color": [
+        0.15,
+        0.55,
+        0.85
+      ],
+      "texture_path": null,
+      "roughness": 0.28,
+      "specular": 0.9,
+      "f0": 0.036,
+      "reflectivity": 1.0,
+      "emissive_strength": 0.0,
+      "ior": 1.0,
+      "alpha_mode": 0,
+      "confidence": "PHYSICAL_VERIFIED",
+      "optical_model": "Fresnel_Schlick_GGX"
+    }
+  },
+  "lights": [
+    {
+      "light_id": "SunDirectionalLight",
+      "type": "DIRECTIONAL",
+      "source_name": "Sun_Exterior",
+      "color_rgb": [
+        1.0,
+        0.98,
+        0.9
+      ],
+      "intensity": 10000.0,
+      "attenuation_radius": 500.0,
+      "position_oot": [
+        0.0,
+        500.0,
+        0.0
+      ],
+      "direction_oot": [
+        0.0,
+        -0.7071,
+        -0.7071
+      ],
+      "position_ue": [
+        -0.0,
+        0.0,
+        500.0
+      ],
+      "direction_ue": [
+        0.7071,
+        0.0,
+        -0.7071
+      ]
+    },
+    {
+      "light_id": "NaviPointLight",
+      "type": "POINT",
+      "source_name": "Navi_Actor",
+      "color_rgb": [
+        0.15,
+        0.55,
+        1.0
+      ],
+      "intensity": 2500.0,
+      "attenuation_radius": 300.0,
+      "position_oot": [
+        0.0,
+        90.0,
+        -80.0
+      ],
+      "direction_oot": null,
+      "position_ue": [
+        80.0,
+        0.0,
+        90.0
+      ],
+      "direction_ue": null
+    }
+  ],
+  "cameras": [
+    {
+      "camera_id": "ReferenceCamera",
+      "fov_degrees": 60.0,
+      "aspect_ratio": 1.3333333333333333,
+      "near_clip": 10.0,
+      "far_clip": 12800.0,
+      "position_oot": [
+        0.0,
+        100.0,
+        150.0
+      ],
+      "target_oot": [
+        0.0,
+        30.0,
+        -80.0
+      ],
+      "position_ue": [
+        -150.0,
+        0.0,
+        100.0
+      ],
+      "target_ue": [
+        80.0,
+        0.0,
+        30.0
+      ]
+    }
+  ]
+}

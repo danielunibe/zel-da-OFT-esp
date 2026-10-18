@@ -2,7 +2,7 @@
 
 // CANONICAL MATERIAL RULES PILOT
 // Dataset-seeded rules with source-verified collectible material corrections.
-// Target: Ocarina of Time PC — Couch Edition V03.1
+// Target: Ocarina of Time PC â€” Couch Edition V03.1
 // UI protection is determined from draw state before texture rules are applied.
 
 #include "fast/MaterialRegistry.h"
@@ -33,6 +33,9 @@ struct StaticMaterialRule {
     // Exact source-verified fallback for surfaces that need DXR relighting
     // even when captured RSP state does not identify their vertex RGB as lit.
     bool dxrHybridRelight = false;
+    // N64 additive clerestory window sunbeams / decorative beams:
+    // non-occluding, non-shadow-casting, additive translucent surfaces.
+    bool decorativeBeam = false;
 };
 
 static const StaticMaterialRule gMaterialRulesPilot[] = {
@@ -89,8 +92,8 @@ static const StaticMaterialRule gMaterialRulesPilot[] = {
     { "objects/gameplay_keep/gCuttableShrubLeafTFragmentTex", MaterialType::FOLIAGE, 0.8f, 0.0f, 0.1f, 0.0f },
     { "objects/gameplay_keep/gCuttableShrubTex", MaterialType::FOLIAGE, 0.8f, 0.0f, 0.1f, 0.0f },
     { "objects/gameplay_keep/gDebugCheckeredFloorTex", MaterialType::STONE, 0.85f, 0.0f, 0.25f, 0.0f },
-    { "objects/gameplay_keep/gDecorativeFlameMaskTex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
-    { "objects/gameplay_keep/gDecorativeFlameTex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "objects/gameplay_keep/gDecorativeFlameMaskTex", MaterialType::EMISSIVE, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "objects/gameplay_keep/gDecorativeFlameTex", MaterialType::EMISSIVE, 0.3f, 0.0f, 0.2f, 0.85f },
     { "objects/gameplay_keep/gDekuStickOverflowTex", MaterialType::WOOD, 0.75f, 0.0f, 0.15f, 0.0f },
     { "objects/gameplay_keep/gDekuStickTex", MaterialType::WOOD, 0.75f, 0.0f, 0.15f, 0.0f },
     { "objects/gameplay_keep/gDoorMetalBarsTex", MaterialType::METAL, 0.35f, 0.9f, 0.8f, 0.0f },
@@ -119,16 +122,16 @@ static const StaticMaterialRule gMaterialRulesPilot[] = {
     { "objects/gameplay_keep/gEffBombExplosion6Tex", MaterialType::EMISSIVE, 0.35f, 0.0f, 0.2f, 1.2f },
     { "objects/gameplay_keep/gEffBombExplosion7Tex", MaterialType::EMISSIVE, 0.35f, 0.0f, 0.2f, 1.2f },
     { "objects/gameplay_keep/gEffBombExplosion8Tex", MaterialType::EMISSIVE, 0.35f, 0.0f, 0.2f, 1.2f },
-    { "objects/gameplay_keep/gEffEnemyDeathFlame10Tex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
-    { "objects/gameplay_keep/gEffEnemyDeathFlame1Tex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
-    { "objects/gameplay_keep/gEffEnemyDeathFlame2Tex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
-    { "objects/gameplay_keep/gEffEnemyDeathFlame3Tex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
-    { "objects/gameplay_keep/gEffEnemyDeathFlame4Tex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
-    { "objects/gameplay_keep/gEffEnemyDeathFlame5Tex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
-    { "objects/gameplay_keep/gEffEnemyDeathFlame6Tex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
-    { "objects/gameplay_keep/gEffEnemyDeathFlame7Tex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
-    { "objects/gameplay_keep/gEffEnemyDeathFlame8Tex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
-    { "objects/gameplay_keep/gEffEnemyDeathFlame9Tex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "objects/gameplay_keep/gEffEnemyDeathFlame10Tex", MaterialType::EMISSIVE, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "objects/gameplay_keep/gEffEnemyDeathFlame1Tex", MaterialType::EMISSIVE, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "objects/gameplay_keep/gEffEnemyDeathFlame2Tex", MaterialType::EMISSIVE, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "objects/gameplay_keep/gEffEnemyDeathFlame3Tex", MaterialType::EMISSIVE, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "objects/gameplay_keep/gEffEnemyDeathFlame4Tex", MaterialType::EMISSIVE, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "objects/gameplay_keep/gEffEnemyDeathFlame5Tex", MaterialType::EMISSIVE, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "objects/gameplay_keep/gEffEnemyDeathFlame6Tex", MaterialType::EMISSIVE, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "objects/gameplay_keep/gEffEnemyDeathFlame7Tex", MaterialType::EMISSIVE, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "objects/gameplay_keep/gEffEnemyDeathFlame8Tex", MaterialType::EMISSIVE, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "objects/gameplay_keep/gEffEnemyDeathFlame9Tex", MaterialType::EMISSIVE, 0.3f, 0.0f, 0.2f, 0.85f },
     { "objects/gameplay_keep/gEffMagmaBubble1Tex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
     { "objects/gameplay_keep/gEffMagmaBubble2Tex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
     { "objects/gameplay_keep/gEffMagmaBubble3Tex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
@@ -137,7 +140,7 @@ static const StaticMaterialRule gMaterialRulesPilot[] = {
     { "objects/gameplay_keep/gEffMagmaBubble6Tex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
     { "objects/gameplay_keep/gEffMagmaBubble7Tex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
     { "objects/gameplay_keep/gEffMagmaBubble8Tex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
-    { "objects/gameplay_keep/gEffShockwaveTex", MaterialType::WATER, 0.05f, 0.0f, 0.5f, 0.0f },
+    { "objects/gameplay_keep/gEffShockwaveTex", MaterialType::MAGIC, 0.35f, 0.0f, 0.3f, 0.6f },
     { "objects/gameplay_keep/gEffWaterRippleTex", MaterialType::WATER, 0.05f, 0.0f, 0.5f, 0.0f },
     { "objects/gameplay_keep/gEffWaterSplash1Tex", MaterialType::WATER, 0.05f, 0.0f, 0.5f, 0.0f },
     { "objects/gameplay_keep/gEffWaterSplash2Tex", MaterialType::WATER, 0.05f, 0.0f, 0.5f, 0.0f },
@@ -173,7 +176,7 @@ static const StaticMaterialRule gMaterialRulesPilot[] = {
     { "objects/gameplay_keep/gSignPostWoodTex", MaterialType::WOOD, 0.75f, 0.0f, 0.15f, 0.0f },
     { "objects/gameplay_keep/gSignRectangularFrontTex", MaterialType::WOOD, 0.75f, 0.0f, 0.15f, 0.0f },
     { "objects/gameplay_keep/gSignRectangularSideTex", MaterialType::WOOD, 0.75f, 0.0f, 0.15f, 0.0f },
-    { "objects/gameplay_keep/gTorchFlameTex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "objects/gameplay_keep/gTorchFlameTex", MaterialType::EMISSIVE, 0.3f, 0.0f, 0.2f, 0.85f },
     { "objects/gameplay_keep/gUnknownEffStone1Tex", MaterialType::STONE, 0.85f, 0.0f, 0.25f, 0.0f },
     { "objects/gameplay_keep/gUnknownEffStone2Tex", MaterialType::STONE, 0.85f, 0.0f, 0.25f, 0.0f },
     { "objects/gameplay_keep/gUnknownEffStone3Tex", MaterialType::STONE, 0.85f, 0.0f, 0.25f, 0.0f },
@@ -240,7 +243,7 @@ static const StaticMaterialRule gMaterialRulesPilot[] = {
     { "objects/object_bdoor/gBossDoorGanonsCastleTex", MaterialType::WOOD, 0.75f, 0.0f, 0.15f, 0.0f },
     { "objects/object_bdoor/gBossDoorShadowTex", MaterialType::WOOD, 0.75f, 0.0f, 0.15f, 0.0f },
     { "objects/object_bdoor/gBossDoorSpiritTex", MaterialType::WOOD, 0.75f, 0.0f, 0.15f, 0.0f },
-    { "objects/object_bdoor/gBossDoorWaterTex", MaterialType::WATER, 0.05f, 0.0f, 0.5f, 0.0f },
+    { "objects/object_bdoor/gBossDoorWaterTex", MaterialType::METAL, 0.35f, 0.65f, 0.7f, 0.0f },
     { "objects/object_bg/gChuGirlEyeClosedTex", MaterialType::CHARACTER, 0.65f, 0.0f, 0.3f, 0.0f },
     { "objects/object_bg/gChuGirlEyeHalfTex", MaterialType::CHARACTER, 0.65f, 0.0f, 0.3f, 0.0f },
     { "objects/object_bg/gChuGirlEyeOpenTex", MaterialType::CHARACTER, 0.65f, 0.0f, 0.3f, 0.0f },
@@ -320,10 +323,10 @@ static const StaticMaterialRule gMaterialRulesPilot[] = {
     { "objects/object_dns/gDntJijiEyeOpenTex", MaterialType::CHARACTER, 0.65f, 0.0f, 0.3f, 0.0f },
     { "objects/object_dns/gDntJijiEyeShutTex", MaterialType::CHARACTER, 0.65f, 0.0f, 0.3f, 0.0f },
     { "objects/object_dodongo/gDodongoFaceTex", MaterialType::CHARACTER, 0.65f, 0.0f, 0.3f, 0.0f },
-    { "objects/object_dodongo/gDodongoFire0Tex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
-    { "objects/object_dodongo/gDodongoFire1Tex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
-    { "objects/object_dodongo/gDodongoFire2Tex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
-    { "objects/object_dodongo/gDodongoFire3Tex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "objects/object_dodongo/gDodongoFire0Tex", MaterialType::EMISSIVE, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "objects/object_dodongo/gDodongoFire1Tex", MaterialType::EMISSIVE, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "objects/object_dodongo/gDodongoFire2Tex", MaterialType::EMISSIVE, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "objects/object_dodongo/gDodongoFire3Tex", MaterialType::EMISSIVE, 0.3f, 0.0f, 0.2f, 0.85f },
     { "objects/object_dodongo/gDodongoInsideMouthTex", MaterialType::CHARACTER, 0.65f, 0.0f, 0.3f, 0.0f },
     { "objects/object_dodongo/gDodongoRoughSkinTex", MaterialType::CHARACTER, 0.65f, 0.0f, 0.3f, 0.0f },
     { "objects/object_dodongo/gDodongoSkinTex", MaterialType::CHARACTER, 0.65f, 0.0f, 0.3f, 0.0f },
@@ -360,8 +363,8 @@ static const StaticMaterialRule gMaterialRulesPilot[] = {
     { "objects/object_dy_obj/gGreatFairySpiralBeamGradientTex", MaterialType::MAGIC, 0.4f, 0.0f, 0.3f, 0.5f },
     { "objects/object_dy_obj/gGreatFairySpiralBeamPatternTex", MaterialType::MAGIC, 0.4f, 0.0f, 0.3f, 0.5f },
     { "objects/object_efc_doughnut/gDeathMountainCloudNormalTex", MaterialType::EARTH, 0.95f, 0.0f, 0.05f, 0.0f },
-    { "objects/object_efc_fire_ball/gCreationFireBallFlameEffectTex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
-    { "objects/object_efc_fire_ball/gCreationFireBallMaskTex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "objects/object_efc_fire_ball/gCreationFireBallFlameEffectTex", MaterialType::EMISSIVE, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "objects/object_efc_fire_ball/gCreationFireBallMaskTex", MaterialType::EMISSIVE, 0.3f, 0.0f, 0.2f, 0.85f },
     { "objects/object_efc_star_field/object_efc_star_field_Tex_000108", MaterialType::GRASS, 0.9f, 0.0f, 0.08f, 0.0f },
     { "objects/object_efc_star_field/object_efc_star_field_Tex_000FD0", MaterialType::GRASS, 0.9f, 0.0f, 0.08f, 0.0f },
     { "objects/object_ei/gStingerBodyGradientTex", MaterialType::CHARACTER, 0.65f, 0.0f, 0.3f, 0.0f },
@@ -382,16 +385,16 @@ static const StaticMaterialRule gMaterialRulesPilot[] = {
     { "objects/object_fd2/gHoleVolvagiaEyeClosedTex", MaterialType::CHARACTER, 0.65f, 0.0f, 0.3f, 0.0f },
     { "objects/object_fd2/gHoleVolvagiaEyeHalfTex", MaterialType::CHARACTER, 0.65f, 0.0f, 0.3f, 0.0f },
     { "objects/object_fd2/gHoleVolvagiaEyeOpenTex", MaterialType::CHARACTER, 0.65f, 0.0f, 0.3f, 0.0f },
-    { "objects/object_fire/gFire0Tex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
-    { "objects/object_fire/gFire1Tex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
-    { "objects/object_fire/gFire2Tex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
-    { "objects/object_fire/gFire3Tex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
-    { "objects/object_fire/gFire4Tex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
-    { "objects/object_fire/gFire5Tex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
-    { "objects/object_fire/gFire6Tex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
-    { "objects/object_fire/gFire7Tex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
-    { "objects/object_firefly/gFireKeeseTalonTex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
-    { "objects/object_firefly/gFireKeeseWingTex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "objects/object_fire/gFire0Tex", MaterialType::EMISSIVE, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "objects/object_fire/gFire1Tex", MaterialType::EMISSIVE, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "objects/object_fire/gFire2Tex", MaterialType::EMISSIVE, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "objects/object_fire/gFire3Tex", MaterialType::EMISSIVE, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "objects/object_fire/gFire4Tex", MaterialType::EMISSIVE, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "objects/object_fire/gFire5Tex", MaterialType::EMISSIVE, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "objects/object_fire/gFire6Tex", MaterialType::EMISSIVE, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "objects/object_fire/gFire7Tex", MaterialType::EMISSIVE, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "objects/object_firefly/gFireKeeseTalonTex", MaterialType::EMISSIVE, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "objects/object_firefly/gFireKeeseWingTex", MaterialType::EMISSIVE, 0.3f, 0.0f, 0.2f, 0.85f },
     { "objects/object_firefly/gKeeseBodyTex", MaterialType::CHARACTER, 0.65f, 0.0f, 0.3f, 0.0f },
     { "objects/object_firefly/gKeeseEarTex", MaterialType::CHARACTER, 0.65f, 0.0f, 0.3f, 0.0f },
     { "objects/object_firefly/gKeeseEyeTex", MaterialType::CHARACTER, 0.65f, 0.0f, 0.3f, 0.0f },
@@ -428,10 +431,10 @@ static const StaticMaterialRule gMaterialRulesPilot[] = {
     { "objects/object_fu/gWindmillManMouthOpenTex", MaterialType::CHARACTER, 0.65f, 0.0f, 0.3f, 0.0f },
     { "objects/object_fu/gWindmillManMusicBoxTex", MaterialType::WOOD, 0.75f, 0.0f, 0.15f, 0.0f },
     { "objects/object_fu/gWindmillManUpperHornAndCrankTex", MaterialType::STONE, 0.7f, 0.0f, 0.25f, 0.0f },
-    { "objects/object_fw/gFlareDancerBlueFlameTex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "objects/object_fw/gFlareDancerBlueFlameTex", MaterialType::EMISSIVE, 0.3f, 0.0f, 0.2f, 0.85f },
     { "objects/object_fw/gFlareDancerCoreBodyTex", MaterialType::CHARACTER, 0.65f, 0.0f, 0.3f, 0.0f },
-    { "objects/object_fw/gFlareDancerFirePatternTex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
-    { "objects/object_fw/gFlareDancerFireTex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "objects/object_fw/gFlareDancerFirePatternTex", MaterialType::EMISSIVE, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "objects/object_fw/gFlareDancerFireTex", MaterialType::EMISSIVE, 0.3f, 0.0f, 0.2f, 0.85f },
     { "objects/object_fw/gFlareDancerSwordHiltTex", MaterialType::METAL, 0.35f, 0.9f, 0.8f, 0.0f },
     { "objects/object_fz/gFreezardSteamTex", MaterialType::STONE, 0.85f, 0.0f, 0.25f, 0.0f },
     { "objects/object_ganon/gGanondorfBlackLeatherTex", MaterialType::FABRIC, 0.75f, 0.0f, 0.15f, 0.0f },
@@ -494,8 +497,8 @@ static const StaticMaterialRule gMaterialRulesPilot[] = {
     { "objects/object_geldb/gGerudoRedEyeShutTex", MaterialType::CHARACTER, 0.65f, 0.0f, 0.3f, 0.0f },
     { "objects/object_gi_boots_2/object_gi_boots_2Tex_000000", MaterialType::FABRIC, 0.75f, 0.0f, 0.15f, 0.0f },
     { "objects/object_gi_clothes/object_gi_clothesTex_000000", MaterialType::FABRIC, 0.9f, 0.0f, 0.08f, 0.0f },
-    { "objects/object_gi_fire/object_gi_fireTex_000000", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
-    { "objects/object_gi_fire/object_gi_fireTex_000200", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "objects/object_gi_fire/object_gi_fireTex_000000", MaterialType::EMISSIVE, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "objects/object_gi_fire/object_gi_fireTex_000200", MaterialType::EMISSIVE, 0.3f, 0.0f, 0.2f, 0.85f },
     { "objects/object_gi_gloves/object_gi_glovesTex_000000", MaterialType::FABRIC, 0.75f, 0.0f, 0.15f, 0.0f },
     { "objects/object_gi_hoverboots/object_gi_hoverbootsTex_000000", MaterialType::FABRIC, 0.75f, 0.0f, 0.15f, 0.0f },
     { "objects/object_gi_hoverboots/object_gi_hoverbootsTex_000300", MaterialType::FABRIC, 0.75f, 0.0f, 0.15f, 0.0f },
@@ -940,7 +943,10 @@ static const StaticMaterialRule gMaterialRulesPilot[] = {
     { "objects/object_mjin/gWarpPadTopTex", MaterialType::MAGIC, 0.4f, 0.0f, 0.3f, 0.5f },
     { "objects/object_mjin_dark/gShadowMedallionPlatformTex", MaterialType::MAGIC, 0.4f, 0.0f, 0.3f, 0.5f },
     { "objects/object_mjin_flash/gLightMedallionPlatformTex", MaterialType::EMISSIVE, 0.35f, 0.0f, 0.2f, 1.2f },
-    { "objects/object_mjin_ice/gWaterMedallionPlatformTex", MaterialType::WATER, 0.05f, 0.0f, 0.5f, 0.0f },
+    // A medallion warp pad is authored platform geometry, not a liquid body.
+    // Sibling pads classify as MAGIC/EMISSIVE/METAL; WATER here produced a
+    // transmissive liquid model on solid masonry.
+    { "objects/object_mjin_ice/gWaterMedallionPlatformTex", MaterialType::MAGIC, 0.4f, 0.0f, 0.3f, 0.5f },
     { "objects/object_mjin_oka/gOcarinaWarpPadOcarinaTex", MaterialType::MAGIC, 0.4f, 0.0f, 0.3f, 0.5f },
     { "objects/object_mjin_oka/gOcarinaWarpPadSideTex", MaterialType::STONE, 0.75f, 0.0f, 0.2f, 0.0f },
     { "objects/object_mjin_soul/gSpiritMedallionPlatformTex", MaterialType::METAL, 0.35f, 0.9f, 0.8f, 0.0f },
@@ -1172,10 +1178,12 @@ static const StaticMaterialRule gMaterialRulesPilot[] = {
     { "objects/object_spot04_objects/gDekuTreeUnusedMouthTex_12C0", MaterialType::CHARACTER, 0.65f, 0.0f, 0.3f, 0.0f },
     { "objects/object_spot05_objects/object_spot05_objects_Tex_000000", MaterialType::STONE, 0.4f, 0.0f, 0.45f, 0.0f },
     { "objects/object_spot05_objects/object_spot05_objects_Tex_000950", MaterialType::STONE, 0.4f, 0.0f, 0.45f, 0.0f },
-    { "objects/object_spot06_objects/gLakeHyliaWaterTempleGateTex", MaterialType::WATER, 0.05f, 0.0f, 0.5f, 0.0f },
+    // OCZ-NIGHTLY-14 Lake Hylia Column & Iceblock Fixes:
+    // Water Temple gate/column is stone/metal masonry, NOT water!
+    { "objects/object_spot06_objects/gLakeHyliaWaterTempleGateTex", MaterialType::STONE, 0.75f, 0.10f, 0.25f, 0.0f, false, 0.04f, true },
     { "objects/object_spot06_objects/gLakeHyliaWaterTempleKeyTex", MaterialType::PROTECTED_2D, 0.5f, 0.0f, 0.0f, 0.0f },
     { "objects/object_spot06_objects/gLakeHyliaWaterTex", MaterialType::WATER, 0.05f, 0.0f, 0.5f, 0.0f },
-    { "objects/object_spot06_objects/gLakeHyliaZoraShortcutIceblockTex", MaterialType::WATER, 0.05f, 0.0f, 0.5f, 0.0f },
+    { "objects/object_spot06_objects/gLakeHyliaZoraShortcutIceblockTex", MaterialType::ICE, 0.15f, 0.0f, 0.60f, 0.0f, false, 0.38f, true },
     { "objects/object_spot07_object/object_spot07_object_Tex_000EE0", MaterialType::STONE, 0.4f, 0.0f, 0.45f, 0.0f },
     { "objects/object_spot07_object/object_spot07_object_Tex_0025E0", MaterialType::STONE, 0.4f, 0.0f, 0.45f, 0.0f },
     { "objects/object_spot07_object/object_spot07_object_Tex_003930", MaterialType::STONE, 0.4f, 0.0f, 0.45f, 0.0f },
@@ -1185,14 +1193,18 @@ static const StaticMaterialRule gMaterialRulesPilot[] = {
     { "objects/object_spot07_object/object_spot07_object_Tex_005530", MaterialType::STONE, 0.4f, 0.0f, 0.45f, 0.0f },
     { "objects/object_spot07_object/object_spot07_object_Tex_005D30", MaterialType::STONE, 0.4f, 0.0f, 0.45f, 0.0f },
     { "objects/object_spot07_object/object_spot07_object_Tex_006530", MaterialType::STONE, 0.4f, 0.0f, 0.45f, 0.0f },
-    { "objects/object_spot08_obj/gZorasFountainBombableWallTex", MaterialType::WATER, 0.05f, 0.0f, 0.5f, 0.0f },
-    { "objects/object_spot08_obj/gZorasFountainIceRampLowerSideTex", MaterialType::WATER, 0.05f, 0.0f, 0.5f, 0.0f },
-    { "objects/object_spot08_obj/gZorasFountainIceRampMiddleSlopeTex", MaterialType::WATER, 0.05f, 0.0f, 0.5f, 0.0f },
-    { "objects/object_spot08_obj/gZorasFountainIceRampSurfaceTex", MaterialType::WATER, 0.05f, 0.0f, 0.5f, 0.0f },
-    { "objects/object_spot08_obj/gZorasFountainIceRampUpperSideTex", MaterialType::WATER, 0.05f, 0.0f, 0.5f, 0.0f },
-    { "objects/object_spot08_obj/gZorasFountainIcebergSideTex", MaterialType::WATER, 0.05f, 0.0f, 0.5f, 0.0f },
-    { "objects/object_spot08_obj/gZorasFountainIcebergTopTex", MaterialType::WATER, 0.05f, 0.0f, 0.5f, 0.0f },
-    { "objects/object_spot08_obj/gZorasFountainIcebergUndersideTex", MaterialType::WATER, 0.05f, 0.0f, 0.5f, 0.0f },
+    // Zora's Fountain: the bombable wall is masonry and the ramps/iceberg are
+    // solid ice geometry. Neither is a liquid; classifying them as WATER gave
+    // them a transmissive liquid optical model (F0 = 0.0204, no absorption,
+    // no micro-wave normals) that does not match their authored surfaces.
+    { "objects/object_spot08_obj/gZorasFountainBombableWallTex", MaterialType::STONE, 0.75f, 0.0f, 0.25f, 0.0f },
+    { "objects/object_spot08_obj/gZorasFountainIceRampLowerSideTex", MaterialType::ICE, 0.15f, 0.0f, 0.6f, 0.0f },
+    { "objects/object_spot08_obj/gZorasFountainIceRampMiddleSlopeTex", MaterialType::ICE, 0.15f, 0.0f, 0.6f, 0.0f },
+    { "objects/object_spot08_obj/gZorasFountainIceRampSurfaceTex", MaterialType::ICE, 0.15f, 0.0f, 0.6f, 0.0f },
+    { "objects/object_spot08_obj/gZorasFountainIceRampUpperSideTex", MaterialType::ICE, 0.15f, 0.0f, 0.6f, 0.0f },
+    { "objects/object_spot08_obj/gZorasFountainIcebergSideTex", MaterialType::ICE, 0.18f, 0.0f, 0.55f, 0.0f },
+    { "objects/object_spot08_obj/gZorasFountainIcebergTopTex", MaterialType::ICE, 0.18f, 0.0f, 0.55f, 0.0f },
+    { "objects/object_spot08_obj/gZorasFountainIcebergUndersideTex", MaterialType::ICE, 0.18f, 0.0f, 0.55f, 0.0f },
     { "objects/object_spot09_obj/object_spot09_objTex_008490", MaterialType::STONE, 0.4f, 0.0f, 0.45f, 0.0f },
     { "objects/object_spot09_obj/object_spot09_objTex_008C90", MaterialType::STONE, 0.4f, 0.0f, 0.45f, 0.0f },
     { "objects/object_spot09_obj/object_spot09_objTex_009490", MaterialType::STONE, 0.4f, 0.0f, 0.45f, 0.0f },
@@ -1231,7 +1243,7 @@ static const StaticMaterialRule gMaterialRulesPilot[] = {
     { "objects/object_stream/object_stream_Tex_000000", MaterialType::WATER, 0.05f, 0.0f, 0.5f, 0.0f },
     { "objects/object_syokudai/gGoldenTorch1Tex", MaterialType::METAL, 0.35f, 0.9f, 0.8f, 0.0f },
     { "objects/object_syokudai/gGoldenTorch2Tex", MaterialType::METAL, 0.35f, 0.9f, 0.8f, 0.0f },
-    { "objects/object_syokudai/gTorchFlameGuardTex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "objects/object_syokudai/gTorchFlameGuardTex", MaterialType::EMISSIVE, 0.3f, 0.0f, 0.2f, 0.85f },
     { "objects/object_syokudai/gWoodenTorchTex", MaterialType::WOOD, 0.75f, 0.0f, 0.15f, 0.0f },
     { "objects/object_ta/gTalonArmHairTex", MaterialType::CHARACTER, 0.65f, 0.0f, 0.3f, 0.0f },
     { "objects/object_ta/gTalonBootSideTex", MaterialType::FABRIC, 0.75f, 0.0f, 0.15f, 0.0f },
@@ -1283,8 +1295,8 @@ static const StaticMaterialRule gMaterialRulesPilot[] = {
     { "objects/object_trap/gSlidingBladeTrapTex_0000", MaterialType::METAL, 0.35f, 0.9f, 0.8f, 0.0f },
     { "objects/object_triforce_spot/gTriforceColumnSide1Tex", MaterialType::STONE, 0.85f, 0.0f, 0.25f, 0.0f },
     { "objects/object_triforce_spot/gTriforceColumnSide2Tex", MaterialType::STONE, 0.85f, 0.0f, 0.25f, 0.0f },
-    { "objects/object_tw/gTwinrovaBigFlameMaskTex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
-    { "objects/object_tw/gTwinrovaBigFlameTex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "objects/object_tw/gTwinrovaBigFlameMaskTex", MaterialType::EMISSIVE, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "objects/object_tw/gTwinrovaBigFlameTex", MaterialType::EMISSIVE, 0.3f, 0.0f, 0.2f, 0.85f },
     { "objects/object_tw/gTwinrovaBroomHandleTex", MaterialType::CHARACTER, 0.65f, 0.0f, 0.3f, 0.0f },
     { "objects/object_tw/gTwinrovaBroomHeadTex", MaterialType::CHARACTER, 0.65f, 0.0f, 0.3f, 0.0f },
     { "objects/object_tw/gTwinrovaEarTex", MaterialType::CHARACTER, 0.65f, 0.0f, 0.3f, 0.0f },
@@ -1293,13 +1305,16 @@ static const StaticMaterialRule gMaterialRulesPilot[] = {
     { "objects/object_tw/gTwinrovaEyeOpenTex", MaterialType::CHARACTER, 0.65f, 0.0f, 0.3f, 0.0f },
     { "objects/object_tw/gTwinrovaEyebrowTex", MaterialType::CHARACTER, 0.65f, 0.0f, 0.3f, 0.0f },
     { "objects/object_tw/gTwinrovaFingerTex", MaterialType::CHARACTER, 0.65f, 0.0f, 0.3f, 0.0f },
-    { "objects/object_tw/gTwinrovaFireMaskTex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
-    { "objects/object_tw/gTwinrovaFirePoolAndShieldChargeCenterTex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
-    { "objects/object_tw/gTwinrovaFireTex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "objects/object_tw/gTwinrovaFireMaskTex", MaterialType::EMISSIVE, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "objects/object_tw/gTwinrovaFirePoolAndShieldChargeCenterTex", MaterialType::EMISSIVE, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "objects/object_tw/gTwinrovaFireTex", MaterialType::EMISSIVE, 0.3f, 0.0f, 0.2f, 0.85f },
     { "objects/object_tw/gTwinrovaHairTex", MaterialType::CHARACTER, 0.65f, 0.0f, 0.3f, 0.0f },
-    { "objects/object_tw/gTwinrovaIcePoolShineMaskTex", MaterialType::WATER, 0.05f, 0.0f, 0.5f, 0.0f },
-    { "objects/object_tw/gTwinrovaIcePoolShineTex", MaterialType::WATER, 0.05f, 0.0f, 0.5f, 0.0f },
-    { "objects/object_tw/gTwinrovaIcePoolTex", MaterialType::WATER, 0.05f, 0.0f, 0.5f, 0.0f },
+    // Twinrova's ice pool is a solid frozen surface that mirrors the fire
+    // pool's LAVA classification. Treating it as a liquid WATER surface gave
+    // it a transmissive water model that contradicts its solid ice geometry.
+    { "objects/object_tw/gTwinrovaIcePoolShineMaskTex", MaterialType::ICE, 0.15f, 0.0f, 0.6f, 0.0f },
+    { "objects/object_tw/gTwinrovaIcePoolShineTex", MaterialType::ICE, 0.15f, 0.0f, 0.6f, 0.0f },
+    { "objects/object_tw/gTwinrovaIcePoolTex", MaterialType::ICE, 0.15f, 0.0f, 0.6f, 0.0f },
     { "objects/object_tw/gTwinrovaKotakeGerudoFabricTex", MaterialType::FABRIC, 0.9f, 0.0f, 0.08f, 0.0f },
     { "objects/object_tw/gTwinrovaKotakeKoumeEarTex", MaterialType::CHARACTER, 0.65f, 0.0f, 0.3f, 0.0f },
     { "objects/object_tw/gTwinrovaKotakeKoumeEyeClosedTex", MaterialType::CHARACTER, 0.65f, 0.0f, 0.3f, 0.0f },
@@ -1430,8 +1445,31 @@ static const StaticMaterialRule gMaterialRulesPilot[] = {
     { "objects/object_zo/gZoraHeadTex", MaterialType::CHARACTER, 0.65f, 0.0f, 0.3f, 0.0f },
     { "objects/object_zo/gZoraMouthTex", MaterialType::CHARACTER, 0.65f, 0.0f, 0.3f, 0.0f },
     { "objects/object_zo/gZoraSplashesTex", MaterialType::WATER, 0.05f, 0.0f, 0.5f, 0.0f },
-    { "overlays/ovl_Boss_Dodongo/sLavaFloorLavaTex", MaterialType::EMISSIVE, 0.5f, 0.0f, 0.1f, 0.8f },
+    // King Dodongo's arena floor alternates these two textures across the
+    // same mesh. sLavaFloorLavaTex is the melt itself and must reach the lava
+    // classifier; sLavaFloorRockTex is the cooled basalt plate over it, which
+    // ClassifyLavaDraw maps to VOLCANIC_HOT_ROCK via the "lava"+"rock" pair.
+    // Treating the melt as EMISSIVE left it on the flat legacy emissive path
+    // with no viscous shading, and left the arena's emissive mask empty.
+    { "overlays/ovl_Boss_Dodongo/sLavaFloorLavaTex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
     { "overlays/ovl_Boss_Dodongo/sLavaFloorRockTex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
+    // Dodongo's Cavern ships its own lava floors as scene textures. Their
+    // names are semantic ("LavaFloor"), so they are listed here rather than
+    // left to the exact-rule table, which exists only for the unnamed HIDAN
+    // and spot17 textures.
+    { "scenes/shared/ddan_boss_scene/gDodongosCavernBossLavaFloorTex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "scenes/shared/ddan_boss_scene/ddan_boss_room_1Tex_0039D8", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "scenes/shared/ddan_boss_scene/ddan_boss_room_1Tex_0031D8", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "scenes/shared/ddan_boss_scene/ddan_boss_room_1tex_0039d8", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "scenes/shared/ddan_boss_scene/ddan_boss_room_1tex_0031d8", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "scenes/nonmq/ddan_scene/gDCLavaFloor1Tex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "scenes/nonmq/ddan_scene/gDCLavaFloor2Tex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "scenes/nonmq/ddan_scene/gDCLavaFloor3Tex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "scenes/nonmq/ddan_scene/gDCLavaFloor4Tex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "scenes/nonmq/ddan_scene/gDCLavaFloor5Tex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "scenes/nonmq/ddan_scene/gDCLavaFloor6Tex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "scenes/nonmq/ddan_scene/gDCLavaFloor7Tex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
+    { "scenes/nonmq/ddan_scene/gDCLavaFloor8Tex", MaterialType::LAVA, 0.3f, 0.0f, 0.2f, 0.85f },
     { "overlays/ovl_Boss_Ganon/gGanondorfLightning10Tex", MaterialType::EMISSIVE, 0.5f, 0.0f, 0.1f, 0.8f },
     { "overlays/ovl_Boss_Ganon/gGanondorfLightning11Tex", MaterialType::EMISSIVE, 0.5f, 0.0f, 0.1f, 0.8f },
     { "overlays/ovl_Boss_Ganon/gGanondorfLightning12Tex", MaterialType::EMISSIVE, 0.5f, 0.0f, 0.1f, 0.8f },
@@ -1464,6 +1502,90 @@ static const StaticMaterialRule gMaterialRulesPilot[] = {
       false, 0.0f, true },
     { "objects/object_toki_objects/object_toki_objects_Tex_003DC0", MaterialType::GLASS, 0.16f, 0.0f, 0.72f, 0.0f,
       false, 0.70f, true, true },
+    // OCZ-NIGHTLY-14: Temple of Time clerestory sunbeams (tokinoma_room_0Tex_0161D8).
+    // Translucent additive light beams: must NOT become a solid white block or shadow blocker!
+    { "scenes/shared/tokinoma_scene/tokinoma_room_0Tex_0161D8", MaterialType::EMISSIVE, 0.50f, 0.0f, 0.04f, 0.0f,
+      false, 0.0f, true, true, false, true },
+
+    // =========================================================================
+    // OCZ-MATERIALS-02: AAA PBR MATERIAL RECONSTRUCTION
+    // Ground truth rules for Goron City, Temple of Time, Kokiri Forest,
+    // and Hyrule Field architectural, mineral, organic, and dielectric surfaces.
+    // =========================================================================
+
+    // 1. GORON CITY & DARUNIA'S ROOM (Scene 0x62 / spot18_scene)
+    // Authentic carved volcanic rock, basalt pillars, masonry walls, and Goron emblem.
+    { "scenes/shared/spot18_scene/spot18_room_1Tex_002868", MaterialType::STONE, 0.82f, 0.0f, 0.25f, 0.0f, true, 0.04f, true },
+    { "scenes/shared/spot18_scene/spot18_room_1Tex_003068", MaterialType::STONE, 0.80f, 0.0f, 0.25f, 0.0f, true, 0.04f, true },
+    { "scenes/shared/spot18_scene/spot18_room_1Tex_004068", MaterialType::STONE, 0.78f, 0.0f, 0.28f, 0.0f, true, 0.04f, true },
+    { "scenes/shared/spot18_scene/spot18_room_1Tex_004868", MaterialType::STONE, 0.75f, 0.0f, 0.30f, 0.0f, true, 0.05f, true },
+    { "scenes/shared/spot18_scene/spot18_room_1Tex_005E00", MaterialType::STONE, 0.84f, 0.0f, 0.22f, 0.0f, true, 0.04f, true },
+    { "scenes/shared/spot18_scene/spot18_sceneTex_0087C8", MaterialType::STONE, 0.85f, 0.0f, 0.20f, 0.0f, true, 0.04f, true },
+    { "scenes/shared/spot18_scene/spot18_sceneTex_009008", MaterialType::STONE, 0.85f, 0.0f, 0.20f, 0.0f, true, 0.04f, true },
+    { "scenes/shared/spot18_scene/spot18_sceneTex_009848", MaterialType::STONE, 0.86f, 0.0f, 0.20f, 0.0f, true, 0.04f, true },
+    { "scenes/shared/spot18_scene/spot18_sceneTex_009C48", MaterialType::STONE, 0.82f, 0.0f, 0.22f, 0.0f, true, 0.04f, true },
+    { "objects/object_spot18_obj/gGoronCityDoorTex", MaterialType::WOOD, 0.70f, 0.0f, 0.20f, 0.0f, true, 0.05f, true },
+    { "objects/object_spot18_obj/gGoronCitySpearHandleTex", MaterialType::WOOD, 0.65f, 0.0f, 0.20f, 0.0f, false, 0.05f, true },
+    { "objects/object_spot18_obj/gGoronCitySpearTipTex", MaterialType::METAL, 0.25f, 0.90f, 0.85f, 0.0f, false, 0.80f, true },
+    { "objects/object_spot18_obj/gGoronCityStatueHappyFaceTex", MaterialType::STONE, 0.80f, 0.0f, 0.25f, 0.0f, true, 0.04f, true },
+    { "objects/object_spot18_obj/gGoronCityStatueAngryFaceTex", MaterialType::STONE, 0.80f, 0.0f, 0.25f, 0.0f, true, 0.04f, true },
+    { "objects/object_spot18_obj/gGoronCityStatueNeutralFaceTex", MaterialType::STONE, 0.80f, 0.0f, 0.25f, 0.0f, true, 0.04f, true },
+    { "objects/object_spot18_obj/gGoronCityStatueTex_7010", MaterialType::STONE, 0.80f, 0.0f, 0.25f, 0.0f, true, 0.04f, true },
+    { "objects/object_spot18_obj/gGoronCityVaseLidTex", MaterialType::CERAMIC, 0.35f, 0.0f, 0.80f, 0.0f, false, 0.12f, true },
+    { "objects/object_spot18_obj/gGoronCityVaseTex_580", MaterialType::CERAMIC, 0.35f, 0.0f, 0.80f, 0.0f, false, 0.12f, true },
+    { "objects/object_spot18_obj/gGoronCityVaseTex_D80", MaterialType::CERAMIC, 0.35f, 0.0f, 0.80f, 0.0f, false, 0.12f, true },
+
+    // 2. TEMPLE OF TIME (Scene 0x43 / tokinoma_scene)
+    // Polished architectural limestone, marble columns, nave vaults, altar, and podium.
+    { "scenes/shared/tokinoma_scene/tokinoma_room_0Tex_0081D8", MaterialType::STONE, 0.45f, 0.0f, 0.50f, 0.0f, true, 0.06f, true },
+    { "scenes/shared/tokinoma_scene/tokinoma_room_0Tex_0091D8", MaterialType::STONE, 0.55f, 0.0f, 0.40f, 0.0f, true, 0.05f, true },
+    { "scenes/shared/tokinoma_scene/tokinoma_room_0Tex_00A1D8", MaterialType::STONE, 0.40f, 0.0f, 0.60f, 0.0f, true, 0.08f, true },
+    { "scenes/shared/tokinoma_scene/tokinoma_room_0Tex_00B1D8", MaterialType::STONE, 0.38f, 0.0f, 0.65f, 0.0f, true, 0.10f, true },
+    { "scenes/shared/tokinoma_scene/tokinoma_room_0Tex_00C1D8", MaterialType::STONE, 0.50f, 0.0f, 0.45f, 0.0f, true, 0.06f, true },
+    { "scenes/shared/tokinoma_scene/tokinoma_room_0Tex_00D1D8", MaterialType::STONE, 0.50f, 0.0f, 0.45f, 0.0f, true, 0.06f, true },
+    { "scenes/shared/tokinoma_scene/tokinoma_room_0Tex_00E1D8", MaterialType::STONE, 0.52f, 0.0f, 0.42f, 0.0f, true, 0.05f, true },
+    { "scenes/shared/tokinoma_scene/tokinoma_room_0Tex_00F1D8", MaterialType::STONE, 0.48f, 0.0f, 0.48f, 0.0f, true, 0.06f, true },
+    { "scenes/shared/tokinoma_scene/tokinoma_room_0Tex_0101D8", MaterialType::STONE, 0.42f, 0.0f, 0.55f, 0.0f, true, 0.07f, true },
+    { "scenes/shared/tokinoma_scene/tokinoma_room_0Tex_0111D8", MaterialType::STONE, 0.52f, 0.0f, 0.42f, 0.0f, true, 0.05f, true },
+    { "scenes/shared/tokinoma_scene/tokinoma_room_0Tex_0121D8", MaterialType::STONE, 0.46f, 0.0f, 0.48f, 0.0f, true, 0.06f, true },
+    { "scenes/shared/tokinoma_scene/tokinoma_room_0Tex_0131D8", MaterialType::STONE, 0.44f, 0.0f, 0.50f, 0.0f, true, 0.06f, true },
+    { "scenes/shared/tokinoma_scene/tokinoma_room_0Tex_0141D8", MaterialType::STONE, 0.40f, 0.0f, 0.58f, 0.0f, true, 0.08f, true },
+    { "scenes/shared/tokinoma_scene/tokinoma_room_0Tex_0149D8", MaterialType::STONE, 0.58f, 0.0f, 0.35f, 0.0f, true, 0.04f, true },
+    { "scenes/shared/tokinoma_scene/tokinoma_room_0Tex_0151D8", MaterialType::STONE, 0.45f, 0.0f, 0.50f, 0.0f, true, 0.06f, true },
+
+    // 3. KOKIRI FOREST (Scene 0x55 / spot04_scene)
+    // Authentic timber structures, hollow tree bridges, bark, cutouts, and lush earth.
+    { "scenes/shared/spot04_scene/spot04_room_0Tex_00D508", MaterialType::WOOD, 0.68f, 0.0f, 0.20f, 0.0f, true, 0.05f, true },
+    { "scenes/shared/spot04_scene/spot04_room_0Tex_00E908", MaterialType::WOOD, 0.65f, 0.0f, 0.20f, 0.0f, true, 0.05f, true },
+    { "scenes/shared/spot04_scene/spot04_room_0Tex_00E108", MaterialType::WOOD, 0.70f, 0.0f, 0.18f, 0.0f, true, 0.04f, true },
+    { "scenes/shared/spot04_scene/spot04_room_0Tex_00D908", MaterialType::WOOD, 0.82f, 0.0f, 0.15f, 0.0f, true, 0.03f, true },
+    { "scenes/shared/spot04_scene/spot04_room_0Tex_00FD08", MaterialType::STONE, 0.80f, 0.0f, 0.25f, 0.0f, true, 0.04f, true },
+    { "scenes/shared/spot04_scene/spot04_room_0Tex_00BF08", MaterialType::EARTH, 0.94f, 0.0f, 0.06f, 0.0f, true, 0.01f, true },
+    { "scenes/shared/spot04_scene/spot04_room_0Tex_013708", MaterialType::GRASS, 0.96f, 0.0f, 0.04f, 0.0f, false, 0.008f, true },
+    { "scenes/shared/spot04_scene/spot04_room_0Tex_012F08", MaterialType::STONE, 0.88f, 0.0f, 0.10f, 0.0f, true, 0.02f, true },
+    { "scenes/shared/spot04_scene/spot04_room_0Tex_019290", MaterialType::FOLIAGE, 0.90f, 0.0f, 0.05f, 0.0f, false, 0.012f, true },
+    { "scenes/shared/spot04_scene/spot04_room_0Tex_019A90", MaterialType::FOLIAGE, 0.90f, 0.0f, 0.05f, 0.0f, false, 0.012f, true },
+    { "scenes/shared/spot04_scene/spot04_room_0Tex_01A290", MaterialType::FOLIAGE, 0.90f, 0.0f, 0.05f, 0.0f, false, 0.012f, true },
+    { "scenes/shared/spot04_scene/spot04_room_0Tex_01AC90", MaterialType::FOLIAGE, 0.90f, 0.0f, 0.05f, 0.0f, false, 0.012f, true },
+    { "scenes/shared/spot04_scene/spot04_room_0Tex_01B090", MaterialType::FOLIAGE, 0.90f, 0.0f, 0.05f, 0.0f, false, 0.012f, true },
+    { "objects/object_spot04_objects/gDekuTreeMouthTex_0000", MaterialType::WOOD, 0.80f, 0.0f, 0.15f, 0.0f, true, 0.03f, true },
+    { "objects/object_spot04_objects/gDekuTreeMouthTex_0400", MaterialType::WOOD, 0.80f, 0.0f, 0.15f, 0.0f, true, 0.03f, true },
+
+    // 4. HYRULE FIELD (Scene 0x51 / spot00_scene)
+    // Castle drawbridge chains, wood timbers, terrain rock walls, and earthen pathways.
+    { "objects/object_spot00_objects/gHyruleFieldCastleDrawbridgeChainsTex", MaterialType::METAL, 0.28f, 0.92f, 0.90f, 0.0f, false, 0.85f, true },
+    { "objects/object_spot00_objects/gHyruleFieldCastleDrawbridgeWoodTex", MaterialType::WOOD, 0.72f, 0.0f, 0.18f, 0.0f, true, 0.04f, true },
+    { "objects/object_spot00_break/gBarbedWireFenceTex", MaterialType::METAL, 0.35f, 0.88f, 0.80f, 0.0f, false, 0.75f, true },
+    { "objects/object_spot00_break/gBrokenDrawbridgeDirtTex", MaterialType::EARTH, 0.95f, 0.0f, 0.05f, 0.0f, true, 0.01f, true },
+    { "scenes/shared/spot00_scene/spot00_sceneTex_013D98", MaterialType::STONE, 0.85f, 0.0f, 0.20f, 0.0f, true, 0.04f, true },
+    { "scenes/shared/spot00_scene/spot00_sceneTex_014598", MaterialType::STONE, 0.85f, 0.0f, 0.20f, 0.0f, true, 0.04f, true },
+    { "scenes/shared/spot00_scene/spot00_sceneTex_014998", MaterialType::STONE, 0.85f, 0.0f, 0.20f, 0.0f, true, 0.04f, true },
+    { "scenes/shared/spot00_scene/spot00_sceneTex_014D98", MaterialType::STONE, 0.85f, 0.0f, 0.20f, 0.0f, true, 0.04f, true },
+    { "scenes/shared/spot00_scene/spot00_sceneTex_015D98", MaterialType::STONE, 0.85f, 0.0f, 0.20f, 0.0f, true, 0.04f, true },
+    { "scenes/shared/spot00_scene/spot00_sceneTex_015E98", MaterialType::STONE, 0.85f, 0.0f, 0.20f, 0.0f, true, 0.04f, true },
+    { "scenes/shared/spot00_scene/spot00_sceneTex_016698", MaterialType::STONE, 0.85f, 0.0f, 0.20f, 0.0f, true, 0.04f, true },
+    { "scenes/shared/spot00_scene/spot00_sceneTex_016A98", MaterialType::STONE, 0.85f, 0.0f, 0.20f, 0.0f, true, 0.04f, true },
+    { "scenes/shared/spot00_scene/spot00_sceneTex_016B98", MaterialType::STONE, 0.85f, 0.0f, 0.20f, 0.0f, true, 0.04f, true },
 };
 
 static constexpr size_t gMaterialRulesPilotCount = sizeof(gMaterialRulesPilot) / sizeof(gMaterialRulesPilot[0]);
@@ -1484,6 +1606,7 @@ inline void PopulateMaterialRulesTable(std::unordered_map<uint64_t, MaterialDefi
         if (r.dxrWindowPortal) def.flags |= MATERIAL_FLAG_DXR_WINDOW_PORTAL;
         if (r.dxrHybridRelight) def.flags |= MATERIAL_FLAG_DXR_PRIMARY_RELIGHT;
         if (r.forceMaterialType) def.flags |= MATERIAL_FLAG_EXACT_PILOT_TYPE;
+        if (r.decorativeBeam) def.flags |= MATERIAL_FLAG_DECORATIVE_BEAM;
         uint64_t hash = CRC64(r.path);
         outRules[hash] = def;
         outStringRules[r.path] = def;

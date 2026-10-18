@@ -234,7 +234,7 @@ $manifestResolvedLauncher = [ordered]@{
     rtxQuality = $RtxQuality
     presentation = if ($Background) { 'SKIPPED_BACKGROUND' } else { 'NORMAL_DXGI' }
     entrance = ('0x{0:X3}' -f [int]$scenario.entrance)
-    scene = ('0x{0:X2}' -f [int]$scenario.expectedScene)
+    scene = ('0x{0:X}' -f [int]$scenario.expectedScene)
     room = [int]$scenario.expectedRoom
     audioOutput = 'MUTED_NULL_BACKEND'
     originalSaveRoot = $originalSaveCanonical
@@ -255,7 +255,8 @@ $harnessEnvNames = @('COUCH_DXR_HARNESS', 'COUCH_DXR_CAPTURE_SEQUENCE', 'COUCH_D
     'COUCH_DXR_GPU_GATE_COUNTERS', 'COUCH_DXR_PRIMARY_GATE_COUNTERS', 'COUCH_DXR_MATRIX_TRACE',
     'COUCH_DXR_FORCE_ANY_HIT_COVERAGE', 'COUCH_DXR_GATE_DIAGNOSTIC', 'COUCH_DXR_VISUAL_ABLATION',
     'COUCH_DXR_MONITOR_CAPTURE', 'COUCH_RTX_QUALITY', 'COUCH_DXR_NAVI_PILOT', 'COUCH_DXR_NAVI_ISOLATION',
-    'COUCH_DXR_NAVI_POINT_GAIN', 'COUCH_DXR_NAVI_POINT_TINT', 'COUCH_DXR_NIGHT_MODE', 'COUCH_DXR_NAVI_SOLE_LIGHT')
+    'COUCH_DXR_NAVI_POINT_GAIN', 'COUCH_DXR_NAVI_POINT_TINT', 'COUCH_DXR_NIGHT_MODE', 'COUCH_DXR_NAVI_SOLE_LIGHT', 'COUCH_DXR_ROUTE',
+    'COUCH_DXR_LAVA_LIGHTING', 'COUCH_DXR_LAVA_EMISSION', 'COUCH_DXR_LAVA_LIGHT_GAIN')
 $savedHarnessEnv = @{}
 foreach ($name in $harnessEnvNames) { $savedHarnessEnv[$name] = [Environment]::GetEnvironmentVariable($name, 'Process') }
 $env:COUCH_DXR_HARNESS = '1'
@@ -304,6 +305,9 @@ $isNightScenario = ($scenario.nightFlag -eq 1 -or $scenario.nightMode -eq $true)
 $isNaviSoleLight = ($scenario.naviSoleLight -eq $true)
 $env:COUCH_DXR_NIGHT_MODE = if ($isNightScenario -or $isNaviSoleLight) { '1' } else { '0' }
 $env:COUCH_DXR_NAVI_SOLE_LIGHT = if ($isNaviSoleLight) { '1' } else { '0' }
+$route = if ($isNaviSoleLight) { 'ISOLATED_LIGHT_LAB' } elseif ($diagnostic.backendMode -ne 0) { 'AOV_DEBUG' } else { 'PRODUCTION' }
+$env:COUCH_DXR_ROUTE = $route
+Write-Host "[COUCH-HARNESS-ROUTE] Scenario=$RunScenario Route=$route SoleLight=$env:COUCH_DXR_NAVI_SOLE_LIGHT NightMode=$env:COUCH_DXR_NIGHT_MODE"
 $env:COUCH_DXR_CAPTURE_SEQUENCE = '1'
 $env:COUCH_DXR_MANIFEST = $manifestPath
 $env:COUCH_DXR_OUTPUT = $runRoot
@@ -311,7 +315,7 @@ $env:COUCH_DXR_SAVE_ROOT = $sandboxSaveCanonical
 $env:COUCH_DXR_SCENARIO = $RunScenario
 $env:COUCH_DXR_MODE = $TruthMode
 $env:COUCH_DXR_TRUTH_MODE = [string][int]$diagnostic.backendMode
-$env:COUCH_DXR_TARGET_SCENE = ('0x{0:X2}' -f [int]$scenario.expectedScene)
+$env:COUCH_DXR_TARGET_SCENE = ('0x{0:X}' -f [int]$scenario.expectedScene)
 $env:COUCH_FORENSIC_CAPTURES = '1'
 $env:COUCH_DXR_TRUTH_SEQUENCE = '0'
 $env:COUCH_DXR_TRUTH_V2_SEQUENCE = '0'
@@ -381,9 +385,17 @@ while ((Get-Date) -lt $deadline) {
         if ($MonitorCapture -and -not (Test-Path -LiteralPath (Join-Path $runRoot 'monitor.capture.complete'))) {
             & (Join-Path $PSScriptRoot 'capture-client.ps1') -ProcessId $process.Id -RunRoot $runRoot
         }
+        if (-not $process.HasExited) {
+            $process.WaitForExit(8000) | Out-Null
+        }
         break
     }
-    if (Test-Path -LiteralPath (Join-Path $runRoot 'CAPTURE_PARTIAL') -PathType Leaf) { break }
+    if (Test-Path -LiteralPath (Join-Path $runRoot 'CAPTURE_PARTIAL') -PathType Leaf) {
+        if (-not $process.HasExited) {
+            $process.WaitForExit(8000) | Out-Null
+        }
+        break
+    }
     if (-not $windowReady -and (Get-Date) -ge $startupDeadline) {
         Set-Content -LiteralPath (Join-Path $runRoot 'RUN_FAIL') -Value 'HARNESS_STARTUP_TIMEOUT' -Encoding utf8
         break
@@ -480,6 +492,18 @@ if (-not $originalUnchanged) {
     Stop-WithCode 'HARNESS_ORIGINAL_SAVE_CHANGED' 'An original save hash changed during the run.' 37
 }
 
+$backgroundCleanup = 'NOT_REQUESTED'
+if ($Background -or $MonitorCapture) {
+    if (-not $process.HasExited) {
+        # Process did not exit on its own within deadline; fallback kill
+        $process.Kill()
+        $process.WaitForExit(5000) | Out-Null
+        $backgroundCleanup = if ($process.HasExited) { 'FALLBACK_KILL_AFTER_TIMEOUT' } else { 'STOP_FAILED' }
+    } else {
+        $backgroundCleanup = 'GRACEFUL_EXIT_CONFIRMED'
+    }
+}
+
 $evidenceVerification = 'NOT_RUN_CAPTURE_INCOMPLETE'
 $evidenceVerificationFailed = $false
 if (Test-Path -LiteralPath (Join-Path $runRoot 'CAPTURE_COMPLETE') -PathType Leaf) {
@@ -513,18 +537,8 @@ $launcherStatus = if (Test-Path -LiteralPath (Join-Path $runRoot 'RUN_PASS')) { 
                   elseif ((Test-Path -LiteralPath (Join-Path $runRoot 'CAPTURE_COMPLETE')) -and $evidenceVerification -eq 'PARTIAL') { 'PARTIAL' }
                   elseif (Test-Path -LiteralPath (Join-Path $runRoot 'CAPTURE_PARTIAL')) { 'PARTIAL' }
                   elseif ($process.HasExited) { 'PROCESS_EXITED' }
+                  elseif ($Background -or $MonitorCapture) { 'POLL_TIMEOUT_BACKGROUND_STOPPED' }
                   else { 'POLL_TIMEOUT_PROCESS_LEFT_OPEN' }
-$backgroundCleanup = 'NOT_REQUESTED'
-if ($Background -or $MonitorCapture) {
-    if (-not $process.HasExited) {
-        # This Process object belongs to the executable launched above. Never
-        # enumerate/terminate other renderers or a user's normal game process.
-        $process.Kill()
-        $process.WaitForExit(5000) | Out-Null
-    }
-    $backgroundCleanup = if ($process.HasExited) { 'OWN_TEST_PROCESS_STOPPED' } else { 'STOP_FAILED' }
-    if ($launcherStatus -eq 'POLL_TIMEOUT_PROCESS_LEFT_OPEN') { $launcherStatus = 'POLL_TIMEOUT_BACKGROUND_STOPPED' }
-}
 [ordered]@{
     status = $launcherStatus
     runId = $runId

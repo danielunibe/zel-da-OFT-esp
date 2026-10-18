@@ -5,15 +5,17 @@
 
 // The generator exports this marker into bytecode headers; CPU pipelines
 // refuse a header from the older 104-byte payload/1408-byte constant layout.
-#define COUCH_DXR_SHADER_ABI_VERSION 4
+#define COUCH_DXR_SHADER_ABI_VERSION 5
 #define MATERIAL_FLAG_NAVI_POINT_PROXY (1u << 8u)
-#define MATERIAL_FLAG_NAVI_POINT_WORLD_RECEIVER (1u << 10u)
+#define MATERIAL_FLAG_NATIVE_LIGHT_RECEIVER (1u << 10u)
+#define MATERIAL_FLAG_NAVI_POINT_WORLD_RECEIVER MATERIAL_FLAG_NATIVE_LIGHT_RECEIVER
 #define DXR_PAYLOAD_FLAG_ALBEDO_RECONSTRUCTED (1u << 9u)
 #define MATERIAL_FLAG_DXR_WINDOW_PORTAL (1u << 5u)
 #define MATERIAL_FLAG_DXR_PRIMARY_RELIGHT (1u << 6u)
 #define MATERIAL_FLAG_SECOND_ALBEDO_TEXTURE_VALID (1u << 7u)
 #define HIT_VERTEX_FLAG_FAST3D_LIT_COLOR (1u << 2u)
 #define DXR_PAYLOAD_FLAG_HYBRID_RELIGHT (1u << 8u)
+#define MATERIAL_FLAG_DECORATIVE_BEAM (1u << 11u)
 
 RaytracingAccelerationStructure gScene : register(t0);
 Texture2D<float> gDepthTexture : register(t1);
@@ -153,6 +155,13 @@ void RayGenShadow() {
                                                         : cross(lightDir, float3(1.0f, 0.0f, 0.0f)));
     float3 lBitangent = cross(lightDir, lTangent);
 
+    // Slope-scaled contact bias: preserve crisp contact shadows on ladder rungs
+    // and actor feet near orthogonal incidence, while scaling out at grazing angles.
+    float cosTheta = saturate(dot(shadowNormal, lightDir));
+    float sinTheta = sqrt(saturate(1.0f - cosTheta * cosTheta));
+    float contactScale = 0.25f + 0.75f * sinTheta;
+    float effectiveBias = bias * contactScale;
+
     // Low-discrepancy disk samples reduce penumbra noise as the RTX quality
     // tier raises the per-pixel shadow-ray budget.
     float2 seed = float2(launchIndex);
@@ -170,9 +179,9 @@ void RayGenShadow() {
         float3 rayDir = normalize(lightDir + (lTangent * cos(angle) + lBitangent * sin(angle)) * r);
 
         RayDesc ray;
-        ray.Origin = hitPosition + shadowNormal * bias;
+        ray.Origin = hitPosition + shadowNormal * effectiveBias;
         ray.Direction = rayDir;
-        ray.TMin = max(bias * 0.1f, 0.001f);
+        ray.TMin = max(effectiveBias * 0.05f, 0.0005f);
         ray.TMax = maxDist;
 
         ShadowPayload payload;
@@ -254,6 +263,9 @@ struct MaterialRecord {
     uint environmentColor;
     uint reserved0;
     uint otherModeH;
+    // ABI v5: per-instance aquatic optics. Meaningful only for WATER.
+    // x: WaterClass ordinal, y: wave scale, z: flow speed, w: absorption.
+    float4 waterOptics;
 };
 
 // Keep the enum value synchronized with MaterialType::GENERIC_MATTE. This
@@ -263,6 +275,8 @@ static const uint MATERIAL_TYPE_GENERIC_MATTE = 18u;
 static const uint MATERIAL_TYPE_WATER = 4u;
 static const uint MATERIAL_TYPE_GLASS = 5u;
 static const uint MATERIAL_TYPE_EMISSIVE = 14u;
+// MaterialType::LAVA. Molten rock is opaque and emissive, never a dielectric.
+static const uint MATERIAL_TYPE_LAVA = 11u;
 static const uint PRIMARY_GATE_COUNTER_SHARDS = 64u;
 // GPU gate counter layout: base counters 0..18, reason counters 19..25,
 // then compact histograms. Keep in sync with DxrSurfaceRenderer.cpp.
@@ -356,7 +370,8 @@ void InitializeReflectionPayload(out ReflectionPayload payload, uint mode) {
 }
 
 MaterialRecord LoadMaterialRecord(uint instanceIndex) {
-    uint address = instanceIndex * 112u;
+    // ABI v5: 128-byte material record. Water optics occupy the final 16 bytes.
+    uint address = instanceIndex * 128u;
     uint4 ids = gInstanceMaterialData.Load4(address);
     uint4 counts = gInstanceMaterialData.Load4(address + 16u);
     float4 optics = asfloat(gInstanceMaterialData.Load4(address + 32u));
@@ -364,6 +379,7 @@ MaterialRecord LoadMaterialRecord(uint instanceIndex) {
     float4 baseColor = asfloat(gInstanceMaterialData.Load4(address + 64u));
     uint4 combiner = gInstanceMaterialData.Load4(address + 80u);
     uint4 inputs = gInstanceMaterialData.Load4(address + 96u);
+    float4 waterOptics = asfloat(gInstanceMaterialData.Load4(address + 112u));
     MaterialRecord result;
     result.vertexOffset = ids.x;
     result.indexOffset = ids.y;
@@ -390,6 +406,7 @@ MaterialRecord LoadMaterialRecord(uint instanceIndex) {
     result.environmentColor = inputs.y;
     result.reserved0 = inputs.z;
     result.otherModeH = inputs.w;
+    result.waterOptics = waterOptics;
     return result;
 }
 
@@ -662,13 +679,6 @@ float3 DecodeMaterialHit(uint instanceIndex, uint primitiveIndex, uint probeMode
     uv = v0.uv * bary.x + v1.uv * bary.y + v2.uv * bary.z;
     const float2 uv1 = v0.uv1 * bary.x + v1.uv1 * bary.y + v2.uv1 * bary.z;
     vertexColor = v0.color * bary.x + v1.color * bary.y + v2.color * bary.z;
-    // The published flag is the complete relight contract. Automatic flags
-    // are emitted only after CPU validation of G_LIGHTING and every captured
-    // vertex; source-verified pilot rules may opt in when that RSP provenance
-    // is absent. Requiring fast3dLitColor again here silently left Shade in
-    // the albedo for those exact assets, then multiplied it by new DXR light.
-    const bool requestPrimaryRelight =
-        (material.flags & MATERIAL_FLAG_DXR_PRIMARY_RELIGHT) != 0u;
     vertexAlpha = vertexColor.a;
     const float rawInterpolatedVertexAlpha = vertexAlpha;
     // The rasterizer reuses vertex alpha for fog. It is not opacity. Recover
@@ -753,59 +763,31 @@ float3 DecodeMaterialHit(uint instanceIndex, uint primitiveIndex, uint probeMode
     const float3 sourceTint = v0.sourceTint * bary.x + v1.sourceTint * bary.y + v2.sourceTint * bary.z;
     const float4 sampledMaterialColor = tile0Valid ? texel0 : texel1;
     sampledTextureAlpha = sampledMaterialColor.a;
-    float4 shadeColor = vertexColor;
-    const float fogFactor = saturate(dot(float3(v0.localAlpha, v1.localAlpha, v2.localAlpha) / 255.0f, bary));
-    shadeColor.a = probeMode == 1u && (((uint)gDiagnosticInfo.x & 64u) != 0u)
-        ? 1.0f : fogFactor;
+    // P0: Fast3D Material Correctness - Separate Albedo from Pre-lit Vertex Shade.
+    // For lit surfaces (G_LIGHTING != 0), Fast3D generates vertexColor from N64
+    // lights and normal vectors; sourceTint is 1.0. For unlit surfaces,
+    // vertexColor and sourceTint represent authored artistic vertex tint.
+    // Evaluating the combiner with unlitShade reconstructs the true unlit
+    // physical albedo (baseColor) across all materials, preventing double-lighting
+    // in primary relighting, secondary reflections, GI bounces, specular F0,
+    // and native point lights. Fog is an atmospheric post-effect and is never
+    // baked into physical surface reflectance.
+    float4 unlitShade = float4(sourceTint, vertexAlpha);
     float4 fast3dCombined;
     bool combinerSupported = EvaluateFast3DCombiner(
-        material, texel0, texel1, DecodePackedMaterialColor(material.primitiveColor), shadeColor,
+        material, texel0, texel1, DecodePackedMaterialColor(material.primitiveColor), unlitShade,
         DecodePackedMaterialColor(material.environmentColor), fast3dCombined);
-    if (combinerSupported && requestPrimaryRelight) {
-        // Re-evaluate with neutral Shade only after proving this combiner can
-        // be reconstructed. Unsupported RDP inputs fall back to captured color
-        // without losing Fast3D lighting or artistic vertex tint.
-        float4 relitShade = shadeColor;
-        relitShade.rgb = 1.0f;
-        float4 relitCombined;
-        if (EvaluateFast3DCombiner(material, texel0, texel1,
-                                   DecodePackedMaterialColor(material.primitiveColor), relitShade,
-                                   DecodePackedMaterialColor(material.environmentColor), relitCombined)) {
-            fast3dCombined = relitCombined;
-        } else {
-            combinerSupported = false;
-        }
-    }
     if (combinerSupported) {
-        float3 combinedEncoded = fast3dCombined.rgb;
-        if (gSourceControls.y == 0u && (v0.fogMode != 0u || v1.fogMode != 0u || v2.fogMode != 0u)) {
-            combinedEncoded = lerp(combinedEncoded, DecodePackedMaterialColor(material.reserved0).rgb,
-                                   fogFactor);
-        }
-        baseColor = float4(SrgbToLinear(combinedEncoded) * material.baseColor.rgb,
+        baseColor = float4(SrgbToLinear(fast3dCombined.rgb) * material.baseColor.rgb,
                            fast3dCombined.a * material.baseColor.a);
     } else {
-        float4 fallbackAlbedo = tile0Valid ? texel0 : texel1;
+        // Conservative fallback preserving original unlit albedo without pre-lit lighting
+        float4 fallbackAlbedo = tile0Valid ? texel0 : (tile1Valid ? texel1 : 1.0f.xxxx);
         fallbackAlbedo.rgb = SrgbToLinear(fallbackAlbedo.rgb);
-        baseColor = saturate(fallbackAlbedo * vertexColor * material.baseColor);
+        baseColor = saturate(fallbackAlbedo * float4(sourceTint, vertexAlpha) * material.baseColor);
     }
     baseColor = saturate(baseColor);
-    // Navi's additive direct term needs material albedo, not Fast3D's already
-    // lit vertex Shade. Re-run the same supported combiner with the original
-    // F3D vertex tint (white for normal-based lighting vertices); omit fog,
-    // which is a raster atmospheric blend rather than surface reflectance.
     naviPointAlbedo = baseColor.rgb;
-    float4 naviPointShade = shadeColor;
-    naviPointShade.rgb = sourceTint;
-    float4 naviPointCombined;
-    if (EvaluateFast3DCombiner(material, texel0, texel1,
-                               DecodePackedMaterialColor(material.primitiveColor), naviPointShade,
-                               DecodePackedMaterialColor(material.environmentColor), naviPointCombined)) {
-        naviPointAlbedo = saturate(SrgbToLinear(naviPointCombined.rgb) * material.baseColor.rgb);
-    } else {
-        float4 sourceAlbedo = tile0Valid ? texel0 : texel1;
-        naviPointAlbedo = saturate(SrgbToLinear(sourceAlbedo.rgb) * sourceTint * material.baseColor.rgb);
-    }
     // One GPU-side first-hit sample per target record; tail of the existing
     // counter UAV/root binding, active only in the explicit forensic sequence.
     if (probeMode == 1u && (((uint)gDiagnosticInfo.x & 32u) != 0u)) {
@@ -878,6 +860,9 @@ float3 ApplyAlbedoRelief(MaterialRecord material, float2 uv, float textureLod, f
     return normalize(normal - (tangent * gradientU + bitangent * gradientV) * (strength * 0.35f));
 }
 
+#include "WaterMaterial.hlsli"
+#include "LavaMaterial.hlsli"
+
 [shader("anyhit")]
 void AnyHitShadow(inout ShadowPayload payload, in BuiltInTriangleIntersectionAttributes attribs) {
     uint validatedFlags;
@@ -891,6 +876,11 @@ void AnyHitShadow(inout ShadowPayload payload, in BuiltInTriangleIntersectionAtt
     // source-verified Temple window materials; their real triangles remain
     // the aperture geometry and surrounding frames/walls still occlude.
     if (payload.probeMode != 1u && (material.flags & MATERIAL_FLAG_DXR_WINDOW_PORTAL) != 0u) {
+        IgnoreHit();
+        return;
+    }
+    if ((material.flags & MATERIAL_FLAG_DECORATIVE_BEAM) != 0u ||
+        (material.flags & MATERIAL_FLAG_NAVI_POINT_PROXY) != 0u) {
         IgnoreHit();
         return;
     }
@@ -970,7 +960,8 @@ float3 EvaluateMaterialSpecularLight(float3 baseColor, float3 normal, float3 vie
     float3 halfVector = normalize(viewDirection + lightDirection);
     float nDotH = saturate(dot(normal, halfVector));
     float vDotH = saturate(dot(viewDirection, halfVector));
-    float3 f0 = lerp((0.04f * saturate(specular)).xxx, baseColor, saturate(metallic));
+    float dielectricF0 = (specular > 0.0f) ? (0.04f * saturate(specular)) : 0.04f;
+    float3 f0 = lerp(dielectricF0.xxx, baseColor, saturate(metallic));
     float3 fresnel = MaterialFresnelSchlick(vDotH, f0);
     float distribution = MaterialNdfGGX(nDotH, roughness);
     float geometry = MaterialGeometrySchlickGGX(nDotV, roughness) *
@@ -984,7 +975,8 @@ float3 EvaluateMaterialDiffuseLight(float3 baseColor, float3 normal, float3 view
                                     float3 lightDirection, float metallic, float specular) {
     float nDotL = saturate(dot(normal, lightDirection));
     if (nDotL <= 0.0f) return 0.0f;
-    float3 f0 = lerp((0.04f * saturate(specular)).xxx, baseColor, saturate(metallic));
+    float dielectricF0 = (specular > 0.0f) ? (0.04f * saturate(specular)) : 0.04f;
+    float3 f0 = lerp(dielectricF0.xxx, baseColor, saturate(metallic));
     float3 fresnel = MaterialFresnelSchlick(
         saturate(dot(viewDirection, normalize(viewDirection + lightDirection))), f0);
     float3 diffuseBrdf = baseColor * (1.0f - saturate(metallic)) * (1.0f - fresnel) * (1.0f / 3.14159265f);
@@ -1016,9 +1008,14 @@ float TraceMaterialVisibility(float3 hitPosition, float3 geometricNormal, float3
     visibility.surfaceOptics.w = 0.0f;
     RayDesc shadowRay;
     shadowRay.Direction = normalize(lightDirection);
-    shadowRay.Origin = OffsetMaterialRayOrigin(hitPosition, geometricNormal, shadowRay.Direction, 0.025f);
-    shadowRay.TMin = 0.01f;
-    shadowRay.TMax = max(maxDistance, 0.02f);
+    float cosTheta = saturate(dot(geometricNormal, shadowRay.Direction));
+    float sinTheta = sqrt(saturate(1.0f - cosTheta * cosTheta));
+    float contactScale = 0.25f + 0.75f * sinTheta;
+    float adaptiveBias = clamp(0.025f * contactScale, 0.008f, 0.05f);
+    shadowRay.Origin = OffsetMaterialRayOrigin(hitPosition, geometricNormal, shadowRay.Direction, adaptiveBias);
+    shadowRay.TMin = max(adaptiveBias * 0.2f, 0.002f);
+    if (maxDistance <= shadowRay.TMin) return 1.0f;
+    shadowRay.TMax = maxDistance;
     TraceRay(gScene,
              RAY_FLAG_ACCEPT_FIRST_HIT_AND_END_SEARCH | RAY_FLAG_SKIP_CLOSEST_HIT_SHADER,
              0x03, 0, 1, 0, shadowRay, visibility);
@@ -1069,6 +1066,57 @@ float3 TraceSelectedEmitter(float3 position, float3 geometricNormal, float3 norm
              max(3.14159265f * distanceSquared, 1.0e-5f));
     }
     return result;
+}
+
+// OCZ-LAVA-02: bounded next-event estimation from material-derived magma
+// light samples. Sources are area-weighted triangle samples captured from
+// real LAVA-classified geometry (never native LightInfo slots, never a
+// per-texel point light). Occlusion is the same probeMode-6 exact-identity
+// trace the emitter harness uses: a miss, an occluder hit, or any non-target
+// triangle contributes zero radiance, so walls between the melt and a
+// receiver stay dark. Receiver response is the standard diffuse+specular
+// material BRDF; emitter radiance is the evaluated thermal emission of the
+// sampled lava triangle, which already tracks heat, crust and flow.
+float3 TraceLavaLighting(float3 position, float3 geometricNormal, float3 normal,
+                         float3 viewDirection, float3 albedo, float roughness,
+                         float metallic, float specular) {
+    float3 result = 0.0f;
+    const float lightGain = max(gEmitterSampleNormal[0].w, 0.0f);
+    [loop] for (uint i = 0u; i < min(8u, (uint)gSourceControls.z); ++i) {
+        float3 toEmitter = gEmitterSamplePosition[i].xyz - position;
+        float distanceSquared = dot(toEmitter, toEmitter);
+        if (distanceSquared < 0.01f) continue;
+        float distance = sqrt(distanceSquared);
+        float3 direction = toEmitter / distance;
+        // EvaluateMaterialDirectLight already folds the receiver cosine.
+        float receiverCosine = saturate(dot(normal, direction));
+        // Melt is single-sided and faces up: never light a surface from the
+        // pool's underside, and never use abs() the way the double-sided
+        // fairy sprites do.
+        float emitterCosine = saturate(dot(gEmitterSampleNormal[i].xyz, -direction));
+        if (receiverCosine <= 0.0f || emitterCosine <= 0.0f) continue;
+        RayDesc ray;
+        ray.Origin = OffsetMaterialRayOrigin(position, geometricNormal, direction, 0.025f);
+        float3 offsetToEmitter = gEmitterSamplePosition[i].xyz - ray.Origin;
+        ray.Direction = normalize(offsetToEmitter);
+        ray.TMin = 0.001f;
+        ray.TMax = length(offsetToEmitter) + 0.02f;
+        ReflectionPayload emitter;
+        InitializeReflectionPayload(emitter, 6u);
+        uint sampleIdentity = gEmitterSampleIdentity[i / 4u][i % 4u];
+        emitter.instanceIndex = sampleIdentity >> 16u;
+        emitter.textureIndex = sampleIdentity & 65535u;
+        TraceRay(gScene, RAY_FLAG_NONE, 0x03, 0, 1, 0, ray, emitter);
+        const float3 emitterRadiance = max(emitter.radiance.rgb, 0.0f.xxx);
+        if (!any(emitterRadiance > 0.0f)) continue;
+        result += EvaluateMaterialDirectLight(albedo, normal, viewDirection, direction,
+                                              roughness, metallic, specular) *
+                  emitterRadiance *
+                  (emitterCosine * gEmitterSamplePosition[i].w * lightGain /
+                   max(3.14159265f * distanceSquared, 1.0e-5f));
+    }
+    if (any(!isfinite(result))) return 0.0f;
+    return max(result, 0.0f.xxx);
 }
 
 // Sparse deterministic first-hit records share the existing forensic UAV. Every
@@ -1133,8 +1181,9 @@ float3 EvaluateMaterialPointLight(float3 baseColor, float3 normal, float3 geomet
         dot(normal, lightDirection) <= 0.0f) return 0.0f;
     float visibility = TraceMaterialVisibility(hitPosition, geometricNormal, lightDirection,
                                                distanceToLight - 0.025f);
+    float3 linearColor = SrgbToLinear(max(lightOptics.yzw, 0.0f.xxx));
     return EvaluateMaterialDirectLight(baseColor, normal, viewDirection, lightDirection,
-                                       roughness, metallic, specular) * lightOptics.yzw *
+                                       roughness, metallic, specular) * linearColor *
            (attenuation * visibility);
 }
 
@@ -1156,7 +1205,8 @@ float3 EvaluateMaterialPointBackscatter(float3 baseColor, float3 normal, float3 
     float visibility = TraceMaterialVisibility(hitPosition, geometricNormal, lightDirection,
                                                distanceToLight - 0.025f);
     float backScatter = pow(saturate(dot(-normal, lightDirection)), 2.0f);
-    return baseColor * lightOptics.yzw * (backScatter * attenuation * amount * visibility);
+    float3 linearColor = SrgbToLinear(max(lightOptics.yzw, 0.0f.xxx));
+    return baseColor * linearColor * (backScatter * attenuation * amount * visibility);
 }
 
 void ClearSurfaceSignals(uint2 pixel) {
@@ -1332,8 +1382,64 @@ void RayGenReflection() {
         return;
     }
     geometricNormal /= geometricLength;
-    if (surface.materialIndex == 4u) {
-        // Organic subtle ripples for water reflection & refraction
+    // OCZ-WATER-01: load the aquatic profile once and reuse it for normals,
+    // Fresnel, reflection, refraction, absorption, and native lights.
+    const bool isWaterSurface = surface.materialIndex == MATERIAL_TYPE_WATER;
+    WaterProfile waterProfile;
+    if (isWaterSurface) {
+        MaterialRecord waterRecord = LoadMaterialRecord(surface.instanceIndex);
+        waterProfile = WaterProfileFromRecord(waterRecord.waterOptics, waterRecord.roughness,
+                                              waterRecord.roughness);
+        // A WATER-typed hit with no classified profile (excluded asset, UI,
+        // or an unproven surface) must keep the original Fast3D pixels; it
+        // still follows the legacy dielectric path below, but never the
+        // hyperreal liquid model.
+        if (!WaterProfileActive(waterProfile)) {
+            waterProfile.cls = WATER_CLASS_NONE;
+            waterProfile.opticsBlend = 0.0f;
+        }
+    } else {
+        waterProfile.cls = WATER_CLASS_NONE;
+        waterProfile.opticsBlend = 0.0f;
+    }
+    const bool hyperrealWater = isWaterSurface && WaterProfileActive(waterProfile);
+    // OCZ-LAVA-01: load the molten profile once and reuse it for normals,
+    // albedo, roughness and thermal emission. Melt is opaque and emissive;
+    // it never follows the water dielectric path below.
+    const bool isLavaSurface = surface.materialIndex == MATERIAL_TYPE_LAVA;
+    MaterialRecord lavaRecord;
+    LavaProfile lavaProfile;
+    if (isLavaSurface) {
+        lavaRecord = LoadMaterialRecord(surface.instanceIndex);
+        lavaProfile = LavaProfileFromRecord(lavaRecord.waterOptics, lavaRecord.roughness);
+        // A LAVA-typed hit with no classified profile (a torch flame the pilot
+        // table mislabelled, a 2D billboard, an effect sprite, or an unproven
+        // surface) must keep the original Fast3D pixels; it never inherits the
+        // hyperreal magma model.
+        if (!LavaProfileActive(lavaProfile)) {
+            lavaProfile.cls = LAVA_CLASS_NONE;
+            lavaProfile.opticsBlend = 0.0f;
+        }
+    } else {
+        lavaProfile.cls = LAVA_CLASS_NONE;
+        lavaProfile.opticsBlend = 0.0f;
+    }
+    const bool hyperrealLava = isLavaSurface && LavaProfileActive(lavaProfile);
+    // Time base for the viscous advection: the monotonic dispatch counter.
+    // Phase-continuous, so the melt never pops between frames.
+    const float waterTime = gFrameInfo.x * 0.016f;
+    if (hyperrealWater) {
+        normal = WaterShadeNormal(LoadMaterialRecord(surface.instanceIndex), surface.detail.xy,
+                                  0.0f, geometricNormal, waterProfile, waterTime,
+                                  viewPos, surface.surfaceOptics.z);
+        if (any(!isfinite(normal)) || dot(normal, normal) <= 1.0e-12f) {
+            ClearSurfaceSignals(launchIndex);
+            return;
+        }
+        normal = normalize(normal);
+    } else if (isWaterSurface) {
+        // Legacy path for excluded/unclassified water: preserve the original
+        // subtle ripple so nothing visibly regresses on DXR OFF-equivalent use.
         float2 waveCoord = surface.detail.xy * 12.0f;
         float wave = sin(waveCoord.x * 3.14159f + waveCoord.y * 2.0f) * 0.035f +
                      cos(waveCoord.y * 4.0f - waveCoord.x * 2.5f) * 0.035f;
@@ -1352,9 +1458,26 @@ void RayGenReflection() {
     float3 baseColor = saturate(surface.baseColorMetallic.rgb);
     float reflectivity = saturate(surface.surfaceOptics.x);
     float emissiveStrength = max(surface.surfaceOptics.y, 0.0f);
-    float3 f0 = lerp(0.04f * surface.detail.z.xxx, baseColor, metallic);
+    // OCZ-WATER-02: reflection rays use the class microfacet roughness
+    // (lake 0.030, falling 0.120 …), not the raster normalRoughness.w.
+    // Without this override the multi-scale wave normals feed a 0.5-rough
+    // GGX lobe and the lake reflects as a dull dielectric instead of a
+    // liquid mirror.
+    if (hyperrealWater) {
+        roughness = waterProfile.roughness;
+    }
+    float dielectricF0 = (surface.detail.z > 0.0f) ? (0.04f * saturate(surface.detail.z)) : 0.04f;
+    float3 f0 = lerp(dielectricF0.xxx, baseColor, metallic);
     float fresnelPower = pow(1.0f - saturate(dot(normal, viewDirection)), 5.0f);
     float3 fresnel = f0 + (1.0f - f0) * fresnelPower;
+    // OCZ-WATER-01: water overrides the generic dielectric model with the
+    // exact IOR-1.333 Fresnel. F0 = 0.0204 (0.04 * 0.51 specular, matching
+    // the original specular response). This is what separates a real liquid
+    // from a glossy dielectric: the correct F0 and a physically shaped curve.
+    if (hyperrealWater) {
+        const float waterF = WaterFresnelSchlick(saturate(dot(normal, viewDirection)), WATER_F0);
+        fresnel = waterF.xxx;
+    }
     // detail.w is geometric coverage computed from the material alpha class
     // in ClosestHit, never raster fog alpha or a material-name whitelist.
     float materialCoverage = saturate(surface.detail.w);
@@ -1365,6 +1488,40 @@ void RayGenReflection() {
     const bool genericMatte = surface.materialIndex == MATERIAL_TYPE_GENERIC_MATTE;
     if (surface.surfaceOptics.w > 2.5f) {
         materialCoverage = 0.0f;
+    }
+    // OCZ-LAVA-01: evaluate the magma surface once and reuse the result for
+    // albedo, roughness, the shade normal and thermal emission. The authored
+    // Fast3D texel is the artistic identity; the physical layer is added on
+    // top of it, never instead of it.
+    float3 lavaEmission = 0.0.xxx;
+    if (hyperrealLava && debugMode == 0u) {
+        const LavaSurfaceResult lava = LavaEvaluate(
+            lavaProfile, lavaRecord, baseColor, materialCoverage,
+            surface.detail.xy, 0.0f, waterTime, geometricNormal);
+        if (any(!isfinite(lava.shadeNormal)) || dot(lava.shadeNormal, lava.shadeNormal) <= 1.0e-12f) {
+            ClearSurfaceSignals(launchIndex);
+            return;
+        }
+        normal = normalize(lava.shadeNormal);
+        baseColor = lava.albedo;
+        roughness = lava.roughness;
+        metallic = 0.0f;
+        // Melt is a rough dielectric with a faint sheen on the open surface.
+        reflectivity = 0.08f;
+        emissiveStrength = 0.0f;
+        materialCoverage = saturate(materialCoverage * lava.coverage);
+        // OCZ-LAVA-02: visual emission is the surface's own thermal glow and
+        // is independently switchable from the lighting contribution, which
+        // is what makes the A/B causality test possible. Bit 2 of
+        // sourceControls.w gates only this additive term; albedo, normals
+        // and roughness keep the magma identity either way.
+        lavaEmission = ((gSourceControls.w & 2u) != 0u)
+            ? lava.emission * materialCoverage : 0.0.xxx;
+        // Keep the dielectric F0 consistent with the updated albedo so the
+        // specular lobe on the open melt reads as a wet sludge, not as metal.
+        dielectricF0 = 0.04f;
+        f0 = dielectricF0.xxx;
+        fresnel = f0 + (1.0f - f0) * fresnelPower;
     }
     const bool forceAnyHitCoverage = gateDiagnostic && (((uint)gDiagnosticInfo.x & 2u) != 0u);
     if (gSourceControls.y != 0u) {
@@ -1429,6 +1586,14 @@ void RayGenReflection() {
                               saturate(gQuality.y) * (genericMatte ? 0.0f : 1.0f);
     float transmissiveFactor = transmissiveMaterial ? materialCoverage : 0.0f;
     float reflectionContribution = Luminance(reflectionWeight);
+    // OCZ-WATER-01: the compositor blends the traced water optics over the
+    // raster water pixel with surface.r * gParams.x. Multiplying the class
+    // opticsBlend here lets a special pool keep more of its authored look
+    // while a lake or river takes the full physical layer, all without a
+    // separate composite path.
+    if (hyperrealWater) {
+        reflectionContribution = saturate(materialCoverage * waterProfile.opticsBlend);
+    }
     uint gateFlags = surface.diagnosticFlags | 1u | 2u | 4u | 8u;
     if (surface.surfaceOptics.w <= 2.5f) gateFlags |= 16u;
     if (forceAnyHitCoverage) {
@@ -1508,8 +1673,14 @@ void RayGenReflection() {
             float3 microfacetNormal = normalize(
                 tangent * (sinTheta * cos(phi)) + bitangent * (sinTheta * sin(phi)) + normal * cosTheta);
             float3 reflectionDirection = normalize(reflect(primaryRay.Direction, microfacetNormal));
-            if (dot(reflectionDirection, normal) > 1.0e-4f &&
-                dot(reflectionDirection, geometricNormal) > 1.0e-4f) {
+            // Water wave normals tilt far enough to reject valid grazing
+            // reflections against the shading hemisphere; the true surface
+            // horizon is the geometric normal, so water only tests that.
+            const bool aboveSurface = hyperrealWater
+                ? (dot(reflectionDirection, geometricNormal) > 1.0e-4f)
+                : (dot(reflectionDirection, normal) > 1.0e-4f &&
+                   dot(reflectionDirection, geometricNormal) > 1.0e-4f);
+            if (aboveSurface) {
                 RayDesc reflectionRay;
                 reflectionRay.Origin = OffsetMaterialRayOrigin(viewPos, geometricNormal, reflectionDirection, 0.025f);
                 reflectionRay.Direction = reflectionDirection;
@@ -1530,14 +1701,17 @@ void RayGenReflection() {
                                  MaterialGeometrySchlickGGX(nDotL, roughness);
                 float3 sampleFresnel = MaterialFresnelSchlick(vDotH, f0);
                 float3 relativeFresnel = sampleFresnel / max(fresnel, 1.0e-4f.xxx);
-                reflectedRadiance += reflected.radiance.rgb * relativeFresnel *
-                                     (geometry * vDotH / (nDotV * nDotH));
+                float specularWeight = min(geometry * vDotH / (nDotV * nDotH), 4.0f);
+                reflectedRadiance += reflected.radiance.rgb * relativeFresnel * specularWeight;
             }
         }
         reflectedRadiance /= reflectionSamples;
     }
 
     float3 transmittedRadiance = baseColor;
+    float3 waterBodyColor = 0.0f.xxx;
+    float waterPathDistance = 0.0f;
+    bool waterRefracted = false;
     if (transmissiveMaterial) {
         float eta = surface.materialIndex == 4u ? (1.0f / 1.333f) : (1.0f / 1.45f);
         // The primary side is encoded as 2=front/entering, 1=back/exiting.
@@ -1578,9 +1752,45 @@ void RayGenReflection() {
         TraceRay(gScene, RAY_FLAG_NONE,
                  0x03, 0, 1, 0, transmittedRay, transmitted);
         transmittedRadiance = transmitted.radiance.rgb;
+        if (hyperrealWater) {
+            // OCZ-WATER-02: the refracted scene is the real underwater world.
+            // Keep its luminance so the floor, walls and shadows stay readable,
+            // but let Beer-Lambert absorption colour the path by depth and
+            // converge the chroma to the original painted water art. The
+            // refracted payload carries RayTCurrent() in surfaceOptics.z on a
+            // hit; a miss uses the authored transmission range scaled down so
+            // a thin sheet never inherits deep-water absorption.
+            waterRefracted = !totalInternalReflection;
+            const float refractedDistance = transmitted.surfaceOptics.z;
+            const bool refractedHitSomething = totalInternalReflection
+                ? true
+                : (isfinite(refractedDistance) && refractedDistance > 0.0f);
+            waterPathDistance = WaterOpticalPath(refractedDistance, refractedHitSomething,
+                                                 transmittedRay.TMax);
+            const float3 waterArt = max(SrgbToLinear(saturate(baseColor)), 0.0.xxx);
+            if (!refractedHitSomething && !totalInternalReflection) {
+                // The transmitted ray escaped into the sky or a void. Replace it
+                // with a depth-tinted body colour so deep water never shows sky
+                // through the surface, while shallow water keeps the art hue.
+                transmittedRadiance = WaterDepthTint(waterPathDistance, baseColor,
+                                                     waterProfile.artWeight);
+            }
+            transmittedRadiance = WaterMatchArtChroma(transmittedRadiance, waterArt,
+                                                      waterProfile.artWeight);
+            waterBodyColor = transmittedRadiance;
+            transmittedRadiance *= WaterAbsorbTransmittance(waterPathDistance,
+                                                            waterProfile.absorption);
+        }
         // Radiance is premixed once with RGB Fresnel; the surface compositor
         // applies only the authored transmission strength to this result.
-        float3 interfaceWeight = saturate(fresnel * reflectivity) * reflectionStrength * saturate(gQuality.y);
+        // OCZ-WATER-01: water always reflects by Fresnel, so its interface
+        // weight is the pure Fresnel term and is never gated by the authored
+        // transmission strength or a quality toggle. This is what makes a
+        // real liquid read as a liquid at every view angle, including the
+        // near-total reflection at grazing incidence.
+        float3 interfaceWeight = hyperrealWater
+            ? fresnel
+            : saturate(fresnel * reflectivity) * reflectionStrength * saturate(gQuality.y);
         if (totalInternalReflection) {
             reflectedRadiance = transmittedRadiance;
         } else {
@@ -1630,8 +1840,49 @@ void RayGenReflection() {
         : 0.0f;
     const float emissionCoverage = surface.materialIndex == MATERIAL_TYPE_EMISSIVE
         ? materialCoverage : 1.0f;
+    // OCZ-WATER-01: native-light glints. A torch, a fairy or the sun must
+    // leave a moving specular trail on the water instead of a flat luminous
+    // disc. These are additive to the traced reflection and never replace it.
+    if (hyperrealWater && debugMode == 0u) {
+        const float3 waterF0 = WATER_F0.xxx;
+        float3 waterGlints = 0.0f.xxx;
+        const float3 waterLightDir = normalize(gLightDir.xyz);
+        const float3 waterKeyColor = max(gSceneLightColor.rgb, 0.0.xxx);
+        waterGlints += WaterDirectionalGlint(normal, viewDirection, geometricNormal,
+                                             waterLightDir, waterKeyColor,
+                                             waterProfile.roughness, waterF0);
+        [loop] for (uint waterLightIndex = 0u;
+             waterLightIndex < min((uint)max(gQuality.w, 0.0f), 32u); ++waterLightIndex) {
+            const uint waterIdentity = (uint)gPointLightOptics[waterLightIndex].x;
+            const uint waterRole = waterIdentity % 8u;
+            if (waterRole == 2u || waterRole == 4u) continue;
+            const float3 waterToLight = gPointLightPosition[waterLightIndex].xyz - viewPos;
+            const float waterDistance = length(waterToLight);
+            const float waterRadius = gPointLightPosition[waterLightIndex].w;
+            if (!isfinite(waterDistance) || waterDistance <= 1.0e-4f ||
+                !isfinite(waterRadius) || waterRadius <= 0.0f || waterDistance >= waterRadius) continue;
+            const float3 waterLightDirection = waterToLight / waterDistance;
+            const float3 waterLightColor = max(gPointLightOptics[waterLightIndex].yzw, 0.0.xxx);
+            if (!any(waterLightColor > 0.0f)) continue;
+            const float waterVisibility = TraceMaterialVisibility(
+                viewPos, geometricNormal, waterLightDirection, waterDistance - 0.025f);
+            if (waterVisibility <= 0.0f) continue;
+            waterGlints += WaterPointLightSpecular(
+                normal, viewDirection, geometricNormal, viewPos, waterProfile.roughness,
+                waterF0, gPointLightPosition[waterLightIndex],
+                float4(waterIdentity, waterLightColor * waterVisibility));
+        }
+        if (any(isfinite(waterGlints))) {
+            reflectedRadiance += max(0.0f, waterGlints) * materialCoverage;
+        }
+    }
+    // OCZ-LAVA-01: thermal emission is additive to the traced reflection.
+    // Melt lights the scene through the same reflection buffer the water
+    // Fresnel uses, so a lava pool throws warm radiance onto the surrounding
+    // rock exactly as the original emissive lava did, but with a physically
+    // shaped chroma instead of a flat orange tint.
     float3 reflectionResult = max(0.0f,
-        reflectedRadiance + baseColor * emissiveStrength * emissionCoverage);
+        reflectedRadiance + lavaEmission + baseColor * emissiveStrength * emissionCoverage);
     float3 pathResult = max(0.0f, surface.radiance.rgb) + indirectContribution;
     if (any(isnan(reflectionResult)) || any(isinf(reflectionResult)) ||
         any(isnan(pathResult)) || any(isinf(pathResult))) {
@@ -1662,12 +1913,14 @@ void RayGenReflection() {
         materialCoverage > 0.0f) {
         MaterialRecord receiverRecord = LoadMaterialRecord(surface.instanceIndex);
         const uint receiverOwner = receiverRecord.samplerFlags >> 16u;
-        if ((receiverRecord.flags & MATERIAL_FLAG_NAVI_POINT_WORLD_RECEIVER) != 0u &&
-            receiverRecord.alphaMode < 2u && receiverOwner == 0u) {
+        if ((receiverRecord.flags & MATERIAL_FLAG_NATIVE_LIGHT_RECEIVER) != 0u &&
+            receiverRecord.alphaMode < 2u) {
             [loop] for (uint lightIndex = 0u; lightIndex < min((uint)max(gQuality.w, 0.0f), 32u); ++lightIndex) {
                 const uint identity = (uint)gPointLightOptics[lightIndex].x;
                 const uint lightOwner = identity / 8u;
-                if (lightOwner == 0u || identity % 8u != 1u || lightOwner == receiverOwner) continue;
+                const uint role = identity % 8u;
+                if (role == 2u || role == 4u) continue; // Inactive auxiliary sentinels
+                if (lightOwner != 0u && lightOwner == receiverOwner) continue; // Prevent self-illumination
                 const float3 lightColor = max(gPointLightOptics[lightIndex].yzw, 0.0f.xxx);
                 const float radius = gPointLightPosition[lightIndex].w;
                 if (!any(lightColor > 0.0f) || !isfinite(radius) || radius <= 0.0f) continue;
@@ -1679,8 +1932,16 @@ void RayGenReflection() {
                 const float attenuation = saturate(1.0f - (distanceToLight / radius) * (distanceToLight / radius));
                 const float visibility = TraceMaterialVisibility(viewPos, geometricNormal, lightDirection,
                                                                  distanceToLight - 0.025f);
+                const float3 linearLightColor = SrgbToLinear(lightColor);
                 nativePointDirectRadiance += EvaluateMaterialDirectLight(surface.naviPointAlbedo.rgb, normal, viewDirection,
-                    lightDirection, roughness, metallic, surface.detail.z) * lightColor * attenuation * visibility;
+                    lightDirection, roughness, metallic, surface.detail.z) * linearLightColor * attenuation * visibility;
+            }
+            // OCZ-LAVA-02: evaluate direct magma illumination onto this physical receiver
+            if ((gSourceControls.w & 1u) != 0u && (uint)gSourceControls.z > 0u &&
+                surface.materialIndex != MATERIAL_TYPE_LAVA) {
+                nativePointDirectRadiance += TraceLavaLighting(
+                    viewPos, geometricNormal, normal, viewDirection,
+                    surface.naviPointAlbedo.rgb, roughness, metallic, surface.detail.z);
             }
         }
     }
@@ -1700,7 +1961,11 @@ void RayGenReflection() {
     } else {
         gIndirectMask[launchIndex] = float4(indirectContribution, samples > 0u ? 1.0f : 0.0f);
     }
-    gEmissiveMask[launchIndex] = max(emissiveStrength, 0.0f) * materialCoverage;
+    float effectiveEmissive = max(emissiveStrength, 0.0f);
+    if (hyperrealLava) {
+        effectiveEmissive = max(effectiveEmissive, Luminance(lavaEmission));
+    }
+    gEmissiveMask[launchIndex] = effectiveEmissive * materialCoverage;
     gNativePointDirect[launchIndex] = float4(nativePointDirectRadiance, 1.0f);
     if (debugMode >= 10u && debugMode <= 15u) {
         float4 lateDebug = float4(Luminance(max(surface.radiance.rgb, 0.0f)),
@@ -1818,6 +2083,10 @@ void AnyHitReflection(inout ReflectionPayload payload, in BuiltInTriangleInterse
     // scene light. Treat only the authored Temple glass panes as portal
     // surfaces; the captured mesh boundaries still define the light opening.
     if (payload.probeMode == 2u && (material.flags & MATERIAL_FLAG_DXR_WINDOW_PORTAL) != 0u) {
+        IgnoreHit();
+        return;
+    }
+    if ((material.flags & MATERIAL_FLAG_DECORATIVE_BEAM) != 0u) {
         IgnoreHit();
         return;
     }
@@ -1978,6 +2247,29 @@ void ClosestHitReflection(inout ReflectionPayload payload, in BuiltInTriangleInt
                       uv, normal, vertexColor, baseColor, naviPointAlbedo, vertexAlpha, sampledTextureAlpha, textureLod,
                       tangent, bitangent, geometricNormal, frontFace);
     if (payload.probeMode == 6u) {
+        // OCZ-LAVA-02: an exact lava emitter sample returns the thermal
+        // radiance of that triangle. Occluders and misses keep zero, so the
+        // receiver-side TraceLavaLighting NEE is occlusion-aware through the
+        // real TLAS. The sample identity was authored CPU-side from the very
+        // triangle this ray was aimed at, so InstanceID/PrimitiveID must both
+        // match; any other hit is a blocker, not a source.
+        if (material.materialType == MATERIAL_TYPE_LAVA &&
+            InstanceID() == payload.instanceIndex && PrimitiveIndex() == payload.textureIndex) {
+            const LavaProfile probeLavaProfile =
+                LavaProfileFromRecord(material.waterOptics, material.roughness);
+            if (LavaProfileActive(probeLavaProfile)) {
+                const float probeLavaTime = gFrameInfo.x * 0.016f;
+                const LavaSurfaceResult probeLava = LavaEvaluate(
+                    probeLavaProfile, material, max(baseColor.rgb, 0.0.xxx), saturate(baseColor.a),
+                    uv, textureLod, probeLavaTime, geometricNormal);
+                const float3 probeEmission = any(isfinite(probeLava.emission))
+                    ? probeLava.emission : 0.0.xxx;
+                payload.radiance = float4(probeEmission * saturate(probeLava.coverage), 0.0f);
+                return;
+            }
+            payload.radiance = 0.0f;
+            return;
+        }
         bool selected = (material.samplerFlags >> 16u) == gSourceControls.x &&
                         InstanceID() == payload.instanceIndex && PrimitiveIndex() == payload.textureIndex &&
                         material.emissiveStrength > 0.0f;
@@ -2050,17 +2342,19 @@ void ClosestHitReflection(inout ReflectionPayload payload, in BuiltInTriangleInt
     const uint policyAlphaMode = useCandidateAlphaPolicy ? candidateAlphaMode : material.alphaMode;
     const bool emissiveAlphaBlend = material.materialType == MATERIAL_TYPE_EMISSIVE &&
         material.emissiveStrength > 0.0f && (policyAlphaMode == 2u || policyAlphaMode == 3u);
+    const bool isDecorativeBeam = (material.flags & MATERIAL_FLAG_DECORATIVE_BEAM) != 0u;
     const bool rawPrimaryRasterBlend = payload.probeMode == 1u &&
                                     (policyAlphaMode == 2u || policyAlphaMode == 3u) &&
                                     !pbrTransmissiveMaterial && !emissiveAlphaBlend;
-    const bool primaryRasterBlend = rawPrimaryRasterBlend && !bypassPrimaryRasterBlend;
+    const bool primaryRasterBlend = (rawPrimaryRasterBlend || isDecorativeBeam) && !bypassPrimaryRasterBlend;
     payload.surfaceOptics = float4(reflectivity, material.emissiveStrength, RayTCurrent(),
                                    primaryRasterBlend ? 3.0f : (frontFace ? 2.0f : 1.0f));
     float coverage = 0.0f;
     const bool opacityValid = !isnan(baseColor.a) && !isinf(baseColor.a);
-    if (opacityValid && policyAlphaMode == 0u) coverage = 1.0f; // opaque alpha is not opacity
+    if (isDecorativeBeam) coverage = 0.0f;
+    else if (opacityValid && policyAlphaMode == 0u) coverage = 1.0f; // opaque alpha is not opacity
     else if (opacityValid && policyAlphaMode == 1u) coverage = baseColor.a >= 0.5f ? 1.0f : 0.0f;
-    else if (opacityValid && emissiveAlphaBlend) coverage = max(saturate(baseColor.a), 0.70f);
+    else if (opacityValid && emissiveAlphaBlend) coverage = saturate(baseColor.a);
     else if (opacityValid && pbrTransmissiveMaterial) coverage = saturate(baseColor.a);
     payload.detail = float4(uv, material.specular, coverage);
     if (gSourceControls.y != 0u && payload.probeMode == 1u) {
@@ -2106,10 +2400,11 @@ void ClosestHitReflection(inout ReflectionPayload payload, in BuiltInTriangleInt
         }
     }
     const float directionalNdotL = saturate(dot(normal, lightDirection));
+    const float3 linearSceneLightColor = SrgbToLinear(max(gSceneLightColor.rgb, 0.0f.xxx));
     float3 specularDirect = EvaluateMaterialSpecularLight(baseColor.rgb, normal, viewDirection,
                                                           lightDirection, roughness,
                                                           material.metallic, material.specular) *
-                            max(gSceneLightColor.rgb, 0.0f.xxx) * directionalVisibility;
+                            linearSceneLightColor * directionalVisibility;
     float3 fast3dShade = max(gAmbientLightColor.rgb, 0.025f.xxx) +
                          max(gSceneLightColor.rgb, 0.0f.xxx) * (directionalNdotL * directionalVisibility);
     float3 pointLights = 0.0f;
@@ -2117,6 +2412,7 @@ void ClosestHitReflection(inout ReflectionPayload payload, in BuiltInTriangleInt
     float3 secondaryLightDirection = secondaryLightLength > 1.0e-6f
         ? gSecondaryLightDir.xyz / secondaryLightLength : float3(0.0f, 1.0f, 0.0f);
     float3 secondaryLightColor = max(gSecondaryLightColor.rgb, 0.0f.xxx);
+    const float3 linearSecondaryLightColor = SrgbToLinear(secondaryLightColor);
     float secondaryVisibility = 1.0f;
     float subsurface = saturate(material.subsurfaceHint);
     float secondaryNdotL = dot(normal, secondaryLightDirection);
@@ -2130,7 +2426,7 @@ void ClosestHitReflection(inout ReflectionPayload payload, in BuiltInTriangleInt
             specularDirect += EvaluateMaterialSpecularLight(baseColor.rgb, normal, viewDirection,
                                                             secondaryLightDirection, roughness,
                                                             material.metallic, material.specular) *
-                              secondaryLightColor * secondaryVisibility;
+                              linearSecondaryLightColor * secondaryVisibility;
             fast3dShade += secondaryLightColor * (saturate(secondaryNdotL) * secondaryVisibility);
         }
     }
@@ -2139,14 +2435,17 @@ void ClosestHitReflection(inout ReflectionPayload payload, in BuiltInTriangleInt
     // ambient and the shadowed directional light still contribute there.
     uint pointLightCount = payload.probeMode == 5u
         ? 0u : min((uint)max(gQuality.w, 0.0f), 32u);
-    const bool splitNaviPointFromRelight = payload.probeMode == 1u && gParams.w <= 0.5f &&
-        (material.flags & MATERIAL_FLAG_NAVI_POINT_WORLD_RECEIVER) != 0u;
-    [loop] for (uint lightIndex = 0u; lightIndex < pointLightCount; ++lightIndex) {
-        const uint identity = (uint)gPointLightOptics[lightIndex].x;
-        if (splitNaviPointFromRelight && identity % 8u == 1u) continue;
-        pointLights += EvaluateMaterialPointLight(baseColor.rgb, normal, geometricNormal, viewDirection, hitPosition,
-                                             gPointLightPosition[lightIndex], gPointLightOptics[lightIndex],
-                                             roughness, material.metallic, material.specular);
+    const bool splitPointFromRelight = payload.probeMode == 1u && gParams.w <= 0.5f &&
+        (material.flags & MATERIAL_FLAG_NATIVE_LIGHT_RECEIVER) != 0u;
+    if (!splitPointFromRelight) {
+        [loop] for (uint lightIndex = 0u; lightIndex < pointLightCount; ++lightIndex) {
+            const uint identity = (uint)gPointLightOptics[lightIndex].x;
+            const uint role = identity % 8u;
+            if (role == 2u || role == 4u) continue;
+            pointLights += EvaluateMaterialPointLight(baseColor.rgb, normal, geometricNormal, viewDirection, hitPosition,
+                                                 gPointLightPosition[lightIndex], gPointLightOptics[lightIndex],
+                                                 roughness, material.metallic, material.specular);
+        }
     }
     float directionalBackscatter = pow(saturate(dot(-normal, lightDirection)), 2.0f);
     fast3dShade += max(gSceneLightColor.rgb, 0.0f.xxx) *
@@ -2155,18 +2454,72 @@ void ClosestHitReflection(inout ReflectionPayload payload, in BuiltInTriangleInt
     fast3dShade += secondaryLightColor *
                    (secondaryBackscatter * subsurface * 0.18f * secondaryVisibility);
     float3 backscatter = 0.0f;
-    [loop] for (uint lightIndex = 0u; lightIndex < pointLightCount; ++lightIndex) {
-        const uint identity = (uint)gPointLightOptics[lightIndex].x;
-        if (splitNaviPointFromRelight && identity % 8u == 1u) continue;
-        backscatter += EvaluateMaterialPointBackscatter(baseColor.rgb, normal, geometricNormal, hitPosition,
-                                                         gPointLightPosition[lightIndex],
-                                                         gPointLightOptics[lightIndex],
-                                                         subsurface * 0.18f);
+    if (!splitPointFromRelight) {
+        [loop] for (uint lightIndex = 0u; lightIndex < pointLightCount; ++lightIndex) {
+            const uint identity = (uint)gPointLightOptics[lightIndex].x;
+            const uint role = identity % 8u;
+            if (role == 2u || role == 4u) continue;
+            backscatter += EvaluateMaterialPointBackscatter(baseColor.rgb, normal, geometricNormal, hitPosition,
+                                                             gPointLightPosition[lightIndex],
+                                                             gPointLightOptics[lightIndex],
+                                                             subsurface * 0.18f);
+        }
     }
-    float3 diffuseFast3D = baseColor.rgb * (1.0f - saturate(material.metallic)) *
-                           SrgbToLinear(fast3dShade);
-    float3 radiance = accumulatedTransparentEmission + diffuseFast3D + specularDirect + pointLights +
-                      backscatter + baseColor.rgb * max(material.emissiveStrength, 0.0f);
+    // P1: Energy Conservation between Specular Fresnel and Diffuse.
+    // Transmitted diffuse light must equal incident energy minus reflected specular energy (1 - ks).
+    float3 keyHalfVector = normalize(viewDirection + lightDirection);
+    float dielectricF0 = (material.specular > 0.0f) ? (0.04f * saturate(material.specular)) : 0.04f;
+    float3 f0 = lerp(dielectricF0.xxx, baseColor.rgb, saturate(material.metallic));
+    float3 keyFresnel = MaterialFresnelSchlick(saturate(dot(viewDirection, keyHalfVector)), f0);
+    float3 diffuseEnergyFactor = (1.0f - saturate(material.metallic)) * saturate(1.0f.xxx - keyFresnel);
+    float3 diffuseFast3D = baseColor.rgb * diffuseEnergyFactor * SrgbToLinear(fast3dShade);
+    // OCZ-LAVA-01: secondary rays (GI and reflections) must see the melt's
+    // thermal radiance, or a lava pool would never light the rock around it.
+    // The same evaluation the primary path uses, driven by the authored texel
+    // this hit already sampled. accumulatedTransparentEmission is const, so
+    // the thermal term rides in its own accumulator.
+    float3 lavaSecondaryEmission = 0.0.xxx;
+    if (material.materialType == MATERIAL_TYPE_LAVA && payload.probeMode != 6u) {
+        const LavaProfile secondaryLavaProfile =
+            LavaProfileFromRecord(material.waterOptics, material.roughness);
+        if (LavaProfileActive(secondaryLavaProfile)) {
+            const float lavaTime = gFrameInfo.x * 0.016f;
+            const LavaSurfaceResult secondaryLava = LavaEvaluate(
+                secondaryLavaProfile, material, baseColor.rgb, 1.0f, uv, textureLod,
+                lavaTime, geometricNormal);
+            if (any(isfinite(secondaryLava.emission))) {
+                // Replace the diffuse term with the crusted albedo so a cooled
+                // plate does not also bounce full ambient as if it were lit
+                // rock, and add the thermal emission unattenuated: melt is its
+                // own light source, not a lit receiver. OCZ-LAVA-02 gates the
+                // additive emission with the visual-emission control so the
+                // A/B causality pair can keep the material but drop the glow.
+                diffuseFast3D = secondaryLava.albedo * (1.0f - saturate(material.metallic)) *
+                                SrgbToLinear(fast3dShade);
+                normal = secondaryLava.shadeNormal;
+                roughness = secondaryLava.roughness;
+                if ((gSourceControls.w & 2u) != 0u) {
+                    lavaSecondaryEmission = secondaryLava.emission;
+                }
+            }
+        }
+    }
+    // OCZ-LAVA-02: direct lighting FROM material-derived magma samples ONTO
+    // this receiver. Primary path pixels and reflection rays evaluate it so
+    // walls, floors, props and Link gain radiance that depends on emitter
+    // heat, distance, orientation and TLAS occlusion. GI bounce rays are
+    // excluded: they already accumulate lava radiance by hitting melt
+    // geometry, and NEE there would double-count the same energy.
+    float3 lavaDirectLighting = 0.0.xxx;
+    if ((gSourceControls.w & 1u) != 0u && (uint)gSourceControls.z > 0u &&
+        (payload.probeMode == 0u || payload.probeMode == 1u)) {
+        lavaDirectLighting = TraceLavaLighting(hitPosition, geometricNormal, normal,
+                                               viewDirection, baseColor.rgb, roughness,
+                                               material.metallic, material.specular);
+    }
+    float3 radiance = accumulatedTransparentEmission + lavaSecondaryEmission + diffuseFast3D +
+                      specularDirect + pointLights + lavaDirectLighting + backscatter +
+                      baseColor.rgb * max(material.emissiveStrength, 0.0f);
     const uint dbgMode = (uint)max(gLightDir.w, 0.0f);
     if (payload.probeMode == 1u && dbgMode >= 16u) {
         float4 decomposed;

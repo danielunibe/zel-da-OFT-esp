@@ -273,7 +273,6 @@ void LightContext_InitList(PlayState* play, LightContext* lightCtx) {
 void LightContext_DestroyList(PlayState* play, LightContext* lightCtx) {
     while (lightCtx->listHead != NULL) {
         LightContext_RemoveLight(play, lightCtx, lightCtx->listHead);
-        lightCtx->listHead = lightCtx->listHead->next;
     }
 }
 

@@ -1,0 +1,285 @@
+{
+  "validation_id": "OCZ_VAL_IMPORT_UE58",
+  "contract_file": "C:\\Users\\danie\\Desktop\\Zeldacouch\\zel-da-OFT-esp-main (3)\\zel-da-OFT-esp-main\\tools\\unreal_lab\\output\\tokinoma_captured_contract.json",
+  "telemetry_file": "C:\\Users\\danie\\Desktop\\Zeldacouch\\zel-da-OFT-esp-main (3)\\zel-da-OFT-esp-main\\tools\\unreal_lab\\output\\import_telemetry_TOKINOMA_TEMPLE_OF_TIME.json",
+  "checks": {
+    "contract_schema": {
+      "status": "PASS",
+      "scene_id": "TOKINOMA_TEMPLE_OF_TIME",
+      "schema_version": "1.0.0"
+    },
+    "geometry": {
+      "status": "PASS",
+      "mesh_count": 21,
+      "details": [
+        {
+          "mesh_id": "tokinoma_room_0DL_000910",
+          "vertex_count": 24,
+          "index_count": 24,
+          "position_invariant_pass": true,
+          "material_id": "MAT_TEMPLE_WALL_MAIN"
+        },
+        {
+          "mesh_id": "tokinoma_room_0DL_0010F0",
+          "vertex_count": 162,
+          "index_count": 162,
+          "position_invariant_pass": true,
+          "material_id": "MAT_TEMPLE_WALL_MAIN"
+        },
+        {
+          "mesh_id": "tokinoma_room_0DL_001818",
+          "vertex_count": 108,
+          "index_count": 108,
+          "position_invariant_pass": true,
+          "material_id": "MAT_TEMPLE_WALL_MAIN"
+        },
+        {
+          "mesh_id": "tokinoma_room_0DL_001E68",
+          "vertex_count": 108,
+          "index_count": 108,
+          "position_invariant_pass": true,
+          "material_id": "MAT_TEMPLE_WALL_MAIN"
+        },
+        {
+          "mesh_id": "tokinoma_room_0DL_0024B8",
+          "vertex_count": 108,
+          "index_count": 108,
+          "position_invariant_pass": true,
+          "material_id": "MAT_TEMPLE_WALL_MAIN"
+        },
+        {
+          "mesh_id": "tokinoma_room_0DL_002AF8",
+          "vertex_count": 108,
+          "index_count": 108,
+          "position_invariant_pass": true,
+          "material_id": "MAT_TEMPLE_WALL_MAIN"
+        },
+        {
+          "mesh_id": "tokinoma_room_0DL_003668",
+          "vertex_count": 264,
+          "index_count": 264,
+          "position_invariant_pass": true,
+          "material_id": "MAT_TEMPLE_WALL_MAIN"
+        },
+        {
+          "mesh_id": "tokinoma_room_0DL_003988",
+          "vertex_count": 9,
+          "index_count": 9,
+          "position_invariant_pass": true,
+          "material_id": "MAT_TEMPLE_WOOD_DOOR"
+        },
+        {
+          "mesh_id": "tokinoma_room_0DL_004228",
+          "vertex_count": 192,
+          "index_count": 192,
+          "position_invariant_pass": true,
+          "material_id": "MAT_TEMPLE_WOOD_DOOR"
+        },
+        {
+          "mesh_id": "tokinoma_room_0DL_004848",
+          "vertex_count": 39,
+          "index_count": 39,
+          "position_invariant_pass": true,
+          "material_id": "MAT_TEMPLE_CARPET_RUNNER"
+        },
+        {
+          "mesh_id": "tokinoma_room_0DL_004B58",
+          "vertex_count": 27,
+          "index_count": 27,
+          "position_invariant_pass": true,
+          "material_id": "MAT_TEMPLE_CARPET_RUNNER"
+        },
+        {
+          "mesh_id": "tokinoma_room_0DL_005D68",
+          "vertex_count": 408,
+          "index_count": 408,
+          "position_invariant_pass": true,
+          "material_id": "MAT_TEMPLE_GLASS_STAINED"
+        },
+        {
+          "mesh_id": "tokinoma_room_0DL_006748",
+          "vertex_count": 141,
+          "index_count": 141,
+          "position_invariant_pass": true,
+          "material_id": "MAT_TEMPLE_GLASS_STAINED"
+        },
+        {
+          "mesh_id": "tokinoma_room_0DL_006AF8",
+          "vertex_count": 33,
+          "index_count": 33,
+          "position_invariant_pass": true,
+          "material_id": "MAT_TEMPLE_WINDOW_BEAM"
+        },
+        {
+          "mesh_id": "tokinoma_room_0DL_006D50",
+          "vertex_count": 15,
+          "index_count": 15,
+          "position_invariant_pass": true,
+          "material_id": "MAT_TEMPLE_WINDOW_BEAM"
+        },
+        {
+          "mesh_id": "tokinoma_room_0DL_006F80",
+          "vertex_count": 15,
+          "index_count": 15,
+          "position_invariant_pass": true,
+          "material_id": "MAT_TEMPLE_GLASS_CLEAR"
+        },
+        {
+          "mesh_id": "tokinoma_room_0DL_007160",
+          "vertex_count": 6,
+          "index_count": 6,
+          "position_invariant_pass": true,
+          "material_id": "MAT_TEMPLE_GLASS_CLEAR"
+        },
+        {
+          "mesh_id": "tokinoma_room_0DL_007310",
+          "vertex_count": 6,
+          "index_count": 6,
+          "position_invariant_pass": true,
+          "material_id": "MAT_TEMPLE_METAL_GATE"
+        },
+        {
+          "mesh_id": "tokinoma_room_0DL_0075B0",
+          "vertex_count": 51,
+          "index_count": 51,
+          "position_invariant_pass": true,
+          "material_id": "MAT_TEMPLE_METAL_GATE"
+        },
+        {
+          "mesh_id": "tokinoma_room_0DL_007A70",
+          "vertex_count": 75,
+          "index_count": 75,
+          "position_invariant_pass": true,
+          "material_id": "MAT_TEMPLE_WALL_MAIN"
+        },
+        {
+          "mesh_id": "tokinoma_room_0DL_007FD0",
+          "vertex_count": 15,
+          "index_count": 15,
+          "position_invariant_pass": true,
+          "material_id": "MAT_TEMPLE_WALL_MAIN"
+        }
+      ]
+    },
+    "materials": {
+      "status": "PASS",
+      "material_count": 7,
+      "details": {
+        "MAT_TEMPLE_WALL_MAIN": {
+          "type": "STONE",
+          "roughness": 0.85,
+          "f0": 0.01,
+          "confidence": "GAME_RESOURCE_MAPPED",
+          "physically_valid": true
+        },
+        "MAT_TEMPLE_WOOD_DOOR": {
+          "type": "WOOD",
+          "roughness": 0.85,
+          "f0": 0.01,
+          "confidence": "GAME_RESOURCE_MAPPED",
+          "physically_valid": true
+        },
+        "MAT_TEMPLE_CARPET_RUNNER": {
+          "type": "STONE",
+          "roughness": 0.85,
+          "f0": 0.01,
+          "confidence": "GAME_RESOURCE_MAPPED",
+          "physically_valid": true
+        },
+        "MAT_TEMPLE_GLASS_STAINED": {
+          "type": "GLASS",
+          "roughness": 0.05,
+          "f0": 0.04,
+          "confidence": "GAME_RESOURCE_MAPPED",
+          "physically_valid": true
+        },
+        "MAT_TEMPLE_WINDOW_BEAM": {
+          "type": "EMISSIVE",
+          "roughness": 0.85,
+          "f0": 0.01,
+          "confidence": "GAME_RESOURCE_MAPPED",
+          "physically_valid": true
+        },
+        "MAT_TEMPLE_GLASS_CLEAR": {
+          "type": "GLASS",
+          "roughness": 0.05,
+          "f0": 0.04,
+          "confidence": "GAME_RESOURCE_MAPPED",
+          "physically_valid": true
+        },
+        "MAT_TEMPLE_METAL_GATE": {
+          "type": "METAL",
+          "roughness": 0.85,
+          "f0": 0.01,
+          "confidence": "GAME_RESOURCE_MAPPED",
+          "physically_valid": true
+        }
+      }
+    },
+    "lights": {
+      "status": "PASS",
+      "light_count": 2,
+      "details": [
+        {
+          "light_id": "Tokinoma_Sunlight_Authentic",
+          "type": "DIRECTIONAL",
+          "color_rgb": [
+            1.0,
+            0.96,
+            0.88
+          ],
+          "intensity": 15000.0,
+          "position_invariant_pass": true
+        },
+        {
+          "light_id": "Navi_Point_Light_Authentic",
+          "type": "POINT",
+          "color_rgb": [
+            0.15,
+            0.55,
+            1.0
+          ],
+          "intensity": 2500.0,
+          "position_invariant_pass": true
+        }
+      ]
+    },
+    "cameras": {
+      "status": "PASS",
+      "camera_count": 1,
+      "details": [
+        {
+          "camera_id": "Cam_Tokinoma_Spawn",
+          "fov": 60.0,
+          "position_invariant_pass": true,
+          "target_invariant_pass": true
+        }
+      ]
+    },
+    "provenance_and_winding": {
+      "status": "PASS",
+      "provenance": "GAME_GEOMETRY_CAPTURE",
+      "determinant": -1.0,
+      "winding_correction": "SWAP_INDEX_1_AND_2 (Preserves CCW FrontFace)"
+    },
+    "ue_import_telemetry": {
+      "status": "PASS",
+      "actors_imported_count": 5,
+      "level_path": "/Game/OCZ/Scenes/LV_OCZ_TempleOfTime_Physical"
+    },
+    "gpu_physical_render": {
+      "status": "PASS",
+      "render_mode": "GPU_HARDWARE_RAYTRACING_LUMEN",
+      "gpu_device": "NVIDIA GeForce RTX 3070 Ti (8 GB VRAM)",
+      "rhi": "Direct3D 12 (SM6)",
+      "resolution": {
+        "width": 1280,
+        "height": 720
+      },
+      "passes_count": 7,
+      "passes_files_exist": true
+    }
+  },
+  "summary": {},
+  "status": "PASS"
+}
