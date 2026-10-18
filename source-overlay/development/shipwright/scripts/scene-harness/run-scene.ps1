@@ -355,7 +355,9 @@ if ($launchFailure) { Stop-WithCode 'HARNESS_PROCESS_START_FAILED' $launchFailur
 
 try {
 $started = Get-Date
-$maximumPollSeconds = 300
+# OCZ-RECOVERY-02: 300s was too short for slow scenes (Goron City renders ~1 fps,
+# needs camera warmup 120 + stable 30 game frames before the capture request).
+$maximumPollSeconds = 900
 $deadline = $started.AddSeconds([Math]::Max(1, [Math]::Min($PollSeconds, $maximumPollSeconds)))
 $startupDeadline = $started.AddSeconds(20)
 $windowReady = $false

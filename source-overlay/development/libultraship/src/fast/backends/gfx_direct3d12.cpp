@@ -1,4 +1,4 @@
-#if defined(_WIN32)
+﻿#if defined(_WIN32)
 
 #include <windows.h>
 #include <wrl/client.h>
@@ -782,7 +782,7 @@ static void DxrDiagnosticSceneGateUpdate(int frame, int sceneId) {
     }
 }
 
-// ==== R4-B — Valid-Vertex Canonical Draw protocol ====
+// ==== R4-B â€” Valid-Vertex Canonical Draw protocol ====
 // Mode/env helpers are defined in namespace Fast next to LogCouchD3D12.
 // COUCH_D3D12_R4B=<mode>: 0=off, 20=C0 solid PS/original states, 21=C1 depth OFF,
 // 22=C2 cull OFF, 23=C3 full viewport/scissor, 24=C4 known SV_VertexID VS.
@@ -795,7 +795,24 @@ static void ForensicEnqueueInFrameCopy(ID3D12GraphicsCommandList* cmdList,
                                        int slot, const char* stage, int frame,
                                        D3D12_RESOURCE_STATES stateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET) {
     InFrameReadback& rb = gInFrame[slot];
-    if (rb.pending) return;
+    if (rb.pending) {
+        // A pending copy that never resolved (missed EndFrame resolve, fence timeout,
+        // or process-lifecycle edge) must not block the slot forever. After one frame
+        // the previous copy is either resolved or stale; re-enqueue for the new frame.
+        if (frame > rb.frame) {
+            ForensicLog("[COUCH-FORENSIC][PENDING_STALE] slot=" + std::to_string(slot) +
+                " stage=" + std::string(rb.stage ? rb.stage : "unknown") +
+                " pendingFrame=" + std::to_string(rb.frame) + " frame=" + std::to_string(frame));
+            rb.pending = false;
+        } else {
+            return;
+        }
+    }
+    if (!backbuffer) {
+        ForensicLog("[COUCH-FORENSIC][INFRAME_SKIP] stage=" + std::string(stage) +
+                    " reason=null_source slot=" + std::to_string(slot));
+        return;
+    }
     const auto captureDesc = backbuffer->GetDesc();
     const UINT bytesPerPixel = ForensicBytesPerPixel(captureDesc.Format);
     if (bytesPerPixel == 0) {
@@ -807,15 +824,21 @@ static void ForensicEnqueueInFrameCopy(ID3D12GraphicsCommandList* cmdList,
     const UINT rowPitch = static_cast<UINT>((captureDesc.Width * bytesPerPixel + 255) & ~UINT64(255));
     const UINT64 captureSize = static_cast<UINT64>(rowPitch) * captureDesc.Height;
     if (rb.buf && rb.buf->GetDesc().Width < captureSize) rb.buf.Reset();
-    if (!rb.buf) {
-        D3D12_HEAP_PROPERTIES hp = {}; hp.Type = D3D12_HEAP_TYPE_READBACK;
-        D3D12_RESOURCE_DESC rbd = {};
-        rbd.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER; rbd.Width = captureSize;
-        rbd.Height = 1; rbd.DepthOrArraySize = 1; rbd.MipLevels = 1;
-        rbd.SampleDesc.Count = 1; rbd.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
-        if (FAILED(device->CreateCommittedResource(&hp, D3D12_HEAP_FLAG_NONE, &rbd,
-            D3D12_RESOURCE_STATE_COPY_DEST, nullptr, IID_PPV_ARGS(&rb.buf)))) return;
-    }
+        if (!rb.buf) {
+            D3D12_HEAP_PROPERTIES hp = {}; hp.Type = D3D12_HEAP_TYPE_READBACK;
+            D3D12_RESOURCE_DESC rbd = {};
+            rbd.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER; rbd.Width = captureSize;
+            rbd.Height = 1; rbd.DepthOrArraySize = 1; rbd.MipLevels = 1;
+            rbd.SampleDesc.Count = 1; rbd.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
+            const HRESULT createHr = device->CreateCommittedResource(&hp, D3D12_HEAP_FLAG_NONE, &rbd,
+                D3D12_RESOURCE_STATE_COPY_DEST, nullptr, IID_PPV_ARGS(&rb.buf));
+            if (FAILED(createHr)) {
+                ForensicLog("[COUCH-FORENSIC][INFRAME_SKIP] stage=" + std::string(stage) +
+                    " reason=create_readback_failed hr=" + std::to_string(static_cast<unsigned long>(createHr)) +
+                    " size=" + std::to_string(captureSize));
+                return;
+            }
+        }
     D3D12_RESOURCE_DESC d = backbuffer->GetDesc();
     D3D12_PLACED_SUBRESOURCE_FOOTPRINT fp = {};
     fp.Footprint.Width = (UINT)d.Width;
@@ -865,11 +888,15 @@ static void ForensicResolveInFrameCaptures(ID3D12Device* device, ID3D12CommandQu
     HRESULT signalResult = queue->Signal(gInFrameFence.Get(), gInFrameFenceVal);
     if (FAILED(signalResult)) { ForensicLog("[COUCH-FORENSIC][READBACK_FENCE_SIGNAL_FAILED] hr=" + std::to_string(static_cast<unsigned long>(signalResult))); return; }
     if (gInFrameFence->GetCompletedValue() < gInFrameFenceVal) {
-        if (FAILED(gInFrameFence->SetEventOnCompletion(gInFrameFenceVal, gInFrameEvent))) return;
+        if (FAILED(gInFrameFence->SetEventOnCompletion(gInFrameFenceVal, gInFrameEvent))) {
+            for (auto& pendingRb : gInFrame) pendingRb.pending = false;
+            return;
+        }
         if (WaitForSingleObject(gInFrameEvent, 5000) != WAIT_OBJECT_0 ||
             gInFrameFence->GetCompletedValue() < gInFrameFenceVal) {
             ForensicLog("[COUCH-FORENSIC][READBACK_FENCE_TIMEOUT] expected=" + std::to_string(gInFrameFenceVal) +
                 " completed=" + std::to_string(gInFrameFence->GetCompletedValue()));
+            for (auto& pendingRb : gInFrame) pendingRb.pending = false;
             return;
         }
     }
@@ -883,7 +910,11 @@ static void ForensicResolveInFrameCaptures(ID3D12Device* device, ID3D12CommandQu
         const int optionalCount = kInFrameStages - 8;
         const int i = pass < optionalCount ? 8 + pass : pass - optionalCount;
         InFrameReadback& rb = gInFrame[i];
-        if (!rb.pending || !rb.buf) continue;
+        if (!rb.pending) continue;
+        if (!rb.buf) {
+            rb.pending = false;
+            continue;
+        }
         D3D12_RANGE mr = { 0, (SIZE_T)rb.buf->GetDesc().Width };
         void* mapped = nullptr;
         if (SUCCEEDED(rb.buf->Map(0, &mr, &mapped)) && mapped) {
@@ -1344,7 +1375,7 @@ GfxRenderingAPIDX12::GfxRenderingAPIDX12(GfxWindowBackendDXGI* backend)
       mInvalidDrawCount(0), mCommandListOpen(false), mDeviceRemoved(false),
       mDebugLayerEnabled(false), mUploadBufferMapped(nullptr),
       mPixelIsoMode(0), mDiagnosticPSOsCreated(false), mDiagnosticDrawCount(0) {
-      // R4-B — Valid-Vertex Canonical Draw protocol
+      // R4-B â€” Valid-Vertex Canonical Draw protocol
       memset(&mR4b, 0, sizeof(mR4b));
     for (uint32_t i = 0; i < SHADER_MAX_TEXTURES; ++i) {
         mCurrentTextureIds[i] = 0;
@@ -2768,6 +2799,8 @@ void GfxRenderingAPIDX12::BeginUiOverlayPass() {
             static_cast<D3D12_RESOURCE_STATES>(DxrSurfaceRenderer::Instance().GetSceneColorCopyState()));
         CaptureDxrComparisonImage(2, surfaceSceneColor,
             static_cast<D3D12_RESOURCE_STATES>(DxrSurfaceRenderer::Instance().GetSceneColorCopyState()), forensic::gForensicFrame);
+    } else if (forensic::ForensicCaptureWindow(forensic::gForensicFrame) && dxrSurfaceEnabled && !surfaceSceneColor) {
+        forensic::ForensicLog("[COUCH-FORENSIC][CAPTURE_SLOT_SKIPPED] slot=2 stage=raster_scene_color_copy reason=null_scene_color_copy");
     }
     if (forensic::ForensicCaptureWindow(forensic::gForensicFrame) && dxrSurfaceEnabled) {
         auto& surfaceRenderer = DxrSurfaceRenderer::Instance();
@@ -2776,22 +2809,39 @@ void GfxRenderingAPIDX12::BeginUiOverlayPass() {
                 forensic::ForensicEnqueueInFrameCopy(mCommandList.Get(), mDevice.Get(), direct, 17,
                     "navi_point_direct", forensic::gForensicFrame,
                     static_cast<D3D12_RESOURCE_STATES>(surfaceRenderer.GetNativePointDirectState()));
+            } else {
+                forensic::ForensicLog("[COUCH-FORENSIC][CAPTURE_SLOT_SKIPPED] slot=17 stage=navi_point_direct reason=null_native_point_direct");
             }
         }
         if (ID3D12Resource* reflection = surfaceRenderer.GetReflectionColorForCapture()) {
             forensic::ForensicEnqueueInFrameCopy(mCommandList.Get(), mDevice.Get(), reflection, 5,
                 "dxr_reflection_color", forensic::gForensicFrame,
                 static_cast<D3D12_RESOURCE_STATES>(surfaceRenderer.GetReflectionColorState()));
+            if (forensic::gInFrame[5].pending) {
+                forensic::ForensicLog("[COUCH-FORENSIC][ENQUEUED] slot=5 frame=" + std::to_string(forensic::gForensicFrame));
+            }
+        } else {
+            forensic::ForensicLog("[COUCH-FORENSIC][CAPTURE_SLOT_SKIPPED] slot=5 stage=dxr_reflection_color reason=null_reflection_color");
         }
         if (ID3D12Resource* indirect = surfaceRenderer.GetIndirectMaskForCapture()) {
             forensic::ForensicEnqueueInFrameCopy(mCommandList.Get(), mDevice.Get(), indirect, 6,
                 "dxr_indirect_mask", forensic::gForensicFrame,
                 static_cast<D3D12_RESOURCE_STATES>(surfaceRenderer.GetIndirectMaskState()));
+            if (forensic::gInFrame[6].pending) {
+                forensic::ForensicLog("[COUCH-FORENSIC][ENQUEUED] slot=6 frame=" + std::to_string(forensic::gForensicFrame));
+            }
+        } else {
+            forensic::ForensicLog("[COUCH-FORENSIC][CAPTURE_SLOT_SKIPPED] slot=6 stage=dxr_indirect_mask reason=null_indirect_mask");
         }
         if (ID3D12Resource* emissive = surfaceRenderer.GetEmissiveMaskForCapture()) {
             forensic::ForensicEnqueueInFrameCopy(mCommandList.Get(), mDevice.Get(), emissive, 7,
                 "emissive_mask", forensic::gForensicFrame,
                 static_cast<D3D12_RESOURCE_STATES>(surfaceRenderer.GetEmissiveMaskState()));
+            if (forensic::gInFrame[7].pending) {
+                forensic::ForensicLog("[COUCH-FORENSIC][ENQUEUED] slot=7 frame=" + std::to_string(forensic::gForensicFrame));
+            }
+        } else {
+            forensic::ForensicLog("[COUCH-FORENSIC][CAPTURE_SLOT_SKIPPED] slot=7 stage=emissive_mask reason=null_emissive_mask");
         }
         const unsigned controlCount = surfaceRenderer.IsNaviPilotDispatch() ? 3u : 4u;
         for (unsigned i = 0; i < controlCount; ++i) {
@@ -2937,7 +2987,7 @@ void GfxRenderingAPIDX12::FinishRender() {
 }
 
 // ============================================================
-// R4 — Diagnostic PSO creation for pixel output isolation
+// R4 â€” Diagnostic PSO creation for pixel output isolation
 // ============================================================
 void GfxRenderingAPIDX12::CreateDiagnosticPSOs() {
     if (mDiagnosticPSOsCreated) return;
@@ -2999,7 +3049,7 @@ void GfxRenderingAPIDX12::CreateDiagnosticPSOs() {
     mDiagnosticPSO_P1 = createPSO(false, D3D12_CULL_MODE_NONE, false);
     // P2 = P1 (same as P1 since both have depth OFF + cull NONE)
     mDiagnosticPSO_P2 = mDiagnosticPSO_P1;
-    // P4: solid magenta PS, depth OFF, cull NONE — but needs known VS (created separately)
+    // P4: solid magenta PS, depth OFF, cull NONE â€” but needs known VS (created separately)
 
     if (mDiagnosticPSO_P0)
         LogCouchD3D12("[COUCH-R4] Diagnostic PSOs created: P0=OK P1=OK");
@@ -3010,7 +3060,7 @@ void GfxRenderingAPIDX12::CreateDiagnosticPSOs() {
 }
 
 // ============================================================
-// R4-B — Valid-Vertex Canonical Draw protocol
+// R4-B â€” Valid-Vertex Canonical Draw protocol
 // ============================================================
 void GfxRenderingAPIDX12::CreateR4bDiagnosticPSOs() {
     if (mR4bPSO_C4) return;
@@ -3068,7 +3118,7 @@ void GfxRenderingAPIDX12::CreateR4bDiagnosticPSOs() {
             return;
         }
 
-        // C0: solid magenta PS, VS original, estados originales (depth según canonical)
+        // C0: solid magenta PS, VS original, estados originales (depth segÃºn canonical)
         mR4bPSO_C0 = makeDiagPSO(mSavedVSBlob->GetBufferPointer(), mSavedVSBlob->GetBufferSize(),
                                  psMagenta->GetBufferPointer(), psMagenta->GetBufferSize(),
                                  true, D3D12_CULL_MODE_NONE, false);
@@ -3085,7 +3135,7 @@ void GfxRenderingAPIDX12::CreateR4bDiagnosticPSOs() {
                                  psMagenta->GetBufferPointer(), psMagenta->GetBufferSize(),
                                  false, D3D12_CULL_MODE_NONE, false);
 
-        // C4: VS diagnóstico por SV_VertexID — triángulo fijo fullscreen-fraction
+        // C4: VS diagnÃ³stico por SV_VertexID â€” triÃ¡ngulo fijo fullscreen-fraction
         ComPtr<ID3DBlob> vsKnown, vsErr;
         const char* vsSrc =
             "struct VSOut { float4 pos : SV_Position; };\n"
@@ -3145,7 +3195,7 @@ void GfxRenderingAPIDX12::CreateR4bDiagnosticPSOs() {
 
     createR4bPSOs();
 
-    // MakeCanonicalLine: construye la línea de log de un vértice del canonical draw
+    // MakeCanonicalLine: construye la lÃ­nea de log de un vÃ©rtice del canonical draw
     auto makeCanonicalLine = [](const float* v, int floatsPerVtx) -> std::string {
         std::string vtx;
         for (int f = 0; f < floatsPerVtx; f++) {
@@ -3454,7 +3504,7 @@ uint32_t GfxRenderingAPIDX12::NewTexture() {
 }
 
 // ============================================================
-// R4-B — Canonical draw selection + diagnostic override
+// R4-B â€” Canonical draw selection + diagnostic override
 // ============================================================
 void GfxRenderingAPIDX12::SelectTexture(int tile, uint32_t textureId) {
     if (tile >= 0 && tile < SHADER_MAX_TEXTURES) {
@@ -3795,7 +3845,7 @@ struct ShaderProgram* GfxRenderingAPIDX12::CreateAndLoadNewShader(uint64_t shade
                               " masks1=" + std::to_string(cc_features.used_masks[1]) +
                               " total=" + std::to_string(sMaskShaderCount));
             }
-            // Phase 4: Root signature t2 audit — log each mask shader that may trigger t2 warning
+            // Phase 4: Root signature t2 audit â€” log each mask shader that may trigger t2 warning
             LogCouchD3D12(std::string("[COUCH-T2-AUDIT] SHADER_USING_MASK t2_warn_candidate") +
                           " shaderId0=" + std::to_string(shaderId0) +
                           " shaderId1=" + std::to_string(shaderId1) +
@@ -4414,7 +4464,7 @@ void GfxRenderingAPIDX12::DrawTriangles(float buf_vbo[], size_t buf_vbo_len, siz
     }
 
     // ============================================================
-    // R4-B — canonical draw capture (once) + frozen diagnostic override
+    // R4-B â€” canonical draw capture (once) + frozen diagnostic override
     // ============================================================
     bool isCanonicalDraw = false;
     if (mPixelIsoMode >= 20 || mR7c5A5Enabled) {
@@ -4561,7 +4611,7 @@ void GfxRenderingAPIDX12::DrawTriangles(float buf_vbo[], size_t buf_vbo_len, siz
                 mR4b.colorWriteValid = true; // canonical PSO: RenderTargetWriteMask = D3D12_COLOR_WRITE_ENABLE_ALL
                 LogCouchD3D12("[COUCH-R4B][AUDIT][COLORWRITE] RenderTargetWriteMask=RGBA COLOR_WRITE_VALID=YES");
 
-                // ---- VERTEX DUMP (CPU input, primeros 3-6 vértices) ----
+                // ---- VERTEX DUMP (CPU input, primeros 3-6 vÃ©rtices) ----
                 {
                     int dumpCount = (candidateVerts < 6) ? (int)candidateVerts : 6;
                     for (int sv = 0; sv < dumpCount; ++sv) {
