@@ -110,6 +110,7 @@ MaterialType MaterialRegistry::ClassifyFromState(const DrawCallInfo& info) const
         return MaterialType::FABRIC;
     }
     if (has({"skin", "face", "hand", "body_skin", "hada"})) return MaterialType::CHARACTER;
+    if (has({"darunia"})) return MaterialType::CHARACTER;
 
     // 2. Scene domain matching for authentic Zelda 64 environments:
     // Caverns, dungeons, and sacred temples are carved stone and architectural masonry.
@@ -1358,6 +1359,8 @@ void MaterialRegistry::WriteDrawCallInventory(const std::string& path) const {
             case MaterialType::EMISSIVE: typeName = "EMISSIVE"; break;
             case MaterialType::SKY: typeName = "SKY"; break;
             case MaterialType::CHARACTER: typeName = "CHARACTER"; break;
+            case MaterialType::CERAMIC: typeName = "CERAMIC"; break;
+            case MaterialType::GENERIC_MATTE: typeName = "GENERIC_MATTE"; break;
             case MaterialType::PROTECTED_2D: typeName = "PROTECTED_2D"; break;
             default: typeName = "UNKNOWN"; break;
         }

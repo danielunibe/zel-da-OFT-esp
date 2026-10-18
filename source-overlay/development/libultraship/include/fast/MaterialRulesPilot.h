@@ -1586,6 +1586,16 @@ static const StaticMaterialRule gMaterialRulesPilot[] = {
     { "scenes/shared/spot00_scene/spot00_sceneTex_016698", MaterialType::STONE, 0.85f, 0.0f, 0.20f, 0.0f, true, 0.04f, true },
     { "scenes/shared/spot00_scene/spot00_sceneTex_016A98", MaterialType::STONE, 0.85f, 0.0f, 0.20f, 0.0f, true, 0.04f, true },
     { "scenes/shared/spot00_scene/spot00_sceneTex_016B98", MaterialType::STONE, 0.85f, 0.0f, 0.20f, 0.0f, true, 0.04f, true },
+
+    { "objects/object_spot18_obj/gGoronCityStatuePattern1Tex", MaterialType::STONE, 0.80f, 0.0f, 0.25f, 0.0f, true, 0.04f, true },
+    { "objects/object_spot18_obj/gGoronCityStatuePattern2Tex", MaterialType::STONE, 0.80f, 0.0f, 0.25f, 0.0f, true, 0.04f, true },
+    { "objects/object_link_child/gLinkChildGoronBraceletTex", MaterialType::STONE, 0.75f, 0.0f, 0.25f, 0.0f, true, 0.04f, true },
+    { "objects/object_link_child/gLinkChildWaistTex", MaterialType::FABRIC, 0.90f, 0.0f, 0.08f, 0.0f, false, 0.012f, true },
+    { "objects/object_sa/gSariaCollarTex", MaterialType::FABRIC, 0.75f, 0.0f, 0.15f, 0.0f, false, 0.012f, true },
+    { "objects/object_sa/gSariaSleeveTex", MaterialType::FABRIC, 0.75f, 0.0f, 0.15f, 0.0f, false, 0.012f, true },
+    { "objects/object_sa/gSariaGreenTex", MaterialType::FABRIC, 0.75f, 0.0f, 0.15f, 0.0f, false, 0.012f, true },
+    { "objects/object_sa/gSariaKneeTex", MaterialType::CHARACTER, 0.65f, 0.0f, 0.3f, 0.0f, false, 0.025f, true },
+    { "objects/gameplay_keep/gCircleShadowTex", MaterialType::PROTECTED_2D, 0.5f, 0.0f, 0.0f, 0.0f, false, 0.0f, true },
 };
 
 static constexpr size_t gMaterialRulesPilotCount = sizeof(gMaterialRulesPilot) / sizeof(gMaterialRulesPilot[0]);
